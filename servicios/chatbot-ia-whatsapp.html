@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot IA WhatsApp para Empresas | GH Specialist</title>
+  <meta name="description" content="Implementamos chatbots con IA en WhatsApp que atienden, califican y cierran ventas 24/7. Sin contratar más personal. Desde $12,000 MXN.">
+  <link rel="canonical" href="https://ghspecialist.com/web/servicios/chatbot-ia-whatsapp.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Chatbot IA WhatsApp","provider":{"@type":"Organization","name":"GH Specialist","telephone":"+528712638082"},"description":"Chatbots con inteligencia artificial para WhatsApp Business. Atención 24/7, calificación de leads y cierre de ventas automático.","areaServed":"MX"}</script>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--p:#7C4DFF;--p2:#5C35CC;--p3:#9D77FF;--p-light:#F3EFFF;--p-border:#DDD5FF;--ink:#111;--ink2:#444;--ink3:#777;--ink4:#aaa;--bg:#fff;--bg2:#FAFAFA;--bg3:#F4F4F4;--border:#E8E8E8;--r:12px}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden;line-height:1.6}
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+    .w{max-width:1080px;margin:0 auto;padding:0 28px}
+    /* HEADER */
+    .hdr{position:fixed;top:0;width:100%;z-index:500;transition:all .3s}
+    .hdr.scrolled .hdr-nav a{color:var(--ink)}.hdr.scrolled .hdr-nav a:hover{color:var(--ink);background:var(--bg3)}.hdr.scrolled{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);box-shadow:0 1px 16px rgba(0,0,0,.06)}
+    .hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px;max-width:1080px;margin:0 auto}
+    .hdr-logo{height:28px}
+    .hdr-nav{display:flex;align-items:center;gap:6px}
+    .hdr-nav a{font-size:13.5px;font-weight:500;color:#fff;padding:6px 12px;border-radius:6px;transition:all .15s}
+    .hdr-nav a:hover{color:#fff;background:rgba(255,255,255,.15)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 22px;border-radius:8px;font-weight:600;font-size:14.5px;cursor:pointer;border:none;font-family:inherit;transition:all .18s;white-space:nowrap}
+    .btn-p{background:var(--p);color:#fff}
+    .btn-p:hover{background:var(--p2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,77,255,.35)}
+    .btn-wa{background:#25D366;color:#fff}
+    .btn-wa:hover{background:#1ebe5d;transform:translateY(-1px)}
+    .btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--ink2)}
+    .btn-outline:hover{border-color:var(--p);color:var(--p);background:var(--p-light)}
+    .btn-sm{padding:8px 16px;font-size:13px;border-radius:6px}
+    .btn-lg{padding:15px 34px;font-size:16px;border-radius:10px}
+    /* HERO SERVICIO */
+    .svc-hero{padding:120px 0 80px;background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.45)),url('../hero-torreon.jpg') center/cover no-repeat;position:relative}
+    .svc-hero .w{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+    .breadcrumb{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:20px;display:flex;align-items:center;gap:6px}
+    .breadcrumb a{color:rgba(255,255,255,.8);font-weight:500}
+    .svc-kicker{display:inline-flex;align-items:center;gap:8px;background:rgba(124,77,255,.3);color:#fff;padding:5px 14px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px;border:1px solid var(--p-border)}
+    .svc-hero h1{font-size:clamp(30px,3.5vw,52px);font-weight:900;letter-spacing:-.03em;line-height:1.06;margin-bottom:20px;color:#fff}
+    .svc-hero h1 em{font-style:normal;color:#a78bfa}
+    .svc-hero-sub{font-size:17px;color:rgba(255,255,255,.85);line-height:1.7;margin-bottom:32px}
+    .svc-hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+    .svc-hero-visual{background:var(--bg2);border-radius:20px;overflow:hidden;border:1.5px solid var(--border);padding:28px}
+    /* CHAT MOCKUP */
+    .chat-wrap{background:#ECE5DD;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px}
+    .msg{max-width:80%;padding:10px 14px;border-radius:12px;font-size:13.5px;line-height:1.5;position:relative}
+    .msg-in{background:#fff;align-self:flex-start;border-bottom-left-radius:3px}
+    .msg-out{background:#DCF8C6;align-self:flex-end;border-bottom-right-radius:3px}
+    .msg-time{font-size:10px;color:#999;text-align:right;margin-top:2px}
+    .msg-bot{background:var(--p);color:#fff;align-self:flex-start;border-bottom-left-radius:3px}
+    /* SECTIONS */
+    .sec{padding:80px 0}
+    .sec-gray{background:var(--bg2)}
+    .label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--p);margin-bottom:10px;display:block}
+    .title{font-size:clamp(24px,3vw,40px);font-weight:800;letter-spacing:-.025em;line-height:1.12;margin-bottom:16px}
+    .sub-text{font-size:16px;color:var(--ink3);line-height:1.7;max-width:520px}
+    .features-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:40px}
+    .feat-card{border:1.5px solid var(--border);border-radius:var(--r);padding:24px;background:#fff;transition:all .2s}
+    .feat-card:hover{border-color:var(--p-border);box-shadow:0 4px 20px rgba(124,77,255,.08)}
+    .feat-icon{font-size:28px;margin-bottom:12px}
+    .feat-card h3{font-size:15px;font-weight:700;margin-bottom:6px}
+    .feat-card p{font-size:13.5px;color:var(--ink3);line-height:1.6}
+    /* USE CASES */
+    .use-cases{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+    .uc-card{background:var(--p-light);border-radius:var(--r);padding:20px;border:1px solid var(--p-border);transition:all .2s}
+    .uc-card:hover{background:var(--p);color:#fff}
+    .uc-card:hover p{color:rgba(255,255,255,.8)}
+    .uc-card h4{font-size:14px;font-weight:700;margin-bottom:6px}
+    .uc-card p{font-size:12.5px;color:var(--ink3);line-height:1.5;transition:color .2s}
+    /* STEPS */
+    .steps{display:flex;flex-direction:column;gap:0;margin-top:36px}
+    .step{display:flex;gap:20px;padding-bottom:32px;position:relative}
+    .step:last-child{padding-bottom:0}
+    .step-num{width:36px;height:36px;border-radius:50%;background:var(--p);color:#fff;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:1}
+    .step-line{position:absolute;left:17px;top:36px;bottom:0;width:2px;background:var(--border)}
+    .step:last-child .step-line{display:none}
+    .step-content{padding-top:6px}
+    .step-content h3{font-size:15px;font-weight:700;margin-bottom:4px}
+    .step-content p{font-size:13.5px;color:var(--ink3);line-height:1.6}
+    /* RESULTS */
+    .results-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+    .result-item{text-align:center;padding:28px;border-radius:var(--r);background:var(--bg3)}
+    .result-n{font-size:42px;font-weight:900;color:var(--p);letter-spacing:-.03em;line-height:1}
+    .result-l{font-size:12px;color:var(--ink3);font-weight:500;margin-top:6px}
+    /* CTA FINAL */
+    .cta-box{background:var(--ink);border-radius:20px;padding:56px;text-align:center;position:relative;overflow:hidden}
+    .cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(124,77,255,.35),transparent 65%)}
+    .cta-box h2{font-size:clamp(24px,3vw,40px);font-weight:900;color:#fff;letter-spacing:-.03em;margin-bottom:12px;position:relative;z-index:1}
+    .cta-box p{font-size:16px;color:rgba(255,255,255,.6);margin-bottom:28px;position:relative;z-index:1}
+    .cta-box-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+    /* FOOTER MINI */
+    .footer-mini{background:#0a0a0a;padding:24px 28px;text-align:center}
+    .footer-mini p{font-size:12px;color:rgba(255,255,255,.3)}
+    /* FLOAT */
+    .wa-float{position:fixed;bottom:28px;right:28px;z-index:400}
+    .wa-float a{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:#25D366;box-shadow:0 4px 20px rgba(37,211,102,.5);transition:all .2s;animation:wap 3s ease-in-out infinite}
+    .wa-float a:hover{transform:scale(1.1)}
+    @keyframes wap{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.5)}50%{box-shadow:0 4px 32px rgba(37,211,102,.8),0 0 0 8px rgba(37,211,102,.1)}}
+    /* DEMO TABS */
+    .demo-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;justify-content:center}
+    .demo-tab{background:var(--bg3);border:1.5px solid var(--border);border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--ink3);transition:all .18s;white-space:nowrap}
+    .demo-tab:hover{border-color:var(--p-border);color:var(--p)}
+    .demo-tab.active{background:var(--p);color:#fff;border-color:var(--p)}
+    /* DEMO CHAT ANIMATION */
+    .demo-start{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 24px;gap:14px}
+    .demo-start p{font-size:14px;color:var(--ink3);text-align:center}
+    .btn-demo{background:var(--p);color:#fff;border:none;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+    .btn-demo:hover{background:var(--p2);transform:translateY(-2px);box-shadow:0 6px 24px rgba(124,77,255,.4)}
+    .chat-wrap{min-height:320px;max-height:420px;overflow-y:auto}
+    .chat-wrap .msg{display:none}
+    .chat-wrap .msg.show{display:block;animation:msgIn .35s ease-out}
+    .chat-wrap .msg-time{display:none}
+    .chat-wrap .msg-time.show{display:block;animation:msgIn .35s ease-out}
+    @keyframes msgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    .typing-indicator{align-self:flex-start;background:var(--p);border-radius:12px;border-bottom-left-radius:3px;padding:12px 18px;display:none;gap:4px}
+    .typing-indicator.show{display:flex}
+    .typing-indicator span{width:7px;height:7px;background:rgba(255,255,255,.6);border-radius:50%;animation:typeDot 1.4s ease-in-out infinite}
+    .typing-indicator span:nth-child(2){animation-delay:.2s}
+    .typing-indicator span:nth-child(3){animation-delay:.4s}
+    @keyframes typeDot{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-4px);opacity:1}}
+    .fi{opacity:1;transform:none}
+    .fi.v{opacity:1;transform:none}
+    .fi-d1{transition-delay:.08s}.fi-d2{transition-delay:.16s}.fi-d3{transition-delay:.24s}
+    @media(max-width:860px){
+      .svc-hero .w{grid-template-columns:1fr;gap:36px}
+      .svc-hero{padding:90px 0 40px}
+      .svc-hero-visual{padding:20px;border-radius:16px}
+      .demo-tabs{gap:5px}
+      .demo-tab{padding:6px 10px;font-size:11px;border-radius:6px}
+      .chat-wrap{padding:12px;min-height:280px;max-height:360px}
+      .msg{font-size:12.5px;max-width:85%;padding:9px 12px}
+      .demo-start{padding:28px 16px;gap:12px}
+      .demo-start p{font-size:13px}
+      .btn-demo{padding:12px 24px;font-size:14px}
+      .features-grid{grid-template-columns:1fr}
+      .use-cases{grid-template-columns:1fr 1fr}
+      .results-row{grid-template-columns:1fr 1fr}
+      .hdr-nav{display:none}
+      .svc-two-col{grid-template-columns:1fr !important;gap:32px !important}
+      .cta-box{padding:36px 24px}
+    }
+    @media(max-width:480px){
+      .demo-tabs{gap:4px}
+      .demo-tab{padding:5px 8px;font-size:10px}
+      .use-cases{grid-template-columns:1fr}
+      .results-row{grid-template-columns:1fr}
+      .svc-hero-btns{flex-direction:column}
+      .svc-hero-btns .btn{width:100%;justify-content:center}
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="hdr" id="hdr">
+    <div class="hdr-inner">
+      <a href="../index.html"><img src="../2.png" alt="GH Specialist" class="hdr-logo"></a>
+      <nav class="hdr-nav">
+        <a href="../index.html#servicios">← Servicios</a>
+        <a href="../index.html#sobre-pedro">Pedro</a>
+        <a href="../index.html#precios">Precios</a>
+        <a href="../blog/">Blog</a>
+      </nav>
+      <a href="https://calendly.com/ghspecialist" target="_blank" class="btn btn-p btn-sm">Agendar diagnóstico</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="svc-hero">
+    <div class="w">
+      <div>
+        <div class="breadcrumb"><a href="../index.html">Inicio</a> › <a href="../index.html#servicios">Servicios</a> › Chatbot IA WhatsApp</div>
+        <div class="svc-kicker">⭐ Servicio más popular</div>
+        <h1>Chatbot IA WhatsApp que <em>vende solo</em> mientras duermes</h1>
+        <p class="svc-hero-sub">Tu bot habla como tu mejor vendedor. Atiende consultas, califica leads, agenda citas y cierra ventas las 24 horas, los 7 días de la semana. Sin contratar más personal.</p>
+        <div class="svc-hero-btns">
+          <a href="https://calendly.com/ghspecialist" target="_blank" class="btn btn-p btn-lg">🗓️ Diagnóstico gratuito</a>
+          <a href="https://wa.me/528712638082?text=Hola%2C%20me%20interesa%20el%20chatbot%20IA%20WhatsApp" target="_blank" class="btn btn-wa">
+            <svg viewBox="0 0 24 24" fill="#fff" width="17"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            Hablar ahora
+          </a>
+        </div>
+      </div>
+      <div class="svc-hero-visual">
+        <div style="font-size:12px;font-weight:600;color:var(--ink3);margin-bottom:8px;text-align:center">Vista previa de conversación real</div>
+        <div class="demo-tabs" id="demoTabs">
+          <button class="demo-tab active" onclick="switchDemo('inmobiliaria')">🏠 Inmobiliaria</button>
+          <button class="demo-tab" onclick="switchDemo('spa')">💆 Spa</button>
+          <button class="demo-tab" onclick="switchDemo('restaurante')">🍽️ Restaurante</button>
+          <button class="demo-tab" onclick="switchDemo('clinica')">🏥 Clínica</button>
+          <button class="demo-tab" onclick="switchDemo('ecommerce')">🛍️ E-commerce</button>
+          <button class="demo-tab" onclick="switchDemo('eventos')">🎉 Eventos</button>
+          <button class="demo-tab" onclick="switchDemo('rrhh')">👔 RRHH</button>
+          <button class="demo-tab" onclick="switchDemo('educacion')">🎓 Educación</button>
+        </div>
+        <div class="chat-wrap" id="chatDemo">
+          <div class="demo-start" id="demoStart">
+            <div style="font-size:48px">🤖</div>
+            <p id="demoDesc">Mira cómo la IA atiende, califica y cierra una venta inmobiliaria en segundos</p>
+            <button class="btn-demo" onclick="startDemo()">▶ Ver demo en vivo</button>
+          </div>
+          <div class="typing-indicator" id="typingDots"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="sec sec-gray">
+    <div class="w">
+      <div class="fi">
+        <span class="label">¿Qué incluye?</span>
+        <h2 class="title">Todo lo que necesitas para vender 24/7</h2>
+        <p class="sub-text">Un chatbot de GH Specialist no es un bot de FAQ. Es un agente IA que razona, vende y califica como humano.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feat-card fi fi-d1">
+          <div class="feat-icon">🧠</div>
+          <h3>IA entrenada en tu negocio</h3>
+          <p>El bot aprende tus productos, precios, horarios y objeciones comunes. Habla exactamente como tu equipo.</p>
+        </div>
+        <div class="feat-card fi fi-d2">
+          <div class="feat-icon">🎯</div>
+          <h3>Calificación inteligente de leads</h3>
+          <p>Detecta presupuesto, urgencia e intención de compra. Filtra curiosos de prospectos reales.</p>
+        </div>
+        <div class="feat-card fi fi-d3">
+          <div class="feat-icon">📅</div>
+          <h3>Agenda citas automáticamente</h3>
+          <p>Conecta con tu Google Calendar o Calendly. El bot agenda, confirma y manda recordatorios solo.</p>
+        </div>
+        <div class="feat-card fi fi-d4">
+          <div class="feat-icon">👤</div>
+          <h3>Escala a humano cuando importa</h3>
+          <p>Detecta cuándo el lead está listo para cerrar y transfiere a tu vendedor humano en el momento correcto.</p>
+        </div>
+        <div class="feat-card fi">
+          <div class="feat-icon">📊</div>
+          <h3>Dashboard de métricas en tiempo real</h3>
+          <p>Ve cuántos leads entran, cuántos califican, cuántos cierran. Toma decisiones con datos.</p>
+        </div>
+        <div class="feat-card fi fi-d1">
+          <div class="feat-icon">🔗</div>
+          <h3>Integración con tu CRM</h3>
+          <p>Cada lead que entra se registra solo en Kommo, HubSpot o cualquier CRM que uses.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASES -->
+  <section class="sec">
+    <div class="w">
+      <div class="fi">
+        <span class="label">¿Para quién es?</span>
+        <h2 class="title">Funciona para cualquier industria</h2>
+      </div>
+      <div class="use-cases fi fi-d1">
+        <div class="uc-card">
+          <h4>🏠 Inmobiliaria</h4>
+          <p>Califica compradores, muestra propiedades, agenda visitas. Sin gastar en más asesores.</p>
+        </div>
+        <div class="uc-card">
+          <h4>🏗️ Constructora</h4>
+          <p>Recibe solicitudes de cotización, filtra proyectos viables, agenda reuniones de estimación.</p>
+        </div>
+        <div class="uc-card">
+          <h4>🛍️ E-commerce</h4>
+          <p>Recupera carritos abandonados, responde sobre envíos, gestiona devoluciones automáticamente.</p>
+        </div>
+        <div class="uc-card">
+          <h4>🏥 Clínica / Médico</h4>
+          <p>Agenda consultas, confirma citas, envía recordatorios, responde preguntas frecuentes.</p>
+        </div>
+        <div class="uc-card">
+          <h4>🎓 Educación</h4>
+          <p>Inscripciones, preguntas sobre cursos, becas y horarios. Atención instantánea a padres y alumnos.</p>
+        </div>
+        <div class="uc-card">
+          <h4>🍽️ Restaurante</h4>
+          <p>Reservas, menús, pedidos a domicilio. Integrado con tu delivery app.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="sec sec-gray">
+    <div class="w">
+      <div class="fi" style="text-align:center">
+        <span class="label">Resultados probados</span>
+        <h2 class="title">Lo que logran nuestros clientes</h2>
+      </div>
+      <div class="results-row">
+        <div class="result-item fi fi-d1">
+          <div class="result-n">+340%</div>
+          <div class="result-l">más leads calificados en 60 días (Inmobiliaria Norteña)</div>
+        </div>
+        <div class="result-item fi fi-d2">
+          <div class="result-n">4 min</div>
+          <div class="result-l">tiempo de respuesta promedio (antes: 72 horas)</div>
+        </div>
+        <div class="result-item fi fi-d3">
+          <div class="result-n">-65%</div>
+          <div class="result-l">reducción en costo de atención al cliente</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="sec">
+    <div class="w">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start" class="svc-two-col">
+        <div class="fi">
+          <span class="label">¿Cómo funciona?</span>
+          <h2 class="title">De cero a chatbot activo en 7 días</h2>
+          <p class="sub-text">Sin complicaciones técnicas. Nosotros manejamos todo.</p>
+        </div>
+        <div class="steps fi fi-d1">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-line"></div>
+            <div class="step-content">
+              <h3>Diagnóstico gratuito (30 min)</h3>
+              <p>Entendemos tu negocio, procesos actuales y qué conversaciones necesitas automatizar.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-line"></div>
+            <div class="step-content">
+              <h3>Diseño de flujos (día 2–3)</h3>
+              <p>Mapeamos los flujos de conversación: bienvenida, calificación, cotización y cierre.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-line"></div>
+            <div class="step-content">
+              <h3>Entrenamiento de la IA (día 4–5)</h3>
+              <p>Subimos tu catálogo, precios, FAQs y entrena el modelo con tu voz de marca.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-line"></div>
+            <div class="step-content">
+              <h3>Pruebas y ajustes (día 6)</h3>
+              <p>Probamos todos los escenarios. Ajustamos respuestas hasta que el bot suene perfecto.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <h3>¡Lanzamiento! (día 7)</h3>
+              <p>Bot en vivo en tu WhatsApp Business. Tú solo supervisas. El bot hace el trabajo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="sec">
+    <div class="w">
+      <div class="cta-box fi">
+        <h2>¿Cuánto estás pagando en nómina por atender WhatsApp?</h2>
+        <p>Un empleado cuesta $8,000–$15,000/mes. El chatbot: $12,000 una sola vez. Se paga en el primer mes.</p>
+        <div class="cta-box-btns">
+          <a href="https://calendly.com/ghspecialist" target="_blank" class="btn btn-p btn-lg">🗓️ Diagnóstico gratis</a>
+          <a href="https://wa.me/528712638082?text=Quiero%20info%20del%20chatbot%20IA" target="_blank" class="btn btn-wa btn-lg">
+            <svg viewBox="0 0 24 24" fill="#fff" width="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            Hablar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer-mini"><p>© 2024 GH Specialist | <a href="../index.html" style="color:#a78bfa">Volver al inicio</a></p></footer>
+
+  <div class="wa-float">
+    <a href="https://wa.me/528712638082?text=Hola%2C%20me%20interesa%20el%20chatbot%20WhatsApp" target="_blank">
+      <svg viewBox="0 0 24 24" fill="#fff" width="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    </a>
+  </div>
+
+  <script>
+    const hdr = document.getElementById('hdr');
+    window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 20), {passive:true});
+    const io = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target)}}), {threshold:.01,rootMargin:'0px 0px -30px 0px'});
+    document.querySelectorAll('.fi').forEach(el => io.observe(el));
+
+    // Demo conversations data
+    const demos = {
+      inmobiliaria: {
+        desc: 'Mira cómo la IA atiende, califica y cierra una venta inmobiliaria en segundos',
+        msgs: [
+          {type:'in', text:'Hola, ¿tienen departamentos en venta en Torreón? 🏠', delay:800},
+          {type:'bot', text:'¡Hola! 👋 Soy el asistente de Grupo Inmobiliario. Sí, tenemos disponibilidad. Para ayudarte mejor, ¿cuál es tu presupuesto aproximado?', delay:1800, typing:1200},
+          {type:'in', text:'Entre 1.5 y 2.5 millones', delay:2200},
+          {type:'bot', text:'Perfecto. Tenemos 3 opciones que se ajustan exactamente a tu presupuesto. ¿Quieres recibirlas en este momento?', delay:1600, typing:1000},
+          {type:'in', text:'Sí, mándalas', delay:1400},
+          {type:'bot', text:'📋 Te envío las 3 opciones + fotos. Para agendar una visita, ¿cuándo tienes tiempo esta semana?', delay:1800, typing:1200},
+          {type:'out', text:'El jueves me queda bien', delay:2400},
+          {type:'bot', text:'✅ Confirmado. Cita el jueves 10am con nuestro agente. Te llega recordatorio el día anterior. ¡Hasta pronto!', delay:1400, typing:1000},
+        ]
+      },
+      spa: {
+        desc: 'Mira cómo la IA agenda citas en un spa sin intervención humana',
+        msgs: [
+          {type:'in', text:'Hola, quiero agendar un masaje para el sábado 💆‍♀️', delay:800},
+          {type:'bot', text:'¡Hola! 🌿 Bienvenida a Zen Spa. Tenemos disponibilidad el sábado. ¿Qué tipo de masaje te interesa?\n\n1. Relajante (60 min) - $850\n2. Descontracturante (90 min) - $1,200\n3. Hot stones (75 min) - $1,100', delay:1800, typing:1200},
+          {type:'in', text:'El de hot stones se ve bien', delay:2000},
+          {type:'bot', text:'Excelente elección 🪨 Horarios disponibles el sábado:\n\n• 10:00 AM\n• 12:30 PM\n• 3:00 PM\n\n¿Cuál prefieres?', delay:1600, typing:1000},
+          {type:'in', text:'12:30 porfa', delay:1400},
+          {type:'bot', text:'¿Es tu primera visita? Necesito tu nombre completo para la reservación 😊', delay:1400, typing:900},
+          {type:'in', text:'Sí, soy María González', delay:1800},
+          {type:'bot', text:'✅ ¡Listo, María! Reservación confirmada:\n\n🪨 Hot Stones - 75 min\n📅 Sábado 12:30 PM\n💰 $1,100\n\nTe envío recordatorio el viernes. ¡Te esperamos! 🧖‍♀️', delay:1600, typing:1200},
+        ]
+      },
+      restaurante: {
+        desc: 'Mira cómo la IA gestiona reservaciones de restaurante automáticamente',
+        msgs: [
+          {type:'in', text:'Buenas tardes, quiero reservar mesa para el viernes 🍽️', delay:800},
+          {type:'bot', text:'¡Hola! 🍷 Bienvenido a La Terraza. Con gusto te ayudo. ¿Para cuántas personas y a qué hora?', delay:1600, typing:1000},
+          {type:'in', text:'Somos 6, como a las 8pm', delay:2000},
+          {type:'bot', text:'Perfecto, mesa para 6 personas. El viernes a las 8:00 PM tenemos disponible:\n\n🪑 Salón principal\n🌿 Terraza (vista al jardín)\n\n¿Cuál prefieres?', delay:1800, typing:1200},
+          {type:'in', text:'Terraza!', delay:1200},
+          {type:'bot', text:'Gran elección 🌿 ¿Celebran algo especial? Podemos preparar un detalle cortesía de la casa 🎂', delay:1400, typing:900},
+          {type:'in', text:'Sí! Es cumpleaños de mi esposa', delay:1800},
+          {type:'bot', text:'✅ ¡Reservación confirmada!\n\n🍽️ Mesa terraza para 6\n📅 Viernes 8:00 PM\n🎂 Pastel sorpresa incluido\n\n¿A nombre de quién? Te envío confirmación y menú del día.', delay:1600, typing:1200},
+        ]
+      },
+      clinica: {
+        desc: 'Mira cómo la IA agenda consultas médicas y filtra urgencias',
+        msgs: [
+          {type:'in', text:'Hola, necesito cita con el dentista 🦷', delay:800},
+          {type:'bot', text:'¡Hola! 🏥 Soy el asistente de Clínica Dental Sonríe. ¿Es consulta de rutina o tienes alguna molestia?', delay:1600, typing:1000},
+          {type:'in', text:'Me duele una muela desde ayer', delay:1800},
+          {type:'bot', text:'Entiendo, vamos a atenderte pronto. Del 1 al 10, ¿qué tan fuerte es el dolor? ¿Tienes inflamación o fiebre?', delay:1400, typing:1000},
+          {type:'in', text:'Como 7, sí está un poco inflamado', delay:1600},
+          {type:'bot', text:'⚠️ Por la inflamación te agendo como urgencia. Tenemos espacio hoy:\n\n• Dr. Ramírez - 4:30 PM\n• Dra. López - 5:15 PM\n\nMientras tanto, aplica hielo 10 min cada hora. ¿Cuál prefieres?', delay:2000, typing:1400},
+          {type:'in', text:'Con el Dr. Ramírez a las 4:30', delay:1400},
+          {type:'bot', text:'✅ Cita de urgencia confirmada:\n\n🦷 Dr. Ramírez\n📅 Hoy 4:30 PM\n📍 Consultorio 3\n\nTrae tu identificación. Si el dolor aumenta mucho antes de la cita, llámanos directo al 871-XXX-XXXX. ¡Te esperamos!', delay:1600, typing:1200},
+        ]
+      },
+      ecommerce: {
+        desc: 'Mira cómo la IA recupera carritos abandonados y cierra ventas',
+        msgs: [
+          {type:'bot', text:'¡Hola! 👋 Noté que dejaste unos tenis Nike Air Max en tu carrito. ¿Sigues interesado? Te los apartamos por 24 hrs 👟', delay:800, typing:1000},
+          {type:'in', text:'Sí pero me pareció caro 😅', delay:2200},
+          {type:'bot', text:'Te entiendo. Justo hoy tenemos 15% de descuento para compras por WhatsApp. Quedarían en $2,125 en vez de $2,500. ¿Te interesa? 🔥', delay:1800, typing:1200},
+          {type:'in', text:'Mmm suena mejor. ¿Tienen talla 28?', delay:2000},
+          {type:'bot', text:'¡Sí! Talla 28 disponible en negro y blanco. ¿Cuál prefieres?\n\n⚫ Negro\n⚪ Blanco', delay:1400, typing:900},
+          {type:'in', text:'Negro', delay:1200},
+          {type:'bot', text:'Perfecto 🖤 Te genero el link de pago con el 15% aplicado. Envío gratis a todo México, llega en 3-5 días.\n\n💳 Total: $2,125 MXN\n\n¿Te lo mando?', delay:1800, typing:1200},
+          {type:'in', text:'Dale, mándalo!', delay:1400},
+          {type:'bot', text:'✅ ¡Aquí tienes! 🛒\n\n🔗 pago.tienda.com/xxxxx\n\nCuando completes el pago te llega confirmación y número de guía automáticamente. ¡Gracias por tu compra! 🎉', delay:1600, typing:1200},
+        ]
+      },
+      eventos: {
+        desc: 'Mira cómo la IA cotiza y reserva salones de eventos automáticamente',
+        msgs: [
+          {type:'in', text:'Hola, busco un salón para una boda en noviembre 💒', delay:800},
+          {type:'bot', text:'¡Hola! 🎉 Soy el asistente de Salón Imperial. ¡Felicidades por tu boda! Para darte la mejor opción, ¿cuántos invitados serían aproximadamente?', delay:1800, typing:1200},
+          {type:'in', text:'Como 150 personas', delay:1800},
+          {type:'bot', text:'Perfecto. Para 150 personas tenemos:\n\n🏛️ Salón Gran Imperial - cap. 200\n🌳 Jardín Las Fuentes - cap. 180\n\nAmbos incluyen mobiliario, iluminación y estacionamiento. ¿Cuál te interesa?', delay:2000, typing:1400},
+          {type:'in', text:'El jardín suena bonito, ¿cuánto cuesta?', delay:2200},
+          {type:'bot', text:'🌳 Jardín Las Fuentes:\n\n💰 $85,000 (viernes)\n💰 $120,000 (sábado)\n\nIncluye: montaje, desmontaje, cocina, barra libre básica, coordinador de evento.\n\n¿Tienen fecha exacta en mente?', delay:1800, typing:1200},
+          {type:'in', text:'Sábado 15 de noviembre', delay:1600},
+          {type:'bot', text:'✅ ¡Esa fecha está disponible! Para apartarla necesitas un anticipo de $25,000.\n\n¿Te gustaría agendar una visita al jardín? Así lo conocen en persona y platicamos detalles de menú 🍽️', delay:1800, typing:1200},
+          {type:'in', text:'Sí, ¿cuándo podemos ir?', delay:1400},
+          {type:'bot', text:'📅 Visitas disponibles:\n\n• Miércoles 5:00 PM\n• Sábado 11:00 AM\n\nIncluye recorrido + degustación de menú. ¿Cuál les queda mejor a ti y a tu pareja?', delay:1600, typing:1000},
+        ]
+      },
+      rrhh: {
+        desc: 'Mira cómo la IA filtra candidatos y agenda entrevistas de trabajo',
+        msgs: [
+          {type:'bot', text:'¡Hola! 👋 Vi que aplicaste para la vacante de Ejecutivo de Ventas en Grupo Norte. Soy el asistente de RRHH. ¿Tienes 2 minutos para unas preguntas rápidas?', delay:800, typing:1000},
+          {type:'in', text:'Sí, claro!', delay:1800},
+          {type:'bot', text:'Perfecto 📋 Pregunta 1 de 3:\n\n¿Cuántos años de experiencia tienes en ventas B2B?', delay:1400, typing:900},
+          {type:'in', text:'4 años, los últimos 2 en ventas de software', delay:2000},
+          {type:'bot', text:'Excelente perfil 💪 Pregunta 2:\n\n¿Cuál es tu expectativa salarial mensual bruta?', delay:1400, typing:900},
+          {type:'in', text:'Entre 25 y 30 mil', delay:1600},
+          {type:'bot', text:'Está dentro del rango 👍 Última pregunta:\n\n¿Tienes disponibilidad para trabajo híbrido (3 días oficina, 2 casa) en Torreón?', delay:1400, typing:900},
+          {type:'in', text:'Sí, perfecto para mí', delay:1400},
+          {type:'bot', text:'✅ ¡Excelente! Tu perfil califica para entrevista.\n\n📅 Horarios disponibles con la Directora de RRHH:\n\n• Martes 10:00 AM\n• Jueves 3:00 PM\n\n¿Cuál prefieres? Te envío liga de Zoom al confirmar.', delay:2000, typing:1400},
+        ]
+      },
+      educacion: {
+        desc: 'Mira cómo la IA resuelve dudas de inscripción y agenda entrevistas',
+        msgs: [
+          {type:'in', text:'Hola, busco info sobre la prepa para mi hijo 📚', delay:800},
+          {type:'bot', text:'¡Hola! 🎓 Soy el asistente del Colegio San Patricio. Con gusto te ayudo. ¿Tu hijo cursaría 1°, 2° o 3° de preparatoria?', delay:1600, typing:1000},
+          {type:'in', text:'Entraría a primero', delay:1800},
+          {type:'bot', text:'Excelente. Para 1° de prepa tenemos:\n\n📘 Turno matutino (7:00-14:00)\n📗 Turno vespertino (14:00-20:00)\n\nInscripción: $8,500\nColegiatura: $4,200/mes\n\n¿Te gustaría agendar un recorrido por las instalaciones?', delay:2000, typing:1400},
+          {type:'in', text:'Sí, me interesa el matutino. ¿Cuándo puedo ir?', delay:2200},
+          {type:'bot', text:'Tenemos recorridos disponibles:\n\n📅 Martes 10:00 AM\n📅 Jueves 11:00 AM\n📅 Sábado 9:00 AM\n\nIncluye plática con el director y visita a laboratorios. ¿Cuál te queda?', delay:1600, typing:1200},
+          {type:'in', text:'El sábado perfecto', delay:1400},
+          {type:'bot', text:'✅ ¡Agendado!\n\n🎓 Recorrido + plática\n📅 Sábado 9:00 AM\n📍 Campus Norte, Blvd. Revolución 500\n\nTrae a tu hijo, así conoce las instalaciones. Te envío recordatorio el viernes. ¿Alguna otra duda?', delay:1800, typing:1200},
+        ]
+      }
+    };
+
+    let currentDemo = 'inmobiliaria';
+    let demoRunning = false;
+    let demoTimeout = null;
+
+    function switchDemo(key) {
+      if (demoRunning) {
+        // Stop current animation
+        clearTimeout(demoTimeout);
+        demoRunning = false;
+      }
+      currentDemo = key;
+      // Update active tab
+      document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+      // Reset chat
+      resetChat();
+      // Update description
+      document.getElementById('demoDesc').textContent = demos[key].desc;
+    }
+
+    function resetChat() {
+      const chatWrap = document.getElementById('chatDemo');
+      const startScreen = document.getElementById('demoStart');
+      // Remove all generated messages and replay buttons
+      chatWrap.querySelectorAll('.msg, .msg-time, .replay-wrap').forEach(el => el.remove());
+      document.getElementById('typingDots').classList.remove('show');
+      startScreen.style.display = 'flex';
+      demoRunning = false;
+    }
+
+    function startDemo() {
+      if (demoRunning) return;
+      demoRunning = true;
+      const startScreen = document.getElementById('demoStart');
+      const chatWrap = document.getElementById('chatDemo');
+      const typing = document.getElementById('typingDots');
+      const conversation = demos[currentDemo].msgs;
+
+      startScreen.style.display = 'none';
+
+      let i = 0;
+      function showNext() {
+        if (!demoRunning) return;
+        if (i >= conversation.length) {
+          demoRunning = false;
+          // Final caption
+          demoTimeout = setTimeout(() => {
+            const caption = document.createElement('div');
+            caption.className = 'msg-time show';
+            caption.style.cssText = 'text-align:right;font-size:10px;color:#999;display:block;';
+            caption.textContent = 'Todo esto: automático, en segundos.';
+            chatWrap.insertBefore(caption, typing);
+            // Replay button
+            const replay = document.createElement('div');
+            replay.className = 'replay-wrap';
+            replay.style.cssText = 'text-align:center;padding:12px;';
+            replay.innerHTML = '<button class="btn-demo" style="padding:10px 24px;font-size:13px" onclick="resetChat();startDemo()">🔄 Ver de nuevo</button>';
+            chatWrap.insertBefore(replay, typing);
+            chatWrap.scrollTop = chatWrap.scrollHeight;
+          }, 800);
+          return;
+        }
+
+        const m = conversation[i];
+        const typingTime = m.typing || 0;
+
+        if (typingTime > 0) {
+          typing.classList.add('show');
+          chatWrap.scrollTop = chatWrap.scrollHeight;
+          demoTimeout = setTimeout(() => {
+            if (!demoRunning && i < conversation.length) return;
+            typing.classList.remove('show');
+            appendMsg(m, chatWrap, typing);
+            chatWrap.scrollTop = chatWrap.scrollHeight;
+            i++;
+            demoTimeout = setTimeout(showNext, m.delay);
+          }, typingTime);
+        } else {
+          appendMsg(m, chatWrap, typing);
+          chatWrap.scrollTop = chatWrap.scrollHeight;
+          i++;
+          demoTimeout = setTimeout(showNext, m.delay);
+        }
+      }
+      demoTimeout = setTimeout(showNext, 400);
+    }
+
+    function appendMsg(m, chatWrap, typing) {
+      const div = document.createElement('div');
+      const cls = m.type === 'bot' ? 'msg msg-bot' : m.type === 'out' ? 'msg msg-out' : 'msg msg-in';
+      div.className = cls + ' show';
+      div.textContent = m.text;
+      chatWrap.insertBefore(div, typing);
+    }
+  </script>
+</body>
+</html>

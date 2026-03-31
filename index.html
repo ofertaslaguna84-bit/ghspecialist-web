@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GH Specialist — Automatiza tu Negocio con IA | Pedro Luis Díaz</title>
+  <meta name="description" content="Automatización IA para empresas LATAM. Chatbots WhatsApp, CRM Kommo, agentes omnicanal, marketing digital. Consulta gratis con Pedro Luis Díaz.">
+  <link rel="canonical" href="https://ghspecialist.com/web/">
+  <meta property="og:title" content="GH Specialist — Automatiza tu Negocio con IA">
+  <meta property="og:description" content="De 30 empleados a equipo de 3 con IA. Más de 200 empresas automatizadas en México y LATAM.">
+  <meta property="og:image" content="https://ghspecialist.com/fotos/slide2_img2.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Pedro Luis Díaz","jobTitle":"Founder & CEO GH Specialist","url":"https://ghspecialist.com","telephone":"+528712638082","sameAs":["https://instagram.com/ghspecialist","https://linkedin.com/in/pedroluisdiaz"]}</script>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --p:#7C4DFF;--p2:#5C35CC;--p3:#9D77FF;
+      --p-light:#F3EFFF;--p-border:#DDD5FF;
+      --ink:#111;--ink2:#444;--ink3:#777;--ink4:#aaa;
+      --bg:#fff;--bg2:#FAFAFA;--bg3:#F4F4F4;
+      --border:#E8E8E8;--border2:#D0D0D0;
+      --r:12px;--r2:8px;
+    }
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden;line-height:1.6}
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+    .w{max-width:1080px;margin:0 auto;padding:0 28px}
+    .w-narrow{max-width:720px;margin:0 auto;padding:0 28px}
+
+    /* SCROLL PROGRESS */
+    #spbar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--p),#a78bfa);z-index:9999;transition:width .08s linear}
+
+    /* ─── HEADER ─── */
+    .hdr{position:fixed;top:0;width:100%;z-index:500;transition:all .3s}
+    .hdr.scrolled{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);box-shadow:0 1px 16px rgba(0,0,0,.06)}
+    .hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px;max-width:1080px;margin:0 auto}
+    .hdr-logo{height:28px}
+    .hdr-nav{display:flex;align-items:center;gap:6px}
+    .hdr-nav a{font-size:13.5px;font-weight:500;color:var(--ink);padding:6px 12px;border-radius:6px;transition:all .15s}
+    .hdr-nav a:hover{color:var(--ink);background:var(--bg3)}
+    .hdr-nav a.active{color:var(--p)}
+    .hdr-right{display:flex;align-items:center;gap:10px}
+    .hdr-wa{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--ink2);padding:7px 14px;border-radius:7px;border:1.5px solid var(--border);transition:all .15s}
+    .hdr-wa:hover{border-color:#25D366;color:#25D366}
+    .hdr-wa svg{width:16px;height:16px;flex-shrink:0}
+
+    /* ─── BUTTONS ─── */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 22px;border-radius:8px;font-weight:600;font-size:14.5px;cursor:pointer;border:none;font-family:inherit;transition:all .18s;white-space:nowrap;line-height:1}
+    .btn-p{background:var(--p);color:#fff}
+    .btn-p:hover{background:var(--p2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,77,255,.35)}
+    .btn-outline{background:transparent;border:1.5px solid var(--border2);color:var(--ink2)}
+    .btn-outline:hover{border-color:var(--p);color:var(--p);background:var(--p-light)}
+    .btn-dark{background:var(--ink);color:#fff}
+    .btn-dark:hover{background:#333;transform:translateY(-1px)}
+    .btn-lg{padding:15px 34px;font-size:16px;border-radius:10px}
+    .btn-sm{padding:8px 16px;font-size:13px;border-radius:6px}
+    .btn-wa{background:#25D366;color:#fff}
+    .btn-wa:hover{background:#1ebe5d;transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,211,102,.3)}
+
+    /* ─── HERO ─── */
+    .hero{padding:120px 0 80px;background:var(--bg)}
+    .hero .w{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .hero-kicker{display:inline-flex;align-items:center;gap:8px;background:var(--p-light);color:var(--p);padding:5px 14px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px;border:1px solid var(--p-border)}
+    .hero-kicker span{width:6px;height:6px;border-radius:50%;background:var(--p);display:block;animation:pulse-dot 2s infinite}
+    @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+    .hero h1{font-size:clamp(32px,3.8vw,54px);font-weight:900;letter-spacing:-.03em;line-height:1.05;margin-bottom:20px;color:var(--ink)}
+    .hero h1 em{font-style:normal;color:var(--p)}
+    .hero-sub{font-size:17px;color:var(--ink3);line-height:1.7;margin-bottom:32px;max-width:480px}
+    .hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:44px}
+    .hero-stats{display:flex;gap:32px;flex-wrap:wrap}
+    .hero-stat{display:flex;flex-direction:column}
+    .hs-n{font-size:28px;font-weight:900;letter-spacing:-.03em;color:var(--ink)}
+    .hs-l{font-size:12px;color:var(--ink4);font-weight:500;margin-top:2px}
+    .hero-img{position:relative}
+    .hero-img-wrap{border-radius:20px;overflow:hidden;box-shadow:0 24px 64px rgba(124,77,255,.15),0 8px 24px rgba(0,0,0,.1);aspect-ratio:4/5;background:var(--bg3)}
+    .hero-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:top center}
+    .hero-badge-float{position:absolute;bottom:28px;left:-20px;background:#fff;border-radius:12px;padding:12px 18px;box-shadow:0 8px 32px rgba(0,0,0,.12);display:flex;align-items:center;gap:10px}
+    .hero-badge-float .hbf-icon{width:40px;height:40px;border-radius:10px;background:var(--p-light);display:flex;align-items:center;justify-content:center;font-size:20px}
+    .hero-badge-float .hbf-text strong{display:block;font-size:13px;font-weight:700;color:var(--ink)}
+    .hero-badge-float .hbf-text span{font-size:11px;color:var(--ink4)}
+    .hero-badge-float2{position:absolute;top:28px;right:-20px;background:#fff;border-radius:12px;padding:12px 18px;box-shadow:0 8px 32px rgba(0,0,0,.12);display:flex;align-items:center;gap:10px}
+
+    /* ─── SECTION BASICS ─── */
+    .sec{padding:96px 0}
+    .sec-gray{background:var(--bg2)}
+    .sec-dark{background:#111;color:#fff}
+    .sec-purple{background:var(--p);color:#fff}
+    .sec-header{text-align:center;margin-bottom:56px}
+    .sec-header.left{text-align:left}
+    .label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--p);margin-bottom:10px;display:block}
+    .sec-dark .label{color:#a78bfa}
+    .title{font-size:clamp(26px,3.5vw,42px);font-weight:800;letter-spacing:-.025em;line-height:1.12;margin-bottom:16px;color:var(--ink)}
+    .sec-dark .title{color:#fff}
+    .sec-purple .title{color:#fff}
+    .sub-text{font-size:17px;color:var(--ink3);line-height:1.7;max-width:520px}
+    .sec-header.center .sub-text{margin:0 auto}
+    .sec-dark .sub-text{color:rgba(255,255,255,.65)}
+    .sec-purple .sub-text{color:rgba(255,255,255,.8)}
+
+    /* ─── DIVIDER ─── */
+    .divider{height:1px;background:var(--border);margin:0}
+
+    /* ─── MARQUEE / TICKER ─── */
+    .ticker-section{padding:32px 0;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .ticker-label{text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--ink4);margin-bottom:16px}
+    .ticker-track{display:flex;gap:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#fff 12%,#fff 88%,transparent);mask-image:linear-gradient(90deg,transparent,#fff 12%,#fff 88%,transparent)}
+    .ticker-inner{display:flex;gap:0;animation:marquee 28s linear infinite;flex-shrink:0}
+    .ticker-inner2{animation-delay:-14s}
+    @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .ticker-item{display:flex;align-items:center;gap:10px;padding:0 36px;white-space:nowrap;font-size:14px;font-weight:600;color:var(--ink3);border-right:1px solid var(--border)}
+    .ticker-item .ti-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;background:var(--bg3)}
+    .ticker-item:last-child{border-right:none}
+
+    /* ─── SERVICES GRID ─── */
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .svc-card{border:1.5px solid var(--border);border-radius:var(--r);padding:28px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden;background:#fff}
+    .svc-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--p-light),transparent);opacity:0;transition:opacity .22s}
+    .svc-card:hover{border-color:var(--p);transform:translateY(-2px);box-shadow:0 8px 32px rgba(124,77,255,.12)}
+    .svc-card:hover::before{opacity:1}
+    .svc-icon{width:48px;height:48px;border-radius:12px;background:var(--p-light);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;position:relative;z-index:1}
+    .svc-card h3{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--ink);position:relative;z-index:1}
+    .svc-card p{font-size:13.5px;color:var(--ink3);line-height:1.6;position:relative;z-index:1;margin-bottom:16px}
+    .svc-link{font-size:13px;font-weight:600;color:var(--p);display:flex;align-items:center;gap:6px;position:relative;z-index:1;transition:gap .15s}
+    .svc-card:hover .svc-link{gap:10px}
+    .svc-tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:var(--p-light);color:var(--p);margin-bottom:10px;position:relative;z-index:1}
+
+    /* ─── ABOUT SECTION ─── */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .about-img{border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.1);aspect-ratio:1;background:var(--bg3)}
+    .about-img img{width:100%;height:100%;object-fit:cover;object-position:top center}
+    .timeline{display:flex;flex-direction:column;gap:0;margin-top:32px}
+    .tl-item{display:flex;gap:20px;padding-bottom:28px;position:relative}
+    .tl-item:last-child{padding-bottom:0}
+    .tl-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:36px}
+    .tl-dot{width:12px;height:12px;border-radius:50%;background:var(--p);flex-shrink:0;margin-top:4px}
+    .tl-line{flex:1;width:2px;background:var(--border);margin-top:4px}
+    .tl-item:last-child .tl-line{display:none}
+    .tl-year{font-size:11px;font-weight:700;color:var(--p);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+    .tl-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px}
+    .tl-desc{font-size:13.5px;color:var(--ink3);line-height:1.6}
+
+    /* ─── RESULTS / CASES ─── */
+    .cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .case-card{border-radius:var(--r);overflow:hidden;position:relative;aspect-ratio:4/3;cursor:pointer;transition:transform .22s}
+    .case-card:hover{transform:scale(1.02)}
+    .case-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.45)}
+    .case-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),transparent 50%)}
+    .case-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:24px}
+    .case-sector{display:inline-flex;align-items:center;padding:3px 10px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;background:rgba(124,77,255,.8);color:#fff;margin-bottom:8px;align-self:flex-start}
+    .case-card h3{font-size:16px;font-weight:800;color:#fff;margin-bottom:6px;line-height:1.2}
+    .case-metric{font-size:28px;font-weight:900;color:#a78bfa;letter-spacing:-.02em;line-height:1}
+    .case-metric-l{font-size:12px;color:rgba(255,255,255,.7);margin-top:2px}
+
+    /* ─── NUMBERS BAR ─── */
+    .numbers-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
+    .nb-item{background:var(--bg);padding:36px 24px;text-align:center}
+    .nb-n{font-size:42px;font-weight:900;color:var(--ink);letter-spacing:-.03em;line-height:1}
+    .nb-n span{color:var(--p)}
+    .nb-l{font-size:12px;color:var(--ink4);font-weight:500;margin-top:8px;text-transform:uppercase;letter-spacing:.06em}
+
+    /* ─── TESTIMONIALS ─── */
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .testi-card{border:1.5px solid var(--border);border-radius:var(--r);padding:28px;background:#fff;transition:all .2s}
+    .testi-card:hover{border-color:var(--p-border);box-shadow:0 4px 20px rgba(124,77,255,.08)}
+    .testi-stars{color:#FBBF24;font-size:14px;margin-bottom:12px;letter-spacing:2px}
+    .testi-text{font-size:14.5px;color:var(--ink2);line-height:1.7;margin-bottom:20px;font-style:italic}
+    .testi-text::before{content:'"';font-size:40px;color:var(--p);line-height:0;vertical-align:-.3em;margin-right:4px}
+    .testi-author{display:flex;align-items:center;gap:12px}
+    .testi-avatar{width:40px;height:40px;border-radius:50%;background:var(--p-light);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--p);flex-shrink:0}
+    .testi-name{font-size:13px;font-weight:700;color:var(--ink)}
+    .testi-role{font-size:12px;color:var(--ink4)}
+
+    /* ─── CITIES SECTION ─── */
+    .cities-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .city-card{border-radius:var(--r);overflow:hidden;position:relative;aspect-ratio:3/4;cursor:pointer;transition:transform .22s}
+    .city-card:hover{transform:scale(1.02)}
+    .city-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .4s}
+    .city-card:hover .city-bg{transform:scale(1.05)}
+    .city-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 55%)}
+    .city-content{position:absolute;bottom:0;left:0;right:0;padding:20px}
+    .city-name{font-size:18px;font-weight:800;color:#fff;margin-bottom:2px}
+    .city-desc{font-size:12px;color:rgba(255,255,255,.7)}
+
+    /* ─── PRICING ─── */
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
+    .plan-card{border:1.5px solid var(--border);border-radius:var(--r);padding:32px;background:#fff;position:relative;transition:all .2s}
+    .plan-card.featured{border-color:var(--p);background:var(--p);color:#fff;transform:scale(1.04);box-shadow:0 20px 60px rgba(124,77,255,.3)}
+    .plan-card:not(.featured):hover{border-color:var(--p-border);box-shadow:0 8px 32px rgba(0,0,0,.08);transform:translateY(-2px)}
+    .plan-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#FBBF24;color:#111;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:4px 14px;border-radius:100px;white-space:nowrap}
+    .plan-name{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ink4);margin-bottom:8px}
+    .plan-card.featured .plan-name{color:rgba(255,255,255,.7)}
+    .plan-price{font-size:42px;font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--ink);margin-bottom:4px}
+    .plan-card.featured .plan-price{color:#fff}
+    .plan-price sup{font-size:18px;font-weight:700;vertical-align:.5em}
+    .plan-price sub{font-size:13px;font-weight:500;color:var(--ink4)}
+    .plan-card.featured .plan-price sub{color:rgba(255,255,255,.6)}
+    .plan-desc{font-size:13px;color:var(--ink3);margin-bottom:24px;line-height:1.5}
+    .plan-card.featured .plan-desc{color:rgba(255,255,255,.75)}
+    .plan-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+    .plan-features li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--ink2)}
+    .plan-card.featured .plan-features li{color:rgba(255,255,255,.9)}
+    .plan-features li::before{content:'✓';color:var(--p);font-weight:800;flex-shrink:0;margin-top:1px}
+    .plan-card.featured .plan-features li::before{color:#FBBF24}
+    .plan-card.featured .btn-p{background:#fff;color:var(--p)}
+    .plan-card.featured .btn-p:hover{background:#f0e8ff}
+
+    /* ─── CTA SECTION ─── */
+    .cta-section{background:var(--ink);padding:100px 0;text-align:center;position:relative;overflow:hidden}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(124,77,255,.3),transparent 60%)}
+    .cta-section .w{position:relative;z-index:1}
+    .cta-section h2{font-size:clamp(28px,4vw,52px);font-weight:900;color:#fff;letter-spacing:-.03em;margin-bottom:16px}
+    .cta-section p{font-size:17px;color:rgba(255,255,255,.6);margin-bottom:36px;max-width:460px;margin-left:auto;margin-right:auto}
+    .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+    /* ─── CONTACT SECTION ─── */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+    .contact-info h2{font-size:32px;font-weight:800;letter-spacing:-.025em;margin-bottom:16px}
+    .contact-info p{font-size:16px;color:var(--ink3);line-height:1.7;margin-bottom:28px}
+    .contact-methods{display:flex;flex-direction:column;gap:14px}
+    .c-method{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1.5px solid var(--border);border-radius:var(--r2);transition:all .15s;cursor:pointer}
+    .c-method:hover{border-color:var(--p);background:var(--p-light)}
+    .c-method-icon{width:38px;height:38px;border-radius:8px;background:var(--p-light);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .c-method-text strong{display:block;font-size:13px;font-weight:700;color:var(--ink)}
+    .c-method-text span{font-size:12px;color:var(--ink4)}
+    .contact-form{background:var(--bg2);border-radius:16px;padding:36px;border:1.5px solid var(--border)}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+    .form-group:last-child{margin-bottom:0}
+    .form-group label{font-size:12px;font-weight:600;color:var(--ink2);text-transform:uppercase;letter-spacing:.06em}
+    .form-group input,.form-group select,.form-group textarea{padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;color:var(--ink);background:#fff;transition:border-color .15s;outline:none}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(124,77,255,.1)}
+    .form-group textarea{resize:vertical;min-height:100px}
+
+    /* ─── FOOTER ─── */
+    .footer{background:#0a0a0a;color:#fff;padding:64px 0 28px}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:28px}
+    .footer-brand p{font-size:13.5px;color:rgba(255,255,255,.45);line-height:1.8;margin-top:14px;max-width:240px}
+    .footer-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.4);margin-bottom:16px}
+    .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .footer-col ul li a{font-size:13.5px;color:rgba(255,255,255,.6);transition:color .15s}
+    .footer-col ul li a:hover{color:#a78bfa}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    .footer-bottom p{font-size:12px;color:rgba(255,255,255,.3)}
+    .footer-social{display:flex;gap:10px}
+    .fsoc{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s;cursor:pointer}
+    .fsoc:hover{background:var(--p);transform:translateY(-2px)}
+
+    /* ─── FLOATING WA ─── */
+    .wa-float{position:fixed;bottom:28px;right:28px;z-index:400;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+    .wa-float a{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:#25D366;box-shadow:0 4px 20px rgba(37,211,102,.5);transition:all .2s}
+    .wa-float a:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.6)}
+    .wa-float svg{width:28px;height:28px}
+    @keyframes wa-pulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.5)}50%{box-shadow:0 4px 32px rgba(37,211,102,.8),0 0 0 8px rgba(37,211,102,.1)}}
+    .wa-float a{animation:wa-pulse 3s ease-in-out infinite}
+
+    /* ─── ANIMATE ON SCROLL ─── */
+    .fi{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+    .fi.v{opacity:1;transform:none}
+    .fi-d1{transition-delay:.08s}
+    .fi-d2{transition-delay:.16s}
+    .fi-d3{transition-delay:.24s}
+    .fi-d4{transition-delay:.32s}
+    .fi-d5{transition-delay:.4s}
+    .fi-d6{transition-delay:.48s}
+
+    /* ─── RESPONSIVE ─── */
+    @media(max-width:900px){
+      .hero .w{grid-template-columns:1fr;gap:40px}
+      .hero-img{display:none}
+      .services-grid{grid-template-columns:1fr 1fr}
+      .cases-grid{grid-template-columns:1fr 1fr}
+      .testi-grid{grid-template-columns:1fr}
+      .pricing-grid{grid-template-columns:1fr}
+      .plan-card.featured{transform:none}
+      .cities-grid{grid-template-columns:1fr 1fr}
+      .numbers-bar{grid-template-columns:1fr 1fr}
+      .about-grid{grid-template-columns:1fr;gap:40px}
+      .contact-grid{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr 1fr}
+      .hdr-nav{display:none}
+    }
+    @media(max-width:600px){
+      .services-grid{grid-template-columns:1fr}
+      .cases-grid{grid-template-columns:1fr}
+      .cities-grid{grid-template-columns:1fr 1fr}
+      .form-row{grid-template-columns:1fr}
+    }
+
+    /* Scroll indicator strip */
+    .strip{background:var(--p);padding:12px 28px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+    .strip p{color:#fff;font-size:13.5px;font-weight:500}
+    .strip .btn{background:#fff;color:var(--p);padding:7px 18px;font-size:12.5px}
+    .strip .btn:hover{background:#f0e8ff}
+  </style>
+</head>
+<body>
+  <div id="spbar"></div>
+
+  <!-- HEADER -->
+  <header class="hdr" id="hdr">
+    <div class="hdr-inner">
+      <a href="index.html"><img src="2.png" alt="GH Specialist" class="hdr-logo"></a>
+      <nav class="hdr-nav">
+        <a href="#servicios">Servicios</a>
+        <a href="#sobre-pedro">Pedro</a>
+        <a href="#resultados">Resultados</a>
+        <a href="#precios">Precios</a>
+        <a href="blog/">Blog</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="hdr-right">
+        <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20gratuito" target="_blank" class="hdr-wa">
+          <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          WhatsApp
+        </a>
+        <a href="https://calendly.com/ghspecialist" target="_blank" class="btn btn-p btn-sm">
+          Agendar diagnóstico
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="w">
+      <div class="hero-text">
+        <div class="hero-kicker"><span></span>+200 empresas automatizadas</div>
+        <h1>Automatiza tu negocio.<br>Escala <em>sin contratar</em><br>más personas.</h1>
+        <p class="hero-sub">Implementamos IA para que tu empresa opere sola. Chatbots, CRM, marketing y automatización total. Tú te enfocas en crecer.</p>
+        <div class="hero-btns">
+          <a href="https://calendly.com/ghspecialist" target="_blank" class="btn btn-p btn-lg">
+            🗓️ Diagnóstico gratis
+          </a>
+          <a href="https://wa.me/528712638082?text=Hola%2C%20me%20interesa%20automatizar%20mi%20empresa" target="_blank" class="btn btn-wa">
+            <svg viewBox="0 0 24 24" fill="#fff" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            Hablar por WhatsApp
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="hs-n">$5.2M</span>
+            <span class="hs-l">ahorrado en nómina</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hs-n">200+</span>
+            <span class="hs-l">empresas automatizadas</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hs-n">3X</span>
+            <span class="hs-l">ROI promedio</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-img">
+        <div class="hero-img-wrap">
+          <img src="fotos/slide2_img2.png" alt="Pedro Luis Díaz — GH Specialist">
+        </div>
+        <div class="hero-badge-float">
+          <div class="hbf-icon">🤖</div>
+          <div class="hbf-text">
+            <strong>IA Activa 24/7</strong>
+            <span>Atención sin pausas</span>
+          </div>
+        </div>
+        <div class="hero-badge-float2">
+          <div class="hbf-icon">📈</div>
+          <div class="hbf-text">
+            <strong>+340% ventas</strong>
+            <span>Inmobiliaria LATAM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS MARQUEE -->
+  <div class="ticker-section">
+    <p class="ticker-label">Partners tecnológicos</p>
+    <div class="ticker-track">
+      <div class="ticker-inner" id="t1a">
+        <div class="ticker-item"><div class="ti-icon">🟣</div>Kommo CRM</div>
+        <div class="ticker-item"><div class="ti-icon">🔶</div>Anthropic</div>
+        <div class="ticker-item"><div class="ti-icon">⚡</div>Cursor AI</div>
+        <div class="ticker-item"><div class="ti-icon">🔵</div>Google Ads Certified</div>
+        <div class="ticker-item"><div class="ti-icon">📘</div>Meta Business</div>
+        <div class="ticker-item"><div class="ti-icon">💬</div>WhatsApp Business API</div>
+        <div class="ticker-item"><div class="ti-icon">📸</div>Instagram Ads</div>
+        <div class="ticker-item"><div class="ti-icon">🎵</div>TikTok Ads</div>
+        <div class="ticker-item"><div class="ti-icon">🔍</div>SEO Profesional</div>
+        <div class="ticker-item"><div class="ti-icon">🟣</div>Kommo CRM</div>
+        <div class="ticker-item"><div class="ti-icon">🔶</div>Anthropic</div>
+        <div class="ticker-item"><div class="ti-icon">⚡</div>Cursor AI</div>
+        <div class="ticker-item"><div class="ti-icon">🔵</div>Google Ads Certified</div>
+        <div class="ticker-item"><div class="ti-icon">📘</div>Meta Business</div>
+        <div class="ticker-item"><div class="ti-icon">💬</div>WhatsApp Business API</div>
+        <div class="ticker-item"><div class="ti-icon">📸</div>Instagram Ads</div>
+        <div class="ticker-item"><div class="ti-icon">🎵</div>TikTok Ads</div>
+        <div class="ticker-item"><div class="ti-icon">🔍</div>SEO Profesional</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NUMBERS BAR -->
+  <div class="numbers-bar">
+    <div class="nb-item fi"><div class="nb-n" data-count="200">0</div><div class="nb-l">Empresas automatizadas</div></div>
+    <div class="nb-item fi fi-d1"><div class="nb-n">$5.2<span>M</span></div><div class="nb-l">Pesos ahorrados en nómina</div></div>
+    <div class="nb-item fi fi-d2"><div class="nb-n" data-count="340">0</div><div class="nb-l">% ROI promedio clientes</div></div>
+    <div class="nb-item fi fi-d3"><div class="nb-n" data-count="5">0</div><div class="nb-l">Países con clientes activos</div></div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="sec" id="servicios">
+    <div class="w">
+      <div class="sec-header center fi">
+        <span class="label">¿Qué hacemos?</span>
+        <h2 class="title">Suite completa de automatización IA</h2>
+        <p class="sub-text">Desde el primer chatbot hasta automatizar toda tu empresa. Cada servicio tiene su propia página con casos de uso y precios.</p>
+      </div>
+      <div class="services-grid">
+
+        <a href="servicios/chatbot-ia-whatsapp.html" class="svc-card fi fi-d1">
+          <div class="svc-tag">⭐ Más popular</div>
+          <div class="svc-icon">💬</div>
+          <h3>Chatbot IA WhatsApp</h3>
+          <p>Atiende, califica y cierra leads las 24h. El bot habla como tu mejor vendedor y escala a humano cuando es necesario.</p>
+          <span class="svc-link">Ver servicio →</span>
+        </a>
+
+        <a href="servicios/agentes-omnicanal.html" class="svc-card fi fi-d2">
+          <div class="svc-icon">🤖</div>
+          <h3>Agentes IA Omnicanal</h3>
+          <p>Un agente que opera en WhatsApp, Instagram DM, email y web al mismo tiempo. Sin duplicar trabajo.</p>
+          <span class="svc-link">Ver servicio →</span>
+        </a>
+
+        <a href="servicios/crm-kommo.html" class="svc-card fi fi-d3">
+          <div class="svc-icon">📊</div>
+          <h3>CRM Kommo</h3>
+          <p>Implementación completa del CRM líder de ventas conversacionales. Pipeline, automatizaciones y capacitación incluida.</p>
+          <span class="svc-link">Ver servicio →</span>
+        </a>
+
+        <a href="servicios/web-seo-blog-ia.html" class="svc-card fi fi-d4">
+          <div class="svc-icon">🌐</div>
+          <h3>Web + SEO + Blog IA</h3>
+          <p>Sitio web profesional con blog que se escribe solo con IA. Contenido SEO publicado automáticamente cada semana.</p>
+          <span class="svc-link">Ver servicio →</span>
+        </a>
+
+        <a href="servicios/automatizacion-total.html" class="svc-card fi fi-d5">
+          <div class="svc-icon">⚡</div>
+          <h3>Automatización Total</h3>
+          <p>Conectamos tus sistemas: CRM, WhatsApp, email, contabilidad, inventario. Tu empresa opera sola mientras duermes.</p>
+          <span class="svc-link">Ver servicio →</span>
+        </a>
+
+        <a href="servicios/growth-difusiones.html" class="svc-card fi fi-d6">
+          <div class="svc-icon">📣</div>
+          <h3>Growth + Difusiones</h3>
+          <p>Campañas masivas de WhatsApp, email y SMS personalizadas por IA. Segmentación inteligente y timing perfecto.</p>
+          <span class="svc-link">Ver servicio →</span>
+        </a>
+
+        <a href="servicios/pauta-omnicanal.html" class="svc-card fi">
+          <div class="svc-icon">🎯</div>
+          <h3>Pauta Omnicanal</h3>
+          <p>Google Ads + Meta Ads + TikTok gestionados con IA. Maximizamos tu ROAS con inteligencia artificial.</p>
+          <span class="svc-link">Ver servicio →</span>
+        </a>
+
+        <a href="servicios/cien-automatizado.html" class="svc-card fi fi-d1">
+          <div class="svc-tag" style="background:#FFF3E0;color:#E65100">🚀 Premium</div>
+          <div class="svc-icon">💎</div>
+          <h3>100% Automatizado</h3>
+          <p>Tu empresa con cero procesos manuales. Desde ventas hasta operaciones. El paquete completo de transformación IA.</p>
+          <span class="svc-link">Ver servicio →</span>
+        </a>
+
+        <a href="servicios/proyectos-medida.html" class="svc-card fi fi-d2">
+          <div class="svc-icon">🛠️</div>
+          <h3>Proyectos a Medida</h3>
+          <p>¿Tienes un proceso específico? Lo automatizamos. Desarrollo de agentes IA y flujos personalizados para tu industria.</p>
+          <span class="svc-link">Ver servicio →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS MARQUEE -->
+  <div class="ticker-section" style="background:var(--bg2)">
+    <p class="ticker-label">Certificaciones y reconocimientos</p>
+    <div class="ticker-track">
+      <div class="ticker-inner" style="animation-duration:22s">
+        <div class="ticker-item"><div class="ti-icon">🏆</div>Google Ads Certified Partner</div>
+        <div class="ticker-item"><div class="ti-icon">🎓</div>Meta Blueprint Certified</div>
+        <div class="ticker-item"><div class="ti-icon">🤖</div>Kommo Gold Partner</div>
+        <div class="ticker-item"><div class="ti-icon">📱</div>WhatsApp Business API Official</div>
+        <div class="ticker-item"><div class="ti-icon">🎯</div>TikTok Ads Certified</div>
+        <div class="ticker-item"><div class="ti-icon">🔍</div>SEO Professional Certified</div>
+        <div class="ticker-item"><div class="ti-icon">⚡</div>Anthropic Claude Partner</div>
+        <div class="ticker-item"><div class="ti-icon">🏆</div>Google Ads Certified Partner</div>
+        <div class="ticker-item"><div class="ti-icon">🎓</div>Meta Blueprint Certified</div>
+        <div class="ticker-item"><div class="ti-icon">🤖</div>Kommo Gold Partner</div>
+        <div class="ticker-item"><div class="ti-icon">📱</div>WhatsApp Business API Official</div>
+        <div class="ticker-item"><div class="ti-icon">🎯</div>TikTok Ads Certified</div>
+        <div class="ticker-item"><div class="ti-icon">🔍</div>SEO Professional Certified</div>
+        <div class="ticker-item"><div class="ti-icon">⚡</div>Anthropic Claude Partner</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT PEDRO -->
+  <section class="sec" id="sobre-pedro">
+    <div class="w">
+      <div class="about-grid">
+        <div class="about-img fi">
+          <img src="fotos/slide2_img2.png" alt="Pedro Luis Díaz — Fundador GH Specialist">
+        </div>
+        <div>
+          <div class="fi">
+            <span class="label">Quién es Pedro</span>
+            <h2 class="title">De 30 empleados a un equipo de 3 personas con IA</h2>
+            <p style="font-size:16px;color:var(--ink3);line-height:1.8;margin-bottom:8px">
+              Pedro Luis Díaz es fundador de GH Specialist y pionero en automatización con IA para empresas latinoamericanas. Lo que empezó como un experimento personal se convirtió en un sistema que ahora usan más de 200 empresas.
+            </p>
+          </div>
+          <div class="timeline">
+            <div class="tl-item fi fi-d1">
+              <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+              <div>
+                <div class="tl-year">2019</div>
+                <div class="tl-title">Primera empresa fundada en Torreón</div>
+                <div class="tl-desc">Inicia operaciones con 30 empleados. Procesos 100% manuales y altos costos de nómina.</div>
+              </div>
+            </div>
+            <div class="tl-item fi fi-d2">
+              <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+              <div>
+                <div class="tl-year">2021</div>
+                <div class="tl-title">Primer chatbot WhatsApp → -40% nómina</div>
+                <div class="tl-desc">Automatiza atención al cliente. Libera 12 personas del equipo y triplica respuestas en tiempo real.</div>
+              </div>
+            </div>
+            <div class="tl-item fi fi-d3">
+              <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+              <div>
+                <div class="tl-year">2022</div>
+                <div class="tl-title">Funda GH Specialist</div>
+                <div class="tl-desc">Decide replicar el modelo. Primeros 20 clientes en 90 días. Expansión a CDMX, Guadalajara y Monterrey.</div>
+              </div>
+            </div>
+            <div class="tl-item fi fi-d4">
+              <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+              <div>
+                <div class="tl-year">2023</div>
+                <div class="tl-title">Nómada digital: base en Mérida</div>
+                <div class="tl-desc">Empresa 100% remota. Equipo de 3 personas opera más de 100 clientes activos simultáneamente con IA.</div>
+              </div>
+            </div>
+            <div class="tl-item fi fi-d5">
+              <div class="tl-left"><div class="tl-dot"></div></div>
+              <div>
+                <div class="tl-year">2024–hoy</div>
+                <div class="tl-title">+200 empresas. 5 países.</div>
+                <div class="tl-desc">México, Colombia, Perú, Argentina y Chile. $5.2M MXN ahorrados en nómina para clientes.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRIP CTA -->
+  <div class="strip">
+    <p>¿Listo para automatizar tu empresa? El diagnóstico es completamente gratis.</p>
+    <a href="https://calendly.com/ghspecialist" target="_blank" class="btn">🗓️ Agendar diagnóstico</a>
+    <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20saber%20m%C3%A1s" target="_blank" class="btn">
+      <svg viewBox="0 0 24 24" fill="#25D366" width="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      WhatsApp directo
+    </a>
+  </div>
+
+  <!-- RESULTS / CASES -->
+  <section class="sec sec-gray" id="resultados">
+    <div class="w">
+      <div class="sec-header center fi">
+        <span class="label">Casos de éxito</span>
+        <h2 class="title">Resultados reales de empresas reales</h2>
+        <p class="sub-text">No prometemos. Mostramos lo que ya logramos para clientes en México y LATAM.</p>
+      </div>
+      <div class="cases-grid">
+        <div class="case-card fi fi-d1">
+          <div class="case-bg" style="background-image:url('hero-torreon.jpg')"></div>
+          <div class="case-overlay"></div>
+          <div class="case-content">
+            <span class="case-sector">🏠 Inmobiliaria</span>
+            <h3>Grupo Inmobiliario Norteño</h3>
+            <div class="case-metric">+340%</div>
+            <div class="case-metric-l">leads calificados en 60 días</div>
+          </div>
+        </div>
+        <div class="case-card fi fi-d2">
+          <div class="case-bg" style="background-image:url('hero-guadalajara.jpg')"></div>
+          <div class="case-overlay"></div>
+          <div class="case-content">
+            <span class="case-sector">🏗️ Constructora</span>
+            <h3>Constructora Pacífico GDL</h3>
+            <div class="case-metric">-68%</div>
+            <div class="case-metric-l">reducción de costos operativos</div>
+          </div>
+        </div>
+        <div class="case-card fi fi-d3">
+          <div class="case-bg" style="background-image:url('hero-queretaro.jpg')"></div>
+          <div class="case-overlay"></div>
+          <div class="case-content">
+            <span class="case-sector">🛍️ Retail / E-commerce</span>
+            <h3>Boutique Querétaro</h3>
+            <div class="case-metric">8.2X</div>
+            <div class="case-metric-l">ROAS en Meta + Google Ads</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTS MARQUEE -->
+  <div class="ticker-section">
+    <p class="ticker-label">Empresas que confían en GH Specialist</p>
+    <div class="ticker-track">
+      <div class="ticker-inner" style="animation-direction:reverse;animation-duration:24s">
+        <div class="ticker-item"><div class="ti-icon">🚗</div>Land Rover</div>
+        <div class="ticker-item"><div class="ti-icon">🥛</div>LALA</div>
+        <div class="ticker-item"><div class="ti-icon">🌹</div>La Rosa</div>
+        <div class="ticker-item"><div class="ti-icon">🏎️</div>Porsche</div>
+        <div class="ticker-item"><div class="ti-icon">🌊</div>Acqua di Giò · Dior</div>
+        <div class="ticker-item"><div class="ti-icon">🏠</div>Inmobiliaria Norteña</div>
+        <div class="ticker-item"><div class="ti-icon">🏗️</div>Constructora Pacífico</div>
+        <div class="ticker-item"><div class="ti-icon">💎</div>Boutique Luxury MX</div>
+        <div class="ticker-item"><div class="ti-icon">🚗</div>Land Rover</div>
+        <div class="ticker-item"><div class="ti-icon">🥛</div>LALA</div>
+        <div class="ticker-item"><div class="ti-icon">🌹</div>La Rosa</div>
+        <div class="ticker-item"><div class="ti-icon">🏎️</div>Porsche</div>
+        <div class="ticker-item"><div class="ti-icon">🌊</div>Acqua di Giò · Dior</div>
+        <div class="ticker-item"><div class="ti-icon">🏠</div>Inmobiliaria Norteña</div>
+        <div class="ticker-item"><div class="ti-icon">🏗️</div>Constructora Pacífico</div>
+        <div class="ticker-item"><div class="ti-icon">💎</div>Boutique Luxury MX</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <section class="sec" id="testimonios">
+    <div class="w">
+      <div class="sec-header center fi">
+        <span class="label">Testimonios</span>
+        <h2 class="title">Lo que dicen nuestros clientes</h2>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card fi fi-d1">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">Pedro implementó el chatbot de WhatsApp en 2 semanas y ya en el primer mes triplicamos los leads calificados. Nunca imaginé que la IA funcionaría tan bien para inmobiliaria.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">A</div>
+            <div>
+              <div class="testi-name">Alejandra Morales</div>
+              <div class="testi-role">Directora Comercial · Inmobiliaria Norteña</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card fi fi-d2">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">Implementamos Kommo CRM con GH Specialist y ahora cada lead se mueve solo en el pipeline. Bajamos de 72h a 4 minutos en tiempo de respuesta promedio.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">R</div>
+            <div>
+              <div class="testi-name">Roberto García</div>
+              <div class="testi-role">CEO · Constructora Pacífico GDL</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card fi fi-d3">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">El blog con IA publica solo cada semana. Ya estamos en primera página de Google para 8 palabras clave. Fue la mejor inversión en marketing de toda nuestra historia.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">C</div>
+            <div>
+              <div class="testi-name">Carolina López</div>
+              <div class="testi-role">Fundadora · Boutique Querétaro</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CITIES -->
+  <section class="sec sec-gray">
+    <div class="w">
+      <div class="sec-header center fi">
+        <span class="label">Presencia nacional</span>
+        <h2 class="title">Operamos desde cualquier ciudad</h2>
+        <p class="sub-text">Empresa 100% digital. Servimos empresas en todo México y LATAM sin importar tu ubicación.</p>
+      </div>
+      <div class="cities-grid">
+        <div class="city-card fi fi-d1">
+          <div class="city-bg" style="background-image:url('hero-torreon.jpg')"></div>
+          <div class="city-overlay"></div>
+          <div class="city-content">
+            <div class="city-name">Torreón</div>
+            <div class="city-desc">Sede original · Coahuila</div>
+          </div>
+        </div>
+        <div class="city-card fi fi-d2">
+          <div class="city-bg" style="background-image:url('hero-guadalajara.jpg')"></div>
+          <div class="city-overlay"></div>
+          <div class="city-content">
+            <div class="city-name">Guadalajara</div>
+            <div class="city-desc">Hub tecnológico · Jalisco</div>
+          </div>
+        </div>
+        <div class="city-card fi fi-d3">
+          <div class="city-bg" style="background-image:url('hero-chihuahua.jpg')"></div>
+          <div class="city-overlay"></div>
+          <div class="city-content">
+            <div class="city-name">Chihuahua</div>
+            <div class="city-desc">Norte industrial · Chih.</div>
+          </div>
+        </div>
+        <div class="city-card fi fi-d4">
+          <div class="city-bg" style="background-image:url('hero-queretaro.jpg')"></div>
+          <div class="city-overlay"></div>
+          <div class="city-content">
+            <div class="city-name">Querétaro</div>
+            <div class="city-desc">Corredor Bajío · Qro.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRIP CTA 2 -->
+  <div class="strip">
+    <p>¿Tu empresa no está en la lista? No importa. Trabajamos con empresas de todo México.</p>
+    <a href="https://calendly.com/ghspecialist" target="_blank" class="btn">🗓️ Agenda tu diagnóstico</a>
+  </div>
+
+  <!-- PRICING -->
+  <section class="sec" id="precios">
+    <div class="w">
+      <div class="sec-header center fi">
+        <span class="label">Precios transparentes</span>
+        <h2 class="title">Inversión que se paga sola</h2>
+        <p class="sub-text">Un empleado cuesta $8K–$15K/mes. Nuestros sistemas trabajan 24/7 desde el primer mes.</p>
+      </div>
+      <div class="pricing-grid">
+
+        <div class="plan-card fi fi-d1">
+          <div class="plan-name">Starter</div>
+          <div class="plan-price"><sup>$</sup>12,000</div>
+          <div style="font-size:12px;color:var(--ink4);margin-bottom:12px">pago único · sin mensualidades</div>
+          <div class="plan-desc">Para negocios que quieren su primer chatbot IA funcionando rápido.</div>
+          <ul class="plan-features">
+            <li>Chatbot WhatsApp con IA</li>
+            <li>Hasta 3 flujos de conversación</li>
+            <li>Integración con tu CRM existente</li>
+            <li>Panel de estadísticas básico</li>
+            <li>Soporte 30 días</li>
+            <li>Entrega en 7 días hábiles</li>
+          </ul>
+          <a href="https://wa.me/528712638082?text=Hola%2C%20me%20interesa%20el%20plan%20Starter%20de%20%2412%2C000" target="_blank" class="btn btn-outline" style="width:100%;justify-content:center">
+            <svg viewBox="0 0 24 24" fill="#25D366" width="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            Quiero este plan
+          </a>
+        </div>
+
+        <div class="plan-card featured fi fi-d2">
+          <div class="plan-badge">Más elegido</div>
+          <div class="plan-name">Business</div>
+          <div class="plan-price"><sup>$</sup>35,000</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.55);margin-bottom:12px">pago único · soporte 3 meses</div>
+          <div class="plan-desc">CRM + chatbot + automatizaciones. La suite completa para escalar ventas.</div>
+          <ul class="plan-features">
+            <li>Todo lo de Starter</li>
+            <li>CRM Kommo implementado</li>
+            <li>Agente omnicanal (WA + IG + web)</li>
+            <li>10 flujos de automatización</li>
+            <li>Dashboard de métricas avanzado</li>
+            <li>Capacitación del equipo</li>
+            <li>Soporte 90 días prioritario</li>
+            <li>Blog IA (4 artículos/mes)</li>
+          </ul>
+          <a href="https://wa.me/528712638082?text=Hola%2C%20me%20interesa%20el%20plan%20Business%20de%20%2435%2C000" target="_blank" class="btn btn-p" style="width:100%;justify-content:center">
+            <svg viewBox="0 0 24 24" fill="#25D366" width="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            Empezar ahora
+          </a>
+        </div>
+
+        <div class="plan-card fi fi-d3">
+          <div class="plan-name">Enterprise</div>
+          <div class="plan-price"><sup>$</sup>120,000</div>
+          <div style="font-size:12px;color:var(--ink4);margin-bottom:12px">pago único · soporte 12 meses</div>
+          <div class="plan-desc">Transformación digital total. Tu empresa 100% automatizada con IA.</div>
+          <ul class="plan-features">
+            <li>Todo lo de Business</li>
+            <li>Automatización de operaciones</li>
+            <li>Integración con ERP / SAP</li>
+            <li>Agentes IA ilimitados</li>
+            <li>Pauta omnicanal gestionada</li>
+            <li>Blog IA diario</li>
+            <li>Reportes de BI mensuales</li>
+            <li>Consultor dedicado 12 meses</li>
+          </ul>
+          <a href="https://wa.me/528712638082?text=Hola%2C%20me%20interesa%20el%20plan%20Enterprise" target="_blank" class="btn btn-dark" style="width:100%;justify-content:center">
+            <svg viewBox="0 0 24 24" fill="#fff" width="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            Quiero Enterprise
+          </a>
+        </div>
+
+      </div>
+
+      <p style="text-align:center;font-size:13px;color:var(--ink4);margin-top:28px">
+        💡 ¿No sabes cuál es el tuyo? <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20saber%20qu%C3%A9%20plan%20necesito" target="_blank" style="color:var(--p);font-weight:600">Cuéntanos sobre tu empresa →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="sec sec-gray" id="contacto">
+    <div class="w">
+      <div class="contact-grid">
+        <div class="contact-info fi">
+          <span class="label">Contáctanos</span>
+          <h2>Agenda tu diagnóstico gratuito</h2>
+          <p>Sin compromisos. En 30 minutos te decimos exactamente qué necesita tu empresa y cuánto puedes ahorrar con IA.</p>
+          <div class="contact-methods">
+            <a href="https://wa.me/528712638082" target="_blank" class="c-method">
+              <div class="c-method-icon">
+                <svg viewBox="0 0 24 24" fill="#25D366" width="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+              </div>
+              <div class="c-method-text">
+                <strong>WhatsApp directo</strong>
+                <span>+52 871 263 8082 · Respuesta en minutos</span>
+              </div>
+            </a>
+            <a href="https://calendly.com/ghspecialist" target="_blank" class="c-method">
+              <div class="c-method-icon">🗓️</div>
+              <div class="c-method-text">
+                <strong>Agenda una videollamada</strong>
+                <span>Calendly · 30 minutos · Sin costo</span>
+              </div>
+            </a>
+            <a href="mailto:hola@ghspecialist.com" class="c-method">
+              <div class="c-method-icon">📧</div>
+              <div class="c-method-text">
+                <strong>Email</strong>
+                <span>hola@ghspecialist.com</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="contact-form fi fi-d2">
+          <h3 style="font-size:18px;font-weight:700;margin-bottom:6px">Cuéntanos sobre tu empresa</h3>
+          <p style="font-size:13.5px;color:var(--ink3);margin-bottom:22px">Te respondemos en menos de 2 horas en días hábiles.</p>
+          <form onsubmit="handleForm(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" placeholder="Tu nombre" required>
+              </div>
+              <div class="form-group">
+                <label>Empresa</label>
+                <input type="text" placeholder="Nombre de tu empresa" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>WhatsApp</label>
+              <input type="tel" placeholder="+52 800 000 0000" required>
+            </div>
+            <div class="form-group">
+              <label>¿Qué necesitas automatizar?</label>
+              <select required>
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option>Chatbot WhatsApp</option>
+                <option>CRM Kommo</option>
+                <option>Marketing y pauta</option>
+                <option>Web + SEO</option>
+                <option>Automatización completa</option>
+                <option>No sé por dónde empezar</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:20px">
+              <label>¿Algo más que deberíamos saber?</label>
+              <textarea placeholder="Cuéntanos brevemente tu situación actual..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-p" style="width:100%;justify-content:center;font-size:15px;padding:14px">
+              Enviar por WhatsApp →
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-section">
+    <div class="w">
+      <h2>¿Tu empresa sigue operando<br>como en 2015?</h2>
+      <p>Cada día sin automatización es dinero dejado en la mesa. El diagnóstico es gratis. La transformación, invaluable.</p>
+      <div class="cta-btns">
+        <a href="https://calendly.com/ghspecialist" target="_blank" class="btn btn-p btn-lg">
+          🗓️ Diagnóstico gratis ahora
+        </a>
+        <a href="https://wa.me/528712638082?text=Hola%20Pedro%2C%20quiero%20automatizar%20mi%20empresa" target="_blank" class="btn btn-wa btn-lg">
+          <svg viewBox="0 0 24 24" fill="#fff" width="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Escribir por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="w">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="2.png" alt="GH Specialist" style="height:28px;filter:brightness(0) invert(1)">
+          <p>Automatizamos empresas en México y LATAM con IA. Chatbots, CRM, marketing y transformación digital.</p>
+          <div style="margin-top:16px;display:flex;gap:8px">
+            <a href="https://wa.me/528712638082" target="_blank" class="fsoc" title="WhatsApp">💬</a>
+            <a href="https://instagram.com/ghspecialist" target="_blank" class="fsoc" title="Instagram">📸</a>
+            <a href="https://linkedin.com/in/ghspecialist" target="_blank" class="fsoc" title="LinkedIn">💼</a>
+            <a href="https://tiktok.com/@ghspecialist" target="_blank" class="fsoc" title="TikTok">🎵</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="servicios/chatbot-ia-whatsapp.html">Chatbot WhatsApp</a></li>
+            <li><a href="servicios/agentes-omnicanal.html">Agentes Omnicanal</a></li>
+            <li><a href="servicios/crm-kommo.html">CRM Kommo</a></li>
+            <li><a href="servicios/web-seo-blog-ia.html">Web + SEO</a></li>
+            <li><a href="servicios/automatizacion-total.html">Automatización Total</a></li>
+            <li><a href="servicios/pauta-omnicanal.html">Pauta Omnicanal</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="#sobre-pedro">Quiénes somos</a></li>
+            <li><a href="#resultados">Casos de éxito</a></li>
+            <li><a href="blog/">Blog IA</a></li>
+            <li><a href="#precios">Precios</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="https://wa.me/528712638082">+52 871 263 8082</a></li>
+            <li><a href="mailto:hola@ghspecialist.com">hola@ghspecialist.com</a></li>
+            <li><a href="https://calendly.com/ghspecialist" target="_blank">Agendar cita</a></li>
+            <li><a href="#">Torreón, Coahuila</a></li>
+            <li><a href="#">México + LATAM</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 GH Specialist. Todos los derechos reservados.</p>
+        <p style="color:rgba(255,255,255,.2)">Hecho con IA en México 🇲🇽</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP -->
+  <div class="wa-float">
+    <a href="https://wa.me/528712638082?text=Hola%20Pedro%2C%20quiero%20automatizar%20mi%20empresa" target="_blank" title="Chatea con nosotros en WhatsApp">
+      <svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    </a>
+  </div>
+
+  <script>
+    // Scroll progress
+    const spbar = document.getElementById('spbar');
+    const hdr = document.getElementById('hdr');
+    window.addEventListener('scroll', () => {
+      const s = window.scrollY;
+      const h = document.body.scrollHeight - window.innerHeight;
+      spbar.style.width = Math.round((s/h)*100) + '%';
+      hdr.classList.toggle('scrolled', s > 20);
+    }, {passive:true});
+
+    // Animate on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('v'); io.unobserve(e.target); }});
+    }, {threshold:.01, rootMargin:'0px 0px -30px 0px'});
+    document.querySelectorAll('.fi').forEach(el => io.observe(el));
+
+    // Counter animation
+    function animCount(el, target, suffix='') {
+      let cur = 0;
+      const step = target / 60;
+      const t = setInterval(() => {
+        cur += step;
+        if(cur >= target){ cur = target; clearInterval(t); }
+        el.textContent = Math.round(cur) + suffix;
+      }, 18);
+    }
+    const cio = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting && e.target.dataset.count) {
+          animCount(e.target, parseInt(e.target.dataset.count));
+          cio.unobserve(e.target);
+        }
+      });
+    }, {threshold:.2});
+    document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
+
+    // Form handler → WhatsApp redirect
+    function handleForm(e) {
+      e.preventDefault();
+      const f = e.target;
+      const nombre = f.querySelector('input[type=text]').value;
+      const empresa = f.querySelectorAll('input[type=text]')[1].value;
+      const wa = f.querySelector('input[type=tel]').value;
+      const servicio = f.querySelector('select').value;
+      const msg = encodeURIComponent(`Hola Pedro, soy ${nombre} de ${empresa}. Mi WhatsApp es ${wa}. Me interesa: ${servicio}`);
+      window.open(`https://wa.me/528712638082?text=${msg}`, '_blank');
+    }
+  </script>
+</body>
+</html>

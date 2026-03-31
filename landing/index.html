@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GH Specialist | Automatiza tu Negocio con IA — Pedro Luis Díaz</title>
+  <meta name="description" content="Automatiza tu negocio con IA: chatbots WhatsApp, CRM Kommo, agentes omnicanal. Pedro Luis Díaz ahorró $5.2M MXN. Diagnóstico gratis.">
+  <link rel="canonical" href="https://ghspecialist.com">
+  <meta property="og:title" content="GH Specialist | Automatiza tu Negocio con IA">
+  <meta property="og:description" content="De 30 empleados a cero con IA. Agenda tu diagnóstico gratis.">
+  <meta property="og:image" content="https://ghspecialist.com/fotos/slide2_img2.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"GH Specialist","telephone":"+528712638082","url":"https://ghspecialist.com","address":{"@type":"PostalAddress","addressLocality":"Torreón","addressRegion":"Coahuila","addressCountry":"MX"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuánto ahorra un negocio al automatizarse?","acceptedAnswer":{"@type":"Answer","text":"Un empleado cuesta $8K–$15K/mes. Con un chatbot de $12,000 pagado una vez, en 1–2 meses ya está pagado."}},{"@type":"Question","name":"¿Funciona para inmobiliarias?","acceptedAnswer":{"@type":"Answer","text":"Es la especialidad de GH Specialist."}}]}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --p:#7C4DFF;--p2:#5C35CC;--p-light:#F3EFFF;
+      --ink:#111;--ink2:#444;--ink3:#888;
+      --bg:#fff;--bg2:#F7F7F5;--border:#E8E8E8;
+    }
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+    .w{max-width:1060px;margin:0 auto;padding:0 28px}
+
+    /* PROGRESS BAR */
+    #spbar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--p),#a78bfa);z-index:9999;transition:width .1s}
+
+    /* HEADER */
+    .hdr{position:fixed;top:0;width:100%;z-index:200}
+    .hdr-bar{width:100%;transition:all .3s}
+    .hdr.scrolled .hdr-bar{background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(0,0,0,.05)}
+    .hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;max-width:1060px;margin:0 auto}
+    .hdr-logo{height:30px}
+    .hdr-nav{display:flex;align-items:center;gap:20px}
+    .hdr-nav a{font-size:14px;font-weight:500;color:rgba(255,255,255,.9);transition:color .15s;text-shadow:0 1px 3px rgba(0,0,0,.3)}
+    .hdr-nav a:hover{color:#fff}
+    .hdr.scrolled .hdr-nav a{color:var(--ink2);text-shadow:none}
+    .hdr.scrolled .hdr-nav a:hover{color:var(--p)}
+
+    /* BUTTONS */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border-radius:8px;font-weight:600;font-size:15px;cursor:pointer;border:none;font-family:inherit;transition:all .18s;white-space:nowrap}
+    .btn-p{background:var(--p);color:#fff}
+    .btn-p:hover{background:var(--p2);transform:translateY(-1px);box-shadow:0 4px 14px rgba(124,77,255,.35)}
+    .btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--ink2)}
+    .btn-outline:hover{border-color:var(--p);color:var(--p)}
+    .btn-lg{padding:16px 36px;font-size:17px;border-radius:10px}
+    .btn-sm{padding:9px 18px;font-size:13px}
+
+    /* AGENDAR STRIP */
+    .agenda-strip{background:var(--p);padding:10px 28px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+    .agenda-strip p{color:#fff;font-size:14px;font-weight:500}
+    .agenda-strip .btn{background:#fff;color:var(--p);padding:7px 18px;font-size:13px}
+    .agenda-strip .btn:hover{background:#f0e8ff;transform:none}
+
+    /* HERO */
+    .hero{padding:140px 0 100px;background:#0a0a0a;text-align:center;position:relative;overflow:hidden;min-height:100vh;display:flex;align-items:center}
+    .hero-bg{position:absolute;inset:0;background:url('hero-bg.jpg') center/cover no-repeat;opacity:.5}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.4),rgba(0,0,0,.65))}
+    .hero .w{position:relative;z-index:1}
+    .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);color:#fff;padding:5px 16px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:.06em;margin-bottom:28px;border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);text-transform:uppercase}
+    .hero h1{font-size:clamp(36px,6vw,72px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:#fff;max-width:900px;margin:0 auto 20px}
+    .hero h1 .hl{color:#a78bfa}
+    .hero-sub{font-size:clamp(16px,2vw,20px);color:rgba(255,255,255,.78);max-width:520px;margin:0 auto 40px;line-height:1.6}
+    .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:56px}
+    .hero-btns .btn-outline{border-color:rgba(255,255,255,.4);color:#fff}
+    .hero-btns .btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+    .hero-stats{display:inline-flex;gap:0;border:1px solid rgba(255,255,255,.15);border-radius:12px;overflow:hidden;backdrop-filter:blur(12px);background:rgba(0,0,0,.3)}
+    .hs{padding:18px 28px;text-align:center;border-right:1px solid rgba(255,255,255,.12)}
+    .hs:last-child{border-right:none}
+    .hs-n{display:block;font-size:24px;font-weight:800;color:#fff;line-height:1}
+    .hs-l{display:block;font-size:11px;color:rgba(255,255,255,.55);font-weight:500;margin-top:4px;text-transform:uppercase;letter-spacing:.06em}
+
+    /* SECTIONS */
+    .sec{padding:96px 0}
+    .sec-gray{background:var(--bg2)}
+    .label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--p);margin-bottom:10px}
+    .title{font-size:clamp(26px,4vw,42px);font-weight:800;letter-spacing:-.025em;line-height:1.12;margin-bottom:14px}
+    .sub{font-size:17px;color:var(--ink3);line-height:1.7;max-width:520px}
+    .center{text-align:center}.center .sub{margin:0 auto}
+
+    /* AGENDAR CTA BETWEEN SECTIONS */
+    .mid-cta{text-align:center;padding:40px 28px;background:var(--p-light);border-top:1px solid #ddd4ff;border-bottom:1px solid #ddd4ff}
+    .mid-cta p{font-size:15px;color:var(--ink2);margin-bottom:14px;font-weight:500}
+
+    /* VIDEO SECTION */
+    .vid-hero{max-width:800px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.12);aspect-ratio:16/9;position:relative}
+    .vid-hero iframe{width:100%;height:100%;border:none}
+    .short-wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:64px}
+    .short-frame{border-radius:24px;overflow:hidden;aspect-ratio:9/16;max-width:280px;margin:0 auto;box-shadow:0 20px 48px rgba(0,0,0,.15);border:4px solid #fff;position:relative}
+    .short-frame::before{content:'';position:absolute;inset:0;border-radius:20px;border:1px solid rgba(124,77,255,.3);z-index:1;pointer-events:none}
+    .short-frame iframe{width:100%;height:100%;border:none}
+    .short-copy .label{margin-bottom:8px}
+    .short-copy h3{font-size:clamp(22px,3vw,32px);font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+    .short-copy p{font-size:15px;color:var(--ink3);line-height:1.75;margin-bottom:20px}
+    .check-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+    .check-list li{font-size:14px;color:var(--ink2);display:flex;align-items:flex-start;gap:8px}
+    .check-list li::before{content:'✓';color:var(--p);font-weight:700;flex-shrink:0;margin-top:1px}
+
+    /* PRICING */
+    .pr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .pr{background:#fff;border:1px solid var(--border);border-radius:16px;padding:32px 28px;position:relative;transition:all .2s}
+    .pr:hover{box-shadow:0 12px 40px rgba(0,0,0,.08);transform:translateY(-2px)}
+    .pr.pop{border-color:var(--p);box-shadow:0 0 0 2px rgba(124,77,255,.15)}
+    .pr-tag{display:inline-block;background:var(--p);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px;margin-bottom:14px;letter-spacing:.04em}
+    .pr h3{font-size:18px;font-weight:700;margin-bottom:6px}
+    .pr .price{font-size:32px;font-weight:800;color:var(--p);margin-bottom:4px;letter-spacing:-.02em}
+    .pr .price small{font-size:14px;font-weight:400;color:var(--ink3)}
+    .pr .desc{font-size:13px;color:var(--ink3);margin-bottom:20px}
+    .pr ul{list-style:none;margin-bottom:24px;display:flex;flex-direction:column;gap:8px}
+    .pr li{font-size:13px;color:var(--ink2);display:flex;align-items:flex-start;gap:8px}
+    .pr li::before{content:'✓';color:var(--p);font-weight:700;flex-shrink:0}
+    .pr .btn{width:100%;justify-content:center}
+
+    /* FAQ */
+    .faq{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:14px;overflow:hidden}
+    .faq-i{border-bottom:1px solid var(--border)}
+    .faq-i:last-child{border-bottom:none}
+    .faq-q{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;cursor:pointer;gap:16px;transition:background .15s}
+    .faq-q:hover{background:var(--bg2)}
+    .faq-q span{font-size:15px;font-weight:600;color:var(--ink)}
+    .faq-ico{font-size:20px;font-weight:300;color:var(--p);flex-shrink:0;transition:transform .2s}
+    .faq-i.open .faq-ico{transform:rotate(45deg)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+    .faq-i.open .faq-a{max-height:300px}
+    .faq-a p{padding:0 24px 20px;font-size:14px;color:var(--ink3);line-height:1.75}
+
+    /* FINAL CTA */
+    .final-cta{background:var(--ink);border-radius:20px;padding:64px 48px;text-align:center;position:relative;overflow:hidden;max-width:860px;margin:0 auto}
+    .final-cta::before{content:'';position:absolute;top:-80px;right:-80px;width:360px;height:360px;background:radial-gradient(circle,rgba(124,77,255,.3) 0%,transparent 70%);pointer-events:none}
+    .final-cta .label{color:#a78bfa;margin-bottom:14px}
+    .final-cta h2{font-size:clamp(24px,4vw,40px);font-weight:800;color:#fff;letter-spacing:-.025em;margin-bottom:14px;position:relative;z-index:1}
+    .final-cta p{font-size:16px;color:rgba(255,255,255,.55);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.65;position:relative;z-index:1}
+    .final-cta .btn-p{font-size:17px;padding:16px 36px;position:relative;z-index:1}
+    .final-trust{font-size:12px;color:rgba(255,255,255,.28);margin-top:16px}
+
+    /* FOOTER */
+    .ftr{padding:36px 28px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;max-width:1060px;margin:0 auto}
+    .ftr-logo{height:24px}
+    .ftr p{font-size:12px;color:var(--ink3)}
+    .ftr-links{display:flex;gap:20px}
+    .ftr-links a{font-size:13px;color:var(--ink3);transition:color .15s}
+    .ftr-links a:hover{color:var(--p)}
+
+    /* FLOAT WA */
+    .wa{position:fixed;bottom:24px;right:24px;z-index:300;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 20px rgba(37,211,102,.45);cursor:pointer}
+    .wa:hover{transform:scale(1.08)}
+    .wa::before,.wa::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid #25D366;animation:waping 2s ease-out infinite}
+    .wa::after{animation-delay:.6s}
+    @keyframes waping{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.4);opacity:0}}
+
+    /* RESPONSIVE */
+    @media(max-width:860px){
+      .pr-grid{grid-template-columns:1fr}
+      .short-wrap{grid-template-columns:1fr;text-align:center}
+      .short-frame{max-width:220px}
+      .hdr-nav a:not(.btn){display:none}
+      .final-cta{padding:40px 24px;border-radius:14px}
+      .ftr{flex-direction:column;text-align:center}
+    }
+  </style>
+</head>
+<body>
+
+<div id="spbar"></div>
+
+<!-- HEADER -->
+<div class="hdr" id="hdr">
+  <div class="hdr-bar">
+    <div class="hdr-inner">
+      <img src="../2.png" alt="GH Specialist" class="hdr-logo">
+      <nav class="hdr-nav">
+        <a href="#video">Mi historia</a>
+        <a href="#precios">Precios</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://wa.me/528712638082?text=Hola%20Pedro,%20quiero%20agendar%20una%20cita" class="btn btn-p btn-sm" target="_blank">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Agendar cita
+        </a>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     1. HERO
+═══════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="w">
+    <div class="hero-badge">⚡ La revolución industrial digital ha comenzado</div>
+    <h1>Tu negocio puede operar<br>sin empleados, sin oficina,<br>con <span class="hl">pura IA</span></h1>
+    <p class="hero-sub">Ahorra millones en nómina, renta y seguros. Yo lo hice — y ahora te lo enseño.</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/528712638082?text=Hola%20Pedro,%20quiero%20agendar%20una%20cita" class="btn btn-p btn-lg" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Agendar cita gratis
+      </a>
+      <a href="#video" class="btn btn-outline btn-lg">▶ Ver mi historia</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><span class="hs-n">$5.2M</span><span class="hs-l">Pesos ahorrados</span></div>
+      <div class="hs"><span class="hs-n">0</span><span class="hs-l">Empleados</span></div>
+      <div class="hs"><span class="hs-n">24/7</span><span class="hs-l">IA operando</span></div>
+      <div class="hs"><span class="hs-n">+12 años</span><span class="hs-l">En negocios</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     2. VIDEO
+═══════════════════════════════════ -->
+<section class="sec" id="video">
+  <div class="w">
+    <div class="center" style="margin-bottom:44px">
+      <div class="label">Mi historia</div>
+      <h2 class="title">De 30 empleados a cero — así lo hice</h2>
+      <p class="sub">Mira el video donde explico cómo ahorré $5.2M y qué puede hacer la IA por tu negocio.</p>
+    </div>
+    <div class="vid-hero">
+      <iframe src="https://www.youtube.com/embed/HmfqtNRf9f0" title="Pedro Luis Díaz — GH Specialist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="short-wrap">
+      <div class="short-copy">
+        <div class="label">En 60 segundos</div>
+        <h3>El autoempleo más caro<br>que puedes tener</h3>
+        <p>Si tu negocio no funciona sin ti, no tienes un negocio — tienes un trabajo muy caro. Esto lo cambié con IA.</p>
+        <ul class="check-list">
+          <li>Eliminé $5,200,000 en costos fijos</li>
+          <li>Me automaticé en 2021 sin saber programar</li>
+          <li>En 2023 me fui a Mérida — porque pude</li>
+          <li>Hoy enseño a otros empresarios a hacer lo mismo</li>
+        </ul>
+        <a href="https://wa.me/528712638082?text=Hola%20Pedro,%20vi%20tu%20video%20y%20quiero%20hacer%20lo%20mismo" class="btn btn-p" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Quiero hacer lo mismo
+        </a>
+      </div>
+      <div class="short-frame">
+        <iframe src="https://www.youtube.com/embed/pgJCM3FPHL8" title="Autoempleo muy caro — Pedro Díaz" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDAR CTA STRIP -->
+<div class="mid-cta">
+  <p>¿Listo para automatizar tu negocio? Agenda tu diagnóstico gratuito ahora.</p>
+  <a href="https://wa.me/528712638082?text=Hola%20Pedro,%20quiero%20agendar%20mi%20diagnostico%20gratis" class="btn btn-p" target="_blank">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    📅 Agendar diagnóstico gratis
+  </a>
+</div>
+
+<!-- ═══════════════════════════════════
+     3. PRECIOS
+═══════════════════════════════════ -->
+<section class="sec sec-gray" id="precios">
+  <div class="w">
+    <div class="center" style="margin-bottom:44px">
+      <div class="label">Precios</div>
+      <h2 class="title">Sin mensualidades sorpresa</h2>
+      <p class="sub">Un empleado cuesta $15K–$25K/mes. Estos paquetes se pagan solos en 3–4 meses.</p>
+    </div>
+    <div class="pr-grid">
+      <div class="pr">
+        <h3>Starter Digital</h3>
+        <div class="price">$12,000 <small>+ IVA</small></div>
+        <div class="desc">Chatbot IA o Consultoría — para empezar</div>
+        <ul>
+          <li>1 Chatbot IA (WhatsApp o Web)</li>
+          <li>Atiende, califica y vende solo</li>
+          <li>Setup y entrenamiento incluido</li>
+          <li>Soporte directo con Pedro</li>
+          <li>1 mes de ajustes incluido</li>
+        </ul>
+        <a href="https://wa.me/528712638082?text=Hola%20Pedro,%20me%20interesa%20el%20Starter" class="btn btn-outline" target="_blank">Empezar con Starter</a>
+      </div>
+      <div class="pr pop">
+        <div class="pr-tag">⭐ Más solicitado</div>
+        <h3>Omnicanal</h3>
+        <div class="price">$35,000 <small>+ IVA</small></div>
+        <div class="desc">Agentes IA en todos los canales</div>
+        <ul>
+          <li>Agentes en WhatsApp, web e Instagram</li>
+          <li>Prospección + venta + seguimiento</li>
+          <li>CRM Kommo configurado</li>
+          <li>ROI estimado: 3–4 meses</li>
+          <li>Sesión de estrategia mensual</li>
+          <li>Soporte prioritario directo</li>
+        </ul>
+        <a href="https://wa.me/528712638082?text=Hola%20Pedro,%20quiero%20el%20paquete%20Omnicanal" class="btn btn-p" target="_blank">Quiero este paquete</a>
+      </div>
+      <div class="pr">
+        <h3>100% Automatizado</h3>
+        <div class="price">$120,000 <small>+ IVA</small></div>
+        <div class="desc">Tu operación en piloto automático</div>
+        <ul>
+          <li>App propia que opera tu negocio</li>
+          <li>RH, ventas, contabilidad automáticos</li>
+          <li>Web + SEO + Blog IA incluidos</li>
+          <li>Pauta digital con IA</li>
+          <li>ROI estimado: 6–12 meses</li>
+          <li>Soporte VIP directo con Pedro</li>
+        </ul>
+        <a href="https://wa.me/528712638082?text=Hola%20Pedro,%20quiero%20el%20100%25%20automatizado" class="btn btn-outline" target="_blank">Hablar con Pedro</a>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:13px;color:var(--ink3);margin-top:24px">¿Proyecto a medida? <strong style="color:var(--ink)">Desde $50,000 USD.</strong> <a href="https://wa.me/528712638082" style="color:var(--p);font-weight:600" target="_blank">Escríbeme →</a></p>
+  </div>
+</section>
+
+<!-- AGENDAR CTA STRIP -->
+<div class="mid-cta">
+  <p>¿No sabes cuál paquete es el tuyo? En 15 minutos te lo digo gratis.</p>
+  <a href="https://wa.me/528712638082?text=Hola%20Pedro,%20no%20se%20que%20paquete%20elegir,%20quiero%20una%20llamada" class="btn btn-p" target="_blank">📅 Agendar llamada de 15 min</a>
+</div>
+
+<!-- ═══════════════════════════════════
+     4. FAQ
+═══════════════════════════════════ -->
+<section class="sec" id="faq">
+  <div class="w">
+    <div class="center" style="margin-bottom:44px">
+      <div class="label">FAQ</div>
+      <h2 class="title">Preguntas frecuentes</h2>
+    </div>
+    <div class="faq">
+      <div class="faq-i"><div class="faq-q"><span>¿Cuánto ahorra realmente un negocio al automatizarse?</span><i class="faq-ico">+</i></div><div class="faq-a"><p>Un empleado cuesta $8K–$15K/mes. Con un chatbot de $12,000 pagado una sola vez, en 1–2 meses ya está pagado. Yo ahorré $5,200,000 pesos eliminando 5 empleados, oficina y seguros.</p></div></div>
+      <div class="faq-i"><div class="faq-q"><span>¿Funciona para inmobiliarias y constructoras?</span><i class="faq-ico">+</i></div><div class="faq-a"><p>Es mi especialidad. Busco específicamente empresarios con gasto en nómina, oficinas y publicidad tradicional que quieren crecer digitalizándose.</p></div></div>
+      <div class="faq-i"><div class="faq-q"><span>¿Cuánto tiempo tarda en estar funcionando?</span><i class="faq-ico">+</i></div><div class="faq-a"><p>Chatbot básico: 5–7 días. Omnicanal completo: 2–4 semanas. Proyecto 100% IA: 6–8 semanas.</p></div></div>
+      <div class="faq-i"><div class="faq-q"><span>¿Necesito conocimientos técnicos?</span><i class="faq-ico">+</i></div><div class="faq-a"><p>Cero. Tú solo ves los resultados en tu teléfono. Yo me encargo de todo: implementación, entrenamiento y mantenimiento.</p></div></div>
+      <div class="faq-i"><div class="faq-q"><span>¿Por qué tú y no una agencia grande?</span><i class="faq-ico">+</i></div><div class="faq-a"><p>Porque no vendo algo que no he vivido. Pasé de 30 empleados a cero con IA. Una agencia te manda un junior. Aquí hablas con quien lo construyó y lo vive.</p></div></div>
+      <div class="faq-i"><div class="faq-q"><span>¿Tienes soporte si algo falla?</span><i class="faq-ico">+</i></div><div class="faq-a"><p>Tienes mi WhatsApp directo: +52 871 263 8082. Sin tickets, sin call center. Incluyo 1 mes de ajustes en todos los paquetes.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="sec sec-gray">
+  <div class="w">
+    <div class="final-cta">
+      <div class="label">Diagnóstico gratuito</div>
+      <h2>¿Tu negocio puede operar<br>sin que estés tú?</h2>
+      <p>Si la respuesta es no, tenemos que hablar. 15 minutos, sin costo, sin compromiso.</p>
+      <a href="https://wa.me/528712638082?text=Hola%20Pedro,%20quiero%20mi%20diagnostico%20gratuito" class="btn btn-p btn-lg" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Agendar diagnóstico gratis
+      </a>
+      <div class="final-trust">+52 871 263 8082 · ghspecialist.com · Sin costo, sin compromiso</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ftr">
+    <img src="../2.png" alt="GH Specialist" class="ftr-logo">
+    <p>© 2026 GH Specialist · Pedro Luis Díaz Velázquez · Torreón, México</p>
+    <div class="ftr-links">
+      <a href="blog/">Blog</a>
+      <a href="https://wa.me/528712638082" target="_blank">WhatsApp</a>
+      <a href="#precios">Precios</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOAT WA -->
+<a href="https://wa.me/528712638082" class="wa" target="_blank" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  const hdr = document.getElementById('hdr');
+  const spbar = document.getElementById('spbar');
+  window.addEventListener('scroll', () => {
+    hdr.classList.toggle('scrolled', scrollY > 40);
+    spbar.style.width = (scrollY / (document.body.scrollHeight - innerHeight) * 100) + '%';
+  });
+  document.querySelectorAll('.faq-q').forEach(q => q.addEventListener('click', () => {
+    const i = q.parentElement;
+    document.querySelectorAll('.faq-i').forEach(x => { if(x!==i) x.classList.remove('open'); });
+    i.classList.toggle('open');
+  }));
+  document.querySelectorAll('.cal-slot:not(.cal-busy)').forEach(b => b.addEventListener('click', () => {
+    window.open('https://wa.me/528712638082?text=Hola%20Pedro,%20quiero%20agendar%20el%20' + encodeURIComponent(b.textContent), '_blank');
+  }));
+</script>
+</body>
+</html>

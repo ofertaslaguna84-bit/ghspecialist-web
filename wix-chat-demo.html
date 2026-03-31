@@ -1,0 +1,221 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:transparent;overflow-x:hidden}
+.demo-box{max-width:520px;margin:0 auto;padding:12px}
+.demo-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;justify-content:center}
+.demo-tab{background:#F4F4F4;border:1.5px solid #E8E8E8;border-radius:8px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;color:#777;transition:all .18s;white-space:nowrap}
+.demo-tab:hover{border-color:#DDD5FF;color:#7C4DFF}
+.demo-tab.active{background:#7C4DFF;color:#fff;border-color:#7C4DFF}
+.chat-wrap{background:#ECE5DD;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px;min-height:300px;max-height:400px;overflow-y:auto}
+.demo-start{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 20px;gap:14px}
+.demo-start p{font-size:14px;color:#777;text-align:center;line-height:1.5}
+.btn-demo{background:#7C4DFF;color:#fff;border:none;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-demo:hover{background:#5C35CC;transform:translateY(-2px);box-shadow:0 6px 24px rgba(124,77,255,.4)}
+.msg{max-width:82%;padding:10px 14px;border-radius:12px;font-size:13.5px;line-height:1.5;display:none;white-space:pre-line}
+.msg.show{display:block;animation:msgIn .35s ease-out}
+.msg-in{background:#fff;align-self:flex-start;border-bottom-left-radius:3px}
+.msg-out{background:#DCF8C6;align-self:flex-end;border-bottom-right-radius:3px}
+.msg-bot{background:#7C4DFF;color:#fff;align-self:flex-start;border-bottom-left-radius:3px}
+.msg-time{font-size:10px;color:#999;text-align:right;display:none}
+.msg-time.show{display:block;animation:msgIn .35s ease-out}
+.typing-indicator{align-self:flex-start;background:#7C4DFF;border-radius:12px;border-bottom-left-radius:3px;padding:12px 18px;display:none;gap:4px}
+.typing-indicator.show{display:flex}
+.typing-indicator span{width:7px;height:7px;background:rgba(255,255,255,.6);border-radius:50%;animation:typeDot 1.4s ease-in-out infinite}
+.typing-indicator span:nth-child(2){animation-delay:.2s}
+.typing-indicator span:nth-child(3){animation-delay:.4s}
+@keyframes msgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes typeDot{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-4px);opacity:1}}
+.replay-wrap{text-align:center;padding:12px}
+@media(max-width:480px){
+  .demo-tab{padding:5px 9px;font-size:10.5px}
+  .demo-tabs{gap:4px}
+  .msg{font-size:12.5px}
+  .chat-wrap{padding:10px;min-height:260px;max-height:350px}
+  .demo-start{padding:24px 14px}
+  .btn-demo{padding:12px 24px;font-size:14px}
+}
+</style>
+</head>
+<body>
+<div class="demo-box">
+  <div class="demo-tabs" id="demoTabs">
+    <button class="demo-tab active" onclick="switchDemo('inmobiliaria',this)">🏠 Inmobiliaria</button>
+    <button class="demo-tab" onclick="switchDemo('spa',this)">💆 Spa</button>
+    <button class="demo-tab" onclick="switchDemo('restaurante',this)">🍽️ Restaurante</button>
+    <button class="demo-tab" onclick="switchDemo('clinica',this)">🏥 Clínica</button>
+    <button class="demo-tab" onclick="switchDemo('ecommerce',this)">🛍️ E-commerce</button>
+    <button class="demo-tab" onclick="switchDemo('eventos',this)">🎉 Eventos</button>
+    <button class="demo-tab" onclick="switchDemo('rrhh',this)">👔 RRHH</button>
+    <button class="demo-tab" onclick="switchDemo('educacion',this)">🎓 Educación</button>
+  </div>
+  <div class="chat-wrap" id="chatDemo">
+    <div class="demo-start" id="demoStart">
+      <div style="font-size:48px">🤖</div>
+      <p id="demoDesc">Mira cómo la IA atiende, califica y cierra una venta inmobiliaria en segundos</p>
+      <button class="btn-demo" onclick="startDemo()">▶ Ver demo en vivo</button>
+    </div>
+    <div class="typing-indicator" id="typingDots"><span></span><span></span><span></span></div>
+  </div>
+</div>
+<script>
+const demos={
+  inmobiliaria:{
+    desc:'Mira cómo la IA atiende, califica y cierra una venta inmobiliaria en segundos',
+    msgs:[
+      {type:'in',text:'Hola, ¿tienen departamentos en venta en Torreón? 🏠',delay:800},
+      {type:'bot',text:'¡Hola! 👋 Soy el asistente de Grupo Inmobiliario. Sí, tenemos disponibilidad. Para ayudarte mejor, ¿cuál es tu presupuesto aproximado?',delay:1800,typing:1200},
+      {type:'in',text:'Entre 1.5 y 2.5 millones',delay:2200},
+      {type:'bot',text:'Perfecto. Tenemos 3 opciones que se ajustan exactamente a tu presupuesto. ¿Quieres recibirlas en este momento?',delay:1600,typing:1000},
+      {type:'in',text:'Sí, mándalas',delay:1400},
+      {type:'bot',text:'📋 Te envío las 3 opciones + fotos. Para agendar una visita, ¿cuándo tienes tiempo esta semana?',delay:1800,typing:1200},
+      {type:'out',text:'El jueves me queda bien',delay:2400},
+      {type:'bot',text:'✅ Confirmado. Cita el jueves 10am con nuestro agente. Te llega recordatorio el día anterior. ¡Hasta pronto!',delay:1400,typing:1000},
+    ]
+  },
+  spa:{
+    desc:'Mira cómo la IA agenda citas en un spa sin intervención humana',
+    msgs:[
+      {type:'in',text:'Hola, quiero agendar un masaje para el sábado 💆‍♀️',delay:800},
+      {type:'bot',text:'¡Hola! 🌿 Bienvenida a Zen Spa. Tenemos disponibilidad el sábado. ¿Qué tipo de masaje te interesa?\n\n1. Relajante (60 min) - $850\n2. Descontracturante (90 min) - $1,200\n3. Hot stones (75 min) - $1,100',delay:1800,typing:1200},
+      {type:'in',text:'El de hot stones se ve bien',delay:2000},
+      {type:'bot',text:'Excelente elección 🪨 Horarios disponibles el sábado:\n\n• 10:00 AM\n• 12:30 PM\n• 3:00 PM\n\n¿Cuál prefieres?',delay:1600,typing:1000},
+      {type:'in',text:'12:30 porfa',delay:1400},
+      {type:'bot',text:'¿Es tu primera visita? Necesito tu nombre completo para la reservación 😊',delay:1400,typing:900},
+      {type:'in',text:'Sí, soy María González',delay:1800},
+      {type:'bot',text:'✅ ¡Listo, María! Reservación confirmada:\n\n🪨 Hot Stones - 75 min\n📅 Sábado 12:30 PM\n💰 $1,100\n\nTe envío recordatorio el viernes. ¡Te esperamos! 🧖‍♀️',delay:1600,typing:1200},
+    ]
+  },
+  restaurante:{
+    desc:'Mira cómo la IA gestiona reservaciones de restaurante automáticamente',
+    msgs:[
+      {type:'in',text:'Buenas tardes, quiero reservar mesa para el viernes 🍽️',delay:800},
+      {type:'bot',text:'¡Hola! 🍷 Bienvenido a La Terraza. Con gusto te ayudo. ¿Para cuántas personas y a qué hora?',delay:1600,typing:1000},
+      {type:'in',text:'Somos 6, como a las 8pm',delay:2000},
+      {type:'bot',text:'Perfecto, mesa para 6 personas. El viernes a las 8:00 PM tenemos disponible:\n\n🪑 Salón principal\n🌿 Terraza (vista al jardín)\n\n¿Cuál prefieres?',delay:1800,typing:1200},
+      {type:'in',text:'Terraza!',delay:1200},
+      {type:'bot',text:'Gran elección 🌿 ¿Celebran algo especial? Podemos preparar un detalle cortesía de la casa 🎂',delay:1400,typing:900},
+      {type:'in',text:'Sí! Es cumpleaños de mi esposa',delay:1800},
+      {type:'bot',text:'✅ ¡Reservación confirmada!\n\n🍽️ Mesa terraza para 6\n📅 Viernes 8:00 PM\n🎂 Pastel sorpresa incluido\n\n¿A nombre de quién? Te envío confirmación y menú del día.',delay:1600,typing:1200},
+    ]
+  },
+  clinica:{
+    desc:'Mira cómo la IA agenda consultas médicas y filtra urgencias',
+    msgs:[
+      {type:'in',text:'Hola, necesito cita con el dentista 🦷',delay:800},
+      {type:'bot',text:'¡Hola! 🏥 Soy el asistente de Clínica Dental Sonríe. ¿Es consulta de rutina o tienes alguna molestia?',delay:1600,typing:1000},
+      {type:'in',text:'Me duele una muela desde ayer',delay:1800},
+      {type:'bot',text:'Entiendo, vamos a atenderte pronto. Del 1 al 10, ¿qué tan fuerte es el dolor? ¿Tienes inflamación o fiebre?',delay:1400,typing:1000},
+      {type:'in',text:'Como 7, sí está un poco inflamado',delay:1600},
+      {type:'bot',text:'⚠️ Por la inflamación te agendo como urgencia. Tenemos espacio hoy:\n\n• Dr. Ramírez - 4:30 PM\n• Dra. López - 5:15 PM\n\nMientras tanto, aplica hielo 10 min cada hora. ¿Cuál prefieres?',delay:2000,typing:1400},
+      {type:'in',text:'Con el Dr. Ramírez a las 4:30',delay:1400},
+      {type:'bot',text:'✅ Cita de urgencia confirmada:\n\n🦷 Dr. Ramírez\n📅 Hoy 4:30 PM\n📍 Consultorio 3\n\nTrae tu identificación. ¡Te esperamos!',delay:1600,typing:1200},
+    ]
+  },
+  ecommerce:{
+    desc:'Mira cómo la IA recupera carritos abandonados y cierra ventas',
+    msgs:[
+      {type:'bot',text:'¡Hola! 👋 Noté que dejaste unos tenis Nike Air Max en tu carrito. ¿Sigues interesado? Te los apartamos por 24 hrs 👟',delay:800,typing:1000},
+      {type:'in',text:'Sí pero me pareció caro 😅',delay:2200},
+      {type:'bot',text:'Te entiendo. Justo hoy tenemos 15% de descuento para compras por WhatsApp. Quedarían en $2,125 en vez de $2,500. ¿Te interesa? 🔥',delay:1800,typing:1200},
+      {type:'in',text:'Mmm suena mejor. ¿Tienen talla 28?',delay:2000},
+      {type:'bot',text:'¡Sí! Talla 28 disponible en negro y blanco. ¿Cuál prefieres?\n\n⚫ Negro\n⚪ Blanco',delay:1400,typing:900},
+      {type:'in',text:'Negro',delay:1200},
+      {type:'bot',text:'Perfecto 🖤 Te genero el link de pago con el 15% aplicado. Envío gratis a todo México, llega en 3-5 días.\n\n💳 Total: $2,125 MXN\n\n¿Te lo mando?',delay:1800,typing:1200},
+      {type:'in',text:'Dale, mándalo!',delay:1400},
+      {type:'bot',text:'✅ ¡Aquí tienes! 🛒\n\nCuando completes el pago te llega confirmación y número de guía automáticamente. ¡Gracias por tu compra! 🎉',delay:1600,typing:1200},
+    ]
+  },
+  eventos:{
+    desc:'Mira cómo la IA cotiza y reserva salones de eventos automáticamente',
+    msgs:[
+      {type:'in',text:'Hola, busco un salón para una boda en noviembre 💒',delay:800},
+      {type:'bot',text:'¡Hola! 🎉 Soy el asistente de Salón Imperial. ¡Felicidades por tu boda! Para darte la mejor opción, ¿cuántos invitados serían aproximadamente?',delay:1800,typing:1200},
+      {type:'in',text:'Como 150 personas',delay:1800},
+      {type:'bot',text:'Perfecto. Para 150 personas tenemos:\n\n🏛️ Salón Gran Imperial - cap. 200\n🌳 Jardín Las Fuentes - cap. 180\n\nAmbos incluyen mobiliario, iluminación y estacionamiento. ¿Cuál te interesa?',delay:2000,typing:1400},
+      {type:'in',text:'El jardín suena bonito, ¿cuánto cuesta?',delay:2200},
+      {type:'bot',text:'🌳 Jardín Las Fuentes:\n\n💰 $85,000 (viernes)\n💰 $120,000 (sábado)\n\nIncluye: montaje, desmontaje, cocina, barra libre básica, coordinador de evento.',delay:1800,typing:1200},
+      {type:'in',text:'Sábado 15 de noviembre',delay:1600},
+      {type:'bot',text:'✅ ¡Esa fecha está disponible! Para apartarla necesitas un anticipo de $25,000.\n\n¿Te gustaría agendar una visita al jardín? Así lo conocen en persona y platicamos detalles de menú 🍽️',delay:1800,typing:1200},
+    ]
+  },
+  rrhh:{
+    desc:'Mira cómo la IA filtra candidatos y agenda entrevistas de trabajo',
+    msgs:[
+      {type:'bot',text:'¡Hola! 👋 Vi que aplicaste para la vacante de Ejecutivo de Ventas en Grupo Norte. Soy el asistente de RRHH. ¿Tienes 2 minutos para unas preguntas rápidas?',delay:800,typing:1000},
+      {type:'in',text:'Sí, claro!',delay:1800},
+      {type:'bot',text:'Perfecto 📋 Pregunta 1 de 3:\n\n¿Cuántos años de experiencia tienes en ventas B2B?',delay:1400,typing:900},
+      {type:'in',text:'4 años, los últimos 2 en ventas de software',delay:2000},
+      {type:'bot',text:'Excelente perfil 💪 Pregunta 2:\n\n¿Cuál es tu expectativa salarial mensual bruta?',delay:1400,typing:900},
+      {type:'in',text:'Entre 25 y 30 mil',delay:1600},
+      {type:'bot',text:'Está dentro del rango 👍 Última pregunta:\n\n¿Tienes disponibilidad para trabajo híbrido (3 días oficina, 2 casa) en Torreón?',delay:1400,typing:900},
+      {type:'in',text:'Sí, perfecto para mí',delay:1400},
+      {type:'bot',text:'✅ ¡Excelente! Tu perfil califica para entrevista.\n\n📅 Horarios disponibles:\n\n• Martes 10:00 AM\n• Jueves 3:00 PM\n\n¿Cuál prefieres? Te envío liga de Zoom al confirmar.',delay:2000,typing:1400},
+    ]
+  },
+  educacion:{
+    desc:'Mira cómo la IA resuelve dudas de inscripción y agenda entrevistas',
+    msgs:[
+      {type:'in',text:'Hola, busco info sobre la prepa para mi hijo 📚',delay:800},
+      {type:'bot',text:'¡Hola! 🎓 Soy el asistente del Colegio San Patricio. Con gusto te ayudo. ¿Tu hijo cursaría 1°, 2° o 3° de preparatoria?',delay:1600,typing:1000},
+      {type:'in',text:'Entraría a primero',delay:1800},
+      {type:'bot',text:'Excelente. Para 1° de prepa tenemos:\n\n📘 Turno matutino (7:00-14:00)\n📗 Turno vespertino (14:00-20:00)\n\nInscripción: $8,500\nColegiatura: $4,200/mes\n\n¿Te gustaría agendar un recorrido?',delay:2000,typing:1400},
+      {type:'in',text:'Sí, me interesa el matutino. ¿Cuándo puedo ir?',delay:2200},
+      {type:'bot',text:'Tenemos recorridos disponibles:\n\n📅 Martes 10:00 AM\n📅 Jueves 11:00 AM\n📅 Sábado 9:00 AM\n\nIncluye plática con el director y visita a laboratorios. ¿Cuál te queda?',delay:1600,typing:1200},
+      {type:'in',text:'El sábado perfecto',delay:1400},
+      {type:'bot',text:'✅ ¡Agendado!\n\n🎓 Recorrido + plática\n📅 Sábado 9:00 AM\n📍 Campus Norte\n\nTrae a tu hijo, así conoce las instalaciones. Te envío recordatorio el viernes.',delay:1800,typing:1200},
+    ]
+  }
+};
+let currentDemo='inmobiliaria',demoRunning=false,demoTimeout=null;
+function switchDemo(key,btn){
+  if(demoRunning){clearTimeout(demoTimeout);demoRunning=false}
+  currentDemo=key;
+  document.querySelectorAll('.demo-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  resetChat();
+  document.getElementById('demoDesc').textContent=demos[key].desc;
+}
+function resetChat(){
+  const c=document.getElementById('chatDemo'),s=document.getElementById('demoStart');
+  c.querySelectorAll('.msg,.msg-time,.replay-wrap').forEach(e=>e.remove());
+  document.getElementById('typingDots').classList.remove('show');
+  s.style.display='flex';
+  demoRunning=false;
+}
+function startDemo(){
+  if(demoRunning)return;
+  demoRunning=true;
+  const s=document.getElementById('demoStart'),c=document.getElementById('chatDemo'),t=document.getElementById('typingDots'),conv=demos[currentDemo].msgs;
+  s.style.display='none';
+  let i=0;
+  function next(){
+    if(!demoRunning)return;
+    if(i>=conv.length){
+      demoRunning=false;
+      demoTimeout=setTimeout(()=>{
+        const cap=document.createElement('div');cap.className='msg-time show';cap.style.cssText='text-align:right;font-size:10px;color:#999;display:block;';cap.textContent='Todo esto: automático, en segundos.';c.insertBefore(cap,t);
+        const r=document.createElement('div');r.className='replay-wrap';r.innerHTML='<button class="btn-demo" style="padding:10px 24px;font-size:13px" onclick="resetChat();startDemo()">🔄 Ver de nuevo</button>';c.insertBefore(r,t);
+        c.scrollTop=c.scrollHeight;
+      },800);
+      return;
+    }
+    const m=conv[i],tt=m.typing||0;
+    if(tt>0){
+      t.classList.add('show');c.scrollTop=c.scrollHeight;
+      demoTimeout=setTimeout(()=>{if(!demoRunning&&i<conv.length)return;t.classList.remove('show');addMsg(m,c,t);c.scrollTop=c.scrollHeight;i++;demoTimeout=setTimeout(next,m.delay)},tt);
+    }else{addMsg(m,c,t);c.scrollTop=c.scrollHeight;i++;demoTimeout=setTimeout(next,m.delay)}
+  }
+  demoTimeout=setTimeout(next,400);
+}
+function addMsg(m,c,t){
+  const d=document.createElement('div');
+  d.className=(m.type==='bot'?'msg msg-bot':m.type==='out'?'msg msg-out':'msg msg-in')+' show';
+  d.textContent=m.text;c.insertBefore(d,t);
+}
+</script>
+</body>
+</html>
