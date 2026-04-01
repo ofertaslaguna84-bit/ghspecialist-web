@@ -324,14 +324,16 @@
     .form-group textarea{resize:vertical;min-height:100px}
 
     /* ─── GRABOVOI BAR ─── */
-    .grabovoi-bar{background:linear-gradient(135deg,#5c35cc,#7C4DFF,#9D77FF);padding:22px 0}
-    .grabovoi-inner{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
-    .grabovoi-label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7)}
-    .grabovoi-codes{display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
-    .grab-code{display:flex;flex-direction:column;align-items:center;gap:3px}
-    .grab-num{font-size:15px;font-weight:700;color:#fff;letter-spacing:.08em;font-variant-numeric:tabular-nums;text-shadow:0 1px 8px rgba(0,0,0,.2)}
-    .grab-desc{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.65)}
-    .grab-sep{color:rgba(255,255,255,.3);font-size:20px;line-height:1}
+    .grabovoi-bar{background:linear-gradient(135deg,#5c35cc,#7C4DFF,#9D77FF);padding:18px 0;overflow:hidden}
+    .grabovoi-label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7);text-align:center;margin-bottom:12px}
+    .grabovoi-scroll{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#fff 6%,#fff 94%,transparent);mask-image:linear-gradient(90deg,transparent,#fff 6%,#fff 94%,transparent)}
+    .grabovoi-track{display:flex;gap:0;animation:grabScroll 40s linear infinite;width:max-content}
+    @keyframes grabScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .grabovoi-codes{display:flex;align-items:center}
+    .grab-code{display:flex;flex-direction:column;align-items:center;gap:3px;padding:0 28px}
+    .grab-num{font-size:15px;font-weight:700;color:#fff;letter-spacing:.08em;font-variant-numeric:tabular-nums;text-shadow:0 1px 8px rgba(0,0,0,.2);white-space:nowrap}
+    .grab-desc{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.65);white-space:nowrap}
+    .grab-sep{color:rgba(255,255,255,.3);font-size:18px;line-height:1;flex-shrink:0}
 
     /* ─── FOOTER ─── */
     .footer{background:#0a0a0a;color:#fff;padding:64px 0 28px}
@@ -1153,9 +1155,9 @@
 
   <!-- GRABOVOI CODES -->
   <div class="grabovoi-bar">
-    <div class="w">
-      <div class="grabovoi-inner">
-        <div class="grabovoi-label">✦ Códigos de prosperidad · Grigori Grabovoi ✦</div>
+    <div class="grabovoi-label">✦ Códigos de prosperidad Grabovoi · Actívalos con tu intención ✦</div>
+    <div class="grabovoi-scroll">
+      <div class="grabovoi-track">
         <div class="grabovoi-codes">
           <div class="grab-code">
             <span class="grab-num">71427321893</span>
@@ -1196,9 +1198,90 @@
             <span class="grab-num">8888</span>
             <span class="grab-desc">Protección divina</span>
           </div>
-        </div>
-      </div>
-    </div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code">
+            <span class="grab-num">777</span>
+            <span class="grab-desc">Suerte universal</span>
+          </div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code">
+            <span class="grab-num">5207418</span>
+            <span class="grab-desc">Dinero viene fácil</span>
+          </div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code">
+            <span class="grab-num">819 419 714</span>
+            <span class="grab-desc">Independencia económica</span>
+          </div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code">
+            <span class="grab-num">918197185</span>
+            <span class="grab-desc">Éxito absoluto</span>
+          </div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code">
+            <span class="grab-num">719 481 71</span>
+            <span class="grab-desc">Materializar planes</span>
+          </div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code">
+            <span class="grab-num">419 488 71</span>
+            <span class="grab-desc">Atraer circunstancias favorables</span>
+          </div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code">
+            <span class="grab-num">318719 819</span>
+            <span class="grab-desc">Auto realización</span>
+          </div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code">
+            <span class="grab-num">14111963</span>
+            <span class="grab-desc">Armonía en el trabajo</span>
+          </div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code">
+            <span class="grab-num">518 617219 71</span>
+            <span class="grab-desc">Rendimiento efectivo</span>
+          </div>
+        </div><!-- fin grabovoi-codes 1 -->
+        <!-- duplicate para loop infinito -->
+        <div class="grabovoi-codes">
+          <div class="grab-code"><span class="grab-num">71427321893</span><span class="grab-desc">Abundancia eterna</span></div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code"><span class="grab-num">289 471 314917</span><span class="grab-desc">Prosperidad en negocios</span></div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code"><span class="grab-num">91688</span><span class="grab-desc">Remover obstáculos</span></div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code"><span class="grab-num">4987123184991</span><span class="grab-desc">Rentabilidad máxima</span></div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code"><span class="grab-num">318 612 518 714</span><span class="grab-desc">Flujo constante de dinero</span></div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code"><span class="grab-num">520</span><span class="grab-desc">Dinero inesperado</span></div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code"><span class="grab-num">741</span><span class="grab-desc">Resultados inmediatos</span></div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code"><span class="grab-num">8888</span><span class="grab-desc">Protección divina</span></div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code"><span class="grab-num">777</span><span class="grab-desc">Suerte universal</span></div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code"><span class="grab-num">5207418</span><span class="grab-desc">Dinero viene fácil</span></div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code"><span class="grab-num">819 419 714</span><span class="grab-desc">Independencia económica</span></div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code"><span class="grab-num">918197185</span><span class="grab-desc">Éxito absoluto</span></div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code"><span class="grab-num">719 481 71</span><span class="grab-desc">Materializar planes</span></div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code"><span class="grab-num">419 488 71</span><span class="grab-desc">Atraer circunstancias favorables</span></div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code"><span class="grab-num">318719 819</span><span class="grab-desc">Auto realización</span></div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code"><span class="grab-num">14111963</span><span class="grab-desc">Armonía en el trabajo</span></div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code"><span class="grab-num">518 617219 71</span><span class="grab-desc">Rendimiento efectivo</span></div>
+        </div><!-- fin grabovoi-codes 2 -->
+      </div><!-- fin grabovoi-track -->
+    </div><!-- fin grabovoi-scroll -->
   </div>
 
   <!-- FOOTER -->
