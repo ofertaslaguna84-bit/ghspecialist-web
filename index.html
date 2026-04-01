@@ -40,9 +40,11 @@
     .hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px;max-width:1080px;margin:0 auto}
     .hdr-logo{height:28px}
     .hdr-nav{display:flex;align-items:center;gap:6px}
-    .hdr-nav a,.hdr-nav .nav-drop-trigger{font-size:13.5px;font-weight:500;color:var(--ink);padding:6px 12px;border-radius:6px;transition:all .15s;cursor:pointer;display:flex;align-items:center;gap:4px}
-    .hdr-nav a:hover,.hdr-nav .nav-drop-trigger:hover{color:var(--ink);background:var(--bg3)}
-    .hdr-nav a.active{color:var(--p)}
+    .hdr-nav a,.hdr-nav .nav-drop-trigger{font-size:13.5px;font-weight:500;color:#fff;padding:6px 12px;border-radius:6px;transition:all .15s;cursor:pointer;display:flex;align-items:center;gap:4px}
+    .hdr-nav a:hover,.hdr-nav .nav-drop-trigger:hover{color:#fff;background:rgba(255,255,255,.12)}
+    .hdr-nav a.active{color:#a78bfa}
+    .hdr.scrolled .hdr-nav a,.hdr.scrolled .hdr-nav .nav-drop-trigger{color:var(--ink)}
+    .hdr.scrolled .hdr-nav a:hover,.hdr.scrolled .hdr-nav .nav-drop-trigger:hover{color:var(--ink);background:var(--bg3)}
     .nav-drop{position:relative}
     .nav-drop-trigger svg{width:12px;height:12px;transition:transform .2s}
     .nav-drop:hover .nav-drop-trigger svg{transform:rotate(180deg)}
@@ -56,9 +58,11 @@
     .nav-mega-text strong{display:block;font-size:13.5px;font-weight:600;color:var(--ink)}
     .nav-mega-text span{font-size:12px;color:var(--ink4);line-height:1.3}
     .hdr-right{display:flex;align-items:center;gap:10px}
-    .hdr-wa{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--ink2);padding:7px 14px;border-radius:7px;border:1.5px solid var(--border);transition:all .15s}
+    .hdr-wa{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:rgba(255,255,255,.85);padding:7px 14px;border-radius:7px;border:1.5px solid rgba(255,255,255,.25);transition:all .15s}
     .hdr-wa:hover{border-color:#25D366;color:#25D366}
     .hdr-wa svg{width:16px;height:16px;flex-shrink:0}
+    .hdr.scrolled .hdr-wa{color:var(--ink2);border-color:var(--border)}
+    .hdr.scrolled .hdr-wa:hover{border-color:#25D366;color:#25D366}
 
     /* ─── BUTTONS ─── */
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 22px;border-radius:8px;font-weight:600;font-size:14.5px;cursor:pointer;border:none;font-family:inherit;transition:all .18s;white-space:nowrap;line-height:1}
@@ -101,41 +105,47 @@
     .logo-strip{overflow:hidden;padding:32px 0 0;border-top:1px solid rgba(255,255,255,.06);-webkit-mask-image:linear-gradient(90deg,transparent,#fff 10%,#fff 90%,transparent);mask-image:linear-gradient(90deg,transparent,#fff 10%,#fff 90%,transparent)}
     .logo-track{display:flex;gap:0;animation:logoScroll 25s linear infinite;flex-shrink:0;width:max-content}
     @keyframes logoScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-    .logo-item{display:flex;align-items:center;padding:0 40px;white-space:nowrap;font-size:16px;font-weight:800;color:rgba(255,255,255,.2);transition:color .3s;letter-spacing:.02em;cursor:default}
-    .logo-item:hover{color:rgba(255,255,255,.7)}
-    .logo-item.lk{font-family:sans-serif;font-style:italic}
-    .logo-item.lm{font-family:'Inter',sans-serif;color:rgba(59,130,246,.3)}
-    .logo-item.lm:hover{color:rgba(59,130,246,.8)}
-    .logo-item.lg{font-family:'Inter',sans-serif}
-    .logo-item.lg:hover{color:#4285f4}
-    .logo-item.lw{color:rgba(37,211,102,.25)}
-    .logo-item.lw:hover{color:#25D366}
-    .logo-item.lmk:hover{color:#6d28d9}
-    .logo-item.lz:hover{color:#ff4a00}
-    .logo-item.lo:hover{color:#10a37f}
-    .logo-item.la:hover{color:#d97706}
+    .logo-item{display:flex;align-items:center;padding:0 40px;white-space:nowrap;font-size:15px;font-weight:400;color:rgba(255,255,255,.3);transition:color .3s;letter-spacing:.12em;text-transform:uppercase;cursor:default}
+    .logo-item:hover{color:rgba(255,255,255,.65)}
 
     /* ─── SECTION 2: CHATBOT DEMO ─── */
-    .chatbot-sec{padding:96px 0;background:var(--bg2)}
-    .chatbot-sec .sec-header{margin-bottom:40px}
-    .chat-tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:32px;padding:0 28px}
-    .chat-tab{padding:8px 18px;border-radius:100px;font-size:13px;font-weight:600;background:#fff;color:var(--ink2);border:1.5px solid var(--border);cursor:pointer;transition:all .18s;white-space:nowrap}
+    .chatbot-sec{padding:96px 0;background:#fff}
+    .chatbot-inner{display:grid;grid-template-columns:1fr auto;gap:64px;align-items:center;max-width:900px;margin:0 auto}
+    .chatbot-copy .label{margin-bottom:12px}
+    .chatbot-copy h2{font-size:clamp(24px,3vw,38px);font-weight:800;letter-spacing:-.025em;line-height:1.15;margin-bottom:16px;color:var(--ink)}
+    .chatbot-copy p{font-size:16px;color:var(--ink3);line-height:1.7;margin-bottom:28px}
+    .chat-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:0}
+    .chat-tab{padding:7px 15px;border-radius:100px;font-size:12.5px;font-weight:600;background:var(--bg2);color:var(--ink3);border:1.5px solid var(--border);cursor:pointer;transition:all .18s;white-space:nowrap}
     .chat-tab:hover{border-color:var(--p);color:var(--p)}
     .chat-tab.active{background:var(--p);color:#fff;border-color:var(--p)}
-    .chat-window{max-width:420px;margin:0 auto;background:#e5ddd5;border-radius:16px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.12);min-height:420px}
-    .chat-header{background:#075e54;color:#fff;padding:14px 18px;display:flex;align-items:center;gap:12px}
-    .chat-header-avatar{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:16px}
-    .chat-header-info strong{display:block;font-size:14px;font-weight:600}
-    .chat-header-info span{font-size:11px;color:rgba(255,255,255,.7)}
-    .chat-messages{padding:16px;display:flex;flex-direction:column;gap:6px;min-height:300px}
-    .chat-msg{max-width:80%;padding:8px 12px;border-radius:8px;font-size:13.5px;line-height:1.5;position:relative}
+    /* iPhone Mockup */
+    .phone-mockup{width:300px;flex-shrink:0;background:#1c1c1e;border-radius:50px;padding:10px;box-shadow:0 40px 80px rgba(0,0,0,.22),0 0 0 1px rgba(255,255,255,.08),inset 0 0 0 2px #2c2c2e;position:relative}
+    .phone-screen{background:#e5ddd5;border-radius:42px;overflow:hidden;position:relative}
+    .phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:110px;height:30px;background:#1c1c1e;border-radius:0 0 22px 22px;z-index:10;display:flex;align-items:center;justify-content:center;gap:6px}
+    .phone-notch::before{content:'';width:10px;height:10px;border-radius:50%;background:#2c2c2e;border:1px solid #3c3c3e}
+    .phone-notch::after{content:'';width:50px;height:5px;background:#2c2c2e;border-radius:3px}
+    .phone-status{background:#075e54;padding:36px 16px 6px;display:flex;align-items:center;justify-content:space-between}
+    .phone-status-time{font-size:12px;font-weight:700;color:#fff}
+    .phone-status-icons{font-size:10px;color:rgba(255,255,255,.8);display:flex;gap:4px}
+    .chat-header{background:#075e54;color:#fff;padding:8px 14px 12px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(0,0,0,.1)}
+    .chat-header-avatar{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:16px}
+    .chat-header-info strong{display:block;font-size:13px;font-weight:700}
+    .chat-header-info span{font-size:10.5px;color:rgba(255,255,255,.7)}
+    .chat-messages{padding:10px;display:flex;flex-direction:column;gap:5px;height:380px;overflow-y:auto;background:#e5ddd5}
+    .chat-messages::-webkit-scrollbar{display:none}
+    .chat-msg{max-width:82%;padding:7px 10px;border-radius:7px;font-size:12px;line-height:1.5;position:relative;word-break:break-word}
     .chat-msg.bot{background:#dcf8c6;align-self:flex-start;border-top-left-radius:0}
     .chat-msg.user{background:#fff;align-self:flex-end;border-top-right-radius:0}
-    .chat-msg .msg-time{font-size:10px;color:rgba(0,0,0,.35);float:right;margin-left:10px;margin-top:4px}
+    .chat-msg .msg-time{font-size:9px;color:rgba(0,0,0,.35);float:right;margin-left:8px;margin-top:3px}
     .chat-msg.hidden-msg{display:none}
     .chat-msg.show-msg{display:block;animation:msgPop .3s ease-out}
-    @keyframes msgPop{from{transform:translateY(10px);opacity:.5}to{transform:translateY(0);opacity:1}}
-    .chat-demo-btn{text-align:center;margin-top:28px}
+    @keyframes msgPop{from{transform:translateY(6px);opacity:.4}to{transform:translateY(0);opacity:1}}
+    .phone-input{background:#f0f0f0;padding:8px 12px;display:flex;align-items:center;gap:8px;border-top:1px solid rgba(0,0,0,.08)}
+    .phone-input-bar{flex:1;background:#fff;border-radius:20px;padding:7px 12px;font-size:11px;color:var(--ink4)}
+    .phone-input-send{width:30px;height:30px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+    .phone-home{height:20px;display:flex;align-items:center;justify-content:center;background:#e5ddd5}
+    .phone-home::after{content:'';width:100px;height:4px;background:rgba(0,0,0,.18);border-radius:3px}
+    .chat-demo-btn{margin-top:24px}
 
     /* ─── SECTION 3: TRUSTED BY ─── */
     .trusted-sec{padding:80px 0;background:var(--bg)}
@@ -516,38 +526,47 @@
   <!-- SECTION 2: CHATBOT DEMO -->
   <section class="chatbot-sec">
     <div class="w">
-      <div class="sec-header center">
-        <span class="label">Chatbot IA en acción</span>
-        <h2 class="title">Prueba el chatbot en vivo</h2>
-        <p class="sub-text">Así contesta tu bot las 24 horas, los 7 días de la semana</p>
-      </div>
-
-      <div class="chat-tabs" id="chatTabs">
-        <div class="chat-tab active" data-chat="inmobiliaria">Inmobiliaria</div>
-        <div class="chat-tab" data-chat="spa">Spa</div>
-        <div class="chat-tab" data-chat="restaurante">Restaurante</div>
-        <div class="chat-tab" data-chat="clinica">Clínica</div>
-        <div class="chat-tab" data-chat="ecommerce">E-commerce</div>
-        <div class="chat-tab" data-chat="eventos">Eventos</div>
-        <div class="chat-tab" data-chat="rrhh">RRHH</div>
-        <div class="chat-tab" data-chat="educacion">Educación</div>
-      </div>
-
-      <div class="chat-window">
-        <div class="chat-header">
-          <div class="chat-header-avatar">🤖</div>
-          <div class="chat-header-info">
-            <strong>GH Bot IA</strong>
-            <span>en línea</span>
+      <div class="chatbot-inner">
+        <div class="chatbot-copy">
+          <span class="label">Chatbot IA en acción</span>
+          <h2>Tu bot atiende, califica y cierra.<br>Tú duermes.</h2>
+          <p>Selecciona tu industria y ve cómo la IA conversa con tus clientes — califica, informa, agenda y cierra ventas sin intervención humana.</p>
+          <div class="chat-tabs" id="chatTabs">
+            <div class="chat-tab active" data-chat="inmobiliaria">🏠 Inmobiliaria</div>
+            <div class="chat-tab" data-chat="spa">💆 Spa</div>
+            <div class="chat-tab" data-chat="restaurante">🍽️ Restaurante</div>
+            <div class="chat-tab" data-chat="clinica">🏥 Clínica</div>
+            <div class="chat-tab" data-chat="ecommerce">🛍️ E-commerce</div>
+            <div class="chat-tab" data-chat="eventos">🎉 Eventos</div>
+            <div class="chat-tab" data-chat="rrhh">👥 RRHH</div>
+            <div class="chat-tab" data-chat="educacion">🎓 Educación</div>
+          </div>
+          <div class="chat-demo-btn">
+            <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20ver%20el%20demo%20del%20chatbot" target="_blank" class="btn btn-p">Ver demo real en WhatsApp →</a>
           </div>
         </div>
-        <div class="chat-messages" id="chatMessages">
-          <!-- Messages injected by JS -->
+        <div class="phone-mockup">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-status">
+              <span class="phone-status-time">9:41</span>
+              <span class="phone-status-icons">▲▲ WiFi 📶</span>
+            </div>
+            <div class="chat-header">
+              <div class="chat-header-avatar">🤖</div>
+              <div class="chat-header-info">
+                <strong>GH Bot IA</strong>
+                <span>en línea ahora</span>
+              </div>
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="phone-input">
+              <div class="phone-input-bar">Escribe un mensaje...</div>
+              <div class="phone-input-send">➤</div>
+            </div>
+            <div class="phone-home"></div>
+          </div>
         </div>
-      </div>
-
-      <div class="chat-demo-btn">
-        <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20ver%20el%20demo%20del%20chatbot" target="_blank" class="btn btn-p">Ver demo en vivo</a>
       </div>
     </div>
   </section>
@@ -1229,95 +1248,224 @@
       window.open(`https://wa.me/528712638082?text=${msg}`, '_blank');
     }
 
-    // Chatbot demo conversations
+    // ── PIPELINE ANIMATION ──
+    const pipeLeads = [
+      {name:'Ana L.', industry:'E-commerce', dot:'cool'},
+      {name:'Carlos R.', industry:'Restaurante', dot:'warm'},
+      {name:'María G.', industry:'Inmobiliaria', dot:'hot'},
+      {name:'Jorge M.', industry:'Clínica', dot:'warm'},
+      {name:'Laura S.', industry:'Spa', dot:'hot'},
+      {name:'Pedro V.', industry:'Educación', dot:'cool'},
+      {name:'Diana F.', industry:'RRHH', dot:'warm'},
+      {name:'Luis T.', industry:'Eventos', dot:'hot'},
+    ];
+    const pipePrices = ['$28,000','$45,000','$62,000','$38,000','$51,000','$33,000'];
+    let pipeIdx = 0, priceIdx = 0;
+    const cols = document.querySelectorAll('.pipe-cards');
+
+    function makeCard(lead, done) {
+      const div = document.createElement('div');
+      div.className = 'pipe-card';
+      if(done) {
+        div.innerHTML = `<span class="pc-dot done"></span>${lead.name} — ${pipePrices[priceIdx++ % pipePrices.length]}`;
+        div.style.background='rgba(37,211,102,.12)';
+        div.style.borderColor='rgba(37,211,102,.25)';
+      } else {
+        div.innerHTML = `<span class="pc-dot ${lead.dot}"></span>${lead.name} — ${lead.industry}`;
+      }
+      return div;
+    }
+
+    function animatePipeline() {
+      // Move last card of col 2 to col 3
+      if(cols[1].children.length > 0) {
+        const card = cols[1].lastElementChild;
+        card.style.transition='opacity .4s';
+        card.style.opacity='0';
+        setTimeout(()=>{
+          cols[1].removeChild(card);
+          card.style.opacity='1';
+          // add to col 3
+          const c3 = card.cloneNode(true);
+          c3.style.opacity='0';
+          cols[2].appendChild(c3);
+          setTimeout(()=>c3.style.opacity='1',50);
+        },400);
+      }
+      // Move last card of col 3 to col 4 (closed)
+      setTimeout(()=>{
+        if(cols[2].children.length > 0) {
+          const card = cols[2].lastElementChild;
+          card.style.transition='opacity .4s';
+          card.style.opacity='0';
+          setTimeout(()=>{
+            cols[2].removeChild(card);
+            const lead = {name: card.textContent.split('—')[0].trim(), industry:'', dot:'done'};
+            const doneCard = makeCard(lead, true);
+            doneCard.style.opacity='0';
+            cols[3].insertBefore(doneCard, cols[3].firstChild);
+            // keep max 3 in done col
+            if(cols[3].children.length > 3) cols[3].removeChild(cols[3].lastElementChild);
+            setTimeout(()=>doneCard.style.opacity='1',50);
+          },400);
+        }
+      }, 800);
+      // Add new lead to col 1
+      setTimeout(()=>{
+        const lead = pipeLeads[pipeIdx++ % pipeLeads.length];
+        const card = makeCard(lead, false);
+        card.style.opacity='0';
+        card.style.transition='opacity .4s';
+        cols[0].insertBefore(card, cols[0].firstChild);
+        if(cols[0].children.length > 3) cols[0].removeChild(cols[0].lastElementChild);
+        setTimeout(()=>card.style.opacity='1',50);
+        // Move first of col 0 to col 1
+        setTimeout(()=>{
+          if(cols[0].children.length > 2) {
+            const c = cols[0].lastElementChild;
+            c.style.transition='opacity .4s';
+            c.style.opacity='0';
+            setTimeout(()=>{
+              cols[0].removeChild(c);
+              const nc = c.cloneNode(true);
+              nc.style.opacity='0';
+              nc.style.transition='opacity .4s';
+              cols[1].insertBefore(nc, cols[1].firstChild);
+              if(cols[1].children.length > 2) cols[1].removeChild(cols[1].lastElementChild);
+              setTimeout(()=>nc.style.opacity='1',50);
+            },400);
+          }
+        },600);
+      }, 1200);
+    }
+    setInterval(animatePipeline, 3000);
+
+    // ── CHATBOT DEMO ──
     const chatData = {
       inmobiliaria: [
-        {type:'user', text:'Hola, busco un departamento en Querétaro de 2 recámaras'},
-        {type:'bot', text:'¡Hola! Tenemos 12 opciones disponibles en Querétaro con 2 recámaras. ¿Tienes un presupuesto en mente?'},
-        {type:'user', text:'Entre 2 y 3 millones'},
-        {type:'bot', text:'Perfecto. Encontré 5 departamentos en ese rango. Te comparto los 3 mejor calificados con fotos, ubicación y precio. ¿Quieres agendar una visita?'},
-        {type:'user', text:'Sí, el primero me interesa'},
-        {type:'bot', text:'Listo. Te agendé una visita para mañana a las 11:00 AM con nuestro asesor Ricardo. Te llegará la confirmación por WhatsApp. ¿Algo más?'}
+        {type:'bot', text:'¡Hola! 👋 Soy el asistente de GH Specialist. ¿Buscas comprar, rentar o vender una propiedad?'},
+        {type:'user', text:'Comprar, busco depto en Querétaro 2 recámaras'},
+        {type:'bot', text:'Perfecto. Tenemos 14 opciones en Querétaro. ¿Cuál es tu presupuesto aproximado?'},
+        {type:'user', text:'Entre 2.5 y 3.5 millones'},
+        {type:'bot', text:'Encontré 6 departamentos en ese rango. ¿Prefieres zona Centro, Juriquilla o El Pueblito?'},
+        {type:'user', text:'Juriquilla'},
+        {type:'bot', text:'Tengo 3 opciones en Juriquilla. Te envío fotos, planos y precios de cada uno 📸'},
+        {type:'user', text:'El segundo me gustó mucho'},
+        {type:'bot', text:'Excelente elección. Tiene 2 rec, 2 baños, estacionamiento y amenidades. ¿Agendamos visita esta semana?'},
+        {type:'user', text:'Sí, el sábado si se puede'},
+        {type:'bot', text:'✅ Visita agendada: sábado 11:00 AM con el asesor Ricardo. Te llega confirmación y ubicación ahora.'}
       ],
       spa: [
-        {type:'user', text:'Hola, quiero reservar un masaje para el sábado'},
-        {type:'bot', text:'¡Hola! Con gusto te ayudo. Tenemos masaje relajante, deportivo y descontracturante. ¿Cuál prefieres?'},
-        {type:'user', text:'Relajante, para 2 personas'},
-        {type:'bot', text:'Tenemos disponibilidad para pareja el sábado a las 10:00, 12:00 y 15:00. El paquete incluye aromaterapia y acceso a jacuzzi. ¿Cuál horario prefieres?'},
-        {type:'user', text:'A las 12 por favor'},
-        {type:'bot', text:'Reservado para 2 personas el sábado a las 12:00. El costo es $1,800 por pareja. Te envío el link de pago y la confirmación.'}
+        {type:'bot', text:'¡Bienvenid@ al Spa! 🌿 ¿En qué puedo ayudarte hoy?'},
+        {type:'user', text:'Quiero reservar para el sábado, somos 2 personas'},
+        {type:'bot', text:'Perfecto. ¿Qué tipo de servicio buscan? Tenemos masaje relajante, terapéutico, piedras calientes o paquete romántico.'},
+        {type:'user', text:'El paquete romántico ¿qué incluye?'},
+        {type:'bot', text:'Incluye: masaje en pareja 60 min + aromaterapia + acceso a jacuzzi + vino y fresas 🍓. Todo por $2,400 por pareja.'},
+        {type:'user', text:'Tiene garantía si no nos gusta?'},
+        {type:'bot', text:'Sí, si no están 100% satisfechos les ofrecemos sesión adicional sin costo. ¿Qué horario prefieren el sábado?'},
+        {type:'user', text:'A las 12'},
+        {type:'bot', text:'Disponible ✅. Para confirmar necesito tu nombre y número de WhatsApp para el recordatorio.'},
+        {type:'user', text:'Laura Sánchez, 8712345678'},
+        {type:'bot', text:'¡Listo Laura! Reserva confirmada: sábado 12:00 PM, Paquete Romántico x2. Te mandamos recordatorio el viernes 💜'}
       ],
       restaurante: [
-        {type:'user', text:'Buenas, quisiera reservar mesa para 6 personas'},
-        {type:'bot', text:'¡Buenas! ¿Para qué fecha y horario te gustaría la reservación?'},
-        {type:'user', text:'Este viernes a las 8pm'},
-        {type:'bot', text:'Tenemos mesa disponible en terraza o salón principal. Para 6 personas te recomiendo la terraza con vista. ¿La confirmo?'},
-        {type:'user', text:'Terraza, perfecto'},
-        {type:'bot', text:'Reservación confirmada: viernes, 8:00 PM, terraza, 6 personas. ¿Deseas pre-ordenar algo o festejan algo especial?'}
+        {type:'bot', text:'¡Hola! Bienvenido a La Capital 🍽️ ¿En qué te ayudo?'},
+        {type:'user', text:'Quiero reservar para este viernes, somos 8 personas'},
+        {type:'bot', text:'Con gusto. ¿A qué hora les gustaría? Tenemos disponibilidad a las 7:00, 8:30 y 9:00 PM.'},
+        {type:'user', text:'A las 8:30'},
+        {type:'bot', text:'¿Prefieren salón privado, terraza exterior o área principal?'},
+        {type:'user', text:'Terraza si hay lugar'},
+        {type:'bot', text:'¡Hay lugar! Terraza para 8 personas, viernes 8:30 PM. ¿Celebran algo especial?'},
+        {type:'user', text:'Cumpleaños de mi mamá'},
+        {type:'bot', text:'Qué bonito 🎂 ¿Quieres que preparemos un pastel sorpresa? Lo incluimos por $350 con tu nombre.'},
+        {type:'user', text:'Sí por favor, se llama Carmen'},
+        {type:'bot', text:'✅ Todo confirmado: terraza, viernes 8:30 PM, 8 personas + pastel "Feliz cumpleaños Carmen". ¡Nos vemos!'}
       ],
       clinica: [
-        {type:'user', text:'Necesito una cita para limpieza dental'},
-        {type:'bot', text:'¡Hola! ¿Eres paciente nuevo o ya tienes expediente con nosotros?'},
+        {type:'bot', text:'¡Hola! Clínica Dental Norte 🦷 ¿Cómo te puedo ayudar?'},
+        {type:'user', text:'Necesito cita para limpieza y revisión'},
+        {type:'bot', text:'Claro. ¿Eres paciente nuevo o ya tienes expediente con nosotros?'},
         {type:'user', text:'Soy nuevo'},
-        {type:'bot', text:'Bienvenido. Tenemos citas disponibles esta semana: miércoles 10:00, jueves 16:00 o viernes 11:00. La limpieza dental incluye revisión general. ¿Cuál prefieres?'},
+        {type:'bot', text:'Bienvenido. ¿Tienes algún seguro médico o pagas de contado?'},
+        {type:'user', text:'De contado, ¿cuánto cuesta?'},
+        {type:'bot', text:'Limpieza + revisión general: $550. Si requieres radiografías se cobran aparte ($200). ¿Te parece bien?'},
+        {type:'user', text:'Sí, ¿cuándo tienen cita?'},
+        {type:'bot', text:'Esta semana: miércoles 10:00 AM, jueves 4:00 PM o viernes 11:00 AM con la Dra. Martínez. ¿Cuál prefieres?'},
         {type:'user', text:'Jueves a las 4'},
-        {type:'bot', text:'Cita agendada: jueves 16:00 con la Dra. Martínez. Llega 15 min antes para tu registro. Te envío recordatorio el día anterior.'}
+        {type:'bot', text:'✅ Cita confirmada: jueves 4:00 PM, Dra. Martínez. Llega 10 min antes. Te enviamos recordatorio 24h antes.'}
       ],
       ecommerce: [
-        {type:'user', text:'¿Tienen la playera negra en talla M?'},
-        {type:'bot', text:'¡Hola! Sí, la playera negra básica está disponible en M. También tenemos la versión oversized. ¿Cuál te interesa?'},
-        {type:'user', text:'La básica. ¿Cuánto sale con envío?'},
-        {type:'bot', text:'La playera es $450 + envío gratis a todo México. Llega en 2-3 días hábiles. ¿La agrego a tu carrito?'},
-        {type:'user', text:'Sí, agrégala'},
-        {type:'bot', text:'Agregada al carrito. Tu total es $450 MXN. Te comparto el link de pago seguro. ¿Necesitas algo más?'}
+        {type:'bot', text:'¡Hola! 👋 ¿En qué te puedo ayudar hoy?'},
+        {type:'user', text:'Busco una playera negra básica en talla M'},
+        {type:'bot', text:'¡Tenemos! La playera oversize negra 100% algodón en M. ¿La quieres básica o con bordado?'},
+        {type:'user', text:'Básica, ¿tienen en stock?'},
+        {type:'bot', text:'Sí, quedan 12 en talla M. Precio: $450 MXN. ¿A qué estado se envía?'},
+        {type:'user', text:'Nuevo León, ¿cuánto el envío?'},
+        {type:'bot', text:'Envío gratis a NL, llega en 2-3 días hábiles con Fedex. ¿Agrego al carrito?'},
+        {type:'user', text:'Sí, y también una en blanco'},
+        {type:'bot', text:'Agregadas: 1 negra + 1 blanca talla M = $900 MXN con envío gratis. ¿Pagas con tarjeta o transferencia?'},
+        {type:'user', text:'Con tarjeta'},
+        {type:'bot', text:'✅ Te envío el link de pago seguro ahora. Una vez confirmado, tu pedido sale el mismo día 🚀'}
       ],
       eventos: [
-        {type:'user', text:'Quiero cotizar un evento corporativo para 80 personas'},
-        {type:'bot', text:'¡Hola! ¿Qué tipo de evento necesitas? Tenemos paquetes para conferencias, cenas de gala y team building.'},
-        {type:'user', text:'Conferencia con comida incluida'},
-        {type:'bot', text:'Para 80 personas con salón, equipo audiovisual, coffee break y comida: desde $45,000. ¿Tienes fecha tentativa?'},
-        {type:'user', text:'15 de abril'},
-        {type:'bot', text:'Esa fecha está disponible. Te envío la cotización completa con 3 opciones de menú. Un asesor te contactará en los próximos 30 minutos.'}
+        {type:'bot', text:'¡Hola! Eventos Corporativos 🎉 ¿En qué te puedo ayudar?'},
+        {type:'user', text:'Necesito cotizar un evento para 100 personas'},
+        {type:'bot', text:'Con gusto. ¿Qué tipo de evento es? ¿Conferencia, cena gala, team building o lanzamiento de producto?'},
+        {type:'user', text:'Conferencia con comida y equipo audiovisual'},
+        {type:'bot', text:'Tenemos el paquete Corporativo Plus: salón climatizado, pantalla LED, sonido, coffee break y comida buffet. ¿Quieres precio?'},
+        {type:'user', text:'Sí, ¿cuánto sale para 100 personas?'},
+        {type:'bot', text:'Para 100 personas: $68,000 todo incluido. ¿Tienes fecha tentativa?'},
+        {type:'user', text:'20 de mayo'},
+        {type:'bot', text:'Esa fecha está disponible ✅. Para asegurarla necesitamos el 30% de anticipo. ¿Te paso los datos bancarios?'},
+        {type:'user', text:'Sí por favor'},
+        {type:'bot', text:'Perfecto. Un ejecutivo te contacta en los próximos 30 min con contrato y ficha de pago. ¡Gracias!'}
       ],
       rrhh: [
-        {type:'user', text:'Vi la vacante de diseñador gráfico, ¿sigue disponible?'},
-        {type:'bot', text:'¡Hola! Sí, la vacante sigue abierta. ¿Tienes experiencia en diseño digital y conoces herramientas como Figma?'},
-        {type:'user', text:'Sí, tengo 3 años de experiencia con Figma y Adobe'},
-        {type:'bot', text:'Excelente perfil. El puesto es presencial en CDMX, sueldo de $18,000-$25,000 según experiencia. ¿Te gustaría agendar entrevista?'},
+        {type:'bot', text:'¡Hola! Recursos Humanos GH 👥 ¿Buscas trabajo o tienes una vacante que cubrir?'},
+        {type:'user', text:'Vi la vacante de vendedor, ¿sigue disponible?'},
+        {type:'bot', text:'Sí, está abierta. ¿Cuántos años de experiencia en ventas tienes?'},
+        {type:'user', text:'5 años, ventas B2B'},
+        {type:'bot', text:'Excelente. ¿Has manejado cartera de clientes o ventas en campo?'},
+        {type:'user', text:'Ambas, con equipos de hasta 8 personas'},
+        {type:'bot', text:'Muy buen perfil. El puesto es híbrido, CDMX. Rango salarial: $22,000-$35,000 + comisiones sin tope. ¿Te interesa?'},
         {type:'user', text:'Sí, me interesa mucho'},
-        {type:'bot', text:'Te agendo entrevista virtual para esta semana. Por favor envíame tu CV en PDF y te confirmo horario disponible con el líder de diseño.'}
+        {type:'bot', text:'¿Cuál es tu disponibilidad de inicio? ¿Inmediata o tienes periodo de aviso?'},
+        {type:'user', text:'15 días de aviso'},
+        {type:'bot', text:'✅ Perfecto. Envíame tu CV en PDF y agendamos entrevista virtual esta semana con el director comercial.'}
       ],
       educacion: [
-        {type:'user', text:'Hola, me interesa el diplomado en marketing digital'},
-        {type:'bot', text:'¡Hola! El diplomado tiene duración de 6 meses, clases en vivo los sábados. ¿Buscas modalidad en línea o presencial?'},
-        {type:'user', text:'En línea, ¿cuánto cuesta?'},
-        {type:'bot', text:'El diplomado en línea tiene un costo de $12,500 con opción a 6 MSI. Incluye certificación, materiales y acceso a comunidad alumni. ¿Te inscribo?'},
-        {type:'user', text:'¿Cuándo inicia?'},
-        {type:'bot', text:'Siguiente generación inicia el 5 de mayo. Quedan 8 lugares. Te comparto el temario completo y el formulario de inscripción. ¿Lo enviamos a tu email?'}
+        {type:'bot', text:'¡Hola! 🎓 Centro Educativo GH. ¿En qué programa estás interesado?'},
+        {type:'user', text:'En el diplomado de IA para negocios'},
+        {type:'bot', text:'Excelente elección. Es 4 meses, 100% en línea, clases grabadas + sesiones en vivo cada sábado. ¿Tienes experiencia previa en IA?'},
+        {type:'user', text:'No, soy empresario y quiero aplicarlo en mi negocio'},
+        {type:'bot', text:'Perfecto, está diseñado para eso. No necesitas saber programar. ¿Cuánto tiempo puedes dedicar por semana?'},
+        {type:'user', text:'Unas 5-6 horas'},
+        {type:'bot', text:'Ideal. El diplomado requiere 4-5 hrs/semana. Costo: $14,500 MXN o 6 MSI sin intereses. ¿Hay becas disponibles?'},
+        {type:'user', text:'Sí, ¿tienen becas?'},
+        {type:'bot', text:'Sí, tenemos beca del 20% para empresarios este mes. Te quedaría en $11,600. ¿Cuándo quieres iniciar?'},
+        {type:'user', text:'Lo antes posible'},
+        {type:'bot', text:'✅ Próxima generación: 1 de mayo. Quedan 5 lugares. Te envío formulario de inscripción y datos de pago ahora.'}
       ]
     };
 
     const chatMsgs = document.getElementById('chatMessages');
     const chatTabs = document.getElementById('chatTabs');
-    let chatTimer = null;
 
     function showChat(industry) {
-      if(chatTimer) clearTimeout(chatTimer);
       const msgs = chatData[industry] || chatData.inmobiliaria;
       chatMsgs.innerHTML = '';
       msgs.forEach((m, i) => {
         const div = document.createElement('div');
         div.className = 'chat-msg ' + m.type + ' hidden-msg';
-        const now = new Date();
-        const h = now.getHours();
-        const min = String(now.getMinutes()).padStart(2,'0');
+        const h = new Date().getHours();
+        const min = String(new Date().getMinutes()).padStart(2,'0');
         div.innerHTML = m.text + '<span class="msg-time">' + h + ':' + min + '</span>';
         chatMsgs.appendChild(div);
         setTimeout(() => {
           div.classList.remove('hidden-msg');
           div.classList.add('show-msg');
           chatMsgs.scrollTop = chatMsgs.scrollHeight;
-        }, 600 * (i + 1));
+        }, 500 * (i + 1));
       });
     }
 
@@ -1329,7 +1477,6 @@
       showChat(tab.dataset.chat);
     });
 
-    // Initialize first tab
     showChat('inmobiliaria');
   </script>
 </body>
