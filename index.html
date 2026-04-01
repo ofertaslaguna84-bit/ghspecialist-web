@@ -73,28 +73,89 @@
     .btn-wa{background:#25D366;color:#fff}
     .btn-wa:hover{background:#1ebe5d;transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,211,102,.3)}
 
-    /* ─── HERO ─── */
-    .hero{padding:120px 0 80px;background:var(--bg)}
-    .hero .w{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-    .hero-kicker{display:inline-flex;align-items:center;gap:8px;background:var(--p-light);color:var(--p);padding:5px 14px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px;border:1px solid var(--p-border)}
-    .hero-kicker span{width:6px;height:6px;border-radius:50%;background:var(--p);display:block;animation:pulse-dot 2s infinite}
-    @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-    .hero h1{font-size:clamp(32px,3.8vw,54px);font-weight:900;letter-spacing:-.03em;line-height:1.05;margin-bottom:20px;color:var(--ink)}
-    .hero h1 em{font-style:normal;color:var(--p)}
-    .hero-sub{font-size:17px;color:var(--ink3);line-height:1.7;margin-bottom:32px;max-width:480px}
-    .hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:44px}
-    .hero-stats{display:flex;gap:32px;flex-wrap:wrap}
-    .hero-stat{display:flex;flex-direction:column}
-    .hs-n{font-size:28px;font-weight:900;letter-spacing:-.03em;color:var(--ink)}
-    .hs-l{font-size:12px;color:var(--ink4);font-weight:500;margin-top:2px}
-    .hero-img{position:relative}
-    .hero-img-wrap{border-radius:20px;overflow:hidden;box-shadow:0 24px 64px rgba(124,77,255,.15),0 8px 24px rgba(0,0,0,.1);aspect-ratio:4/5;background:var(--bg3)}
-    .hero-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:top center}
-    .hero-badge-float{position:absolute;bottom:28px;left:-20px;background:#fff;border-radius:12px;padding:12px 18px;box-shadow:0 8px 32px rgba(0,0,0,.12);display:flex;align-items:center;gap:10px}
-    .hero-badge-float .hbf-icon{width:40px;height:40px;border-radius:10px;background:var(--p-light);display:flex;align-items:center;justify-content:center;font-size:20px}
-    .hero-badge-float .hbf-text strong{display:block;font-size:13px;font-weight:700;color:var(--ink)}
-    .hero-badge-float .hbf-text span{font-size:11px;color:var(--ink4)}
-    .hero-badge-float2{position:absolute;top:28px;right:-20px;background:#fff;border-radius:12px;padding:12px 18px;box-shadow:0 8px 32px rgba(0,0,0,.12);display:flex;align-items:center;gap:10px}
+    /* ─── SECTION 1: VIDEO EMBUDO ─── */
+    .embudo-sec{padding:100px 0 60px;background:#0d0d0d;color:#fff;overflow:hidden}
+    .embudo-sec .sec-header{margin-bottom:48px}
+    .embudo-sec .title{color:#fff;max-width:700px;margin:0 auto 8px}
+    .embudo-sec .sub-text{color:rgba(255,255,255,.55);text-align:center;margin:0 auto}
+    .pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:56px;position:relative}
+    .pipe-col{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px 14px;min-height:220px;position:relative}
+    .pipe-col.pipe-done{background:rgba(37,211,102,.06);border-color:rgba(37,211,102,.2)}
+    .pipe-col-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.4);margin-bottom:14px;display:flex;align-items:center;gap:6px}
+    .pipe-col.pipe-done .pipe-col-title{color:#25D366}
+    .pipe-cards{display:flex;flex-direction:column;gap:8px}
+    .pipe-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 12px;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.8);display:flex;align-items:center;gap:8px}
+    .pipe-card .pc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .pipe-card .pc-dot.hot{background:#ef4444}
+    .pipe-card .pc-dot.warm{background:#f59e0b}
+    .pipe-card .pc-dot.cool{background:#3b82f6}
+    .pipe-card .pc-dot.done{background:#25D366}
+    .pipe-card.moving{animation:slideRight 3s ease-in-out infinite}
+    @keyframes slideRight{0%,100%{transform:translateX(0);opacity:1}45%{transform:translateX(30px);opacity:.5}55%{transform:translateX(30px);opacity:.5}100%{transform:translateX(0);opacity:1}}
+    .pipe-card.moving2{animation:slideRight 3s ease-in-out infinite;animation-delay:1.5s}
+    .pipe-card.moving3{animation:slideRight 3.5s ease-in-out infinite;animation-delay:.8s}
+    .pipe-col.pipe-done .pipe-card{background:rgba(37,211,102,.1);border-color:rgba(37,211,102,.2)}
+    .pipe-arrow{position:absolute;top:50%;font-size:18px;color:rgba(255,255,255,.15);transform:translateY(-50%)}
+
+    /* Logo strip */
+    .logo-strip{overflow:hidden;padding:32px 0 0;border-top:1px solid rgba(255,255,255,.06);-webkit-mask-image:linear-gradient(90deg,transparent,#fff 10%,#fff 90%,transparent);mask-image:linear-gradient(90deg,transparent,#fff 10%,#fff 90%,transparent)}
+    .logo-track{display:flex;gap:0;animation:logoScroll 25s linear infinite;flex-shrink:0;width:max-content}
+    @keyframes logoScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .logo-item{display:flex;align-items:center;padding:0 40px;white-space:nowrap;font-size:16px;font-weight:800;color:rgba(255,255,255,.2);transition:color .3s;letter-spacing:.02em;cursor:default}
+    .logo-item:hover{color:rgba(255,255,255,.7)}
+    .logo-item.lk{font-family:sans-serif;font-style:italic}
+    .logo-item.lm{font-family:'Inter',sans-serif;color:rgba(59,130,246,.3)}
+    .logo-item.lm:hover{color:rgba(59,130,246,.8)}
+    .logo-item.lg{font-family:'Inter',sans-serif}
+    .logo-item.lg:hover{color:#4285f4}
+    .logo-item.lw{color:rgba(37,211,102,.25)}
+    .logo-item.lw:hover{color:#25D366}
+    .logo-item.lmk:hover{color:#6d28d9}
+    .logo-item.lz:hover{color:#ff4a00}
+    .logo-item.lo:hover{color:#10a37f}
+    .logo-item.la:hover{color:#d97706}
+
+    /* ─── SECTION 2: CHATBOT DEMO ─── */
+    .chatbot-sec{padding:96px 0;background:var(--bg2)}
+    .chatbot-sec .sec-header{margin-bottom:40px}
+    .chat-tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:32px;padding:0 28px}
+    .chat-tab{padding:8px 18px;border-radius:100px;font-size:13px;font-weight:600;background:#fff;color:var(--ink2);border:1.5px solid var(--border);cursor:pointer;transition:all .18s;white-space:nowrap}
+    .chat-tab:hover{border-color:var(--p);color:var(--p)}
+    .chat-tab.active{background:var(--p);color:#fff;border-color:var(--p)}
+    .chat-window{max-width:420px;margin:0 auto;background:#e5ddd5;border-radius:16px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.12);min-height:420px}
+    .chat-header{background:#075e54;color:#fff;padding:14px 18px;display:flex;align-items:center;gap:12px}
+    .chat-header-avatar{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:16px}
+    .chat-header-info strong{display:block;font-size:14px;font-weight:600}
+    .chat-header-info span{font-size:11px;color:rgba(255,255,255,.7)}
+    .chat-messages{padding:16px;display:flex;flex-direction:column;gap:6px;min-height:300px}
+    .chat-msg{max-width:80%;padding:8px 12px;border-radius:8px;font-size:13.5px;line-height:1.5;position:relative}
+    .chat-msg.bot{background:#dcf8c6;align-self:flex-start;border-top-left-radius:0}
+    .chat-msg.user{background:#fff;align-self:flex-end;border-top-right-radius:0}
+    .chat-msg .msg-time{font-size:10px;color:rgba(0,0,0,.35);float:right;margin-left:10px;margin-top:4px}
+    .chat-msg.hidden-msg{display:none}
+    .chat-msg.show-msg{display:block;animation:msgPop .3s ease-out}
+    @keyframes msgPop{from{transform:translateY(10px);opacity:.5}to{transform:translateY(0);opacity:1}}
+    .chat-demo-btn{text-align:center;margin-top:28px}
+
+    /* ─── SECTION 3: TRUSTED BY ─── */
+    .trusted-sec{padding:80px 0;background:var(--bg)}
+    .trusted-sec .sec-header{margin-bottom:44px}
+    .trusted-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .trusted-card{display:flex;align-items:center;gap:14px;padding:20px 22px;border:1.5px solid var(--border);border-radius:var(--r);background:#fff;transition:all .18s}
+    .trusted-card:hover{border-color:var(--p-border);box-shadow:0 4px 16px rgba(124,77,255,.08)}
+    .trusted-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;flex-shrink:0}
+    .trusted-info strong{display:block;font-size:14px;font-weight:700;color:var(--ink)}
+    .trusted-info span{font-size:12px;color:var(--ink4)}
+
+    /* ─── SECTION 4: ANALISIS CTA ─── */
+    .analisis-sec{padding:96px 0;text-align:center;position:relative}
+    .analisis-sec .w{position:relative;z-index:1}
+    .analisis-sec .title{color:#fff;margin-bottom:12px}
+    .analisis-sec .sub-text{color:rgba(255,255,255,.75);text-align:center;margin:0 auto 32px;max-width:580px}
+    .analisis-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
+    .analisis-checks{list-style:none;display:flex;flex-direction:column;gap:12px;align-items:center}
+    .analisis-checks li{display:flex;align-items:center;gap:10px;font-size:15px;color:rgba(255,255,255,.9);font-weight:500}
+    .analisis-checks li::before{content:'✓';display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(124,77,255,.3);color:#a78bfa;font-weight:800;font-size:13px;flex-shrink:0}
 
     /* ─── SECTION BASICS ─── */
     .sec{padding:96px 0}
@@ -286,8 +347,7 @@
 
     /* ─── RESPONSIVE ─── */
     @media(max-width:900px){
-      .hero .w{grid-template-columns:1fr;gap:40px}
-      .hero-img{display:none}
+      .pipeline{grid-template-columns:1fr 1fr;gap:12px}
       .services-grid{grid-template-columns:1fr 1fr}
       .cases-grid{grid-template-columns:1fr 1fr}
       .testi-grid{grid-template-columns:1fr}
@@ -299,12 +359,18 @@
       .contact-grid{grid-template-columns:1fr}
       .footer-grid{grid-template-columns:1fr 1fr}
       .hdr-nav{display:none}
+      .trusted-grid{grid-template-columns:1fr 1fr}
+      .chat-tabs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
+      .chat-tabs::-webkit-scrollbar{display:none}
     }
     @media(max-width:600px){
+      .pipeline{grid-template-columns:1fr}
       .services-grid{grid-template-columns:1fr}
       .cases-grid{grid-template-columns:1fr}
       .cities-grid{grid-template-columns:1fr 1fr}
       .form-row{grid-template-columns:1fr}
+      .trusted-grid{grid-template-columns:1fr}
+      .analisis-btns{flex-direction:column;align-items:center}
     }
 
     /* Scroll indicator strip */
@@ -383,96 +449,167 @@
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero" id="inicio">
+  <!-- SECTION 1: VIDEO EMBUDO -->
+  <section class="embudo-sec" id="inicio">
     <div class="w">
-      <div class="hero-text">
-        <div class="hero-kicker"><span></span>+200 empresas automatizadas</div>
-        <h1>Automatiza tu negocio.<br>Escala <em>sin contratar</em><br>más personas.</h1>
-        <p class="hero-sub">Implementamos IA para que tu empresa opere sola. Chatbots, CRM, marketing y automatización total. Tú te enfocas en crecer.</p>
-        <div class="hero-btns">
-          <a href="https://calendly.com/ghspecialist" target="_blank" class="btn btn-p btn-lg">
-            🗓️ Diagnóstico gratis
-          </a>
-          <a href="https://wa.me/528712638082?text=Hola%2C%20me%20interesa%20automatizar%20mi%20empresa" target="_blank" class="btn btn-wa">
-            <svg viewBox="0 0 24 24" fill="#fff" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-            Hablar por WhatsApp
-          </a>
+      <div class="sec-header center">
+        <h2 class="title">Mira cómo la IA mueve tus clientes por el embudo. Automáticamente.</h2>
+        <p class="sub-text">Tu pipeline de ventas operando solo, las 24 horas</p>
+      </div>
+
+      <div class="pipeline">
+        <div class="pipe-col">
+          <div class="pipe-col-title">Nuevo Lead</div>
+          <div class="pipe-cards">
+            <div class="pipe-card moving"><span class="pc-dot hot"></span>María G. — Inmobiliaria</div>
+            <div class="pipe-card moving3"><span class="pc-dot warm"></span>Carlos R. — Restaurante</div>
+            <div class="pipe-card"><span class="pc-dot cool"></span>Ana L. — E-commerce</div>
+          </div>
         </div>
-        <div class="hero-stats">
-          <div class="hero-stat">
-            <span class="hs-n">$5.2M</span>
-            <span class="hs-l">ahorrado en nómina</span>
+        <div class="pipe-col">
+          <div class="pipe-col-title">Calificado</div>
+          <div class="pipe-cards">
+            <div class="pipe-card moving2"><span class="pc-dot warm"></span>Jorge M. — Clínica</div>
+            <div class="pipe-card"><span class="pc-dot hot"></span>Laura S. — Spa</div>
           </div>
-          <div class="hero-stat">
-            <span class="hs-n">200+</span>
-            <span class="hs-l">empresas automatizadas</span>
+        </div>
+        <div class="pipe-col">
+          <div class="pipe-col-title">Propuesta</div>
+          <div class="pipe-cards">
+            <div class="pipe-card moving"><span class="pc-dot hot"></span>Pedro V. — Educación</div>
+            <div class="pipe-card moving2"><span class="pc-dot warm"></span>Diana F. — RRHH</div>
           </div>
-          <div class="hero-stat">
-            <span class="hs-n">3X</span>
-            <span class="hs-l">ROI promedio</span>
+        </div>
+        <div class="pipe-col pipe-done">
+          <div class="pipe-col-title">Cerrado &#10003;</div>
+          <div class="pipe-cards">
+            <div class="pipe-card"><span class="pc-dot done"></span>Roberto K. — $45,000</div>
+            <div class="pipe-card"><span class="pc-dot done"></span>Sofía T. — $28,000</div>
+            <div class="pipe-card"><span class="pc-dot done"></span>Miguel A. — $62,000</div>
           </div>
         </div>
       </div>
-      <div class="hero-img">
-        <div class="hero-img-wrap">
-          <img src="fotos/slide2_img2.png" alt="Pedro Luis Díaz — GH Specialist">
-        </div>
-        <div class="hero-badge-float">
-          <div class="hbf-icon">🤖</div>
-          <div class="hbf-text">
-            <strong>IA Activa 24/7</strong>
-            <span>Atención sin pausas</span>
-          </div>
-        </div>
-        <div class="hero-badge-float2">
-          <div class="hbf-icon">📈</div>
-          <div class="hbf-text">
-            <strong>+340% ventas</strong>
-            <span>Inmobiliaria LATAM</span>
-          </div>
+
+      <div class="logo-strip">
+        <div class="logo-track">
+          <span class="logo-item lk">kommo</span>
+          <span class="logo-item lm">Meta</span>
+          <span class="logo-item lg">Google</span>
+          <span class="logo-item lw">WhatsApp</span>
+          <span class="logo-item lmk">Make</span>
+          <span class="logo-item lz">Zapier</span>
+          <span class="logo-item lo">OpenAI</span>
+          <span class="logo-item la">Anthropic</span>
+          <span class="logo-item lk">kommo</span>
+          <span class="logo-item lm">Meta</span>
+          <span class="logo-item lg">Google</span>
+          <span class="logo-item lw">WhatsApp</span>
+          <span class="logo-item lmk">Make</span>
+          <span class="logo-item lz">Zapier</span>
+          <span class="logo-item lo">OpenAI</span>
+          <span class="logo-item la">Anthropic</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PARTNERS MARQUEE -->
-  <div class="ticker-section">
-    <p class="ticker-label">Partners tecnológicos</p>
-    <div class="ticker-track">
-      <div class="ticker-inner" id="t1a">
-        <div class="ticker-item"><div class="ti-icon">🟣</div>Kommo CRM</div>
-        <div class="ticker-item"><div class="ti-icon">🔶</div>Anthropic</div>
-        <div class="ticker-item"><div class="ti-icon">⚡</div>Cursor AI</div>
-        <div class="ticker-item"><div class="ti-icon">🔵</div>Google Ads Certified</div>
-        <div class="ticker-item"><div class="ti-icon">📘</div>Meta Business</div>
-        <div class="ticker-item"><div class="ti-icon">💬</div>WhatsApp Business API</div>
-        <div class="ticker-item"><div class="ti-icon">📸</div>Instagram Ads</div>
-        <div class="ticker-item"><div class="ti-icon">🎵</div>TikTok Ads</div>
-        <div class="ticker-item"><div class="ti-icon">🔍</div>SEO Profesional</div>
-        <div class="ticker-item"><div class="ti-icon">🟣</div>Kommo CRM</div>
-        <div class="ticker-item"><div class="ti-icon">🔶</div>Anthropic</div>
-        <div class="ticker-item"><div class="ti-icon">⚡</div>Cursor AI</div>
-        <div class="ticker-item"><div class="ti-icon">🔵</div>Google Ads Certified</div>
-        <div class="ticker-item"><div class="ti-icon">📘</div>Meta Business</div>
-        <div class="ticker-item"><div class="ti-icon">💬</div>WhatsApp Business API</div>
-        <div class="ticker-item"><div class="ti-icon">📸</div>Instagram Ads</div>
-        <div class="ticker-item"><div class="ti-icon">🎵</div>TikTok Ads</div>
-        <div class="ticker-item"><div class="ti-icon">🔍</div>SEO Profesional</div>
+  <!-- SECTION 2: CHATBOT DEMO -->
+  <section class="chatbot-sec">
+    <div class="w">
+      <div class="sec-header center">
+        <span class="label">Chatbot IA en acción</span>
+        <h2 class="title">Prueba el chatbot en vivo</h2>
+        <p class="sub-text">Así contesta tu bot las 24 horas, los 7 días de la semana</p>
+      </div>
+
+      <div class="chat-tabs" id="chatTabs">
+        <div class="chat-tab active" data-chat="inmobiliaria">Inmobiliaria</div>
+        <div class="chat-tab" data-chat="spa">Spa</div>
+        <div class="chat-tab" data-chat="restaurante">Restaurante</div>
+        <div class="chat-tab" data-chat="clinica">Clínica</div>
+        <div class="chat-tab" data-chat="ecommerce">E-commerce</div>
+        <div class="chat-tab" data-chat="eventos">Eventos</div>
+        <div class="chat-tab" data-chat="rrhh">RRHH</div>
+        <div class="chat-tab" data-chat="educacion">Educación</div>
+      </div>
+
+      <div class="chat-window">
+        <div class="chat-header">
+          <div class="chat-header-avatar">🤖</div>
+          <div class="chat-header-info">
+            <strong>GH Bot IA</strong>
+            <span>en línea</span>
+          </div>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <!-- Messages injected by JS -->
+        </div>
+      </div>
+
+      <div class="chat-demo-btn">
+        <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20ver%20el%20demo%20del%20chatbot" target="_blank" class="btn btn-p">Ver demo en vivo</a>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- NUMBERS BAR -->
-  <div class="numbers-bar">
-    <div class="nb-item fi"><div class="nb-n" data-count="200">0</div><div class="nb-l">Empresas automatizadas</div></div>
-    <div class="nb-item fi fi-d1"><div class="nb-n">$5.2<span>M</span></div><div class="nb-l">Pesos ahorrados en nómina</div></div>
-    <div class="nb-item fi fi-d2"><div class="nb-n" data-count="340">0</div><div class="nb-l">% ROI promedio clientes</div></div>
-    <div class="nb-item fi fi-d3"><div class="nb-n" data-count="5">0</div><div class="nb-l">Países con clientes activos</div></div>
-  </div>
+  <!-- SECTION 3: TRUSTED BY -->
+  <section class="trusted-sec">
+    <div class="w">
+      <div class="sec-header center">
+        <span class="label">Clientes activos</span>
+        <h2 class="title">Empresas que ya operan con IA</h2>
+      </div>
+      <div class="trusted-grid">
+        <div class="trusted-card">
+          <div class="trusted-avatar" style="background:#7C4DFF">I</div>
+          <div class="trusted-info"><strong>Inmobiliaria LATAM</strong><span>Bienes raíces</span></div>
+        </div>
+        <div class="trusted-card">
+          <div class="trusted-avatar" style="background:#f59e0b">C</div>
+          <div class="trusted-info"><strong>Constructora Pacífico GDL</strong><span>Construcción</span></div>
+        </div>
+        <div class="trusted-card">
+          <div class="trusted-avatar" style="background:#ec4899">B</div>
+          <div class="trusted-info"><strong>Boutique Querétaro</strong><span>Moda y retail</span></div>
+        </div>
+        <div class="trusted-card">
+          <div class="trusted-avatar" style="background:#3b82f6">C</div>
+          <div class="trusted-info"><strong>Clínica Dental Norte</strong><span>Salud</span></div>
+        </div>
+        <div class="trusted-card">
+          <div class="trusted-avatar" style="background:#ef4444">R</div>
+          <div class="trusted-info"><strong>Restaurante La Capital</strong><span>Gastronomía</span></div>
+        </div>
+        <div class="trusted-card">
+          <div class="trusted-avatar" style="background:#10b981">S</div>
+          <div class="trusted-info"><strong>Spa Wellness Mérida</strong><span>Bienestar</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: ANÁLISIS CTA -->
+  <section class="sec sec-photo analisis-sec" style="--bg-img:url('hero-queretaro.jpg')">
+    <div class="w">
+      <div class="sec-header center">
+        <span class="label">Oferta especial</span>
+        <h2 class="title">Pide tu análisis de mercado gratuito</h2>
+        <p class="sub-text">Al contratar, te decimos exactamente qué hace tu competencia, cómo está posicionada y cómo mejoramos todo lo que tiene ella.</p>
+      </div>
+      <div class="analisis-btns">
+        <a href="https://calendly.com/ghspecialist" target="_blank" class="btn btn-p btn-lg">Agendar diagnóstico</a>
+        <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20mi%20an%C3%A1lisis%20de%20mercado%20gratuito" target="_blank" class="btn btn-wa btn-lg">Hablar por WhatsApp</a>
+      </div>
+      <ul class="analisis-checks">
+        <li>Análisis completo de tu competencia</li>
+        <li>Mapa de posicionamiento digital</li>
+        <li>Plan de acción personalizado con IA</li>
+      </ul>
+    </div>
+  </section>
 
   <!-- SERVICES -->
-  <section class="sec" id="servicios">
+  <section class="sec sec-photo" id="servicios" style="--bg-img:url('hero-torreon.jpg')">
     <div class="w">
       <div class="sec-header center fi">
         <span class="label">¿Qué hacemos?</span>
@@ -646,7 +783,7 @@
   </div>
 
   <!-- RESULTS / CASES -->
-  <section class="sec sec-photo" id="resultados" style="--bg-img:url('hero-torreon.jpg')">
+  <section class="sec sec-photo" id="resultados" style="--bg-img:url('hero-guadalajara.jpg')">
     <div class="w">
       <div class="sec-header center fi">
         <span class="label">Casos de éxito</span>
@@ -1091,6 +1228,109 @@
       const msg = encodeURIComponent(`Hola Pedro, soy ${nombre} de ${empresa}. Mi WhatsApp es ${wa}. Me interesa: ${servicio}`);
       window.open(`https://wa.me/528712638082?text=${msg}`, '_blank');
     }
+
+    // Chatbot demo conversations
+    const chatData = {
+      inmobiliaria: [
+        {type:'user', text:'Hola, busco un departamento en Querétaro de 2 recámaras'},
+        {type:'bot', text:'¡Hola! Tenemos 12 opciones disponibles en Querétaro con 2 recámaras. ¿Tienes un presupuesto en mente?'},
+        {type:'user', text:'Entre 2 y 3 millones'},
+        {type:'bot', text:'Perfecto. Encontré 5 departamentos en ese rango. Te comparto los 3 mejor calificados con fotos, ubicación y precio. ¿Quieres agendar una visita?'},
+        {type:'user', text:'Sí, el primero me interesa'},
+        {type:'bot', text:'Listo. Te agendé una visita para mañana a las 11:00 AM con nuestro asesor Ricardo. Te llegará la confirmación por WhatsApp. ¿Algo más?'}
+      ],
+      spa: [
+        {type:'user', text:'Hola, quiero reservar un masaje para el sábado'},
+        {type:'bot', text:'¡Hola! Con gusto te ayudo. Tenemos masaje relajante, deportivo y descontracturante. ¿Cuál prefieres?'},
+        {type:'user', text:'Relajante, para 2 personas'},
+        {type:'bot', text:'Tenemos disponibilidad para pareja el sábado a las 10:00, 12:00 y 15:00. El paquete incluye aromaterapia y acceso a jacuzzi. ¿Cuál horario prefieres?'},
+        {type:'user', text:'A las 12 por favor'},
+        {type:'bot', text:'Reservado para 2 personas el sábado a las 12:00. El costo es $1,800 por pareja. Te envío el link de pago y la confirmación.'}
+      ],
+      restaurante: [
+        {type:'user', text:'Buenas, quisiera reservar mesa para 6 personas'},
+        {type:'bot', text:'¡Buenas! ¿Para qué fecha y horario te gustaría la reservación?'},
+        {type:'user', text:'Este viernes a las 8pm'},
+        {type:'bot', text:'Tenemos mesa disponible en terraza o salón principal. Para 6 personas te recomiendo la terraza con vista. ¿La confirmo?'},
+        {type:'user', text:'Terraza, perfecto'},
+        {type:'bot', text:'Reservación confirmada: viernes, 8:00 PM, terraza, 6 personas. ¿Deseas pre-ordenar algo o festejan algo especial?'}
+      ],
+      clinica: [
+        {type:'user', text:'Necesito una cita para limpieza dental'},
+        {type:'bot', text:'¡Hola! ¿Eres paciente nuevo o ya tienes expediente con nosotros?'},
+        {type:'user', text:'Soy nuevo'},
+        {type:'bot', text:'Bienvenido. Tenemos citas disponibles esta semana: miércoles 10:00, jueves 16:00 o viernes 11:00. La limpieza dental incluye revisión general. ¿Cuál prefieres?'},
+        {type:'user', text:'Jueves a las 4'},
+        {type:'bot', text:'Cita agendada: jueves 16:00 con la Dra. Martínez. Llega 15 min antes para tu registro. Te envío recordatorio el día anterior.'}
+      ],
+      ecommerce: [
+        {type:'user', text:'¿Tienen la playera negra en talla M?'},
+        {type:'bot', text:'¡Hola! Sí, la playera negra básica está disponible en M. También tenemos la versión oversized. ¿Cuál te interesa?'},
+        {type:'user', text:'La básica. ¿Cuánto sale con envío?'},
+        {type:'bot', text:'La playera es $450 + envío gratis a todo México. Llega en 2-3 días hábiles. ¿La agrego a tu carrito?'},
+        {type:'user', text:'Sí, agrégala'},
+        {type:'bot', text:'Agregada al carrito. Tu total es $450 MXN. Te comparto el link de pago seguro. ¿Necesitas algo más?'}
+      ],
+      eventos: [
+        {type:'user', text:'Quiero cotizar un evento corporativo para 80 personas'},
+        {type:'bot', text:'¡Hola! ¿Qué tipo de evento necesitas? Tenemos paquetes para conferencias, cenas de gala y team building.'},
+        {type:'user', text:'Conferencia con comida incluida'},
+        {type:'bot', text:'Para 80 personas con salón, equipo audiovisual, coffee break y comida: desde $45,000. ¿Tienes fecha tentativa?'},
+        {type:'user', text:'15 de abril'},
+        {type:'bot', text:'Esa fecha está disponible. Te envío la cotización completa con 3 opciones de menú. Un asesor te contactará en los próximos 30 minutos.'}
+      ],
+      rrhh: [
+        {type:'user', text:'Vi la vacante de diseñador gráfico, ¿sigue disponible?'},
+        {type:'bot', text:'¡Hola! Sí, la vacante sigue abierta. ¿Tienes experiencia en diseño digital y conoces herramientas como Figma?'},
+        {type:'user', text:'Sí, tengo 3 años de experiencia con Figma y Adobe'},
+        {type:'bot', text:'Excelente perfil. El puesto es presencial en CDMX, sueldo de $18,000-$25,000 según experiencia. ¿Te gustaría agendar entrevista?'},
+        {type:'user', text:'Sí, me interesa mucho'},
+        {type:'bot', text:'Te agendo entrevista virtual para esta semana. Por favor envíame tu CV en PDF y te confirmo horario disponible con el líder de diseño.'}
+      ],
+      educacion: [
+        {type:'user', text:'Hola, me interesa el diplomado en marketing digital'},
+        {type:'bot', text:'¡Hola! El diplomado tiene duración de 6 meses, clases en vivo los sábados. ¿Buscas modalidad en línea o presencial?'},
+        {type:'user', text:'En línea, ¿cuánto cuesta?'},
+        {type:'bot', text:'El diplomado en línea tiene un costo de $12,500 con opción a 6 MSI. Incluye certificación, materiales y acceso a comunidad alumni. ¿Te inscribo?'},
+        {type:'user', text:'¿Cuándo inicia?'},
+        {type:'bot', text:'Siguiente generación inicia el 5 de mayo. Quedan 8 lugares. Te comparto el temario completo y el formulario de inscripción. ¿Lo enviamos a tu email?'}
+      ]
+    };
+
+    const chatMsgs = document.getElementById('chatMessages');
+    const chatTabs = document.getElementById('chatTabs');
+    let chatTimer = null;
+
+    function showChat(industry) {
+      if(chatTimer) clearTimeout(chatTimer);
+      const msgs = chatData[industry] || chatData.inmobiliaria;
+      chatMsgs.innerHTML = '';
+      msgs.forEach((m, i) => {
+        const div = document.createElement('div');
+        div.className = 'chat-msg ' + m.type + ' hidden-msg';
+        const now = new Date();
+        const h = now.getHours();
+        const min = String(now.getMinutes()).padStart(2,'0');
+        div.innerHTML = m.text + '<span class="msg-time">' + h + ':' + min + '</span>';
+        chatMsgs.appendChild(div);
+        setTimeout(() => {
+          div.classList.remove('hidden-msg');
+          div.classList.add('show-msg');
+          chatMsgs.scrollTop = chatMsgs.scrollHeight;
+        }, 600 * (i + 1));
+      });
+    }
+
+    chatTabs.addEventListener('click', function(e) {
+      const tab = e.target.closest('.chat-tab');
+      if(!tab) return;
+      chatTabs.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      showChat(tab.dataset.chat);
+    });
+
+    // Initialize first tab
+    showChat('inmobiliaria');
   </script>
 </body>
 </html>
