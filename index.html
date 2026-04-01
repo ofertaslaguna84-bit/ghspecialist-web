@@ -32,10 +32,10 @@
     .w-narrow{max-width:720px;margin:0 auto;padding:0 28px}
 
     /* SCROLL PROGRESS */
-    #spbar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--p),#a78bfa);z-index:9999;transition:width .08s linear}
+    #spbar{position:fixed;top:36px;left:0;height:3px;width:0%;background:linear-gradient(90deg,#a78bfa,#fff);z-index:9999;transition:width .08s linear}
 
     /* ─── HEADER ─── */
-    .hdr{position:fixed;top:0;width:100%;z-index:500;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(0,0,0,.06)}
+    .hdr{position:fixed;top:36px;width:100%;z-index:500;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(0,0,0,.06)}
     .hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px;max-width:1080px;margin:0 auto}
     .hdr-logo{height:28px}
     .hdr-nav{display:flex;align-items:center;gap:6px}
@@ -323,17 +323,17 @@
     .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(124,77,255,.1)}
     .form-group textarea{resize:vertical;min-height:100px}
 
-    /* ─── GRABOVOI BAR ─── */
-    .grabovoi-bar{background:linear-gradient(135deg,#5c35cc,#7C4DFF,#9D77FF);padding:18px 0;overflow:hidden}
-    .grabovoi-label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7);text-align:center;margin-bottom:12px}
-    .grabovoi-scroll{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#fff 6%,#fff 94%,transparent);mask-image:linear-gradient(90deg,transparent,#fff 6%,#fff 94%,transparent)}
-    .grabovoi-track{display:flex;gap:0;animation:grabScroll 40s linear infinite;width:max-content}
+    /* ─── GRABOVOI TOP BAR ─── */
+    .grabovoi-bar{background:linear-gradient(90deg,#5c35cc,#7C4DFF,#9D77FF,#7C4DFF,#5c35cc);padding:7px 0;overflow:hidden;position:fixed;top:0;left:0;right:0;z-index:700;height:36px}
+    .grabovoi-label{display:none}
+    .grabovoi-scroll{overflow:hidden;height:100%}
+    .grabovoi-track{display:flex;gap:0;animation:grabScroll 50s linear infinite;width:max-content;align-items:center;height:100%}
     @keyframes grabScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
     .grabovoi-codes{display:flex;align-items:center}
-    .grab-code{display:flex;flex-direction:column;align-items:center;gap:3px;padding:0 28px}
-    .grab-num{font-size:15px;font-weight:700;color:#fff;letter-spacing:.08em;font-variant-numeric:tabular-nums;text-shadow:0 1px 8px rgba(0,0,0,.2);white-space:nowrap}
-    .grab-desc{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.65);white-space:nowrap}
-    .grab-sep{color:rgba(255,255,255,.3);font-size:18px;line-height:1;flex-shrink:0}
+    .grab-code{display:flex;align-items:center;gap:8px;padding:0 24px}
+    .grab-num{font-size:13px;font-weight:700;color:#fff;letter-spacing:.06em;font-variant-numeric:tabular-nums;white-space:nowrap}
+    .grab-desc{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.6);white-space:nowrap}
+    .grab-sep{color:rgba(255,255,255,.35);font-size:16px;line-height:1;flex-shrink:0}
 
     /* ─── FOOTER ─── */
     .footer{background:#0a0a0a;color:#fff;padding:64px 0 28px}
