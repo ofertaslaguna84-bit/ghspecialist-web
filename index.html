@@ -89,6 +89,11 @@
     .sec-gray{background:var(--bg2)}
     .sec-dark{background:#111;color:#fff}
     .sec-purple{background:var(--p);color:#fff}
+    .sec-photo{background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.5)),var(--bg-img) center/cover no-repeat;color:#fff}
+    .sec-photo .title,.sec-photo h2,.sec-photo h3,.sec-photo strong{color:#fff}
+    .sec-photo .sub,.sec-photo p,.sec-photo li,.sec-photo .hs-l{color:rgba(255,255,255,.8)}
+    .sec-photo .label{color:#a78bfa}
+    .sec-photo .hs-n{color:#fff}
     .sec-header{text-align:center;margin-bottom:56px}
     .sec-header.left{text-align:left}
     .label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--p);margin-bottom:10px;display:block}
@@ -587,7 +592,7 @@
   </div>
 
   <!-- RESULTS / CASES -->
-  <section class="sec sec-gray" id="resultados">
+  <section class="sec sec-photo" id="resultados" style="--bg-img:url('hero-torreon.jpg')">
     <div class="w">
       <div class="sec-header center fi">
         <span class="label">Casos de éxito</span>
@@ -655,7 +660,7 @@
   </div>
 
   <!-- TESTIMONIALS -->
-  <section class="sec" id="testimonios">
+  <section class="sec sec-photo" id="testimonios" style="--bg-img:url('hero-guadalajara.jpg')">
     <div class="w">
       <div class="sec-header center fi">
         <span class="label">Testimonios</span>
@@ -700,7 +705,7 @@
   </section>
 
   <!-- CITIES -->
-  <section class="sec sec-gray">
+  <section class="sec sec-photo" style="--bg-img:url('hero-chihuahua.jpg')">
     <div class="w">
       <div class="sec-header center fi">
         <span class="label">Presencia nacional</span>
