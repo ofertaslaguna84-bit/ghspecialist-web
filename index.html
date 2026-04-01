@@ -35,16 +35,13 @@
     #spbar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--p),#a78bfa);z-index:9999;transition:width .08s linear}
 
     /* ─── HEADER ─── */
-    .hdr{position:fixed;top:0;width:100%;z-index:500;transition:all .3s}
-    .hdr.scrolled{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);box-shadow:0 1px 16px rgba(0,0,0,.06)}
+    .hdr{position:fixed;top:0;width:100%;z-index:500;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(0,0,0,.06)}
     .hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px;max-width:1080px;margin:0 auto}
     .hdr-logo{height:28px}
     .hdr-nav{display:flex;align-items:center;gap:6px}
-    .hdr-nav a,.hdr-nav .nav-drop-trigger{font-size:13.5px;font-weight:500;color:#fff;padding:6px 12px;border-radius:6px;transition:all .15s;cursor:pointer;display:flex;align-items:center;gap:4px}
-    .hdr-nav a:hover,.hdr-nav .nav-drop-trigger:hover{color:#fff;background:rgba(255,255,255,.12)}
-    .hdr-nav a.active{color:#a78bfa}
-    .hdr.scrolled .hdr-nav a,.hdr.scrolled .hdr-nav .nav-drop-trigger{color:var(--ink)}
-    .hdr.scrolled .hdr-nav a:hover,.hdr.scrolled .hdr-nav .nav-drop-trigger:hover{color:var(--ink);background:var(--bg3)}
+    .hdr-nav a,.hdr-nav .nav-drop-trigger{font-size:13.5px;font-weight:500;color:var(--ink);padding:6px 12px;border-radius:6px;transition:all .15s;cursor:pointer;display:flex;align-items:center;gap:4px}
+    .hdr-nav a:hover,.hdr-nav .nav-drop-trigger:hover{color:var(--ink);background:var(--bg3)}
+    .hdr-nav a.active{color:var(--p)}
     .nav-drop{position:relative}
     .nav-drop-trigger svg{width:12px;height:12px;transition:transform .2s}
     .nav-drop:hover .nav-drop-trigger svg{transform:rotate(180deg)}
@@ -78,7 +75,7 @@
     .btn-wa:hover{background:#1ebe5d;transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,211,102,.3)}
 
     /* ─── SECTION 1: VIDEO EMBUDO ─── */
-    .embudo-sec{padding:100px 0 60px;background:#0d0d0d;color:#fff;overflow:hidden}
+    .embudo-sec{padding:100px 0 60px;background:linear-gradient(rgba(0,0,0,.68),rgba(0,0,0,.6)),url('hero-torreon.jpg') center/cover no-repeat;color:#fff;overflow:hidden}
     .embudo-sec .sec-header{margin-bottom:48px}
     .embudo-sec .title{color:#fff;max-width:700px;margin:0 auto 8px}
     .embudo-sec .sub-text{color:rgba(255,255,255,.55);text-align:center;margin:0 auto}
@@ -148,17 +145,20 @@
     .chat-demo-btn{margin-top:24px}
 
     /* ─── SECTION 3: TRUSTED BY ─── */
-    .trusted-sec{padding:80px 0;background:var(--bg)}
+    .trusted-sec{padding:80px 0;background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.55)),url('hero-guadalajara.jpg') center/cover no-repeat;color:#fff}
     .trusted-sec .sec-header{margin-bottom:44px}
+    .trusted-sec .title{color:#fff}
+    .trusted-sec .label{color:#a78bfa}
     .trusted-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .trusted-card{display:flex;align-items:center;gap:14px;padding:20px 22px;border:1.5px solid var(--border);border-radius:var(--r);background:#fff;transition:all .18s}
-    .trusted-card:hover{border-color:var(--p-border);box-shadow:0 4px 16px rgba(124,77,255,.08)}
+    .trusted-card{display:flex;align-items:center;gap:14px;padding:20px 22px;border:1px solid rgba(255,255,255,.15);border-radius:var(--r);background:rgba(255,255,255,.08);backdrop-filter:blur(8px);transition:all .18s}
+    .trusted-card:hover{border-color:rgba(167,139,250,.5);background:rgba(255,255,255,.13)}
     .trusted-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;flex-shrink:0}
-    .trusted-info strong{display:block;font-size:14px;font-weight:700;color:var(--ink)}
-    .trusted-info span{font-size:12px;color:var(--ink4)}
+    .trusted-info strong{display:block;font-size:14px;font-weight:700;color:#fff}
+    .trusted-info span{font-size:12px;color:rgba(255,255,255,.6)}
 
     /* ─── SECTION 4: ANALISIS CTA ─── */
-    .analisis-sec{padding:96px 0;text-align:center;position:relative}
+    .analisis-sec{padding:96px 0;text-align:center;position:relative;background:#120930;overflow:hidden}
+    .analisis-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(124,77,255,.35),transparent 65%);z-index:0}
     .analisis-sec .w{position:relative;z-index:1}
     .analisis-sec .title{color:#fff;margin-bottom:12px}
     .analisis-sec .sub-text{color:rgba(255,255,255,.75);text-align:center;margin:0 auto 32px;max-width:580px}
@@ -210,11 +210,11 @@
     .svc-card:hover{border-color:var(--p);transform:translateY(-2px);box-shadow:0 8px 32px rgba(124,77,255,.12)}
     .svc-card:hover::before{opacity:1}
     .svc-icon{width:48px;height:48px;border-radius:12px;background:var(--p-light);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;position:relative;z-index:1}
-    .svc-card h3{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--ink);position:relative;z-index:1}
-    .svc-card p{font-size:13.5px;color:var(--ink3);line-height:1.6;position:relative;z-index:1;margin-bottom:16px}
-    .svc-link{font-size:13px;font-weight:600;color:var(--p);display:flex;align-items:center;gap:6px;position:relative;z-index:1;transition:gap .15s}
+    .svc-card h3{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--ink)!important;position:relative;z-index:1}
+    .svc-card p{font-size:13.5px;color:var(--ink3)!important;line-height:1.6;position:relative;z-index:1;margin-bottom:16px}
+    .svc-link{font-size:13px;font-weight:600;color:var(--p)!important;display:flex;align-items:center;gap:6px;position:relative;z-index:1;transition:gap .15s}
     .svc-card:hover .svc-link{gap:10px}
-    .svc-tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:var(--p-light);color:var(--p);margin-bottom:10px;position:relative;z-index:1}
+    .svc-tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:var(--p-light);color:var(--p)!important;margin-bottom:10px;position:relative;z-index:1}
 
     /* ─── ABOUT SECTION ─── */
     .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
@@ -256,7 +256,7 @@
     .testi-card:hover{border-color:var(--p-border);box-shadow:0 4px 20px rgba(124,77,255,.08)}
     .testi-stars{color:#FBBF24;font-size:14px;margin-bottom:12px;letter-spacing:2px}
     .testi-text{font-size:14.5px;color:var(--ink2);line-height:1.7;margin-bottom:20px;font-style:italic}
-    .testi-text::before{content:'"';font-size:40px;color:var(--p);line-height:0;vertical-align:-.3em;margin-right:4px}
+    .testi-text::before{content:'\201C';font-size:40px;color:var(--p);line-height:0;vertical-align:-.3em;margin-right:4px}
     .testi-author{display:flex;align-items:center;gap:12px}
     .testi-avatar{width:40px;height:40px;border-radius:50%;background:var(--p-light);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--p);flex-shrink:0}
     .testi-name{font-size:13px;font-weight:700;color:var(--ink)}
@@ -306,15 +306,15 @@
 
     /* ─── CONTACT SECTION ─── */
     .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
-    .contact-info h2{font-size:32px;font-weight:800;letter-spacing:-.025em;margin-bottom:16px}
-    .contact-info p{font-size:16px;color:var(--ink3);line-height:1.7;margin-bottom:28px}
+    .contact-info h2{font-size:32px;font-weight:800;letter-spacing:-.025em;margin-bottom:16px;color:#fff}
+    .contact-info p{font-size:16px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:28px}
     .contact-methods{display:flex;flex-direction:column;gap:14px}
-    .c-method{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1.5px solid var(--border);border-radius:var(--r2);transition:all .15s;cursor:pointer}
-    .c-method:hover{border-color:var(--p);background:var(--p-light)}
-    .c-method-icon{width:38px;height:38px;border-radius:8px;background:var(--p-light);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-    .c-method-text strong{display:block;font-size:13px;font-weight:700;color:var(--ink)}
-    .c-method-text span{font-size:12px;color:var(--ink4)}
-    .contact-form{background:var(--bg2);border-radius:16px;padding:36px;border:1.5px solid var(--border)}
+    .c-method{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1px solid rgba(255,255,255,.2);border-radius:var(--r2);transition:all .15s;cursor:pointer;background:rgba(255,255,255,.07)}
+    .c-method:hover{border-color:rgba(167,139,250,.6);background:rgba(255,255,255,.14)}
+    .c-method-icon{width:38px;height:38px;border-radius:8px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .c-method-text strong{display:block;font-size:13px;font-weight:700;color:#fff}
+    .c-method-text span{font-size:12px;color:rgba(255,255,255,.6)}
+    .contact-form{background:rgba(255,255,255,.92);border-radius:16px;padding:36px;border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(12px)}
     .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
     .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
     .form-group:last-child{margin-bottom:0}
@@ -322,6 +322,16 @@
     .form-group input,.form-group select,.form-group textarea{padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;color:var(--ink);background:#fff;transition:border-color .15s;outline:none}
     .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(124,77,255,.1)}
     .form-group textarea{resize:vertical;min-height:100px}
+
+    /* ─── GRABOVOI BAR ─── */
+    .grabovoi-bar{background:#0a0606;padding:24px 0;border-top:1px solid rgba(212,175,55,.15)}
+    .grabovoi-inner{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+    .grabovoi-label{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(212,175,55,.5)}
+    .grabovoi-codes{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center}
+    .grab-code{display:flex;flex-direction:column;align-items:center;gap:2px}
+    .grab-num{font-size:14px;font-weight:600;color:rgba(212,175,55,.7);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+    .grab-desc{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:rgba(212,175,55,.3)}
+    .grab-sep{color:rgba(212,175,55,.2);font-size:20px;line-height:1}
 
     /* ─── FOOTER ─── */
     .footer{background:#0a0a0a;color:#fff;padding:64px 0 28px}
@@ -381,6 +391,8 @@
       .form-row{grid-template-columns:1fr}
       .trusted-grid{grid-template-columns:1fr}
       .analisis-btns{flex-direction:column;align-items:center}
+      .grabovoi-codes{gap:12px}
+      .grab-sep{display:none}
     }
 
     /* Scroll indicator strip */
@@ -608,7 +620,7 @@
   </section>
 
   <!-- SECTION 4: ANÁLISIS CTA -->
-  <section class="sec sec-photo analisis-sec" style="--bg-img:url('hero-queretaro.jpg')">
+  <section class="sec analisis-sec">
     <div class="w">
       <div class="sec-header center">
         <span class="label">Oferta especial</span>
@@ -628,7 +640,7 @@
   </section>
 
   <!-- SERVICES -->
-  <section class="sec sec-photo" id="servicios" style="--bg-img:url('hero-torreon.jpg')">
+  <section class="sec sec-photo" id="servicios" style="--bg-img:url('hero-chihuahua.jpg')">
     <div class="w">
       <div class="sec-header center fi">
         <span class="label">¿Qué hacemos?</span>
@@ -802,7 +814,7 @@
   </div>
 
   <!-- RESULTS / CASES -->
-  <section class="sec sec-photo" id="resultados" style="--bg-img:url('hero-guadalajara.jpg')">
+  <section class="sec sec-photo" id="resultados" style="--bg-img:url('hero-monterrey.png')">
     <div class="w">
       <div class="sec-header center fi">
         <span class="label">Casos de éxito</span>
@@ -870,7 +882,7 @@
   </div>
 
   <!-- TESTIMONIALS -->
-  <section class="sec sec-photo" id="testimonios" style="--bg-img:url('hero-guadalajara.jpg')">
+  <section class="sec sec-gray" id="testimonios">
     <div class="w">
       <div class="sec-header center fi">
         <span class="label">Testimonios</span>
@@ -915,7 +927,7 @@
   </section>
 
   <!-- CITIES -->
-  <section class="sec sec-photo" style="--bg-img:url('hero-chihuahua.jpg')">
+  <section class="sec sec-photo" style="--bg-img:url('hero-cdmx.png')">
     <div class="w">
       <div class="sec-header center fi">
         <span class="label">Presencia nacional</span>
@@ -1046,7 +1058,7 @@
   </section>
 
   <!-- CONTACT -->
-  <section class="sec sec-gray" id="contacto">
+  <section class="sec sec-photo" id="contacto" style="--bg-img:url('hero-puebla.png')">
     <div class="w">
       <div class="contact-grid">
         <div class="contact-info fi">
@@ -1080,7 +1092,7 @@
           </div>
         </div>
         <div class="contact-form fi fi-d2">
-          <h3 style="font-size:18px;font-weight:700;margin-bottom:6px">Cuéntanos sobre tu empresa</h3>
+          <h3 style="font-size:18px;font-weight:700;margin-bottom:6px;color:var(--ink)">Cuéntanos sobre tu empresa</h3>
           <p style="font-size:13.5px;color:var(--ink3);margin-bottom:22px">Te respondemos en menos de 2 horas en días hábiles.</p>
           <form onsubmit="handleForm(event)">
             <div class="form-row">
@@ -1138,6 +1150,41 @@
       </div>
     </div>
   </section>
+
+  <!-- GRABOVOI CODES -->
+  <div class="grabovoi-bar">
+    <div class="w">
+      <div class="grabovoi-inner">
+        <div class="grabovoi-label">✦ Códigos de prosperidad · Grigori Grabovoi ✦</div>
+        <div class="grabovoi-codes">
+          <div class="grab-code">
+            <span class="grab-num">71427321893</span>
+            <span class="grab-desc">Abundancia eterna</span>
+          </div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code">
+            <span class="grab-num">289 471 314917</span>
+            <span class="grab-desc">Prosperidad en negocios</span>
+          </div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code">
+            <span class="grab-num">91688</span>
+            <span class="grab-desc">Remover obstáculos</span>
+          </div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code">
+            <span class="grab-num">4987123184991</span>
+            <span class="grab-desc">Rentabilidad máxima</span>
+          </div>
+          <div class="grab-sep">·</div>
+          <div class="grab-code">
+            <span class="grab-num">318 612 518 714</span>
+            <span class="grab-desc">Flujo constante de dinero</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer class="footer">
