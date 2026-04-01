@@ -99,11 +99,11 @@
     .pipe-arrow{position:absolute;top:50%;font-size:18px;color:rgba(255,255,255,.15);transform:translateY(-50%)}
 
     /* Logo strip */
-    .logo-strip{overflow:hidden;padding:32px 0 0;border-top:1px solid rgba(255,255,255,.06);-webkit-mask-image:linear-gradient(90deg,transparent,#fff 10%,#fff 90%,transparent);mask-image:linear-gradient(90deg,transparent,#fff 10%,#fff 90%,transparent)}
+    .logo-strip{overflow:hidden;padding:0;background:rgba(0,0,0,.45);border-top:1px solid rgba(255,255,255,.1);margin-top:48px}
     .logo-track{display:flex;gap:0;animation:logoScroll 25s linear infinite;flex-shrink:0;width:max-content}
     @keyframes logoScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-    .logo-item{display:flex;align-items:center;padding:0 40px;white-space:nowrap;font-size:15px;font-weight:400;color:rgba(255,255,255,.55);transition:color .3s;letter-spacing:.12em;text-transform:uppercase;cursor:default;text-shadow:0 1px 6px rgba(0,0,0,.3)}
-    .logo-item:hover{color:rgba(255,255,255,.9)}
+    .logo-item{display:flex;align-items:center;padding:16px 40px;white-space:nowrap;font-size:14px;font-weight:500;color:rgba(255,255,255,.85);transition:color .3s;letter-spacing:.14em;text-transform:uppercase;cursor:default}
+    .logo-item:hover{color:#fff}
 
     /* ─── SECTION 2: CHATBOT DEMO ─── */
     .chatbot-sec{padding:96px 0;background:#fff}
