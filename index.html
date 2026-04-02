@@ -100,15 +100,17 @@
 
     /* Logo strip */
     .logo-strip{overflow:hidden;padding:0;background:rgba(0,0,0,.45);border-top:1px solid rgba(255,255,255,.1);margin-top:48px}
-    .logo-track{display:flex;gap:0;animation:logoScroll 25s linear infinite;flex-shrink:0;width:max-content}
+    .logo-track{display:flex;gap:0;animation:logoScroll 45s linear infinite;flex-shrink:0;width:max-content}
     @keyframes logoScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-    .logo-item{display:flex;align-items:center;padding:16px 40px;white-space:nowrap;font-size:14px;font-weight:500;color:rgba(255,255,255,.85);transition:color .3s;letter-spacing:.14em;text-transform:uppercase;cursor:default}
-    .logo-item:hover{color:#fff}
+    .logo-item{display:flex;align-items:center;justify-content:center;padding:14px 24px;white-space:nowrap;font-size:13px;font-weight:600;color:rgba(255,255,255,.9);transition:opacity .3s;letter-spacing:.12em;text-transform:uppercase;cursor:default;gap:8px}
+    .logo-item:hover{opacity:1}
+    .logo-item .logo-svg{height:22px;width:auto;max-width:110px;display:block;filter:brightness(0) invert(1);opacity:.92}
+    .logo-item--nano{text-transform:none;letter-spacing:.04em;font-size:14px;font-weight:700}
 
     /* ─── SECTION 2: CHATBOT DEMO ─── */
     .chatbot-sec{padding:96px 0;background:#fff}
     .chatbot-inner{display:grid;grid-template-columns:1fr auto;gap:64px;align-items:center;max-width:900px;margin:0 auto}
-    .chatbot-copy .label{margin-bottom:12px}
+    .chatbot-copy .label{margin-bottom:12px;font-size:clamp(15px,2vw,20px);letter-spacing:.11em}
     .chatbot-copy h2{font-size:clamp(24px,3vw,38px);font-weight:800;letter-spacing:-.025em;line-height:1.15;margin-bottom:16px;color:var(--ink)}
     .chatbot-copy p{font-size:16px;color:var(--ink3);line-height:1.7;margin-bottom:28px}
     .chat-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:0}
@@ -179,7 +181,7 @@
     .sec-photo .hs-n{color:#fff}
     .sec-header{text-align:center;margin-bottom:56px}
     .sec-header.left{text-align:left}
-    .label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--p);margin-bottom:10px;display:block}
+    .label{font-size:clamp(13px,1.25vw,16px);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--p);margin-bottom:10px;display:block}
     .sec-dark .label{color:#a78bfa}
     .title{font-size:clamp(26px,3.5vw,42px);font-weight:800;letter-spacing:-.025em;line-height:1.12;margin-bottom:16px;color:var(--ink)}
     .sec-dark .title{color:#fff}
@@ -402,6 +404,22 @@
     .strip p{color:#fff;font-size:13.5px;font-weight:500}
     .strip .btn{background:#fff;color:var(--p);padding:7px 18px;font-size:12.5px}
     .strip .btn:hover{background:#f0e8ff}
+
+    /* CTA oferta chatbot — hero */
+    .embudo-price-cta{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.28);border-radius:14px;padding:16px 20px;margin-bottom:32px;backdrop-filter:blur(10px)}
+    .embudo-price-cta-text{flex:1;min-width:220px}
+    .embudo-price-line{margin:0;font-size:clamp(15px,2.2vw,18px);color:#fff;font-weight:600;line-height:1.35;text-shadow:0 1px 8px rgba(0,0,0,.35)}
+    .embudo-price-line strong{font-weight:800;color:#fff}
+    .embudo-price-line .iva{font-weight:500;opacity:.9;font-size:.92em}
+    .embudo-price-sub{margin:8px 0 0;font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.4}
+    .btn-embudo-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#fff;color:var(--p2);font-weight:700;font-size:14.5px;padding:12px 22px;border-radius:10px;border:none;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 4px 20px rgba(0,0,0,.2);text-decoration:none}
+    .btn-embudo-cta:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(0,0,0,.28);color:var(--p)}
+
+    /* Sección agendar + Calendly */
+    .book-sec{padding:72px 0 88px;background:var(--bg2);border-top:1px solid var(--border)}
+    .book-sec .sec-header{margin-bottom:28px}
+    .book-sec .book-lead{font-size:16px;color:var(--ink3);max-width:560px;margin:0 auto 24px;text-align:center;line-height:1.65}
+    .book-cal-wrap{border-radius:var(--r);overflow:hidden;border:1px solid var(--border);background:#fff;min-height:720px;max-width:900px;margin:0 auto;box-shadow:0 8px 40px rgba(0,0,0,.06)}
   </style>
 </head>
 <body>
@@ -466,7 +484,7 @@
           <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
           WhatsApp
         </a>
-        <a href="https://calendly.com/ghspecialist" target="_blank" class="btn btn-p btn-sm">
+        <a href="#agendar-diagnostico" class="btn btn-p btn-sm">
           Agendar diagnóstico
         </a>
       </div>
@@ -476,6 +494,13 @@
   <!-- SECTION 1: VIDEO EMBUDO -->
   <section class="embudo-sec" id="inicio">
     <div class="w">
+      <div class="embudo-price-cta" role="region" aria-label="Oferta automatización mensajes">
+        <div class="embudo-price-cta-text">
+          <p class="embudo-price-line">Automatiza tus mensajes desde <strong>$12,000</strong> <span class="iva">+ IVA</span></p>
+          <p class="embudo-price-sub">No incluye licencia de Kommo.</p>
+        </div>
+        <a href="#agendar-diagnostico" class="btn-embudo-cta">Agendar diagnóstico</a>
+      </div>
       <div class="sec-header center">
         <h2 class="title">Mira cómo la IA mueve tus clientes por el embudo. Automáticamente.</h2>
         <p class="sub-text">Tu pipeline de ventas operando solo, las 24 horas</p>
@@ -516,22 +541,36 @@
 
       <div class="logo-strip">
         <div class="logo-track">
-          <span class="logo-item lk">kommo</span>
-          <span class="logo-item lm">Meta</span>
-          <span class="logo-item lg">Google</span>
-          <span class="logo-item lw">WhatsApp</span>
-          <span class="logo-item lmk">Make</span>
-          <span class="logo-item lz">Zapier</span>
-          <span class="logo-item lo">OpenAI</span>
-          <span class="logo-item la">Anthropic</span>
-          <span class="logo-item lk">kommo</span>
-          <span class="logo-item lm">Meta</span>
-          <span class="logo-item lg">Google</span>
-          <span class="logo-item lw">WhatsApp</span>
-          <span class="logo-item lmk">Make</span>
-          <span class="logo-item lz">Zapier</span>
-          <span class="logo-item lo">OpenAI</span>
-          <span class="logo-item la">Anthropic</span>
+          <span class="logo-item">kommo</span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/meta.svg" alt="Meta" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/google.svg" alt="Google" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/whatsapp.svg" alt="WhatsApp" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/cursor.svg" alt="Cursor" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/googlegemini.svg" alt="Gemini" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item">Google AI</span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/anthropic.svg" alt="Claude" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item logo-item--nano">Nano Banana</span>
+          <span class="logo-item">Grok</span>
+          <span class="logo-item">HeyGen</span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/stripe.svg" alt="Stripe" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/vercel.svg" alt="Vercel" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/supabase.svg" alt="Supabase" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/googlecloud.svg" alt="Google Cloud" loading="lazy" width="120" height="22"/></span>
+          <span class="logo-item">kommo</span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/meta.svg" alt="Meta" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/google.svg" alt="Google" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/whatsapp.svg" alt="WhatsApp" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/cursor.svg" alt="Cursor" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/googlegemini.svg" alt="Gemini" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item">Google AI</span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/anthropic.svg" alt="Claude" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item logo-item--nano">Nano Banana</span>
+          <span class="logo-item">Grok</span>
+          <span class="logo-item">HeyGen</span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/stripe.svg" alt="Stripe" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/vercel.svg" alt="Vercel" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/supabase.svg" alt="Supabase" loading="lazy" width="90" height="22"/></span>
+          <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/googlecloud.svg" alt="Google Cloud" loading="lazy" width="120" height="22"/></span>
         </div>
       </div>
     </div>
@@ -630,7 +669,7 @@
         <p class="sub-text">Al contratar, te decimos exactamente qué hace tu competencia, cómo está posicionada y cómo mejoramos todo lo que tiene ella.</p>
       </div>
       <div class="analisis-btns">
-        <a href="https://calendly.com/ghspecialist" target="_blank" class="btn btn-p btn-lg">Agendar diagnóstico</a>
+        <a href="#agendar-diagnostico" class="btn btn-p btn-lg">Agendar diagnóstico</a>
         <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20mi%20an%C3%A1lisis%20de%20mercado%20gratuito" target="_blank" class="btn btn-wa btn-lg">Hablar por WhatsApp</a>
       </div>
       <ul class="analisis-checks">
@@ -638,6 +677,21 @@
         <li>Mapa de posicionamiento digital</li>
         <li>Plan de acción personalizado con IA</li>
       </ul>
+    </div>
+  </section>
+
+  <!-- AGENDAR: Calendly embebido -->
+  <section class="book-sec" id="agendar-diagnostico">
+    <div class="w">
+      <div class="sec-header center">
+        <span class="label">Diagnóstico sin costo</span>
+        <h2 class="title">Agenda tu llamada</h2>
+        <p class="book-lead">Automatiza tus mensajes desde <strong>$12,000 + IVA</strong>. No incluye licencia de Kommo. Elige horario abajo.</p>
+      </div>
+      <div class="book-cal-wrap">
+        <div class="calendly-inline-widget" data-url="https://calendly.com/ghspecialist" style="min-width:320px;height:720px;"></div>
+      </div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
     </div>
   </section>
 
@@ -807,8 +861,8 @@
 
   <!-- STRIP CTA -->
   <div class="strip">
-    <p>¿Listo para automatizar tu empresa? El diagnóstico es completamente gratis.</p>
-    <a href="https://calendly.com/ghspecialist" target="_blank" class="btn">🗓️ Agendar diagnóstico</a>
+    <p>Automatiza tus mensajes desde $12,000 + IVA · sin licencia Kommo · Diagnóstico gratis.</p>
+    <a href="#agendar-diagnostico" class="btn">🗓️ Agendar diagnóstico</a>
     <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20saber%20m%C3%A1s" target="_blank" class="btn">
       <svg viewBox="0 0 24 24" fill="#25D366" width="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
       WhatsApp directo
@@ -976,7 +1030,7 @@
   <!-- STRIP CTA 2 -->
   <div class="strip">
     <p>¿Tu empresa no está en la lista? No importa. Trabajamos con empresas de todo México.</p>
-    <a href="https://calendly.com/ghspecialist" target="_blank" class="btn">🗓️ Agenda tu diagnóstico</a>
+    <a href="#agendar-diagnostico" class="btn">🗓️ Agenda tu diagnóstico</a>
   </div>
 
   <!-- PRICING -->
@@ -1077,7 +1131,7 @@
                 <span>+52 871 263 8082 · Respuesta en minutos</span>
               </div>
             </a>
-            <a href="https://calendly.com/ghspecialist" target="_blank" class="c-method">
+            <a href="#agendar-diagnostico" class="c-method">
               <div class="c-method-icon">🗓️</div>
               <div class="c-method-text">
                 <strong>Agenda una videollamada</strong>
@@ -1142,7 +1196,7 @@
       <h2>¿Tu empresa sigue operando<br>como en 2015?</h2>
       <p>Cada día sin automatización es dinero dejado en la mesa. El diagnóstico es gratis. La transformación, invaluable.</p>
       <div class="cta-btns">
-        <a href="https://calendly.com/ghspecialist" target="_blank" class="btn btn-p btn-lg">
+        <a href="#agendar-diagnostico" class="btn btn-p btn-lg">
           🗓️ Diagnóstico gratis ahora
         </a>
         <a href="https://wa.me/528712638082?text=Hola%20Pedro%2C%20quiero%20automatizar%20mi%20empresa" target="_blank" class="btn btn-wa btn-lg">
@@ -1324,7 +1378,7 @@
           <ul>
             <li><a href="https://wa.me/528712638082">+52 871 263 8082</a></li>
             <li><a href="mailto:hola@ghspecialist.com">hola@ghspecialist.com</a></li>
-            <li><a href="https://calendly.com/ghspecialist" target="_blank">Agendar cita</a></li>
+            <li><a href="#agendar-diagnostico">Agendar cita</a></li>
             <li><a href="#">Torreón, Coahuila</a></li>
             <li><a href="#">México + LATAM</a></li>
           </ul>
