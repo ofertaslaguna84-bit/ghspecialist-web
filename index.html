@@ -417,11 +417,27 @@
     .btn-embudo-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#fff;color:var(--p2);font-weight:700;font-size:14.5px;padding:12px 22px;border-radius:10px;border:none;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 4px 20px rgba(0,0,0,.2);text-decoration:none}
     .btn-embudo-cta:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(0,0,0,.28);color:var(--p)}
 
-    /* Sección agendar + Calendly */
+    /* Sección agendar + onboarding filtro + Calendly */
     .book-sec{padding:72px 0 88px;background:var(--bg2);border-top:1px solid var(--border)}
     .book-sec .sec-header{margin-bottom:28px}
-    .book-sec .book-lead{font-size:16px;color:var(--ink3);max-width:560px;margin:0 auto 24px;text-align:center;line-height:1.65}
-    .book-cal-wrap{border-radius:var(--r);overflow:hidden;border:1px solid var(--border);background:#fff;min-height:720px;max-width:900px;margin:0 auto;box-shadow:0 8px 40px rgba(0,0,0,.06)}
+    .book-sec .book-lead{font-size:16px;color:var(--ink3);max-width:620px;margin:0 auto 24px;text-align:center;line-height:1.65}
+    .book-form-wrap{max-width:520px;margin:0 auto 28px;background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:28px 24px 26px;box-shadow:0 4px 28px rgba(0,0,0,.05)}
+    .book-form-wrap h3{font-size:18px;font-weight:800;margin-bottom:6px;color:var(--ink);letter-spacing:-.02em}
+    .book-form-note{font-size:13px;color:var(--ink3);margin-bottom:18px;line-height:1.55}
+    .book-field{margin-bottom:14px}
+    .book-field label{display:block;font-size:12.5px;font-weight:600;color:var(--ink2);margin-bottom:5px}
+    .book-field input,.book-field select{width:100%;padding:12px 12px;border:1px solid var(--border2);border-radius:8px;font-size:14px;font-family:inherit;background:#fff}
+    .book-field input:focus,.book-field select:focus{outline:none;border-color:var(--p);box-shadow:0 0 0 3px var(--p-light)}
+    .book-field .hint{font-size:11.5px;color:var(--ink4);margin-top:4px}
+    .book-submit .btn{width:100%;justify-content:center;padding:14px;font-size:15px}
+    .book-err{font-size:13px;color:#b91c1c;margin-top:10px;display:none}
+    .book-err.show{display:block}
+    #gh-book-form.is-sent{display:none}
+    .book-cal-wrap{border-radius:var(--r);overflow:hidden;border:1px solid var(--border);background:#fff;min-height:720px;max-width:900px;margin:0 auto;box-shadow:0 8px 40px rgba(0,0,0,.06);display:none}
+    .book-cal-wrap.show{display:block}
+    .book-reject{display:none;background:#fffbeb;border:1px solid #fcd34d;border-radius:var(--r);padding:22px 20px;max-width:520px;margin:0 auto;font-size:14px;color:var(--ink2);line-height:1.65}
+    .book-reject.show{display:block}
+    .book-reject a{color:#15803d;font-weight:600}
   </style>
 </head>
 <body>
@@ -682,18 +698,53 @@
     </div>
   </section>
 
-  <!-- AGENDAR: Calendly embebido -->
+  <!-- AGENDAR: onboarding filtro (USD) + Calendly -->
   <section class="book-sec" id="agendar-diagnostico">
     <div class="w">
       <div class="sec-header center">
         <span class="label">Diagnóstico sin costo</span>
-        <h2 class="title">Agenda tu llamada</h2>
-        <p class="book-lead">Automatiza tus mensajes desde <strong>$12,000 + IVA</strong>. No incluye licencia de Kommo. Elige horario abajo.</p>
+        <h2 class="title">Primero validamos que el proyecto encaje</h2>
+        <p class="book-lead">Nos enfocamos en proyectos de implementación entre <strong>USD $600 y más de USD $25,000</strong> (según alcance). Automatización de mensajes desde <strong>$12,000 + IVA</strong>; no incluye licencia Kommo. Si operas en el <strong>norte</strong> (Monterrey, NL y zona) u otro estado, el flujo es el mismo.</p>
       </div>
-      <div class="book-cal-wrap">
-        <div class="calendly-inline-widget" data-url="https://calendly.com/ghspecialist" style="min-width:320px;height:720px;"></div>
+      <form id="gh-book-form" class="book-form-wrap" novalidate>
+        <h3>Cuéntanos tu perfil</h3>
+        <p class="book-form-note">Con esto filtramos curiosos y priorizamos equipos con presupuesto real de proyecto.</p>
+        <input type="hidden" name="_subject" value="Lead GH — onboarding web (filtro USD)">
+        <div class="book-field">
+          <label for="gh-nombre">Nombre *</label>
+          <input id="gh-nombre" name="nombre" type="text" required autocomplete="name" placeholder="Tu nombre">
+        </div>
+        <div class="book-field">
+          <label for="gh-email">Correo *</label>
+          <input id="gh-email" name="email" type="email" required autocomplete="email" placeholder="correo@empresa.com">
+        </div>
+        <div class="book-field">
+          <label for="gh-wa">WhatsApp *</label>
+          <input id="gh-wa" name="whatsapp" type="tel" required inputmode="numeric" placeholder="10 dígitos" maxlength="16">
+        </div>
+        <div class="book-field">
+          <label for="gh-usd">¿En qué rango está el proyecto que quieres automatizar? (USD) *</label>
+          <select id="gh-usd" name="proyecto_usd" required>
+            <option value="" disabled selected>Selecciona</option>
+            <option value="menos600">Menos de USD $600</option>
+            <option value="600-2500">USD $600 – $2,500</option>
+            <option value="2500-10000">USD $2,500 – $10,000</option>
+            <option value="10000-25000">USD $10,000 – $25,000</option>
+            <option value="mas25000">Más de USD $25,000</option>
+          </select>
+          <p class="hint">Tipos de cambio y alcance pueden variar; es una referencia para ver encaje.</p>
+        </div>
+        <p class="book-err" id="gh-book-err" role="alert"></p>
+        <div class="book-submit">
+          <button type="submit" class="btn btn-p" id="gh-book-submit">Continuar</button>
+        </div>
+        <p class="hint" style="margin-top:14px;text-align:center;font-size:12px">¿Ya pasaste este filtro? <a href="https://calendly.com/ghspecialist" target="_blank" rel="noopener" style="color:var(--p);font-weight:600">Abrir Calendly directo</a></p>
+      </form>
+      <div id="book-cal-container" class="book-cal-wrap" aria-live="polite"></div>
+      <div id="book-reject" class="book-reject" role="status">
+        <p><strong>Por ahora no abrimos agenda para este rango por aquí.</strong> Si tu inversión proyectada es menor a USD $600, escríbenos por WhatsApp y vemos si hay otra opción.</p>
+        <p style="margin-top:12px"><a id="book-reject-wa" href="#">WhatsApp →</a></p>
       </div>
-      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
     </div>
   </section>
 
@@ -1448,6 +1499,68 @@
       const msg = encodeURIComponent(`Hola Pedro, soy ${nombre} de ${empresa}. Mi WhatsApp es ${wa}. Me interesa: ${servicio}`);
       window.open(`https://wa.me/528712638082?text=${msg}`, '_blank');
     }
+
+    // Onboarding filtro USD → Calendly (GH Specialist). Opcional: pon tu id de Formspree en FORM_ID para guardar leads.
+    (function () {
+      var FORM_ID = '';
+      var CALENDLY = 'https://calendly.com/ghspecialist';
+      var WA = '528712638082';
+      function qualifies(usd) { return usd && usd !== 'menos600'; }
+      function loadCalendly(container) {
+        container.innerHTML = '';
+        function mount() {
+          Calendly.initInlineWidget({ url: CALENDLY, parentElement: container });
+        }
+        if (window.Calendly) { mount(); return; }
+        var s = document.createElement('script');
+        s.src = 'https://assets.calendly.com/assets/external/widget.js';
+        s.async = true;
+        s.onload = function () { mount(); };
+        document.body.appendChild(s);
+      }
+      var form = document.getElementById('gh-book-form');
+      var errEl = document.getElementById('gh-book-err');
+      var cal = document.getElementById('book-cal-container');
+      var rej = document.getElementById('book-reject');
+      var rejWa = document.getElementById('book-reject-wa');
+      if (!form || !cal || !rej) return;
+      rejWa.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent('Hola Pedro, mi proyecto está por debajo de USD $600 pero quiero ver opciones.');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        errEl.classList.remove('show');
+        errEl.textContent = '';
+        var fd = new FormData(form);
+        var usd = (fd.get('proyecto_usd') || '').toString();
+        var nombre = (fd.get('nombre') || '').toString().trim();
+        var email = (fd.get('email') || '').toString().trim();
+        if (!nombre || nombre.length < 2) { errEl.textContent = 'Escribe tu nombre.'; errEl.classList.add('show'); return; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = 'Correo no válido.'; errEl.classList.add('show'); return; }
+        if (!usd) { errEl.textContent = 'Selecciona el rango del proyecto en USD.'; errEl.classList.add('show'); return; }
+        function afterNotify(ok) {
+          if (!qualifies(usd)) {
+            rej.classList.add('show');
+            form.classList.add('is-sent');
+            cal.classList.remove('show');
+            try { form.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (x) {}
+            return;
+          }
+          form.classList.add('is-sent');
+          rej.classList.remove('show');
+          cal.classList.add('show');
+          loadCalendly(cal);
+          try { cal.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (x) {}
+        }
+        if (FORM_ID) {
+          fetch('https://formspree.io/f/' + FORM_ID, {
+            method: 'POST',
+            body: fd,
+            headers: { Accept: 'application/json' }
+          }).then(function (r) { afterNotify(r.ok); }).catch(function () { afterNotify(true); });
+        } else {
+          afterNotify(true);
+        }
+      });
+    })();
 
     // ── PIPELINE ANIMATION ──
     const pipeLeads = [
