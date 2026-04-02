@@ -417,7 +417,7 @@
     .btn-embudo-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#fff;color:var(--p2);font-weight:700;font-size:14.5px;padding:12px 22px;border-radius:10px;border:none;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 4px 20px rgba(0,0,0,.2);text-decoration:none}
     .btn-embudo-cta:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(0,0,0,.28);color:var(--p)}
 
-    /* Sección agendar + onboarding filtro + Calendly */
+    /* Sección agendar + onboarding + Google Calendar */
     .book-sec{padding:72px 0 88px;background:var(--bg2);border-top:1px solid var(--border)}
     .book-sec .sec-header{margin-bottom:28px}
     .book-sec .book-lead{font-size:16px;color:var(--ink3);max-width:620px;margin:0 auto 24px;text-align:center;line-height:1.65}
@@ -437,8 +437,14 @@
     .book-err{font-size:13px;color:#b91c1c;margin-top:10px;display:none}
     .book-err.show{display:block}
     #gh-book-form.is-sent{display:none}
-    .book-cal-wrap{border-radius:var(--r);overflow:hidden;border:1px solid var(--border);background:#fff;min-height:720px;max-width:900px;margin:0 auto;box-shadow:0 8px 40px rgba(0,0,0,.06);display:none}
+    .book-cal-wrap{border-radius:var(--r);overflow:hidden;border:1px solid var(--border);background:var(--bg2);min-height:120px;max-width:900px;margin:0 auto;box-shadow:0 8px 40px rgba(0,0,0,.06);display:none;padding:16px 12px 20px}
     .book-cal-wrap.show{display:block}
+    .book-cal-head{text-align:center;margin-bottom:14px;padding:4px 8px 0}
+    .book-cal-head-title{font-size:18px;font-weight:800;color:var(--ink);margin:0 0 6px;letter-spacing:-.02em}
+    .book-cal-head-sub{font-size:13px;color:var(--ink3);margin:0;line-height:1.45;max-width:480px;margin-left:auto;margin-right:auto}
+    .book-cal-iframe-wrap{border-radius:10px;overflow:hidden;border:1px solid var(--border);background:#fff}
+    .book-cal-fallback{text-align:center;margin-top:14px;font-size:13px;color:var(--ink3)}
+    .book-cal-fallback a.btn{margin-top:6px}
     .book-reject{display:none;background:#fffbeb;border:1px solid #fcd34d;border-radius:var(--r);padding:22px 20px;max-width:520px;margin:0 auto;font-size:14px;color:var(--ink2);line-height:1.65}
     .book-reject.show{display:block}
     .book-reject a{color:#15803d;font-weight:600}
@@ -702,7 +708,7 @@
     </div>
   </section>
 
-  <!-- AGENDAR: onboarding filtro (USD) + Calendly -->
+  <!-- AGENDAR: onboarding + Google Calendar -->
   <section class="book-sec" id="agendar-diagnostico">
     <div class="w">
       <div class="sec-header center">
@@ -779,7 +785,7 @@
         <div class="book-submit">
           <button type="submit" class="btn btn-p" id="gh-book-submit">Continuar</button>
         </div>
-        <p class="hint" style="margin-top:14px;text-align:center;font-size:12px">¿Ya pasaste este filtro? <a href="https://calendly.com/ghspecialist" target="_blank" rel="noopener" style="color:var(--p);font-weight:600">Abrir Calendly directo</a></p>
+        <p class="hint" style="margin-top:14px;text-align:center;font-size:12px">¿Ya pasaste este filtro? <a href="https://calendar.app.google/Ay2yA84WLXLZhPJN9" target="_blank" rel="noopener" style="color:var(--p);font-weight:600">Abrir agenda Google directo</a></p>
       </form>
       <div id="book-cal-container" class="book-cal-wrap" aria-live="polite"></div>
       <div id="book-reject" class="book-reject" role="status">
@@ -1229,7 +1235,7 @@
               <div class="c-method-icon">🗓️</div>
               <div class="c-method-text">
                 <strong>Agenda una videollamada</strong>
-                <span>Calendly · 30 minutos · Sin costo</span>
+                <span>Google Calendar · Elige fecha y hora</span>
               </div>
             </a>
             <a href="mailto:hola@ghspecialist.com" class="c-method">
@@ -1541,25 +1547,35 @@
       window.open(`https://wa.me/528712638082?text=${msg}`, '_blank');
     }
 
-    // Onboarding: MX/US estados, nómina, qué instalar, mín. USD 1500 → Calendly. FORM_ID opcional (Formspree).
+    // Onboarding: MX/US estados, nómina, qué instalar, mín. USD 1500 → Google Calendar (iframe). FORM_ID opcional (Formspree).
     (function () {
       var FORM_ID = '';
-      var CALENDLY = 'https://calendly.com/ghspecialist';
+      var BOOKING_URL = 'https://calendar.app.google/Ay2yA84WLXLZhPJN9';
       var WA = '528712638082';
       var MX = ['Aguascalientes','Baja California','Baja California Sur','Campeche','Chiapas','Chihuahua','Ciudad de México','Coahuila','Colima','Durango','Guanajuato','Guerrero','Hidalgo','Jalisco','México','Michoacán','Morelos','Nayarit','Nuevo León','Oaxaca','Puebla','Querétaro','Quintana Roo','San Luis Potosí','Sinaloa','Sonora','Tabasco','Tamaulipas','Tlaxcala','Veracruz','Yucatán','Zacatecas'];
       var US = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
       function qualifies(usd) { return usd && usd !== 'menos1500'; }
-      function loadCalendly(container) {
+      function loadGoogleBooking(container) {
         container.innerHTML = '';
-        function mount() {
-          Calendly.initInlineWidget({ url: CALENDLY, parentElement: container });
-        }
-        if (window.Calendly) { mount(); return; }
-        var s = document.createElement('script');
-        s.src = 'https://assets.calendly.com/assets/external/widget.js';
-        s.async = true;
-        s.onload = function () { mount(); };
-        document.body.appendChild(s);
+        var head = document.createElement('div');
+        head.className = 'book-cal-head';
+        head.innerHTML = '<p class="book-cal-head-title">Elige fecha y hora</p><p class="book-cal-head-sub">Aquí abajo está el calendario de Google: usa los botones para elegir día y horario disponibles.</p>';
+        container.appendChild(head);
+        var wrap = document.createElement('div');
+        wrap.className = 'book-cal-iframe-wrap';
+        var iframe = document.createElement('iframe');
+        iframe.src = BOOKING_URL;
+        iframe.title = 'Citas de GH Specialist';
+        iframe.setAttribute('allow', 'fullscreen');
+        iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+        iframe.loading = 'lazy';
+        iframe.style.cssText = 'width:100%;min-height:720px;border:0;display:block';
+        wrap.appendChild(iframe);
+        container.appendChild(wrap);
+        var fb = document.createElement('div');
+        fb.className = 'book-cal-fallback';
+        fb.innerHTML = 'Si no carga el calendario aquí (bloqueo del navegador), abre la misma agenda en una pestaña nueva.<br><a href="' + BOOKING_URL + '" target="_blank" rel="noopener" class="btn btn-p btn-sm">Abrir agenda en Google</a>';
+        container.appendChild(fb);
       }
       function fillStates(sel, list) {
         sel.innerHTML = '<option value="" disabled selected>Elige estado</option>';
@@ -1618,7 +1634,7 @@
           form.classList.add('is-sent');
           rej.classList.remove('show');
           cal.classList.add('show');
-          loadCalendly(cal);
+          loadGoogleBooking(cal);
           try { cal.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (x) {}
         }
         if (FORM_ID) {
