@@ -22,6 +22,14 @@
  * panelPassword → vacío = panel sin clave. Si pones texto, hay que escribirlo para entrar.
  *   Ojo: en repo público la clave es visible en el código; para más seguridad usa repo privado o Cloudflare Access.
  *
+ * analyticsEmbedUrl → URL de informe EMBEBIBLE para ver métricas DENTRO del panel.
+ *   No es el link normal de GA: crea un informe en Looker Studio conectado a tu GA4,
+ *   luego Archivo → Incorporar informe → copia la URL que empiece por lookerstudio.google.com/embed/...
+ *
+ * leadsSheetEmbedUrl → (opcional) URL de una hoja de Google publicada (Archivo → Publicar en la web)
+ *   para ver lista de suscriptores/leads que tú mantengas en la hoja. El sitio estático no tiene
+ *   base de datos de “usuarios registrados”; esto es un atajo visual.
+ *
  * Tras editar: git add js/gh-site-config.js && git commit -m "chore: config" && git push origin main
  */
 window.GH_SITE_CONFIG = {
@@ -29,5 +37,7 @@ window.GH_SITE_CONFIG = {
   formspreeLeadsId: '',
   formspreeContactId: '',
   githubRepo: 'ofertaslaguna84-bit/ghspecialist-web',
-  panelPassword: 'Grupo84*'
+  panelPassword: 'Grupo84*',
+  analyticsEmbedUrl: '',
+  leadsSheetEmbedUrl: ''
 };
