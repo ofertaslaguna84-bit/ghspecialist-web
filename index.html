@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="favicon.png">
   <title>GH Specialist — Automatiza tu Negocio con IA | Pedro Luis Díaz Velázquez</title>
@@ -27,19 +27,25 @@
       --bg:#fff;--bg2:#FAFAFA;--bg3:#F4F4F4;
       --border:#E8E8E8;--border2:#D0D0D0;
       --r:12px;--r2:8px;
+      --safe-top:env(safe-area-inset-top, 0px);
+      --safe-bottom:env(safe-area-inset-bottom, 0px);
+      --safe-left:env(safe-area-inset-left, 0px);
+      --safe-right:env(safe-area-inset-right, 0px);
+      --grab-strip:36px;
+      --hdr-h:64px;
     }
-    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%}
     body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden;line-height:1.6}
     a{text-decoration:none;color:inherit}
     img{display:block;max-width:100%}
-    .w{max-width:1080px;margin:0 auto;padding:0 28px}
-    .w-narrow{max-width:720px;margin:0 auto;padding:0 28px}
+    .w{max-width:1080px;margin:0 auto;padding:0 max(28px, var(--safe-right)) 0 max(28px, var(--safe-left))}
+    .w-narrow{max-width:720px;margin:0 auto;padding:0 max(28px, var(--safe-right)) 0 max(28px, var(--safe-left))}
 
     /* SCROLL PROGRESS */
-    #spbar{position:fixed;top:36px;left:0;height:3px;width:0%;background:linear-gradient(90deg,#a78bfa,#fff);z-index:9999;transition:width .08s linear}
+    #spbar{position:fixed;top:calc(var(--grab-strip) + var(--safe-top));left:0;height:3px;width:0%;background:linear-gradient(90deg,#a78bfa,#fff);z-index:9999;transition:width .08s linear}
 
     /* ─── HEADER ─── */
-    .hdr{position:fixed;top:36px;width:100%;z-index:500;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(0,0,0,.06)}
+    .hdr{position:fixed;top:calc(var(--grab-strip) + var(--safe-top));width:100%;z-index:500;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(0,0,0,.06)}
     .hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px;max-width:1080px;margin:0 auto}
     .hdr-logo{height:28px}
     .hdr-nav{display:flex;align-items:center;gap:6px}
@@ -87,7 +93,7 @@
     .btn-wa:hover{background:#1ebe5d;transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,211,102,.3)}
 
     /* ─── SECTION 1: VIDEO EMBUDO ─── */
-    .embudo-sec{padding:100px 0 60px;background:linear-gradient(rgba(0,0,0,.30),rgba(0,0,0,.22)),url('hero-torreon.jpg') center/cover no-repeat;color:#fff;overflow:hidden}
+    .embudo-sec{padding:calc(100px + var(--safe-top)) 0 60px;background:linear-gradient(rgba(0,0,0,.30),rgba(0,0,0,.22)),url('hero-torreon.jpg') center/cover no-repeat;color:#fff;overflow:hidden}
     .embudo-sec .sec-header{margin-bottom:48px}
     .embudo-sec .title{color:#fff;max-width:700px;margin:0 auto 8px;text-shadow:0 2px 12px rgba(0,0,0,.5)}
     .embudo-sec .sub-text{color:rgba(255,255,255,.9);text-align:center;margin:0 auto;text-shadow:0 1px 8px rgba(0,0,0,.4)}
@@ -342,7 +348,7 @@
     .contact-form-msg--err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
 
     /* ─── GRABOVOI TOP BAR ─── */
-    .grabovoi-bar{background:linear-gradient(90deg,#5c35cc,#7C4DFF,#9D77FF,#7C4DFF,#5c35cc);padding:7px 0;overflow:hidden;position:fixed;top:0;left:0;right:0;z-index:700;height:36px}
+    .grabovoi-bar{background:linear-gradient(90deg,#5c35cc,#7C4DFF,#9D77FF,#7C4DFF,#5c35cc);position:fixed;top:0;left:0;right:0;z-index:700;box-sizing:border-box;height:calc(var(--grab-strip) + var(--safe-top));padding-top:var(--safe-top);padding-left:max(12px, var(--safe-left));padding-right:max(12px, var(--safe-right));overflow:hidden;display:flex;align-items:center}
     .grabovoi-label{display:none}
     .grabovoi-scroll{overflow:hidden;height:100%}
     .grabovoi-track{display:flex;gap:0;animation:grabScroll 50s linear infinite;width:max-content;align-items:center;height:100%}
@@ -354,7 +360,7 @@
     .grab-sep{color:rgba(255,255,255,.35);font-size:16px;line-height:1;flex-shrink:0}
 
     /* ─── FOOTER ─── */
-    .footer{background:#0a0a0a;color:#fff;padding:64px 0 28px}
+    .footer{background:#0a0a0a;color:#fff;padding:64px 0 calc(28px + var(--safe-bottom))}
     .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:28px}
     .footer-brand p{font-size:13.5px;color:rgba(255,255,255,.45);line-height:1.8;margin-top:14px;max-width:240px}
     .footer-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.4);margin-bottom:16px}
@@ -368,7 +374,7 @@
     .fsoc:hover{background:var(--p);transform:translateY(-2px)}
 
     /* ─── FLOATING WA ─── */
-    .wa-float{position:fixed;bottom:28px;right:28px;z-index:400;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+    .wa-float{position:fixed;bottom:calc(28px + var(--safe-bottom));right:calc(28px + var(--safe-right));z-index:400;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
     .wa-float a{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:#25D366;box-shadow:0 4px 20px rgba(37,211,102,.5);transition:all .2s}
     .wa-float a:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.6)}
     .wa-float svg{width:28px;height:28px}
@@ -402,6 +408,9 @@
       .trusted-grid{grid-template-columns:1fr 1fr}
       .chat-tabs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
       .chat-tabs::-webkit-scrollbar{display:none}
+    }
+    @media(max-width:768px){
+      .book-field input,.book-field select,.form-group input,.form-group select,.form-group textarea{font-size:16px!important}
     }
     @media(max-width:600px){
       .pipeline{grid-template-columns:1fr}
@@ -462,7 +471,11 @@
     .book-cal-head{text-align:center;margin-bottom:14px;padding:4px 8px 0}
     .book-cal-head-title{font-size:18px;font-weight:800;color:var(--ink);margin:0 0 6px;letter-spacing:-.02em}
     .book-cal-head-sub{font-size:13px;color:var(--ink3);margin:0;line-height:1.45;max-width:480px;margin-left:auto;margin-right:auto}
-    .book-cal-iframe-wrap{border-radius:10px;overflow:hidden;border:1px solid var(--border);background:#fff}
+    .book-cal-iframe-wrap{border-radius:10px;overflow:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--border);background:#fff;max-width:100%;-webkit-transform:translateZ(0)}
+    .book-cal-iframe-wrap iframe{width:100%;min-height:520px;border:0;display:block}
+    @media(max-width:768px){
+      .book-cal-iframe-wrap iframe{min-height:62vh;min-height:62dvh}
+    }
     .book-cal-fallback{text-align:center;margin-top:14px;font-size:13px;color:var(--ink3)}
     .book-cal-fallback a.btn{margin-top:6px}
     .book-reject{display:none;background:#fffbeb;border:1px solid #fcd34d;border-radius:var(--r);padding:22px 20px;max-width:520px;margin:0 auto;font-size:14px;color:var(--ink2);line-height:1.65}
@@ -1663,13 +1676,24 @@
         iframe.title = ght('cal.title', 'Citas de GH Specialist');
         iframe.setAttribute('allow', 'fullscreen');
         iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
-        iframe.loading = 'lazy';
-        iframe.style.cssText = 'width:100%;min-height:720px;border:0;display:block';
+        iframe.loading = 'eager';
+        iframe.className = 'gh-book-cal-iframe';
         wrap.appendChild(iframe);
         container.appendChild(wrap);
         var fb = document.createElement('div');
         fb.className = 'book-cal-fallback';
-        fb.innerHTML = ght('cal.fallback', 'Si no carga el calendario aquí (bloqueo del navegador), abre la misma agenda en una pestaña nueva.') + '<br><a href="' + BOOKING_URL + '" target="_blank" rel="noopener" class="btn btn-p btn-sm">' + ght('cal.btn', 'Abrir agenda en Google') + '</a>';
+        var ios = /iPhone|iPad|iPod/i.test(navigator.userAgent || '');
+        var iosLine = ios
+          ? '<p style="font-size:12px;color:#666;margin-top:10px;line-height:1.45">Safari en iPhone a veces no muestra el calendario embebido: usa el botón de abajo para abrir la agenda en otra pantalla.</p>'
+          : '';
+        fb.innerHTML =
+          ght('cal.fallback', 'Si no carga el calendario aquí (bloqueo del navegador), abre la misma agenda en una pestaña nueva.') +
+          iosLine +
+          '<br><a href="' +
+          BOOKING_URL +
+          '" target="_blank" rel="noopener" class="btn btn-p btn-sm">' +
+          ght('cal.btn', 'Abrir agenda en Google') +
+          '</a>';
         container.appendChild(fb);
       }
       function fillStates(sel, list) {

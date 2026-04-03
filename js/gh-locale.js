@@ -555,9 +555,18 @@
     var sub = document.querySelector('.book-cal-head-sub');
     if (title) title.textContent = t('cal.title');
     if (sub) sub.textContent = t('cal.sub');
+    var ios = /iPhone|iPad|iPod/i.test(navigator.userAgent || '');
+    var iosLine = '';
+    if (ios) {
+      iosLine =
+        state.lang === 'en'
+          ? '<p style="font-size:12px;color:#666;margin-top:10px;line-height:1.45">On iPhone Safari the embedded calendar may not load: use the button below to open Google Calendar.</p>'
+          : '<p style="font-size:12px;color:#666;margin-top:10px;line-height:1.45">Safari en iPhone a veces no muestra el calendario embebido: usa el botón de abajo para abrir la agenda en otra pantalla.</p>';
+    }
     document.querySelectorAll('.book-cal-fallback').forEach(function (fb) {
       fb.innerHTML =
         t('cal.fallback') +
+        iosLine +
         '<br><a href="' +
         BOOKING_URL +
         '" target="_blank" rel="noopener" class="btn btn-p btn-sm">' +
