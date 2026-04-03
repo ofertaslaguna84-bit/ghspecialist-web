@@ -1,9 +1,8 @@
 /**
- * Panel interno GH Specialist — enlaces + estado deploy (API pública GitHub).
+ * Panel interno GH Specialist — Analytics, Formspree, blog (sin GitHub en UI).
  */
 (function () {
   var C = window.GH_SITE_CONFIG || {};
-  var REPO = C.githubRepo || 'ofertaslaguna84-bit/ghspecialist-web';
   var PASS = (C.panelPassword || '').trim();
   var SESSION_KEY = 'gh_panel_auth';
 
@@ -290,8 +289,5 @@
     bindGate();
     bindSalir();
     checkAuth();
-    if (!PASS || sessionStorage.getItem(SESSION_KEY) === '1') {
-      loadGithub();
-    }
   });
 })();

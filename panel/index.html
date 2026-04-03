@@ -129,16 +129,7 @@
     .card a.link:hover { text-decoration: underline; }
     .card .stack a { display: block; margin-top: 8px; }
 
-    .status {
-      grid-column: 1 / -1;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 16px 24px;
-    }
-    .status img { height: 22px; }
     .mono { font-family: ui-monospace, monospace; font-size: 12px; color: var(--ink3); }
-    #gh-err { color: #b45309; font-size: 12px; }
 
     #gate {
       max-width: 400px;
@@ -181,7 +172,7 @@
   <div id="gate">
     <form id="gate-form">
       <h2>Panel interno</h2>
-      <p>Introduce la clave configurada en <span class="mono">js/gh-site-config.js</span> (campo <span class="mono">panelPassword</span>).</p>
+      <p>Introduce la clave de acceso al panel.</p>
       <div id="gate-err"></div>
       <input type="password" id="gate-pass" placeholder="Clave" autocomplete="current-password" autofocus>
       <button type="submit">Entrar</button>
@@ -205,7 +196,7 @@
         <div id="analytics-embed-placeholder" class="embed-hint">
           <strong>Aún no hay informe embebido.</strong> Google Analytics no permite meter su pantalla completa aquí; la forma oficial es crear un informe en
           <a href="https://lookerstudio.google.com/" target="_blank" rel="noopener noreferrer">Looker Studio</a>
-          conectado a tu GA4 → <strong>Archivo → Incorporar informe</strong> → copia la URL que empiece por <span class="mono">lookerstudio.google.com/embed/</span> y pégala en <span class="mono">analyticsEmbedUrl</span> en <span class="mono">js/gh-site-config.js</span>.
+          conectado a tu GA4 → <strong>Archivo → Incorporar informe</strong> → copia la URL que empiece por <span class="mono">lookerstudio.google.com/embed/</span> y pégala en la configuración del sitio (informe embebido).
           <a href="https://support.google.com/looker-studio/answer/9053467" target="_blank" rel="noopener noreferrer">Guía de incorporación →</a>
         </div>
         <div id="analytics-embed-frame-wrap" class="embed-box" hidden>
@@ -236,10 +227,10 @@
         <ul style="font-size:13px;color:var(--ink3);margin:10px 0 12px 18px;line-height:1.55">
           <li><strong>Visitantes / sesiones:</strong> en el informe de Analytics embebido arriba (cuando lo configures) o en <a id="link-ga-inline" href="https://analytics.google.com/" target="_blank" rel="noopener noreferrer" style="color:var(--p);font-weight:600">Analytics en otra pestaña</a>.</li>
           <li><strong>Leads que llenan formularios:</strong> en Formspree (envíos por correo y panel).</li>
-          <li><strong>Lista propia (emails, etc.):</strong> opcional — publica una hoja en Google y pega la URL en <span class="mono">leadsSheetEmbedUrl</span> para verla aquí abajo.</li>
+          <li><strong>Lista propia (emails, etc.):</strong> opcional — publica una hoja en Google y configura la URL del embed en el sitio para verla aquí abajo.</li>
         </ul>
         <div id="leads-embed-placeholder" class="embed-hint">
-          Sin hoja embebida. Si usas una Google Sheet publicada, añade <span class="mono">leadsSheetEmbedUrl</span> en la config.
+          Sin hoja embebida. Si usas una Google Sheet publicada, tu técnico puede enlazarla aquí desde la configuración.
         </div>
         <div id="leads-embed-wrap" class="embed-box leads-embed" hidden>
           <iframe id="leads-embed-frame" title="Lista de leads" loading="lazy"></iframe>
@@ -248,20 +239,6 @@
     </div>
 
     <div class="grid" style="margin-top:8px">
-      <section class="card status">
-        <div>
-          <h2>Último commit en main</h2>
-          <p class="mono" id="gh-msg">Cargando…</p>
-          <p><strong>SHA:</strong> <span class="mono" id="gh-sha">—</span> · <span id="gh-date" class="mono"></span></p>
-          <p id="gh-err"></p>
-        </div>
-        <div>
-          <h2>Deploy GitHub Pages</h2>
-          <p><img id="deploy-badge" src="" alt=""></p>
-          <a class="link" id="link-gh-actions" href="#" target="_blank" rel="noopener">Ver workflow en Actions →</a>
-        </div>
-      </section>
-
       <section class="card">
         <h2>Visitas (Google Analytics)</h2>
         <p>Informes completos (tiempo real, conversiones) en la consola de Google.</p>
@@ -275,15 +252,7 @@
         <div class="stack" style="margin-top:12px">
           <a class="link" id="link-fs-contact" href="#" target="_blank" rel="noopener" hidden>Contacto</a>
           <a class="link" id="link-fs-leads" href="#" target="_blank" rel="noopener" hidden>Leads</a>
-          <span id="hint-fs" style="font-size:12px;color:#888">Pega los IDs en <span class="mono">gh-site-config.js</span> para enlaces rápidos a cada formulario.</span>
-        </div>
-      </section>
-
-      <section class="card">
-        <h2>Código y deploy</h2>
-        <p>Repositorio y Actions (mismo flujo que al hacer push a <span class="mono">main</span>).</p>
-        <div class="stack">
-          <a class="link" id="link-gh-repo" href="#" target="_blank" rel="noopener">Abrir repositorio en GitHub →</a>
+          <span id="hint-fs" style="font-size:12px;color:#888">Configura los IDs de formulario en el sitio para ver aquí enlaces directos a cada uno.</span>
         </div>
       </section>
 

@@ -18,7 +18,6 @@
  * No va aquí: edita window.GH_VISITOR_NOTIFY.ntfyTopic en index.html, landing, sobre-pedro.
  *
  * === D) Panel interno (/panel/) ===
- * githubRepo → usado para último commit + enlaces a Actions (owner/repo).
  * panelPassword → vacío = panel sin clave. Si pones texto, hay que escribirlo para entrar.
  *   Ojo: en repo público la clave es visible en el código; para más seguridad usa repo privado o Cloudflare Access.
  *
@@ -36,7 +35,6 @@ window.GH_SITE_CONFIG = {
   ga4MeasurementId: 'G-76XN5538Y8',
   formspreeLeadsId: '',
   formspreeContactId: '',
-  githubRepo: 'ofertaslaguna84-bit/ghspecialist-web',
   panelPassword: 'Grupo84*',
   analyticsEmbedUrl: '',
   leadsSheetEmbedUrl: ''
