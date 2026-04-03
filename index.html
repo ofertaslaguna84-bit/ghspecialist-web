@@ -15,6 +15,8 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="js/gh-site-config.js"></script>
+  <script src="js/gh-analytics.js" async></script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Pedro Luis Díaz Velázquez","jobTitle":"Founder & CEO GH Specialist","url":"https://ghspecialist.com","telephone":"+528712638082","sameAs":["https://instagram.com/ghspecialist","https://linkedin.com/in/pedroluisdiaz"]}</script>
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -57,6 +59,14 @@
     .nav-mega-text strong{display:block;font-size:13.5px;font-weight:600;color:var(--ink)}
     .nav-mega-text span{font-size:12px;color:var(--ink4);line-height:1.3}
     .hdr-right{display:flex;align-items:center;gap:10px}
+    .hdr-lang{display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;flex-shrink:0}
+    .hdr-lang-btn{background:#fff;padding:6px 11px;font-size:12px;font-weight:700;cursor:pointer;border:none;color:var(--ink3);font-family:inherit;line-height:1}
+    .hdr-lang-btn:hover{color:var(--ink)}
+    .hdr-lang-btn.active{background:var(--p-light);color:var(--p)}
+    .hdr-currency-badge{font-size:10px;font-weight:600;color:var(--ink4);max-width:92px;text-align:right;line-height:1.25}
+    @media(max-width:900px){.hdr-currency-badge{display:none}}
+    .plan-usd{font-size:15px;font-weight:700;margin-left:2px;opacity:.88}
+    .plan-card.featured .plan-usd{color:rgba(255,255,255,.85)}
     .hdr-wa{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:rgba(255,255,255,.85);padding:7px 14px;border-radius:7px;border:1.5px solid rgba(255,255,255,.25);transition:all .15s}
     .hdr-wa:hover{border-color:#25D366;color:#25D366}
     .hdr-wa svg{width:16px;height:16px;flex-shrink:0}
@@ -326,6 +336,10 @@
     .form-group input,.form-group select,.form-group textarea{padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;color:var(--ink);background:#fff;transition:border-color .15s;outline:none}
     .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(124,77,255,.1)}
     .form-group textarea{resize:vertical;min-height:100px}
+    .contact-form-msg{font-size:14px;padding:12px 14px;border-radius:8px;margin-bottom:14px;display:none;line-height:1.45}
+    .contact-form-msg.show{display:block}
+    .contact-form-msg--ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+    .contact-form-msg--err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
 
     /* ─── GRABOVOI TOP BAR ─── */
     .grabovoi-bar{background:linear-gradient(90deg,#5c35cc,#7C4DFF,#9D77FF,#7C4DFF,#5c35cc);padding:7px 0;overflow:hidden;position:fixed;top:0;left:0;right:0;z-index:700;height:36px}
@@ -459,60 +473,65 @@
       <a href="index.html"><img src="2.png" alt="GH Specialist" class="hdr-logo"></a>
       <nav class="hdr-nav">
         <div class="nav-drop">
-          <div class="nav-drop-trigger">Servicios <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+          <div class="nav-drop-trigger"><span data-i18n="nav.servicios">Servicios</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
           <div class="nav-mega">
             <div class="nav-mega-grid">
               <a href="servicios/chatbot-ia-whatsapp.html" class="nav-mega-item">
                 <div class="nav-mega-icon">💬</div>
-                <div class="nav-mega-text"><strong>Chatbot IA WhatsApp</strong><span>Vende 24/7 en automático</span></div>
+                <div class="nav-mega-text"><strong data-i18n="mega.c1t">Chatbot IA WhatsApp</strong><span data-i18n="mega.c1d">Vende 24/7 en automático</span></div>
               </a>
               <a href="servicios/agentes-omnicanal.html" class="nav-mega-item">
                 <div class="nav-mega-icon">🤖</div>
-                <div class="nav-mega-text"><strong>Agentes IA Omnicanal</strong><span>WhatsApp, IG, email, web</span></div>
+                <div class="nav-mega-text"><strong data-i18n="mega.c2t">Agentes IA Omnicanal</strong><span data-i18n="mega.c2d">WhatsApp, IG, email, web</span></div>
               </a>
               <a href="servicios/crm-kommo.html" class="nav-mega-item">
                 <div class="nav-mega-icon">📊</div>
-                <div class="nav-mega-text"><strong>CRM Kommo</strong><span>Pipeline + automatizaciones</span></div>
+                <div class="nav-mega-text"><strong data-i18n="mega.c3t">CRM Kommo</strong><span data-i18n="mega.c3d">Pipeline + automatizaciones</span></div>
               </a>
               <a href="servicios/web-seo-blog-ia.html" class="nav-mega-item">
                 <div class="nav-mega-icon">🌐</div>
-                <div class="nav-mega-text"><strong>Web + SEO + Blog IA</strong><span>Contenido que posiciona solo</span></div>
+                <div class="nav-mega-text"><strong data-i18n="mega.c4t">Web + SEO + Blog IA</strong><span data-i18n="mega.c4d">Contenido que posiciona solo</span></div>
               </a>
               <a href="servicios/automatizacion-total.html" class="nav-mega-item">
                 <div class="nav-mega-icon">⚡</div>
-                <div class="nav-mega-text"><strong>Automatización Total</strong><span>Conecta todos tus sistemas</span></div>
+                <div class="nav-mega-text"><strong data-i18n="mega.c5t">Automatización Total</strong><span data-i18n="mega.c5d">Conecta todos tus sistemas</span></div>
               </a>
               <a href="servicios/growth-difusiones.html" class="nav-mega-item">
                 <div class="nav-mega-icon">📈</div>
-                <div class="nav-mega-text"><strong>Growth + Difusiones</strong><span>Campañas masivas con IA</span></div>
+                <div class="nav-mega-text"><strong data-i18n="mega.c6t">Growth + Difusiones</strong><span data-i18n="mega.c6d">Campañas masivas con IA</span></div>
               </a>
               <a href="servicios/pauta-omnicanal.html" class="nav-mega-item">
                 <div class="nav-mega-icon">📣</div>
-                <div class="nav-mega-text"><strong>Pauta Omnicanal</strong><span>Ads en todas las plataformas</span></div>
+                <div class="nav-mega-text"><strong data-i18n="mega.c7t">Pauta Omnicanal</strong><span data-i18n="mega.c7d">Ads en todas las plataformas</span></div>
               </a>
               <a href="servicios/cien-automatizado.html" class="nav-mega-item">
                 <div class="nav-mega-icon">🏭</div>
-                <div class="nav-mega-text"><strong>100% Automatizado</strong><span>Tu empresa opera sola</span></div>
+                <div class="nav-mega-text"><strong data-i18n="mega.c8t">100% Automatizado</strong><span data-i18n="mega.c8d">Tu empresa opera sola</span></div>
               </a>
               <a href="servicios/proyectos-medida.html" class="nav-mega-item">
                 <div class="nav-mega-icon">🎯</div>
-                <div class="nav-mega-text"><strong>Proyectos a Medida</strong><span>Soluciones personalizadas</span></div>
+                <div class="nav-mega-text"><strong data-i18n="mega.c9t">Proyectos a Medida</strong><span data-i18n="mega.c9d">Soluciones personalizadas</span></div>
               </a>
             </div>
           </div>
         </div>
-        <a href="landing/">Cómo funciona</a>
-        <a href="#sobre-pedro">Pedro</a>
-        <a href="#resultados">Resultados</a>
-        <a href="#precios">Precios</a>
-        <a href="blog/">Blog</a>
+        <a href="landing/" data-i18n="nav.como">Cómo funciona</a>
+        <a href="#sobre-pedro" data-i18n="nav.pedro">Pedro</a>
+        <a href="#resultados" data-i18n="nav.resultados">Resultados</a>
+        <a href="#precios" data-i18n="nav.precios">Precios</a>
+        <a href="blog/" data-i18n="nav.blog">Blog</a>
       </nav>
       <div class="hdr-right">
-        <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20gratuito" target="_blank" class="hdr-wa">
+        <div class="hdr-lang" id="hdr-lang" role="group" aria-label="Idioma">
+          <button type="button" class="hdr-lang-btn active" data-gh-lang="es" aria-pressed="true">ES</button>
+          <button type="button" class="hdr-lang-btn" data-gh-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <span class="hdr-currency-badge" id="currency-badge" title=""></span>
+        <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20gratuito" target="_blank" class="hdr-wa" id="hdr-wa-link">
           <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-          WhatsApp
+          <span data-i18n="nav.whatsapp">WhatsApp</span>
         </a>
-        <a href="#agendar-diagnostico" class="btn btn-p btn-sm">
+        <a href="#agendar-diagnostico" class="btn btn-p btn-sm" data-i18n="nav.agendar">
           Agendar diagnóstico
         </a>
       </div>
@@ -524,14 +543,14 @@
     <div class="w">
       <div class="embudo-price-cta" role="region" aria-label="Oferta automatización mensajes">
         <div class="embudo-price-cta-text">
-          <p class="embudo-price-line">Automatiza tus mensajes desde <strong>$12,000</strong> <span class="iva">+ IVA</span></p>
-          <p class="embudo-price-sub">No incluye licencia de Kommo.</p>
+          <p class="embudo-price-line" id="gh-embudo-line">Automatiza tus mensajes desde <strong>$12,000</strong> <span class="iva">+ IVA</span></p>
+          <p class="embudo-price-sub" id="gh-embudo-sub">No incluye licencia de Kommo.</p>
         </div>
-        <a href="#agendar-diagnostico" class="btn-embudo-cta">Agendar diagnóstico</a>
+        <a href="#agendar-diagnostico" class="btn-embudo-cta" data-i18n="embudo.cta">Agendar diagnóstico</a>
       </div>
       <div class="sec-header center">
-        <h2 class="title">Mira cómo la IA mueve tus clientes por el embudo. Automáticamente.</h2>
-        <p class="sub-text">Tu pipeline de ventas operando solo, las 24 horas</p>
+        <h2 class="title" data-i18n="embudo.title">Mira cómo la IA mueve tus clientes por el embudo. Automáticamente.</h2>
+        <p class="sub-text" data-i18n="embudo.sub">Tu pipeline de ventas operando solo, las 24 horas</p>
       </div>
 
       <div class="pipeline">
@@ -609,9 +628,9 @@
     <div class="w">
       <div class="chatbot-inner">
         <div class="chatbot-copy">
-          <span class="label">Chatbot IA en acción</span>
-          <h2>Tu bot atiende, califica y cierra.<br>Tú duermes.</h2>
-          <p>Selecciona tu industria y ve cómo la IA conversa con tus clientes — califica, informa, agenda y cierra ventas sin intervención humana.</p>
+          <span class="label" data-i18n="chat.label">Chatbot IA en acción</span>
+          <h2 data-i18n-html="chat.h2">Tu bot atiende, califica y cierra.<br>Tú duermes.</h2>
+          <p data-i18n="chat.p">Selecciona tu industria y ve cómo la IA conversa con tus clientes — califica, informa, agenda y cierra ventas sin intervención humana.</p>
           <div class="chat-tabs" id="chatTabs">
             <div class="chat-tab active" data-chat="inmobiliaria">🏠 Inmobiliaria</div>
             <div class="chat-tab" data-chat="spa">💆 Spa</div>
@@ -623,7 +642,7 @@
             <div class="chat-tab" data-chat="educacion">🎓 Educación</div>
           </div>
           <div class="chat-demo-btn">
-            <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20ver%20el%20demo%20del%20chatbot" target="_blank" class="btn btn-p">Ver demo real en WhatsApp →</a>
+            <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20ver%20el%20demo%20del%20chatbot" target="_blank" class="btn btn-p" data-i18n="chat.demo">Ver demo real en WhatsApp →</a>
           </div>
         </div>
         <div class="phone-mockup">
@@ -656,8 +675,8 @@
   <section class="trusted-sec">
     <div class="w">
       <div class="sec-header center">
-        <span class="label">Clientes activos</span>
-        <h2 class="title">Empresas que ya operan con IA</h2>
+        <span class="label" data-i18n="trusted.label">Clientes activos</span>
+        <h2 class="title" data-i18n="trusted.title">Empresas que ya operan con IA</h2>
       </div>
       <div class="trusted-grid">
         <div class="trusted-card">
@@ -692,18 +711,18 @@
   <section class="sec analisis-sec">
     <div class="w">
       <div class="sec-header center">
-        <span class="label">Oferta especial</span>
-        <h2 class="title">Pide tu análisis de mercado gratuito</h2>
-        <p class="sub-text">Al contratar, te decimos exactamente qué hace tu competencia, cómo está posicionada y cómo mejoramos todo lo que tiene ella.</p>
+        <span class="label" data-i18n="analisis.label">Oferta especial</span>
+        <h2 class="title" data-i18n="analisis.title">Pide tu análisis de mercado gratuito</h2>
+        <p class="sub-text" data-i18n="analisis.sub">Al contratar, te decimos exactamente qué hace tu competencia, cómo está posicionada y cómo mejoramos todo lo que tiene ella.</p>
       </div>
       <div class="analisis-btns">
-        <a href="#agendar-diagnostico" class="btn btn-p btn-lg">Agendar diagnóstico</a>
-        <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20mi%20an%C3%A1lisis%20de%20mercado%20gratuito" target="_blank" class="btn btn-wa btn-lg">Hablar por WhatsApp</a>
+        <a href="#agendar-diagnostico" class="btn btn-p btn-lg" data-i18n="analisis.btn1">Agendar diagnóstico</a>
+        <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20mi%20an%C3%A1lisis%20de%20mercado%20gratuito" target="_blank" class="btn btn-wa btn-lg" data-i18n="analisis.btn2">Hablar por WhatsApp</a>
       </div>
       <ul class="analisis-checks">
-        <li>Análisis completo de tu competencia</li>
-        <li>Mapa de posicionamiento digital</li>
-        <li>Plan de acción personalizado con IA</li>
+        <li data-i18n="analisis.li1">Análisis completo de tu competencia</li>
+        <li data-i18n="analisis.li2">Mapa de posicionamiento digital</li>
+        <li data-i18n="analisis.li3">Plan de acción personalizado con IA</li>
       </ul>
     </div>
   </section>
@@ -712,28 +731,28 @@
   <section class="book-sec" id="agendar-diagnostico">
     <div class="w">
       <div class="sec-header center">
-        <span class="label">Diagnóstico sin costo</span>
-        <h2 class="title">Primero validamos que el proyecto encaje</h2>
-        <p class="book-lead">Trabajamos con empresas en <strong>México y Estados Unidos</strong>. Los proyectos de implementación arrancan desde <strong>USD $1,500 en adelante (todo incluido: licencias y entregables acordados)</strong>. Chatbots desde <strong>$12,000 + IVA</strong> en México (Kommo no incluido salvo que se cotice aparte).</p>
+        <span class="label" data-i18n="book.label">Diagnóstico sin costo</span>
+        <h2 class="title" data-i18n="book.title">Primero validamos que el proyecto encaje</h2>
+        <p class="book-lead" id="gh-book-lead">Trabajamos con empresas en <strong>México y Estados Unidos</strong>. Los proyectos de implementación arrancan desde <strong>USD $1,500 en adelante (todo incluido: licencias y entregables acordados)</strong>. Chatbots desde <strong>$12,000 + IVA</strong> en México (Kommo no incluido salvo que se cotice aparte).</p>
       </div>
       <form id="gh-book-form" class="book-form-wrap" novalidate>
-        <h3>Cuéntanos tu perfil</h3>
-        <p class="book-form-note">Filtramos curiosos y priorizamos equipos con nómina y proyecto reales.</p>
+        <h3 data-i18n="book.h3">Cuéntanos tu perfil</h3>
+        <p class="book-form-note" data-i18n="book.note">Filtramos curiosos y priorizamos equipos con nómina y proyecto reales.</p>
         <input type="hidden" name="_subject" value="Lead GH — onboarding (MX/US, nómina, instalación)">
         <div class="book-field">
-          <label for="gh-nombre">Nombre *</label>
-          <input id="gh-nombre" name="nombre" type="text" required autocomplete="name" placeholder="Tu nombre">
+          <label for="gh-nombre" data-i18n="book.nombre">Nombre *</label>
+          <input id="gh-nombre" name="nombre" type="text" required autocomplete="name" data-i18n-placeholder="book.placeholder.nombre" placeholder="Tu nombre">
         </div>
         <div class="book-field">
-          <label for="gh-email">Correo *</label>
-          <input id="gh-email" name="email" type="email" required autocomplete="email" placeholder="correo@empresa.com">
+          <label for="gh-email" data-i18n="book.email">Correo *</label>
+          <input id="gh-email" name="email" type="email" required autocomplete="email" data-i18n-placeholder="book.placeholder.email" placeholder="correo@empresa.com">
         </div>
         <div class="book-field">
-          <label for="gh-wa">WhatsApp (lada + número) *</label>
-          <input id="gh-wa" name="whatsapp" type="tel" required inputmode="tel" placeholder="Ej. +52… o +1…" maxlength="22">
+          <label for="gh-wa" data-i18n="book.wa">WhatsApp (lada + número) *</label>
+          <input id="gh-wa" name="whatsapp" type="tel" required inputmode="tel" data-i18n-placeholder="book.placeholder.wa" placeholder="Ej. +52… o +1…" maxlength="22">
         </div>
         <div class="book-field">
-          <label for="gh-pais">País *</label>
+          <label for="gh-pais" data-i18n="book.pais">País *</label>
           <select id="gh-pais" name="pais" required>
             <option value="" disabled selected>Selecciona</option>
             <option value="MX">México</option>
@@ -741,13 +760,13 @@
           </select>
         </div>
         <div class="book-field">
-          <label for="gh-estado">Estado *</label>
+          <label for="gh-estado" data-i18n="book.estado">Estado *</label>
           <select id="gh-estado" name="estado" disabled>
             <option value="">Primero elige país</option>
           </select>
         </div>
         <div class="book-field">
-          <label for="gh-nomina">¿Cuánto pagan al mes en nómina (aprox.)? *</label>
+          <label for="gh-nomina" data-i18n="book.nomina">¿Cuánto pagan al mes en nómina (aprox.)? *</label>
           <select id="gh-nomina" name="nomina_mensual" required>
             <option value="" disabled selected>Selecciona</option>
             <option value="banda_s">Hasta ~$300,000 MXN/mes (~USD $17k) o equivalente</option>
@@ -755,10 +774,10 @@
             <option value="banda_l">$1.2M – $4M MXN/mes o ~USD $70k–$250k/mes</option>
             <option value="banda_xl">Más de $4M MXN/mes o operación mayor en USD</option>
           </select>
-          <p class="hint">Si tu nómina está en USD (EE. UU.), elige la banda equivalente a tu nómina mensual total.</p>
+          <p class="hint" data-i18n="book.hint_nomina">Si tu nómina está en USD (EE. UU.), elige la banda equivalente a tu nómina mensual total.</p>
         </div>
         <div class="book-field">
-          <span class="book-quiero-title">¿Qué te gustaría instalar? * (marca uno o más)</span>
+          <span class="book-quiero-title" data-i18n="book.quiero">¿Qué te gustaría instalar? * (marca uno o más)</span>
           <div class="book-checks" id="gh-quiero-wrap">
             <label><input type="checkbox" name="quiero" value="chatbot_whatsapp"> Chatbot / WhatsApp IA</label>
             <label><input type="checkbox" name="quiero" value="crm_kommo"> CRM Kommo</label>
@@ -770,7 +789,7 @@
           </div>
         </div>
         <div class="book-field">
-          <label for="gh-usd">¿En qué rango está el proyecto (USD) todo incluido? *</label>
+          <label for="gh-usd" data-i18n="book.proyecto_usd">¿En qué rango está el proyecto (USD) todo incluido? *</label>
           <select id="gh-usd" name="proyecto_usd" required>
             <option value="" disabled selected>Selecciona</option>
             <option value="menos1500">Menos de USD $1,500 (todo incluido)</option>
@@ -779,18 +798,18 @@
             <option value="15000-50000">USD $15,000 – $50,000</option>
             <option value="mas50000">Más de USD $50,000</option>
           </select>
-          <p class="hint">Incluye licencias y alcance acordado; no es solo “mensualidad”.</p>
+          <p class="hint" data-i18n="book.hint_proyecto">Incluye licencias y alcance acordado; no es solo “mensualidad”.</p>
         </div>
         <p class="book-err" id="gh-book-err" role="alert"></p>
         <div class="book-submit">
-          <button type="submit" class="btn btn-p" id="gh-book-submit">Continuar</button>
+          <button type="submit" class="btn btn-p" id="gh-book-submit" data-i18n="book.submit">Continuar</button>
         </div>
-        <p class="hint" style="margin-top:14px;text-align:center;font-size:12px">¿Ya pasaste este filtro? <a href="https://calendar.app.google/Ay2yA84WLXLZhPJN9" target="_blank" rel="noopener" style="color:var(--p);font-weight:600">Abrir agenda Google directo</a></p>
+        <p class="hint" style="margin-top:14px;text-align:center;font-size:12px" id="gh-book-direct">¿Ya pasaste este filtro? <a href="https://calendar.app.google/Ay2yA84WLXLZhPJN9" target="_blank" rel="noopener" style="color:var(--p);font-weight:600">Abrir agenda Google directo</a></p>
       </form>
       <div id="book-cal-container" class="book-cal-wrap" aria-live="polite"></div>
       <div id="book-reject" class="book-reject" role="status">
         <p><strong>Por ahora no abrimos agenda para este rango por aquí.</strong> Si tu inversión total del proyecto es menor a <strong>USD $1,500</strong> (todo incluido), escríbenos por WhatsApp y vemos si hay otra opción.</p>
-        <p style="margin-top:12px"><a id="book-reject-wa" href="#">WhatsApp →</a></p>
+        <p style="margin-top:12px"><a id="book-reject-wa" href="https://wa.me/528712638082">WhatsApp →</a></p>
       </div>
     </div>
   </section>
@@ -961,11 +980,11 @@
 
   <!-- STRIP CTA -->
   <div class="strip">
-    <p>Automatiza tus mensajes desde $12,000 + IVA · sin licencia Kommo · Diagnóstico gratis.</p>
-    <a href="#agendar-diagnostico" class="btn">🗓️ Agendar diagnóstico</a>
+    <p id="gh-strip-1">Automatiza tus mensajes desde $12,000 + IVA · sin licencia Kommo · Diagnóstico gratis.</p>
+    <a href="#agendar-diagnostico" class="btn" data-i18n="strip1.btn1">🗓️ Agendar diagnóstico</a>
     <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20saber%20m%C3%A1s" target="_blank" class="btn">
       <svg viewBox="0 0 24 24" fill="#25D366" width="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-      WhatsApp directo
+      <span data-i18n="strip1.btn2">WhatsApp directo</span>
     </a>
   </div>
 
@@ -1129,24 +1148,24 @@
 
   <!-- STRIP CTA 2 -->
   <div class="strip">
-    <p>¿Tu empresa no está en la lista? No importa. Trabajamos con empresas de todo México.</p>
-    <a href="#agendar-diagnostico" class="btn">🗓️ Agenda tu diagnóstico</a>
+    <p id="gh-strip-2" data-i18n="strip2">¿Tu empresa no está en la lista? No importa. Trabajamos con empresas de todo México.</p>
+    <a href="#agendar-diagnostico" class="btn" data-i18n="strip2.btn">🗓️ Agenda tu diagnóstico</a>
   </div>
 
   <!-- PRICING -->
   <section class="sec" id="precios">
     <div class="w">
       <div class="sec-header center fi">
-        <span class="label">Precios transparentes</span>
-        <h2 class="title">Inversión que se paga sola</h2>
-        <p class="sub-text">Un empleado cuesta $8K–$15K/mes. Nuestros sistemas trabajan 24/7 desde el primer mes.</p>
+        <span class="label" data-i18n="pricing.label">Precios transparentes</span>
+        <h2 class="title" data-i18n="pricing.title">Inversión que se paga sola</h2>
+        <p class="sub-text" id="gh-pricing-sub">Un empleado cuesta $8K–$15K/mes. Nuestros sistemas trabajan 24/7 desde el primer mes.</p>
       </div>
       <div class="pricing-grid">
 
         <div class="plan-card fi fi-d1">
           <div class="plan-name">Starter</div>
-          <div class="plan-price"><sup>$</sup>12,000</div>
-          <div style="font-size:12px;color:var(--ink4);margin-bottom:12px">pago único · sin mensualidades</div>
+          <div class="plan-price" id="gh-price-starter"><sup>$</sup>12,000</div>
+          <div style="font-size:12px;color:var(--ink4);margin-bottom:12px" data-i18n="plan.starter.foot">pago único · sin mensualidades</div>
           <div class="plan-desc">Para negocios que quieren su primer chatbot IA funcionando rápido.</div>
           <ul class="plan-features">
             <li>Chatbot WhatsApp con IA</li>
@@ -1156,17 +1175,17 @@
             <li>Soporte 30 días</li>
             <li>Entrega en 7 días hábiles</li>
           </ul>
-          <a href="https://wa.me/528712638082?text=Hola%2C%20me%20interesa%20el%20plan%20Starter%20de%20%2412%2C000" target="_blank" class="btn btn-outline" style="width:100%;justify-content:center">
+          <a href="https://wa.me/528712638082?text=Hola%2C%20me%20interesa%20el%20plan%20Starter%20de%20%2412%2C000" target="_blank" class="btn btn-outline" style="width:100%;justify-content:center" data-gh-wa-plan="Starter" data-mxn="12000">
             <svg viewBox="0 0 24 24" fill="#25D366" width="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-            Quiero este plan
+            <span data-i18n="plan.btn.starter">Quiero este plan</span>
           </a>
         </div>
 
         <div class="plan-card featured fi fi-d2">
           <div class="plan-badge">Más elegido</div>
           <div class="plan-name">Business</div>
-          <div class="plan-price"><sup>$</sup>35,000</div>
-          <div style="font-size:12px;color:rgba(255,255,255,.55);margin-bottom:12px">pago único · soporte 3 meses</div>
+          <div class="plan-price" id="gh-price-business"><sup>$</sup>35,000</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.55);margin-bottom:12px" data-i18n="plan.business.foot">pago único · soporte 3 meses</div>
           <div class="plan-desc">CRM + chatbot + automatizaciones. La suite completa para escalar ventas.</div>
           <ul class="plan-features">
             <li>Todo lo de Starter</li>
@@ -1178,16 +1197,16 @@
             <li>Soporte 90 días prioritario</li>
             <li>Blog IA (4 artículos/mes)</li>
           </ul>
-          <a href="https://wa.me/528712638082?text=Hola%2C%20me%20interesa%20el%20plan%20Business%20de%20%2435%2C000" target="_blank" class="btn btn-p" style="width:100%;justify-content:center">
+          <a href="https://wa.me/528712638082?text=Hola%2C%20me%20interesa%20el%20plan%20Business%20de%20%2435%2C000" target="_blank" class="btn btn-p" style="width:100%;justify-content:center" data-gh-wa-plan="Business" data-mxn="35000">
             <svg viewBox="0 0 24 24" fill="#25D366" width="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-            Empezar ahora
+            <span data-i18n="plan.btn.business">Empezar ahora</span>
           </a>
         </div>
 
         <div class="plan-card fi fi-d3">
           <div class="plan-name">Enterprise</div>
-          <div class="plan-price"><sup>$</sup>120,000</div>
-          <div style="font-size:12px;color:var(--ink4);margin-bottom:12px">pago único · soporte 12 meses</div>
+          <div class="plan-price" id="gh-price-enterprise"><sup>$</sup>120,000</div>
+          <div style="font-size:12px;color:var(--ink4);margin-bottom:12px" data-i18n="plan.enterprise.foot">pago único · soporte 12 meses</div>
           <div class="plan-desc">Transformación digital total. Tu empresa 100% automatizada con IA.</div>
           <ul class="plan-features">
             <li>Todo lo de Business</li>
@@ -1199,16 +1218,16 @@
             <li>Reportes de BI mensuales</li>
             <li>Consultor dedicado 12 meses</li>
           </ul>
-          <a href="https://wa.me/528712638082?text=Hola%2C%20me%20interesa%20el%20plan%20Enterprise" target="_blank" class="btn btn-dark" style="width:100%;justify-content:center">
+          <a href="https://wa.me/528712638082?text=Hola%2C%20me%20interesa%20el%20plan%20Enterprise" target="_blank" class="btn btn-dark" style="width:100%;justify-content:center" data-gh-wa-plan="Enterprise" data-mxn="120000">
             <svg viewBox="0 0 24 24" fill="#fff" width="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-            Quiero Enterprise
+            <span data-i18n="plan.btn.enterprise">Quiero Enterprise</span>
           </a>
         </div>
 
       </div>
 
-      <p style="text-align:center;font-size:13px;color:var(--ink4);margin-top:28px">
-        💡 ¿No sabes cuál es el tuyo? <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20saber%20qu%C3%A9%20plan%20necesito" target="_blank" style="color:var(--p);font-weight:600">Cuéntanos sobre tu empresa →</a>
+      <p style="text-align:center;font-size:13px;color:var(--ink4);margin-top:28px" id="gh-plan-footer-hint">
+        <span data-i18n="plan.footer_q">💡 ¿No sabes cuál es el tuyo? </span><a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20saber%20qu%C3%A9%20plan%20necesito" target="_blank" style="color:var(--p);font-weight:600" data-i18n="plan.footer_a">Cuéntanos sobre tu empresa →</a>
       </p>
     </div>
   </section>
@@ -1218,70 +1237,73 @@
     <div class="w">
       <div class="contact-grid">
         <div class="contact-info fi">
-          <span class="label">Contáctanos</span>
-          <h2>Agenda tu diagnóstico gratuito</h2>
-          <p>Sin compromisos. En 30 minutos te decimos exactamente qué necesita tu empresa y cuánto puedes ahorrar con IA.</p>
+          <span class="label" data-i18n="contact.label">Contáctanos</span>
+          <h2 data-i18n="contact.h2">Agenda tu diagnóstico gratuito</h2>
+          <p data-i18n="contact.p">Sin compromisos. En 30 minutos te decimos exactamente qué necesita tu empresa y cuánto puedes ahorrar con IA.</p>
           <div class="contact-methods">
             <a href="https://wa.me/528712638082" target="_blank" class="c-method">
               <div class="c-method-icon">
                 <svg viewBox="0 0 24 24" fill="#25D366" width="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
               </div>
               <div class="c-method-text">
-                <strong>WhatsApp directo</strong>
-                <span>+52 871 263 8082 · Respuesta en minutos</span>
+                <strong data-i18n="contact.c_wa_t">WhatsApp directo</strong>
+                <span data-i18n="contact.c_wa_s">+52 871 263 8082 · Respuesta en minutos</span>
               </div>
             </a>
             <a href="#agendar-diagnostico" class="c-method">
               <div class="c-method-icon">🗓️</div>
               <div class="c-method-text">
-                <strong>Agenda una videollamada</strong>
-                <span>Google Calendar · Elige fecha y hora</span>
+                <strong data-i18n="contact.c_cal_t">Agenda una videollamada</strong>
+                <span data-i18n="contact.c_cal_s">Google Calendar · Elige fecha y hora</span>
               </div>
             </a>
             <a href="mailto:hola@ghspecialist.com" class="c-method">
               <div class="c-method-icon">📧</div>
               <div class="c-method-text">
-                <strong>Email</strong>
+                <strong data-i18n="contact.c_em_t">Email</strong>
                 <span>hola@ghspecialist.com</span>
               </div>
             </a>
           </div>
         </div>
         <div class="contact-form fi fi-d2">
-          <h3 style="font-size:18px;font-weight:700;margin-bottom:6px;color:var(--ink)">Cuéntanos sobre tu empresa</h3>
-          <p style="font-size:13.5px;color:var(--ink3);margin-bottom:22px">Te respondemos en menos de 2 horas en días hábiles.</p>
-          <form onsubmit="handleForm(event)">
+          <h3 style="font-size:18px;font-weight:700;margin-bottom:6px;color:var(--ink)" data-i18n="contact.form_h3">Cuéntanos sobre tu empresa</h3>
+          <p style="font-size:13.5px;color:var(--ink3);margin-bottom:22px" data-i18n="contact.form_p">Te respondemos en menos de 2 horas en días hábiles.</p>
+          <p class="contact-form-msg contact-form-msg--ok" id="contact-form-success" role="status">¡Gracias! Revisaremos tu mensaje y te contactamos pronto.</p>
+          <p class="contact-form-msg contact-form-msg--err" id="contact-form-error" role="alert"></p>
+          <form id="gh-contact-form" onsubmit="handleContactForm(event)">
+            <input type="hidden" name="_subject" value="Contacto web — GH Specialist">
             <div class="form-row">
               <div class="form-group">
-                <label>Nombre</label>
-                <input type="text" placeholder="Tu nombre" required>
+                <label for="cf-nombre">Nombre</label>
+                <input id="cf-nombre" name="nombre" type="text" placeholder="Tu nombre" required autocomplete="name">
               </div>
               <div class="form-group">
-                <label>Empresa</label>
-                <input type="text" placeholder="Nombre de tu empresa" required>
+                <label for="cf-empresa">Empresa</label>
+                <input id="cf-empresa" name="empresa" type="text" placeholder="Nombre de tu empresa" required autocomplete="organization">
               </div>
             </div>
             <div class="form-group">
-              <label>WhatsApp</label>
-              <input type="tel" placeholder="+52 800 000 0000" required>
+              <label for="cf-wa">WhatsApp</label>
+              <input id="cf-wa" name="whatsapp" type="tel" placeholder="+52 800 000 0000" required inputmode="tel" autocomplete="tel">
             </div>
             <div class="form-group">
-              <label>¿Qué necesitas automatizar?</label>
-              <select required>
+              <label for="cf-servicio">¿Qué necesitas automatizar?</label>
+              <select id="cf-servicio" name="servicio" required>
                 <option value="" disabled selected>Selecciona una opción</option>
-                <option>Chatbot WhatsApp</option>
-                <option>CRM Kommo</option>
-                <option>Marketing y pauta</option>
-                <option>Web + SEO</option>
-                <option>Automatización completa</option>
-                <option>No sé por dónde empezar</option>
+                <option value="Chatbot WhatsApp">Chatbot WhatsApp</option>
+                <option value="CRM Kommo">CRM Kommo</option>
+                <option value="Marketing y pauta">Marketing y pauta</option>
+                <option value="Web + SEO">Web + SEO</option>
+                <option value="Automatización completa">Automatización completa</option>
+                <option value="No sé por dónde empezar">No sé por dónde empezar</option>
               </select>
             </div>
             <div class="form-group" style="margin-bottom:20px">
-              <label>¿Algo más que deberíamos saber?</label>
-              <textarea placeholder="Cuéntanos brevemente tu situación actual..."></textarea>
+              <label for="cf-mensaje">¿Algo más que deberíamos saber?</label>
+              <textarea id="cf-mensaje" name="mensaje" placeholder="Cuéntanos brevemente tu situación actual..."></textarea>
             </div>
-            <button type="submit" class="btn btn-p" style="width:100%;justify-content:center;font-size:15px;padding:14px">
+            <button type="submit" class="btn btn-p" id="contact-form-submit" style="width:100%;justify-content:center;font-size:15px;padding:14px" data-i18n="contact.btn_send">
               Enviar por WhatsApp →
             </button>
           </form>
@@ -1293,15 +1315,15 @@
   <!-- CTA FINAL -->
   <section class="cta-section">
     <div class="w">
-      <h2>¿Tu empresa sigue operando<br>como en 2015?</h2>
-      <p>Cada día sin automatización es dinero dejado en la mesa. El diagnóstico es gratis. La transformación, invaluable.</p>
+      <h2 data-i18n-html="cta.h2">¿Tu empresa sigue operando<br>como en 2015?</h2>
+      <p data-i18n="cta.p">Cada día sin automatización es dinero dejado en la mesa. El diagnóstico es gratis. La transformación, invaluable.</p>
       <div class="cta-btns">
-        <a href="#agendar-diagnostico" class="btn btn-p btn-lg">
+        <a href="#agendar-diagnostico" class="btn btn-p btn-lg" data-i18n="cta.btn1">
           🗓️ Diagnóstico gratis ahora
         </a>
-        <a href="https://wa.me/528712638082?text=Hola%20Pedro%2C%20quiero%20automatizar%20mi%20empresa" target="_blank" class="btn btn-wa btn-lg">
+        <a href="https://wa.me/528712638082?text=Hola%20Pedro%2C%20quiero%20automatizar%20mi%20empresa" target="_blank" class="btn btn-wa btn-lg" id="cta-wa-link">
           <svg viewBox="0 0 24 24" fill="#fff" width="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-          Escribir por WhatsApp
+          <span data-i18n="cta.btn2">Escribir por WhatsApp</span>
         </a>
       </div>
     </div>
@@ -1444,7 +1466,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <img src="2.png" alt="GH Specialist" style="height:28px;filter:brightness(0) invert(1)">
-          <p>Automatizamos empresas en México y LATAM con IA. Chatbots, CRM, marketing y transformación digital.</p>
+          <p data-i18n="footer.tagline">Automatizamos empresas en México y LATAM con IA. Chatbots, CRM, marketing y transformación digital.</p>
           <div style="margin-top:16px;display:flex;gap:8px">
             <a href="https://wa.me/528712638082" target="_blank" class="fsoc" title="WhatsApp">💬</a>
             <a href="https://instagram.com/ghspecialist" target="_blank" class="fsoc" title="Instagram">📸</a>
@@ -1498,6 +1520,16 @@
     </a>
   </div>
 
+  <!-- Aviso de visitas (ntfy): deja ntfyTopic vacío hasta configurar. Ver js/gh-visitors.js -->
+  <script>
+    window.GH_VISITOR_NOTIFY = {
+      ntfyTopic: '',
+      title: 'GH Specialist · nueva visita'
+    };
+  </script>
+  <script src="js/gh-visitors.js" defer></script>
+
+  <script src="js/gh-locale.js"></script>
   <script>
     // Scroll progress
     const spbar = document.getElementById('spbar');
@@ -1535,37 +1567,80 @@
     }, {threshold:.2});
     document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
 
-    // Form handler → WhatsApp redirect
-    function handleForm(e) {
+    // Contacto: Formspree (email + panel en formspree.io) o WhatsApp si no hay ID en gh-site-config.js
+    function handleContactForm(e) {
       e.preventDefault();
-      const f = e.target;
-      const nombre = f.querySelector('input[type=text]').value;
-      const empresa = f.querySelectorAll('input[type=text]')[1].value;
-      const wa = f.querySelector('input[type=tel]').value;
-      const servicio = f.querySelector('select').value;
-      const msg = encodeURIComponent(`Hola Pedro, soy ${nombre} de ${empresa}. Mi WhatsApp es ${wa}. Me interesa: ${servicio}`);
-      window.open(`https://wa.me/528712638082?text=${msg}`, '_blank');
+      var cfg = window.GH_SITE_CONFIG || {};
+      var formId = (cfg.formspreeContactId || '').trim();
+      var f = e.target;
+      var okEl = document.getElementById('contact-form-success');
+      var errEl = document.getElementById('contact-form-error');
+      var btn = document.getElementById('contact-form-submit');
+      if (okEl) { okEl.classList.remove('show'); }
+      if (errEl) { errEl.classList.remove('show'); errEl.textContent = ''; }
+      if (formId) {
+        if (btn) { btn.disabled = true; }
+        var fd = new FormData(f);
+        fetch('https://formspree.io/f/' + formId, {
+          method: 'POST',
+          body: fd,
+          headers: { Accept: 'application/json' }
+        })
+          .then(function (res) {
+            if (res.ok) {
+              f.reset();
+              if (okEl) okEl.classList.add('show');
+            } else {
+              if (errEl) {
+                errEl.textContent = 'No se pudo enviar. Intenta de nuevo o escríbenos por WhatsApp.';
+                errEl.classList.add('show');
+              }
+            }
+          })
+          .catch(function () {
+            if (errEl) {
+              errEl.textContent = 'Error de red. Intenta por WhatsApp.';
+              errEl.classList.add('show');
+            }
+          })
+          .finally(function () {
+            if (btn) btn.disabled = false;
+          });
+        return;
+      }
+      var nombre = (f.querySelector('#cf-nombre') || {}).value || '';
+      var empresa = (f.querySelector('#cf-empresa') || {}).value || '';
+      var wa = (f.querySelector('#cf-wa') || {}).value || '';
+      var servicio = (f.querySelector('#cf-servicio') || {}).value || '';
+      var msg = encodeURIComponent('Hola Pedro, soy ' + nombre + ' de ' + empresa + '. Mi WhatsApp es ' + wa + '. Me interesa: ' + servicio);
+      window.open('https://wa.me/528712638082?text=' + msg, '_blank');
     }
 
-    // Onboarding: MX/US estados, nómina, qué instalar, mín. USD 1500 → Google Calendar (iframe). FORM_ID opcional (Formspree).
+    // Onboarding: MX/US estados, nómina, qué instalar, mín. USD 1500 → Google Calendar (iframe). IDs en js/gh-site-config.js
     (function () {
-      var FORM_ID = '';
+      var FORM_ID = (window.GH_SITE_CONFIG && window.GH_SITE_CONFIG.formspreeLeadsId) ? String(window.GH_SITE_CONFIG.formspreeLeadsId).trim() : '';
       var BOOKING_URL = 'https://calendar.app.google/Ay2yA84WLXLZhPJN9';
       var WA = '528712638082';
       var MX = ['Aguascalientes','Baja California','Baja California Sur','Campeche','Chiapas','Chihuahua','Ciudad de México','Coahuila','Colima','Durango','Guanajuato','Guerrero','Hidalgo','Jalisco','México','Michoacán','Morelos','Nayarit','Nuevo León','Oaxaca','Puebla','Querétaro','Quintana Roo','San Luis Potosí','Sinaloa','Sonora','Tabasco','Tamaulipas','Tlaxcala','Veracruz','Yucatán','Zacatecas'];
       var US = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
+      function ght(key, fallback) {
+        try {
+          if (window.__ghT) return window.__ghT(key);
+        } catch (x) {}
+        return fallback;
+      }
       function qualifies(usd) { return usd && usd !== 'menos1500'; }
       function loadGoogleBooking(container) {
         container.innerHTML = '';
         var head = document.createElement('div');
         head.className = 'book-cal-head';
-        head.innerHTML = '<p class="book-cal-head-title">Elige fecha y hora</p><p class="book-cal-head-sub">Aquí abajo está el calendario de Google: usa los botones para elegir día y horario disponibles.</p>';
+        head.innerHTML = '<p class="book-cal-head-title">' + ght('cal.title', 'Elige fecha y hora') + '</p><p class="book-cal-head-sub">' + ght('cal.sub', 'Aquí abajo está el calendario de Google: usa los botones para elegir día y horario disponibles.') + '</p>';
         container.appendChild(head);
         var wrap = document.createElement('div');
         wrap.className = 'book-cal-iframe-wrap';
         var iframe = document.createElement('iframe');
         iframe.src = BOOKING_URL;
-        iframe.title = 'Citas de GH Specialist';
+        iframe.title = ght('cal.title', 'Citas de GH Specialist');
         iframe.setAttribute('allow', 'fullscreen');
         iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
         iframe.loading = 'lazy';
@@ -1574,17 +1649,22 @@
         container.appendChild(wrap);
         var fb = document.createElement('div');
         fb.className = 'book-cal-fallback';
-        fb.innerHTML = 'Si no carga el calendario aquí (bloqueo del navegador), abre la misma agenda en una pestaña nueva.<br><a href="' + BOOKING_URL + '" target="_blank" rel="noopener" class="btn btn-p btn-sm">Abrir agenda en Google</a>';
+        fb.innerHTML = ght('cal.fallback', 'Si no carga el calendario aquí (bloqueo del navegador), abre la misma agenda en una pestaña nueva.') + '<br><a href="' + BOOKING_URL + '" target="_blank" rel="noopener" class="btn btn-p btn-sm">' + ght('cal.btn', 'Abrir agenda en Google') + '</a>';
         container.appendChild(fb);
       }
       function fillStates(sel, list) {
-        sel.innerHTML = '<option value="" disabled selected>Elige estado</option>';
+        var first = ght('book.opt.elige_estado', 'Elige estado');
+        sel.innerHTML = '<option value="" disabled selected>' + first + '</option>';
         list.forEach(function (name) {
           var o = document.createElement('option');
           o.value = name;
           o.textContent = name;
           sel.appendChild(o);
         });
+      }
+      function ghErr(key) {
+        if (window.__ghLocaleErr) return window.__ghLocaleErr(key);
+        return { nombre: 'Escribe tu nombre.', email: 'Correo no válido.', pais: 'Selecciona país.', estado: 'Selecciona estado.', nomina: 'Selecciona rango de nómina.', quiero: 'Marca al menos una opción de lo que quieres instalar.', proyecto_usd: 'Selecciona el rango del proyecto en USD.' }[key] || '';
       }
       var form = document.getElementById('gh-book-form');
       var errEl = document.getElementById('gh-book-err');
@@ -1594,16 +1674,20 @@
       var pais = document.getElementById('gh-pais');
       var estado = document.getElementById('gh-estado');
       if (!form || !cal || !rej || !pais || !estado) return;
-      rejWa.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent('Hola Pedro, mi proyecto total es menor a USD $1,500 todo incluido; quiero ver si hay opciones.');
       pais.addEventListener('change', function () {
         var v = pais.value;
         estado.removeAttribute('disabled');
         if (v === 'MX') fillStates(estado, MX);
         else if (v === 'US') fillStates(estado, US);
         else {
-          estado.innerHTML = '<option value="">Primero elige país</option>';
+          estado.innerHTML = '<option value="">' + ght('book.opt.primero_pais', 'Primero elige país') + '</option>';
           estado.setAttribute('disabled', '');
         }
+      });
+      document.addEventListener('gh-localechange', function () {
+        var v = pais.value;
+        if (v === 'MX') fillStates(estado, MX);
+        else if (v === 'US') fillStates(estado, US);
       });
       form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -1616,13 +1700,13 @@
         var st = (fd.get('estado') || '').toString();
         var nom = (fd.get('nomina_mensual') || '').toString();
         var checks = form.querySelectorAll('input[name="quiero"]:checked');
-        if (!nombre || nombre.length < 2) { errEl.textContent = 'Escribe tu nombre.'; errEl.classList.add('show'); return; }
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = 'Correo no válido.'; errEl.classList.add('show'); return; }
-        if (!pais.value) { errEl.textContent = 'Selecciona país.'; errEl.classList.add('show'); return; }
-        if (!st) { errEl.textContent = 'Selecciona estado.'; errEl.classList.add('show'); return; }
-        if (!nom) { errEl.textContent = 'Selecciona rango de nómina.'; errEl.classList.add('show'); return; }
-        if (checks.length === 0) { errEl.textContent = 'Marca al menos una opción de lo que quieres instalar.'; errEl.classList.add('show'); return; }
-        if (!usd) { errEl.textContent = 'Selecciona el rango del proyecto en USD.'; errEl.classList.add('show'); return; }
+        if (!nombre || nombre.length < 2) { errEl.textContent = ghErr('nombre'); errEl.classList.add('show'); return; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = ghErr('email'); errEl.classList.add('show'); return; }
+        if (!pais.value) { errEl.textContent = ghErr('pais'); errEl.classList.add('show'); return; }
+        if (!st) { errEl.textContent = ghErr('estado'); errEl.classList.add('show'); return; }
+        if (!nom) { errEl.textContent = ghErr('nomina'); errEl.classList.add('show'); return; }
+        if (checks.length === 0) { errEl.textContent = ghErr('quiero'); errEl.classList.add('show'); return; }
+        if (!usd) { errEl.textContent = ghErr('proyecto_usd'); errEl.classList.add('show'); return; }
         function afterNotify() {
           if (!qualifies(usd)) {
             rej.classList.add('show');
