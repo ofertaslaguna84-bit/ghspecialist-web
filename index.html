@@ -416,6 +416,12 @@
     }
 
     /* Scroll indicator strip */
+    .blog-seo-sec{background:linear-gradient(135deg,var(--p-light) 0%,#fff 55%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:56px 0}
+    .blog-seo-inner{max-width:760px;margin:0 auto;text-align:center;padding:0 28px}
+    .blog-seo-sec .label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--p);margin-bottom:14px;display:block}
+    .blog-seo-sec h2{font-size:clamp(22px,3vw,34px);font-weight:800;margin-bottom:12px;letter-spacing:-.02em;color:var(--ink);line-height:1.15}
+    .blog-seo-sec .blog-seo-desc{font-size:16px;color:var(--ink3);line-height:1.65;margin-bottom:24px}
+    .blog-seo-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
     .strip{background:var(--p);padding:12px 28px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
     .strip p{color:#fff;font-size:13.5px;font-weight:500}
     .strip .btn{background:#fff;color:var(--p);padding:7px 18px;font-size:12.5px}
@@ -889,6 +895,19 @@
           <span class="svc-link">Ver servicio →</span>
         </a>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG IA + SEO (visible en home) -->
+  <section class="blog-seo-sec fi" id="blog-ia-seo">
+    <div class="w blog-seo-inner">
+      <span class="label" data-i18n="blogseo.label">Contenido SEO con IA</span>
+      <h2 data-i18n="blogseo.title">Blog con IA para posicionar en Google</h2>
+      <p class="blog-seo-desc" data-i18n="blogseo.desc">Guías y artículos para automatizar tu negocio. Publicamos contenido pensado para SEO; si quieres el mismo sistema en tu web, lo implementamos.</p>
+      <div class="blog-seo-btns">
+        <a href="blog/" class="btn btn-p btn-lg" data-i18n="blogseo.btn">Ver blog</a>
+        <a href="servicios/web-seo-blog-ia.html" class="btn btn-outline btn-lg" data-i18n="blogseo.btn2">Web + SEO + Blog IA</a>
       </div>
     </div>
   </section>
