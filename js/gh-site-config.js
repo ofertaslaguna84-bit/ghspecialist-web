@@ -20,7 +20,7 @@
  * Tras editar: git add js/gh-site-config.js && git commit -m "chore: config" && git push origin main
  */
 window.GH_SITE_CONFIG = {
-  ga4MeasurementId: '',
+  ga4MeasurementId: 'G-76XN5538Y8',
   formspreeLeadsId: '',
   formspreeContactId: ''
 };
