@@ -33,8 +33,8 @@
  */
 window.GH_SITE_CONFIG = {
   ga4MeasurementId: 'G-76XN5538Y8',
-  formspreeLeadsId: '',
-  formspreeContactId: '',
+  formspreeLeadsId: 'mdaplvzd',
+  formspreeContactId: 'mdaplvzd',
   panelPassword: 'Grupo84*',
   analyticsEmbedUrl: '',
   leadsSheetEmbedUrl: ''
