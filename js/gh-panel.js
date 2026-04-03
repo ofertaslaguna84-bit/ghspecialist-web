@@ -22,6 +22,29 @@
     } catch (e) {}
   }
 
+  function logout() {
+    try {
+      sessionStorage.removeItem(SESSION_KEY);
+    } catch (e) {}
+    var input = $('gate-pass');
+    if (input) input.value = '';
+    var err = $('gate-err');
+    if (err) err.textContent = '';
+    if (PASS) {
+      document.documentElement.classList.add('panel-gated');
+    } else {
+      window.location.href = '../index.html';
+    }
+  }
+
+  function bindSalir() {
+    var btn = $('panel-btn-salir');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      logout();
+    });
+  }
+
   function checkAuth() {
     if (!PASS) {
       document.documentElement.classList.remove('panel-gated');
@@ -142,6 +165,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     fillLinks();
     bindGate();
+    bindSalir();
     checkAuth();
     if (!PASS || sessionStorage.getItem(SESSION_KEY) === '1') {
       loadGithub();

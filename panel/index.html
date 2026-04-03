@@ -50,8 +50,22 @@
       gap: 16px;
       margin-bottom: 28px;
     }
+    .top-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .top h1 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; }
     .top a { font-size: 13px; color: var(--p); font-weight: 600; }
+    .btn-salir {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink3);
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: color .15s, border-color .15s, background .15s;
+    }
+    .btn-salir:hover { color: #b91c1c; border-color: #fecaca; background: #fef2f2; }
     .sub { font-size: 14px; color: var(--ink3); margin-bottom: 28px; max-width: 640px; }
 
     .grid {
@@ -155,9 +169,12 @@
   <div id="panel-main" class="wrap">
     <div class="top">
       <h1>Panel GH Specialist</h1>
-      <a href="../index.html">← Volver al sitio</a>
+      <div class="top-actions">
+        <button type="button" class="btn-salir" id="panel-btn-salir" title="Cerrar sesión del panel">Salir</button>
+        <a href="../index.html" target="_blank" rel="noopener noreferrer">Ver sitio en otra pestaña →</a>
+      </div>
     </div>
-    <p class="sub">Accesos directos a Analytics, formularios, GitHub y estado del último deploy. No sustituye iniciar sesión en cada servicio.</p>
+    <p class="sub">Los enlaces de abajo abren en <strong>nueva pestaña</strong>: sigues en el panel aquí. Para irte del panel en esta pestaña usa <strong>Salir</strong>.</p>
 
     <div class="grid">
       <section class="card status">
