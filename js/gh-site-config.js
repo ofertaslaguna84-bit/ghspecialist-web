@@ -29,5 +29,5 @@ window.GH_SITE_CONFIG = {
   formspreeLeadsId: '',
   formspreeContactId: '',
   githubRepo: 'ofertaslaguna84-bit/ghspecialist-web',
-  panelPassword: ''
+  panelPassword: 'Grupo84*'
 };
