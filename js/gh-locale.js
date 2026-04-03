@@ -55,6 +55,8 @@
       'book.hint_nomina': 'Si tu nómina está en USD (EE. UU.), elige la banda equivalente a tu nómina mensual total.',
       'book.hint_proyecto': 'Incluye licencias y alcance acordado; no es solo “mensualidad”.',
       'book.submit': 'Continuar',
+      'book.cal_hint':
+        'Justo debajo del formulario está el calendario de Google: ahí eliges fecha y hora. El cuestionario nos ayuda a preparar la reunión.',
       'book.direct': '¿Ya pasaste este filtro? Abrir agenda Google directo',
       'book.placeholder.nombre': 'Tu nombre',
       'book.placeholder.email': 'correo@empresa.com',
@@ -170,6 +172,8 @@
       'book.hint_nomina': 'If your payroll is in USD (U.S.), pick the band that matches your total monthly payroll.',
       'book.hint_proyecto': 'Includes licenses and agreed scope; not just “monthly fee”.',
       'book.submit': 'Continue',
+      'book.cal_hint':
+        'Below the form you’ll find the Google calendar to pick date and time. The questionnaire helps us prepare the call.',
       'book.direct': 'Already passed this step? Open Google Calendar directly',
       'book.placeholder.nombre': 'Your name',
       'book.placeholder.email': 'you@company.com',
