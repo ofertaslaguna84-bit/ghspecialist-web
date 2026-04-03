@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 Sitemap: https://ghspecialist.com/sitemap.xml
 Disallow: /drafts/
+Disallow: /panel/

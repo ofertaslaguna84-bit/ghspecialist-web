@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel interno — GH Specialist</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="../js/gh-site-config.js"></script>
+  <script>
+    (function () {
+      var p = (window.GH_SITE_CONFIG && window.GH_SITE_CONFIG.panelPassword || '').trim();
+      var ok = false;
+      try { ok = sessionStorage.getItem('gh_panel_auth') === '1'; } catch (e) {}
+      if (p && !ok) document.documentElement.classList.add('panel-gated');
+    })();
+  </script>
+  <script src="../js/gh-panel.js" defer></script>
+  <style>
+    :root {
+      --p: #7C4DFF;
+      --p2: #5C35CC;
+      --p-light: #F3EFFF;
+      --ink: #111;
+      --ink3: #666;
+      --border: #E8E8E8;
+      --bg: #fafafa;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+    html.panel-gated { background: #f0f0f2; }
+    html.panel-gated body { background: #f0f0f2; }
+    #gate { display: none; }
+    html.panel-gated #gate { display: block; }
+    html.panel-gated #panel-main { display: none !important; }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 32px 20px 48px; }
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .top h1 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; }
+    .top a { font-size: 13px; color: var(--p); font-weight: 600; }
+    .sub { font-size: 14px; color: var(--ink3); margin-bottom: 28px; max-width: 640px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    }
+    .card h2 {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--p);
+      margin-bottom: 12px;
+    }
+    .card p { font-size: 13px; color: var(--ink3); margin-bottom: 12px; }
+    .card a.btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      background: var(--p);
+      color: #fff !important;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .card a.btn:hover { background: var(--p2); }
+    .card a.link { color: var(--p); font-weight: 600; font-size: 13px; text-decoration: none; display: inline-block; margin-top: 6px; }
+    .card a.link:hover { text-decoration: underline; }
+    .card .stack a { display: block; margin-top: 8px; }
+
+    .status {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px 24px;
+    }
+    .status img { height: 22px; }
+    .mono { font-family: ui-monospace, monospace; font-size: 12px; color: var(--ink3); }
+    #gh-err { color: #b45309; font-size: 12px; }
+
+    #gate {
+      max-width: 400px;
+      margin: 80px auto;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+    }
+    #gate h2 { font-size: 1.1rem; margin-bottom: 8px; }
+    #gate p { font-size: 13px; color: var(--ink3); margin-bottom: 16px; }
+    #gate input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+      margin-bottom: 12px;
+      font-family: inherit;
+    }
+    #gate button {
+      width: 100%;
+      padding: 12px;
+      background: var(--p);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    #gate button:hover { background: var(--p2); }
+    #gate-err { color: #dc2626; font-size: 13px; margin-bottom: 8px; min-height: 1.2em; }
+
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div id="gate">
+    <form id="gate-form">
+      <h2>Panel interno</h2>
+      <p>Introduce la clave configurada en <span class="mono">js/gh-site-config.js</span> (campo <span class="mono">panelPassword</span>).</p>
+      <div id="gate-err"></div>
+      <input type="password" id="gate-pass" placeholder="Clave" autocomplete="current-password" autofocus>
+      <button type="submit">Entrar</button>
+    </form>
+  </div>
+
+  <div id="panel-main" class="wrap">
+    <div class="top">
+      <h1>Panel GH Specialist</h1>
+      <a href="../index.html">← Volver al sitio</a>
+    </div>
+    <p class="sub">Accesos directos a Analytics, formularios, GitHub y estado del último deploy. No sustituye iniciar sesión en cada servicio.</p>
+
+    <div class="grid">
+      <section class="card status">
+        <div>
+          <h2>Último commit en main</h2>
+          <p class="mono" id="gh-msg">Cargando…</p>
+          <p><strong>SHA:</strong> <span class="mono" id="gh-sha">—</span> · <span id="gh-date" class="mono"></span></p>
+          <p id="gh-err"></p>
+        </div>
+        <div>
+          <h2>Deploy GitHub Pages</h2>
+          <p><img id="deploy-badge" src="" alt=""></p>
+          <a class="link" id="link-gh-actions" href="#" target="_blank" rel="noopener">Ver workflow en Actions →</a>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Visitas (Google Analytics)</h2>
+        <p>Informes en tiempo real, audiencias y conversiones.</p>
+        <a class="btn" id="link-ga" href="https://analytics.google.com/" target="_blank" rel="noopener">Abrir Analytics</a>
+      </section>
+
+      <section class="card">
+        <h2>Formularios (Formspree)</h2>
+        <p>Panel de envíos y notificaciones por correo.</p>
+        <a class="btn" id="link-fs" href="https://formspree.io/login" target="_blank" rel="noopener">Iniciar sesión Formspree</a>
+        <div class="stack" style="margin-top:12px">
+          <a class="link" id="link-fs-contact" href="#" target="_blank" rel="noopener" hidden>Contacto</a>
+          <a class="link" id="link-fs-leads" href="#" target="_blank" rel="noopener" hidden>Leads</a>
+          <span id="hint-fs" style="font-size:12px;color:#888">Pega los IDs en <span class="mono">gh-site-config.js</span> para enlaces rápidos a cada formulario.</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Código y deploy</h2>
+        <p>Repositorio y Actions (mismo flujo que al hacer push a <span class="mono">main</span>).</p>
+        <div class="stack">
+          <a class="link" id="link-gh-repo" href="#" target="_blank" rel="noopener">Abrir repositorio en GitHub →</a>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Sitio publicado</h2>
+        <p>Vista pública y blog.</p>
+        <div class="stack">
+          <a class="link" id="link-site" href="https://ghspecialist.com/" target="_blank" rel="noopener">ghspecialist.com →</a>
+          <a class="link" id="link-blog" href="https://ghspecialist.com/blog/" target="_blank" rel="noopener">Blog →</a>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
