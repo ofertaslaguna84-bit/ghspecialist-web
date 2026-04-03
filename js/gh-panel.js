@@ -119,6 +119,8 @@
     }
     var gaInline = $('link-ga-inline');
     if (gaInline) gaInline.href = 'https://analytics.google.com/';
+    var gaPanel = $('link-ga-panel');
+    if (gaPanel) gaPanel.href = 'https://analytics.google.com/';
     var gaLabel = $('ga-id-label');
     if (gaLabel) gaLabel.textContent = ga || '(configura ga4MeasurementId)';
 
