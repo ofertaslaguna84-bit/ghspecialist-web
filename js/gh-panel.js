@@ -125,7 +125,10 @@
     if (gaLabel) gaLabel.textContent = ga || '(configura ga4MeasurementId)';
 
     var fsMain = $('link-fs');
-    if (fsMain) fsMain.href = 'https://formspree.io/login';
+    if (fsMain) {
+      fsMain.href = 'https://formspree.io/forms';
+      fsMain.textContent = 'Abrir Formspree (crear formulario / ver envíos)';
+    }
 
     var fsC = $('link-fs-contact');
     if (fsC) {

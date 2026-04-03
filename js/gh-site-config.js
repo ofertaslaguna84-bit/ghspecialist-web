@@ -8,11 +8,11 @@
  * 4. Informes → Tiempo real para ver visitas
  *
  * === B) Formspree (correo + panel en formspree.io) ===
- * 1. https://formspree.io → registro → confirma email
- * 2. Crea formulario(s); el ID es la parte final de https://formspree.io/f/XXXXXX
- * 3. formspreeContactId → formulario “Cuéntanos sobre tu empresa” (index.html)
- * 4. formspreeLeadsId → onboarding largo (#gh-book-form)
- * 5. Puedes usar el MISMO XXXXXX en ambos si quieres un solo buzón
+ * 1. Cuenta creada → entra a https://formspree.io/forms
+ * 2. Pulsa + / Add New y crea un formulario (o dos si quieres separar contacto vs onboarding)
+ * 3. Copia el ID: es lo que va después de https://formspree.io/f/  (ej. si la URL es .../f/mnqvpzy → ID = mnqvpzy)
+ * 4. Pega ese ID abajo en formspreeContactId y formspreeLeadsId (el MISMO en ambos si usas un solo formulario)
+ * 5. git commit + push → el sitio empezará a enviar a Formspree; verás envíos en Formspree y en tu correo
  *
  * === C) ntfy (opcional, avisos al móvil al entrar al sitio) ===
  * No va aquí: edita window.GH_VISITOR_NOTIFY.ntfyTopic en index.html, landing, sobre-pedro.
