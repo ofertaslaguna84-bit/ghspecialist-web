@@ -10,7 +10,7 @@
   <link rel="icon" href="../favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="../js/gh-site-config.js?v=panel3"></script>
+  <script src="../js/gh-site-config.js?v=panel4"></script>
   <script>
     (function () {
       var p = (window.GH_SITE_CONFIG && window.GH_SITE_CONFIG.panelPassword || '').trim();
@@ -19,7 +19,7 @@
       if (p && !ok) document.documentElement.classList.add('panel-gated');
     })();
   </script>
-  <script src="../js/gh-panel.js?v=panel3" defer></script>
+  <script src="../js/gh-panel.js?v=panel4" defer></script>
   <style>
     :root {
       --p: #7C4DFF;
@@ -214,9 +214,19 @@
       </div>
     </div>
     <p class="sub">Los enlaces externos abren en <strong>nueva pestaña</strong>. Para cerrar sesión del panel usa <strong>Salir</strong>.</p>
-    <p id="panel-version-hint" style="font-size:12px;color:#92400e;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 14px;margin:-4px 0 16px;max-width:720px;line-height:1.45"><strong>Si no ves las secciones «Analytics» (caja verde), «Blog con IA» y «Visitantes» arriba,</strong> es caché del navegador: <strong>Cmd+Shift+R</strong> (Mac) o <strong>Ctrl+F5</strong> (Windows), o prueba en ventana privada. <span class="mono" style="color:#b45309">Versión panel: 2026-04-03</span></p>
+    <p id="panel-version-hint" style="font-size:12px;color:#92400e;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 14px;margin:-4px 0 16px;max-width:720px;line-height:1.45"><strong>Si no ves las secciones nuevas,</strong> recarga forzada: <strong>Cmd+Shift+R</strong> o ventana privada. <span class="mono" style="color:#b45309">Versión panel: 2026-04-04</span></p>
 
     <div class="panel-stack">
+      <section class="card" style="border-left:4px solid var(--p)">
+        <h2>Registros / envíos del formulario</h2>
+        <p style="font-size:14px;color:var(--ink);margin-bottom:10px">El sitio <strong>no tiene cuentas de usuario</strong> (login propio). Quien llena el formulario queda como <strong>lead</strong> en Formspree: correo, nombre, mensaje, etc. Eso es lo que puedes revisar como “registros”.</p>
+        <p style="font-size:13px;color:var(--ink3);margin-bottom:14px">Para verlos aquí mismo como <strong>tabla embebida</strong> haría falta sincronizar Formspree → Google Sheets (Zapier/Make) y enlazar la hoja en la configuración; por defecto usas el botón y entras al panel de Formspree.</p>
+        <div class="analytics-actions">
+          <a class="btn" id="link-fs-submissions" href="https://formspree.io/forms" target="_blank" rel="noopener noreferrer" style="background:var(--p);color:#fff">Ver envíos / registros en Formspree →</a>
+        </div>
+        <p class="embed-hint" style="margin-top:12px">Inicia sesión en Formspree si te lo pide. Si el enlace no abre el listado de tu formulario, entra manualmente a Formspree → tu proyecto → el formulario → <strong>Submissions</strong>.</p>
+      </section>
+
       <section class="card">
         <h2>Analytics en el panel</h2>
         <div class="analytics-ok" id="analytics-ok-msg">
@@ -265,7 +275,7 @@
         <p><strong>Este sitio no tiene registro de cuentas</strong> (no hay login de usuarios en la base de datos). Lo que sí puedes ver:</p>
         <ul style="font-size:13px;color:var(--ink3);margin:10px 0 12px 18px;line-height:1.55">
           <li><strong>Visitantes / sesiones:</strong> en el informe de Analytics embebido arriba (cuando lo configures) o en <a id="link-ga-inline" href="https://analytics.google.com/" target="_blank" rel="noopener noreferrer" style="color:var(--p);font-weight:600">Analytics en otra pestaña</a>.</li>
-          <li><strong>Leads que llenan formularios:</strong> en Formspree (envíos por correo y panel).</li>
+          <li><strong>Personas que enviaron el formulario (registros / leads):</strong> sección <strong>«Registros / envíos»</strong> arriba o directamente en Formspree.</li>
           <li><strong>Lista propia (emails, etc.):</strong> opcional — publica una hoja en Google y configura la URL del embed en el sitio para verla aquí abajo.</li>
         </ul>
         <div id="leads-embed-placeholder" class="embed-hint">
@@ -286,9 +296,8 @@
 
       <section class="card">
         <h2>Formularios (Formspree)</h2>
-        <p><strong>Cuenta lista:</strong> falta crear el formulario. En Formspree pulsa <strong>+</strong> o «Add New» → crea un formulario (puedes usar uno solo para todo el sitio).</p>
-        <p style="font-size:12px;color:var(--ink3);margin-bottom:12px">La URL del formulario se ve como <span class="mono">https://formspree.io/f/TU_CODIGO</span> — ese <span class="mono">TU_CODIGO</span> hay que ponerlo en la configuración del sitio (contacto y onboarding; puede ser el mismo código en ambos). Luego los envíos llegan al correo y los ves en Formspree.</p>
-        <a class="btn" id="link-fs" href="https://formspree.io/forms" target="_blank" rel="noopener noreferrer">Abrir Formspree (crear formulario / ver envíos)</a>
+        <p>Formulario del sitio conectado. Los envíos llegan a tu correo y al panel de Formspree.</p>
+        <a class="btn" id="link-fs" href="https://formspree.io/forms" target="_blank" rel="noopener noreferrer">Abrir Formspree</a>
         <div class="stack" style="margin-top:12px">
           <a class="link" id="link-fs-contact" href="#" target="_blank" rel="noopener noreferrer" hidden>Contacto</a>
           <a class="link" id="link-fs-leads" href="#" target="_blank" rel="noopener noreferrer" hidden>Leads</a>

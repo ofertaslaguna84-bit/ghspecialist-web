@@ -69,42 +69,12 @@
       if ((input.value || '').trim() === PASS) {
         if (err) err.textContent = '';
         showPanel();
-        loadGithub();
       } else {
         if (err) err.textContent = 'Clave incorrecta.';
         input.value = '';
         input.focus();
       }
     });
-  }
-
-  function loadGithub() {
-    var elSha = $('gh-sha');
-    var elDate = $('gh-date');
-    var elMsg = $('gh-msg');
-    var elErr = $('gh-err');
-    var api = 'https://api.github.com/repos/' + REPO + '/commits/main';
-    fetch(api, { headers: { Accept: 'application/vnd.github+json' } })
-      .then(function (r) {
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        return r.json();
-      })
-      .then(function (data) {
-        if (elSha) elSha.textContent = (data.sha || '').slice(0, 7);
-        if (elDate && data.commit && data.commit.author) {
-          elDate.textContent = data.commit.author.date || '—';
-        }
-        if (elMsg && data.commit && data.commit.message) {
-          elMsg.textContent = (data.commit.message || '').split('\n')[0];
-        }
-        if (elErr) elErr.textContent = '';
-      })
-      .catch(function () {
-        if (elErr) {
-          elErr.textContent =
-            'No se pudo leer la API de GitHub (límite o red). Usa el enlace a Actions abajo.';
-        }
-      });
   }
 
   function fillLinks() {
@@ -126,8 +96,21 @@
 
     var fsMain = $('link-fs');
     if (fsMain) {
-      fsMain.href = 'https://formspree.io/forms';
-      fsMain.textContent = 'Abrir Formspree (crear formulario / ver envíos)';
+      var fidMain = (fc || fl || '').trim();
+      fsMain.href = fidMain ? 'https://formspree.io/forms/' + fidMain : 'https://formspree.io/forms';
+      fsMain.textContent = 'Abrir Formspree';
+    }
+
+    var fsSub = $('link-fs-submissions');
+    if (fsSub) {
+      var subOverride = (C.formspreeSubmissionsUrl || '').trim();
+      var fid = (fc || fl || '').trim();
+      var subUrl = subOverride;
+      if (!subUrl && fid) {
+        subUrl = 'https://formspree.io/forms/' + fid;
+      }
+      if (!subUrl) subUrl = 'https://formspree.io/forms';
+      fsSub.href = subUrl;
     }
 
     var fsC = $('link-fs-contact');
@@ -153,21 +136,10 @@
       hintFs.hidden = !!(fc || fl);
     }
 
-    var la = $('link-gh-actions');
-    var lr = $('link-gh-repo');
     var ls = $('link-site');
     var lb = $('link-blog');
-    if (la) la.href = 'https://github.com/' + REPO + '/actions';
-    if (lr) lr.href = 'https://github.com/' + REPO;
     if (ls) ls.href = 'https://ghspecialist.com/';
     if (lb) lb.href = 'https://ghspecialist.com/blog/';
-
-    var badge = $('deploy-badge');
-    if (badge) {
-      badge.src =
-        'https://github.com/' + REPO + '/actions/workflows/pages.yml/badge.svg?branch=main';
-      badge.alt = 'Estado deploy GitHub Pages';
-    }
   }
 
   function initAnalyticsEmbed() {

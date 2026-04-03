@@ -29,12 +29,16 @@
  *   para ver lista de suscriptores/leads que tú mantengas en la hoja. El sitio estático no tiene
  *   base de datos de “usuarios registrados”; esto es un atajo visual.
  *
+ * formspreeSubmissionsUrl → (opcional) URL exacta de la pestaña Submissions de tu formulario en Formspree.
+ *   Si lo dejas vacío, el panel usa https://formspree.io/forms/TU_ID (mismo ID que /f/...).
+ *
  * Tras editar: git add js/gh-site-config.js && git commit -m "chore: config" && git push origin main
  */
 window.GH_SITE_CONFIG = {
   ga4MeasurementId: 'G-76XN5538Y8',
   formspreeLeadsId: 'mdaplvzd',
   formspreeContactId: 'mdaplvzd',
+  formspreeSubmissionsUrl: '',
   panelPassword: 'Grupo84*',
   analyticsEmbedUrl: '',
   leadsSheetEmbedUrl: ''
