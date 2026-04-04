@@ -39,7 +39,7 @@
     a{text-decoration:none;color:inherit}
     img{display:block;max-width:100%}
     .w{max-width:1080px;width:100%;margin:0 auto;padding:0 max(28px, var(--safe-right)) 0 max(28px, var(--safe-left));box-sizing:border-box}
-    .w-narrow{max-width:720px;margin:0 auto;padding:0 max(28px, var(--safe-right)) 0 max(28px, var(--safe-left))}
+    .w-narrow{max-width:720px;width:100%;margin:0 auto;padding:0 max(28px, var(--safe-right)) 0 max(28px, var(--safe-left));box-sizing:border-box}
 
     /* SCROLL PROGRESS */
     #spbar{position:fixed;top:calc(var(--grab-strip) + var(--safe-top));left:0;height:3px;width:0%;background:linear-gradient(90deg,#a78bfa,#fff);z-index:9999;transition:width .08s linear}
@@ -115,7 +115,7 @@
     .pipe-col-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.95);margin-bottom:14px;display:flex;align-items:center;gap:6px;text-shadow:0 1px 4px rgba(0,0,0,.3)}
     .pipe-col.pipe-done .pipe-col-title{color:#25D366}
     .pipe-cards{display:flex;flex-direction:column;gap:8px}
-    .pipe-card{background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.6);border-radius:8px;padding:10px 12px;font-size:12.5px;font-weight:600;color:#111;display:flex;align-items:center;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+    .pipe-card{background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.6);border-radius:8px;padding:10px 12px;font-size:12.5px;font-weight:600;color:#111;display:flex;align-items:center;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,.12);min-width:0;overflow-wrap:break-word}
     .pipe-card .pc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
     .pipe-card .pc-dot.hot{background:#ef4444}
     .pipe-card .pc-dot.warm{background:#f59e0b}
@@ -138,17 +138,18 @@
     .logo-item--nano{text-transform:none;letter-spacing:.04em;font-size:14px;font-weight:700}
 
     /* ─── SECTION 2: CHATBOT DEMO ─── */
-    .chatbot-sec{padding:96px 0;background:#fff}
-    .chatbot-inner{display:grid;grid-template-columns:1fr auto;gap:64px;align-items:center;max-width:900px;margin:0 auto}
+    .chatbot-sec{padding:96px 0;background:#fff;overflow-x:hidden}
+    .chatbot-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:64px;align-items:center;max-width:900px;margin:0 auto;width:100%;min-width:0;box-sizing:border-box}
+    .chatbot-copy{min-width:0;max-width:100%}
     .chatbot-copy .label{margin-bottom:12px;font-size:clamp(15px,2vw,20px);letter-spacing:.11em}
     .chatbot-copy h2{font-size:clamp(24px,3vw,38px);font-weight:800;letter-spacing:-.025em;line-height:1.15;margin-bottom:16px;color:var(--ink)}
     .chatbot-copy p{font-size:16px;color:var(--ink3);line-height:1.7;margin-bottom:28px}
-    .chat-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:0}
+    .chat-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:0;max-width:100%;min-width:0}
     .chat-tab{padding:7px 15px;border-radius:100px;font-size:12.5px;font-weight:600;background:var(--bg2);color:var(--ink3);border:1.5px solid var(--border);cursor:pointer;transition:all .18s;white-space:nowrap}
     .chat-tab:hover{border-color:var(--p);color:var(--p)}
     .chat-tab.active{background:var(--p);color:#fff;border-color:var(--p)}
     /* iPhone Mockup */
-    .phone-mockup{width:300px;flex-shrink:0;background:#1c1c1e;border-radius:50px;padding:10px;box-shadow:0 40px 80px rgba(0,0,0,.22),0 0 0 1px rgba(255,255,255,.08),inset 0 0 0 2px #2c2c2e;position:relative}
+    .phone-mockup{width:300px;max-width:min(300px,100%);flex-shrink:0;background:#1c1c1e;border-radius:50px;padding:10px;box-shadow:0 40px 80px rgba(0,0,0,.22),0 0 0 1px rgba(255,255,255,.08),inset 0 0 0 2px #2c2c2e;position:relative;box-sizing:border-box}
     .phone-screen{background:#e5ddd5;border-radius:42px;overflow:hidden;position:relative}
     .phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:110px;height:30px;background:#1c1c1e;border-radius:0 0 22px 22px;z-index:10;display:flex;align-items:center;justify-content:center;gap:6px}
     .phone-notch::before{content:'';width:10px;height:10px;border-radius:50%;background:#2c2c2e;border:1px solid #3c3c3e}
@@ -424,6 +425,7 @@
       .hdr-drawer .btn{width:100%;justify-content:center}
     }
     @media(max-width:900px){
+      .chatbot-inner{grid-template-columns:1fr;gap:40px;justify-items:center;min-width:0;padding:0}
       .embudo-price-cta{flex-direction:column;align-items:stretch;gap:14px}
       .btn-embudo-cta{width:100%;justify-content:center;box-sizing:border-box}
       .pipeline{grid-template-columns:1fr 1fr;gap:12px}
