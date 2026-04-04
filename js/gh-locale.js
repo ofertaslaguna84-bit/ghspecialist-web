@@ -56,8 +56,7 @@
       'book.hint_proyecto': 'Incluye licencias y alcance acordado; no es solo “mensualidad”.',
       'book.submit': 'Continuar',
       'book.cal_hint':
-        'Justo debajo del formulario está el calendario de Google: ahí eliges fecha y hora. El cuestionario nos ayuda a preparar la reunión.',
-      'book.direct': '¿Ya pasaste este filtro? Abrir agenda Google directo',
+        'Si tu perfil cumple el mínimo de inversión (USD $1,500+ todo incluido), al enviar el formulario aparecerá aquí abajo el calendario para elegir fecha y hora. Si no encaja el rango, te indicamos la vía por WhatsApp.',
       'book.placeholder.nombre': 'Tu nombre',
       'book.placeholder.email': 'correo@empresa.com',
       'book.placeholder.wa': 'Ej. +52… o +1…',
@@ -173,8 +172,7 @@
       'book.hint_proyecto': 'Includes licenses and agreed scope; not just “monthly fee”.',
       'book.submit': 'Continue',
       'book.cal_hint':
-        'Below the form you’ll find the Google calendar to pick date and time. The questionnaire helps us prepare the call.',
-      'book.direct': 'Already passed this step? Open Google Calendar directly',
+        'If your profile meets the minimum investment (USD $1,500+ all-in), after you submit the form the calendar will appear below so you can pick a slot. If it doesn’t fit, we’ll point you to WhatsApp.',
       'book.placeholder.nombre': 'Your name',
       'book.placeholder.email': 'you@company.com',
       'book.placeholder.wa': 'e.g. +52… or +1…',
@@ -575,23 +573,6 @@
     });
   }
 
-  function renderBookDirect() {
-    var el = document.getElementById('gh-book-direct');
-    if (!el) return;
-    var url = 'https://calendar.app.google/Ay2yA84WLXLZhPJN9';
-    if (state.lang === 'es') {
-      el.innerHTML =
-        '¿Ya pasaste este filtro? <a href="' +
-        url +
-        '" target="_blank" rel="noopener" style="color:var(--p);font-weight:600">Abrir agenda Google directo</a>';
-    } else {
-      el.innerHTML =
-        'Already passed this step? <a href="' +
-        url +
-        '" target="_blank" rel="noopener" style="color:var(--p);font-weight:600">Open Google Calendar directly</a>';
-    }
-  }
-
   function renderAll() {
     applyMeta();
     applyDataI18n();
@@ -609,7 +590,6 @@
     renderReject();
     renderBookSelectOptions();
     renderBookChecks();
-    renderBookDirect();
     refreshCalendarCopy();
 
     document.querySelectorAll('.hdr-lang-btn').forEach(function (btn) {

@@ -41,7 +41,5 @@ window.GH_SITE_CONFIG = {
   formspreeSubmissionsUrl: '',
   panelPassword: 'Grupo84*',
   analyticsEmbedUrl: '',
-  leadsSheetEmbedUrl: '',
-  /** Misma agenda que index.html (Google Calendar booking). La landing la usa embebida. */
-  googleBookingUrl: 'https://calendar.app.google/Ay2yA84WLXLZhPJN9'
+  leadsSheetEmbedUrl: ''
 };

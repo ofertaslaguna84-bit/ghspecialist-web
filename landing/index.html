@@ -370,29 +370,21 @@
   </div>
 </section>
 
-<!-- AGENDA: Google Calendar (misma URL que el sitio principal) -->
+<!-- AGENDA: solo tras filtro en el sitio principal (mín. USD $1,500) -->
 <section class="sec landing-book" id="agendar-diagnostico">
   <div class="w">
-    <div class="center" style="margin-bottom:28px">
+    <div class="center" style="margin-bottom:8px">
       <div class="label">Diagnóstico gratuito</div>
-      <h2 class="title">Elige fecha y hora</h2>
-      <p class="sub">Google no permite mostrar el calendario de citas dentro de otras webs. El botón abre la agenda oficial en una pestaña nueva; al terminar puedes volver aquí.</p>
+      <h2 class="title">Primero el cuestionario, luego el calendario</h2>
+      <p class="sub">El calendario de citas <strong>solo se muestra en el sitio principal</strong> después de enviar el formulario y <strong>si tu proyecto cumple el mínimo de inversión</strong> (USD $1,500+ todo incluido). Así no ocupamos agenda con perfiles que no encajan.</p>
     </div>
-    <div class="book-cal-wrap" id="landing-book-cal">
-      <div class="landing-book-card">
-        <div class="landing-book-icon" aria-hidden="true">📅</div>
-        <p class="landing-book-lead">Pulsa el botón y elige día y hora en Google Calendar. <strong>Se abre en una pestaña nueva</strong> (misma reserva que en ghspecialist.com).</p>
-        <a href="https://calendar.app.google/Ay2yA84WLXLZhPJN9" class="btn btn-p btn-lg landing-book-cta" id="landing-book-open" target="_blank" rel="noopener noreferrer">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg>
-          Elegir fecha y hora
-        </a>
-        <ul class="landing-book-steps">
-          <li>Ves disponibilidad en tiempo real</li>
-          <li>Recibes confirmación por correo</li>
-          <li>Puedes cerrar la pestaña y seguir navegando aquí</li>
-        </ul>
-        <p class="landing-book-note">Si el navegador bloquea ventanas nuevas, permite pop-ups para este sitio o copia el enlace del botón (clic derecho → copiar).</p>
-      </div>
+    <div class="landing-book-card" style="max-width:560px;margin:0 auto">
+      <div class="landing-book-icon" aria-hidden="true">📋</div>
+      <p class="landing-book-lead">Mismo flujo que en <strong>ghspecialist.com</strong>: país, nómina, qué quieres instalar y rango del proyecto. Si calificas, al final aparece el enlace para <strong>elegir fecha y hora</strong>.</p>
+      <a href="../index.html#agendar-diagnostico" class="btn btn-p btn-lg landing-book-cta">
+        Ir al cuestionario y agenda
+      </a>
+      <p class="landing-book-note">Si tu inversión es menor a USD $1,500, te orientamos por WhatsApp; no abrimos la agenda automática para ese rango.</p>
     </div>
   </div>
 </section>
@@ -651,13 +643,6 @@
     document.querySelectorAll('.faq-i').forEach(x => { if(x!==i) x.classList.remove('open'); });
     i.classList.toggle('open');
   }));
-
-  (function syncLandingBookingUrl() {
-    var cfg = window.GH_SITE_CONFIG || {};
-    var u = (cfg.googleBookingUrl && String(cfg.googleBookingUrl).trim()) || 'https://calendar.app.google/Ay2yA84WLXLZhPJN9';
-    var a = document.getElementById('landing-book-open');
-    if (a) a.href = u;
-  })();
 
   const chatData = {
     inmobiliaria: [

@@ -791,7 +791,7 @@
         <span class="label" data-i18n="book.label">Diagnóstico sin costo</span>
         <h2 class="title" data-i18n="book.title">Primero validamos que el proyecto encaje</h2>
         <p class="book-lead" id="gh-book-lead">Trabajamos con empresas en <strong>México y Estados Unidos</strong>. Los proyectos de implementación arrancan desde <strong>USD $1,500 en adelante (todo incluido: licencias y entregables acordados)</strong>. Chatbots desde <strong>$12,000 + IVA</strong> en México (Kommo no incluido salvo que se cotice aparte).</p>
-        <p class="book-cal-hint" data-i18n="book.cal_hint" style="font-size:14px;color:var(--ink3);max-width:640px;margin:12px auto 0;line-height:1.55">Justo debajo del formulario está el <strong>calendario de Google</strong>: ahí eliges fecha y hora. El cuestionario nos ayuda a preparar la reunión.</p>
+        <p class="book-cal-hint" data-i18n="book.cal_hint" style="font-size:14px;color:var(--ink3);max-width:640px;margin:12px auto 0;line-height:1.55"></p>
       </div>
       <form id="gh-book-form" class="book-form-wrap" novalidate>
         <h3 data-i18n="book.h3">Cuéntanos tu perfil</h3>
@@ -862,9 +862,8 @@
         <div class="book-submit">
           <button type="submit" class="btn btn-p" id="gh-book-submit" data-i18n="book.submit">Continuar</button>
         </div>
-        <p class="hint" style="margin-top:14px;text-align:center;font-size:12px" id="gh-book-direct">¿Ya pasaste este filtro? <a href="https://calendar.app.google/Ay2yA84WLXLZhPJN9" target="_blank" rel="noopener" style="color:var(--p);font-weight:600">Abrir agenda Google directo</a></p>
       </form>
-      <div id="book-cal-container" class="book-cal-wrap show" aria-live="polite"></div>
+      <div id="book-cal-container" class="book-cal-wrap" aria-live="polite"></div>
       <div id="book-reject" class="book-reject" role="status">
         <p><strong>Por ahora no abrimos agenda para este rango por aquí.</strong> Si tu inversión total del proyecto es menor a <strong>USD $1,500</strong> (todo incluido), escríbenos por WhatsApp y vemos si hay otra opción.</p>
         <p style="margin-top:12px"><a id="book-reject-wa" href="https://wa.me/528712638082">WhatsApp →</a></p>
@@ -1819,7 +1818,6 @@
         if (v === 'MX') fillStates(estado, MX);
         else if (v === 'US') fillStates(estado, US);
       });
-      loadGoogleBooking(cal);
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         errEl.classList.remove('show');
@@ -1843,11 +1841,13 @@
             rej.classList.add('show');
             form.classList.add('is-sent');
             cal.classList.remove('show');
+            cal.innerHTML = '';
             try { form.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (x) {}
             return;
           }
           form.classList.add('is-sent');
           rej.classList.remove('show');
+          loadGoogleBooking(cal);
           cal.classList.add('show');
           try { cal.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (x) {}
         }
