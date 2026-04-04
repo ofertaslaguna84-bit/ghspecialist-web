@@ -79,6 +79,18 @@
     .hdr.scrolled .hdr-wa{color:var(--ink2);border-color:var(--border)}
     .hdr.scrolled .hdr-wa:hover{border-color:#25D366;color:#25D366}
 
+    .hdr-logo-link{display:flex;align-items:center;flex-shrink:0;min-width:0}
+    .hdr-menu-btn{display:none;align-items:center;justify-content:center;flex-shrink:0;width:44px;height:44px;padding:0;border:1.5px solid var(--border);border-radius:10px;background:#fff;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation;position:relative;z-index:570;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+    .hdr-menu-btn .hdr-menu-bar{display:block;width:20px;height:2px;background:var(--ink);border-radius:1px;transition:transform .2s,opacity .2s}
+    .hdr-menu-btn .hdr-menu-bar+.hdr-menu-bar{margin-top:5px}
+    .hdr-menu-btn[aria-expanded="true"] .hdr-menu-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hdr-menu-btn[aria-expanded="true"] .hdr-menu-bar:nth-child(2){opacity:0}
+    .hdr-menu-btn[aria-expanded="true"] .hdr-menu-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .hdr-drawer{display:flex;flex:1;align-items:center;justify-content:space-between;min-width:0;margin-left:20px;gap:10px}
+    .hdr-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:480;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s,visibility .2s}
+    .hdr-overlay.is-open{opacity:1;visibility:visible;pointer-events:auto}
+    body.hdr-nav-open{overflow:hidden;touch-action:none}
+
     /* ─── BUTTONS ─── */
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 22px;border-radius:8px;font-weight:600;font-size:14.5px;cursor:pointer;border:none;font-family:inherit;transition:all .18s;white-space:nowrap;line-height:1}
     .btn-p{background:var(--p);color:#fff}
@@ -392,6 +404,25 @@
     .fi-d6{transition-delay:.48s}
 
     /* ─── RESPONSIVE ─── */
+    @media(max-width:1024px){
+      .hdr-inner{flex-wrap:nowrap;padding:0 max(16px, var(--safe-left)) 0 max(16px, var(--safe-right));position:relative}
+      .hdr-logo-link{flex:1;min-width:0;max-width:calc(100% - 56px)}
+      .hdr-logo{max-width:min(160px,46vw);height:auto;max-height:28px;width:auto;object-fit:contain}
+      .hdr-menu-btn{display:inline-flex;flex-direction:column}
+      .hdr-drawer{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;margin:0;padding:0 0 calc(12px + var(--safe-bottom));background:#fff;border-bottom:1px solid var(--border);box-shadow:0 16px 40px rgba(0,0,0,.12);z-index:560;max-height:min(85vh,700px);overflow-y:auto;-webkit-overflow-scrolling:touch}
+      .hdr-drawer.is-open{display:flex}
+      .hdr-drawer .hdr-nav{flex-direction:column;align-items:stretch;gap:0;width:100%;flex-wrap:nowrap}
+      .hdr-drawer .hdr-nav>a:not(.nav-drop a){display:block;padding:14px 18px;border-bottom:1px solid var(--border);font-size:15px}
+      .hdr-drawer .nav-drop{width:100%;border-bottom:1px solid var(--border)}
+      .hdr-drawer .nav-drop-trigger{padding:14px 18px;font-size:14px;font-weight:700}
+      .hdr-drawer .nav-drop .nav-mega{position:static;left:auto;transform:none;opacity:1;visibility:visible;min-width:100%;padding:0 12px 14px;box-shadow:none;border-radius:0;background:var(--bg2);margin:0}
+      .hdr-drawer .nav-mega-grid{grid-template-columns:1fr;gap:4px}
+      .hdr-drawer .nav-mega-item{padding:10px 12px;border-radius:8px}
+      .hdr-drawer .hdr-right{flex-direction:column;width:100%;align-items:stretch;gap:12px;padding:16px 18px 8px;margin:0;border-top:1px solid var(--border);background:var(--bg2)}
+      .hdr-drawer .hdr-lang{align-self:center}
+      .hdr-drawer .hdr-wa{justify-content:center}
+      .hdr-drawer .btn{width:100%;justify-content:center}
+    }
     @media(max-width:900px){
       .pipeline{grid-template-columns:1fr 1fr;gap:12px}
       .services-grid{grid-template-columns:1fr 1fr}
@@ -404,7 +435,6 @@
       .about-grid{grid-template-columns:1fr;gap:40px}
       .contact-grid{grid-template-columns:1fr}
       .footer-grid{grid-template-columns:1fr 1fr}
-      .hdr-nav{display:none}
       .trusted-grid{grid-template-columns:1fr 1fr}
       .chat-tabs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
       .chat-tabs::-webkit-scrollbar{display:none}
@@ -485,11 +515,18 @@
 </head>
 <body>
   <div id="spbar"></div>
+  <div class="hdr-overlay" id="hdrOverlay" aria-hidden="true"></div>
 
   <!-- HEADER -->
   <header class="hdr" id="hdr">
     <div class="hdr-inner">
-      <a href="index.html"><img src="2.png" alt="GH Specialist" class="hdr-logo"></a>
+      <a href="index.html" class="hdr-logo-link"><img src="2.png" alt="GH Specialist" class="hdr-logo"></a>
+      <button type="button" class="hdr-menu-btn" id="hdrMenuBtn" aria-controls="hdrDrawer" aria-expanded="false" aria-label="Abrir menú">
+        <span class="hdr-menu-bar"></span>
+        <span class="hdr-menu-bar"></span>
+        <span class="hdr-menu-bar"></span>
+      </button>
+      <div class="hdr-drawer" id="hdrDrawer">
       <nav class="hdr-nav">
         <div class="nav-drop">
           <div class="nav-drop-trigger"><span data-i18n="nav.servicios">Servicios</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
@@ -553,6 +590,7 @@
         <a href="#agendar-diagnostico" class="btn btn-p btn-sm" data-i18n="nav.agendar">
           Agendar diagnóstico
         </a>
+      </div>
       </div>
     </div>
   </header>
@@ -1573,6 +1611,54 @@
       spbar.style.width = Math.round((s/h)*100) + '%';
       hdr.classList.toggle('scrolled', s > 20);
     }, {passive:true});
+
+    (function ghMobileNav() {
+      var btn = document.getElementById('hdrMenuBtn');
+      var drawer = document.getElementById('hdrDrawer');
+      var overlay = document.getElementById('hdrOverlay');
+      if (!btn || !drawer) return;
+      function close() {
+        drawer.classList.remove('is-open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Abrir menú');
+        if (overlay) {
+          overlay.classList.remove('is-open');
+          overlay.setAttribute('aria-hidden', 'true');
+        }
+        document.body.classList.remove('hdr-nav-open');
+      }
+      function open() {
+        drawer.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.setAttribute('aria-label', 'Cerrar menú');
+        if (overlay) {
+          overlay.classList.add('is-open');
+          overlay.setAttribute('aria-hidden', 'false');
+        }
+        document.body.classList.add('hdr-nav-open');
+      }
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        drawer.classList.contains('is-open') ? close() : open();
+      });
+      if (overlay) overlay.addEventListener('click', close);
+      drawer.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          if (window.matchMedia('(max-width:1024px)').matches) close();
+        });
+      });
+      drawer.querySelectorAll('.hdr-lang-btn').forEach(function (b) {
+        b.addEventListener('click', function () {
+          if (window.matchMedia('(max-width:1024px)').matches) close();
+        });
+      });
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 1024) close();
+      });
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') close();
+      });
+    })();
 
     // Animate on scroll
     const io = new IntersectionObserver((entries) => {
