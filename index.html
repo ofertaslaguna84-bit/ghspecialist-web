@@ -34,19 +34,19 @@
       --grab-strip:36px;
       --hdr-h:64px;
     }
-    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%}
-    body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden;line-height:1.6}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden;max-width:100%}
+    body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden;line-height:1.6;max-width:100%;position:relative}
     a{text-decoration:none;color:inherit}
     img{display:block;max-width:100%}
-    .w{max-width:1080px;margin:0 auto;padding:0 max(28px, var(--safe-right)) 0 max(28px, var(--safe-left))}
+    .w{max-width:1080px;width:100%;margin:0 auto;padding:0 max(28px, var(--safe-right)) 0 max(28px, var(--safe-left));box-sizing:border-box}
     .w-narrow{max-width:720px;margin:0 auto;padding:0 max(28px, var(--safe-right)) 0 max(28px, var(--safe-left))}
 
     /* SCROLL PROGRESS */
     #spbar{position:fixed;top:calc(var(--grab-strip) + var(--safe-top));left:0;height:3px;width:0%;background:linear-gradient(90deg,#a78bfa,#fff);z-index:9999;transition:width .08s linear}
 
     /* ─── HEADER ─── */
-    .hdr{position:fixed;top:calc(var(--grab-strip) + var(--safe-top));width:100%;z-index:500;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(0,0,0,.06)}
-    .hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px;max-width:1080px;margin:0 auto}
+    .hdr{position:fixed;top:calc(var(--grab-strip) + var(--safe-top));left:0;right:0;width:100%;max-width:100%;box-sizing:border-box;z-index:500;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(0,0,0,.06)}
+    .hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px;max-width:1080px;width:100%;margin:0 auto;box-sizing:border-box;min-width:0}
     .hdr-logo{height:28px}
     .hdr-nav{display:flex;align-items:center;gap:6px}
     .hdr-nav a,.hdr-nav .nav-drop-trigger{font-size:13.5px;font-weight:500;color:var(--ink);padding:6px 12px;border-radius:6px;transition:all .15s;cursor:pointer;display:flex;align-items:center;gap:4px}
@@ -109,8 +109,8 @@
     .embudo-sec .sec-header{margin-bottom:48px}
     .embudo-sec .title{color:#fff;max-width:700px;margin:0 auto 8px;text-shadow:0 2px 12px rgba(0,0,0,.5)}
     .embudo-sec .sub-text{color:rgba(255,255,255,.9);text-align:center;margin:0 auto;text-shadow:0 1px 8px rgba(0,0,0,.4)}
-    .pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:56px;position:relative}
-    .pipe-col{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:12px;padding:18px 14px;min-height:220px;position:relative;backdrop-filter:blur(6px)}
+    .pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:56px;position:relative;min-width:0;width:100%}
+    .pipe-col{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:12px;padding:18px 14px;min-height:220px;min-width:0;position:relative;backdrop-filter:blur(6px)}
     .pipe-col.pipe-done{background:rgba(37,211,102,.15);border-color:rgba(37,211,102,.5)}
     .pipe-col-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.95);margin-bottom:14px;display:flex;align-items:center;gap:6px;text-shadow:0 1px 4px rgba(0,0,0,.3)}
     .pipe-col.pipe-done .pipe-col-title{color:#25D366}
@@ -360,9 +360,9 @@
     .contact-form-msg--err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
 
     /* ─── GRABOVOI TOP BAR ─── */
-    .grabovoi-bar{background:linear-gradient(90deg,#5c35cc,#7C4DFF,#9D77FF,#7C4DFF,#5c35cc);position:fixed;top:0;left:0;right:0;z-index:700;box-sizing:border-box;height:calc(var(--grab-strip) + var(--safe-top));padding-top:var(--safe-top);padding-left:max(12px, var(--safe-left));padding-right:max(12px, var(--safe-right));overflow:hidden;display:flex;align-items:center}
+    .grabovoi-bar{background:linear-gradient(90deg,#5c35cc,#7C4DFF,#9D77FF,#7C4DFF,#5c35cc);position:fixed;top:0;left:0;right:0;width:100%;max-width:100%;z-index:700;box-sizing:border-box;height:calc(var(--grab-strip) + var(--safe-top));padding-top:var(--safe-top);padding-left:max(12px, var(--safe-left));padding-right:max(12px, var(--safe-right));overflow:hidden;overflow-x:clip;display:flex;align-items:center;min-width:0}
     .grabovoi-label{display:none}
-    .grabovoi-scroll{overflow:hidden;height:100%}
+    .grabovoi-scroll{flex:1;min-width:0;width:100%;overflow:hidden;overflow-x:clip;height:100%}
     .grabovoi-track{display:flex;gap:0;animation:grabScroll 50s linear infinite;width:max-content;align-items:center;height:100%}
     @keyframes grabScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
     .grabovoi-codes{display:flex;align-items:center}
@@ -424,6 +424,8 @@
       .hdr-drawer .btn{width:100%;justify-content:center}
     }
     @media(max-width:900px){
+      .embudo-price-cta{flex-direction:column;align-items:stretch;gap:14px}
+      .btn-embudo-cta{width:100%;justify-content:center;box-sizing:border-box}
       .pipeline{grid-template-columns:1fr 1fr;gap:12px}
       .services-grid{grid-template-columns:1fr 1fr}
       .cases-grid{grid-template-columns:1fr 1fr}
@@ -467,8 +469,8 @@
     .strip .btn:hover{background:#f0e8ff}
 
     /* CTA oferta chatbot — hero */
-    .embudo-price-cta{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.28);border-radius:14px;padding:16px 20px;margin-bottom:32px;backdrop-filter:blur(10px)}
-    .embudo-price-cta-text{flex:1;min-width:220px}
+    .embudo-price-cta{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.28);border-radius:14px;padding:16px 20px;margin-bottom:32px;backdrop-filter:blur(10px);max-width:100%;box-sizing:border-box;min-width:0}
+    .embudo-price-cta-text{flex:1;min-width:0}
     .embudo-price-line{margin:0;font-size:clamp(15px,2.2vw,18px);color:#fff;font-weight:600;line-height:1.35;text-shadow:0 1px 8px rgba(0,0,0,.35)}
     .embudo-price-line strong{font-weight:800;color:#fff}
     .embudo-price-line .iva{font-weight:500;opacity:.9;font-size:.92em}
