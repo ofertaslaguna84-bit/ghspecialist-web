@@ -173,16 +173,19 @@
     .mid-cta{text-align:center;padding:40px 28px;background:var(--p-light);border-top:1px solid #ddd4ff;border-bottom:1px solid #ddd4ff}
     .mid-cta p{font-size:15px;color:var(--ink2);margin-bottom:14px;font-weight:500}
 
-    /* Google Calendar embebido */
+    /* Agenda: Google no permite iframe de calendar.app en sitios externos → botón a pestaña nueva */
     .landing-book{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-    .landing-book .book-cal-wrap{max-width:900px;margin:0 auto;background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px 16px 24px;box-shadow:0 8px 40px rgba(0,0,0,.06)}
-    .book-cal-iframe-wrap{border-radius:12px;overflow:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--border);background:#fff;max-width:100%;-webkit-transform:translateZ(0)}
-    .book-cal-iframe-wrap iframe{width:100%;min-height:520px;border:0;display:block}
-    .book-cal-fallback{text-align:center;margin-top:14px;font-size:13px;color:var(--ink3);line-height:1.5}
-    .book-cal-fallback .btn{margin-top:10px}
-    @media(max-width:768px){
-      .book-cal-iframe-wrap iframe{min-height:62vh;min-height:62dvh}
-    }
+    .landing-book .book-cal-wrap{max-width:560px;margin:0 auto}
+    .landing-book-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:28px 24px 32px;box-shadow:0 8px 40px rgba(0,0,0,.06);text-align:center}
+    .landing-book-icon{font-size:42px;line-height:1;margin-bottom:12px}
+    .landing-book-lead{font-size:15px;color:var(--ink2);line-height:1.65;margin:0 0 22px;max-width:480px;margin-left:auto;margin-right:auto}
+    .landing-book-lead strong{color:var(--ink)}
+    .landing-book-cta{width:100%;justify-content:center;max-width:100%}
+    .landing-book-steps{list-style:none;margin:22px 0 0;padding:0;text-align:left;max-width:400px;margin-left:auto;margin-right:auto}
+    .landing-book-steps li{font-size:14px;color:var(--ink3);padding:8px 0 8px 28px;position:relative;border-top:1px solid var(--border)}
+    .landing-book-steps li:first-child{border-top:none}
+    .landing-book-steps li::before{content:'✓';position:absolute;left:0;color:var(--p);font-weight:700}
+    .landing-book-note{font-size:12px;color:var(--ink3);margin:18px 0 0;line-height:1.5;max-width:440px;margin-left:auto;margin-right:auto}
 
     /* VIDEO SECTION */
     .vid-hero{max-width:800px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.12);aspect-ratio:16/9;position:relative}
@@ -368,9 +371,24 @@
     <div class="center" style="margin-bottom:28px">
       <div class="label">Diagnóstico gratuito</div>
       <h2 class="title">Elige fecha y hora</h2>
-      <p class="sub">Reserva aquí con el calendario de Google. Elige día y horario disponibles sin salir de la página.</p>
+      <p class="sub">Google no permite mostrar el calendario de citas dentro de otras webs. El botón abre la agenda oficial en una pestaña nueva; al terminar puedes volver aquí.</p>
     </div>
-    <div id="landing-book-cal" class="book-cal-wrap" aria-live="polite"></div>
+    <div class="book-cal-wrap" id="landing-book-cal">
+      <div class="landing-book-card">
+        <div class="landing-book-icon" aria-hidden="true">📅</div>
+        <p class="landing-book-lead">Pulsa el botón y elige día y hora en Google Calendar. <strong>Se abre en una pestaña nueva</strong> (misma reserva que en ghspecialist.com).</p>
+        <a href="https://calendar.app.google/Ay2yA84WLXLZhPJN9" class="btn btn-p btn-lg landing-book-cta" id="landing-book-open" target="_blank" rel="noopener noreferrer">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg>
+          Elegir fecha y hora
+        </a>
+        <ul class="landing-book-steps">
+          <li>Ves disponibilidad en tiempo real</li>
+          <li>Recibes confirmación por correo</li>
+          <li>Puedes cerrar la pestaña y seguir navegando aquí</li>
+        </ul>
+        <p class="landing-book-note">Si el navegador bloquea ventanas nuevas, permite pop-ups para este sitio o copia el enlace del botón (clic derecho → copiar).</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -629,28 +647,11 @@
     i.classList.toggle('open');
   }));
 
-  (function loadLandingCalendar() {
+  (function syncLandingBookingUrl() {
     var cfg = window.GH_SITE_CONFIG || {};
-    var BOOKING_URL = (cfg.googleBookingUrl && String(cfg.googleBookingUrl).trim()) || 'https://calendar.app.google/Ay2yA84WLXLZhPJN9';
-    var container = document.getElementById('landing-book-cal');
-    if (!container) return;
-    var wrap = document.createElement('div');
-    wrap.className = 'book-cal-iframe-wrap';
-    var iframe = document.createElement('iframe');
-    iframe.src = BOOKING_URL;
-    iframe.title = 'Agendar cita — GH Specialist';
-    iframe.setAttribute('allow', 'fullscreen');
-    iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
-    iframe.loading = 'eager';
-    wrap.appendChild(iframe);
-    container.appendChild(wrap);
-    var ios = /iPhone|iPad|iPod/i.test(navigator.userAgent || '');
-    var fb = document.createElement('div');
-    fb.className = 'book-cal-fallback';
-    fb.innerHTML = 'Si no ves el calendario aquí (bloqueo del navegador), ábrelo en Google.' +
-      (ios ? '<p style="font-size:12px;color:var(--ink3);margin:10px 0 0;line-height:1.45">En Safari de iPhone a veces conviene abrir en otra pantalla.</p>' : '') +
-      '<br><a href="' + BOOKING_URL + '" target="_blank" rel="noopener" class="btn btn-p btn-sm">Abrir agenda en Google</a>';
-    container.appendChild(fb);
+    var u = (cfg.googleBookingUrl && String(cfg.googleBookingUrl).trim()) || 'https://calendar.app.google/Ay2yA84WLXLZhPJN9';
+    var a = document.getElementById('landing-book-open');
+    if (a) a.href = u;
   })();
 
   const chatData = {
