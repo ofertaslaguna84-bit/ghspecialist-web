@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <link rel="icon" href="../favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="../favicon.png">
   <title>GH Specialist | Automatiza tu Negocio con IA — Pedro Luis Díaz</title>
@@ -23,9 +23,14 @@
       --p:#7C4DFF;--p2:#5C35CC;--p-light:#F3EFFF;--p-border:#DDD5FF;
       --ink:#111;--ink2:#444;--ink3:#888;
       --bg:#fff;--bg2:#F7F7F5;--border:#E8E8E8;
+      --safe-top:env(safe-area-inset-top, 0px);
+      --safe-bottom:env(safe-area-inset-bottom, 0px);
+      --safe-left:env(safe-area-inset-left, 0px);
+      --safe-right:env(safe-area-inset-right, 0px);
     }
-    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%}
     body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden}
+    body.nav-open{overflow:hidden;touch-action:none}
     a{text-decoration:none;color:inherit}
     img{display:block;max-width:100%}
     .w{max-width:1060px;margin:0 auto;padding:0 28px}
@@ -34,14 +39,22 @@
     #spbar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--p),#a78bfa);z-index:9999;transition:width .1s}
 
     /* HEADER — barra blanca fija, texto oscuro */
-    .hdr{position:fixed;top:0;width:100%;z-index:200}
+    .hdr{position:fixed;top:0;width:100%;z-index:200;padding-top:var(--safe-top)}
     .hdr-bar{width:100%;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(0,0,0,.06);transition:box-shadow .3s}
     .hdr.scrolled .hdr-bar{box-shadow:0 4px 24px rgba(0,0,0,.08)}
-    .hdr-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 28px;max-width:1060px;margin:0 auto;flex-wrap:wrap}
+    .hdr-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px max(28px, var(--safe-right)) 12px max(28px, var(--safe-left));max-width:1060px;margin:0 auto;flex-wrap:wrap;position:relative}
     .hdr-logo{height:30px}
     .hdr-brand{display:flex;align-items:center;gap:14px;flex-shrink:0}
     .hdr-home{font-size:13px;font-weight:600;color:var(--p);padding:6px 12px;border-radius:8px;border:1.5px solid var(--p-border);background:var(--p-light);white-space:nowrap}
     .hdr-home:hover{background:#fff;border-color:var(--p)}
+    .hdr-menu-btn{display:none;align-items:center;justify-content:center;flex-shrink:0;width:44px;height:44px;padding:0;border:1.5px solid var(--border);border-radius:10px;background:#fff;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent}
+    .hdr-menu-btn .hdr-menu-bar{display:block;width:20px;height:2px;background:var(--ink);border-radius:1px;transition:transform .2s,opacity .2s}
+    .hdr-menu-btn .hdr-menu-bar+.hdr-menu-bar{margin-top:5px}
+    .hdr-menu-btn[aria-expanded="true"] .hdr-menu-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hdr-menu-btn[aria-expanded="true"] .hdr-menu-bar:nth-child(2){opacity:0}
+    .hdr-menu-btn[aria-expanded="true"] .hdr-menu-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .hdr-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:150;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s,visibility .2s}
+    .hdr-overlay.is-open{opacity:1;visibility:visible;pointer-events:auto}
     .hdr-nav{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
     .hdr-nav a:not(.btn){font-size:14px;font-weight:500;color:var(--ink2);transition:color .15s}
     .hdr-nav a:not(.btn):hover{color:var(--p)}
@@ -62,7 +75,7 @@
     .agenda-strip .btn:hover{background:#f0e8ff;transform:none}
 
     /* HERO */
-    .hero{padding:100px 0 72px;background:#0a0a0a;position:relative;overflow:hidden;min-height:min(100vh,1100px);display:flex;align-items:center}
+    .hero{padding:calc(100px + var(--safe-top)) 0 72px;background:#0a0a0a;position:relative;overflow:hidden;min-height:min(100vh,1100px);display:flex;align-items:center}
     .hero-bg{position:absolute;inset:0;background:url('hero-bg.jpg') center/cover no-repeat;opacity:.72}
     .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.18),rgba(0,0,0,.38))}
     .hero .w{position:relative;z-index:1}
@@ -160,6 +173,17 @@
     .mid-cta{text-align:center;padding:40px 28px;background:var(--p-light);border-top:1px solid #ddd4ff;border-bottom:1px solid #ddd4ff}
     .mid-cta p{font-size:15px;color:var(--ink2);margin-bottom:14px;font-weight:500}
 
+    /* Google Calendar embebido */
+    .landing-book{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .landing-book .book-cal-wrap{max-width:900px;margin:0 auto;background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px 16px 24px;box-shadow:0 8px 40px rgba(0,0,0,.06)}
+    .book-cal-iframe-wrap{border-radius:12px;overflow:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--border);background:#fff;max-width:100%;-webkit-transform:translateZ(0)}
+    .book-cal-iframe-wrap iframe{width:100%;min-height:520px;border:0;display:block}
+    .book-cal-fallback{text-align:center;margin-top:14px;font-size:13px;color:var(--ink3);line-height:1.5}
+    .book-cal-fallback .btn{margin-top:10px}
+    @media(max-width:768px){
+      .book-cal-iframe-wrap iframe{min-height:62vh;min-height:62dvh}
+    }
+
     /* VIDEO SECTION */
     .vid-hero{max-width:800px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.12);aspect-ratio:16/9;position:relative}
     .vid-hero iframe{width:100%;height:100%;border:none}
@@ -232,19 +256,32 @@
       .short-wrap{grid-template-columns:1fr;text-align:center}
       .short-frame{max-width:220px}
       .hero-grid{grid-template-columns:1fr}
-      .hero{padding-top:88px}
+      .hero{padding-top:calc(88px + var(--safe-top))}
+      .hero-stats{display:grid;grid-template-columns:1fr 1fr;max-width:100%;width:100%}
+      .hs{border-right:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);padding:14px 12px}
+      .hs:nth-child(2n){border-right:none}
+      .hs:nth-child(3),.hs:nth-child(4){border-bottom:none}
       .chatbot-inner{grid-template-columns:1fr;justify-items:center}
       .phone-mockup{max-width:300px;width:100%}
-      .hdr-nav a:not(.btn){display:none}
-      .hdr-home{font-size:12px;padding:5px 10px}
+      .hdr-menu-btn{display:inline-flex;flex-direction:column;z-index:260}
+      .hdr-nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;padding:8px max(16px, var(--safe-right)) calc(16px + var(--safe-bottom)) max(16px, var(--safe-left));background:#fff;border-bottom:1px solid var(--border);box-shadow:0 16px 40px rgba(0,0,0,.12);z-index:255}
+      .hdr-nav.is-open{display:flex}
+      .hdr-nav a:not(.btn){display:block;padding:14px 14px;font-size:15px;border-radius:10px}
+      .hdr-nav a:not(.btn):active{background:var(--bg2)}
+      .hdr-nav .btn{width:100%;justify-content:center;margin-top:6px;padding:12px 18px}
+      .hdr-home{font-size:12px;padding:5px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:min(140px,38vw)}
       .final-cta{padding:40px 24px;border-radius:14px}
       .ftr{flex-direction:column;text-align:center}
+      .wa{bottom:max(24px, var(--safe-bottom));right:max(24px, var(--safe-right))}
+      .w{padding:0 max(16px, var(--safe-right)) 0 max(16px, var(--safe-left))}
+      .agenda-strip{padding:10px max(16px, var(--safe-right)) 10px max(16px, var(--safe-left))}
     }
   </style>
 </head>
 <body>
 
 <div id="spbar"></div>
+<div class="hdr-overlay" id="hdrOverlay" aria-hidden="true"></div>
 
 <!-- HEADER -->
 <div class="hdr" id="hdr">
@@ -254,12 +291,18 @@
         <a href="../index.html"><img src="../2.png" alt="GH Specialist" class="hdr-logo"></a>
         <a href="../index.html" class="hdr-home">Sitio completo</a>
       </div>
-      <nav class="hdr-nav">
+      <button type="button" class="hdr-menu-btn" id="hdrMenuBtn" aria-controls="hdrNav" aria-expanded="false" aria-label="Abrir menú">
+        <span class="hdr-menu-bar"></span>
+        <span class="hdr-menu-bar"></span>
+        <span class="hdr-menu-bar"></span>
+      </button>
+      <nav class="hdr-nav" id="hdrNav">
         <a href="#video">Mi historia</a>
+        <a href="#agendar-diagnostico">Agenda</a>
         <a href="#precios">Precios</a>
         <a href="#faq">FAQ</a>
-        <a href="https://wa.me/528712638082?text=Hola%20Pedro,%20quiero%20agendar%20una%20cita" class="btn btn-p btn-sm" target="_blank">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <a href="#agendar-diagnostico" class="btn btn-p btn-sm">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
           Agendar cita
         </a>
       </nav>
@@ -280,8 +323,8 @@
         <h1>Tu negocio puede operar<br>sin empleados, sin oficina,<br>con <span class="hl">pura IA</span></h1>
         <p class="hero-sub">Ahorra millones en nómina, renta y seguros. Yo lo hice — y ahora te lo enseño.</p>
         <div class="hero-btns">
-          <a href="https://wa.me/528712638082?text=Hola%20Pedro,%20quiero%20agendar%20una%20cita" class="btn btn-p btn-lg" target="_blank">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <a href="#agendar-diagnostico" class="btn btn-p btn-lg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
             Agendar cita gratis
           </a>
           <a href="#video" class="btn btn-outline btn-lg">▶ Ver mi historia</a>
@@ -316,6 +359,18 @@
     <div class="vid-hero">
       <iframe src="https://www.youtube.com/embed/HmfqtNRf9f0" title="Agente IA — Pedro Díaz" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
     </div>
+  </div>
+</section>
+
+<!-- AGENDA: Google Calendar (misma URL que el sitio principal) -->
+<section class="sec landing-book" id="agendar-diagnostico">
+  <div class="w">
+    <div class="center" style="margin-bottom:28px">
+      <div class="label">Diagnóstico gratuito</div>
+      <h2 class="title">Elige fecha y hora</h2>
+      <p class="sub">Reserva aquí con el calendario de Google. Elige día y horario disponibles sin salir de la página.</p>
+    </div>
+    <div id="landing-book-cal" class="book-cal-wrap" aria-live="polite"></div>
   </div>
 </section>
 
@@ -397,10 +452,7 @@
 <!-- AGENDAR CTA STRIP -->
 <div class="mid-cta">
   <p>¿Listo para automatizar tu negocio? Agenda tu diagnóstico gratuito ahora.</p>
-  <a href="https://wa.me/528712638082?text=Hola%20Pedro,%20quiero%20agendar%20mi%20diagnostico%20gratis" class="btn btn-p" target="_blank">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    📅 Agendar diagnóstico gratis
-  </a>
+  <a href="#agendar-diagnostico" class="btn btn-p">📅 Ver calendario y agendar</a>
 </div>
 
 <!-- ═══════════════════════════════════
@@ -464,7 +516,7 @@
 <!-- AGENDAR CTA STRIP -->
 <div class="mid-cta">
   <p>¿No sabes cuál paquete es el tuyo? En 15 minutos te lo digo gratis.</p>
-  <a href="https://wa.me/528712638082?text=Hola%20Pedro,%20no%20se%20que%20paquete%20elegir,%20quiero%20una%20llamada" class="btn btn-p" target="_blank">📅 Agendar llamada de 15 min</a>
+  <a href="#agendar-diagnostico" class="btn btn-p">📅 Reservar llamada de 15 min</a>
 </div>
 
 <!-- ═══════════════════════════════════
@@ -530,6 +582,43 @@
 <script>
   const hdr = document.getElementById('hdr');
   const spbar = document.getElementById('spbar');
+  const hdrMenuBtn = document.getElementById('hdrMenuBtn');
+  const hdrNav = document.getElementById('hdrNav');
+  const hdrOverlay = document.getElementById('hdrOverlay');
+  function ghCloseLandingMenu() {
+    if (!hdrNav || !hdrMenuBtn) return;
+    hdrNav.classList.remove('is-open');
+    hdrMenuBtn.setAttribute('aria-expanded', 'false');
+    hdrMenuBtn.setAttribute('aria-label', 'Abrir menú');
+    if (hdrOverlay) { hdrOverlay.classList.remove('is-open'); hdrOverlay.setAttribute('aria-hidden', 'true'); }
+    document.body.classList.remove('nav-open');
+  }
+  function ghOpenLandingMenu() {
+    if (!hdrNav || !hdrMenuBtn) return;
+    hdrNav.classList.add('is-open');
+    hdrMenuBtn.setAttribute('aria-expanded', 'true');
+    hdrMenuBtn.setAttribute('aria-label', 'Cerrar menú');
+    if (hdrOverlay) { hdrOverlay.classList.add('is-open'); hdrOverlay.setAttribute('aria-hidden', 'false'); }
+    document.body.classList.add('nav-open');
+  }
+  if (hdrMenuBtn && hdrNav) {
+    hdrMenuBtn.addEventListener('click', function () {
+      if (hdrNav.classList.contains('is-open')) ghCloseLandingMenu();
+      else ghOpenLandingMenu();
+    });
+    if (hdrOverlay) hdrOverlay.addEventListener('click', ghCloseLandingMenu);
+    hdrNav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (window.matchMedia('(max-width:860px)').matches) ghCloseLandingMenu();
+      });
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 860) ghCloseLandingMenu();
+    });
+    window.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') ghCloseLandingMenu();
+    });
+  }
   window.addEventListener('scroll', () => {
     hdr.classList.toggle('scrolled', scrollY > 40);
     spbar.style.width = (scrollY / (document.body.scrollHeight - innerHeight) * 100) + '%';
@@ -539,9 +628,30 @@
     document.querySelectorAll('.faq-i').forEach(x => { if(x!==i) x.classList.remove('open'); });
     i.classList.toggle('open');
   }));
-  document.querySelectorAll('.cal-slot:not(.cal-busy)').forEach(b => b.addEventListener('click', () => {
-    window.open('https://wa.me/528712638082?text=Hola%20Pedro,%20quiero%20agendar%20el%20' + encodeURIComponent(b.textContent), '_blank');
-  }));
+
+  (function loadLandingCalendar() {
+    var cfg = window.GH_SITE_CONFIG || {};
+    var BOOKING_URL = (cfg.googleBookingUrl && String(cfg.googleBookingUrl).trim()) || 'https://calendar.app.google/Ay2yA84WLXLZhPJN9';
+    var container = document.getElementById('landing-book-cal');
+    if (!container) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'book-cal-iframe-wrap';
+    var iframe = document.createElement('iframe');
+    iframe.src = BOOKING_URL;
+    iframe.title = 'Agendar cita — GH Specialist';
+    iframe.setAttribute('allow', 'fullscreen');
+    iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+    iframe.loading = 'eager';
+    wrap.appendChild(iframe);
+    container.appendChild(wrap);
+    var ios = /iPhone|iPad|iPod/i.test(navigator.userAgent || '');
+    var fb = document.createElement('div');
+    fb.className = 'book-cal-fallback';
+    fb.innerHTML = 'Si no ves el calendario aquí (bloqueo del navegador), ábrelo en Google.' +
+      (ios ? '<p style="font-size:12px;color:var(--ink3);margin:10px 0 0;line-height:1.45">En Safari de iPhone a veces conviene abrir en otra pantalla.</p>' : '') +
+      '<br><a href="' + BOOKING_URL + '" target="_blank" rel="noopener" class="btn btn-p btn-sm">Abrir agenda en Google</a>';
+    container.appendChild(fb);
+  })();
 
   const chatData = {
     inmobiliaria: [
