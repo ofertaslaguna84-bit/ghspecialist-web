@@ -7,7 +7,10 @@
   <meta http-equiv="Pragma" content="no-cache">
   <title>Panel interno — GH Specialist</title>
   <meta name="robots" content="noindex, nofollow">
-  <link rel="icon" href="../favicon.png" type="image/png">
+  <link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../favicon.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png" sizes="180x180">
+  <meta name="theme-color" content="#7C4DFF">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="../js/gh-site-config.js?v=panel4"></script>
@@ -219,7 +222,7 @@
     <div class="panel-stack">
       <section class="card" style="border-left:4px solid var(--p)">
         <h2>Registros / envíos del formulario</h2>
-        <p style="font-size:14px;color:var(--ink);margin-bottom:10px">El sitio <strong>no tiene cuentas de usuario</strong> (login propio). Quien llena el formulario queda como <strong>lead</strong> en Formspree: correo, nombre, mensaje, etc. Eso es lo que puedes revisar como “registros”.</p>
+        <p style="font-size:14px;color:var(--ink);margin-bottom:10px">El sitio <strong>no tiene cuentas de usuario</strong> (login propio). Quien llena el formulario queda como <strong>prospecto</strong> en Formspree: correo, nombre, mensaje, etc. Eso es lo que puedes revisar como “registros”.</p>
         <p style="font-size:13px;color:var(--ink3);margin-bottom:14px">Para verlos aquí mismo como <strong>tabla embebida</strong> haría falta sincronizar Formspree → Google Sheets (Zapier/Make) y enlazar la hoja en la configuración; por defecto usas el botón y entras al panel de Formspree.</p>
         <div class="analytics-actions">
           <a class="btn" id="link-fs-submissions" href="https://formspree.io/forms" target="_blank" rel="noopener noreferrer" style="background:var(--p);color:#fff">Ver envíos / registros en Formspree →</a>
@@ -275,14 +278,14 @@
         <p><strong>Este sitio no tiene registro de cuentas</strong> (no hay login de usuarios en la base de datos). Lo que sí puedes ver:</p>
         <ul style="font-size:13px;color:var(--ink3);margin:10px 0 12px 18px;line-height:1.55">
           <li><strong>Visitantes / sesiones:</strong> en el informe de Analytics embebido arriba (cuando lo configures) o en <a id="link-ga-inline" href="https://analytics.google.com/" target="_blank" rel="noopener noreferrer" style="color:var(--p);font-weight:600">Analytics en otra pestaña</a>.</li>
-          <li><strong>Personas que enviaron el formulario (registros / leads):</strong> sección <strong>«Registros / envíos»</strong> arriba o directamente en Formspree.</li>
+          <li><strong>Personas que enviaron el formulario (registros / prospectos):</strong> sección <strong>«Registros / envíos»</strong> arriba o directamente en Formspree.</li>
           <li><strong>Lista propia (emails, etc.):</strong> opcional — publica una hoja en Google y configura la URL del embed en el sitio para verla aquí abajo.</li>
         </ul>
         <div id="leads-embed-placeholder" class="embed-hint">
           Sin hoja embebida. Si usas una Google Sheet publicada, tu técnico puede enlazarla aquí desde la configuración.
         </div>
         <div id="leads-embed-wrap" class="embed-box leads-embed" hidden>
-          <iframe id="leads-embed-frame" title="Lista de leads" loading="lazy"></iframe>
+          <iframe id="leads-embed-frame" title="Lista de prospectos" loading="lazy"></iframe>
         </div>
       </section>
     </div>
@@ -300,7 +303,7 @@
         <a class="btn" id="link-fs" href="https://formspree.io/forms" target="_blank" rel="noopener noreferrer">Abrir Formspree</a>
         <div class="stack" style="margin-top:12px">
           <a class="link" id="link-fs-contact" href="#" target="_blank" rel="noopener noreferrer" hidden>Contacto</a>
-          <a class="link" id="link-fs-leads" href="#" target="_blank" rel="noopener noreferrer" hidden>Leads</a>
+          <a class="link" id="link-fs-leads" href="#" target="_blank" rel="noopener noreferrer" hidden>Prospectos</a>
           <span id="hint-fs" style="font-size:12px;color:#888">Cuando estén los IDs en la config, aquí aparecen enlaces directos a cada endpoint.</span>
         </div>
       </section>

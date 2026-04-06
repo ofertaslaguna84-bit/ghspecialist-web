@@ -1,0 +1,32 @@
+{
+  "id": "https://ghspecialist.com/",
+  "name": "GH Specialist",
+  "short_name": "GH Specialist",
+  "description": "Automatización con IA para tu negocio — chatbots, CRM y más.",
+  "start_url": "https://ghspecialist.com/",
+  "scope": "https://ghspecialist.com/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#7C4DFF",
+  "icons": [
+    {
+      "src": "https://ghspecialist.com/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://ghspecialist.com/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://ghspecialist.com/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

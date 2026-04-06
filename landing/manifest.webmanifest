@@ -1,0 +1,32 @@
+{
+  "id": "https://ghspecialist.com/landing/",
+  "name": "GH Specialist",
+  "short_name": "GH Specialist",
+  "description": "Automatiza tu negocio con IA — diagnóstico gratis.",
+  "start_url": "https://ghspecialist.com/landing/",
+  "scope": "https://ghspecialist.com/landing/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#7C4DFF",
+  "icons": [
+    {
+      "src": "https://ghspecialist.com/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://ghspecialist.com/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://ghspecialist.com/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

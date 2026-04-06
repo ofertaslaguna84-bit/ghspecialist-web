@@ -3,8 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <link rel="icon" href="favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="favicon.png" type="image/png" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="192x192" href="https://ghspecialist.com/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="https://ghspecialist.com/icon-512.png">
+  <link rel="apple-touch-icon" href="https://ghspecialist.com/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="https://ghspecialist.com/manifest.webmanifest">
+  <meta name="theme-color" content="#7C4DFF">
+  <meta name="msapplication-TileColor" content="#7C4DFF">
+  <meta name="msapplication-TileImage" content="https://ghspecialist.com/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="GH Specialist">
+  <meta name="mobile-web-app-capable" content="yes">
   <title>GH Specialist — Automatiza tu Negocio con IA | Pedro Luis Díaz Velázquez</title>
   <meta name="description" content="Automatización IA para empresas LATAM. Chatbots WhatsApp, CRM Kommo, agentes omnicanal, marketing digital. Consulta gratis con Pedro Luis Díaz Velázquez.">
   <link rel="canonical" href="https://ghspecialist.com/">
@@ -80,12 +91,8 @@
     .hdr.scrolled .hdr-wa:hover{border-color:#25D366;color:#25D366}
 
     .hdr-logo-link{display:flex;align-items:center;flex-shrink:0;min-width:0}
-    .hdr-menu-btn{display:none;align-items:center;justify-content:center;flex-shrink:0;width:44px;height:44px;padding:0;border:1.5px solid var(--border);border-radius:10px;background:#fff;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation;position:relative;z-index:570;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-    .hdr-menu-btn .hdr-menu-bar{display:block;width:20px;height:2px;background:var(--ink);border-radius:1px;transition:transform .2s,opacity .2s}
-    .hdr-menu-btn .hdr-menu-bar+.hdr-menu-bar{margin-top:5px}
-    .hdr-menu-btn[aria-expanded="true"] .hdr-menu-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
-    .hdr-menu-btn[aria-expanded="true"] .hdr-menu-bar:nth-child(2){opacity:0}
-    .hdr-menu-btn[aria-expanded="true"] .hdr-menu-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .hdr-menu-btn{display:none;align-items:center;justify-content:center;flex-shrink:0;width:auto;height:44px;padding:0 14px;min-width:44px;border:1.5px solid var(--border);border-radius:10px;background:#fff;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation;position:relative;z-index:570;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+    .hdr-menu-label{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:.02em;line-height:1;white-space:nowrap}
     .hdr-drawer{display:flex;flex:1;align-items:center;justify-content:space-between;min-width:0;margin-left:20px;gap:10px}
     .hdr-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:480;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s,visibility .2s}
     .hdr-overlay.is-open{opacity:1;visibility:visible;pointer-events:auto}
@@ -407,9 +414,9 @@
     /* ─── RESPONSIVE ─── */
     @media(max-width:1024px){
       .hdr-inner{flex-wrap:nowrap;padding:0 max(16px, var(--safe-left)) 0 max(16px, var(--safe-right));position:relative}
-      .hdr-logo-link{flex:1;min-width:0;max-width:calc(100% - 56px)}
+      .hdr-logo-link{flex:1;min-width:0;max-width:calc(100% - 100px)}
       .hdr-logo{max-width:min(160px,46vw);height:auto;max-height:28px;width:auto;object-fit:contain}
-      .hdr-menu-btn{display:inline-flex;flex-direction:column}
+      .hdr-menu-btn{display:inline-flex;flex-direction:row}
       .hdr-drawer{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;margin:0;padding:0 0 calc(12px + var(--safe-bottom));background:#fff;border-bottom:1px solid var(--border);box-shadow:0 16px 40px rgba(0,0,0,.12);z-index:560;max-height:min(85vh,700px);overflow-y:auto;-webkit-overflow-scrolling:touch}
       .hdr-drawer.is-open{display:flex}
       .hdr-drawer .hdr-nav{flex-direction:column;align-items:stretch;gap:0;width:100%;flex-wrap:nowrap}
@@ -526,9 +533,7 @@
     <div class="hdr-inner">
       <a href="index.html" class="hdr-logo-link"><img src="2.png" alt="GH Specialist" class="hdr-logo"></a>
       <button type="button" class="hdr-menu-btn" id="hdrMenuBtn" aria-controls="hdrDrawer" aria-expanded="false" aria-label="Abrir menú">
-        <span class="hdr-menu-bar"></span>
-        <span class="hdr-menu-bar"></span>
-        <span class="hdr-menu-bar"></span>
+        <span class="hdr-menu-label" id="hdrMenuLabel">Menú</span>
       </button>
       <div class="hdr-drawer" id="hdrDrawer">
       <nav class="hdr-nav">
@@ -610,13 +615,13 @@
         <a href="#agendar-diagnostico" class="btn-embudo-cta" data-i18n="embudo.cta">Agendar diagnóstico</a>
       </div>
       <div class="sec-header center">
-        <h2 class="title" data-i18n="embudo.title">Mira cómo la IA mueve tus clientes por el embudo. Automáticamente.</h2>
+        <h2 class="title" data-i18n="embudo.title">Mira cómo tu agente de ventas perfila a tus prospectos hasta llevarlos al cierre de venta.</h2>
         <p class="sub-text" data-i18n="embudo.sub">Tu pipeline de ventas operando solo, las 24 horas</p>
       </div>
 
       <div class="pipeline">
         <div class="pipe-col">
-          <div class="pipe-col-title">Nuevo Lead</div>
+          <div class="pipe-col-title">Nuevo prospecto</div>
           <div class="pipe-cards">
             <div class="pipe-card moving"><span class="pc-dot hot"></span>María G. — Inmobiliaria</div>
             <div class="pipe-card moving3"><span class="pc-dot warm"></span>Carlos R. — Restaurante</div>
@@ -800,7 +805,7 @@
       <form id="gh-book-form" class="book-form-wrap" novalidate>
         <h3 data-i18n="book.h3">Cuéntanos tu perfil</h3>
         <p class="book-form-note" data-i18n="book.note">Filtramos curiosos y priorizamos equipos con nómina y proyecto reales.</p>
-        <input type="hidden" name="_subject" value="Lead GH — onboarding (MX/US, nómina, instalación)">
+        <input type="hidden" name="_subject" value="Prospecto GH — onboarding (MX/US, nómina, instalación)">
         <div class="book-field">
           <label for="gh-nombre" data-i18n="book.nombre">Nombre *</label>
           <input id="gh-nombre" name="nombre" type="text" required autocomplete="name" data-i18n-placeholder="book.placeholder.nombre" placeholder="Tu nombre">
@@ -889,7 +894,7 @@
           <div class="svc-tag">⭐ Más popular</div>
           <div class="svc-icon">💬</div>
           <h3>Chatbot IA WhatsApp</h3>
-          <p>Atiende, califica y cierra leads las 24h. El bot habla como tu mejor vendedor y escala a humano cuando es necesario.</p>
+          <p>Atiende, califica y cierra ventas con prospectos las 24h. El bot habla como tu mejor vendedor y escala a humano cuando es necesario.</p>
           <span class="svc-link">Ver servicio →</span>
         </a>
 
@@ -1078,7 +1083,7 @@
             <span class="case-sector">🏠 Inmobiliaria</span>
             <h3>Grupo Inmobiliario Norteño</h3>
             <div class="case-metric">+340%</div>
-            <div class="case-metric-l">leads calificados en 60 días</div>
+            <div class="case-metric-l">prospectos calificados en 60 días</div>
           </div>
         </div>
         <div class="case-card fi fi-d2">
@@ -1140,7 +1145,7 @@
       <div class="testi-grid">
         <div class="testi-card fi fi-d1">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">Pedro implementó el chatbot de WhatsApp en 2 semanas y ya en el primer mes triplicamos los leads calificados. Nunca imaginé que la IA funcionaría tan bien para inmobiliaria.</p>
+          <p class="testi-text">Pedro implementó el chatbot de WhatsApp en 2 semanas y ya en el primer mes triplicamos los prospectos calificados. Nunca imaginé que la IA funcionaría tan bien para inmobiliaria.</p>
           <div class="testi-author">
             <div class="testi-avatar">A</div>
             <div>
@@ -1151,7 +1156,7 @@
         </div>
         <div class="testi-card fi fi-d2">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">Implementamos Kommo CRM con GH Specialist y ahora cada lead se mueve solo en el pipeline. Bajamos de 72h a 4 minutos en tiempo de respuesta promedio.</p>
+          <p class="testi-text">Implementamos Kommo CRM con GH Specialist y ahora cada prospecto se mueve solo en el pipeline. Bajamos de 72h a 4 minutos en tiempo de respuesta promedio.</p>
           <div class="testi-author">
             <div class="testi-avatar">R</div>
             <div>
@@ -1617,6 +1622,7 @@
 
     (function ghMobileNav() {
       var btn = document.getElementById('hdrMenuBtn');
+      var menuLabel = document.getElementById('hdrMenuLabel');
       var drawer = document.getElementById('hdrDrawer');
       var overlay = document.getElementById('hdrOverlay');
       if (!btn || !drawer) return;
@@ -1624,6 +1630,7 @@
         drawer.classList.remove('is-open');
         btn.setAttribute('aria-expanded', 'false');
         btn.setAttribute('aria-label', 'Abrir menú');
+        if (menuLabel) menuLabel.textContent = 'Menú';
         if (overlay) {
           overlay.classList.remove('is-open');
           overlay.setAttribute('aria-hidden', 'true');
@@ -1634,6 +1641,7 @@
         drawer.classList.add('is-open');
         btn.setAttribute('aria-expanded', 'true');
         btn.setAttribute('aria-label', 'Cerrar menú');
+        if (menuLabel) menuLabel.textContent = 'Cerrar';
         if (overlay) {
           overlay.classList.add('is-open');
           overlay.setAttribute('aria-hidden', 'false');

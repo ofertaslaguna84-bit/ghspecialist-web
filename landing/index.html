@@ -3,8 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <link rel="icon" href="../favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="../favicon.png">
+  <link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../favicon.png" type="image/png" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="192x192" href="https://ghspecialist.com/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="https://ghspecialist.com/icon-512.png">
+  <link rel="apple-touch-icon" href="https://ghspecialist.com/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="https://ghspecialist.com/landing/manifest.webmanifest">
+  <meta name="theme-color" content="#7C4DFF">
+  <meta name="msapplication-TileColor" content="#7C4DFF">
+  <meta name="msapplication-TileImage" content="https://ghspecialist.com/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="GH Specialist">
+  <meta name="mobile-web-app-capable" content="yes">
   <title>GH Specialist | Automatiza tu Negocio con IA — Pedro Luis Díaz</title>
   <meta name="description" content="Automatiza tu negocio con IA: chatbots WhatsApp, CRM Kommo, agentes omnicanal. Pedro Luis Díaz ahorró $5.2M MXN. Diagnóstico gratis.">
   <link rel="canonical" href="https://ghspecialist.com">
@@ -47,12 +58,8 @@
     .hdr-brand{display:flex;align-items:center;gap:14px;flex-shrink:1;min-width:0}
     .hdr-home{font-size:13px;font-weight:600;color:var(--p);padding:6px 12px;border-radius:8px;border:1.5px solid var(--p-border);background:var(--p-light);white-space:nowrap}
     .hdr-home:hover{background:#fff;border-color:var(--p)}
-    .hdr-menu-btn{display:none;align-items:center;justify-content:center;flex-shrink:0;width:44px;height:44px;padding:0;border:1.5px solid var(--border);border-radius:10px;background:#fff;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation;position:relative;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-    .hdr-menu-btn .hdr-menu-bar{display:block;width:20px;height:2px;background:var(--ink);border-radius:1px;transition:transform .2s,opacity .2s}
-    .hdr-menu-btn .hdr-menu-bar+.hdr-menu-bar{margin-top:5px}
-    .hdr-menu-btn[aria-expanded="true"] .hdr-menu-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
-    .hdr-menu-btn[aria-expanded="true"] .hdr-menu-bar:nth-child(2){opacity:0}
-    .hdr-menu-btn[aria-expanded="true"] .hdr-menu-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .hdr-menu-btn{display:none;align-items:center;justify-content:center;flex-shrink:0;width:auto;height:44px;padding:0 14px;min-width:44px;border:1.5px solid var(--border);border-radius:10px;background:#fff;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation;position:relative;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+    .hdr-menu-label{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:.02em;line-height:1;white-space:nowrap}
     .hdr-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:150;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s,visibility .2s}
     .hdr-overlay.is-open{opacity:1;visibility:visible;pointer-events:auto}
     .hdr-nav{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
@@ -258,7 +265,7 @@
       .hdr-inner{flex-wrap:nowrap;gap:10px}
       .hdr-brand{max-width:calc(100% - 54px)}
       .hdr-logo{max-width:min(132px,42vw);height:auto;max-height:30px;object-fit:contain}
-      .hdr-menu-btn{display:inline-flex;flex-direction:column;z-index:260}
+      .hdr-menu-btn{display:inline-flex;flex-direction:row;z-index:260}
       .hdr-nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;padding:8px max(16px, var(--safe-right)) calc(16px + var(--safe-bottom)) max(16px, var(--safe-left));background:#fff;border-bottom:1px solid var(--border);box-shadow:0 16px 40px rgba(0,0,0,.12);z-index:255}
       .hdr-nav.is-open{display:flex}
       .hdr-nav a:not(.btn){display:block;padding:14px 14px;font-size:15px;border-radius:10px}
@@ -300,9 +307,7 @@
         <a href="../index.html" class="hdr-home">Sitio completo</a>
       </div>
       <button type="button" class="hdr-menu-btn" id="hdrMenuBtn" aria-controls="hdrNav" aria-expanded="false" aria-label="Abrir menú">
-        <span class="hdr-menu-bar"></span>
-        <span class="hdr-menu-bar"></span>
-        <span class="hdr-menu-bar"></span>
+        <span class="hdr-menu-label" id="hdrMenuLabel">Menú</span>
       </button>
       <nav class="hdr-nav" id="hdrNav">
         <a href="#video">Mi historia</a>
@@ -598,6 +603,7 @@
   const hdr = document.getElementById('hdr');
   const spbar = document.getElementById('spbar');
   const hdrMenuBtn = document.getElementById('hdrMenuBtn');
+  const hdrMenuLabel = document.getElementById('hdrMenuLabel');
   const hdrNav = document.getElementById('hdrNav');
   const hdrOverlay = document.getElementById('hdrOverlay');
   function ghCloseLandingMenu() {
@@ -605,6 +611,7 @@
     hdrNav.classList.remove('is-open');
     hdrMenuBtn.setAttribute('aria-expanded', 'false');
     hdrMenuBtn.setAttribute('aria-label', 'Abrir menú');
+    if (hdrMenuLabel) hdrMenuLabel.textContent = 'Menú';
     if (hdrOverlay) { hdrOverlay.classList.remove('is-open'); hdrOverlay.setAttribute('aria-hidden', 'true'); }
     document.body.classList.remove('nav-open');
   }
@@ -613,6 +620,7 @@
     hdrNav.classList.add('is-open');
     hdrMenuBtn.setAttribute('aria-expanded', 'true');
     hdrMenuBtn.setAttribute('aria-label', 'Cerrar menú');
+    if (hdrMenuLabel) hdrMenuLabel.textContent = 'Cerrar';
     if (hdrOverlay) { hdrOverlay.classList.add('is-open'); hdrOverlay.setAttribute('aria-hidden', 'false'); }
     document.body.classList.add('nav-open');
   }

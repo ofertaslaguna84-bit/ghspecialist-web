@@ -26,7 +26,7 @@
  *   luego Archivo → Incorporar informe → copia la URL que empiece por lookerstudio.google.com/embed/...
  *
  * leadsSheetEmbedUrl → (opcional) URL de una hoja de Google publicada (Archivo → Publicar en la web)
- *   para ver lista de suscriptores/leads que tú mantengas en la hoja. El sitio estático no tiene
+ *   para ver lista de suscriptores/prospectos que tú mantengas en la hoja. El sitio estático no tiene
  *   base de datos de “usuarios registrados”; esto es un atajo visual.
  *
  * formspreeSubmissionsUrl → (opcional) URL exacta de la pestaña Submissions de tu formulario en Formspree.

@@ -126,7 +126,7 @@
     if (fsL) {
       if (fl) {
         fsL.href = 'https://formspree.io/f/' + fl;
-        fsL.textContent = 'Formulario leads/onboarding (endpoint /f/' + fl + ')';
+        fsL.textContent = 'Formulario prospectos/onboarding (endpoint /f/' + fl + ')';
         fsL.hidden = false;
       } else fsL.hidden = true;
     }
