@@ -447,8 +447,7 @@
       .contact-grid{grid-template-columns:1fr}
       .footer-grid{grid-template-columns:1fr 1fr}
       .trusted-grid{grid-template-columns:1fr 1fr}
-      .chat-tabs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
-      .chat-tabs::-webkit-scrollbar{display:none}
+      .chat-tabs{flex-wrap:wrap;justify-content:center;gap:8px;row-gap:10px;overflow:visible}
     }
     @media(max-width:768px){
       .book-field input,.book-field select,.form-group input,.form-group select,.form-group textarea{font-size:16px!important}
@@ -2092,7 +2091,7 @@
           div.classList.remove('hidden-msg');
           div.classList.add('show-msg');
           chatMsgs.scrollTop = chatMsgs.scrollHeight;
-        }, 500 * (i + 1));
+        }, 2000 * i);
       });
     }
 
