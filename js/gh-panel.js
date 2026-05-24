@@ -1,5 +1,5 @@
 /**
- * Panel interno GH Specialist — Analytics, Formspree, blog (sin GitHub en UI).
+ * Panel interno GH Specialist — Analytics, Formspree, blog one-click (GitHub Actions + OpenAI).
  */
 (function () {
   var C = window.GH_SITE_CONFIG || {};
@@ -174,98 +174,201 @@
     }
   }
 
-  function buildBlogPrompt(topic, keywords) {
-    var t = (topic || '').trim();
-    var k = (keywords || '').trim();
-    if (!t) return '';
-    var lines = [
-      'Actúas como redactor SEO senior para GH Specialist, agencia de automatización con inteligencia artificial para empresas en México y LATAM.',
-      '',
-      'TAREA: Redacta un artículo de blog en español para publicarse en ghspecialist.com/blog/ con este tema:',
-      'TEMA / ENFOQUE: ' + t
-    ];
-    if (k) lines.push('PALABRAS CLAVE O ÁNGULO: ' + k);
-    lines.push(
-      '',
-      'REQUISITOS DE CONTENIDO:',
-      '- Longitud orientativa: 1.800–2.400 palabras.',
-      '- Incluye: meta description (máximo ~155 caracteres), un H1, introducción con gancho, varios H2 y H3, listas con viñetas, conclusiones.',
-      '- Tono profesional, claro, orientado a dueños de negocio y directivos en México.',
-      '- 3–5 enlaces internos naturales a artículos del blog (ghspecialist.com/blog/) y servicios (ghspecialist.com/servicios/).',
-      '- Sección "Artículos relacionados" con 2–3 links al final del artículo.',
-      '- CTAs: https://calendly.com/ghspecialist y WhatsApp +528712638082.',
-      '- Slug en kebab-case para archivo: blog/[slug].html (ej: mi-tema-mexico-2026.html).',
-      '',
-      'REQUISITOS SEO TÉCNICOS (usar blog/_template.html como base):',
-      '- Bloque <head> completo: title, description, canonical, Open Graph (og:type=article, og:image, og:locale), Twitter Card summary_large_image.',
-      '- JSON-LD Article completo (headline, description, image, author, publisher+logo, datePublished, dateModified, mainEntityOfPage).',
-      '- JSON-LD BreadcrumbList: Inicio > Blog > Título.',
-      '- Breadcrumbs visuales antes del <article>.',
-      '- Imagen OG absoluta: https://ghspecialist.com/hero-[ciudad].jpg o fotos/slide2_img2.png.',
-      '',
-      'DESPUÉS DE REDACTAR:',
-      '- Pegar en blog/[slug].html desde _template.html.',
-      '- Añadir card en blog/index.html.',
-      '- Ejecutar: node scripts/generate-seo.mjs',
-      '',
-      'Entrega el cuerpo del artículo en HTML limpio (<p>, <h2>, <h3>, <ul>, <li>, <strong>) listo para pegar dentro de <article class="art">.'
-    );
-    return lines.join('\n');
+  function ghHeaders(pat) {
+    return {
+      Authorization: 'Bearer ' + pat,
+      Accept: 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28'
+    };
   }
 
-  function initBlogPrompt() {
-    var out = $('blog-prompt-out');
-    var toast = $('blog-toast');
+  function sleep(ms) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, ms);
+    });
+  }
+
+  function setBlogStatus(type, html) {
+    var box = $('blog-status');
+    if (!box) return;
+    box.hidden = false;
+    box.className = 'blog-status blog-status--' + (type || 'info');
+    box.innerHTML = html;
+  }
+
+  function hideBlogStatus() {
+    var box = $('blog-status');
+    if (box) {
+      box.hidden = true;
+      box.innerHTML = '';
+    }
+  }
+
+  function fetchResultJson(owner, repo, branch) {
+    var url =
+      'https://raw.githubusercontent.com/' +
+      owner +
+      '/' +
+      repo +
+      '/' +
+      (branch || 'main') +
+      '/blog-generate-result.json?t=' +
+      Date.now();
+    return fetch(url).then(function (r) {
+      if (!r.ok) throw new Error('no result');
+      return r.json();
+    });
+  }
+
+  function pollBlogWorkflow(startedAt, owner, repo, pat) {
+    var deadline = Date.now() + 8 * 60 * 1000;
+    var wf =
+      'https://api.github.com/repos/' +
+      owner +
+      '/' +
+      repo +
+      '/actions/workflows/blog-generate.yml/runs?per_page=8';
+
+    function tick() {
+      if (Date.now() > deadline) {
+        return Promise.reject(new Error('timeout'));
+      }
+      return fetch(wf, { headers: ghHeaders(pat) })
+        .then(function (r) {
+          return r.json().then(function (data) {
+            if (!r.ok) throw new Error((data && data.message) || 'GitHub API');
+            return data;
+          });
+        })
+        .then(function (data) {
+          var runs = data.workflow_runs || [];
+          var run = null;
+          for (var i = 0; i < runs.length; i++) {
+            if (new Date(runs[i].created_at).getTime() >= startedAt - 5000) {
+              run = runs[i];
+              break;
+            }
+          }
+          if (!run) return sleep(12000).then(tick);
+          if (run.status !== 'completed') {
+            setBlogStatus(
+              'info',
+              '<strong>Generando artículo…</strong> La IA está escribiendo y publicando (2–4 min). Estado: <em>' +
+                run.status +
+                '</em>'
+            );
+            return sleep(12000).then(tick);
+          }
+          if (run.conclusion !== 'success') {
+            return Promise.reject(new Error('El workflow falló: ' + (run.conclusion || 'error')));
+          }
+          return fetchResultJson(owner, repo, 'main');
+        });
+    }
+    return tick();
+  }
+
+  function initBlogGenerate() {
     var gen = $('btn-blog-generate');
-    var copy = $('btn-blog-copy');
-    var chat = $('btn-blog-chatgpt');
-    if (!gen || !out) return;
+    var topicEl = $('blog-topic');
+    var kwEl = $('blog-keywords');
+    if (!gen) return;
+
+    var owner = (C.githubOwner || 'ofertaslaguna84-bit').trim();
+    var repo = (C.githubRepo || 'ghspecialist-web').trim();
+    var pat = (C.githubDispatchPat || '').trim();
+    var setupEl = $('blog-setup-hint');
+    if (setupEl) setupEl.hidden = !!pat;
 
     gen.addEventListener('click', function () {
-      var topic = ($('blog-topic') && $('blog-topic').value) || '';
-      var kw = ($('blog-keywords') && $('blog-keywords').value) || '';
-      var p = buildBlogPrompt(topic, kw);
-      if (!p) {
-        out.value = '';
-        if (toast) toast.textContent = 'Escribe al menos el tema del artículo.';
+      if (gen.disabled) return;
+      hideBlogStatus();
+
+      if (!pat) {
+        setBlogStatus(
+          'err',
+          '<strong>Falta configurar el token.</strong> Pega <code>githubDispatchPat</code> en <code>js/gh-site-config.js</code> (PAT con Actions + Contents) y sube el cambio. También necesitas los secrets <code>OPENAI_API_KEY</code> y <code>BLOG_GENERATE_SECRET</code> en GitHub.'
+        );
         return;
       }
-      out.value = p;
-      if (toast) toast.textContent = 'Prompt listo. Puedes copiarlo o abrir ChatGPT y pegarlo.';
+
+      var topic = topicEl ? (topicEl.value || '').trim() : '';
+      var keywords = kwEl ? (kwEl.value || '').trim() : '';
+      var startedAt = Date.now();
+
+      gen.disabled = true;
+      gen.textContent = 'Generando…';
+      setBlogStatus(
+        'info',
+        '<strong>Enviando a GitHub…</strong> Se generará el HTML, se actualizará el blog y el sitio se publicará solo.'
+      );
+
+      fetch('https://api.github.com/repos/' + owner + '/' + repo + '/dispatches', {
+        method: 'POST',
+        headers: Object.assign({ 'Content-Type': 'application/json' }, ghHeaders(pat)),
+        body: JSON.stringify({
+          event_type: 'blog_generate',
+          client_payload: {
+            secret: PASS,
+            topic: topic,
+            keywords: keywords
+          }
+        })
+      })
+        .then(function (r) {
+          if (r.status === 204) return;
+          return r.json().then(function (data) {
+            throw new Error((data && data.message) || 'No se pudo disparar el workflow');
+          });
+        })
+        .then(function () {
+          setBlogStatus(
+            'info',
+            '<strong>Generando artículo…</strong> OpenAI + publicación automática. Espera 2–4 minutos.'
+          );
+          return pollBlogWorkflow(startedAt, owner, repo, pat);
+        })
+        .then(function (result) {
+          if (topicEl) topicEl.value = '';
+          if (kwEl) kwEl.value = '';
+          var url = (result && result.url) || 'https://ghspecialist.com/blog/';
+          var title = (result && result.title) || 'Artículo nuevo';
+          setBlogStatus(
+            'ok',
+            '<p class="blog-status-title">Artículo publicado</p><p>' +
+              title +
+              '</p><a href="' +
+              url +
+              '" target="_blank" rel="noopener">Ver artículo →</a> · <a href="https://ghspecialist.com/blog/" target="_blank" rel="noopener">Ver blog</a>'
+          );
+        })
+        .catch(function (err) {
+          var msg = (err && err.message) || String(err);
+          if (msg === 'timeout') {
+            setBlogStatus(
+              'warn',
+              '<strong>Tarda más de lo normal.</strong> Revisa <a href="https://github.com/' +
+                owner +
+                '/' +
+                repo +
+                '/actions" target="_blank" rel="noopener">GitHub Actions</a> y el blog en unos minutos.'
+            );
+          } else {
+            setBlogStatus('err', '<strong>Error:</strong> ' + msg);
+          }
+        })
+        .finally(function () {
+          gen.disabled = false;
+          gen.textContent = 'Generar artículo';
+        });
     });
 
-    if (copy) {
-      copy.addEventListener('click', function () {
-        var text = (out && out.value) || '';
-        if (!text) {
-          if (toast) toast.textContent = 'Primero pulsa «Generar prompt».';
-          return;
+    if (topicEl) {
+      topicEl.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey && !gen.disabled) {
+          e.preventDefault();
+          gen.click();
         }
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(
-            function () {
-              if (toast) toast.textContent = 'Copiado al portapapeles.';
-            },
-            function () {
-              if (toast) toast.textContent = 'No se pudo copiar; selecciona el texto a mano.';
-            }
-          );
-        } else {
-          out.select();
-          try {
-            document.execCommand('copy');
-            if (toast) toast.textContent = 'Copiado.';
-          } catch (e) {
-            if (toast) toast.textContent = 'Selecciona el texto y copia con Ctrl+C.';
-          }
-        }
-      });
-    }
-
-    if (chat) {
-      chat.addEventListener('click', function () {
-        window.open('https://chatgpt.com/', '_blank', 'noopener,noreferrer');
-        if (toast) toast.textContent = 'Pestaña abierta: pega el prompt (Ctrl+V) en el chat.';
       });
     }
   }
@@ -274,7 +377,7 @@
     fillLinks();
     initAnalyticsEmbed();
     initLeadsEmbed();
-    initBlogPrompt();
+    initBlogGenerate();
     bindGate();
     bindSalir();
     checkAuth();

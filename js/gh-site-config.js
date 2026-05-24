@@ -32,6 +32,11 @@
  * formspreeSubmissionsUrl → (opcional) URL exacta de la pestaña Submissions de tu formulario en Formspree.
  *   Si lo dejas vacío, el panel usa https://formspree.io/forms/TU_ID (mismo ID que /f/...).
  *
+ * === E) Blog one-click (como Adestajo) ===
+ * githubOwner / githubRepo → repo donde corre GitHub Actions (genera HTML + deploy).
+ * githubDispatchPat → token fine-grained con permisos Actions (RW) + Contents (RW) en ese repo.
+ *   En GitHub → Settings → Secrets: OPENAI_API_KEY y BLOG_GENERATE_SECRET (misma clave que panelPassword).
+ *
  * Tras editar: git add js/gh-site-config.js && git commit -m "chore: config" && git push origin main
  */
 window.GH_SITE_CONFIG = {
@@ -41,5 +46,8 @@ window.GH_SITE_CONFIG = {
   formspreeSubmissionsUrl: '',
   panelPassword: 'Grupo84*',
   analyticsEmbedUrl: '',
-  leadsSheetEmbedUrl: ''
+  leadsSheetEmbedUrl: '',
+  githubOwner: 'ofertaslaguna84-bit',
+  githubRepo: 'ghspecialist-web',
+  githubDispatchPat: ''
 };

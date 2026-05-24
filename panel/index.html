@@ -13,7 +13,7 @@
   <meta name="theme-color" content="#7C4DFF">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="../js/gh-site-config.js?v=panel4"></script>
+  <script src="../js/gh-site-config.js?v=panel5"></script>
   <script>
     (function () {
       var p = (window.GH_SITE_CONFIG && window.GH_SITE_CONFIG.panelPassword || '').trim();
@@ -22,7 +22,7 @@
       if (p && !ok) document.documentElement.classList.add('panel-gated');
     })();
   </script>
-  <script src="../js/gh-panel.js?v=panel4" defer></script>
+  <script src="../js/gh-panel.js?v=panel5" defer></script>
   <style>
     :root {
       --p: #7C4DFF;
@@ -52,11 +52,20 @@
     .embed-box iframe { display: block; width: 100%; min-height: 520px; border: 0; }
     .embed-hint { font-size: 12px; color: var(--ink3); line-height: 1.55; margin-top: 10px; }
     .embed-hint a { color: var(--p); font-weight: 600; }
-    .blog-area { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 14px; margin-bottom: 10px; resize: vertical; }
-    .blog-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; margin-bottom: 10px; }
-    .btn-sec { font-family: inherit; font-size: 13px; font-weight: 600; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--border); background: #fff; cursor: pointer; color: var(--ink); }
-    .btn-sec:hover { border-color: var(--p); color: var(--p); }
-    #blog-toast { font-size: 13px; color: #15803d; margin-top: 8px; min-height: 1.2em; }
+    .blog-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; margin-top: 12px; }
+    .blog-row input { flex: 1; min-width: 220px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 14px; }
+    .blog-row input:focus { outline: none; border-color: var(--p); box-shadow: 0 0 0 3px rgba(124,77,255,.12); }
+    .blog-row .btn-p { padding: 12px 22px; font-size: 14px; white-space: nowrap; min-width: 160px; }
+    .blog-row .btn-p:disabled { opacity: .55; cursor: not-allowed; }
+    .blog-kw { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 13px; margin-top: 10px; }
+    .blog-status { margin-top: 14px; padding: 14px 16px; border-radius: 10px; font-size: 14px; line-height: 1.55; }
+    .blog-status--info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e3a8a; }
+    .blog-status--ok { background: #f0fdf4; border: 1px solid #bbf7d0; color: #14532d; }
+    .blog-status--warn { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; }
+    .blog-status--err { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+    .blog-status a { color: var(--p); font-weight: 700; }
+    .blog-status-title { font-weight: 800; margin-bottom: 4px; }
+    #blog-setup-hint { font-size: 12px; color: #92400e; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 10px 12px; margin-top: 12px; line-height: 1.5; }
     .leads-embed iframe { min-height: 360px; }
     .analytics-ok {
       background: #f0fdf4;
@@ -217,7 +226,7 @@
       </div>
     </div>
     <p class="sub">Los enlaces externos abren en <strong>nueva pestaña</strong>. Para cerrar sesión del panel usa <strong>Salir</strong>.</p>
-    <p id="panel-version-hint" style="font-size:12px;color:#92400e;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 14px;margin:-4px 0 16px;max-width:720px;line-height:1.45"><strong>Si no ves las secciones nuevas,</strong> recarga forzada: <strong>Cmd+Shift+R</strong> o ventana privada. <span class="mono" style="color:#b45309">Versión panel: 2026-04-04</span></p>
+    <p id="panel-version-hint" style="font-size:12px;color:#92400e;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 14px;margin:-4px 0 16px;max-width:720px;line-height:1.45"><strong>Si no ves las secciones nuevas,</strong> recarga forzada: <strong>Cmd+Shift+R</strong> o ventana privada. <span class="mono" style="color:#b45309">Versión panel: 2026-05-23</span></p>
 
     <div class="panel-stack">
       <section class="card" style="border-left:4px solid var(--p)">
@@ -256,21 +265,17 @@
         </div>
       </section>
 
-      <section class="card">
-        <h2>Blog con IA (prompt para artículo)</h2>
-        <p>Escribe el tema; generamos un prompt listo para pegar en ChatGPT (o la IA que uses). Luego publicas el HTML en <span class="mono">blog/</span> como siempre.</p>
-        <label for="blog-topic" style="font-size:12px;font-weight:600;color:var(--ink3)">Tema del artículo</label>
-        <textarea id="blog-topic" class="blog-area" rows="2" placeholder="Ej: chatbots WhatsApp para clínicas dentales en México"></textarea>
-        <label for="blog-keywords" style="font-size:12px;font-weight:600;color:var(--ink3)">Palabras clave o ángulo (opcional)</label>
-        <textarea id="blog-keywords" class="blog-area" rows="2" placeholder="Ej: ROI, Kommo, LATAM"></textarea>
-        <div class="blog-actions">
-          <button type="button" class="btn-p" id="btn-blog-generate" style="padding:10px 18px;font-size:14px">Generar prompt</button>
-          <button type="button" class="btn-sec" id="btn-blog-copy">Copiar prompt</button>
-          <button type="button" class="btn-sec" id="btn-blog-chatgpt">Abrir ChatGPT en otra pestaña</button>
+      <section class="card" style="border-left:4px solid var(--p)">
+        <h2>Blog con IA</h2>
+        <p>Escribe un tema (o déjalo vacío para uno aleatorio), pulsa <strong>Generar artículo</strong> y en 2–4 min queda publicado en el blog — igual que Adestajo.</p>
+        <div class="blog-row">
+          <input type="text" id="blog-topic" placeholder="Tema (opcional — aleatorio si lo dejas vacío)" autocomplete="off">
+          <button type="button" class="btn-p" id="btn-blog-generate">Generar artículo</button>
         </div>
-        <label for="blog-prompt-out" style="font-size:12px;font-weight:600;color:var(--ink3)">Prompt generado</label>
-        <textarea id="blog-prompt-out" class="blog-area" rows="10" readonly placeholder="Pulsa «Generar prompt»…"></textarea>
-        <p id="blog-toast"></p>
+        <input type="text" id="blog-keywords" class="blog-kw" placeholder="Palabras clave o ángulo (opcional)" autocomplete="off">
+        <p id="blog-setup-hint" hidden><strong>Configuración pendiente:</strong> token <code>githubDispatchPat</code> en la config + secrets <code>OPENAI_API_KEY</code> y <code>BLOG_GENERATE_SECRET</code> en GitHub (misma clave que el panel).</p>
+        <div id="blog-status" hidden></div>
+        <p class="embed-hint" style="margin-top:12px"><a id="link-blog-panel" href="https://ghspecialist.com/blog/" target="_blank" rel="noopener">Ver blog público →</a></p>
       </section>
 
       <section class="card">

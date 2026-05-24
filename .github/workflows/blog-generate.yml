@@ -1,0 +1,36 @@
+name: Generar artículo de blog con IA
+
+on:
+  repository_dispatch:
+    types: [blog_generate]
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generar artículo
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          BLOG_GENERATE_SECRET: ${{ secrets.BLOG_GENERATE_SECRET }}
+          CLIENT_SECRET: ${{ github.event.client_payload.secret }}
+          BLOG_TOPIC: ${{ github.event.client_payload.topic }}
+          BLOG_KEYWORDS: ${{ github.event.client_payload.keywords }}
+        run: node scripts/blog-generate.mjs
+
+      - name: Commit y push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add blog/ sitemap.xml blog/feed.xml blog-generate-result.json 2>/dev/null || true
+          git diff --staged --quiet && echo "Sin cambios" && exit 0
+          git commit -m "blog: artículo generado con IA ($(date -u +%Y-%m-%d))"
+          git push
