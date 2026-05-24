@@ -1,0 +1,51 @@
+name: Borrar artículo del blog
+
+on:
+  repository_dispatch:
+    types: [blog_delete]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Borrar artículo
+        env:
+          BLOG_GENERATE_SECRET: ${{ secrets.BLOG_GENERATE_SECRET }}
+          CLIENT_SECRET: ${{ github.event.client_payload.secret }}
+          BLOG_SLUG: ${{ github.event.client_payload.slug }}
+        run: node scripts/blog-delete.mjs
+
+      - name: Commit y push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A blog/ sitemap.xml blog/feed.xml blog-delete-result.json 2>/dev/null || true
+          git diff --staged --quiet && echo "Sin cambios en git" || (git commit -m "blog: eliminar artículo $(date -u +%Y-%m-%d)" && git push)
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Publicar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

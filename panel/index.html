@@ -13,7 +13,7 @@
   <meta name="theme-color" content="#7C4DFF">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="../js/gh-site-config.js?v=panel6"></script>
+  <script src="../js/gh-site-config.js?v=panel7"></script>
   <script>
     (function () {
       var p = (window.GH_SITE_CONFIG && window.GH_SITE_CONFIG.panelPassword || '').trim();
@@ -22,7 +22,7 @@
       if (p && !ok) document.documentElement.classList.add('panel-gated');
     })();
   </script>
-  <script src="../js/gh-panel.js?v=panel6" defer></script>
+  <script src="../js/gh-panel.js?v=panel7" defer></script>
   <style>
     :root {
       --p: #7C4DFF;
@@ -66,6 +66,24 @@
     .blog-status a { color: var(--p); font-weight: 700; }
     .blog-status-title { font-weight: 800; margin-bottom: 4px; }
     #blog-setup-hint { font-size: 12px; color: #92400e; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 10px 12px; margin-top: 12px; line-height: 1.5; }
+    .blog-list { margin-top: 20px; border-top: 1px solid var(--border); padding-top: 16px; }
+    .blog-list-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    .blog-list-head h3 { font-size: 13px; font-weight: 800; color: var(--ink); }
+    .blog-list-head button { font-family: inherit; font-size: 12px; font-weight: 600; color: var(--p); background: var(--p-light); border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+    .blog-list-head button:hover { background: #e9ddff; }
+    .blog-list-head button:disabled { opacity: .5; cursor: not-allowed; }
+    .blog-items { display: flex; flex-direction: column; gap: 8px; max-height: 360px; overflow-y: auto; }
+    .blog-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; background: #fff; }
+    .blog-item-main { flex: 1; min-width: 0; }
+    .blog-item-title { font-size: 13px; font-weight: 700; line-height: 1.4; margin-bottom: 4px; }
+    .blog-item-title a { color: var(--ink); }
+    .blog-item-title a:hover { color: var(--p); }
+    .blog-item-slug { font-size: 11px; color: var(--ink3); font-family: ui-monospace, monospace; word-break: break-all; }
+    .btn-del { flex-shrink: 0; font-family: inherit; font-size: 12px; font-weight: 700; color: #b91c1c; background: #fef2f2; border: 1px solid #fecaca; padding: 8px 12px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
+    .btn-del:hover { background: #fee2e2; }
+    .btn-del:disabled { opacity: .45; cursor: not-allowed; }
+    .blog-list-empty { font-size: 13px; color: var(--ink3); padding: 8px 0; }
+    .blog-list-loading { font-size: 13px; color: var(--ink3); }
     .leads-embed iframe { min-height: 360px; }
     .analytics-ok {
       background: #f0fdf4;
@@ -274,6 +292,15 @@
         </div>
         <input type="text" id="blog-keywords" class="blog-kw" placeholder="Palabras clave o ángulo (opcional)" autocomplete="off">
         <div id="blog-status" hidden></div>
+        <div class="blog-list" id="blog-list-wrap">
+          <div class="blog-list-head">
+            <h3>Artículos publicados</h3>
+            <button type="button" id="btn-blog-refresh">Actualizar lista</button>
+          </div>
+          <div id="blog-list" class="blog-items">
+            <p class="blog-list-loading">Cargando artículos…</p>
+          </div>
+        </div>
         <p class="embed-hint" style="margin-top:12px"><a id="link-blog-panel" href="https://ghspecialist.com/blog/" target="_blank" rel="noopener">Ver blog público →</a></p>
       </section>
 

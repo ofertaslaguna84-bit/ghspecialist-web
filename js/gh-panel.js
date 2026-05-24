@@ -196,14 +196,20 @@
     }
   }
 
-  function pollBlogStatus(apiBase, startedAt) {
+  function pollBlogStatus(apiBase, startedAt, opts) {
+    opts = opts || {};
+    var mode = opts.mode || 'generate';
+    var slug = opts.slug || '';
     var deadline = Date.now() + 8 * 60 * 1000;
     var url =
       apiBase +
       '/api/ghspecialist/blog-status?secret=' +
       encodeURIComponent(PASS) +
       '&startedAt=' +
-      encodeURIComponent(String(startedAt));
+      encodeURIComponent(String(startedAt)) +
+      '&mode=' +
+      encodeURIComponent(mode);
+    if (slug) url += '&slug=' + encodeURIComponent(slug);
 
     function tick() {
       if (Date.now() > deadline) return Promise.reject(new Error('timeout'));
@@ -215,16 +221,149 @@
           });
         })
         .then(function (data) {
-          if (data.status === 'done' && data.article) return data.article;
-          if (data.status === 'error') throw new Error(data.error || 'Error al generar');
-          setBlogStatus(
-            'info',
-            '<strong>Generando artículo…</strong> DeepSeek/Qwen escribiendo y publicando (2–4 min).'
-          );
+          if (data.status === 'done' && data.article) return { type: 'article', data: data.article };
+          if (data.status === 'done' && data.deleted) return { type: 'deleted', data: data.deleted };
+          if (data.status === 'error') throw new Error(data.error || 'Error en el workflow');
+          var msg =
+            mode === 'delete'
+              ? '<strong>Eliminando artículo…</strong> Borrando archivo y actualizando blog (1–2 min).'
+              : '<strong>Generando artículo…</strong> DeepSeek/Qwen escribiendo y publicando (2–4 min).';
+          setBlogStatus('info', msg);
           return sleep(12000).then(tick);
         });
     }
     return tick();
+  }
+
+  function renderBlogList(articles) {
+    var list = $('blog-list');
+    if (!list) return;
+    if (!articles || !articles.length) {
+      list.innerHTML = '<p class="blog-list-empty">No hay artículos en el blog.</p>';
+      return;
+    }
+    list.innerHTML = articles
+      .map(function (a) {
+        var title = a.title || a.slug;
+        var slug = a.slug || '';
+        var url = a.url || 'https://ghspecialist.com/blog/' + slug;
+        return (
+          '<div class="blog-item" data-slug="' +
+          slug.replace(/"/g, '&quot;') +
+          '">' +
+          '<div class="blog-item-main">' +
+          '<div class="blog-item-title"><a href="' +
+          url +
+          '" target="_blank" rel="noopener">' +
+          title +
+          '</a></div>' +
+          '<div class="blog-item-slug">' +
+          slug +
+          '</div>' +
+          '</div>' +
+          '<button type="button" class="btn-del" data-slug="' +
+          slug.replace(/"/g, '&quot;') +
+          '" title="Eliminar artículo">Borrar</button>' +
+          '</div>'
+        );
+      })
+      .join('');
+
+    list.querySelectorAll('.btn-del').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var slug = btn.getAttribute('data-slug');
+        if (slug) deleteBlogArticle(slug, btn);
+      });
+    });
+  }
+
+  function loadBlogList() {
+    var list = $('blog-list');
+    var refresh = $('btn-blog-refresh');
+    var apiBase = ((C.blogApiBase || 'https://adestajo.com.mx') + '').replace(/\/$/, '');
+    if (list) list.innerHTML = '<p class="blog-list-loading">Cargando artículos…</p>';
+    if (refresh) refresh.disabled = true;
+
+    return fetch(
+      apiBase + '/api/ghspecialist/blog-list?secret=' + encodeURIComponent(PASS)
+    )
+      .then(function (r) {
+        return r.json().then(function (data) {
+          if (!r.ok || !data.ok) throw new Error((data && data.error) || 'No se pudo cargar la lista');
+          return data.articles || [];
+        });
+      })
+      .then(function (articles) {
+        renderBlogList(articles);
+      })
+      .catch(function (err) {
+        if (list) {
+          list.innerHTML =
+            '<p class="blog-list-empty">Error al cargar: ' +
+            ((err && err.message) || String(err)) +
+            '. <button type="button" id="blog-list-retry" style="font:inherit;color:var(--p);font-weight:700;background:none;border:none;cursor:pointer">Reintentar</button></p>';
+          var retry = $('blog-list-retry');
+          if (retry) retry.addEventListener('click', loadBlogList);
+        }
+      })
+      .finally(function () {
+        if (refresh) refresh.disabled = false;
+      });
+  }
+
+  function deleteBlogArticle(slug, btn) {
+    if (!slug || !window.confirm('¿Borrar "' + slug + '" del blog? No se puede deshacer.')) return;
+
+    var apiBase = ((C.blogApiBase || 'https://adestajo.com.mx') + '').replace(/\/$/, '');
+    var allDel = document.querySelectorAll('.btn-del');
+    allDel.forEach(function (b) {
+      b.disabled = true;
+    });
+    if (btn) btn.textContent = 'Borrando…';
+    hideBlogStatus();
+    setBlogStatus('info', '<strong>Eliminando…</strong> ' + slug);
+
+    fetch(apiBase + '/api/ghspecialist/blog-delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: PASS, slug: slug }),
+    })
+      .then(function (r) {
+        return r.json().then(function (data) {
+          if (!r.ok || !data.ok) throw new Error((data && data.error) || 'No se pudo iniciar el borrado');
+          return data.startedAt || Date.now();
+        });
+      })
+      .then(function (startedAt) {
+        return pollBlogStatus(apiBase, startedAt, { mode: 'delete', slug: slug });
+      })
+      .then(function (result) {
+        setBlogStatus(
+          'ok',
+          '<p class="blog-status-title">Artículo eliminado</p><p>' +
+            (result.data.title || result.data.slug || slug) +
+            '</p><a href="https://ghspecialist.com/blog/" target="_blank" rel="noopener">Ver blog →</a>'
+        );
+        return loadBlogList();
+      })
+      .catch(function (err) {
+        var msg = (err && err.message) || String(err);
+        if (msg === 'timeout') {
+          setBlogStatus(
+            'warn',
+            '<strong>Tarda más de lo normal.</strong> Recarga la lista en un minuto.'
+          );
+          loadBlogList();
+        } else {
+          setBlogStatus('err', '<strong>Error:</strong> ' + msg);
+        }
+      })
+      .finally(function () {
+        allDel.forEach(function (b) {
+          b.disabled = false;
+          b.textContent = 'Borrar';
+        });
+      });
   }
 
   function initBlogGenerate() {
@@ -263,9 +402,10 @@
           });
         })
         .then(function (startedAt) {
-          return pollBlogStatus(apiBase, startedAt);
+          return pollBlogStatus(apiBase, startedAt, { mode: 'generate' });
         })
-        .then(function (article) {
+        .then(function (result) {
+          var article = result.data;
           if (topicEl) topicEl.value = '';
           if (kwEl) kwEl.value = '';
           var url = (article && article.url) || 'https://ghspecialist.com/blog/';
@@ -278,6 +418,7 @@
               url +
               '" target="_blank" rel="noopener">Ver artículo →</a> · <a href="https://ghspecialist.com/blog/" target="_blank" rel="noopener">Ver blog</a>'
           );
+          loadBlogList();
         })
         .catch(function (err) {
           var msg = (err && err.message) || String(err);
@@ -304,6 +445,15 @@
         }
       });
     }
+
+    var refreshBtn = $('btn-blog-refresh');
+    if (refreshBtn) {
+      refreshBtn.addEventListener('click', function () {
+        loadBlogList();
+      });
+    }
+
+    loadBlogList();
   }
 
   document.addEventListener('DOMContentLoaded', function () {
