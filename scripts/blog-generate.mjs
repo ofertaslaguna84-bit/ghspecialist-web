@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * Genera un artículo de blog con OpenAI, escribe HTML, actualiza blog/index.html y sitemap/RSS.
- * Uso local: BLOG_TOPIC="..." OPENAI_API_KEY=sk-... node scripts/blog-generate.mjs
- * CI: secrets OPENAI_API_KEY + BLOG_GENERATE_SECRET; client_payload.secret debe coincidir.
+ * Genera un artículo de blog con Claude (Anthropic), escribe HTML, actualiza blog/index.html y sitemap/RSS.
+ * Uso local: BLOG_TOPIC="..." ANTHROPIC_API_KEY=sk-ant-... node scripts/blog-generate.mjs
+ * CI: secrets ANTHROPIC_API_KEY + BLOG_GENERATE_SECRET; client_payload.secret debe coincidir.
  */
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -73,28 +73,34 @@ async function listExistingArticles() {
   return files.filter((f) => f.endsWith('.html') && f !== 'index.html' && !f.startsWith('_'));
 }
 
-async function callOpenAI(prompt, apiKey) {
-  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+async function callClaude(prompt, apiKey) {
+  const model = (process.env.CLAUDE_MODEL || 'claude-3-5-haiku-20241022').trim();
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'content-type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'gpt-4o-mini',
-      messages: [{ role: 'user', content: prompt }],
+      model,
       max_tokens: 8192,
-      temperature: 0.7,
+      messages: [{ role: 'user', content: prompt }],
     }),
   });
+  const raw = await res.text();
   if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`OpenAI ${res.status}: ${err.slice(0, 300)}`);
+    throw new Error(`Anthropic ${res.status}: ${raw.slice(0, 300)}`);
   }
-  const data = await res.json();
-  const content = data.choices?.[0]?.message?.content;
-  if (!content) throw new Error('OpenAI sin contenido');
-  return content;
+  let data;
+  try {
+    data = JSON.parse(raw);
+  } catch {
+    throw new Error('Anthropic: respuesta no JSON');
+  }
+  const text = data.content?.find((c) => c.type === 'text')?.text;
+  if (!text) throw new Error('Claude no devolvió texto');
+  return text;
 }
 
 function buildPrompt(topic, keywords, existingSlugs) {
@@ -315,9 +321,9 @@ async function main() {
     process.exit(1);
   }
 
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    console.error('Falta OPENAI_API_KEY en secrets del repo');
+    console.error('Falta ANTHROPIC_API_KEY en secrets del repo');
     process.exit(1);
   }
 
@@ -327,7 +333,7 @@ async function main() {
   const keywords = (process.env.BLOG_KEYWORDS || '').trim();
 
   const existing = await listExistingArticles();
-  const raw = await callOpenAI(buildPrompt(topic, keywords, existing), apiKey);
+  const raw = await callClaude(buildPrompt(topic, keywords, existing), apiKey);
   const parsed = extractJsonObject(raw.replace(/```json\s*/gi, '').replace(/```/g, ''));
 
   if (!parsed.slug) parsed.slug = slugify(parsed.title || topic);

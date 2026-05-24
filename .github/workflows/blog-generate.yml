@@ -19,7 +19,7 @@ jobs:
 
       - name: Generar artículo
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           BLOG_GENERATE_SECRET: ${{ secrets.BLOG_GENERATE_SECRET }}
           CLIENT_SECRET: ${{ github.event.client_payload.secret }}
           BLOG_TOPIC: ${{ github.event.client_payload.topic }}

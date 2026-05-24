@@ -1,5 +1,5 @@
 /**
- * Panel interno GH Specialist — Analytics, Formspree, blog one-click (GitHub Actions + OpenAI).
+ * Panel interno GH Specialist — Analytics, Formspree, blog one-click (GitHub Actions + Claude).
  */
 (function () {
   var C = window.GH_SITE_CONFIG || {};
@@ -287,7 +287,7 @@
       if (!pat) {
         setBlogStatus(
           'err',
-          '<strong>Falta configurar el token.</strong> Pega <code>githubDispatchPat</code> en <code>js/gh-site-config.js</code> (PAT con Actions + Contents) y sube el cambio. También necesitas los secrets <code>OPENAI_API_KEY</code> y <code>BLOG_GENERATE_SECRET</code> en GitHub.'
+          '<strong>Falta configurar el token.</strong> Pega <code>githubDispatchPat</code> en <code>js/gh-site-config.js</code> (PAT con Actions + Contents) y sube el cambio. También necesitas los secrets <code>ANTHROPIC_API_KEY</code> y <code>BLOG_GENERATE_SECRET</code> en GitHub.'
         );
         return;
       }
@@ -324,7 +324,7 @@
         .then(function () {
           setBlogStatus(
             'info',
-            '<strong>Generando artículo…</strong> OpenAI + publicación automática. Espera 2–4 minutos.'
+            '<strong>Generando artículo…</strong> Claude está escribiendo y publicando (2–4 min).'
           );
           return pollBlogWorkflow(startedAt, owner, repo, pat);
         })

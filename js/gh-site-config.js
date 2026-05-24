@@ -35,7 +35,7 @@
  * === E) Blog one-click (como Adestajo) ===
  * githubOwner / githubRepo → repo donde corre GitHub Actions (genera HTML + deploy).
  * githubDispatchPat → token fine-grained con permisos Actions (RW) + Contents (RW) en ese repo.
- *   En GitHub → Settings → Secrets: OPENAI_API_KEY y BLOG_GENERATE_SECRET (misma clave que panelPassword).
+ *   En GitHub → Settings → Secrets: ANTHROPIC_API_KEY y BLOG_GENERATE_SECRET (misma clave que panelPassword).
  *
  * Tras editar: git add js/gh-site-config.js && git commit -m "chore: config" && git push origin main
  */
