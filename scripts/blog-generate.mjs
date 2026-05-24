@@ -3,7 +3,7 @@
  * Genera un artículo de blog con IA (DeepSeek / Qwen primero — baratos).
  * CI: secrets DEEPSEEK_API_KEY y/o QWEN_API_KEY + BLOG_GENERATE_SECRET.
  */
-import { readFile, writeFile, readdir } from 'node:fs/promises';
+import { readFile, writeFile, readdir, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
@@ -11,13 +11,136 @@ import { execSync } from 'node:child_process';
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const SITE = 'https://ghspecialist.com';
 
-const HERO_CARDS = [
-  { img: '../fotos/slide2_img2.png', city: 'México', og: `${SITE}/fotos/slide2_img2.png` },
-  { img: '../hero-torreon.jpg', city: 'Torreón', og: `${SITE}/hero-torreon.jpg` },
-  { img: '../hero-guadalajara.jpg', city: 'Guadalajara', og: `${SITE}/hero-guadalajara.jpg` },
-  { img: '../hero-queretaro.jpg', city: 'Querétaro', og: `${SITE}/hero-queretaro.jpg` },
-  { img: '../hero-chihuahua.jpg', city: 'Chihuahua', og: `${SITE}/hero-chihuahua.jpg` },
+const BASE_IMAGES = [
+  { path: 'fotos/slide2_img2.png', city: 'México', tags: ['whatsapp', 'chatbot', 'ia', 'automatizacion', 'negocio', 'mexico'] },
+  { path: 'fotos/slide1_img0.png', city: 'México', tags: ['ia', 'tecnologia', 'negocio', 'mexico'] },
+  { path: 'fotos/slide1_img1.jpg', city: 'México', tags: ['ia', 'tecnologia', 'negocio'] },
+  { path: 'fotos/slide2_img3.jpg', city: 'México', tags: ['whatsapp', 'ventas', 'negocio'] },
+  { path: 'fotos/slide5_img4.png', city: 'México', tags: ['crm', 'kommo', 'ventas'] },
+  { path: 'fotos/slide5_img5.jpg', city: 'México', tags: ['automatizacion', 'ia', 'negocio'] },
+  { path: 'hero-torreon.jpg', city: 'Torreón', tags: ['torreon', 'coahuila', 'mexico', 'negocio'] },
+  { path: 'hero-guadalajara.jpg', city: 'Guadalajara', tags: ['guadalajara', 'jalisco', 'mexico'] },
+  { path: 'hero-queretaro.jpg', city: 'Querétaro', tags: ['queretaro', 'mexico'] },
+  { path: 'hero-chihuahua.jpg', city: 'Chihuahua', tags: ['chihuahua', 'mexico'] },
+  { path: 'hero-monterrey.png', city: 'Monterrey', tags: ['monterrey', 'nuevo leon', 'mexico'] },
+  { path: 'hero-cdmx.png', city: 'CDMX', tags: ['cdmx', 'ciudad de mexico', 'mexico'] },
+  { path: 'hero-puebla.png', city: 'Puebla', tags: ['puebla', 'mexico'] },
+  { path: 'hero-leon.png', city: 'León', tags: ['leon', 'guanajuato', 'mexico'] },
+  { path: 'hero-merida.png', city: 'Mérida', tags: ['merida', 'yucatan', 'mexico'] },
+  { path: 'hero-bg.jpg', city: 'México', tags: ['mexico', 'negocio', 'tecnologia'] },
 ];
+
+function encodeWebPath(relPath) {
+  return relPath.split('/').map((p) => encodeURIComponent(p)).join('/');
+}
+
+function toHeroAsset(relPath, city, tags) {
+  const enc = encodeWebPath(relPath);
+  return {
+    img: `../${enc}`,
+    og: `${SITE}/${enc}`,
+    city,
+    tags,
+    relPath,
+    generated: false,
+  };
+}
+
+async function discoverImagePool() {
+  const pool = BASE_IMAGES.map((i) => toHeroAsset(i.path, i.city, i.tags));
+  try {
+    const rootFiles = await readdir(ROOT);
+    for (const f of rootFiles) {
+      if (/^NanoBanana.*\.(png|jpg|webp)$/i.test(f)) {
+        pool.push(toHeroAsset(f, 'México', ['ia', 'chatbot', 'whatsapp', 'automatizacion', 'tecnologia', 'negocio']));
+      }
+    }
+  } catch {
+    /* noop */
+  }
+  return pool.length ? pool : [toHeroAsset('fotos/slide2_img2.png', 'México', ['mexico'])];
+}
+
+function pickImageForTopic(pool, topic, keywords) {
+  const text = `${topic} ${keywords}`.toLowerCase();
+  const topicRules = [
+    { re: /whatsapp|chatbot|kommo|crm|ventas/, tags: ['whatsapp', 'chatbot', 'ventas', 'crm'] },
+    { re: /automatiz|agente|ia|inteligencia/, tags: ['ia', 'automatizacion', 'tecnologia'] },
+    { re: /humano|atencion|cliente|servicio/, tags: ['negocio', 'tecnologia', 'ia'] },
+  ];
+  let best = pool[0];
+  let bestScore = -1;
+  for (const item of pool) {
+    let score = Math.random();
+    for (const tag of item.tags) {
+      if (text.includes(tag)) score += 3;
+    }
+    for (const rule of topicRules) {
+      if (rule.re.test(text) && rule.tags.some((t) => item.tags.includes(t))) score += 4;
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      best = item;
+    }
+  }
+  return best;
+}
+
+async function generateHeroWithGemini(topic, slug, apiKey) {
+  const models = ['gemini-2.0-flash-preview-image-generation', 'gemini-2.5-flash-image'];
+  const prompt = `Imagen hero profesional para artículo de blog B2B en México sobre: ${topic}. Estilo moderno, tecnología e IA, acentos morado #7C4DFF, oficina o negocio latino, limpio, sin texto ni logos. Fotorealista.`;
+  const imgDir = join(ROOT, 'blog', 'img');
+  await mkdir(imgDir, { recursive: true });
+  const slugBase = slug.replace(/\.html$/, '');
+    try {
+      console.log(`→ Gemini imagen (${model})…`);
+      const res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { responseModalities: ['TEXT', 'IMAGE'] },
+          }),
+        }
+      );
+      const raw = await res.text();
+      if (!res.ok) throw new Error(`${model} ${res.status}: ${raw.slice(0, 200)}`);
+      const data = JSON.parse(raw);
+      const parts = data.candidates?.[0]?.content?.parts || [];
+      const imgPart = parts.find((p) => p.inlineData?.data || p.inline_data?.data);
+      const inline = imgPart?.inlineData || imgPart?.inline_data;
+      if (!inline?.data) throw new Error('sin imagen en respuesta');
+      const ext = (inline.mimeType || inline.mime_type || 'image/jpeg').includes('png') ? 'png' : 'jpg';
+      const finalRel = `blog/img/${slugBase}.${ext}`;
+      await writeFile(join(ROOT, finalRel), Buffer.from(inline.data, 'base64'));
+      const enc = encodeWebPath(finalRel);
+      return {
+        img: `../${enc}`,
+        og: `${SITE}/${enc}`,
+        city: 'GH Specialist',
+        tags: ['generado'],
+        relPath: finalRel,
+        generated: true,
+      };
+    } catch (e) {
+      console.warn('Gemini imagen:', e.message || e);
+    }
+  }
+  return null;
+}
+
+async function resolveHeroImage(topic, keywords, slug) {
+  const pool = await discoverImagePool();
+  const geminiKey = process.env.GEMINI_API_KEY?.trim();
+  const tryGemini = process.env.BLOG_GEMINI_IMAGES !== '0' && geminiKey;
+  if (tryGemini) {
+    const generated = await generateHeroWithGemini(topic, slug, geminiKey);
+    if (generated) return generated;
+  }
+  return pickImageForTopic(pool, topic, keywords);
+}
 
 const AUTO_TOPICS = [
   'cómo automatizar tu negocio con inteligencia artificial en México 2026',
@@ -344,7 +467,10 @@ function buildArticleHtml(article, dateIso, hero) {
     .art{max-width:720px;margin:0 auto;padding:24px 32px 48px}
     .art-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--p);margin-bottom:14px}
     .art h1{font-size:clamp(28px,5vw,46px);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:20px}
-    .art-meta{font-size:13px;color:var(--ink);margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+    .art-meta{font-size:13px;color:var(--ink);margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+    .art-hero{margin:0 0 32px;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:var(--bg2)}
+    .art-hero img{display:block;width:100%;height:auto;max-height:420px;object-fit:cover}
+    .art-hero figcaption{font-size:12px;color:var(--ink3);padding:10px 14px;text-align:center}
     .art h2{font-size:24px;font-weight:700;margin:40px 0 14px}.art h3{font-size:18px;font-weight:700;margin:28px 0 10px}
     .art p{margin-bottom:18px;font-size:17px;color:var(--ink2);line-height:1.8}
     .art ul,.art ol{margin:0 0 18px 22px}.art li{font-size:16px;color:var(--ink2);margin-bottom:8px}
@@ -373,6 +499,10 @@ function buildArticleHtml(article, dateIso, hero) {
   <div class="art-label">${escapeHtml(article.category_label)}</div>
   <h1>${escapeHtml(article.title)}</h1>
   <div class="art-meta">Por <strong>Pedro Luis Díaz Velázquez</strong> · GH Specialist · ${dateDisplay} · ${article.read_time || 8} min lectura</div>
+  <figure class="art-hero">
+    <img src="${hero.img}" alt="${escapeHtml(article.title)}" width="1200" height="630" loading="eager">
+    <figcaption>${hero.generated ? 'Imagen generada con IA · GH Specialist' : escapeHtml(article.card_city_label || hero.city || 'México')}</figcaption>
+  </figure>
   ${article.content_html}
   <div class="cta-art">
     <h3>¿Quieres automatizar tu negocio con IA?</h3>
@@ -464,7 +594,7 @@ async function main() {
     parsed.slug = parsed.slug.replace('.html', '') + '-' + Date.now().toString(36) + '.html';
   }
 
-  const hero = HERO_CARDS[Math.floor(Math.random() * HERO_CARDS.length)];
+  const hero = await resolveHeroImage(topic, keywords, parsed.slug);
   const dateIso = new Date().toISOString().slice(0, 10);
 
   const html = buildArticleHtml(parsed, dateIso, hero);

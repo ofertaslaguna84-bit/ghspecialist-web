@@ -32,6 +32,7 @@ jobs:
           QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
           DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          BLOG_GEMINI_IMAGES: '1'
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           BLOG_GENERATE_SECRET: ${{ secrets.BLOG_GENERATE_SECRET }}
           CLIENT_SECRET: ${{ github.event.client_payload.secret }}
