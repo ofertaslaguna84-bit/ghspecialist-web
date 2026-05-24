@@ -92,6 +92,8 @@ async function generateHeroWithGemini(topic, slug, apiKey) {
   const imgDir = join(ROOT, 'blog', 'img');
   await mkdir(imgDir, { recursive: true });
   const slugBase = slug.replace(/\.html$/, '');
+
+  for (const model of models) {
     try {
       console.log(`→ Gemini imagen (${model})…`);
       const res = await fetch(
