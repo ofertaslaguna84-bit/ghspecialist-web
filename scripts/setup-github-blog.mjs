@@ -40,13 +40,18 @@ async function gh(path, opts = {}) {
   return data;
 }
 
-async function readAnthropicKey() {
-  if (process.env.ANTHROPIC_API_KEY?.trim()) return process.env.ANTHROPIC_API_KEY.trim();
+async function readAdestajoEnv() {
   const envPath = `${ADESTAJO_DIR}/.env.vercel.local`;
   const raw = await readFile(envPath, 'utf8');
-  const m = raw.match(/ANTHROPIC_API_KEY="([^"]+)"/);
-  if (m) return m[1];
-  throw new Error('No ANTHROPIC_API_KEY');
+  const get = (key) => {
+    const m = raw.match(new RegExp(`${key}="([^"]+)"`));
+    return m ? m[1] : '';
+  };
+  return {
+    anthropic: get('ANTHROPIC_API_KEY'),
+    gemini: get('GEMINI_API_KEY') || (await readFile(`${ADESTAJO_DIR}/.env.local`, 'utf8').then((r) => r.match(/GEMINI_API_KEY="([^"]+)"/)?.[1] || '').catch(() => '')),
+    openai: get('OPENAI_API_KEY') || (await readFile(`${ADESTAJO_DIR}/.env.local`, 'utf8').then((r) => r.match(/OPENAI_API_KEY="([^"]+)"/)?.[1] || '').catch(() => '')),
+  };
 }
 
 async function setSecret(name, value) {
@@ -81,8 +86,13 @@ async function main() {
   const user = await gh('/user');
   console.log(`✓ GitHub: ${user.login}`);
 
-  const anthropic = await readAnthropicKey();
-  await setSecret('ANTHROPIC_API_KEY', anthropic);
+  const keys = await readAdestajoEnv();
+  if (keys.anthropic) await setSecret('ANTHROPIC_API_KEY', keys.anthropic);
+  if (keys.gemini) await setSecret('GEMINI_API_KEY', keys.gemini);
+  if (keys.openai) await setSecret('OPENAI_API_KEY', keys.openai);
+  if (!keys.gemini && !keys.openai && !keys.anthropic) {
+    throw new Error('No hay API keys de IA en Adestajo');
+  }
   await setSecret('BLOG_GENERATE_SECRET', BLOG_SECRET);
 
   vercelEnvAdd('GHSPECIALIST_GITHUB_TOKEN', GITHUB_TOKEN);

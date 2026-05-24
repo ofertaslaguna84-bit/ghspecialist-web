@@ -73,6 +73,46 @@ async function listExistingArticles() {
   return files.filter((f) => f.endsWith('.html') && f !== 'index.html' && !f.startsWith('_'));
 }
 
+async function callGemini(prompt, apiKey, model = 'gemini-2.0-flash') {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: prompt }] }],
+      generationConfig: { maxOutputTokens: 8192, temperature: 0.7 },
+    }),
+  });
+  const raw = await res.text();
+  if (!res.ok) throw new Error(`Gemini ${res.status}: ${raw.slice(0, 300)}`);
+  const data = JSON.parse(raw);
+  const text = data.candidates?.[0]?.content?.parts?.map((p) => p.text).join('') || '';
+  if (!text) throw new Error('Gemini sin contenido');
+  return text;
+}
+
+async function callOpenAI(prompt, apiKey) {
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: 'gpt-4o-mini',
+      messages: [{ role: 'user', content: prompt }],
+      max_tokens: 8192,
+      temperature: 0.7,
+    }),
+  });
+  const raw = await res.text();
+  if (!res.ok) throw new Error(`OpenAI ${res.status}: ${raw.slice(0, 300)}`);
+  const data = JSON.parse(raw);
+  const text = data.choices?.[0]?.message?.content;
+  if (!text) throw new Error('OpenAI sin contenido');
+  return text;
+}
+
 async function callClaude(prompt, apiKey) {
   const model = (process.env.CLAUDE_MODEL || 'claude-3-5-haiku-20241022').trim();
   const res = await fetch('https://api.anthropic.com/v1/messages', {
@@ -101,6 +141,48 @@ async function callClaude(prompt, apiKey) {
   const text = data.content?.find((c) => c.type === 'text')?.text;
   if (!text) throw new Error('Claude no devolvió texto');
   return text;
+}
+
+async function generateArticleContent(prompt) {
+  const errors = [];
+  const anthropic = process.env.ANTHROPIC_API_KEY?.trim();
+  const gemini = process.env.GEMINI_API_KEY?.trim();
+  const openai = process.env.OPENAI_API_KEY?.trim();
+
+  if (anthropic) {
+    try {
+      console.log('→ Claude…');
+      return await callClaude(prompt, anthropic);
+    } catch (e) {
+      errors.push(e.message || String(e));
+    }
+  }
+
+  const geminiModels = ['gemini-2.0-flash', 'gemini-2.0-flash-lite', 'gemini-1.5-flash'];
+  if (gemini) {
+    for (const model of geminiModels) {
+      try {
+        console.log(`→ Gemini (${model})…`);
+        return await callGemini(prompt, gemini, model);
+      } catch (e) {
+        errors.push(e.message || String(e));
+      }
+    }
+  }
+
+  if (openai) {
+    try {
+      console.log('→ OpenAI…');
+      return await callOpenAI(prompt, openai);
+    } catch (e) {
+      errors.push(e.message || String(e));
+    }
+  }
+
+  if (!anthropic && !gemini && !openai) {
+    throw new Error('Falta ANTHROPIC_API_KEY, GEMINI_API_KEY u OPENAI_API_KEY en secrets');
+  }
+  throw new Error(`Todas las IAs fallaron: ${errors.join(' · ').slice(0, 500)}`);
 }
 
 function buildPrompt(topic, keywords, existingSlugs) {
@@ -321,9 +403,9 @@ async function main() {
     process.exit(1);
   }
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.ANTHROPIC_API_KEY || process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY;
   if (!apiKey) {
-    console.error('Falta ANTHROPIC_API_KEY en secrets del repo');
+    console.error('Falta al menos una API key (ANTHROPIC, GEMINI u OPENAI) en secrets del repo');
     process.exit(1);
   }
 
@@ -333,7 +415,7 @@ async function main() {
   const keywords = (process.env.BLOG_KEYWORDS || '').trim();
 
   const existing = await listExistingArticles();
-  const raw = await callClaude(buildPrompt(topic, keywords, existing), apiKey);
+  const raw = await generateArticleContent(buildPrompt(topic, keywords, existing));
   const parsed = extractJsonObject(raw.replace(/```json\s*/gi, '').replace(/```/g, ''));
 
   if (!parsed.slug) parsed.slug = slugify(parsed.title || topic);
