@@ -11,18 +11,26 @@ Posicionar a GH Specialist como autoridad en automatizacion con IA para negocios
 
 ---
 
-## 2. CATEGORIAS DEL BLOG
+## 2. CATEGORIAS DEL BLOG (tags visuales)
 
-Configurar estas categorias en Wix Blog:
+El blog es HTML estático en GitHub Pages (`ghspecialist.com/blog/`). Las categorías se muestran como **tags en las cards** del índice, no como rutas separadas.
 
-| Categoria | Slug en URL | Descripcion |
+| Categoria | Tag en card | Descripcion |
 |-----------|-------------|-------------|
-| **Automatizacion con IA** | `/blog/automatizacion-ia` | Todo sobre automatizar procesos con IA |
-| **Chatbots y Agentes IA** | `/blog/chatbots-agentes-ia` | WhatsApp bots, agentes, atencion automatica |
-| **CRM y Ventas** | `/blog/crm-ventas` | Kommo, gestion de leads, pipelines |
-| **Marketing Digital** | `/blog/marketing-digital` | SEO, redes, email marketing con IA |
-| **Tendencias IA** | `/blog/tendencias-ia` | Noticias y futuro de la IA empresarial |
-| **Guias Practicas** | `/blog/guias` | Tutoriales paso a paso |
+| **Automatizacion con IA** | `Automatización · IA` | Todo sobre automatizar procesos con IA |
+| **Chatbots y Agentes IA** | `Chatbots · WhatsApp` | WhatsApp bots, agentes, atencion automatica |
+| **CRM y Ventas** | `CRM · Kommo` | Kommo, gestion de leads, pipelines |
+| **Marketing Digital** | `Marketing · SEO` | SEO, redes, email marketing con IA |
+| **Tendencias IA** | `Tendencias · IA` | Noticias y futuro de la IA empresarial |
+| **Guias Practicas** | `Guía · Práctica` | Tutoriales paso a paso |
+
+### Flujo de publicación (GitHub Pages)
+
+1. Generar contenido con el prompt del panel (`/panel/` → sección Blog) o redactar manualmente
+2. Copiar `blog/_template.html` → `blog/[slug].html` y rellenar placeholders + contenido
+3. Añadir card al grid de `blog/index.html`
+4. Ejecutar `node scripts/generate-seo.mjs` (regenera `sitemap.xml` y `blog/feed.xml`)
+5. Push a `main` → GitHub Actions despliega automáticamente
 
 ---
 

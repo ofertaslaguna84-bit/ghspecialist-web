@@ -187,16 +187,28 @@
     if (k) lines.push('PALABRAS CLAVE O ÁNGULO: ' + k);
     lines.push(
       '',
-      'REQUISITOS:',
+      'REQUISITOS DE CONTENIDO:',
       '- Longitud orientativa: 1.800–2.400 palabras.',
-      '- Incluye: meta description (máximo ~155 caracteres), un H1, introducción con gancho, varios H2 y H3, listas con viñetas donde tenga sentido, conclusiones.',
-      '- Tono profesional, claro, orientado a dueños de negocio y directivos.',
-      '- Incluye un CTA hacia https://calendly.com/ghspecialist (diagnóstico / agendar llamada).',
-      '- Menciona servicios de GH Specialist (IA, WhatsApp, CRM Kommo, automatización) solo si encajan de forma natural con el tema.',
-      '- Sugiere un slug de URL en kebab-case (ej: mi-tema-mexico-2026).',
-      '- Al final, entrega un bloque JSON-LD schema.org tipo Article listo para el <head> del HTML.',
+      '- Incluye: meta description (máximo ~155 caracteres), un H1, introducción con gancho, varios H2 y H3, listas con viñetas, conclusiones.',
+      '- Tono profesional, claro, orientado a dueños de negocio y directivos en México.',
+      '- 3–5 enlaces internos naturales a artículos del blog (ghspecialist.com/blog/) y servicios (ghspecialist.com/servicios/).',
+      '- Sección "Artículos relacionados" con 2–3 links al final del artículo.',
+      '- CTAs: https://calendly.com/ghspecialist y WhatsApp +528712638082.',
+      '- Slug en kebab-case para archivo: blog/[slug].html (ej: mi-tema-mexico-2026.html).',
       '',
-      'Entrega el cuerpo del artículo en HTML limpio (<p>, <h2>, <h3>, <ul>, <li>, <strong>) para pegarlo en blog/[slug].html del sitio estático.'
+      'REQUISITOS SEO TÉCNICOS (usar blog/_template.html como base):',
+      '- Bloque <head> completo: title, description, canonical, Open Graph (og:type=article, og:image, og:locale), Twitter Card summary_large_image.',
+      '- JSON-LD Article completo (headline, description, image, author, publisher+logo, datePublished, dateModified, mainEntityOfPage).',
+      '- JSON-LD BreadcrumbList: Inicio > Blog > Título.',
+      '- Breadcrumbs visuales antes del <article>.',
+      '- Imagen OG absoluta: https://ghspecialist.com/hero-[ciudad].jpg o fotos/slide2_img2.png.',
+      '',
+      'DESPUÉS DE REDACTAR:',
+      '- Pegar en blog/[slug].html desde _template.html.',
+      '- Añadir card en blog/index.html.',
+      '- Ejecutar: node scripts/generate-seo.mjs',
+      '',
+      'Entrega el cuerpo del artículo en HTML limpio (<p>, <h2>, <h3>, <ul>, <li>, <strong>) listo para pegar dentro de <article class="art">.'
     );
     return lines.join('\n');
   }

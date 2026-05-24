@@ -3,3 +3,5 @@ Allow: /
 Sitemap: https://ghspecialist.com/sitemap.xml
 Disallow: /drafts/
 Disallow: /panel/
+Disallow: /landing/
+Disallow: /wix-chat-demo.html
