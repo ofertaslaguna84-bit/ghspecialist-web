@@ -13,7 +13,7 @@
   <meta name="theme-color" content="#7C4DFF">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="../js/gh-site-config.js?v=panel7"></script>
+  <script src="../js/gh-site-config.js?v=panel8"></script>
   <script>
     (function () {
       var p = (window.GH_SITE_CONFIG && window.GH_SITE_CONFIG.panelPassword || '').trim();
@@ -22,7 +22,7 @@
       if (p && !ok) document.documentElement.classList.add('panel-gated');
     })();
   </script>
-  <script src="../js/gh-panel.js?v=panel7" defer></script>
+  <script src="../js/gh-panel.js?v=panel8" defer></script>
   <style>
     :root {
       --p: #7C4DFF;
@@ -84,6 +84,12 @@
     .btn-del:disabled { opacity: .45; cursor: not-allowed; }
     .blog-list-empty { font-size: 13px; color: var(--ink3); padding: 8px 0; }
     .blog-list-loading { font-size: 13px; color: var(--ink3); }
+    .blog-token-box { margin-top: 14px; padding: 12px 14px; border-radius: 10px; background: #fffbeb; border: 1px solid #fde68a; font-size: 12px; line-height: 1.55; }
+    .blog-token-box strong { color: #92400e; }
+    .blog-token-row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+    .blog-token-row input { flex: 1; min-width: 200px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 13px; }
+    .blog-token-row button { padding: 10px 14px; border-radius: 8px; border: none; background: var(--p); color: #fff; font-weight: 700; font-size: 12px; cursor: pointer; font-family: inherit; }
+    .blog-token-ok { color: #166534; font-size: 12px; margin-top: 8px; }
     .leads-embed iframe { min-height: 360px; }
     .analytics-ok {
       background: #f0fdf4;
@@ -291,6 +297,14 @@
           <button type="button" class="btn-p" id="btn-blog-generate">Generar artículo</button>
         </div>
         <input type="text" id="blog-keywords" class="blog-kw" placeholder="Palabras clave o ángulo (opcional)" autocomplete="off">
+        <div id="blog-token-wrap" class="blog-token-box" hidden>
+          <strong>API de Adestajo no responde</strong> (Vercel caído). Para generar o borrar artículos, pega un token GitHub con permisos <span class="mono">repo</span> + <span class="mono">workflow</span> en el repo <span class="mono">ghspecialist-web</span>. Se guarda solo en este navegador.
+          <div class="blog-token-row">
+            <input type="password" id="blog-github-token" placeholder="ghp_… o github_pat_…" autocomplete="off">
+            <button type="button" id="btn-save-github-token">Guardar token</button>
+          </div>
+          <p id="blog-token-ok" class="blog-token-ok" hidden>Token guardado. Ya puedes generar o borrar.</p>
+        </div>
         <div id="blog-status" hidden></div>
         <div class="blog-list" id="blog-list-wrap">
           <div class="blog-list-head">
