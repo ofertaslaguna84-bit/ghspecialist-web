@@ -13,7 +13,7 @@
   <meta name="theme-color" content="#7C4DFF">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="../js/gh-site-config.js?v=panel8"></script>
+  <script src="../js/gh-site-config.js?v=panel9"></script>
   <script>
     (function () {
       var p = (window.GH_SITE_CONFIG && window.GH_SITE_CONFIG.panelPassword || '').trim();
@@ -22,7 +22,7 @@
       if (p && !ok) document.documentElement.classList.add('panel-gated');
     })();
   </script>
-  <script src="../js/gh-panel.js?v=panel8" defer></script>
+  <script src="../js/gh-panel.js?v=panel9" defer></script>
   <style>
     :root {
       --p: #7C4DFF;
@@ -79,9 +79,13 @@
     .blog-item-title a { color: var(--ink); }
     .blog-item-title a:hover { color: var(--p); }
     .blog-item-slug { font-size: 11px; color: var(--ink3); font-family: ui-monospace, monospace; word-break: break-all; }
-    .btn-del { flex-shrink: 0; font-family: inherit; font-size: 12px; font-weight: 700; color: #b91c1c; background: #fef2f2; border: 1px solid #fecaca; padding: 8px 12px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
+    .blog-item-date { font-size: 11px; color: var(--ink3); margin-top: 4px; }
+    .blog-item-actions { display: flex; flex-shrink: 0; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+    .btn-edit { font-family: inherit; font-size: 12px; font-weight: 700; color: var(--p); background: var(--p-light); border: 1px solid #ddd5ff; padding: 8px 12px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
+    .btn-edit:hover { background: #e9ddff; }
+    .btn-del { font-family: inherit; font-size: 12px; font-weight: 700; color: #b91c1c; background: #fef2f2; border: 1px solid #fecaca; padding: 8px 12px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
     .btn-del:hover { background: #fee2e2; }
-    .btn-del:disabled { opacity: .45; cursor: not-allowed; }
+    .btn-edit:disabled, .btn-del:disabled { opacity: .45; cursor: not-allowed; }
     .blog-list-empty { font-size: 13px; color: var(--ink3); padding: 8px 0; }
     .blog-list-loading { font-size: 13px; color: var(--ink3); }
     .blog-token-box { margin-top: 14px; padding: 12px 14px; border-radius: 10px; background: #fffbeb; border: 1px solid #fde68a; font-size: 12px; line-height: 1.55; }
@@ -90,6 +94,20 @@
     .blog-token-row input { flex: 1; min-width: 200px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 13px; }
     .blog-token-row button { padding: 10px 14px; border-radius: 8px; border: none; background: var(--p); color: #fff; font-weight: 700; font-size: 12px; cursor: pointer; font-family: inherit; }
     .blog-token-ok { color: #166534; font-size: 12px; margin-top: 8px; }
+    .blog-edit-modal { position: fixed; inset: 0; z-index: 900; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(0,0,0,.45); }
+    .blog-edit-modal[hidden] { display: none !important; }
+    .blog-edit-box { width: 100%; max-width: 720px; max-height: 90vh; overflow: auto; background: #fff; border-radius: 14px; padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,.2); }
+    .blog-edit-box h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 6px; }
+    .blog-edit-meta { font-size: 12px; color: var(--ink3); margin-bottom: 16px; }
+    .blog-edit-field { margin-bottom: 14px; }
+    .blog-edit-field label { display: block; font-size: 12px; font-weight: 700; color: var(--ink3); margin-bottom: 6px; }
+    .blog-edit-field input, .blog-edit-field textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 14px; }
+    .blog-edit-field textarea { min-height: 220px; font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.5; resize: vertical; }
+    .blog-edit-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 18px; flex-wrap: wrap; }
+    .blog-edit-actions button { padding: 10px 18px; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; font-family: inherit; border: none; }
+    .blog-edit-cancel { background: #f3f4f6; color: var(--ink3); }
+    .blog-edit-save { background: var(--p); color: #fff; }
+    .blog-edit-save:disabled { opacity: .55; cursor: not-allowed; }
     .leads-embed iframe { min-height: 360px; }
     .analytics-ok {
       background: #f0fdf4;
@@ -361,6 +379,34 @@
           <a class="link" id="link-blog" href="https://ghspecialist.com/blog/" target="_blank" rel="noopener">Blog →</a>
         </div>
       </section>
+    </div>
+  </div>
+
+  <div id="blog-edit-modal" class="blog-edit-modal" hidden>
+    <div class="blog-edit-box" role="dialog" aria-labelledby="blog-edit-title">
+      <h3 id="blog-edit-title">Editar artículo</h3>
+      <p class="blog-edit-meta" id="blog-edit-date"></p>
+      <input type="hidden" id="blog-edit-slug">
+      <div class="blog-edit-field">
+        <label for="blog-edit-title-input">Título</label>
+        <input type="text" id="blog-edit-title-input" autocomplete="off">
+      </div>
+      <div class="blog-edit-field">
+        <label for="blog-edit-desc">Descripción SEO (meta)</label>
+        <input type="text" id="blog-edit-desc" autocomplete="off">
+      </div>
+      <div class="blog-edit-field">
+        <label for="blog-edit-excerpt">Extracto en tarjeta del blog</label>
+        <input type="text" id="blog-edit-excerpt" autocomplete="off">
+      </div>
+      <div class="blog-edit-field">
+        <label for="blog-edit-body">Contenido (HTML: p, h2, ul, etc.)</label>
+        <textarea id="blog-edit-body" spellcheck="false"></textarea>
+      </div>
+      <div class="blog-edit-actions">
+        <button type="button" class="blog-edit-cancel" id="blog-edit-cancel">Cancelar</button>
+        <button type="button" class="blog-edit-save" id="blog-edit-save">Guardar cambios</button>
+      </div>
     </div>
   </div>
 </body>

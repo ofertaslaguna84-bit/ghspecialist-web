@@ -275,17 +275,54 @@
 
   function parseBlogIndexHtml(html) {
     var articles = [];
-    var re = /<a href="([^"]+\.html)" class="card">[\s\S]*?<h2>([^<]*)<\/h2>/g;
+    var re = /<a href="([^"]+\.html)" class="card">([\s\S]*?)<\/a>/g;
     var m;
     while ((m = re.exec(html)) !== null) {
-      if (m[1] === 'index.html' || m[1].indexOf('_') === 0) continue;
+      var slug = m[1];
+      var block = m[2];
+      if (slug === 'index.html' || slug.indexOf('_') === 0) continue;
+      var titleM = block.match(/<h2>([^<]*)<\/h2>/);
+      var dateM = block.match(/<div class="card-meta">\s*<span>\s*([^·<]+)/);
       articles.push({
-        slug: m[1],
-        title: m[2].trim(),
-        url: 'https://ghspecialist.com/blog/' + m[1],
+        slug: slug,
+        title: titleM ? titleM[1].trim() : slug,
+        date: dateM ? dateM[1].trim() : '',
+        url: 'https://ghspecialist.com/blog/' + slug,
       });
     }
     return articles;
+  }
+
+  function extractArticleFields(html) {
+    var title = (html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i) || [])[1] || '';
+    title = title.replace(/<[^>]+>/g, '').trim();
+    var description = (html.match(/<meta name="description" content="([^"]*)"/i) || [])[1] || '';
+    var datePub =
+      (html.match(/"datePublished"\s*:\s*"([^"]+)"/) || [])[1] ||
+      (html.match(/<meta property="article:published_time" content="([^"]+)"/i) || [])[1] ||
+      '';
+    var dateLabel = datePub
+      ? new Date(datePub).toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' })
+      : '';
+    var start = html.match(/<div class="art-meta">[\s\S]*?<\/div>\s*/i);
+    var bodyHtml = '';
+    if (start) {
+      var startIdx = start.index + start[0].length;
+      var endIdx = html.length;
+      ['<div class="cta-art">', '<section class="related"'].forEach(function (mark) {
+        var p = html.indexOf(mark, startIdx);
+        if (p !== -1 && p < endIdx) endIdx = p;
+      });
+      bodyHtml = html.slice(startIdx, endIdx).trim();
+    }
+    var excerpt = (html.match(/<meta name="description" content="([^"]*)"/i) || [])[1] || '';
+    return { title: title, description: description, dateLabel: dateLabel, datePub: datePub, bodyHtml: bodyHtml, excerpt: excerpt };
+  }
+
+  function triggerBlogSave(payload) {
+    return dispatchGithub('blog_save', Object.assign({ secret: PASS }, payload)).then(function (startedAt) {
+      return { startedAt: startedAt, via: 'github' };
+    });
   }
 
   function dispatchGithub(eventType, payload) {
@@ -334,7 +371,12 @@
     var token = getGithubToken();
     if (!token) return Promise.reject(new Error('Falta token GitHub'));
     var deadline = Date.now() + 8 * 60 * 1000;
-    var resultFile = mode === 'delete' ? 'blog-delete-result.json' : 'blog-generate-result.json';
+    var resultFile =
+      mode === 'delete'
+        ? 'blog-delete-result.json'
+        : mode === 'save'
+          ? 'blog-save-result.json'
+          : 'blog-generate-result.json';
 
     function tick() {
       if (Date.now() > deadline) return Promise.reject(new Error('timeout'));
@@ -381,6 +423,13 @@
                   return sleep(8000).then(tick);
                 }
                 return { type: 'deleted', data: result };
+              }
+            } else if (mode === 'save') {
+              if (result && result.ok && result.saved && result.slug) {
+                if (expectedSlug && result.slug !== expectedSlug) {
+                  return sleep(8000).then(tick);
+                }
+                return { type: 'saved', data: result };
               }
             } else if (result && result.ok && result.url) {
               return { type: 'article', data: result };
@@ -434,7 +483,8 @@
 
   function waitBlogJob(startedAt, mode, slug, via) {
     if (via === 'github') {
-      var wf = mode === 'delete' ? 'blog-delete.yml' : 'blog-generate.yml';
+      var wf =
+        mode === 'delete' ? 'blog-delete.yml' : mode === 'save' ? 'blog-save.yml' : 'blog-generate.yml';
       return pollGithubWorkflow(wf, startedAt, mode, slug);
     }
     return pollBlogStatusAdestajo(startedAt, mode, slug);
@@ -489,6 +539,7 @@
         var title = a.title || a.slug;
         var slug = a.slug || '';
         var url = a.url || 'https://ghspecialist.com/blog/' + slug;
+        var dateLine = a.date ? '<div class="blog-item-date">Publicado: ' + a.date + '</div>' : '';
         return (
           '<div class="blog-item" data-slug="' +
           slug.replace(/"/g, '&quot;') +
@@ -502,10 +553,16 @@
           '<div class="blog-item-slug">' +
           slug +
           '</div>' +
+          dateLine +
           '</div>' +
+          '<div class="blog-item-actions">' +
+          '<button type="button" class="btn-edit" data-slug="' +
+          slug.replace(/"/g, '&quot;') +
+          '">Editar</button>' +
           '<button type="button" class="btn-del" data-slug="' +
           slug.replace(/"/g, '&quot;') +
-          '" title="Eliminar artículo">Borrar</button>' +
+          '">Borrar</button>' +
+          '</div>' +
           '</div>'
         );
       })
@@ -517,6 +574,127 @@
         if (slug) deleteBlogArticle(slug, btn);
       });
     });
+    list.querySelectorAll('.btn-edit').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var slug = btn.getAttribute('data-slug');
+        if (slug) openBlogEdit(slug, btn);
+      });
+    });
+  }
+
+  function openBlogEdit(slug, btn) {
+    var modal = $('blog-edit-modal');
+    if (!modal) return;
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Cargando…';
+    }
+    fetch('../blog/' + slug + '?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.text();
+      })
+      .then(function (html) {
+        var fields = extractArticleFields(html);
+        var slugEl = $('blog-edit-slug');
+        var dateEl = $('blog-edit-date');
+        var titleEl = $('blog-edit-title-input');
+        var descEl = $('blog-edit-desc');
+        var excerptEl = $('blog-edit-excerpt');
+        var bodyEl = $('blog-edit-body');
+        if (slugEl) slugEl.value = slug;
+        if (dateEl) {
+          dateEl.textContent = fields.dateLabel
+            ? 'Publicado: ' + fields.dateLabel + ' · ' + slug
+            : slug;
+        }
+        if (titleEl) titleEl.value = fields.title;
+        if (descEl) descEl.value = fields.description;
+        if (excerptEl) excerptEl.value = fields.excerpt;
+        if (bodyEl) bodyEl.value = fields.bodyHtml;
+        modal.hidden = false;
+      })
+      .catch(function (err) {
+        setBlogStatus('err', '<strong>Error al abrir editor:</strong> ' + ((err && err.message) || String(err)));
+      })
+      .finally(function () {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = 'Editar';
+        }
+      });
+  }
+
+  function closeBlogEdit() {
+    var modal = $('blog-edit-modal');
+    if (modal) modal.hidden = true;
+  }
+
+  function saveBlogEdit() {
+    var slug = ($('blog-edit-slug') && $('blog-edit-slug').value) || '';
+    var title = ($('blog-edit-title-input') && $('blog-edit-title-input').value) || '';
+    var description = ($('blog-edit-desc') && $('blog-edit-desc').value) || '';
+    var cardExcerpt = ($('blog-edit-excerpt') && $('blog-edit-excerpt').value) || description;
+    var bodyHtml = ($('blog-edit-body') && $('blog-edit-body').value) || '';
+    var saveBtn = $('blog-edit-save');
+
+    if (!slug || !title.trim() || !description.trim() || !bodyHtml.trim()) {
+      setBlogStatus('err', '<strong>Faltan campos</strong> — título, descripción y contenido son obligatorios.');
+      return;
+    }
+
+    if (saveBtn) {
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Guardando…';
+    }
+    closeBlogEdit();
+    setBlogStatus('info', '<strong>Guardando cambios…</strong> ' + slug);
+
+    triggerBlogSave({
+      slug: slug,
+      title: title.trim(),
+      description: description.trim(),
+      bodyHtml: bodyHtml.trim(),
+      cardExcerpt: cardExcerpt.trim(),
+    })
+      .then(function (job) {
+        return waitBlogJob(job.startedAt, 'save', slug, job.via);
+      })
+      .then(function (result) {
+        setBlogStatus(
+          'ok',
+          '<p class="blog-status-title">Artículo actualizado</p><p>' +
+            (result.data.title || slug) +
+            '</p><a href="https://ghspecialist.com/blog/' +
+            slug +
+            '" target="_blank" rel="noopener">Ver artículo →</a>'
+        );
+        loadBlogList();
+      })
+      .catch(function (err) {
+        var msg = (err && err.message) || String(err);
+        setBlogStatus('err', '<strong>Error al guardar:</strong> ' + msg);
+        showGithubTokenBox(true);
+      })
+      .finally(function () {
+        if (saveBtn) {
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Guardar cambios';
+        }
+      });
+  }
+
+  function initBlogEditModal() {
+    var cancel = $('blog-edit-cancel');
+    var save = $('blog-edit-save');
+    var modal = $('blog-edit-modal');
+    if (cancel) cancel.addEventListener('click', closeBlogEdit);
+    if (save) save.addEventListener('click', saveBlogEdit);
+    if (modal) {
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) closeBlogEdit();
+      });
+    }
   }
 
   function loadBlogList() {
@@ -669,6 +847,7 @@
 
     loadBlogList();
     initGithubTokenUi();
+    initBlogEditModal();
   }
 
   document.addEventListener('DOMContentLoaded', function () {

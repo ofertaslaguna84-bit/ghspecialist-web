@@ -1,0 +1,51 @@
+name: Guardar edición de artículo
+
+on:
+  repository_dispatch:
+    types: [blog_save]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  save:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Guardar artículo
+        env:
+          BLOG_GENERATE_SECRET: ${{ secrets.BLOG_GENERATE_SECRET }}
+          CLIENT_SECRET: ${{ github.event.client_payload.secret }}
+          BLOG_SAVE_PAYLOAD: ${{ toJson(github.event.client_payload) }}
+        run: node scripts/blog-save.mjs
+
+      - name: Commit y push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add blog/ sitemap.xml blog/feed.xml blog-save-result.json 2>/dev/null || true
+          git diff --staged --quiet && echo "Sin cambios" || (git commit -m "blog: editar artículo $(date -u +%Y-%m-%d)" && git push)
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Publicar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
