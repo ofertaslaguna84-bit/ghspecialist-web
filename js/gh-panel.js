@@ -174,14 +174,6 @@
     }
   }
 
-  function ghHeaders(pat) {
-    return {
-      Authorization: 'Bearer ' + pat,
-      Accept: 'application/vnd.github+json',
-      'X-GitHub-Api-Version': '2022-11-28'
-    };
-  }
-
   function sleep(ms) {
     return new Promise(function (resolve) {
       setTimeout(resolve, ms);
@@ -204,65 +196,32 @@
     }
   }
 
-  function fetchResultJson(owner, repo, branch) {
-    var url =
-      'https://raw.githubusercontent.com/' +
-      owner +
-      '/' +
-      repo +
-      '/' +
-      (branch || 'main') +
-      '/blog-generate-result.json?t=' +
-      Date.now();
-    return fetch(url).then(function (r) {
-      if (!r.ok) throw new Error('no result');
-      return r.json();
-    });
-  }
-
-  function pollBlogWorkflow(startedAt, owner, repo, pat) {
+  function pollBlogStatus(apiBase, startedAt) {
     var deadline = Date.now() + 8 * 60 * 1000;
-    var wf =
-      'https://api.github.com/repos/' +
-      owner +
-      '/' +
-      repo +
-      '/actions/workflows/blog-generate.yml/runs?per_page=8';
+    var url =
+      apiBase +
+      '/api/ghspecialist/blog-status?secret=' +
+      encodeURIComponent(PASS) +
+      '&startedAt=' +
+      encodeURIComponent(String(startedAt));
 
     function tick() {
-      if (Date.now() > deadline) {
-        return Promise.reject(new Error('timeout'));
-      }
-      return fetch(wf, { headers: ghHeaders(pat) })
+      if (Date.now() > deadline) return Promise.reject(new Error('timeout'));
+      return fetch(url)
         .then(function (r) {
           return r.json().then(function (data) {
-            if (!r.ok) throw new Error((data && data.message) || 'GitHub API');
+            if (!r.ok) throw new Error((data && data.error) || 'Error de servidor');
             return data;
           });
         })
         .then(function (data) {
-          var runs = data.workflow_runs || [];
-          var run = null;
-          for (var i = 0; i < runs.length; i++) {
-            if (new Date(runs[i].created_at).getTime() >= startedAt - 5000) {
-              run = runs[i];
-              break;
-            }
-          }
-          if (!run) return sleep(12000).then(tick);
-          if (run.status !== 'completed') {
-            setBlogStatus(
-              'info',
-              '<strong>Generando artículo…</strong> La IA está escribiendo y publicando (2–4 min). Estado: <em>' +
-                run.status +
-                '</em>'
-            );
-            return sleep(12000).then(tick);
-          }
-          if (run.conclusion !== 'success') {
-            return Promise.reject(new Error('El workflow falló: ' + (run.conclusion || 'error')));
-          }
-          return fetchResultJson(owner, repo, 'main');
+          if (data.status === 'done' && data.article) return data.article;
+          if (data.status === 'error') throw new Error(data.error || 'Error al generar');
+          setBlogStatus(
+            'info',
+            '<strong>Generando artículo…</strong> Claude está escribiendo y publicando (2–4 min).'
+          );
+          return sleep(12000).then(tick);
         });
     }
     return tick();
@@ -274,65 +233,43 @@
     var kwEl = $('blog-keywords');
     if (!gen) return;
 
-    var owner = (C.githubOwner || 'ofertaslaguna84-bit').trim();
-    var repo = (C.githubRepo || 'ghspecialist-web').trim();
-    var pat = (C.githubDispatchPat || '').trim();
-    var setupEl = $('blog-setup-hint');
-    if (setupEl) setupEl.hidden = !!pat;
+    var apiBase = ((C.blogApiBase || 'https://adestajo.com.mx') + '').replace(/\/$/, '');
 
     gen.addEventListener('click', function () {
       if (gen.disabled) return;
       hideBlogStatus();
 
-      if (!pat) {
-        setBlogStatus(
-          'err',
-          '<strong>Falta configurar el token.</strong> Pega <code>githubDispatchPat</code> en <code>js/gh-site-config.js</code> (PAT con Actions + Contents) y sube el cambio. También necesitas los secrets <code>ANTHROPIC_API_KEY</code> y <code>BLOG_GENERATE_SECRET</code> en GitHub.'
-        );
-        return;
-      }
-
       var topic = topicEl ? (topicEl.value || '').trim() : '';
       var keywords = kwEl ? (kwEl.value || '').trim() : '';
-      var startedAt = Date.now();
 
       gen.disabled = true;
       gen.textContent = 'Generando…';
       setBlogStatus(
         'info',
-        '<strong>Enviando a GitHub…</strong> Se generará el HTML, se actualizará el blog y el sitio se publicará solo.'
+        '<strong>Iniciando…</strong> Claude + publicación automática en ghspecialist.com'
       );
 
-      fetch('https://api.github.com/repos/' + owner + '/' + repo + '/dispatches', {
+      fetch(apiBase + '/api/ghspecialist/blog-trigger', {
         method: 'POST',
-        headers: Object.assign({ 'Content-Type': 'application/json' }, ghHeaders(pat)),
-        body: JSON.stringify({
-          event_type: 'blog_generate',
-          client_payload: {
-            secret: PASS,
-            topic: topic,
-            keywords: keywords
-          }
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ secret: PASS, topic: topic, keywords: keywords })
       })
         .then(function (r) {
-          if (r.status === 204) return;
           return r.json().then(function (data) {
-            throw new Error((data && data.message) || 'No se pudo disparar el workflow');
+            if (!r.ok || !data.ok) {
+              throw new Error((data && data.error) || 'No se pudo iniciar la generación');
+            }
+            return data.startedAt || Date.now();
           });
         })
-        .then(function () {
-          setBlogStatus(
-            'info',
-            '<strong>Generando artículo…</strong> Claude está escribiendo y publicando (2–4 min).'
-          );
-          return pollBlogWorkflow(startedAt, owner, repo, pat);
+        .then(function (startedAt) {
+          return pollBlogStatus(apiBase, startedAt);
         })
-        .then(function (result) {
+        .then(function (article) {
           if (topicEl) topicEl.value = '';
           if (kwEl) kwEl.value = '';
-          var url = (result && result.url) || 'https://ghspecialist.com/blog/';
-          var title = (result && result.title) || 'Artículo nuevo';
+          var url = (article && article.url) || 'https://ghspecialist.com/blog/';
+          var title = (article && article.title) || 'Artículo nuevo';
           setBlogStatus(
             'ok',
             '<p class="blog-status-title">Artículo publicado</p><p>' +
@@ -347,11 +284,7 @@
           if (msg === 'timeout') {
             setBlogStatus(
               'warn',
-              '<strong>Tarda más de lo normal.</strong> Revisa <a href="https://github.com/' +
-                owner +
-                '/' +
-                repo +
-                '/actions" target="_blank" rel="noopener">GitHub Actions</a> y el blog en unos minutos.'
+              '<strong>Tarda más de lo normal.</strong> Revisa el <a href="https://ghspecialist.com/blog/" target="_blank" rel="noopener">blog</a> en unos minutos.'
             );
           } else {
             setBlogStatus('err', '<strong>Error:</strong> ' + msg);

@@ -13,7 +13,7 @@
   <meta name="theme-color" content="#7C4DFF">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="../js/gh-site-config.js?v=panel5"></script>
+  <script src="../js/gh-site-config.js?v=panel6"></script>
   <script>
     (function () {
       var p = (window.GH_SITE_CONFIG && window.GH_SITE_CONFIG.panelPassword || '').trim();
@@ -22,7 +22,7 @@
       if (p && !ok) document.documentElement.classList.add('panel-gated');
     })();
   </script>
-  <script src="../js/gh-panel.js?v=panel5" defer></script>
+  <script src="../js/gh-panel.js?v=panel6" defer></script>
   <style>
     :root {
       --p: #7C4DFF;
@@ -273,7 +273,6 @@
           <button type="button" class="btn-p" id="btn-blog-generate">Generar artículo</button>
         </div>
         <input type="text" id="blog-keywords" class="blog-kw" placeholder="Palabras clave o ángulo (opcional)" autocomplete="off">
-        <p id="blog-setup-hint" hidden><strong>Configuración pendiente:</strong> token <code>githubDispatchPat</code> en la config + secrets <code>ANTHROPIC_API_KEY</code> y <code>BLOG_GENERATE_SECRET</code> en GitHub (misma clave que el panel).</p>
         <div id="blog-status" hidden></div>
         <p class="embed-hint" style="margin-top:12px"><a id="link-blog-panel" href="https://ghspecialist.com/blog/" target="_blank" rel="noopener">Ver blog público →</a></p>
       </section>

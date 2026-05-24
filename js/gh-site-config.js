@@ -33,9 +33,7 @@
  *   Si lo dejas vacío, el panel usa https://formspree.io/forms/TU_ID (mismo ID que /f/...).
  *
  * === E) Blog one-click (como Adestajo) ===
- * githubOwner / githubRepo → repo donde corre GitHub Actions (genera HTML + deploy).
- * githubDispatchPat → token fine-grained con permisos Actions (RW) + Contents (RW) en ese repo.
- *   En GitHub → Settings → Secrets: ANTHROPIC_API_KEY y BLOG_GENERATE_SECRET (misma clave que panelPassword).
+ * blogApiBase → Adestajo dispara Claude + GitHub Actions en servidor (no necesitas token GitHub en el panel).
  *
  * Tras editar: git add js/gh-site-config.js && git commit -m "chore: config" && git push origin main
  */
@@ -49,5 +47,6 @@ window.GH_SITE_CONFIG = {
   leadsSheetEmbedUrl: '',
   githubOwner: 'ofertaslaguna84-bit',
   githubRepo: 'ghspecialist-web',
-  githubDispatchPat: ''
+  /** API en Adestajo (servidor) — el panel no necesita token GitHub en el navegador */
+  blogApiBase: 'https://adestajo.com.mx'
 };
