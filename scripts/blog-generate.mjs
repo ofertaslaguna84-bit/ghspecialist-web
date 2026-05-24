@@ -163,28 +163,10 @@ async function callOpenAI(prompt, apiKey) {
   return text;
 }
 
-async function callOpenRouter(prompt, apiKey) {
-  const models = (process.env.OPENROUTER_MODEL ||
-    'qwen/qwen3-4b:free,deepseek/deepseek-r1:free,google/gemma-3-4b-it:free')
-    .split(',')
-    .map((m) => m.trim())
-    .filter(Boolean);
-  let lastErr;
-  for (const model of models) {
-    try {
-      return await callChatCompletions('https://openrouter.ai/api/v1', apiKey, model, prompt, `OpenRouter(${model})`);
-    } catch (e) {
-      lastErr = e;
-    }
-  }
-  throw lastErr || new Error('OpenRouter falló');
-}
-
 async function generateArticleContent(prompt) {
   const errors = [];
   const deepseek = process.env.DEEPSEEK_API_KEY?.trim();
   const qwen = (process.env.QWEN_API_KEY || process.env.DASHSCOPE_API_KEY)?.trim();
-  const openrouter = process.env.OPENROUTER_API_KEY?.trim();
   const gemini = process.env.GEMINI_API_KEY?.trim();
   const openai = process.env.OPENAI_API_KEY?.trim();
 
@@ -201,15 +183,6 @@ async function generateArticleContent(prompt) {
     try {
       console.log('→ Qwen…');
       return await callQwen(prompt, qwen);
-    } catch (e) {
-      errors.push(e.message || String(e));
-    }
-  }
-
-  if (openrouter) {
-    try {
-      console.log('→ OpenRouter (modelos free)…');
-      return await callOpenRouter(prompt, openrouter);
     } catch (e) {
       errors.push(e.message || String(e));
     }
@@ -236,9 +209,9 @@ async function generateArticleContent(prompt) {
     }
   }
 
-  if (!deepseek && !qwen && !openrouter && !gemini && !openai) {
+  if (!deepseek && !qwen && !gemini && !openai) {
     throw new Error(
-      'Falta DEEPSEEK_API_KEY, QWEN_API_KEY u OPENROUTER_API_KEY en GitHub Secrets. Gratis: platform.deepseek.com ($5 crédito) o openrouter.ai (modelos :free)'
+      'Falta DEEPSEEK_API_KEY o QWEN_API_KEY en GitHub Secrets. Gratis: platform.deepseek.com o dashscope.aliyun.com'
     );
   }
   throw new Error(`Todas las IAs fallaron: ${errors.join(' · ').slice(0, 500)}`);
@@ -466,11 +439,10 @@ async function main() {
     process.env.DEEPSEEK_API_KEY ||
     process.env.QWEN_API_KEY ||
     process.env.DASHSCOPE_API_KEY ||
-    process.env.OPENROUTER_API_KEY ||
     process.env.GEMINI_API_KEY ||
     process.env.OPENAI_API_KEY;
   if (!hasKey) {
-    console.error('Falta DEEPSEEK_API_KEY, QWEN_API_KEY u OPENROUTER_API_KEY en secrets');
+    console.error('Falta DEEPSEEK_API_KEY o QWEN_API_KEY en secrets');
     process.exit(1);
   }
 
