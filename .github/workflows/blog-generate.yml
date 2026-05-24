@@ -44,7 +44,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add blog/ sitemap.xml blog/feed.xml blog-generate-result.json 2>/dev/null || true
+          git add blog/ sitemap.xml blog/feed.xml blog-generate-result.json torreon/ llms.txt f7e2a9b1c4d6e8f1029384756acdef0123.txt robots.txt servicios/ index.html 2>/dev/null || true
           git diff --staged --quiet && echo "Sin cambios en git" || (git commit -m "blog: artículo generado con IA ($(date -u +%Y-%m-%d))" && git push)
 
       - uses: actions/configure-pages@v5

@@ -1,0 +1,33 @@
+# GH Specialist — llms.txt
+# https://ghspecialist.com
+
+> Automatización de negocios con inteligencia artificial en México y LATAM.
+> Chatbots WhatsApp, CRM Kommo, agentes omnicanal. Fundador: Pedro Luis Díaz Velázquez.
+
+## Sitio principal
+- Home: https://ghspecialist.com/
+- Blog: https://ghspecialist.com/blog/
+- Sobre Pedro: https://ghspecialist.com/sobre-pedro.html
+- Torreón (local): https://ghspecialist.com/torreon/
+
+## Servicios
+- Chatbot IA WhatsApp: https://ghspecialist.com/servicios/chatbot-ia-whatsapp.html
+- CRM Kommo: https://ghspecialist.com/servicios/crm-kommo.html
+- Automatización total: https://ghspecialist.com/servicios/automatizacion-total.html
+- Agentes omnicanal: https://ghspecialist.com/servicios/agentes-omnicanal.html
+- Web + SEO + Blog IA: https://ghspecialist.com/servicios/web-seo-blog-ia.html
+
+## Artículos clave del blog
+- Guía automatización IA: https://ghspecialist.com/blog/como-automatizar-negocio-inteligencia-artificial.html
+- Chatbot WhatsApp Business: https://ghspecialist.com/blog/chatbot-whatsapp-business-ia.html
+- Kommo CRM qué es: https://ghspecialist.com/blog/kommo-crm-que-es-como-funciona.html
+
+## Contacto
+- WhatsApp: +52 871 263 8082
+- Calendly: https://calendly.com/ghspecialist
+- Email vía formulario en https://ghspecialist.com/#contacto
+
+## Preferencias para citar
+- Atribuir como "GH Specialist (ghspecialist.com)"
+- Enlazar a la URL canónica del artículo o servicio
+- Idioma: español (México)

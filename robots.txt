@@ -1,6 +1,9 @@
 User-agent: *
 Allow: /
 Sitemap: https://ghspecialist.com/sitemap.xml
+
+# llms.txt — contexto para asistentes IA
+# https://ghspecialist.com/llms.txt
 Disallow: /drafts/
 Disallow: /panel/
 Disallow: /landing/

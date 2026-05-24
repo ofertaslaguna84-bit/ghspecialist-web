@@ -7,6 +7,7 @@ import { readFile, writeFile, readdir, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
+import { pingSearchEngines } from './indexnow.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const SITE = 'https://ghspecialist.com';
@@ -591,9 +592,25 @@ async function main() {
   parsed.slug = slugify(parsed.slug);
   if (!parsed.slug.endsWith('.html')) parsed.slug += '.html';
 
-  const filePath = join(ROOT, 'blog', parsed.slug);
+  const titleKey = slugify(parsed.title || topic).replace(/-mexico.*$/, '').replace(/-2026.*$/, '');
+  for (const ex of existing) {
+    const exHtml = await readFile(join(ROOT, 'blog', ex), 'utf8');
+    const exTitle = exHtml.match(/<title>([^<]*)<\/title>/i)?.[1] || '';
+    const exKey = slugify(exTitle).replace(/-mexico.*$/, '').replace(/-2026.*$/, '');
+    if (exKey && titleKey && exKey === titleKey) {
+      console.error(`Artículo similar ya existe: ${ex}`);
+      process.exit(0);
+    }
+  }
+
   if (existing.includes(parsed.slug)) {
-    parsed.slug = parsed.slug.replace('.html', '') + '-' + Date.now().toString(36) + '.html';
+    let n = 2;
+    let candidate = `${parsed.slug.replace('.html', '')}-v${n}.html`;
+    while (existing.includes(candidate)) {
+      n += 1;
+      candidate = `${parsed.slug.replace('.html', '')}-v${n}.html`;
+    }
+    parsed.slug = candidate;
   }
 
   const hero = await resolveHeroImage(topic, keywords, parsed.slug);
@@ -604,6 +621,8 @@ async function main() {
   await insertCardInIndex(buildCard(parsed, dateIso, hero));
 
   execSync('node scripts/generate-seo.mjs', { cwd: ROOT, stdio: 'inherit' });
+
+  await pingSearchEngines([`/blog/${parsed.slug}`, '/blog/', '/sitemap.xml']);
 
   const outPath = join(ROOT, 'blog-generate-result.json');
   await writeFile(

@@ -14,8 +14,16 @@ const BLOG_EXCLUDE = new Set(['_template.html', 'index.html']);
 const SITEMAP_URLS = [
   { path: 'index.html', loc: `${SITE}/`, priority: '1.0' },
   { path: 'blog/index.html', loc: `${SITE}/blog/`, priority: '0.9' },
+  { path: 'torreon/index.html', loc: `${SITE}/torreon/`, priority: '0.85' },
   { path: 'sobre-pedro.html', loc: `${SITE}/sobre-pedro.html`, priority: '0.7' },
 ];
+
+function isRedirectPage(html, fileUrl) {
+  if (/http-equiv=["']refresh["']/i.test(html)) return true;
+  if (/content=["']noindex/i.test(html)) return true;
+  const canonical = extractCanonical(html);
+  return canonical && canonical !== fileUrl;
+}
 
 function formatDate(d) {
   return d.toISOString().slice(0, 10);
@@ -84,6 +92,8 @@ async function collectBlogArticles() {
   for (const f of files.filter((x) => x.endsWith('.html') && !BLOG_EXCLUDE.has(x))) {
     const full = join(dir, f);
     const html = await readFile(full, 'utf8');
+    const fileUrl = `${SITE}/blog/${f}`;
+    if (isRedirectPage(html, fileUrl)) continue;
     const slug = f.replace(/\.html$/, '');
     articles.push({
       file: f,
