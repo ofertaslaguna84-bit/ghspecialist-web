@@ -219,7 +219,7 @@
           if (data.status === 'error') throw new Error(data.error || 'Error al generar');
           setBlogStatus(
             'info',
-            '<strong>Generando artículo…</strong> Claude está escribiendo y publicando (2–4 min).'
+            '<strong>Generando artículo…</strong> DeepSeek/Qwen escribiendo y publicando (2–4 min).'
           );
           return sleep(12000).then(tick);
         });
@@ -246,7 +246,7 @@
       gen.textContent = 'Generando…';
       setBlogStatus(
         'info',
-        '<strong>Iniciando…</strong> Claude + publicación automática en ghspecialist.com'
+        '<strong>Iniciando…</strong> DeepSeek/Qwen + publicación automática en ghspecialist.com'
       );
 
       fetch(apiBase + '/api/ghspecialist/blog-trigger', {

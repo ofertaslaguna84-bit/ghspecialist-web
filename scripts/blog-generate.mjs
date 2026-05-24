@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 /**
- * Genera un artículo de blog con Claude (Anthropic), escribe HTML, actualiza blog/index.html y sitemap/RSS.
- * Uso local: BLOG_TOPIC="..." ANTHROPIC_API_KEY=sk-ant-... node scripts/blog-generate.mjs
- * CI: secrets ANTHROPIC_API_KEY + BLOG_GENERATE_SECRET; client_payload.secret debe coincidir.
+ * Genera un artículo de blog con IA (DeepSeek / Qwen primero — baratos).
+ * CI: secrets DEEPSEEK_API_KEY y/o QWEN_API_KEY + BLOG_GENERATE_SECRET.
  */
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -73,6 +72,57 @@ async function listExistingArticles() {
   return files.filter((f) => f.endsWith('.html') && f !== 'index.html' && !f.startsWith('_'));
 }
 
+async function callChatCompletions(baseUrl, apiKey, model, prompt, label) {
+  const url = baseUrl.replace(/\/$/, '') + '/chat/completions';
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model,
+      messages: [{ role: 'user', content: prompt }],
+      max_tokens: 8192,
+      temperature: 0.7,
+    }),
+  });
+  const raw = await res.text();
+  if (!res.ok) throw new Error(`${label} ${res.status}: ${raw.slice(0, 300)}`);
+  const data = JSON.parse(raw);
+  const text = data.choices?.[0]?.message?.content;
+  if (!text) throw new Error(`${label} sin contenido`);
+  return text;
+}
+
+async function callDeepSeek(prompt, apiKey) {
+  const base = (process.env.DEEPSEEK_BASE_URL || 'https://api.deepseek.com/v1').trim();
+  const models = (process.env.DEEPSEEK_MODEL || 'deepseek-chat,deepseek-v4-flash').split(',').map((m) => m.trim()).filter(Boolean);
+  let lastErr;
+  for (const model of models) {
+    try {
+      return await callChatCompletions(base, apiKey, model, prompt, `DeepSeek(${model})`);
+    } catch (e) {
+      lastErr = e;
+    }
+  }
+  throw lastErr || new Error('DeepSeek falló');
+}
+
+async function callQwen(prompt, apiKey) {
+  const base = (process.env.QWEN_BASE_URL || 'https://dashscope.aliyuncs.com/compatible-mode/v1').trim();
+  const models = (process.env.QWEN_MODEL || 'qwen-turbo,qwen-plus').split(',').map((m) => m.trim()).filter(Boolean);
+  let lastErr;
+  for (const model of models) {
+    try {
+      return await callChatCompletions(base, apiKey, model, prompt, `Qwen(${model})`);
+    } catch (e) {
+      lastErr = e;
+    }
+  }
+  throw lastErr || new Error('Qwen falló');
+}
+
 async function callGemini(prompt, apiKey, model = 'gemini-2.0-flash') {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
   const res = await fetch(url, {
@@ -113,46 +163,53 @@ async function callOpenAI(prompt, apiKey) {
   return text;
 }
 
-async function callClaude(prompt, apiKey) {
-  const model = (process.env.CLAUDE_MODEL || 'claude-3-5-haiku-20241022').trim();
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({
-      model,
-      max_tokens: 8192,
-      messages: [{ role: 'user', content: prompt }],
-    }),
-  });
-  const raw = await res.text();
-  if (!res.ok) {
-    throw new Error(`Anthropic ${res.status}: ${raw.slice(0, 300)}`);
+async function callOpenRouter(prompt, apiKey) {
+  const models = (process.env.OPENROUTER_MODEL ||
+    'qwen/qwen3-4b:free,deepseek/deepseek-r1:free,google/gemma-3-4b-it:free')
+    .split(',')
+    .map((m) => m.trim())
+    .filter(Boolean);
+  let lastErr;
+  for (const model of models) {
+    try {
+      return await callChatCompletions('https://openrouter.ai/api/v1', apiKey, model, prompt, `OpenRouter(${model})`);
+    } catch (e) {
+      lastErr = e;
+    }
   }
-  let data;
-  try {
-    data = JSON.parse(raw);
-  } catch {
-    throw new Error('Anthropic: respuesta no JSON');
-  }
-  const text = data.content?.find((c) => c.type === 'text')?.text;
-  if (!text) throw new Error('Claude no devolvió texto');
-  return text;
+  throw lastErr || new Error('OpenRouter falló');
 }
 
 async function generateArticleContent(prompt) {
   const errors = [];
-  const anthropic = process.env.ANTHROPIC_API_KEY?.trim();
+  const deepseek = process.env.DEEPSEEK_API_KEY?.trim();
+  const qwen = (process.env.QWEN_API_KEY || process.env.DASHSCOPE_API_KEY)?.trim();
+  const openrouter = process.env.OPENROUTER_API_KEY?.trim();
   const gemini = process.env.GEMINI_API_KEY?.trim();
   const openai = process.env.OPENAI_API_KEY?.trim();
 
-  if (anthropic) {
+  if (deepseek) {
     try {
-      console.log('→ Claude…');
-      return await callClaude(prompt, anthropic);
+      console.log('→ DeepSeek…');
+      return await callDeepSeek(prompt, deepseek);
+    } catch (e) {
+      errors.push(e.message || String(e));
+    }
+  }
+
+  if (qwen) {
+    try {
+      console.log('→ Qwen…');
+      return await callQwen(prompt, qwen);
+    } catch (e) {
+      errors.push(e.message || String(e));
+    }
+  }
+
+  if (openrouter) {
+    try {
+      console.log('→ OpenRouter (modelos free)…');
+      return await callOpenRouter(prompt, openrouter);
     } catch (e) {
       errors.push(e.message || String(e));
     }
@@ -179,8 +236,10 @@ async function generateArticleContent(prompt) {
     }
   }
 
-  if (!anthropic && !gemini && !openai) {
-    throw new Error('Falta ANTHROPIC_API_KEY, GEMINI_API_KEY u OPENAI_API_KEY en secrets');
+  if (!deepseek && !qwen && !openrouter && !gemini && !openai) {
+    throw new Error(
+      'Falta DEEPSEEK_API_KEY, QWEN_API_KEY u OPENROUTER_API_KEY en GitHub Secrets. Gratis: platform.deepseek.com ($5 crédito) o openrouter.ai (modelos :free)'
+    );
   }
   throw new Error(`Todas las IAs fallaron: ${errors.join(' · ').slice(0, 500)}`);
 }
@@ -403,9 +462,15 @@ async function main() {
     process.exit(1);
   }
 
-  const apiKey = process.env.ANTHROPIC_API_KEY || process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY;
-  if (!apiKey) {
-    console.error('Falta al menos una API key (ANTHROPIC, GEMINI u OPENAI) en secrets del repo');
+  const hasKey =
+    process.env.DEEPSEEK_API_KEY ||
+    process.env.QWEN_API_KEY ||
+    process.env.DASHSCOPE_API_KEY ||
+    process.env.OPENROUTER_API_KEY ||
+    process.env.GEMINI_API_KEY ||
+    process.env.OPENAI_API_KEY;
+  if (!hasKey) {
+    console.error('Falta DEEPSEEK_API_KEY, QWEN_API_KEY u OPENROUTER_API_KEY en secrets');
     process.exit(1);
   }
 

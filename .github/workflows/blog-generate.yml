@@ -28,9 +28,12 @@ jobs:
 
       - name: Generar artículo
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           BLOG_GENERATE_SECRET: ${{ secrets.BLOG_GENERATE_SECRET }}
           CLIENT_SECRET: ${{ github.event.client_payload.secret }}
           BLOG_TOPIC: ${{ github.event.client_payload.topic }}
