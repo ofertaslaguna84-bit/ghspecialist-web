@@ -205,12 +205,50 @@ ${items}
   console.log(`✓ blog/feed.xml — ${articles.length} artículos`);
 }
 
+function cleanHeadline(title) {
+  return title.replace(/\s*\|\s*GH Specialist\s*$/i, '').trim();
+}
+
+async function updateBlogIndexSchema(articles) {
+  const indexPath = join(ROOT, 'blog/index.html');
+  let html = await readFile(indexPath, 'utf8');
+  const blogPost = articles.map((a) => ({
+    '@type': 'BlogPosting',
+    headline: cleanHeadline(a.title),
+    url: a.canonical,
+    datePublished: a.datePublished || a.lastmod,
+  }));
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'Blog GH Specialist',
+    description: 'Artículos sobre automatización con IA para empresas en México',
+    url: `${SITE}/blog/`,
+    publisher: {
+      '@type': 'Organization',
+      name: 'GH Specialist',
+      logo: { '@type': 'ImageObject', url: `${SITE}/2.png` },
+    },
+    blogPost,
+  };
+  const newScript = `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+  const re = /<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"Blog"[\s\S]*?<\/script>/;
+  if (!re.test(html)) {
+    console.warn('⚠ No se encontró schema Blog en blog/index.html');
+    return;
+  }
+  html = html.replace(re, newScript);
+  await writeFile(indexPath, html, 'utf8');
+  console.log(`✓ blog/index.html schema — ${blogPost.length} artículos`);
+}
+
 async function main() {
   const blogArticles = await collectBlogArticles();
   const servicios = await collectServicios();
 
   await generateSitemap(blogArticles, servicios);
   await generateRss(blogArticles);
+  await updateBlogIndexSchema(blogArticles);
 
   const warnings = [];
   for (const art of blogArticles) {
