@@ -9,6 +9,12 @@ import { execSync } from 'node:child_process';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const SITE = 'https://ghspecialist.com';
+const BLOG_CURRENT_YEAR = '2026';
+
+function fixOutdatedYears(text) {
+  if (!text || typeof text !== 'string') return text;
+  return text.replace(/\b202[0-5]\b/g, BLOG_CURRENT_YEAR);
+}
 
 function escapeRegex(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -115,6 +121,11 @@ async function main() {
     console.error('Faltan title, description o bodyHtml');
     process.exit(1);
   }
+
+  title = fixOutdatedYears(title);
+  description = fixOutdatedYears(description);
+  bodyHtml = fixOutdatedYears(bodyHtml);
+  cardExcerpt = fixOutdatedYears(cardExcerpt);
 
   const filePath = join(ROOT, 'blog', slug);
   let html = await readFile(filePath, 'utf8');

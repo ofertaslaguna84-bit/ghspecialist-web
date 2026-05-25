@@ -11,6 +11,7 @@ import { pingSearchEngines } from './indexnow.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const SITE = 'https://ghspecialist.com';
+const BLOG_CURRENT_YEAR = '2026';
 
 const BASE_IMAGES = [
   { path: 'fotos/slide2_img2.png', city: 'México', tags: ['whatsapp', 'chatbot', 'ia', 'automatizacion', 'negocio', 'mexico'] },
@@ -88,47 +89,61 @@ function pickImageForTopic(pool, topic, keywords) {
 }
 
 async function generateHeroWithGemini(topic, slug, apiKey) {
-  const models = ['gemini-2.0-flash-preview-image-generation', 'gemini-2.5-flash-image'];
-  const prompt = `Imagen hero profesional para artículo de blog B2B en México sobre: ${topic}. Estilo moderno, tecnología e IA, acentos morado #7C4DFF, oficina o negocio latino, limpio, sin texto ni logos. Fotorealista.`;
+  const models = [
+    'gemini-2.0-flash-preview-image-generation',
+    'gemini-2.5-flash-image',
+    'gemini-2.0-flash-exp-image-generation',
+  ];
+  const prompts = [
+    `Ultra-premium editorial hero photograph for a B2B technology blog in Mexico (${BLOG_CURRENT_YEAR}). Topic: ${topic}.
+Cinematic 16:9 wide shot, magazine cover quality, photorealistic, sharp focus, professional studio lighting, subtle purple accent glow (#7C4DFF).
+Modern Latin American office, WhatsApp/AI/automation theme when relevant, depth of field, aspirational business mood.
+NO text, NO logos, NO watermarks, NO readable UI. Looks like a top Getty Images stock photo.`,
+    `Award-winning business photography for blog hero (${BLOG_CURRENT_YEAR}). ${topic}.
+High-end commercial photo, futuristic but believable, Mexican enterprise context, purple (#7C4DFF) highlights, clean composition, 16:9, photorealistic, no text or logos.`,
+  ];
   const imgDir = join(ROOT, 'blog', 'img');
   await mkdir(imgDir, { recursive: true });
   const slugBase = slug.replace(/\.html$/, '');
 
-  for (const model of models) {
-    try {
-      console.log(`→ Gemini imagen (${model})…`);
-      const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: { responseModalities: ['TEXT', 'IMAGE'] },
-          }),
-        }
-      );
-      const raw = await res.text();
-      if (!res.ok) throw new Error(`${model} ${res.status}: ${raw.slice(0, 200)}`);
-      const data = JSON.parse(raw);
-      const parts = data.candidates?.[0]?.content?.parts || [];
-      const imgPart = parts.find((p) => p.inlineData?.data || p.inline_data?.data);
-      const inline = imgPart?.inlineData || imgPart?.inline_data;
-      if (!inline?.data) throw new Error('sin imagen en respuesta');
-      const ext = (inline.mimeType || inline.mime_type || 'image/jpeg').includes('png') ? 'png' : 'jpg';
-      const finalRel = `blog/img/${slugBase}.${ext}`;
-      await writeFile(join(ROOT, finalRel), Buffer.from(inline.data, 'base64'));
-      const enc = encodeWebPath(finalRel);
-      return {
-        img: `../${enc}`,
-        og: `${SITE}/${enc}`,
-        city: 'GH Specialist',
-        tags: ['generado'],
-        relPath: finalRel,
-        generated: true,
-      };
-    } catch (e) {
-      console.warn('Gemini imagen:', e.message || e);
+  for (const prompt of prompts) {
+    for (const model of models) {
+      try {
+        console.log(`→ Gemini imagen (${model})…`);
+        const res = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{ parts: [{ text: prompt }] }],
+              generationConfig: { responseModalities: ['TEXT', 'IMAGE'] },
+            }),
+          }
+        );
+        const raw = await res.text();
+        if (!res.ok) throw new Error(`${model} ${res.status}: ${raw.slice(0, 200)}`);
+        const data = JSON.parse(raw);
+        const parts = data.candidates?.[0]?.content?.parts || [];
+        const imgPart = parts.find((p) => p.inlineData?.data || p.inline_data?.data);
+        const inline = imgPart?.inlineData || imgPart?.inline_data;
+        if (!inline?.data) throw new Error('sin imagen en respuesta');
+        const ext = (inline.mimeType || inline.mime_type || 'image/jpeg').includes('png') ? 'png' : 'jpg';
+        const finalRel = `blog/img/${slugBase}.${ext}`;
+        await writeFile(join(ROOT, finalRel), Buffer.from(inline.data, 'base64'));
+        const enc = encodeWebPath(finalRel);
+        console.log(`✓ Hero IA generado: ${finalRel}`);
+        return {
+          img: `../${enc}`,
+          og: `${SITE}/${enc}`,
+          city: 'GH Specialist',
+          tags: ['generado'],
+          relPath: finalRel,
+          generated: true,
+        };
+      } catch (e) {
+        console.warn('Gemini imagen:', e.message || e);
+      }
     }
   }
   return null;
@@ -141,21 +156,23 @@ async function resolveHeroImage(topic, keywords, slug) {
   if (tryGemini) {
     const generated = await generateHeroWithGemini(topic, slug, geminiKey);
     if (generated) return generated;
+    console.warn('⚠ Gemini no generó imagen; usando foto del sitio como fallback');
   }
   return pickImageForTopic(pool, topic, keywords);
 }
 
 const AUTO_TOPICS = [
   'cómo automatizar tu negocio con inteligencia artificial en México 2026',
-  'chatbot WhatsApp Business con IA para empresas en México',
-  'CRM Kommo para vender por WhatsApp guía para PYMEs',
-  'agentes de IA para empresas en México casos de uso',
-  'cómo reducir costos operativos con automatización IA',
-  'WhatsApp marketing con IA para aumentar ventas en México',
-  'embudo de ventas automatizado con IA paso a paso',
-  'IA para inmobiliarias automatizar citas y prospectos',
-  'automatización IA para constructoras en México',
-  'ROI de la inteligencia artificial en negocios mexicanos',
+  'chatbot WhatsApp Business con IA para empresas en México 2026',
+  'CRM Kommo para vender por WhatsApp guía 2026 para PYMEs',
+  'agentes de IA para empresas en México casos de uso 2026',
+  'cómo reducir costos operativos con automatización IA en 2026',
+  'WhatsApp marketing con IA para aumentar ventas en México 2026',
+  'embudo de ventas automatizado con IA paso a paso 2026',
+  'IA para inmobiliarias automatizar citas y prospectos 2026',
+  'automatización IA para constructoras en México 2026',
+  'ROI de la inteligencia artificial en negocios mexicanos 2026',
+  'chatbot de WhatsApp para negocios en México guía completa 2026',
 ];
 
 function slugify(s) {
@@ -343,9 +360,52 @@ async function generateArticleContent(prompt) {
   throw new Error(`Todas las IAs fallaron: ${errors.join(' · ').slice(0, 500)}`);
 }
 
+function fixOutdatedYears(text) {
+  if (!text || typeof text !== 'string') return text;
+  return text.replace(/\b202[0-5]\b/g, BLOG_CURRENT_YEAR);
+}
+
+function enforceCurrentYear(article) {
+  const fields = [
+    'title',
+    'description',
+    'og_title',
+    'og_description',
+    'card_excerpt',
+    'content_html',
+    'breadcrumb_title',
+  ];
+  for (const key of fields) {
+    if (article[key]) article[key] = fixOutdatedYears(article[key]);
+  }
+  if (article.slug) {
+    article.slug = article.slug.replace(/-202[0-5](?=\.html$)/i, `-${BLOG_CURRENT_YEAR}`);
+  }
+  if (article.related?.length) {
+    for (const r of article.related) {
+      if (r.title) r.title = fixOutdatedYears(r.title);
+      if (r.desc) r.desc = fixOutdatedYears(r.desc);
+    }
+  }
+  if (
+    article.title &&
+    !/\b2026\b/.test(article.title) &&
+    /gu[ií]a|completa|futuro|tendencias|esencial|definitiva|mejores|c[oó]mo/i.test(article.title)
+  ) {
+    article.title = `${article.title.replace(/\s*\(\d{4}\)\s*$/, '').trim()} (${BLOG_CURRENT_YEAR})`;
+  }
+  if (article.slug && !article.slug.includes('2026') && !article.slug.includes('-mexico')) {
+    article.slug = article.slug.replace(/\.html$/, `-${BLOG_CURRENT_YEAR}.html`);
+  }
+  return article;
+}
+
 function buildPrompt(topic, keywords, existingSlugs) {
   const slugList = existingSlugs.map((s) => s.replace('.html', '')).join(', ');
   return `Eres redactor SEO senior para GH Specialist (automatización con IA, chatbots WhatsApp, CRM Kommo, México y LATAM).
+
+FECHA ACTUAL: ${BLOG_CURRENT_YEAR}. Todo el contenido debe sentirse actualizado a ${BLOG_CURRENT_YEAR}.
+PROHIBIDO usar 2024, 2025 u otros años pasados en título, slug o texto. Usa siempre ${BLOG_CURRENT_YEAR} cuando menciones el año.
 
 Escribe UN artículo en español de México sobre: ${topic}
 ${keywords ? `Palabras clave / ángulo: ${keywords}` : ''}
@@ -362,13 +422,14 @@ Servicios para enlazar cuando aplique:
 REGLAS:
 - 1.500–2.200 palabras en content_html (HTML: p, h2, h3, ul, ol, li, strong, a — sin h1)
 - 3–5 enlaces internos a blog o servicios (href relativos ../servicios/... o slug.html)
-- Tono profesional para dueños de negocio
+- Tono profesional para dueños de negocio en ${BLOG_CURRENT_YEAR}
 - CTAs naturales a Calendly y WhatsApp +528712638082
-- slug único, kebab-case, sin acentos, termina en -mexico o -2026 si encaja
+- slug único, kebab-case, sin acentos, DEBE incluir -2026 o -mexico-2026
+- title debe incluir ${BLOG_CURRENT_YEAR} si es guía, tendencias o "completa"
 
 Responde SOLO JSON (sin markdown):
 {
-  "title": "Título SEO (sin | GH Specialist)",
+  "title": "Título SEO con ${BLOG_CURRENT_YEAR} (sin | GH Specialist)",
   "slug": "slug-articulo-mexico-2026",
   "description": "meta description max 155 chars",
   "og_title": "Título corto para redes",
@@ -504,7 +565,7 @@ function buildArticleHtml(article, dateIso, hero) {
   <div class="art-meta">Por <strong>Pedro Luis Díaz Velázquez</strong> · GH Specialist · ${dateDisplay} · ${article.read_time || 8} min lectura</div>
   <figure class="art-hero">
     <img src="${hero.img}" alt="${escapeHtml(article.title)}" width="1200" height="630" loading="eager">
-    <figcaption>${hero.generated ? 'Imagen generada con IA · GH Specialist' : escapeHtml(article.card_city_label || hero.city || 'México')}</figcaption>
+    <figcaption>${hero.generated ? 'Imagen hero IA · GH Specialist · ' + BLOG_CURRENT_YEAR : escapeHtml(article.card_city_label || hero.city || 'México')}</figcaption>
   </figure>
   ${article.content_html}
   <div class="cta-art">
@@ -591,6 +652,10 @@ async function main() {
   if (!parsed.slug) parsed.slug = slugify(parsed.title || topic);
   parsed.slug = slugify(parsed.slug);
   if (!parsed.slug.endsWith('.html')) parsed.slug += '.html';
+
+  enforceCurrentYear(parsed);
+  parsed.slug = slugify(parsed.slug.replace(/\.html$/, '')) + '.html';
+  enforceCurrentYear(parsed);
 
   const titleKey = slugify(parsed.title || topic).replace(/-mexico.*$/, '').replace(/-2026.*$/, '');
   for (const ex of existing) {
