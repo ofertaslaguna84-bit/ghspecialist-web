@@ -414,7 +414,10 @@
             return sleep(12000).then(tick);
           }
           if (run.conclusion !== 'success') {
-            throw new Error('Workflow falló: ' + run.conclusion);
+            return fetchRawJson(resultFile).then(function (result) {
+              if (result && result.error) throw new Error(result.error);
+              throw new Error('Workflow falló: ' + run.conclusion);
+            });
           }
           return fetchRawJson(resultFile).then(function (result) {
             if (mode === 'delete') {

@@ -89,11 +89,7 @@ function pickImageForTopic(pool, topic, keywords) {
 }
 
 async function generateHeroWithGemini(topic, slug, apiKey) {
-  const models = [
-    'gemini-2.0-flash-preview-image-generation',
-    'gemini-2.5-flash-image',
-    'gemini-2.0-flash-exp-image-generation',
-  ];
+  const models = ['gemini-2.5-flash-image', 'gemini-2.0-flash-exp-image-generation'];
   const prompts = [
     `Ultra-premium editorial hero photograph for a B2B technology blog in Mexico (${BLOG_CURRENT_YEAR}). Topic: ${topic}.
 Cinematic 16:9 wide shot, magazine cover quality, photorealistic, sharp focus, professional studio lighting, subtle purple accent glow (#7C4DFF).
@@ -313,24 +309,6 @@ async function generateArticleContent(prompt) {
   const gemini = process.env.GEMINI_API_KEY?.trim();
   const openai = process.env.OPENAI_API_KEY?.trim();
 
-  if (deepseek) {
-    try {
-      console.log('→ DeepSeek…');
-      return await callDeepSeek(prompt, deepseek);
-    } catch (e) {
-      errors.push(e.message || String(e));
-    }
-  }
-
-  if (qwen) {
-    try {
-      console.log('→ Qwen…');
-      return await callQwen(prompt, qwen);
-    } catch (e) {
-      errors.push(e.message || String(e));
-    }
-  }
-
   const geminiModels = ['gemini-2.0-flash', 'gemini-2.0-flash-lite', 'gemini-1.5-flash'];
   if (gemini) {
     for (const model of geminiModels) {
@@ -347,6 +325,24 @@ async function generateArticleContent(prompt) {
     try {
       console.log('→ OpenAI…');
       return await callOpenAI(prompt, openai);
+    } catch (e) {
+      errors.push(e.message || String(e));
+    }
+  }
+
+  if (deepseek) {
+    try {
+      console.log('→ DeepSeek…');
+      return await callDeepSeek(prompt, deepseek);
+    } catch (e) {
+      errors.push(e.message || String(e));
+    }
+  }
+
+  if (qwen) {
+    try {
+      console.log('→ Qwen…');
+      return await callQwen(prompt, qwen);
     } catch (e) {
       errors.push(e.message || String(e));
     }
@@ -703,7 +699,14 @@ async function main() {
   console.log(`✓ Artículo publicado: ${parsed.slug}`);
 }
 
-main().catch((err) => {
-  console.error(err);
+main().catch(async (err) => {
+  const msg = err?.message || String(err);
+  console.error(msg);
+  try {
+    const outPath = join(ROOT, 'blog-generate-result.json');
+    await writeFile(outPath, JSON.stringify({ ok: false, error: msg.slice(0, 500) }), 'utf8');
+  } catch {
+    /* noop */
+  }
   process.exit(1);
 });
