@@ -435,8 +435,8 @@ Responde SOLO JSON:
   "description": "max 155 chars con ${freshness.label}",
   "og_title": "...",
   "og_description": "max 120 chars",
-  "category_tag": "${topicEntry.category}",
-  "category_label": "Blog · ${topicEntry.category}",
+  "category_tag": "${topic.category}",
+  "category_label": "Blog · ${topic.category}",
   "breadcrumb_title": "título corto",
   "read_time": 5,
   "card_excerpt": "...",
@@ -687,7 +687,7 @@ async function main() {
     }
   }
 
-  const titleKey = slugify(parsed.title || topicEntry.phrase)
+  const titleKey = slugify(parsed.title || plan.userTopic)
     .replace(/-mexico.*$/, '')
     .replace(/-mayo-\d{4}$/, '')
     .replace(/-\d{4}$/, '');
