@@ -9,7 +9,7 @@ const SKIP_NOISE =
   /pelicula|juego|famosos|receta|noticias|github|n8n\b|gratis\b|curso |portones|calculadora|festival|maestria|ingenieria en|tec monterrey|toluca vs|america vs|empresas ia chinas|empresas ia para invertir|cotizan en bolsa|tesis|pdf\b|libro\b|claro|movistar|tigo|trabajo|personal\b|web\b descargar|download|login|logo|partner|pricing|iniciar sesión|iniciar sesion/;
 
 const NICHE =
-  /whatsapp|chatbot|kommo|crm|automatiz|inteligencia|google|seo|agente|embudo|pyme|negocio|negocios|\bia\b|ventas|cliente|business api|asistente|transformacion|digitaliz|posicionar|growth|hacking|video|contenido|marketing|youtube|tiktok|instagram|competencia|analisis|estrategia|conversion|funnel|redes sociales|email marketing|copywriting|publicidad|digital\b/;
+  /whatsapp|chatbot|kommo|crm|automatiz|inteligencia|google|seo|agente|embudo|pyme|negocio|negocios|\bia\b|ventas|cliente|business api|asistente|transformacion|digitaliz|posicionar|growth|hacking|video|contenido|marketing|youtube|tiktok|instagram|competencia|analisis|estrategia|conversion|funnel|redes sociales|email marketing|copywriting|publicidad|digital\b|citas|agenda|agendar|reservas|calendario/;
 
 /** Texto del usuario relacionado con servicios GH (permite publicar sin estar en catálogo). */
 export function isGhBlogUserIntent(input) {

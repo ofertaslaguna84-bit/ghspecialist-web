@@ -8,11 +8,8 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
 import { pingSearchEngines } from './indexnow.mjs';
-import { pickNextValidatedTopic } from './gh-blog-validated-keywords.mjs';
-import {
-  resolveTopicInputAsync,
-  isComparativeBrief,
-} from './gh-blog-topic-resolve.mjs';
+import { isComparativeBrief } from './gh-blog-topic-resolve.mjs';
+import { prepareBlogGeneration, prepareBlogAuto } from './gh-blog-prepare.mjs';
 import {
   getBlogFreshness,
   applyFreshnessToArticle,
@@ -374,26 +371,35 @@ async function generateArticleContent(prompt) {
   throw new Error(`Todas las IAs fallaron: ${errors.join(' · ').slice(0, 500)}`);
 }
 
-function buildPrompt(topicEntry, freshness, contentBrief, existingSlugs) {
-  const phrase = topicEntry.phrase;
+function buildPrompt(plan, freshness, existingSlugs) {
+  const { topic, userTopic, seoKeywords, contentBrief } = plan;
+  const articleTopic = userTopic || topic.phrase;
   const slugList = existingSlugs.map((s) => s.replace('.html', '')).join(', ');
   const expansionBlock = contentBrief
     ? `
 
-Contenido ampliado (lo que el usuario pidió — incluir en el artículo):
-${contentBrief}
-El title/slug siguen anclados en «${phrase}», pero el cuerpo debe cubrir todo el brief.`
+Contenido ampliado:
+${contentBrief}`
     : '';
   const comparativeNote = isComparativeBrief(contentBrief)
     ? '\n- TABLA HTML comparativa breve (table, thead, tbody) con 3–4 filas; celdas cortas'
     : '';
+  const keywordBlock =
+    seoKeywords?.length > 0
+      ? `
+
+PALABRAS CLAVE DE BÚSQUEDA (Google Suggest México — integra entre 2 y 5 de forma natural en el artículo: en algún <h2>, párrafos y meta description; NO cambies el tema del artículo):
+${seoKeywords.map((k) => `- ${k}`).join('\n')}`
+      : '';
 
   return `Eres redactor SEO senior para GH Specialist (automatización con IA, chatbots WhatsApp, CRM Kommo, México).
 
 Actualidad obligatoria: ${freshness.label} (zona horaria México). Prohibido años anteriores a ${freshness.year}.
 
-Frase objetivo EXACTA (Google Suggest MX): "${phrase}"
-Categoría: ${topicEntry.category}
+TEMA DEL ARTÍCULO (obligatorio — lo que pidió el usuario): "${articleTopic}"
+Categoría: ${topic.category}
+El título, slug, h1 y enfoque del contenido deben ser sobre ESE tema, no sobre otro del catálogo.
+${keywordBlock}
 
 Artículos ya publicados (enlaza 2-3 si encajan): ${slugList}
 
@@ -415,8 +421,8 @@ REGLAS DE LONGITUD (CRÍTICO — el lector no lee paredes de texto):
 REGLAS SEO:
 - 2–4 enlaces internos
 - CTAs a Google Calendar (${GOOGLE_CALENDAR_URL}) y WhatsApp +528712638082
-- slug kebab-case sin acentos, palabras clave de la frase, terminar en "-${freshness.slugSuffix}"
-- title con frase objetivo y vigencia "${freshness.label}" (ej. "... | guía ${freshness.label}")
+- slug kebab-case del TEMA DEL USUARIO, terminar en "-${freshness.slugSuffix}"
+- title sobre el TEMA DEL USUARIO y vigencia "${freshness.label}" (ej. "... | guía ${freshness.label}")
 - Primer párrafo: mencionar actualización ${freshness.label}
 - PROHIBIDO la palabra "leads" (usa contactos, interesados, prospectos)
 - PROHIBIDO jerga inventada (B2B leads, funnel anglicismos) salvo WhatsApp/CRM reales
@@ -439,7 +445,7 @@ Responde SOLO JSON:
   "related": [{"slug": "otro.html", "title": "...", "desc": "..."}]
 }
 
-Escribe sobre: ${phrase}${expansionBlock}`;
+Escribe sobre: ${articleTopic}${expansionBlock}`;
 }
 
 function escapeHtml(s) {
@@ -642,37 +648,34 @@ async function main() {
   const haystack = await fetchExistingHaystack(existing);
   const freshness = getBlogFreshness();
 
-  let topicEntry;
-  let contentBrief;
-  /** @type {{ userInput: string, phrase: string, autoCorrected: boolean, message: string } | undefined} */
-  let resolveMeta;
+  /** @type {import('./gh-blog-prepare.mjs').prepareBlogGeneration extends (...args: any) => Promise<infer R> ? R : never} */
+  let plan;
 
   if (userInput) {
-    const resolved = await resolveTopicInputAsync(userInput);
-    topicEntry = resolved.topic;
-    contentBrief = resolved.contentBrief;
-    resolveMeta = {
-      userInput: resolved.userInput,
-      phrase: resolved.topic.phrase,
-      autoCorrected: resolved.autoCorrected,
-      message: resolved.message,
-    };
-    console.log(`→ Tema: «${topicEntry.phrase}»${resolved.autoCorrected ? ' (corregido)' : ''}`);
+    plan = await prepareBlogGeneration(userInput);
+    console.log(`→ Tema usuario: «${plan.userTopic}»`);
+    console.log(`→ Keywords SEO: ${plan.seoKeywords.join(' | ')}`);
   } else {
-    topicEntry = pickNextValidatedTopic(haystack);
-    console.log(`→ Tema automático: «${topicEntry.phrase}»`);
+    plan = prepareBlogAuto(haystack);
+    console.log(`→ Tema automático: «${plan.userTopic}»`);
   }
 
-  const raw = await generateArticleContent(
-    buildPrompt(topicEntry, freshness, contentBrief, existing)
-  );
+  const resolveMeta = {
+    userInput: plan.userTopic,
+    phrase: plan.userTopic,
+    seoKeywords: plan.seoKeywords,
+    autoCorrected: false,
+    message: plan.message,
+  };
+
+  const raw = await generateArticleContent(buildPrompt(plan, freshness, existing));
   const parsed = extractJsonObject(raw.replace(/```json\s*/gi, '').replace(/```/g, ''));
 
-  if (!parsed.slug) parsed.slug = slugify(topicEntry.phrase);
+  if (!parsed.slug) parsed.slug = slugify(plan.userTopic);
   parsed.slug = slugify(parsed.slug.replace(/\.html$/, ''));
   if (!parsed.slug.endsWith('.html')) parsed.slug += '.html';
 
-  applyFreshnessToArticle(parsed, freshness, topicEntry.phrase);
+  applyFreshnessToArticle(parsed, freshness, plan.userTopic);
   enforceArticleLength(parsed);
   const wordCount = countWordsInHtml(parsed.content_html || '');
   console.log(`→ Longitud: ${wordCount} palabras (máx ${BLOG_MAX_WORDS})`);
@@ -716,7 +719,7 @@ async function main() {
     parsed.slug = candidate;
   }
 
-  const hero = await resolveHeroImage(topicEntry.phrase, '', parsed.slug);
+  const hero = await resolveHeroImage(plan.userTopic, '', parsed.slug);
   const dateIso = new Date().toISOString().slice(0, 10);
 
   const html = buildArticleHtml(parsed, dateIso, hero);
@@ -736,6 +739,7 @@ async function main() {
       slug: parsed.slug,
       url: `${SITE}/blog/${parsed.slug}`,
       resolved: resolveMeta,
+      seoKeywords: plan.seoKeywords,
     }),
     'utf8'
   );

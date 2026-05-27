@@ -787,7 +787,7 @@
     var exact = preview.exact;
     var cls = exact ? 'blog-topic-preview--exact' : 'blog-topic-preview--corrected';
     box.className = 'blog-topic-preview is-visible ' + cls;
-    var head = exact ? '✓ Tema listo' : '→ Se generará con';
+    var head = '✓ Artículo sobre';
     var phraseHtml = preview.resolvedPhrase
       ? '<span class="blog-topic-phrase">' + preview.resolvedPhrase + '</span>'
       : '';
@@ -796,22 +796,6 @@
         ? '<p style="margin-top:6px;font-size:12px;font-weight:700">Incluirá contenido ampliado (local, comparativa o agencia en tu ciudad).</p>'
         : '';
     var chips = '';
-    if (!exact && preview.suggestions && preview.suggestions.length) {
-      chips =
-        '<div class="blog-topic-chips">' +
-        preview.suggestions
-          .map(function (s) {
-            return (
-              '<button type="button" data-suggest="' +
-              s.replace(/"/g, '&quot;') +
-              '">' +
-              s +
-              '</button>'
-            );
-          })
-          .join('') +
-        '</div>';
-    }
     box.innerHTML =
       '<strong>' +
       head +
