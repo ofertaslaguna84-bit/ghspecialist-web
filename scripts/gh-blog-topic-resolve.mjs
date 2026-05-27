@@ -45,6 +45,16 @@ const SERVICE_ALIASES = {
   agente: ['agente', 'agentes'],
   ventas: ['embudo', 'ventas', 'vender', 'cerrar ventas'],
   pyme: ['pyme', 'pymes', 'negocio', 'empresa', 'empresas'],
+  atencion: [
+    'servicio al cliente',
+    'servicio a cliente',
+    'atencion al cliente',
+    'atencion cliente',
+    'soporte al cliente',
+    'experiencia del cliente',
+    'centro de atencion',
+    'customer service',
+  ],
 };
 
 const PAYMENT_ALIASES = ['precio', 'precios', 'costo', 'cuanto', 'cuánto', 'tarifa', 'cotizar'];
@@ -86,6 +96,79 @@ function hasIaOrAgencyIntent(input) {
     n.includes('chatbot') ||
     n.includes('gh specialist')
   );
+}
+
+/** Servicio / atención al cliente — no mapear a "chatbot con inteligencia artificial" genérico */
+function detectCustomerServiceIntent(input) {
+  const n = normalize(input);
+  return (
+    n.includes('servicio al cliente') ||
+    n.includes('servicio a cliente') ||
+    n.includes('atencion al cliente') ||
+    n.includes('atencion cliente') ||
+    n.includes('soporte al cliente') ||
+    n.includes('experiencia del cliente') ||
+    n.includes('centro de atencion') ||
+    (n.includes('cliente') && (n.includes('automatiz') || n.includes('chatbot')))
+  );
+}
+
+/** Si el texto del usuario ya es casi la frase validada */
+function findNearValidatedTopic(input) {
+  const n = normalize(input);
+  let best;
+  let bestScore = 0;
+  for (const t of VALIDATED_BLOG_TOPICS) {
+    const p = normalize(t.phrase);
+    if (p === n) return t;
+    const inputTokens = tokenize(input);
+    const phraseTokens = tokenize(t.phrase);
+    let overlap = 0;
+    for (const tok of phraseTokens) {
+      if (inputTokens.includes(tok)) overlap += 1;
+    }
+    const ratio = overlap / Math.max(phraseTokens.length, 1);
+    if (ratio >= 0.75 && overlap >= 3 && ratio > bestScore) {
+      bestScore = ratio;
+      best = t;
+    }
+  }
+  return best;
+}
+
+/** @param {string} input @param {string[]} services */
+function pickAnchorForCustomerService(input, services) {
+  const n = normalize(input);
+  if (services.includes('whatsapp') || n.includes('whatsapp')) {
+    return (
+      findValidatedTopic('chatbot atencion al cliente whatsapp') ||
+      findValidatedTopic('chatbot whatsapp para empresas') ||
+      VALIDATED_BLOG_TOPICS[0]
+    );
+  }
+  if (n.includes('chatbot')) {
+    return (
+      findValidatedTopic('atencion cliente chatbot') ||
+      findValidatedTopic('chatbot atencion al cliente whatsapp') ||
+      VALIDATED_BLOG_TOPICS[0]
+    );
+  }
+  return (
+    findValidatedTopic('automatizacion de servicio al cliente') ||
+    findValidatedTopic('automatizacion atencion al cliente') ||
+    findValidatedTopic('atencion cliente chatbot') ||
+    VALIDATED_BLOG_TOPICS[0]
+  );
+}
+
+/** @param {string} userInput */
+function buildCustomerServiceBrief(userInput) {
+  return [
+    `El usuario pidió: «${userInput}».`,
+    'Artículo sobre AUTOMATIZACIÓN DE SERVICIO Y ATENCIÓN AL CLIENTE en México (WhatsApp, chatbot, CRM, tiempos de respuesta, escalamiento a humano).',
+    'PROHIBIDO centrar el artículo solo en "inteligencia artificial" genérica o un chatbot abstracto sin hablar de servicio al cliente.',
+    'Incluye beneficios para PYMEs, métricas (tiempo de respuesta, satisfacción) y CTA a GH Specialist.',
+  ].join(' ');
 }
 
 /** Recursos humanos / RH — no debe mapearse a IA solo por llevar una ciudad */
@@ -226,6 +309,25 @@ function scoreTopic(input, topic) {
   if (rh && phraseNorm.includes('recursos humanos')) score += 8;
   if (rh && phraseNorm.includes('humanos')) score += 4;
 
+  const cs = detectCustomerServiceIntent(input);
+  if (cs) {
+    if (phraseNorm.includes('servicio') && phraseNorm.includes('cliente')) score += 16;
+    if (phraseNorm.includes('atencion') && phraseNorm.includes('cliente')) score += 14;
+    if (phraseNorm.includes('atencion') && phraseNorm.includes('cliente') && phraseNorm.includes('chatbot')) score += 4;
+    if (
+      phraseNorm.includes('inteligencia artificial') &&
+      !phraseNorm.includes('cliente') &&
+      !phraseNorm.includes('atencion') &&
+      !phraseNorm.includes('servicio')
+    ) {
+      score -= 10;
+    }
+  }
+
+  if (services.includes('atencion') || cs) {
+    if (phraseNorm.includes('atencion') || phraseNorm.includes('servicio')) score += 6;
+  }
+
   if (services.includes('chatbot') && phraseNorm.includes('chatbot')) score += 4;
   if (services.includes('whatsapp') && phraseNorm.includes('whatsapp')) score += 4;
   if (services.includes('crm') && (phraseNorm.includes('crm') || phraseNorm.includes('kommo'))) score += 4;
@@ -319,11 +421,48 @@ export function resolveTopicInput(userInput) {
       autoCorrected: false,
       message: 'Frase validada en Google MX.',
       suggestions: [],
+      contentBrief: detectCustomerServiceIntent(trimmed)
+        ? buildCustomerServiceBrief(trimmed)
+        : undefined,
+    };
+  }
+
+  const near = findNearValidatedTopic(trimmed);
+  if (near) {
+    return {
+      topic: near,
+      userInput: trimmed,
+      autoCorrected: normalize(trimmed) !== normalize(near.phrase),
+      message:
+        normalize(trimmed) === normalize(near.phrase)
+          ? 'Frase validada en Google MX.'
+          : `Ajustado a frase validada: «${near.phrase}»`,
+      suggestions: [],
+      contentBrief: detectCustomerServiceIntent(trimmed)
+        ? buildCustomerServiceBrief(trimmed)
+        : undefined,
     };
   }
 
   const city = detectCity(trimmed);
   const services = detectServices(trimmed);
+
+  if (detectCustomerServiceIntent(trimmed)) {
+    const topic = pickAnchorForCustomerService(trimmed, services);
+    return {
+      topic,
+      userInput: trimmed,
+      autoCorrected: normalize(trimmed) !== normalize(topic.phrase),
+      message: `Entendí automatización de servicio y atención al cliente. Frase SEO Google MX: «${topic.phrase}».`,
+      suggestions: [
+        'automatizacion de servicio al cliente',
+        'automatizacion atencion al cliente',
+        'chatbot atencion al cliente whatsapp',
+        'atencion cliente chatbot',
+      ],
+      contentBrief: buildCustomerServiceBrief(trimmed),
+    };
+  }
 
   if (detectRhIntent(trimmed)) {
     const topic = pickValidatedTopicForRh(city, trimmed);
@@ -416,7 +555,8 @@ export function isComparativeBrief(brief) {
   return Boolean(
     brief?.includes('Guía comparativa para dueños de negocio') ||
       brief?.includes('Artículo LOCAL para empresas') ||
-      brief?.includes('recursos humanos en')
+      brief?.includes('recursos humanos en') ||
+      brief?.includes('AUTOMATIZACIÓN DE SERVICIO Y ATENCIÓN AL CLIENTE')
   );
 }
 

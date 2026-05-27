@@ -8,6 +8,9 @@
     { phrase: 'chatbot con inteligencia artificial', category: 'Chatbots' },
     { phrase: 'chatbot whatsapp precio', category: 'Chatbots' },
     { phrase: 'atencion cliente chatbot', category: 'Chatbots' },
+    { phrase: 'automatizacion de servicio al cliente', category: 'Automatización' },
+    { phrase: 'automatizacion atencion al cliente', category: 'Automatización' },
+    { phrase: 'chatbot atencion al cliente whatsapp', category: 'Chatbots' },
     { phrase: 'como automatizar mi negocio con ia', category: 'Automatización' },
     { phrase: 'automatizar negocio con inteligencia artificial', category: 'Automatización' },
     { phrase: 'automatizacion whatsapp pymes', category: 'Automatización' },
@@ -57,6 +60,13 @@
     agente: ['agente', 'agentes'],
     ventas: ['embudo', 'ventas', 'vender', 'cerrar ventas'],
     pyme: ['pyme', 'pymes', 'negocio', 'empresa', 'empresas'],
+    atencion: [
+      'servicio al cliente',
+      'servicio a cliente',
+      'atencion al cliente',
+      'atencion cliente',
+      'soporte al cliente',
+    ],
   };
 
   var SERVICE_LABELS = {
@@ -117,6 +127,17 @@
       n.indexOf('agencia') >= 0 ||
       n.indexOf('agente') >= 0 ||
       n.indexOf('chatbot') >= 0
+    );
+  }
+
+  function detectCustomerServiceIntent(input) {
+    var n = normalize(input);
+    return (
+      n.indexOf('servicio al cliente') >= 0 ||
+      n.indexOf('atencion al cliente') >= 0 ||
+      n.indexOf('atencion cliente') >= 0 ||
+      n.indexOf('soporte al cliente') >= 0 ||
+      (n.indexOf('cliente') >= 0 && (n.indexOf('automatiz') >= 0 || n.indexOf('chatbot') >= 0))
     );
   }
 
@@ -182,6 +203,12 @@
       } else if (rh || ia) score -= 8;
     }
     if (rh && phraseNorm.indexOf('recursos humanos') >= 0) score += 8;
+    var cs = detectCustomerServiceIntent(input);
+    if (cs) {
+      if (phraseNorm.indexOf('servicio') >= 0 && phraseNorm.indexOf('cliente') >= 0) score += 16;
+      if (phraseNorm.indexOf('atencion') >= 0 && phraseNorm.indexOf('cliente') >= 0) score += 14;
+      if (phraseNorm.indexOf('inteligencia artificial') >= 0 && phraseNorm.indexOf('cliente') < 0) score -= 10;
+    }
     if (services.indexOf('chatbot') >= 0 && phraseNorm.indexOf('chatbot') >= 0) score += 4;
     if (services.indexOf('whatsapp') >= 0 && phraseNorm.indexOf('whatsapp') >= 0) score += 4;
     if (services.indexOf('crm') >= 0 && (phraseNorm.indexOf('crm') >= 0 || phraseNorm.indexOf('kommo') >= 0)) score += 4;
@@ -254,6 +281,29 @@
 
     var city = detectCity(trimmed);
     var services = detectServices(trimmed);
+
+    if (detectCustomerServiceIntent(trimmed)) {
+      var csTopic = findValidatedTopic('automatizacion de servicio al cliente') || VALIDATED_BLOG_TOPICS[0];
+      if (normalize(trimmed).indexOf('whatsapp') >= 0) {
+        csTopic = findValidatedTopic('chatbot atencion al cliente whatsapp') || csTopic;
+      }
+      return {
+        topic: csTopic,
+        userInput: trimmed,
+        autoCorrected: normalize(trimmed) !== normalize(csTopic.phrase),
+        message:
+          'Entendí automatización de servicio y atención al cliente. Frase SEO Google MX: «' +
+          csTopic.phrase +
+          '».',
+        suggestions: [
+          'automatizacion de servicio al cliente',
+          'automatizacion atencion al cliente',
+          'chatbot atencion al cliente whatsapp',
+          'atencion cliente chatbot',
+        ],
+        contentBrief: true,
+      };
+    }
 
     if (detectRhIntent(trimmed)) {
       var rhTopic = findValidatedTopic('recursos humanos torreon') || VALIDATED_BLOG_TOPICS[0];
