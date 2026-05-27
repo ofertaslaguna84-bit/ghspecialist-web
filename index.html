@@ -1789,7 +1789,7 @@
     // Onboarding: MX/US estados, nómina, qué instalar, mín. USD 1500 → Google Calendar (iframe). IDs en js/gh-site-config.js
     (function () {
       var FORM_ID = (window.GH_SITE_CONFIG && window.GH_SITE_CONFIG.formspreeLeadsId) ? String(window.GH_SITE_CONFIG.formspreeLeadsId).trim() : '';
-      var BOOKING_URL = 'https://calendar.app.google/Ay2yA84WLXLZhPJN9';
+      var BOOKING_URL = (window.GH_SITE_CONFIG && window.GH_SITE_CONFIG.googleCalendarUrl) || 'https://calendar.app.google/rz32YjLinKvYWUTT9';
       var WA = '528712638082';
       var MX = ['Aguascalientes','Baja California','Baja California Sur','Campeche','Chiapas','Chihuahua','Ciudad de México','Coahuila','Colima','Durango','Guanajuato','Guerrero','Hidalgo','Jalisco','México','Michoacán','Morelos','Nayarit','Nuevo León','Oaxaca','Puebla','Querétaro','Quintana Roo','San Luis Potosí','Sinaloa','Sonora','Tabasco','Tamaulipas','Tlaxcala','Veracruz','Yucatán','Zacatecas'];
       var US = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];

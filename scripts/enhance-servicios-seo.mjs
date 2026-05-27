@@ -77,7 +77,7 @@ const SERVICE_FAQS = {
     faqs: [
       ['¿Qué tipo de proyectos custom hacen?', 'Integraciones ERP, APIs propias, bots especializados, dashboards y automatizaciones n8n a medida.'],
       ['¿Trabajan con empresas fuera de México?', 'Sí. México y LATAM, español e inglés.'],
-      ['¿Cómo empiezo?', 'Agenda un diagnóstico gratuito de 30 minutos en calendly.com/ghspecialist.'],
+      ['¿Cómo empiezo?', 'Agenda un diagnóstico gratuito de 30 minutos en calendar.app.google/rz32YjLinKvYWUTT9.'],
     ],
   },
 };

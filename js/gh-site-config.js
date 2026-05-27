@@ -48,5 +48,7 @@ window.GH_SITE_CONFIG = {
   githubOwner: 'ofertaslaguna84-bit',
   githubRepo: 'ghspecialist-web',
   /** API en Adestajo (servidor) — el panel no necesita token GitHub en el navegador */
-  blogApiBase: 'https://adestajo.com.mx'
+  blogApiBase: 'https://adestajo.com.mx',
+  /** Citas / diagnóstico — Google Calendar (reemplaza Calendly en todo el sitio) */
+  googleCalendarUrl: 'https://calendar.app.google/rz32YjLinKvYWUTT9'
 };

@@ -548,7 +548,9 @@
   }
 
   function refreshCalendarCopy() {
-    var BOOKING_URL = 'https://calendar.app.google/Ay2yA84WLXLZhPJN9';
+    var BOOKING_URL =
+      (window.GH_SITE_CONFIG && window.GH_SITE_CONFIG.googleCalendarUrl) ||
+      'https://calendar.app.google/rz32YjLinKvYWUTT9';
     var title = document.querySelector('.book-cal-head-title');
     var sub = document.querySelector('.book-cal-head-sub');
     if (title) title.textContent = t('cal.title');

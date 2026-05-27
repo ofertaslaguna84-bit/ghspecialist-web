@@ -19,6 +19,7 @@ import {
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const SITE = 'https://ghspecialist.com';
+const GOOGLE_CALENDAR_URL = 'https://calendar.app.google/rz32YjLinKvYWUTT9';
 const BLOG_YEAR = String(getBlogFreshness().year);
 
 const BASE_IMAGES = [
@@ -398,7 +399,7 @@ Servicios (enlaces relativos ../servicios/...):
 REGLAS:
 - 1.500–2.200 palabras en content_html (p, h2, h3, ul, ol, li, strong, a — sin h1)
 - 3–5 enlaces internos
-- CTAs a Calendly y WhatsApp +528712638082
+- CTAs a Google Calendar (${GOOGLE_CALENDAR_URL}) y WhatsApp +528712638082
 - slug kebab-case sin acentos, palabras clave de la frase, terminar en "-${freshness.slugSuffix}"
 - title con frase objetivo y vigencia "${freshness.label}" (ej. "... | guía ${freshness.label}")
 - Primer párrafo: mencionar actualización ${freshness.label}
@@ -549,7 +550,7 @@ function buildArticleHtml(article, dateIso, hero) {
   <div class="cta-art">
     <h3>¿Quieres automatizar tu negocio con IA?</h3>
     <p>Diagnóstico gratuito de 30 minutos. Te decimos qué implementar primero.</p>
-    <a href="https://calendly.com/ghspecialist" target="_blank" rel="noopener">📅 Agendar diagnóstico →</a>
+    <a href="https://calendar.app.google/rz32YjLinKvYWUTT9" target="_blank" rel="noopener">📅 Agendar diagnóstico →</a>
     <a href="https://wa.me/528712638082?text=Hola%20Pedro,%20leí%20tu%20artículo%20sobre%20${encodeURIComponent(slug)}" target="_blank" rel="noopener">📱 WhatsApp →</a>
   </div>
   <section class="related" aria-label="Artículos relacionados">
