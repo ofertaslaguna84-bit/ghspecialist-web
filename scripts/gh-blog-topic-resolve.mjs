@@ -15,11 +15,32 @@ import {
  * @property {string} [contentBrief]
  */
 
+const SHORT_TOKENS = new Set(['ia', 'seo', 'crm']);
+
+const CITY_ALIASES = {
+  torreon: ['torreon', 'torreón', 'la laguna', 'laguna', 'gomez palacio', 'gómez palacio', 'lerdo'],
+  monterrey: ['monterrey', 'nuevo leon', 'nuevo león', 'san pedro garza'],
+  cdmx: ['cdmx', 'ciudad de mexico', 'ciudad de méxico', 'df', 'cd mx'],
+  guadalajara: ['guadalajara', 'jalisco', 'zapopan'],
+  queretaro: ['queretaro', 'querétaro'],
+  chihuahua: ['chihuahua'],
+};
+
+const CITY_LABELS = {
+  torreon: 'Torreón y La Laguna',
+  monterrey: 'Monterrey',
+  cdmx: 'CDMX',
+  guadalajara: 'Guadalajara',
+  queretaro: 'Querétaro',
+  chihuahua: 'Chihuahua',
+};
+
 const SERVICE_ALIASES = {
   chatbot: ['chatbot', 'bot', 'asistente virtual', 'asistente'],
   whatsapp: ['whatsapp', 'wsp', 'wa', 'business api', 'whats app'],
   crm: ['crm', 'kommo', 'pipedrive', 'hubspot'],
   ia: ['ia', 'inteligencia artificial', 'automatiz', 'automatizar', ' ai '],
+  agencia: ['agencia', 'agencias', 'consultora', 'proveedor de ia', 'empresa de ia', 'servicios de ia'],
   seo: ['seo', 'posicionar', 'posicionamiento', 'google', 'ranking'],
   agente: ['agente', 'agentes'],
   ventas: ['embudo', 'ventas', 'vender', 'cerrar ventas'],
@@ -39,7 +60,32 @@ function normalize(s) {
 }
 
 function tokenize(s) {
-  return normalize(s).split(' ').filter((w) => w.length > 2);
+  return normalize(s)
+    .split(' ')
+    .filter((w) => w.length > 2 || SHORT_TOKENS.has(w));
+}
+
+/** @param {string} input */
+function detectCity(input) {
+  const n = normalize(input);
+  for (const [city, aliases] of Object.entries(CITY_ALIASES)) {
+    if (aliases.some((a) => n.includes(normalize(a)))) return city;
+  }
+  return null;
+}
+
+/** @param {string} input */
+function hasIaOrAgencyIntent(input) {
+  const n = normalize(input);
+  return (
+    /\bia\b/.test(n) ||
+    n.includes('inteligencia artificial') ||
+    n.includes('automatiz') ||
+    n.includes('agencia') ||
+    n.includes('agente') ||
+    n.includes('chatbot') ||
+    n.includes('gh specialist')
+  );
 }
 
 /** @param {string} input */
@@ -51,12 +97,53 @@ function detectServices(input) {
       found.push(service);
     }
   }
-  return found;
+  if (n.includes('agencia') && !found.includes('ia')) found.push('ia');
+  return [...new Set(found)];
 }
 
 function hasPaymentIntent(input) {
   const n = normalize(input);
   return PAYMENT_ALIASES.some((w) => n.includes(w));
+}
+
+/** @param {string} city */
+function topicsForCity(city) {
+  return VALIDATED_BLOG_TOPICS.filter((t) => normalize(t.phrase).includes(city));
+}
+
+/** @param {string} city @param {string} input @param {string[]} services */
+function pickValidatedTopicForCity(city, input, services) {
+  const local = topicsForCity(city);
+  if (!local.length) {
+    return (
+      findValidatedTopic('inteligencia artificial empresas mexico') || VALIDATED_BLOG_TOPICS[0]
+    );
+  }
+
+  if (services.includes('chatbot')) {
+    const chat = local.find((t) => normalize(t.phrase).includes('chatbot'));
+    if (chat) return chat;
+  }
+
+  const iaLocal = local.find((t) => normalize(t.phrase).includes('inteligencia artificial'));
+  if (iaLocal) return iaLocal;
+
+  const ranked = local
+    .map((t) => ({ t, score: scoreTopic(input, t) }))
+    .sort((a, b) => b.score - a.score);
+  return ranked[0]?.t ?? local[0];
+}
+
+/** @param {string} city @param {string} userInput */
+function buildLocalBrief(city, userInput) {
+  const label = CITY_LABELS[city] ?? city;
+  const path = city === 'torreon' ? '/torreon/' : 'https://ghspecialist.com/';
+  return [
+    `Artículo LOCAL para empresas en ${label}. El usuario escribió: «${userInput}».`,
+    'Enfócate en agencia o servicios de IA para negocios (chatbots WhatsApp, CRM Kommo, automatización de ventas y atención), NO en automatización industrial de maquinaria salvo que el usuario lo pida explícitamente.',
+    `Menciona GH Specialist como implementador local. CTA a ${path} y WhatsApp +528712638082.`,
+    'Incluye 2–3 beneficios concretos para PYMEs de la zona y casos de uso (inmobiliaria, servicios, retail).',
+  ].join(' ');
 }
 
 /** @param {string} input @param {ValidatedKeywordTopic} topic */
@@ -72,11 +159,19 @@ function scoreTopic(input, topic) {
 
   const services = detectServices(input);
   const phraseNorm = normalize(topic.phrase);
+  const city = detectCity(input);
+
+  if (city) {
+    if (phraseNorm.includes(city)) score += 12;
+    else score -= 8;
+  }
 
   if (services.includes('chatbot') && phraseNorm.includes('chatbot')) score += 4;
   if (services.includes('whatsapp') && phraseNorm.includes('whatsapp')) score += 4;
   if (services.includes('crm') && (phraseNorm.includes('crm') || phraseNorm.includes('kommo'))) score += 4;
-  if (services.includes('ia') && (phraseNorm.includes('ia') || phraseNorm.includes('inteligencia'))) score += 4;
+  if ((services.includes('ia') || services.includes('agencia')) && phraseNorm.includes('inteligencia')) score += 5;
+  if (services.includes('ia') && phraseNorm.includes('ia')) score += 3;
+  if (services.includes('agencia') && phraseNorm.includes('inteligencia')) score += 4;
   if (services.includes('seo') && (phraseNorm.includes('google') || phraseNorm.includes('posicionar'))) score += 5;
   if (services.includes('agente') && phraseNorm.includes('agente')) score += 4;
   if (services.includes('ventas') && phraseNorm.includes('ventas')) score += 3;
@@ -94,6 +189,7 @@ const SERVICE_LABELS = {
   whatsapp: 'WhatsApp',
   crm: 'CRM Kommo',
   ia: 'automatización con IA',
+  agencia: 'agencia de IA',
   seo: 'SEO en Google',
   agente: 'agente de IA',
   ventas: 'embudo de ventas',
@@ -103,8 +199,12 @@ const SERVICE_LABELS = {
 /** @param {string[]} services @param {string} input */
 function buildComparativeBrief(services, input) {
   const labels = services.map((s) => SERVICE_LABELS[s] ?? s).join(', ');
+  const city = detectCity(input);
+  const localNote = city
+    ? ` Contexto local: ${CITY_LABELS[city] ?? city}.`
+    : '';
   const parts = [
-    `Guía comparativa para dueños de negocio en México sobre: ${labels}.`,
+    `Guía comparativa para dueños de negocio en México sobre: ${labels}.${localNote}`,
     'Incluye TABLA MARKDOWN principal con columnas: solución | ideal para | ventajas clave | integración WhatsApp | esfuerzo inicial.',
     'Cada fila debe cubrir un concepto que el usuario mencionó (chatbot, CRM, automatización, SEO, agente IA, etc.).',
     'Cierra con recomendación práctica: qué implementar primero en una PYME mexicana.',
@@ -118,6 +218,11 @@ function buildComparativeBrief(services, input) {
 
 /** @param {string} input @param {string[]} services */
 function pickAnchorForComparative(input, services) {
+  const city = detectCity(input);
+  if (city && hasIaOrAgencyIntent(input)) {
+    return pickValidatedTopicForCity(city, input, services);
+  }
+
   const ranked = VALIDATED_BLOG_TOPICS.map((t) => ({ t, score: scoreTopic(input, t) }))
     .sort((a, b) => b.score - a.score);
 
@@ -133,7 +238,7 @@ function pickAnchorForComparative(input, services) {
     const crm = findValidatedTopic('crm kommo whatsapp') || findValidatedTopic('crm kommo que es');
     if (crm) return crm;
   }
-  if (services.includes('ia')) {
+  if (services.includes('ia') || services.includes('agencia')) {
     const ia =
       findValidatedTopic('como automatizar mi negocio con ia') ||
       findValidatedTopic('inteligencia artificial para pymes mexico');
@@ -157,7 +262,25 @@ export function resolveTopicInput(userInput) {
     };
   }
 
+  const city = detectCity(trimmed);
   const services = detectServices(trimmed);
+
+  if (city && hasIaOrAgencyIntent(trimmed)) {
+    const topic = pickValidatedTopicForCity(city, trimmed, services);
+    const cityLabel = CITY_LABELS[city] ?? city;
+    const localSuggestions = topicsForCity(city).map((t) => t.phrase);
+    return {
+      topic,
+      userInput: trimmed,
+      autoCorrected: true,
+      message: `Entendí servicios/agencia de IA en ${cityLabel}. Frase SEO Google MX: «${topic.phrase}».`,
+      suggestions: localSuggestions.length
+        ? localSuggestions
+        : ['inteligencia artificial torreon', 'chatbot torreon'],
+      contentBrief: buildLocalBrief(city, trimmed),
+    };
+  }
+
   const multiService = services.length >= 2;
 
   if (multiService) {
@@ -197,7 +320,7 @@ export function resolveTopicInput(userInput) {
 
   const fallback =
     best?.t ??
-    findValidatedTopic('chatbot whatsapp para empresas') ??
+    findValidatedTopic('inteligencia artificial para pymes mexico') ??
     VALIDATED_BLOG_TOPICS[0];
 
   return {
@@ -213,7 +336,10 @@ export function resolveTopicInput(userInput) {
 
 /** @param {string} [brief] */
 export function isComparativeBrief(brief) {
-  return Boolean(brief?.includes('Guía comparativa para dueños de negocio'));
+  return Boolean(
+    brief?.includes('Guía comparativa para dueños de negocio') ||
+      brief?.includes('Artículo LOCAL para empresas')
+  );
 }
 
 /** @param {string} userInput */

@@ -793,7 +793,7 @@
       : '';
     var expand =
       preview.willExpandContent
-        ? '<p style="margin-top:6px;font-size:12px;font-weight:700">Incluirá tabla comparativa (varios temas detectados).</p>'
+        ? '<p style="margin-top:6px;font-size:12px;font-weight:700">Incluirá contenido ampliado (local, comparativa o agencia en tu ciudad).</p>'
         : '';
     var chips = '';
     if (!exact && preview.suggestions && preview.suggestions.length) {

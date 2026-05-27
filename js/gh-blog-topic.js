@@ -1,5 +1,5 @@
 /**
- * Preview de tema en panel (misma lógica que scripts/gh-blog-topic-resolve.mjs).
+ * Preview de tema en panel — misma lógica que scripts/gh-blog-topic-resolve.mjs (local primero).
  */
 (function (global) {
   var VALIDATED_BLOG_TOPICS = [
@@ -14,6 +14,9 @@
     { phrase: 'automatizacion de ventas whatsapp', category: 'Automatización' },
     { phrase: 'inteligencia artificial empresas mexico', category: 'IA' },
     { phrase: 'inteligencia artificial para pymes mexico', category: 'IA' },
+    { phrase: 'inteligencia artificial torreon', category: 'IA' },
+    { phrase: 'chatbot torreon', category: 'Chatbots' },
+    { phrase: 'automatizacion torreon', category: 'Automatización' },
     { phrase: 'agente de ia para whatsapp', category: 'IA' },
     { phrase: 'agente ia whatsapp', category: 'IA' },
     { phrase: 'crm kommo que es', category: 'CRM' },
@@ -24,11 +27,30 @@
     { phrase: 'como posicionar pagina google mexico', category: 'SEO' },
   ];
 
+  var CITY_ALIASES = {
+    torreon: ['torreon', 'torreón', 'la laguna', 'laguna', 'gomez palacio', 'gómez palacio', 'lerdo'],
+    monterrey: ['monterrey', 'nuevo leon', 'nuevo león'],
+    cdmx: ['cdmx', 'ciudad de mexico', 'ciudad de méxico', 'df'],
+    guadalajara: ['guadalajara', 'jalisco'],
+    queretaro: ['queretaro', 'querétaro'],
+    chihuahua: ['chihuahua'],
+  };
+
+  var CITY_LABELS = {
+    torreon: 'Torreón y La Laguna',
+    monterrey: 'Monterrey',
+    cdmx: 'CDMX',
+    guadalajara: 'Guadalajara',
+    queretaro: 'Querétaro',
+    chihuahua: 'Chihuahua',
+  };
+
   var SERVICE_ALIASES = {
     chatbot: ['chatbot', 'bot', 'asistente virtual', 'asistente'],
     whatsapp: ['whatsapp', 'wsp', 'wa', 'business api', 'whats app'],
     crm: ['crm', 'kommo', 'pipedrive', 'hubspot'],
     ia: ['ia', 'inteligencia artificial', 'automatiz', 'automatizar', ' ai '],
+    agencia: ['agencia', 'agencias', 'consultora', 'proveedor de ia', 'empresa de ia', 'servicios de ia'],
     seo: ['seo', 'posicionar', 'posicionamiento', 'google', 'ranking'],
     agente: ['agente', 'agentes'],
     ventas: ['embudo', 'ventas', 'vender', 'cerrar ventas'],
@@ -40,6 +62,7 @@
     whatsapp: 'WhatsApp',
     crm: 'CRM Kommo',
     ia: 'automatización con IA',
+    agencia: 'agencia de IA',
     seo: 'SEO en Google',
     agente: 'agente de IA',
     ventas: 'embudo de ventas',
@@ -56,6 +79,12 @@
       .trim();
   }
 
+  function tokenize(s) {
+    return normalize(s).split(' ').filter(function (w) {
+      return w.length > 2 || w === 'ia' || w === 'seo' || w === 'crm';
+    });
+  }
+
   function findValidatedTopic(phrase) {
     var n = normalize(phrase);
     for (var i = 0; i < VALIDATED_BLOG_TOPICS.length; i++) {
@@ -64,10 +93,29 @@
     return null;
   }
 
-  function tokenize(s) {
-    return normalize(s).split(' ').filter(function (w) {
-      return w.length > 2;
-    });
+  function detectCity(input) {
+    var n = normalize(input);
+    var keys = Object.keys(CITY_ALIASES);
+    for (var i = 0; i < keys.length; i++) {
+      var city = keys[i];
+      var aliases = CITY_ALIASES[city];
+      for (var j = 0; j < aliases.length; j++) {
+        if (n.indexOf(normalize(aliases[j])) >= 0) return city;
+      }
+    }
+    return null;
+  }
+
+  function hasIaOrAgencyIntent(input) {
+    var n = normalize(input);
+    return (
+      /\bia\b/.test(n) ||
+      n.indexOf('inteligencia artificial') >= 0 ||
+      n.indexOf('automatiz') >= 0 ||
+      n.indexOf('agencia') >= 0 ||
+      n.indexOf('agente') >= 0 ||
+      n.indexOf('chatbot') >= 0
+    );
   }
 
   function detectServices(input) {
@@ -83,34 +131,74 @@
         }
       }
     });
+    if (n.indexOf('agencia') >= 0 && found.indexOf('ia') < 0) found.push('ia');
     return found;
   }
 
+  function topicsForCity(city) {
+    return VALIDATED_BLOG_TOPICS.filter(function (t) {
+      return normalize(t.phrase).indexOf(city) >= 0;
+    });
+  }
+
   function scoreTopic(input, topic) {
-    var inputTokens = tokenize(input);
     var set = {};
-    inputTokens.forEach(function (t) {
+    tokenize(input).forEach(function (t) {
       set[t] = true;
     });
-    var phraseTokens = tokenize(topic.phrase);
     var score = 0;
-    var phraseNorm = normalize(topic.phrase);
-    var services = detectServices(input);
-
-    phraseTokens.forEach(function (t) {
+    tokenize(topic.phrase).forEach(function (t) {
       if (set[t]) score += 3;
     });
+    var phraseNorm = normalize(topic.phrase);
+    var services = detectServices(input);
+    var city = detectCity(input);
 
+    if (city) {
+      if (phraseNorm.indexOf(city) >= 0) score += 12;
+      else score -= 8;
+    }
     if (services.indexOf('chatbot') >= 0 && phraseNorm.indexOf('chatbot') >= 0) score += 4;
     if (services.indexOf('whatsapp') >= 0 && phraseNorm.indexOf('whatsapp') >= 0) score += 4;
     if (services.indexOf('crm') >= 0 && (phraseNorm.indexOf('crm') >= 0 || phraseNorm.indexOf('kommo') >= 0)) score += 4;
-    if (services.indexOf('ia') >= 0 && (phraseNorm.indexOf('ia') >= 0 || phraseNorm.indexOf('inteligencia') >= 0)) score += 4;
-    if (services.indexOf('seo') >= 0 && (phraseNorm.indexOf('google') >= 0 || phraseNorm.indexOf('posicionar') >= 0)) score += 5;
-
+    if (
+      (services.indexOf('ia') >= 0 || services.indexOf('agencia') >= 0) &&
+      phraseNorm.indexOf('inteligencia') >= 0
+    ) {
+      score += 5;
+    }
+    if (services.indexOf('seo') >= 0 && (phraseNorm.indexOf('google') >= 0 || phraseNorm.indexOf('posicionar') >= 0)) {
+      score += 5;
+    }
     return score;
   }
 
+  function pickValidatedTopicForCity(city, input, services) {
+    var local = topicsForCity(city);
+    if (!local.length) return findValidatedTopic('inteligencia artificial empresas mexico') || VALIDATED_BLOG_TOPICS[0];
+    if (services.indexOf('chatbot') >= 0) {
+      for (var i = 0; i < local.length; i++) {
+        if (normalize(local[i].phrase).indexOf('chatbot') >= 0) return local[i];
+      }
+    }
+    for (var j = 0; j < local.length; j++) {
+      if (normalize(local[j].phrase).indexOf('inteligencia artificial') >= 0) return local[j];
+    }
+    var ranked = local
+      .map(function (t) {
+        return { t: t, score: scoreTopic(input, t) };
+      })
+      .sort(function (a, b) {
+        return b.score - a.score;
+      });
+    return ranked[0] ? ranked[0].t : local[0];
+  }
+
   function pickAnchorForComparative(input, services) {
+    var city = detectCity(input);
+    if (city && hasIaOrAgencyIntent(input)) {
+      return pickValidatedTopicForCity(city, input, services);
+    }
     if (services.indexOf('seo') >= 0) {
       var seo = findValidatedTopic('como posicionar mi pagina en google mexico');
       if (seo) return seo;
@@ -140,7 +228,30 @@
       };
     }
 
+    var city = detectCity(trimmed);
     var services = detectServices(trimmed);
+
+    if (city && hasIaOrAgencyIntent(trimmed)) {
+      var localTopic = pickValidatedTopicForCity(city, trimmed, services);
+      var cityLabel = CITY_LABELS[city] || city;
+      var localSuggestions = topicsForCity(city).map(function (t) {
+        return t.phrase;
+      });
+      return {
+        topic: localTopic,
+        userInput: trimmed,
+        autoCorrected: true,
+        message:
+          'Entendí servicios/agencia de IA en ' +
+          cityLabel +
+          '. Frase SEO Google MX: «' +
+          localTopic.phrase +
+          '».',
+        suggestions: localSuggestions.length ? localSuggestions : ['inteligencia artificial torreon', 'chatbot torreon'],
+        contentBrief: true,
+      };
+    }
+
     if (services.length >= 2) {
       var topic = pickAnchorForComparative(trimmed, services);
       var labels = services
@@ -201,9 +312,11 @@
       message: best
         ? 'Aproximado a: «' + fallback.phrase + '». Si no es lo que buscas, elige una sugerencia.'
         : 'No encontré coincidencia clara. Usando tema similar.',
-      suggestions: suggestions.length ? suggestions : VALIDATED_BLOG_TOPICS.slice(0, 5).map(function (t) {
-        return t.phrase;
-      }),
+      suggestions: suggestions.length
+        ? suggestions
+        : VALIDATED_BLOG_TOPICS.slice(0, 5).map(function (t) {
+            return t.phrase;
+          }),
     };
   }
 
@@ -227,29 +340,11 @@
     };
   }
 
-  function fetchRemotePreview(input) {
-    var base = ((global.GH_SITE_CONFIG && global.GH_SITE_CONFIG.blogApiBase) || 'https://adestajo.com.mx').replace(
-      /\/$/,
-      ''
-    );
-    return fetch(base + '/api/ghspecialist/suggest-topic', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ input: input }),
-    })
-      .then(function (res) {
-        if (!res.ok) throw new Error('API ' + res.status);
-        return res.json();
-      });
-  }
-
   global.GH_BlogTopic = {
     previewTopicInput: previewTopicInput,
     resolveTopicInput: resolveTopicInput,
     fetchPreview: function (input) {
-      return fetchRemotePreview(input).catch(function () {
-        return previewTopicInput(input);
-      });
+      return Promise.resolve(previewTopicInput(input));
     },
   };
 })(typeof window !== 'undefined' ? window : globalThis);

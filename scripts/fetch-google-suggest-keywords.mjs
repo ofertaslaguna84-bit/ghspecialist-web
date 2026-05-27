@@ -21,6 +21,10 @@ const SEEDS = [
   'inteligencia artificial empresas mexico',
   'embudo ventas whatsapp',
   'atencion cliente chatbot',
+  'inteligencia artificial torreon',
+  'chatbot torreon',
+  'automatizacion torreon',
+  'agencia inteligencia artificial',
 ];
 
 async function suggest(q) {
