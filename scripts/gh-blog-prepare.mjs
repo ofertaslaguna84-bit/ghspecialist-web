@@ -58,7 +58,7 @@ export function pickSeoKeywordsForArticle(userTopic, suggestions, max = 5) {
     if (out.length >= max) break;
   }
 
-  if (out.length < 3 && /cita|agenda|reserva|calendario/.test(n)) {
+  if (/cita|agenda|reserva|calendario/.test(n)) {
     add('agendar citas whatsapp');
     add('automatizar citas whatsapp');
   }
