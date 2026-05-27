@@ -9,7 +9,14 @@ const SKIP_NOISE =
   /pelicula|juego|famosos|receta|noticias|github|n8n\b|gratis\b|curso |portones|calculadora|festival|maestria|ingenieria en|tec monterrey|toluca vs|america vs|empresas ia chinas|empresas ia para invertir|cotizan en bolsa|tesis|pdf\b|libro\b|claro|movistar|tigo|trabajo|personal\b|web\b descargar|download|login|logo|partner|pricing|iniciar sesión|iniciar sesion/;
 
 const NICHE =
-  /whatsapp|chatbot|kommo|crm|automatiz|inteligencia|google|seo|agente|embudo|pyme|negocio|negocios|\bia\b|ventas|cliente|business api|asistente|transformacion|digitaliz|posicionar|growth|hacking|video|contenido|marketing digital|youtube|tiktok/;
+  /whatsapp|chatbot|kommo|crm|automatiz|inteligencia|google|seo|agente|embudo|pyme|negocio|negocios|\bia\b|ventas|cliente|business api|asistente|transformacion|digitaliz|posicionar|growth|hacking|video|contenido|marketing|youtube|tiktok|instagram|competencia|analisis|estrategia|conversion|funnel|redes sociales|email marketing|copywriting|publicidad|digital\b/;
+
+/** Texto del usuario relacionado con servicios GH (permite publicar sin estar en catálogo). */
+export function isGhBlogUserIntent(input) {
+  const n = normalize(input);
+  if (n.length < 8) return false;
+  return NICHE.test(n);
+}
 
 /** @param {string} q */
 export async function fetchGoogleSuggestMx(q) {
@@ -87,7 +94,13 @@ export function pickBestSuggestPhrase(userInput, suggestions) {
       best = phrase;
     }
   }
-  return bestScore >= 4 ? best : '';
+  if (best) return best;
+  for (const raw of suggestions) {
+    if (!isGhBlogNichePhrase(raw)) continue;
+    const phrase = normalize(raw);
+    if (inputTokens.some((tok) => phrase.includes(tok))) return phrase;
+  }
+  return '';
 }
 
 /** @param {string} userInput */

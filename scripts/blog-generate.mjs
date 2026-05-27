@@ -688,13 +688,21 @@ async function main() {
     .replace(/-mexico.*$/, '')
     .replace(/-mayo-\d{4}$/, '')
     .replace(/-\d{4}$/, '');
-  for (const ex of existing) {
-    const exHtml = await readFile(join(ROOT, 'blog', ex), 'utf8');
-    const exTitle = exHtml.match(/<title>([^<]*)<\/title>/i)?.[1] || '';
-    const exKey = slugify(exTitle).replace(/-mexico.*$/, '').replace(/-2026.*$/, '');
-    if (exKey && titleKey && exKey === titleKey) {
-      console.error(`Artículo similar ya existe: ${ex}`);
-      process.exit(0);
+  if (!userInput) {
+    for (const ex of existing) {
+      const exHtml = await readFile(join(ROOT, 'blog', ex), 'utf8');
+      const exTitle = exHtml.match(/<title>([^<]*)<\/title>/i)?.[1] || '';
+      const exKey = slugify(exTitle).replace(/-mexico.*$/, '').replace(/-2026.*$/, '');
+      if (exKey && titleKey && exKey === titleKey) {
+        console.error(`Artículo similar ya existe: ${ex}`);
+        process.exit(0);
+      }
+    }
+  } else {
+    const userSlugBase = slugify(userInput).replace(/-mayo-\d{4}$/, '').slice(0, 48);
+    if (userSlugBase) {
+      const candidate = `${userSlugBase}-${freshness.slugSuffix}.html`;
+      if (!existing.includes(candidate)) parsed.slug = candidate;
     }
   }
 

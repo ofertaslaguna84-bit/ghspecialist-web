@@ -6,6 +6,7 @@ import {
 import {
   pickBestSuggestPhrase,
   suggestPhrasesForUserInput,
+  isGhBlogUserIntent,
 } from './gh-blog-google-suggest.mjs';
 
 /** @typedef {import('./gh-blog-validated-keywords.mjs').ValidatedKeywordTopic} ValidatedKeywordTopic */
@@ -456,6 +457,27 @@ function pickAnchorForComparative(input, services) {
 }
 
 /** @param {string} userInput */
+function buildFreeformBrief(userInput) {
+  return [
+    `El usuario pidió exactamente: «${userInput}».`,
+    'El artículo debe cubrir ESA intención (no cambiar el tema a otro del catálogo).',
+    'Título y slug derivados de lo que pidió. Enfoque PYME en México. CTA a GH Specialist.',
+  ].join(' ');
+}
+
+/** @param {string} trimmed @param {string} phrase @param {string} message @param {string[]} [suggestions] */
+function resultFromCustomPhrase(trimmed, phrase, message, suggestions = []) {
+  return {
+    topic: topicFromPhrase(phrase),
+    userInput: trimmed,
+    autoCorrected: normalize(trimmed) !== normalize(phrase),
+    message,
+    suggestions,
+    contentBrief: buildFreeformBrief(trimmed),
+  };
+}
+
+/** @param {string} userInput */
 export function resolveTopicInput(userInput) {
   const trimmed = userInput.trim();
   const exact = findValidatedTopic(trimmed);
@@ -582,6 +604,15 @@ export function resolveTopicInput(userInput) {
     };
   }
 
+  if (isGhBlogUserIntent(trimmed)) {
+    return resultFromCustomPhrase(
+      trimmed,
+      normalize(trimmed),
+      `Publicamos con tu frase (no hace falta catálogo): «${normalize(trimmed)}».`,
+      suggestions
+    );
+  }
+
   const fallback =
     best?.t ??
     findValidatedTopic('inteligencia artificial para pymes mexico') ??
@@ -649,27 +680,72 @@ function shouldRefineWithGoogleSuggest(sync, trimmed) {
  * @param {string} userInput
  */
 export async function resolveTopicInputAsync(userInput) {
-  const sync = resolveTopicInput(userInput);
   const trimmed = userInput.trim();
+  if (!trimmed) return resolveTopicInput(userInput);
+
+  const exact = findValidatedTopic(trimmed);
+  if (exact) {
+    return {
+      topic: exact,
+      userInput: trimmed,
+      autoCorrected: false,
+      message: 'Frase del catálogo / Google MX.',
+      suggestions: [],
+      contentBrief: detectCustomerServiceIntent(trimmed)
+        ? buildCustomerServiceBrief(trimmed)
+        : undefined,
+    };
+  }
+
+  try {
+    const suggestions = await suggestPhrasesForUserInput(trimmed);
+    const picked = pickBestSuggestPhrase(trimmed, suggestions);
+    if (picked) {
+      return resultFromCustomPhrase(
+        trimmed,
+        picked,
+        `Google Suggest México: «${picked}». El artículo responde a lo que escribiste.`,
+        suggestions.slice(0, 8)
+      );
+    }
+  } catch (err) {
+    console.warn('Google Suggest:', err?.message || err);
+  }
+
+  if (isGhBlogUserIntent(trimmed)) {
+    return resultFromCustomPhrase(
+      trimmed,
+      normalize(trimmed),
+      `Tema libre (tu frase): «${normalize(trimmed)}». Se publica aunque no esté en la lista.`,
+      []
+    );
+  }
+
+  const sync = resolveTopicInput(userInput);
+  if (
+    isGhBlogUserIntent(trimmed) &&
+    normalize(sync.topic.phrase) !== normalize(trimmed)
+  ) {
+    return resultFromCustomPhrase(
+      trimmed,
+      normalize(trimmed),
+      `Tu tema: «${normalize(trimmed)}» (el catálogo sugería otro; usamos el tuyo).`,
+      sync.suggestions
+    );
+  }
+
   if (!shouldRefineWithGoogleSuggest(sync, trimmed)) return sync;
 
   try {
     const suggestions = await suggestPhrasesForUserInput(trimmed);
     const picked = pickBestSuggestPhrase(trimmed, suggestions);
     if (!picked) return sync;
-
-    const topic = topicFromPhrase(picked);
-    const listSuggest = suggestions.slice(0, 8);
-    return {
-      ...sync,
-      topic,
-      autoCorrected: normalize(trimmed) !== normalize(picked),
-      message: `Frase sugerida por Google México: «${picked}». El artículo cubre lo que escribiste.`,
-      suggestions: listSuggest.length ? listSuggest : sync.suggestions,
-      contentBrief:
-        sync.contentBrief ||
-        `El usuario pidió: «${trimmed}». Usa la frase SEO «${picked}» en título/slug; el cuerpo debe responder exactamente a su intención.`,
-    };
+    return resultFromCustomPhrase(
+      trimmed,
+      picked,
+      `Frase sugerida por Google México: «${picked}».`,
+      suggestions.slice(0, 8)
+    );
   } catch {
     return sync;
   }
@@ -691,7 +767,7 @@ export function previewTopicInput(userInput) {
     return {
       exact: true,
       resolvedPhrase: '',
-      message: 'Vacío = el sistema elige el siguiente tema validado automáticamente.',
+      message: 'Vacío = el sistema elige el siguiente tema del catálogo automáticamente.',
       suggestions: [],
       willExpandContent: false,
     };

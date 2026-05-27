@@ -776,6 +776,19 @@
       };
     }
 
+    if (isGhBlogUserIntent(trimmed)) {
+      var customPhrase = normalize(trimmed);
+      return {
+        topic: { phrase: customPhrase, category: 'Consejos' },
+        userInput: trimmed,
+        autoCorrected: false,
+        message:
+          'Se publicará con tu frase (no hace falta catálogo): «' + customPhrase + '».',
+        suggestions: suggestions,
+        contentBrief: true,
+      };
+    }
+
     var fallback = best ? best.t : VALIDATED_BLOG_TOPICS[0];
     return {
       topic: fallback,
@@ -792,12 +805,20 @@
     };
   }
 
+  function isGhBlogUserIntent(input) {
+    var n = normalize(input);
+    if (n.length < 8) return false;
+    return /whatsapp|chatbot|kommo|crm|automatiz|inteligencia|google|seo|agente|embudo|pyme|negocio|ia\b|ventas|cliente|marketing|video|contenido|growth|hacking|competencia|analisis|estrategia|youtube|tiktok|instagram|digital/.test(
+      n
+    );
+  }
+
   function previewTopicInput(userInput) {
     if (!(userInput || '').trim()) {
       return {
         exact: true,
         resolvedPhrase: '',
-        message: 'Vacío = el sistema elige el siguiente tema validado automáticamente.',
+        message: 'Vacío = el sistema elige el siguiente tema del catálogo automáticamente.',
         suggestions: [],
         willExpandContent: false,
       };

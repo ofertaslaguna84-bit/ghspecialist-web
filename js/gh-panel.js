@@ -787,7 +787,7 @@
     var exact = preview.exact;
     var cls = exact ? 'blog-topic-preview--exact' : 'blog-topic-preview--corrected';
     box.className = 'blog-topic-preview is-visible ' + cls;
-    var head = exact ? '✓ Frase validada' : '→ Se generará con';
+    var head = exact ? '✓ Tema listo' : '→ Se generará con';
     var phraseHtml = preview.resolvedPhrase
       ? '<span class="blog-topic-phrase">' + preview.resolvedPhrase + '</span>'
       : '';
