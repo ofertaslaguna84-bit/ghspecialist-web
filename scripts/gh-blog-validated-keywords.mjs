@@ -21,6 +21,8 @@ export const VALIDATED_BLOG_TOPICS = [
   { phrase: 'inteligencia artificial torreon', category: 'IA' },
   { phrase: 'chatbot torreon', category: 'Chatbots' },
   { phrase: 'automatizacion torreon', category: 'Automatización' },
+  { phrase: 'recursos humanos torreon', category: 'Consejos' },
+  { phrase: 'automatizacion recursos humanos', category: 'Automatización' },
   { phrase: 'agente de ia para whatsapp', category: 'IA' },
   { phrase: 'agente ia whatsapp', category: 'IA' },
   { phrase: 'crm kommo que es', category: 'CRM' },

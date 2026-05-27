@@ -17,6 +17,8 @@
     { phrase: 'inteligencia artificial torreon', category: 'IA' },
     { phrase: 'chatbot torreon', category: 'Chatbots' },
     { phrase: 'automatizacion torreon', category: 'Automatización' },
+    { phrase: 'recursos humanos torreon', category: 'Consejos' },
+    { phrase: 'automatizacion recursos humanos', category: 'Automatización' },
     { phrase: 'agente de ia para whatsapp', category: 'IA' },
     { phrase: 'agente ia whatsapp', category: 'IA' },
     { phrase: 'crm kommo que es', category: 'CRM' },
@@ -118,6 +120,18 @@
     );
   }
 
+  function detectRhIntent(input) {
+    var n = normalize(input);
+    return (
+      n.indexOf('recursos humanos') >= 0 ||
+      /\brh\b/.test(n) ||
+      n.indexOf('nomina') >= 0 ||
+      n.indexOf('reclutamiento') >= 0 ||
+      n.indexOf('capital humano') >= 0 ||
+      (n.indexOf('especializada') >= 0 && n.indexOf('humanos') >= 0)
+    );
+  }
+
   function detectServices(input) {
     var n = ' ' + normalize(input) + ' ';
     var found = [];
@@ -154,10 +168,20 @@
     var services = detectServices(input);
     var city = detectCity(input);
 
+    var rh = detectRhIntent(input);
+    var ia = hasIaOrAgencyIntent(input);
     if (city) {
-      if (phraseNorm.indexOf(city) >= 0) score += 12;
-      else score -= 8;
+      if (phraseNorm.indexOf(city) >= 0) {
+        if (rh && phraseNorm.indexOf('recursos humanos') >= 0) score += 14;
+        else if (
+          ia &&
+          (phraseNorm.indexOf('inteligencia') >= 0 || phraseNorm.indexOf('chatbot') >= 0)
+        ) {
+          score += 12;
+        }
+      } else if (rh || ia) score -= 8;
     }
+    if (rh && phraseNorm.indexOf('recursos humanos') >= 0) score += 8;
     if (services.indexOf('chatbot') >= 0 && phraseNorm.indexOf('chatbot') >= 0) score += 4;
     if (services.indexOf('whatsapp') >= 0 && phraseNorm.indexOf('whatsapp') >= 0) score += 4;
     if (services.indexOf('crm') >= 0 && (phraseNorm.indexOf('crm') >= 0 || phraseNorm.indexOf('kommo') >= 0)) score += 4;
@@ -230,6 +254,23 @@
 
     var city = detectCity(trimmed);
     var services = detectServices(trimmed);
+
+    if (detectRhIntent(trimmed)) {
+      var rhTopic = findValidatedTopic('recursos humanos torreon') || VALIDATED_BLOG_TOPICS[0];
+      if (normalize(trimmed).indexOf('automatiz') >= 0) {
+        rhTopic = findValidatedTopic('automatizacion recursos humanos') || rhTopic;
+      }
+      var rhPlace = city ? CITY_LABELS[city] || city : 'México';
+      return {
+        topic: rhTopic,
+        userInput: trimmed,
+        autoCorrected: true,
+        message:
+          'Entendí recursos humanos en ' + rhPlace + '. Frase SEO Google MX: «' + rhTopic.phrase + '».',
+        suggestions: ['recursos humanos torreon', 'automatizacion recursos humanos'],
+        contentBrief: true,
+      };
+    }
 
     if (city && hasIaOrAgencyIntent(trimmed)) {
       var localTopic = pickValidatedTopicForCity(city, trimmed, services);

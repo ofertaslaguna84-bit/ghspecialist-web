@@ -88,6 +88,20 @@ function hasIaOrAgencyIntent(input) {
   );
 }
 
+/** Recursos humanos / RH — no debe mapearse a IA solo por llevar una ciudad */
+function detectRhIntent(input) {
+  const n = normalize(input);
+  return (
+    n.includes('recursos humanos') ||
+    /\brh\b/.test(n) ||
+    n.includes('nomina') ||
+    n.includes('reclutamiento') ||
+    n.includes('capital humano') ||
+    n.includes('departamento de personal') ||
+    (n.includes('especializada') && n.includes('humanos'))
+  );
+}
+
 /** @param {string} input */
 function detectServices(input) {
   const n = ` ${normalize(input)} `;
@@ -111,6 +125,33 @@ function topicsForCity(city) {
   return VALIDATED_BLOG_TOPICS.filter((t) => normalize(t.phrase).includes(city));
 }
 
+/** @param {string} city @param {string} input */
+function pickValidatedTopicForRh(city, input) {
+  if (normalize(input).includes('automatiz') || hasIaOrAgencyIntent(input)) {
+    const auto = findValidatedTopic('automatizacion recursos humanos');
+    if (auto) return auto;
+  }
+  if (city === 'torreon') {
+    const rh = findValidatedTopic('recursos humanos torreon');
+    if (rh) return rh;
+  }
+  return (
+    findValidatedTopic('recursos humanos torreon') ||
+    findValidatedTopic('automatizacion recursos humanos') ||
+    VALIDATED_BLOG_TOPICS[0]
+  );
+}
+
+/** @param {string} city @param {string} userInput */
+function buildRhBrief(city, userInput) {
+  const place = city ? CITY_LABELS[city] ?? city : 'México';
+  return [
+    `El usuario escribió: «${userInput}». Artículo sobre recursos humanos en ${place}.`,
+    'Cubrir lo que pidió (empresas especializadas, vacantes, servicios de RH en la zona). NO convertir el artículo en “agencia de IA” genérica.',
+    'Si encaja, una sección breve sobre automatización con IA en procesos de RH (filtro de candidatos, respuestas, onboarding); CTA opcional a GH Specialist.',
+  ].join(' ');
+}
+
 /** @param {string} city @param {string} input @param {string[]} services */
 function pickValidatedTopicForCity(city, input, services) {
   const local = topicsForCity(city);
@@ -118,6 +159,11 @@ function pickValidatedTopicForCity(city, input, services) {
     return (
       findValidatedTopic('inteligencia artificial empresas mexico') || VALIDATED_BLOG_TOPICS[0]
     );
+  }
+
+  if (detectRhIntent(input)) {
+    const rh = local.find((t) => normalize(t.phrase).includes('recursos humanos'));
+    if (rh) return rh;
   }
 
   if (services.includes('chatbot')) {
@@ -160,11 +206,25 @@ function scoreTopic(input, topic) {
   const services = detectServices(input);
   const phraseNorm = normalize(topic.phrase);
   const city = detectCity(input);
+  const rh = detectRhIntent(input);
+  const ia = hasIaOrAgencyIntent(input);
 
   if (city) {
-    if (phraseNorm.includes(city)) score += 12;
-    else score -= 8;
+    if (phraseNorm.includes(city)) {
+      if (rh && phraseNorm.includes('recursos humanos')) score += 14;
+      else if (
+        ia &&
+        (phraseNorm.includes('inteligencia') ||
+          phraseNorm.includes('chatbot') ||
+          (phraseNorm.includes('automatiz') && !phraseNorm.includes('recursos humanos')))
+      ) {
+        score += 12;
+      } else if (!rh && !ia) score += 1;
+    } else if (rh || ia) score -= 8;
   }
+
+  if (rh && phraseNorm.includes('recursos humanos')) score += 8;
+  if (rh && phraseNorm.includes('humanos')) score += 4;
 
   if (services.includes('chatbot') && phraseNorm.includes('chatbot')) score += 4;
   if (services.includes('whatsapp') && phraseNorm.includes('whatsapp')) score += 4;
@@ -265,6 +325,23 @@ export function resolveTopicInput(userInput) {
   const city = detectCity(trimmed);
   const services = detectServices(trimmed);
 
+  if (detectRhIntent(trimmed)) {
+    const topic = pickValidatedTopicForRh(city, trimmed);
+    const place = city ? CITY_LABELS[city] ?? city : 'México';
+    return {
+      topic,
+      userInput: trimmed,
+      autoCorrected: true,
+      message: `Entendí recursos humanos en ${place}. Frase SEO Google MX: «${topic.phrase}».`,
+      suggestions: [
+        'recursos humanos torreon',
+        'automatizacion recursos humanos',
+        ...(city === 'torreon' ? [] : ['inteligencia artificial torreon']),
+      ],
+      contentBrief: buildRhBrief(city, trimmed),
+    };
+  }
+
   if (city && hasIaOrAgencyIntent(trimmed)) {
     const topic = pickValidatedTopicForCity(city, trimmed, services);
     const cityLabel = CITY_LABELS[city] ?? city;
@@ -338,7 +415,8 @@ export function resolveTopicInput(userInput) {
 export function isComparativeBrief(brief) {
   return Boolean(
     brief?.includes('Guía comparativa para dueños de negocio') ||
-      brief?.includes('Artículo LOCAL para empresas')
+      brief?.includes('Artículo LOCAL para empresas') ||
+      brief?.includes('recursos humanos en')
   );
 }
 
