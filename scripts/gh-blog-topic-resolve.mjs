@@ -412,6 +412,27 @@ function pickAnchorForComparative(input, services) {
     if (crm) return crm;
   }
 
+  if (services.includes('seo') && (normalize(input).includes('ia') || services.includes('video'))) {
+    const seoIa =
+      findValidatedTopic('seo con ia') ||
+      findValidatedTopic('seo inteligencia artificial') ||
+      findValidatedTopic('hacer seo con ia');
+    if (seoIa) return seoIa;
+  }
+  if (services.includes('video')) {
+    const vid =
+      findValidatedTopic('crear videos con ia') ||
+      findValidatedTopic('video marketing con ia') ||
+      findValidatedTopic('videos con inteligencia artificial');
+    if (vid) return vid;
+  }
+  if (services.includes('growth')) {
+    const gh =
+      findValidatedTopic('growth hacking mexico') ||
+      findValidatedTopic('growth hacking que es') ||
+      findValidatedTopic('growth hacking empresa');
+    if (gh) return gh;
+  }
   if (services.includes('seo')) {
     const seo = findValidatedTopic('como posicionar mi pagina en google mexico');
     if (seo) return seo;

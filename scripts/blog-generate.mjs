@@ -19,6 +19,11 @@ import {
   sanitizeBannedWords,
   sanitizeStaleYears,
 } from './gh-blog-freshness.mjs';
+import {
+  enforceArticleLength,
+  countWordsInHtml,
+  BLOG_MAX_WORDS,
+} from './gh-blog-article-length.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const SITE = 'https://ghspecialist.com';
@@ -400,7 +405,7 @@ Servicios (enlaces relativos ../servicios/...):
 - agentes-omnicanal.html
 
 REGLAS DE LONGITUD (CRÍTICO — el lector no lee paredes de texto):
-- Entre 700 y 1.000 palabras en content_html (NUNCA más de 1.000). Cuenta mentalmente antes de cerrar el JSON.
+- Entre 700 y 1.000 palabras en content_html (NUNCA más de 1.000). Si te pasas, el sistema RECORTA el artículo y borra secciones del final.
 - Máximo 4 secciones <h2>; evita <h3> salvo que sea indispensable.
 - Párrafos cortos (2–3 líneas). Listas con máximo 5 viñetas.
 - Ve al grano: una idea por sección, sin relleno ni repetir lo mismo con otras palabras.
@@ -668,6 +673,9 @@ async function main() {
   if (!parsed.slug.endsWith('.html')) parsed.slug += '.html';
 
   applyFreshnessToArticle(parsed, freshness, topicEntry.phrase);
+  enforceArticleLength(parsed);
+  const wordCount = countWordsInHtml(parsed.content_html || '');
+  console.log(`→ Longitud: ${wordCount} palabras (máx ${BLOG_MAX_WORDS})`);
   parsed.slug = slugify(parsed.slug.replace(/\.html$/, '')) + '.html';
   if (parsed.related?.length) {
     for (const r of parsed.related) {
