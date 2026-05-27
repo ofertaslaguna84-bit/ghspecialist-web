@@ -22,7 +22,8 @@
       if (p && !ok) document.documentElement.classList.add('panel-gated');
     })();
   </script>
-  <script src="../js/gh-panel.js?v=panel9" defer></script>
+  <script src="../js/gh-blog-topic.js?v=1" defer></script>
+  <script src="../js/gh-panel.js?v=panel11" defer></script>
   <style>
     :root {
       --p: #7C4DFF;
@@ -57,7 +58,15 @@
     .blog-row input:focus { outline: none; border-color: var(--p); box-shadow: 0 0 0 3px rgba(124,77,255,.12); }
     .blog-row .btn-p { padding: 12px 22px; font-size: 14px; white-space: nowrap; min-width: 160px; }
     .blog-row .btn-p:disabled { opacity: .55; cursor: not-allowed; }
-    .blog-kw { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 13px; margin-top: 10px; }
+    .blog-topic-preview { margin-top: 12px; padding: 12px 14px; border-radius: 10px; font-size: 13px; line-height: 1.5; display: none; }
+    .blog-topic-preview.is-visible { display: block; }
+    .blog-topic-preview--exact { background: #f0fdf4; border: 1px solid #bbf7d0; color: #14532d; }
+    .blog-topic-preview--corrected { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e3a8a; }
+    .blog-topic-preview strong { display: block; font-weight: 800; margin-bottom: 4px; }
+    .blog-topic-preview .blog-topic-phrase { font-family: ui-monospace, monospace; font-size: 12px; background: rgba(255,255,255,.65); padding: 6px 8px; border-radius: 6px; margin-top: 6px; display: inline-block; }
+    .blog-topic-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .blog-topic-chips button { font-family: inherit; font-size: 11px; background: #fff; border: 1px solid #bfdbfe; color: #1e40af; padding: 5px 10px; border-radius: 6px; cursor: pointer; }
+    .blog-topic-chips button:hover { background: #dbeafe; }
     .blog-status { margin-top: 14px; padding: 14px 16px; border-radius: 10px; font-size: 14px; line-height: 1.55; }
     .blog-status--info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e3a8a; }
     .blog-status--ok { background: #f0fdf4; border: 1px solid #bbf7d0; color: #14532d; }
@@ -309,12 +318,12 @@
 
       <section class="card" style="border-left:4px solid var(--p)">
         <h2>Blog con IA</h2>
-        <p>Escribe un tema (o déjalo vacío para uno aleatorio), pulsa <strong>Generar artículo</strong> y en 2–4 min queda publicado — contenido actualizado a <strong>2026</strong> con imagen hero IA.</p>
+        <p>Escribe como quieras (typos, varios temas) — el sistema corrige a frase validada de Google MX. Vacío = siguiente tema automático. Mes y año México en título y slug.</p>
         <div class="blog-row">
-          <input type="text" id="blog-topic" placeholder="Tema (opcional — aleatorio si lo dejas vacío)" autocomplete="off">
+          <input type="text" id="blog-topic" placeholder="Ej: chatbot whatsapp crm kommo automatizar negocio..." autocomplete="off">
           <button type="button" class="btn-p" id="btn-blog-generate">Generar artículo</button>
         </div>
-        <input type="text" id="blog-keywords" class="blog-kw" placeholder="Palabras clave o ángulo (opcional)" autocomplete="off">
+        <div id="blog-topic-preview" class="blog-topic-preview" aria-live="polite"></div>
         <div id="blog-token-wrap" class="blog-token-box" hidden>
           <strong>API de Adestajo no responde</strong> (Vercel caído). Para generar o borrar artículos, pega un token GitHub con permisos <span class="mono">repo</span> + <span class="mono">workflow</span> en el repo <span class="mono">ghspecialist-web</span>. Se guarda solo en este navegador.
           <div class="blog-token-row">

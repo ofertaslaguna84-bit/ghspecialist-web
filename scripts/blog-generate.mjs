@@ -8,10 +8,18 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
 import { pingSearchEngines } from './indexnow.mjs';
+import { pickNextValidatedTopic } from './gh-blog-validated-keywords.mjs';
+import { resolveTopicInput, isComparativeBrief } from './gh-blog-topic-resolve.mjs';
+import {
+  getBlogFreshness,
+  applyFreshnessToArticle,
+  sanitizeBannedWords,
+  sanitizeStaleYears,
+} from './gh-blog-freshness.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const SITE = 'https://ghspecialist.com';
-const BLOG_CURRENT_YEAR = '2026';
+const BLOG_YEAR = String(getBlogFreshness().year);
 
 const BASE_IMAGES = [
   { path: 'fotos/slide2_img2.png', city: 'México', tags: ['whatsapp', 'chatbot', 'ia', 'automatizacion', 'negocio', 'mexico'] },
@@ -91,11 +99,11 @@ function pickImageForTopic(pool, topic, keywords) {
 async function generateHeroWithGemini(topic, slug, apiKey) {
   const models = ['gemini-2.5-flash-image', 'gemini-2.0-flash-exp-image-generation'];
   const prompts = [
-    `Ultra-premium editorial hero photograph for a B2B technology blog in Mexico (${BLOG_CURRENT_YEAR}). Topic: ${topic}.
+    `Ultra-premium editorial hero photograph for a B2B technology blog in Mexico (${BLOG_YEAR}). Topic: ${topic}.
 Cinematic 16:9 wide shot, magazine cover quality, photorealistic, sharp focus, professional studio lighting, subtle purple accent glow (#7C4DFF).
 Modern Latin American office, WhatsApp/AI/automation theme when relevant, depth of field, aspirational business mood.
 NO text, NO logos, NO watermarks, NO readable UI. Looks like a top Getty Images stock photo.`,
-    `Award-winning business photography for blog hero (${BLOG_CURRENT_YEAR}). ${topic}.
+    `Award-winning business photography for blog hero (${BLOG_YEAR}). ${topic}.
 High-end commercial photo, futuristic but believable, Mexican enterprise context, purple (#7C4DFF) highlights, clean composition, 16:9, photorealistic, no text or logos.`,
   ];
   const imgDir = join(ROOT, 'blog', 'img');
@@ -157,20 +165,6 @@ async function resolveHeroImage(topic, keywords, slug) {
   return pickImageForTopic(pool, topic, keywords);
 }
 
-const AUTO_TOPICS = [
-  'cómo automatizar tu negocio con inteligencia artificial en México 2026',
-  'chatbot WhatsApp Business con IA para empresas en México 2026',
-  'CRM Kommo para vender por WhatsApp guía 2026 para PYMEs',
-  'agentes de IA para empresas en México casos de uso 2026',
-  'cómo reducir costos operativos con automatización IA en 2026',
-  'WhatsApp marketing con IA para aumentar ventas en México 2026',
-  'embudo de ventas automatizado con IA paso a paso 2026',
-  'IA para inmobiliarias automatizar citas y prospectos 2026',
-  'automatización IA para constructoras en México 2026',
-  'ROI de la inteligencia artificial en negocios mexicanos 2026',
-  'chatbot de WhatsApp para negocios en México guía completa 2026',
-];
-
 function slugify(s) {
   return s
     .normalize('NFD')
@@ -209,6 +203,21 @@ async function listExistingArticles() {
   const dir = join(ROOT, 'blog');
   const files = await readdir(dir);
   return files.filter((f) => f.endsWith('.html') && f !== 'index.html' && !f.startsWith('_'));
+}
+
+async function fetchExistingHaystack(files) {
+  const parts = [];
+  for (const f of files) {
+    parts.push(f.replace('.html', ''));
+    try {
+      const html = await readFile(join(ROOT, 'blog', f), 'utf8');
+      const title = html.match(/<title>([^<]*)<\/title>/i)?.[1] || '';
+      if (title) parts.push(title);
+    } catch {
+      /* noop */
+    }
+  }
+  return parts;
 }
 
 async function callChatCompletions(baseUrl, apiKey, model, prompt, label) {
@@ -356,92 +365,65 @@ async function generateArticleContent(prompt) {
   throw new Error(`Todas las IAs fallaron: ${errors.join(' · ').slice(0, 500)}`);
 }
 
-function fixOutdatedYears(text) {
-  if (!text || typeof text !== 'string') return text;
-  return text.replace(/\b202[0-5]\b/g, BLOG_CURRENT_YEAR);
-}
-
-function enforceCurrentYear(article) {
-  const fields = [
-    'title',
-    'description',
-    'og_title',
-    'og_description',
-    'card_excerpt',
-    'content_html',
-    'breadcrumb_title',
-  ];
-  for (const key of fields) {
-    if (article[key]) article[key] = fixOutdatedYears(article[key]);
-  }
-  if (article.slug) {
-    article.slug = article.slug.replace(/-202[0-5](?=\.html$)/i, `-${BLOG_CURRENT_YEAR}`);
-  }
-  if (article.related?.length) {
-    for (const r of article.related) {
-      if (r.title) r.title = fixOutdatedYears(r.title);
-      if (r.desc) r.desc = fixOutdatedYears(r.desc);
-    }
-  }
-  if (
-    article.title &&
-    !/\b2026\b/.test(article.title) &&
-    /gu[ií]a|completa|futuro|tendencias|esencial|definitiva|mejores|c[oó]mo/i.test(article.title)
-  ) {
-    article.title = `${article.title.replace(/\s*\(\d{4}\)\s*$/, '').trim()} (${BLOG_CURRENT_YEAR})`;
-  }
-  if (article.slug && !article.slug.includes('2026') && !article.slug.includes('-mexico')) {
-    article.slug = article.slug.replace(/\.html$/, `-${BLOG_CURRENT_YEAR}.html`);
-  }
-  return article;
-}
-
-function buildPrompt(topic, keywords, existingSlugs) {
+function buildPrompt(topicEntry, freshness, contentBrief, existingSlugs) {
+  const phrase = topicEntry.phrase;
   const slugList = existingSlugs.map((s) => s.replace('.html', '')).join(', ');
-  return `Eres redactor SEO senior para GH Specialist (automatización con IA, chatbots WhatsApp, CRM Kommo, México y LATAM).
+  const expansionBlock = contentBrief
+    ? `
 
-FECHA ACTUAL: ${BLOG_CURRENT_YEAR}. Todo el contenido debe sentirse actualizado a ${BLOG_CURRENT_YEAR}.
-PROHIBIDO usar 2024, 2025 u otros años pasados en título, slug o texto. Usa siempre ${BLOG_CURRENT_YEAR} cuando menciones el año.
+Contenido ampliado (lo que el usuario pidió — incluir en el artículo):
+${contentBrief}
+El title/slug siguen anclados en «${phrase}», pero el cuerpo debe cubrir todo el brief.`
+    : '';
+  const comparativeNote = isComparativeBrief(contentBrief)
+    ? '\n- TABLA HTML comparativa obligatoria (table, thead, tbody) con al menos 4 filas'
+    : '';
 
-Escribe UN artículo en español de México sobre: ${topic}
-${keywords ? `Palabras clave / ángulo: ${keywords}` : ''}
+  return `Eres redactor SEO senior para GH Specialist (automatización con IA, chatbots WhatsApp, CRM Kommo, México).
+
+Actualidad obligatoria: ${freshness.label} (zona horaria México). Prohibido años anteriores a ${freshness.year}.
+
+Frase objetivo EXACTA (Google Suggest MX): "${phrase}"
+Categoría: ${topicEntry.category}
 
 Artículos ya publicados (enlaza 2-3 si encajan): ${slugList}
 
-Servicios para enlazar cuando aplique:
-- /servicios/chatbot-ia-whatsapp.html
-- /servicios/crm-kommo.html
-- /servicios/automatizacion-total.html
-- /servicios/web-seo-blog-ia.html
-- /servicios/agentes-omnicanal.html
+Servicios (enlaces relativos ../servicios/...):
+- chatbot-ia-whatsapp.html
+- crm-kommo.html
+- automatizacion-total.html
+- web-seo-blog-ia.html
+- agentes-omnicanal.html
 
 REGLAS:
-- 1.500–2.200 palabras en content_html (HTML: p, h2, h3, ul, ol, li, strong, a — sin h1)
-- 3–5 enlaces internos a blog o servicios (href relativos ../servicios/... o slug.html)
-- Tono profesional para dueños de negocio en ${BLOG_CURRENT_YEAR}
-- CTAs naturales a Calendly y WhatsApp +528712638082
-- slug único, kebab-case, sin acentos, DEBE incluir -2026 o -mexico-2026
-- title debe incluir ${BLOG_CURRENT_YEAR} si es guía, tendencias o "completa"
+- 1.500–2.200 palabras en content_html (p, h2, h3, ul, ol, li, strong, a — sin h1)
+- 3–5 enlaces internos
+- CTAs a Calendly y WhatsApp +528712638082
+- slug kebab-case sin acentos, palabras clave de la frase, terminar en "-${freshness.slugSuffix}"
+- title con frase objetivo y vigencia "${freshness.label}" (ej. "... | guía ${freshness.label}")
+- Primer párrafo: mencionar actualización ${freshness.label}
+- PROHIBIDO la palabra "leads" (usa contactos, interesados, prospectos)
+- PROHIBIDO jerga inventada (B2B leads, funnel anglicismos) salvo WhatsApp/CRM reales
+${comparativeNote}
 
-Responde SOLO JSON (sin markdown):
+Responde SOLO JSON:
 {
-  "title": "Título SEO con ${BLOG_CURRENT_YEAR} (sin | GH Specialist)",
-  "slug": "slug-articulo-mexico-2026",
-  "description": "meta description max 155 chars",
-  "og_title": "Título corto para redes",
-  "og_description": "Descripción OG max 120 chars",
-  "category_tag": "Chatbots · WhatsApp",
-  "category_label": "Blog · Categoría",
-  "breadcrumb_title": "Título corto breadcrumb",
+  "title": "...",
+  "slug": "palabras-clave-frase-${freshness.slugSuffix}",
+  "description": "max 155 chars con ${freshness.label}",
+  "og_title": "...",
+  "og_description": "max 120 chars",
+  "category_tag": "${topicEntry.category}",
+  "category_label": "Blog · ${topicEntry.category}",
+  "breadcrumb_title": "título corto",
   "read_time": 8,
-  "card_excerpt": "Resumen 1-2 líneas para listado del blog",
-  "card_city_label": "Etiqueta corta ciudad o tema",
-  "content_html": "<p>...</p><h2>...</h2>...",
-  "related": [
-    {"slug": "otro-articulo.html", "title": "...", "desc": "..."},
-    {"slug": "...", "title": "...", "desc": "..."}
-  ]
-}`;
+  "card_excerpt": "...",
+  "card_city_label": "México",
+  "content_html": "<p>...</p>",
+  "related": [{"slug": "otro.html", "title": "...", "desc": "..."}]
+}
+
+Escribe sobre: ${phrase}${expansionBlock}`;
 }
 
 function escapeHtml(s) {
@@ -561,7 +543,7 @@ function buildArticleHtml(article, dateIso, hero) {
   <div class="art-meta">Por <strong>Pedro Luis Díaz Velázquez</strong> · GH Specialist · ${dateDisplay} · ${article.read_time || 8} min lectura</div>
   <figure class="art-hero">
     <img src="${hero.img}" alt="${escapeHtml(article.title)}" width="1200" height="630" loading="eager">
-    <figcaption>${hero.generated ? 'Imagen hero IA · GH Specialist · ' + BLOG_CURRENT_YEAR : escapeHtml(article.card_city_label || hero.city || 'México')}</figcaption>
+    <figcaption>${hero.generated ? 'Imagen hero IA · GH Specialist · ' + BLOG_YEAR : escapeHtml(article.card_city_label || hero.city || 'México')}</figcaption>
   </figure>
   ${article.content_html}
   <div class="cta-art">
@@ -636,24 +618,57 @@ async function main() {
     process.exit(1);
   }
 
-  const topic =
-    (process.env.BLOG_TOPIC || '').trim() ||
-    AUTO_TOPICS[Math.floor(Math.random() * AUTO_TOPICS.length)];
-  const keywords = (process.env.BLOG_KEYWORDS || '').trim();
+  const userTopic = (process.env.BLOG_TOPIC || '').trim();
+  const userKeywords = (process.env.BLOG_KEYWORDS || '').trim();
+  const userInput = [userTopic, userKeywords].filter(Boolean).join(' ').trim();
 
   const existing = await listExistingArticles();
-  const raw = await generateArticleContent(buildPrompt(topic, keywords, existing));
+  const haystack = await fetchExistingHaystack(existing);
+  const freshness = getBlogFreshness();
+
+  let topicEntry;
+  let contentBrief;
+  /** @type {{ userInput: string, phrase: string, autoCorrected: boolean, message: string } | undefined} */
+  let resolveMeta;
+
+  if (userInput) {
+    const resolved = resolveTopicInput(userInput);
+    topicEntry = resolved.topic;
+    contentBrief = resolved.contentBrief;
+    resolveMeta = {
+      userInput: resolved.userInput,
+      phrase: resolved.topic.phrase,
+      autoCorrected: resolved.autoCorrected,
+      message: resolved.message,
+    };
+    console.log(`→ Tema: «${topicEntry.phrase}»${resolved.autoCorrected ? ' (corregido)' : ''}`);
+  } else {
+    topicEntry = pickNextValidatedTopic(haystack);
+    console.log(`→ Tema automático: «${topicEntry.phrase}»`);
+  }
+
+  const raw = await generateArticleContent(
+    buildPrompt(topicEntry, freshness, contentBrief, existing)
+  );
   const parsed = extractJsonObject(raw.replace(/```json\s*/gi, '').replace(/```/g, ''));
 
-  if (!parsed.slug) parsed.slug = slugify(parsed.title || topic);
-  parsed.slug = slugify(parsed.slug);
+  if (!parsed.slug) parsed.slug = slugify(topicEntry.phrase);
+  parsed.slug = slugify(parsed.slug.replace(/\.html$/, ''));
   if (!parsed.slug.endsWith('.html')) parsed.slug += '.html';
 
-  enforceCurrentYear(parsed);
+  applyFreshnessToArticle(parsed, freshness, topicEntry.phrase);
   parsed.slug = slugify(parsed.slug.replace(/\.html$/, '')) + '.html';
-  enforceCurrentYear(parsed);
+  if (parsed.related?.length) {
+    for (const r of parsed.related) {
+      if (r.title) r.title = sanitizeBannedWords(sanitizeStaleYears(r.title, freshness));
+      if (r.desc) r.desc = sanitizeBannedWords(sanitizeStaleYears(r.desc, freshness));
+    }
+  }
 
-  const titleKey = slugify(parsed.title || topic).replace(/-mexico.*$/, '').replace(/-2026.*$/, '');
+  const titleKey = slugify(parsed.title || topicEntry.phrase)
+    .replace(/-mexico.*$/, '')
+    .replace(/-mayo-\d{4}$/, '')
+    .replace(/-\d{4}$/, '');
   for (const ex of existing) {
     const exHtml = await readFile(join(ROOT, 'blog', ex), 'utf8');
     const exTitle = exHtml.match(/<title>([^<]*)<\/title>/i)?.[1] || '';
@@ -674,7 +689,7 @@ async function main() {
     parsed.slug = candidate;
   }
 
-  const hero = await resolveHeroImage(topic, keywords, parsed.slug);
+  const hero = await resolveHeroImage(topicEntry.phrase, '', parsed.slug);
   const dateIso = new Date().toISOString().slice(0, 10);
 
   const html = buildArticleHtml(parsed, dateIso, hero);
@@ -693,6 +708,7 @@ async function main() {
       title: parsed.title,
       slug: parsed.slug,
       url: `${SITE}/blog/${parsed.slug}`,
+      resolved: resolveMeta,
     }),
     'utf8'
   );

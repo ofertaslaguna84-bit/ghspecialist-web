@@ -774,18 +774,102 @@
       });
   }
 
+  function renderBlogTopicPreview(preview) {
+    var box = $('blog-topic-preview');
+    if (!box) return;
+    if (!preview) {
+      box.className = 'blog-topic-preview';
+      box.innerHTML = '';
+      box.hidden = true;
+      return;
+    }
+    box.hidden = false;
+    var exact = preview.exact;
+    var cls = exact ? 'blog-topic-preview--exact' : 'blog-topic-preview--corrected';
+    box.className = 'blog-topic-preview is-visible ' + cls;
+    var head = exact ? '✓ Frase validada' : '→ Se generará con';
+    var phraseHtml = preview.resolvedPhrase
+      ? '<span class="blog-topic-phrase">' + preview.resolvedPhrase + '</span>'
+      : '';
+    var expand =
+      preview.willExpandContent
+        ? '<p style="margin-top:6px;font-size:12px;font-weight:700">Incluirá tabla comparativa (varios temas detectados).</p>'
+        : '';
+    var chips = '';
+    if (!exact && preview.suggestions && preview.suggestions.length) {
+      chips =
+        '<div class="blog-topic-chips">' +
+        preview.suggestions
+          .map(function (s) {
+            return (
+              '<button type="button" data-suggest="' +
+              s.replace(/"/g, '&quot;') +
+              '">' +
+              s +
+              '</button>'
+            );
+          })
+          .join('') +
+        '</div>';
+    }
+    box.innerHTML =
+      '<strong>' +
+      head +
+      '</strong>' +
+      phraseHtml +
+      '<p style="margin-top:6px;font-size:12px;opacity:.9">' +
+      (preview.message || '') +
+      '</p>' +
+      expand +
+      chips;
+    box.querySelectorAll('[data-suggest]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var topicEl = $('blog-topic');
+        if (topicEl) topicEl.value = btn.getAttribute('data-suggest') || '';
+        topicEl && topicEl.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+    });
+  }
+
+  function initBlogTopicPreview() {
+    var topicEl = $('blog-topic');
+    if (!topicEl || !window.GH_BlogTopic) return;
+    var timer;
+    function runPreview() {
+      var val = (topicEl.value || '').trim();
+      if (!val) {
+        renderBlogTopicPreview({
+          exact: true,
+          resolvedPhrase: '',
+          message: 'Vacío = el sistema elige el siguiente tema validado automáticamente.',
+          suggestions: [],
+          willExpandContent: false,
+        });
+        return;
+      }
+      window.GH_BlogTopic.fetchPreview(val).then(renderBlogTopicPreview).catch(function () {
+        renderBlogTopicPreview(window.GH_BlogTopic.previewTopicInput(val));
+      });
+    }
+    topicEl.addEventListener('input', function () {
+      clearTimeout(timer);
+      timer = setTimeout(runPreview, 350);
+    });
+    runPreview();
+  }
+
   function initBlogGenerate() {
     var gen = $('btn-blog-generate');
     var topicEl = $('blog-topic');
-    var kwEl = $('blog-keywords');
     if (!gen) return;
+
+    initBlogTopicPreview();
 
     gen.addEventListener('click', function () {
       if (gen.disabled) return;
       hideBlogStatus();
 
       var topic = topicEl ? (topicEl.value || '').trim() : '';
-      var keywords = kwEl ? (kwEl.value || '').trim() : '';
 
       gen.disabled = true;
       gen.textContent = 'Generando…';
@@ -794,19 +878,29 @@
         '<strong>Iniciando…</strong> IA + publicación automática en ghspecialist.com'
       );
 
-      triggerBlogGenerate(topic, keywords)
+      triggerBlogGenerate(topic, '')
         .then(function (job) {
           return waitBlogJob(job.startedAt, 'generate', '', job.via);
         })
         .then(function (result) {
           var article = result.data;
+          var resolved = article && article.resolved;
           if (topicEl) topicEl.value = '';
-          if (kwEl) kwEl.value = '';
+          renderBlogTopicPreview(null);
           var url = (article && article.url) || 'https://ghspecialist.com/blog/';
           var title = (article && article.title) || 'Artículo nuevo';
+          var corrected =
+            resolved && resolved.autoCorrected
+              ? '<p style="font-size:12px;margin-bottom:8px">Corregido desde: «' +
+                (resolved.userInput || '') +
+                '» → «' +
+                (resolved.phrase || '') +
+                '»</p>'
+              : '';
           setBlogStatus(
             'ok',
-            '<p class="blog-status-title">Artículo publicado</p><p>' +
+            corrected +
+              '<p class="blog-status-title">Artículo publicado</p><p>' +
               title +
               '</p><a href="' +
               url +
