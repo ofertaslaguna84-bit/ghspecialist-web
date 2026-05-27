@@ -22,8 +22,9 @@
       if (p && !ok) document.documentElement.classList.add('panel-gated');
     })();
   </script>
-  <script src="../js/gh-blog-topic.js?v=6" defer></script>
-  <script src="../js/gh-panel.js?v=panel14" defer></script>
+  <script src="../js/gh-blog-indexing-preview.js?v=1" defer></script>
+  <script src="../js/gh-blog-topic.js?v=7" defer></script>
+  <script src="../js/gh-panel.js?v=panel15" defer></script>
   <style>
     :root {
       --p: #7C4DFF;
@@ -67,6 +68,19 @@
     .blog-topic-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
     .blog-topic-chips button { font-family: inherit; font-size: 11px; background: #fff; border: 1px solid #bfdbfe; color: #1e40af; padding: 5px 10px; border-radius: 6px; cursor: pointer; }
     .blog-topic-chips button:hover { background: #dbeafe; }
+    .blog-indexing { margin-top: 14px; padding-top: 12px; border-top: 1px dashed rgba(30, 58, 138, .35); }
+    .blog-indexing-title { font-size: 13px; margin-bottom: 8px; color: #1e3a8a; }
+    .blog-indexing-sub { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: #1e40af; margin: 10px 0 6px; }
+    .blog-indexing-list { margin: 0 0 8px 18px; font-size: 12px; line-height: 1.45; color: #1e3a8a; }
+    .blog-indexing-list li { margin-bottom: 4px; }
+    .blog-indexing-region { margin-bottom: 10px; }
+    .blog-indexing-region strong { font-size: 12px; color: #312e81; }
+    .blog-indexing-note { font-size: 11px; color: #4338ca; margin-top: 8px; line-height: 1.45; opacity: .9; }
+    .blog-indexing-loading { margin-top: 12px; font-size: 12px; color: #4338ca; font-style: italic; }
+    .blog-status .blog-indexing { border-top-color: rgba(20, 83, 45, .25); }
+    .blog-status .blog-indexing-title, .blog-status .blog-indexing-sub,
+    .blog-status .blog-indexing-list, .blog-status .blog-indexing-note { color: #14532d; }
+    .blog-status .blog-indexing-region strong { color: #166534; }
     .blog-status { margin-top: 14px; padding: 14px 16px; border-radius: 10px; font-size: 14px; line-height: 1.55; }
     .blog-status--info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e3a8a; }
     .blog-status--ok { background: #f0fdf4; border: 1px solid #bbf7d0; color: #14532d; }

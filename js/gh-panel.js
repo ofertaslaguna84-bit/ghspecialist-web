@@ -795,7 +795,13 @@
       preview.willExpandContent
         ? '<p style="margin-top:6px;font-size:12px;font-weight:700">Incluirá contenido ampliado (local, comparativa o agencia en tu ciudad).</p>'
         : '';
-    var chips = '';
+    var indexingHtml = '';
+    if (preview.indexingLoading) {
+      indexingHtml =
+        '<p class="blog-indexing-loading">Buscando en Google México qué indexar (México, Torreón, Monterrey)…</p>';
+    } else if (preview.indexingKeywords && window.GH_BlogIndexing) {
+      indexingHtml = window.GH_BlogIndexing.renderIndexingHtml(preview.indexingKeywords);
+    }
     box.innerHTML =
       '<strong>' +
       head +
@@ -805,7 +811,7 @@
       (preview.message || '') +
       '</p>' +
       expand +
-      chips;
+      indexingHtml;
     box.querySelectorAll('[data-suggest]').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var topicEl = $('blog-topic');
@@ -813,6 +819,11 @@
         topicEl && topicEl.dispatchEvent(new Event('input', { bubbles: true }));
       });
     });
+  }
+
+  function renderIndexingStatusBlock(indexing) {
+    if (!indexing || !window.GH_BlogIndexing) return '';
+    return window.GH_BlogIndexing.renderIndexingHtml(indexing);
   }
 
   function initBlogTopicPreview() {
@@ -881,6 +892,10 @@
                 (resolved.phrase || '') +
                 '»</p>'
               : '';
+          var indexingBlock = renderIndexingStatusBlock(
+            (article && article.indexingKeywords) ||
+              (resolved && resolved.indexingKeywords)
+          );
           setBlogStatus(
             'ok',
             corrected +
@@ -888,7 +903,8 @@
               title +
               '</p><a href="' +
               url +
-              '" target="_blank" rel="noopener">Ver artículo →</a> · <a href="https://ghspecialist.com/blog/" target="_blank" rel="noopener">Ver blog</a>'
+              '" target="_blank" rel="noopener">Ver artículo →</a> · <a href="https://ghspecialist.com/blog/" target="_blank" rel="noopener">Ver blog</a>' +
+              indexingBlock
           );
           loadBlogList();
         })

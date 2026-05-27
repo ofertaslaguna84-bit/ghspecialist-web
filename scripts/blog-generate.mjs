@@ -400,6 +400,10 @@ TEMA DEL ARTÍCULO (obligatorio — lo que pidió el usuario): "${articleTopic}"
 Categoría: ${topic.category}
 El título, slug, h1 y enfoque del contenido deben ser sobre ESE tema, no sobre otro del catálogo.
 ${keywordBlock}
+${plan.indexingKeywords?.regions?.length ? `
+
+INDEXACIÓN LOCAL (menciona al menos una vez en el artículo que GH Specialist atiende México; si encaja, una línea sobre Torreón/La Laguna o Monterrey sin inventar datos locales):
+${plan.indexingKeywords.regions.map((r) => `- ${r.region}: ${r.keywords.join(', ')}`).join('\n')}` : ''}
 
 Artículos ya publicados (enlaza 2-3 si encajan): ${slugList}
 
@@ -655,6 +659,11 @@ async function main() {
     plan = await prepareBlogGeneration(userInput);
     console.log(`→ Tema usuario: «${plan.userTopic}»`);
     console.log(`→ Keywords SEO: ${plan.seoKeywords.join(' | ')}`);
+    if (plan.indexingKeywords?.regions) {
+      for (const r of plan.indexingKeywords.regions) {
+        console.log(`→ Indexar ${r.region}: ${r.keywords.join(' | ')}`);
+      }
+    }
   } else {
     plan = prepareBlogAuto(haystack);
     console.log(`→ Tema automático: «${plan.userTopic}»`);
@@ -664,6 +673,7 @@ async function main() {
     userInput: plan.userTopic,
     phrase: plan.userTopic,
     seoKeywords: plan.seoKeywords,
+    indexingKeywords: plan.indexingKeywords,
     autoCorrected: false,
     message: plan.message,
   };
@@ -740,6 +750,7 @@ async function main() {
       url: `${SITE}/blog/${parsed.slug}`,
       resolved: resolveMeta,
       seoKeywords: plan.seoKeywords,
+      indexingKeywords: plan.indexingKeywords,
     }),
     'utf8'
   );
