@@ -9,7 +9,10 @@ import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
 import { pingSearchEngines } from './indexnow.mjs';
 import { pickNextValidatedTopic } from './gh-blog-validated-keywords.mjs';
-import { resolveTopicInput, isComparativeBrief } from './gh-blog-topic-resolve.mjs';
+import {
+  resolveTopicInputAsync,
+  isComparativeBrief,
+} from './gh-blog-topic-resolve.mjs';
 import {
   getBlogFreshness,
   applyFreshnessToArticle,
@@ -377,7 +380,7 @@ ${contentBrief}
 El title/slug siguen anclados en «${phrase}», pero el cuerpo debe cubrir todo el brief.`
     : '';
   const comparativeNote = isComparativeBrief(contentBrief)
-    ? '\n- TABLA HTML comparativa obligatoria (table, thead, tbody) con al menos 4 filas'
+    ? '\n- TABLA HTML comparativa breve (table, thead, tbody) con 3–4 filas; celdas cortas'
     : '';
 
   return `Eres redactor SEO senior para GH Specialist (automatización con IA, chatbots WhatsApp, CRM Kommo, México).
@@ -396,9 +399,16 @@ Servicios (enlaces relativos ../servicios/...):
 - web-seo-blog-ia.html
 - agentes-omnicanal.html
 
-REGLAS:
-- 1.500–2.200 palabras en content_html (p, h2, h3, ul, ol, li, strong, a — sin h1)
-- 3–5 enlaces internos
+REGLAS DE LONGITUD (CRÍTICO — el lector no lee paredes de texto):
+- Entre 700 y 1.000 palabras en content_html (NUNCA más de 1.000). Cuenta mentalmente antes de cerrar el JSON.
+- Máximo 4 secciones <h2>; evita <h3> salvo que sea indispensable.
+- Párrafos cortos (2–3 líneas). Listas con máximo 5 viñetas.
+- Ve al grano: una idea por sección, sin relleno ni repetir lo mismo con otras palabras.
+- Tono directo para dueño de PYME ocupado en México.
+- read_time en JSON: entero 4, 5 o 6 (minutos de lectura), acorde a la longitud real.
+
+REGLAS SEO:
+- 2–4 enlaces internos
 - CTAs a Google Calendar (${GOOGLE_CALENDAR_URL}) y WhatsApp +528712638082
 - slug kebab-case sin acentos, palabras clave de la frase, terminar en "-${freshness.slugSuffix}"
 - title con frase objetivo y vigencia "${freshness.label}" (ej. "... | guía ${freshness.label}")
@@ -417,7 +427,7 @@ Responde SOLO JSON:
   "category_tag": "${topicEntry.category}",
   "category_label": "Blog · ${topicEntry.category}",
   "breadcrumb_title": "título corto",
-  "read_time": 8,
+  "read_time": 5,
   "card_excerpt": "...",
   "card_city_label": "México",
   "content_html": "<p>...</p>",
@@ -541,7 +551,7 @@ function buildArticleHtml(article, dateIso, hero) {
 <article class="art">
   <div class="art-label">${escapeHtml(article.category_label)}</div>
   <h1>${escapeHtml(article.title)}</h1>
-  <div class="art-meta">Por <strong>Pedro Luis Díaz Velázquez</strong> · GH Specialist · ${dateDisplay} · ${article.read_time || 8} min lectura</div>
+  <div class="art-meta">Por <strong>Pedro Luis Díaz Velázquez</strong> · GH Specialist · ${dateDisplay} · ${article.read_time || 5} min lectura</div>
   <figure class="art-hero">
     <img src="${hero.img}" alt="${escapeHtml(article.title)}" width="1200" height="630" loading="eager">
     <figcaption>${hero.generated ? 'Imagen hero IA · GH Specialist · ' + BLOG_YEAR : escapeHtml(article.card_city_label || hero.city || 'México')}</figcaption>
@@ -581,7 +591,7 @@ function buildCard(article, dateIso, hero) {
         <h2>${escapeHtml(article.title)}</h2>
         <p>${escapeHtml(article.card_excerpt)}</p>
         <div class="card-meta">
-          <span>${dateShort} · ${article.read_time || 8} min</span>
+          <span>${dateShort} · ${article.read_time || 5} min</span>
           <span class="card-read">Leer artículo →</span>
         </div>
       </div>
@@ -633,7 +643,7 @@ async function main() {
   let resolveMeta;
 
   if (userInput) {
-    const resolved = resolveTopicInput(userInput);
+    const resolved = await resolveTopicInputAsync(userInput);
     topicEntry = resolved.topic;
     contentBrief = resolved.contentBrief;
     resolveMeta = {

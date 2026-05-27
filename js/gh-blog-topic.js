@@ -3,33 +3,374 @@
  */
 (function (global) {
   var VALIDATED_BLOG_TOPICS = [
-    { phrase: 'chatbot whatsapp negocios mexico', category: 'Chatbots' },
-    { phrase: 'chatbot whatsapp para empresas', category: 'Chatbots' },
-    { phrase: 'chatbot con inteligencia artificial', category: 'Chatbots' },
-    { phrase: 'chatbot whatsapp precio', category: 'Chatbots' },
-    { phrase: 'atencion cliente chatbot', category: 'Chatbots' },
-    { phrase: 'automatizacion de servicio al cliente', category: 'Automatización' },
-    { phrase: 'automatizacion atencion al cliente', category: 'Automatización' },
-    { phrase: 'chatbot atencion al cliente whatsapp', category: 'Chatbots' },
-    { phrase: 'como automatizar mi negocio con ia', category: 'Automatización' },
-    { phrase: 'automatizar negocio con inteligencia artificial', category: 'Automatización' },
-    { phrase: 'automatizacion whatsapp pymes', category: 'Automatización' },
-    { phrase: 'automatizacion de ventas whatsapp', category: 'Automatización' },
-    { phrase: 'inteligencia artificial empresas mexico', category: 'IA' },
-    { phrase: 'inteligencia artificial para pymes mexico', category: 'IA' },
-    { phrase: 'inteligencia artificial torreon', category: 'IA' },
-    { phrase: 'chatbot torreon', category: 'Chatbots' },
-    { phrase: 'automatizacion torreon', category: 'Automatización' },
-    { phrase: 'recursos humanos torreon', category: 'Consejos' },
-    { phrase: 'automatizacion recursos humanos', category: 'Automatización' },
-    { phrase: 'agente de ia para whatsapp', category: 'IA' },
-    { phrase: 'agente ia whatsapp', category: 'IA' },
-    { phrase: 'crm kommo que es', category: 'CRM' },
-    { phrase: 'crm kommo whatsapp', category: 'CRM' },
-    { phrase: 'embudo ventas whatsapp', category: 'WhatsApp' },
-    { phrase: 'whatsapp business api mexico', category: 'WhatsApp' },
-    { phrase: 'como posicionar mi pagina en google mexico', category: 'SEO' },
-    { phrase: 'como posicionar pagina google mexico', category: 'SEO' },
+    {
+      "phrase": "chatbot whatsapp negocios mexico",
+      "category": "Chatbots"
+    },
+    {
+      "phrase": "chatbot whatsapp para empresas",
+      "category": "Chatbots"
+    },
+    {
+      "phrase": "chatbot con inteligencia artificial",
+      "category": "Chatbots"
+    },
+    {
+      "phrase": "chatbot whatsapp precio",
+      "category": "Chatbots"
+    },
+    {
+      "phrase": "precio chatbot whatsapp",
+      "category": "Chatbots"
+    },
+    {
+      "phrase": "precio chatbot con ia",
+      "category": "Chatbots"
+    },
+    {
+      "phrase": "chatbot whatsapp business precio",
+      "category": "Chatbots"
+    },
+    {
+      "phrase": "atencion cliente chatbot",
+      "category": "Chatbots"
+    },
+    {
+      "phrase": "atencion al cliente chatbot",
+      "category": "Chatbots"
+    },
+    {
+      "phrase": "chatbot atencion al cliente whatsapp",
+      "category": "Chatbots"
+    },
+    {
+      "phrase": "bot whatsapp para empresas",
+      "category": "Chatbots"
+    },
+    {
+      "phrase": "como crear chatbot whatsapp",
+      "category": "Chatbots"
+    },
+    {
+      "phrase": "asistente virtual whatsapp empresas",
+      "category": "Chatbots"
+    },
+    {
+      "phrase": "chatbot inmobiliaria whatsapp",
+      "category": "Chatbots"
+    },
+    {
+      "phrase": "chatbot torreon",
+      "category": "Chatbots"
+    },
+    {
+      "phrase": "chatbot monterrey",
+      "category": "Chatbots"
+    },
+    {
+      "phrase": "automatizacion de servicio al cliente",
+      "category": "Automatización"
+    },
+    {
+      "phrase": "automatizacion atencion al cliente",
+      "category": "Automatización"
+    },
+    {
+      "phrase": "automatizar ventas por whatsapp",
+      "category": "Automatización"
+    },
+    {
+      "phrase": "automatizacion de ventas whatsapp",
+      "category": "Automatización"
+    },
+    {
+      "phrase": "automatizacion whatsapp pymes",
+      "category": "Automatización"
+    },
+    {
+      "phrase": "respuestas automaticas whatsapp",
+      "category": "Automatización"
+    },
+    {
+      "phrase": "respuestas automaticas whatsapp ia",
+      "category": "Automatización"
+    },
+    {
+      "phrase": "respuestas automaticas whatsapp business",
+      "category": "Automatización"
+    },
+    {
+      "phrase": "como automatizar mi negocio con ia",
+      "category": "Automatización"
+    },
+    {
+      "phrase": "automatizar negocio con inteligencia artificial",
+      "category": "Automatización"
+    },
+    {
+      "phrase": "automatizacion recursos humanos",
+      "category": "Automatización"
+    },
+    {
+      "phrase": "automatizacion torreon",
+      "category": "Automatización"
+    },
+    {
+      "phrase": "automatizacion monterrey",
+      "category": "Automatización"
+    },
+    {
+      "phrase": "agencia automatizacion whatsapp mexico",
+      "category": "Automatización"
+    },
+    {
+      "phrase": "inteligencia artificial empresas mexico",
+      "category": "IA"
+    },
+    {
+      "phrase": "inteligencia artificial para pymes mexico",
+      "category": "IA"
+    },
+    {
+      "phrase": "inteligencia artificial pymes",
+      "category": "IA"
+    },
+    {
+      "phrase": "inteligencia artificial torreon",
+      "category": "IA"
+    },
+    {
+      "phrase": "inteligencia artificial monterrey",
+      "category": "IA"
+    },
+    {
+      "phrase": "agencia inteligencia artificial mexico",
+      "category": "IA"
+    },
+    {
+      "phrase": "consultoria inteligencia artificial mexico",
+      "category": "IA"
+    },
+    {
+      "phrase": "transformacion digital pymes",
+      "category": "IA"
+    },
+    {
+      "phrase": "ia para ventas whatsapp",
+      "category": "IA"
+    },
+    {
+      "phrase": "agente de ia para whatsapp",
+      "category": "IA"
+    },
+    {
+      "phrase": "agente ia whatsapp",
+      "category": "IA"
+    },
+    {
+      "phrase": "agente de ia por whatsapp",
+      "category": "IA"
+    },
+    {
+      "phrase": "agente de ventas ia whatsapp",
+      "category": "IA"
+    },
+    {
+      "phrase": "agente ia whatsapp business",
+      "category": "IA"
+    },
+    {
+      "phrase": "crear agente ia en whatsapp",
+      "category": "IA"
+    },
+    {
+      "phrase": "crm kommo que es",
+      "category": "CRM"
+    },
+    {
+      "phrase": "crm kommo whatsapp",
+      "category": "CRM"
+    },
+    {
+      "phrase": "kommo crm whatsapp",
+      "category": "CRM"
+    },
+    {
+      "phrase": "kommo crm para whatsapp",
+      "category": "CRM"
+    },
+    {
+      "phrase": "kommo crm whatsapp api",
+      "category": "CRM"
+    },
+    {
+      "phrase": "kommo crm whatsapp business",
+      "category": "CRM"
+    },
+    {
+      "phrase": "kommo crm como funciona",
+      "category": "CRM"
+    },
+    {
+      "phrase": "kommo crm precios",
+      "category": "CRM"
+    },
+    {
+      "phrase": "integracion crm whatsapp",
+      "category": "CRM"
+    },
+    {
+      "phrase": "software crm whatsapp mexico",
+      "category": "CRM"
+    },
+    {
+      "phrase": "embudo ventas whatsapp",
+      "category": "WhatsApp"
+    },
+    {
+      "phrase": "embudo de ventas whatsapp",
+      "category": "WhatsApp"
+    },
+    {
+      "phrase": "whatsapp business api mexico",
+      "category": "WhatsApp"
+    },
+    {
+      "phrase": "whatsapp business api como funciona",
+      "category": "WhatsApp"
+    },
+    {
+      "phrase": "whatsapp business api costo",
+      "category": "WhatsApp"
+    },
+    {
+      "phrase": "whatsapp business api precios",
+      "category": "WhatsApp"
+    },
+    {
+      "phrase": "servicio al cliente whatsapp",
+      "category": "WhatsApp"
+    },
+    {
+      "phrase": "servicio al cliente whatsapp business",
+      "category": "WhatsApp"
+    },
+    {
+      "phrase": "marketing whatsapp pymes",
+      "category": "WhatsApp"
+    },
+    {
+      "phrase": "como posicionar mi pagina en google mexico",
+      "category": "SEO"
+    },
+    {
+      "phrase": "como posicionar pagina google mexico",
+      "category": "SEO"
+    },
+    {
+      "phrase": "posicionar pagina en google",
+      "category": "SEO"
+    },
+    {
+      "phrase": "posicionar negocio en google maps",
+      "category": "SEO"
+    },
+    {
+      "phrase": "posicionar en google maps",
+      "category": "SEO"
+    },
+    {
+      "phrase": "seo para pymes mexico",
+      "category": "SEO"
+    },
+    {
+      "phrase": "cuanto cuesta posicionar pagina google mexico",
+      "category": "SEO"
+    },
+    {
+      "phrase": "seo con ia",
+      "category": "SEO"
+    },
+    {
+      "phrase": "seo inteligencia artificial",
+      "category": "SEO"
+    },
+    {
+      "phrase": "hacer seo con ia",
+      "category": "SEO"
+    },
+    {
+      "phrase": "agencia seo con ia",
+      "category": "SEO"
+    },
+    {
+      "phrase": "posicionamiento seo con ia",
+      "category": "SEO"
+    },
+    {
+      "phrase": "seo local con ia",
+      "category": "SEO"
+    },
+    {
+      "phrase": "crear contenido con ia",
+      "category": "SEO"
+    },
+    {
+      "phrase": "crear contenido con ia para youtube",
+      "category": "SEO"
+    },
+    {
+      "phrase": "marketing digital con ia",
+      "category": "IA"
+    },
+    {
+      "phrase": "crear videos con ia",
+      "category": "IA"
+    },
+    {
+      "phrase": "videos con inteligencia artificial",
+      "category": "IA"
+    },
+    {
+      "phrase": "video marketing con ia",
+      "category": "IA"
+    },
+    {
+      "phrase": "generar videos ia",
+      "category": "IA"
+    },
+    {
+      "phrase": "crear videos con ia a partir de texto",
+      "category": "IA"
+    },
+    {
+      "phrase": "growth hacking que es",
+      "category": "Consejos"
+    },
+    {
+      "phrase": "growth hacking mexico",
+      "category": "Consejos"
+    },
+    {
+      "phrase": "growth hacking empresa",
+      "category": "Consejos"
+    },
+    {
+      "phrase": "growth hacking estrategias",
+      "category": "Consejos"
+    },
+    {
+      "phrase": "growth hacking marketing que es",
+      "category": "Consejos"
+    },
+    {
+      "phrase": "growth hacking y marketing digital",
+      "category": "Consejos"
+    },
+    {
+      "phrase": "recursos humanos torreon",
+      "category": "Consejos"
+    }
   ];
 
   var CITY_ALIASES = {
@@ -103,6 +444,29 @@
       if (normalize(VALIDATED_BLOG_TOPICS[i].phrase) === n) return VALIDATED_BLOG_TOPICS[i];
     }
     return null;
+  }
+
+  function findNearValidatedTopic(input) {
+    var n = normalize(input);
+    var best;
+    var bestScore = 0;
+    for (var i = 0; i < VALIDATED_BLOG_TOPICS.length; i++) {
+      var t = VALIDATED_BLOG_TOPICS[i];
+      var p = normalize(t.phrase);
+      if (p === n) return t;
+      var inputTokens = tokenize(input);
+      var phraseTokens = tokenize(t.phrase);
+      var overlap = 0;
+      for (var j = 0; j < phraseTokens.length; j++) {
+        if (inputTokens.indexOf(phraseTokens[j]) >= 0) overlap++;
+      }
+      var ratio = overlap / Math.max(phraseTokens.length, 1);
+      if (ratio >= 0.55 && overlap >= 2 && ratio > bestScore) {
+        bestScore = ratio;
+        best = t;
+      }
+    }
+    return best;
   }
 
   function detectCity(input) {
@@ -279,6 +643,20 @@
       };
     }
 
+    var near = findNearValidatedTopic(trimmed);
+    if (near) {
+      return {
+        topic: near,
+        userInput: trimmed,
+        autoCorrected: normalize(trimmed) !== normalize(near.phrase),
+        message:
+          normalize(trimmed) === normalize(near.phrase)
+            ? 'Frase validada en Google MX.'
+            : 'Ajustado a frase del catálogo: «' + near.phrase + '»',
+        suggestions: [],
+      };
+    }
+
     var city = detectCity(trimmed);
     var services = detectServices(trimmed);
 
@@ -380,17 +758,20 @@
         return b.score - a.score;
       });
 
-    var suggestions = ranked.slice(0, 5).map(function (x) {
+    var suggestions = ranked.slice(0, 8).map(function (x) {
       return x.t.phrase;
     });
     var best = ranked[0];
 
-    if (best && best.score >= 4) {
+    if (best && best.score >= 2) {
       return {
         topic: best.t,
         userInput: trimmed,
-        autoCorrected: true,
-        message: 'Corregido automáticamente a: «' + best.t.phrase + '»',
+        autoCorrected: normalize(trimmed) !== normalize(best.t.phrase),
+        message:
+          normalize(trimmed) === normalize(best.t.phrase)
+            ? 'Frase validada en Google MX.'
+            : 'Mejor coincidencia en catálogo: «' + best.t.phrase + '»',
         suggestions: suggestions,
       };
     }
@@ -401,11 +782,11 @@
       userInput: trimmed,
       autoCorrected: true,
       message: best
-        ? 'Aproximado a: «' + fallback.phrase + '». Si no es lo que buscas, elige una sugerencia.'
-        : 'No encontré coincidencia clara. Usando tema similar.',
+        ? 'Aproximado a: «' + fallback.phrase + '». Al publicar, el servidor consulta Google Suggest MX.'
+        : 'No encontré coincidencia clara. Al publicar se busca en Google Suggest MX.',
       suggestions: suggestions.length
         ? suggestions
-        : VALIDATED_BLOG_TOPICS.slice(0, 5).map(function (t) {
+        : VALIDATED_BLOG_TOPICS.slice(0, 8).map(function (t) {
             return t.phrase;
           }),
     };

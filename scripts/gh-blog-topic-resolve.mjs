@@ -1,7 +1,12 @@
 import {
   VALIDATED_BLOG_TOPICS,
   findValidatedTopic,
+  topicFromPhrase,
 } from './gh-blog-validated-keywords.mjs';
+import {
+  pickBestSuggestPhrase,
+  suggestPhrasesForUserInput,
+} from './gh-blog-google-suggest.mjs';
 
 /** @typedef {import('./gh-blog-validated-keywords.mjs').ValidatedKeywordTopic} ValidatedKeywordTopic */
 
@@ -41,7 +46,10 @@ const SERVICE_ALIASES = {
   crm: ['crm', 'kommo', 'pipedrive', 'hubspot'],
   ia: ['ia', 'inteligencia artificial', 'automatiz', 'automatizar', ' ai '],
   agencia: ['agencia', 'agencias', 'consultora', 'proveedor de ia', 'empresa de ia', 'servicios de ia'],
-  seo: ['seo', 'posicionar', 'posicionamiento', 'google', 'ranking'],
+  seo: ['seo', 'posicionar', 'posicionamiento', 'google', 'ranking', 'contenido con ia', 'blog ia'],
+  video: ['video', 'videos', 'youtube', 'tiktok', 'reels', 'short'],
+  growth: ['growth hacking', 'growth', 'hacking growth'],
+  marketing: ['marketing digital', 'marketing con ia', 'email marketing'],
   agente: ['agente', 'agentes'],
   ventas: ['embudo', 'ventas', 'vender', 'cerrar ventas'],
   pyme: ['pyme', 'pymes', 'negocio', 'empresa', 'empresas'],
@@ -330,11 +338,16 @@ function scoreTopic(input, topic) {
 
   if (services.includes('chatbot') && phraseNorm.includes('chatbot')) score += 4;
   if (services.includes('whatsapp') && phraseNorm.includes('whatsapp')) score += 4;
-  if (services.includes('crm') && (phraseNorm.includes('crm') || phraseNorm.includes('kommo'))) score += 4;
+  if (services.includes('crm') && (phraseNorm.includes('crm') || phraseNorm.includes('kommo'))) score += 8;
+  if (normalize(input).includes('kommo') && phraseNorm.includes('kommo')) score += 14;
   if ((services.includes('ia') || services.includes('agencia')) && phraseNorm.includes('inteligencia')) score += 5;
   if (services.includes('ia') && phraseNorm.includes('ia')) score += 3;
   if (services.includes('agencia') && phraseNorm.includes('inteligencia')) score += 4;
-  if (services.includes('seo') && (phraseNorm.includes('google') || phraseNorm.includes('posicionar'))) score += 5;
+  if (services.includes('seo') && (phraseNorm.includes('google') || phraseNorm.includes('posicionar') || phraseNorm.includes('seo'))) score += 5;
+  if (services.includes('seo') && phraseNorm.includes('ia') && normalize(input).includes('seo')) score += 10;
+  if (services.includes('video') && (phraseNorm.includes('video') || phraseNorm.includes('videos'))) score += 10;
+  if (services.includes('growth') && phraseNorm.includes('growth')) score += 12;
+  if (services.includes('marketing') && phraseNorm.includes('marketing')) score += 6;
   if (services.includes('agente') && phraseNorm.includes('agente')) score += 4;
   if (services.includes('ventas') && phraseNorm.includes('ventas')) score += 3;
   if (services.includes('pyme') && (phraseNorm.includes('pyme') || phraseNorm.includes('negocio'))) score += 2;
@@ -356,6 +369,9 @@ const SERVICE_LABELS = {
   agente: 'agente de IA',
   ventas: 'embudo de ventas',
   pyme: 'PYMEs',
+  video: 'videos con IA',
+  growth: 'growth hacking',
+  marketing: 'marketing digital con IA',
 };
 
 /** @param {string[]} services @param {string} input */
@@ -387,6 +403,14 @@ function pickAnchorForComparative(input, services) {
 
   const ranked = VALIDATED_BLOG_TOPICS.map((t) => ({ t, score: scoreTopic(input, t) }))
     .sort((a, b) => b.score - a.score);
+
+  if (normalize(input).includes('kommo') || (services.includes('crm') && services.includes('whatsapp'))) {
+    const crm =
+      findValidatedTopic('kommo crm whatsapp') ||
+      findValidatedTopic('kommo crm para whatsapp') ||
+      findValidatedTopic('crm kommo whatsapp');
+    if (crm) return crm;
+  }
 
   if (services.includes('seo')) {
     const seo = findValidatedTopic('como posicionar mi pagina en google mexico');
@@ -524,12 +548,15 @@ export function resolveTopicInput(userInput) {
   const suggestions = ranked.slice(0, 5).map((x) => x.t.phrase);
   const best = ranked[0];
 
-  if (best && best.score >= 4) {
+  if (best && best.score >= 2) {
     return {
       topic: best.t,
       userInput: trimmed,
-      autoCorrected: true,
-      message: `Corregido automáticamente a: «${best.t.phrase}»`,
+      autoCorrected: normalize(trimmed) !== normalize(best.t.phrase),
+      message:
+        normalize(trimmed) === normalize(best.t.phrase)
+          ? 'Frase validada en Google MX.'
+          : `Mejor coincidencia en catálogo: «${best.t.phrase}»`,
       suggestions,
     };
   }
@@ -546,8 +573,85 @@ export function resolveTopicInput(userInput) {
     message: best
       ? `Aproximado a: «${fallback.phrase}». Si no es lo que buscas, elige una sugerencia.`
       : 'No encontré coincidencia clara. Usando tema similar.',
-    suggestions: suggestions.length ? suggestions : VALIDATED_BLOG_TOPICS.slice(0, 5).map((t) => t.phrase),
+    suggestions: suggestions.length
+      ? suggestions
+      : VALIDATED_BLOG_TOPICS.slice(0, 8).map((t) => t.phrase),
   };
+}
+
+/** @param {string} input @param {string} phrase */
+function inputTokensMatchPhrase(input, phrase) {
+  const p = normalize(phrase);
+  const words = tokenize(input).filter((w) => w.length > 3 || SHORT_TOKENS.has(w));
+  if (!words.length) return 0;
+  return words.filter((w) => p.includes(w)).length;
+}
+
+function shouldRefineWithGoogleSuggest(sync, trimmed) {
+  if (!trimmed || trimmed.length < 6) return false;
+  const n = normalize(trimmed);
+  const phrase = normalize(sync.topic.phrase);
+
+  const anchors = [
+    ['kommo', 'kommo'],
+    ['chatbot', 'chatbot'],
+    ['posicionar', 'google'],
+    ['posicionar', 'posicionar'],
+    ['seo', 'seo'],
+    ['growth hacking', 'growth'],
+    ['growth', 'growth'],
+    ['video', 'video'],
+    ['videos', 'video'],
+    ['embudo', 'embudo'],
+    ['recursos humanos', 'recursos humanos'],
+  ];
+  for (const [needle, inPhrase] of anchors) {
+    if (n.includes(needle) && !phrase.includes(inPhrase)) return true;
+  }
+
+  if (!sync.autoCorrected) return false;
+  if (
+    sync.message.includes('No encontré') ||
+    sync.message.includes('similar') ||
+    sync.message.includes('Aproximado')
+  ) {
+    return true;
+  }
+  const matched = inputTokensMatchPhrase(trimmed, sync.topic.phrase);
+  const wordCount = tokenize(trimmed).filter((w) => w.length > 3).length;
+  if (wordCount >= 3 && matched < 2) return true;
+  return false;
+}
+
+/**
+ * Resuelve tema con catálogo + Google Suggest MX si el texto del usuario no encaja bien.
+ * @param {string} userInput
+ */
+export async function resolveTopicInputAsync(userInput) {
+  const sync = resolveTopicInput(userInput);
+  const trimmed = userInput.trim();
+  if (!shouldRefineWithGoogleSuggest(sync, trimmed)) return sync;
+
+  try {
+    const suggestions = await suggestPhrasesForUserInput(trimmed);
+    const picked = pickBestSuggestPhrase(trimmed, suggestions);
+    if (!picked) return sync;
+
+    const topic = topicFromPhrase(picked);
+    const listSuggest = suggestions.slice(0, 8);
+    return {
+      ...sync,
+      topic,
+      autoCorrected: normalize(trimmed) !== normalize(picked),
+      message: `Frase sugerida por Google México: «${picked}». El artículo cubre lo que escribiste.`,
+      suggestions: listSuggest.length ? listSuggest : sync.suggestions,
+      contentBrief:
+        sync.contentBrief ||
+        `El usuario pidió: «${trimmed}». Usa la frase SEO «${picked}» en título/slug; el cuerpo debe responder exactamente a su intención.`,
+    };
+  } catch {
+    return sync;
+  }
 }
 
 /** @param {string} [brief] */

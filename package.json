@@ -5,6 +5,7 @@
   "scripts": {
     "indexnow": "node scripts/indexnow.mjs",
     "indexnow:latest": "node scripts/indexnow.mjs --latest 8",
-    "blog:suggest-fetch": "node scripts/fetch-google-suggest-keywords.mjs"
+    "blog:suggest-fetch": "node scripts/fetch-google-suggest-keywords.mjs",
+    "blog:sync-topics": "node scripts/sync-blog-topics-panel.mjs"
   }
 }

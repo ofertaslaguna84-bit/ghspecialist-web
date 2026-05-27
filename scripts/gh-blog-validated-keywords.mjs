@@ -1,40 +1,14 @@
 /**
- * Temas de blog SOLO con frases validadas en Google Suggest México (hl=es, gl=mx).
- * Ampliar: node scripts/fetch-google-suggest-keywords.mjs
+ * Temas de blog con frases alineadas a Google Suggest México.
+ * Lista: data/gh-blog-topics.json — ampliar: node scripts/fetch-google-suggest-keywords.mjs
  */
+import topicsJson from '../data/gh-blog-topics.json' with { type: 'json' };
+import { inferBlogCategory } from './gh-blog-google-suggest.mjs';
 
 /** @typedef {{ phrase: string, category: 'Chatbots'|'WhatsApp'|'Automatización'|'CRM'|'SEO'|'IA'|'Consejos' }} ValidatedKeywordTopic */
 
 /** @type {ValidatedKeywordTopic[]} */
-export const VALIDATED_BLOG_TOPICS = [
-  { phrase: 'chatbot whatsapp negocios mexico', category: 'Chatbots' },
-  { phrase: 'chatbot whatsapp para empresas', category: 'Chatbots' },
-  { phrase: 'chatbot con inteligencia artificial', category: 'Chatbots' },
-  { phrase: 'chatbot whatsapp precio', category: 'Chatbots' },
-  { phrase: 'atencion cliente chatbot', category: 'Chatbots' },
-  { phrase: 'automatizacion de servicio al cliente', category: 'Automatización' },
-  { phrase: 'automatizacion atencion al cliente', category: 'Automatización' },
-  { phrase: 'chatbot atencion al cliente whatsapp', category: 'Chatbots' },
-  { phrase: 'como automatizar mi negocio con ia', category: 'Automatización' },
-  { phrase: 'automatizar negocio con inteligencia artificial', category: 'Automatización' },
-  { phrase: 'automatizacion whatsapp pymes', category: 'Automatización' },
-  { phrase: 'automatizacion de ventas whatsapp', category: 'Automatización' },
-  { phrase: 'inteligencia artificial empresas mexico', category: 'IA' },
-  { phrase: 'inteligencia artificial para pymes mexico', category: 'IA' },
-  { phrase: 'inteligencia artificial torreon', category: 'IA' },
-  { phrase: 'chatbot torreon', category: 'Chatbots' },
-  { phrase: 'automatizacion torreon', category: 'Automatización' },
-  { phrase: 'recursos humanos torreon', category: 'Consejos' },
-  { phrase: 'automatizacion recursos humanos', category: 'Automatización' },
-  { phrase: 'agente de ia para whatsapp', category: 'IA' },
-  { phrase: 'agente ia whatsapp', category: 'IA' },
-  { phrase: 'crm kommo que es', category: 'CRM' },
-  { phrase: 'crm kommo whatsapp', category: 'CRM' },
-  { phrase: 'embudo ventas whatsapp', category: 'WhatsApp' },
-  { phrase: 'whatsapp business api mexico', category: 'WhatsApp' },
-  { phrase: 'como posicionar mi pagina en google mexico', category: 'SEO' },
-  { phrase: 'como posicionar pagina google mexico', category: 'SEO' },
-];
+export const VALIDATED_BLOG_TOPICS = topicsJson;
 
 function normalizePhrase(s) {
   return s
@@ -48,8 +22,8 @@ function normalizePhrase(s) {
 function topicKeys(phrase) {
   return normalizePhrase(phrase)
     .split(' ')
-    .filter((w) => w.length > 4)
-    .slice(0, 4);
+    .filter((w) => w.length > 3 || w === 'ia' || w === 'seo' || w === 'crm')
+    .slice(0, 5);
 }
 
 /**
@@ -64,13 +38,19 @@ export function pickNextValidatedTopic(existingSlugsAndTitles, options) {
 
   for (const topic of pool) {
     const keys = topicKeys(topic.phrase);
-    const covered =
-      keys.length >= 2 &&
-      keys.filter((k) => haystack.includes(k)).length >= Math.min(3, keys.length);
-    if (!covered) return topic;
+    if (keys.length < 2) continue;
+    const matched = keys.filter((k) => haystack.includes(k)).length;
+    const needed = Math.min(2, keys.length);
+    if (matched < needed) return topic;
   }
 
-  return pool[Math.floor(Math.random() * pool.length)];
+  const uncovered = pool.filter((topic) => {
+    const keys = topicKeys(topic.phrase);
+    const matched = keys.filter((k) => haystack.includes(k)).length;
+    return matched < Math.min(2, keys.length);
+  });
+  const pickFrom = uncovered.length ? uncovered : pool;
+  return pickFrom[Math.floor(Math.random() * pickFrom.length)];
 }
 
 export function isValidatedPhrase(phrase) {
@@ -84,4 +64,19 @@ export function isValidatedPhrase(phrase) {
 export function findValidatedTopic(phrase) {
   const n = normalizePhrase(phrase);
   return VALIDATED_BLOG_TOPICS.find((t) => normalizePhrase(t.phrase) === n);
+}
+
+/**
+ * Tema para generar (lista fija o frase nueva validada por nicho / Suggest).
+ * @param {string} phrase
+ * @returns {ValidatedKeywordTopic}
+ */
+export function topicFromPhrase(phrase) {
+  const existing = findValidatedTopic(phrase);
+  if (existing) return existing;
+  const normalized = normalizePhrase(phrase);
+  return {
+    phrase: normalized,
+    category: inferBlogCategory(normalized),
+  };
 }

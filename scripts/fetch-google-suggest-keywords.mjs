@@ -8,7 +8,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const KEYWORDS_FILE = join(ROOT, 'scripts/gh-blog-validated-keywords.mjs');
+const TOPICS_FILE = join(ROOT, 'data/gh-blog-topics.json');
 
 const SEEDS = [
   'chatbot whatsapp negocios mexico',
@@ -25,6 +25,12 @@ const SEEDS = [
   'chatbot torreon',
   'automatizacion torreon',
   'agencia inteligencia artificial',
+  'seo con ia',
+  'crear videos con ia',
+  'video marketing con ia',
+  'growth hacking mexico',
+  'marketing digital con ia',
+  'crear contenido con ia',
 ];
 
 async function suggest(q) {
@@ -38,7 +44,7 @@ async function suggest(q) {
   return data[1] || [];
 }
 
-const existing = readFileSync(KEYWORDS_FILE, 'utf8').toLowerCase();
+const existing = readFileSync(TOPICS_FILE, 'utf8').toLowerCase();
 const found = new Set();
 
 for (const seed of SEEDS) {
