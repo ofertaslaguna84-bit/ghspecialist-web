@@ -414,9 +414,23 @@
             return sleep(12000).then(tick);
           }
           if (run.conclusion !== 'success') {
+            var runUrl =
+              run.html_url ||
+              'https://github.com/' + ghOwner() + '/' + ghRepo() + '/actions/runs/' + run.id;
             return fetchRawJson(resultFile).then(function (result) {
-              if (result && result.error) throw new Error(result.error);
-              throw new Error('Workflow falló: ' + run.conclusion);
+              var runIdStr = String(run.id);
+              if (result && result.error && (!result.runId || result.runId === runIdStr)) {
+                var errMsg = result.error;
+                if (result.runUrl) errMsg += ' — ' + result.runUrl;
+                throw new Error(errMsg);
+              }
+              throw new Error(
+                'Workflow falló (' +
+                  run.conclusion +
+                  '). Abre el log: ' +
+                  runUrl +
+                  ' (paso «Generar artículo»). Suele ser clave del panel ≠ BLOG_GENERATE_SECRET o API keys vacías en GitHub Secrets.'
+              );
             });
           }
           return fetchRawJson(resultFile).then(function (result) {

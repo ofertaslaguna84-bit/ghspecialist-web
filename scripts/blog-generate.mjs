@@ -629,18 +629,22 @@ async function main() {
   const clientSecret = process.env.CLIENT_SECRET || '';
   const expectedSecret = process.env.BLOG_GENERATE_SECRET || '';
   if (expectedSecret && clientSecret !== expectedSecret) {
-    console.error('Secret inválido');
+    console.error(
+      'Secret inválido: la clave del panel (panelPassword) debe coincidir con BLOG_GENERATE_SECRET en GitHub Actions.'
+    );
     process.exit(1);
   }
 
   const hasKey =
-    process.env.DEEPSEEK_API_KEY ||
-    process.env.QWEN_API_KEY ||
-    process.env.DASHSCOPE_API_KEY ||
-    process.env.GEMINI_API_KEY ||
-    process.env.OPENAI_API_KEY;
+    process.env.DEEPSEEK_API_KEY?.trim() ||
+    process.env.QWEN_API_KEY?.trim() ||
+    process.env.DASHSCOPE_API_KEY?.trim() ||
+    process.env.GEMINI_API_KEY?.trim() ||
+    process.env.OPENAI_API_KEY?.trim();
   if (!hasKey) {
-    console.error('Falta DEEPSEEK_API_KEY o QWEN_API_KEY en secrets');
+    console.error(
+      'Falta una API key de IA en GitHub Secrets (Settings → Secrets → Actions): GEMINI_API_KEY, OPENAI_API_KEY, DEEPSEEK_API_KEY o QWEN_API_KEY.'
+    );
     process.exit(1);
   }
 
@@ -751,10 +755,20 @@ async function main() {
       resolved: resolveMeta,
       seoKeywords: plan.seoKeywords,
       indexingKeywords: plan.indexingKeywords,
+      ...blogResultMeta(),
     }),
     'utf8'
   );
   console.log(`✓ Artículo publicado: ${parsed.slug}`);
+}
+
+function blogResultMeta() {
+  return {
+    runId: process.env.GITHUB_RUN_ID || '',
+    runUrl: process.env.GITHUB_RUN_ID
+      ? `https://github.com/ofertaslaguna84-bit/ghspecialist-web/actions/runs/${process.env.GITHUB_RUN_ID}`
+      : '',
+  };
 }
 
 main().catch(async (err) => {
@@ -762,7 +776,11 @@ main().catch(async (err) => {
   console.error(msg);
   try {
     const outPath = join(ROOT, 'blog-generate-result.json');
-    await writeFile(outPath, JSON.stringify({ ok: false, error: msg.slice(0, 500) }), 'utf8');
+    await writeFile(
+      outPath,
+      JSON.stringify({ ok: false, error: msg.slice(0, 500), ...blogResultMeta() }),
+      'utf8'
+    );
   } catch {
     /* noop */
   }

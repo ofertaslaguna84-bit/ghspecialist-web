@@ -27,6 +27,7 @@ jobs:
           node-version: '20'
 
       - name: Generar artículo
+        id: generate
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
@@ -38,7 +39,18 @@ jobs:
           CLIENT_SECRET: ${{ github.event.client_payload.secret }}
           BLOG_TOPIC: ${{ github.event.client_payload.topic }}
           BLOG_KEYWORDS: ${{ github.event.client_payload.keywords }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
         run: node scripts/blog-generate.mjs
+
+      - name: Guardar resultado (error)
+        if: failure() && steps.generate.outcome == 'failure'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -f blog-generate-result.json ]; then
+            git add blog-generate-result.json
+            git diff --staged --quiet || (git commit -m "blog: error en generación ($(date -u +%Y-%m-%d))" && git push)
+          fi
 
       - name: Commit y push
         run: |
