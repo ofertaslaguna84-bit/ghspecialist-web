@@ -153,7 +153,7 @@
         });
       }
       html +=
-        '<p class="blog-indexing-note">IndexNow + sitemap al publicar. En Google Search Console puedes pedir indexación del URL del post.</p></div>';
+        '<p class="blog-indexing-note">Al publicar: IndexNow + ping del sitemap (Bing/Yandex). Google rastrea vía sitemap en Search Console.</p></div>';
       return html;
     },
   };
