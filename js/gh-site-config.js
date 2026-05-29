@@ -50,5 +50,8 @@ window.GH_SITE_CONFIG = {
   /** API en Adestajo (servidor) — el panel no necesita token GitHub en el navegador */
   blogApiBase: 'https://adestajo.com.mx',
   /** Citas / diagnóstico — Google Calendar (reemplaza Calendly en todo el sitio) */
-  googleCalendarUrl: 'https://calendar.app.google/rz32YjLinKvYWUTT9'
+  googleCalendarUrl: 'https://calendar.app.google/rz32YjLinKvYWUTT9',
+  /** Redes — enlazar IG ↔ TikTok en bio y en el sitio */
+  instagramUrl: 'https://www.instagram.com/peterdays23/',
+  tiktokUrl: 'https://www.tiktok.com/@ghspecialist'
 };
