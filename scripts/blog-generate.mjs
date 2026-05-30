@@ -585,7 +585,7 @@ ${relatedHtml}
     </div>
   </section>
 </article>
-<div class="ftr-art">© 2026 GH Specialist · <a href="https://ghspecialist.com">ghspecialist.com</a> · <a href="https://www.instagram.com/peterdays23/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@ghspecialist" target="_blank" rel="noopener">TikTok</a></div>
+<div class="ftr-art">© 2026 GH Specialist · <a href="https://ghspecialist.com">ghspecialist.com</a> · <a href="https://www.instagram.com/ghspecialist26/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@ghspecialist" target="_blank" rel="noopener">TikTok</a></div>
 </body>
 </html>
 `;

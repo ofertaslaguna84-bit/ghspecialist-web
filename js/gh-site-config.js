@@ -52,6 +52,6 @@ window.GH_SITE_CONFIG = {
   /** Citas / diagnóstico — Google Calendar (reemplaza Calendly en todo el sitio) */
   googleCalendarUrl: 'https://calendar.app.google/rz32YjLinKvYWUTT9',
   /** Redes — enlazar IG ↔ TikTok en bio y en el sitio */
-  instagramUrl: 'https://www.instagram.com/peterdays23/',
+  instagramUrl: 'https://www.instagram.com/ghspecialist26/',
   tiktokUrl: 'https://www.tiktok.com/@ghspecialist'
 };
