@@ -1,8 +1,8 @@
 # GH Specialist — llms.txt
 # https://ghspecialist.com
 
-> Automatización de negocios con inteligencia artificial en México y LATAM.
-> Chatbots WhatsApp, CRM Kommo, agentes omnicanal. Fundador: Pedro Luis Díaz Velázquez.
+> Web Apps IA, Chatbots y Growth Hacker en México y LATAM.
+> Automatización, SEO y ventas por WhatsApp. Fundador: Pedro Luis Díaz Velázquez.
 
 ## Sitio principal
 - Home: https://ghspecialist.com/
