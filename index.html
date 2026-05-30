@@ -269,6 +269,10 @@
     .svc-link{font-size:13px;font-weight:600;color:var(--p)!important;display:flex;align-items:center;gap:6px;position:relative;z-index:1;transition:gap .15s}
     .svc-card:hover .svc-link{gap:10px}
     .svc-tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:var(--p-light);color:var(--p)!important;margin-bottom:10px;position:relative;z-index:1}
+    .svc-tag--pillar{background:var(--p);color:#fff!important}
+    .services-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:12px}
+    .svc-card--pillar{border-color:var(--p-border);background:linear-gradient(180deg,#fff 0%,var(--p-light) 120%)}
+    .services-more-label{text-align:center;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);margin:28px 0 18px}
 
     /* ─── ABOUT SECTION ─── */
     .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
@@ -450,7 +454,7 @@
       .embudo-price-cta{flex-direction:column;align-items:stretch;gap:14px}
       .btn-embudo-cta{width:100%;justify-content:center;box-sizing:border-box}
       .pipeline{grid-template-columns:1fr 1fr;gap:12px}
-      .services-grid{grid-template-columns:1fr 1fr}
+      .services-pillars,.services-grid{grid-template-columns:1fr 1fr}
       .cases-grid{grid-template-columns:1fr 1fr}
       .testi-grid{grid-template-columns:1fr}
       .pricing-grid{grid-template-columns:1fr}
@@ -468,7 +472,7 @@
     }
     @media(max-width:600px){
       .pipeline{grid-template-columns:1fr}
-      .services-grid{grid-template-columns:1fr}
+      .services-pillars,.services-grid{grid-template-columns:1fr}
       .cases-grid{grid-template-columns:1fr}
       .cities-grid{grid-template-columns:1fr 1fr}
       .form-row{grid-template-columns:1fr}
@@ -915,73 +919,77 @@
         <h2 class="title" data-i18n="svc.title">Web Apps IA · Chatbots · Growth Hacker</h2>
         <p class="sub-text" data-i18n="svc.sub">Tres pilares para PYMES en México: tu web con IA, ventas por WhatsApp y crecimiento medible en Google.</p>
       </div>
-      <div class="services-grid">
-
-        <a href="servicios/chatbot-ia-whatsapp.html" class="svc-card fi fi-d1">
-          <div class="svc-tag">⭐ Más popular</div>
+      <div class="services-pillars">
+        <a href="servicios/chatbot-ia-whatsapp.html" class="svc-card svc-card--pillar fi fi-d1">
+          <div class="svc-tag svc-tag--pillar" data-i18n="svc.pillar.chatbots">Pilar · Chatbots</div>
           <div class="svc-icon">💬</div>
-          <h3>Chatbot IA WhatsApp</h3>
-          <p>Atiende, califica y cierra ventas con prospectos las 24h. El bot habla como tu mejor vendedor y escala a humano cuando es necesario.</p>
-          <span class="svc-link">Ver servicio →</span>
+          <h3 data-i18n="svc.card.chatbot.t">Chatbots · WhatsApp IA</h3>
+          <p data-i18n="svc.card.chatbot.d">Atiende, califica y cierra ventas 24/7. Tu mejor vendedor en WhatsApp; escala a humano cuando hace falta.</p>
+          <span class="svc-link" data-i18n="svc.link">Ver servicio →</span>
         </a>
 
-        <a href="servicios/agentes-omnicanal.html" class="svc-card fi fi-d2">
+        <a href="servicios/web-seo-blog-ia.html" class="svc-card svc-card--pillar fi fi-d2">
+          <div class="svc-tag svc-tag--pillar" data-i18n="svc.pillar.webapps">Pilar · Web Apps IA</div>
+          <div class="svc-icon">🌐</div>
+          <h3 data-i18n="svc.card.webapps.t">Web Apps IA</h3>
+          <p data-i18n="svc.card.webapps.d">Sitios y web apps con IA: SEO, blog automático y herramientas a medida. Para que Google te encuentre.</p>
+          <span class="svc-link" data-i18n="svc.link">Ver servicio →</span>
+        </a>
+
+        <a href="servicios/growth-difusiones.html" class="svc-card svc-card--pillar fi fi-d3">
+          <div class="svc-tag svc-tag--pillar" data-i18n="svc.pillar.growth">Pilar · Growth Hacker</div>
+          <div class="svc-icon">📣</div>
+          <h3 data-i18n="svc.card.growth.t">Growth Hacker</h3>
+          <p data-i18n="svc.card.growth.d">Difusiones WhatsApp, funnels, SEO y campañas con IA. Crece sin quemar presupuesto.</p>
+          <span class="svc-link" data-i18n="svc.link">Ver servicio →</span>
+        </a>
+      </div>
+
+      <p class="services-more-label fi" data-i18n="svc.more">También implementamos</p>
+
+      <div class="services-grid">
+        <a href="servicios/agentes-omnicanal.html" class="svc-card fi fi-d4">
           <div class="svc-icon">🤖</div>
           <h3>Agentes IA Omnicanal</h3>
-          <p>Un agente que opera en WhatsApp, Instagram DM, email y web al mismo tiempo. Sin duplicar trabajo.</p>
-          <span class="svc-link">Ver servicio →</span>
+          <p>WhatsApp, Instagram DM, email y web con un solo agente. Sin duplicar trabajo.</p>
+          <span class="svc-link" data-i18n="svc.link">Ver servicio →</span>
         </a>
 
-        <a href="servicios/crm-kommo.html" class="svc-card fi fi-d3">
+        <a href="servicios/crm-kommo.html" class="svc-card fi fi-d5">
           <div class="svc-icon">📊</div>
           <h3>CRM Kommo</h3>
-          <p>Implementación completa del CRM líder de ventas conversacionales. Pipeline, automatizaciones y capacitación incluida.</p>
-          <span class="svc-link">Ver servicio →</span>
+          <p>CRM conversacional: pipeline, automatizaciones y capacitación incluida.</p>
+          <span class="svc-link" data-i18n="svc.link">Ver servicio →</span>
         </a>
 
-        <a href="servicios/web-seo-blog-ia.html" class="svc-card fi fi-d4">
-          <div class="svc-icon">🌐</div>
-          <h3>Web Apps IA</h3>
-          <p>Web apps y sitios con IA integrada: SEO, blog automático y herramientas a medida. Para que Google te encuentre.</p>
-          <span class="svc-link">Ver servicio →</span>
-        </a>
-
-        <a href="servicios/automatizacion-total.html" class="svc-card fi fi-d5">
+        <a href="servicios/automatizacion-total.html" class="svc-card fi fi-d6">
           <div class="svc-icon">⚡</div>
           <h3>Automatización Total</h3>
-          <p>Conectamos tus sistemas: CRM, WhatsApp, email, contabilidad, inventario. Tu empresa opera sola mientras duermes.</p>
-          <span class="svc-link">Ver servicio →</span>
-        </a>
-
-        <a href="servicios/growth-difusiones.html" class="svc-card fi fi-d6">
-          <div class="svc-icon">📣</div>
-          <h3>Growth Hacker</h3>
-          <p>Growth hacking con IA: difusiones WhatsApp, funnels, SEO y campañas que escalan tu negocio sin quemar presupuesto.</p>
-          <span class="svc-link">Ver servicio →</span>
+          <p>CRM, WhatsApp, email, contabilidad e inventario conectados. Tu empresa opera sola.</p>
+          <span class="svc-link" data-i18n="svc.link">Ver servicio →</span>
         </a>
 
         <a href="servicios/pauta-omnicanal.html" class="svc-card fi">
           <div class="svc-icon">🎯</div>
           <h3>Pauta Omnicanal</h3>
-          <p>Google Ads + Meta Ads + TikTok gestionados con IA. Maximizamos tu ROAS con inteligencia artificial.</p>
-          <span class="svc-link">Ver servicio →</span>
+          <p>Google, Meta y TikTok con IA. Maximizamos ROAS.</p>
+          <span class="svc-link" data-i18n="svc.link">Ver servicio →</span>
         </a>
 
         <a href="servicios/cien-automatizado.html" class="svc-card fi fi-d1">
           <div class="svc-tag" style="background:#FFF3E0;color:#E65100">🚀 Premium</div>
           <div class="svc-icon">💎</div>
           <h3>100% Automatizado</h3>
-          <p>Tu empresa con cero procesos manuales. Desde ventas hasta operaciones. El paquete completo de transformación IA.</p>
-          <span class="svc-link">Ver servicio →</span>
+          <p>Ventas y operaciones sin procesos manuales. Paquete completo de transformación IA.</p>
+          <span class="svc-link" data-i18n="svc.link">Ver servicio →</span>
         </a>
 
         <a href="servicios/proyectos-medida.html" class="svc-card fi fi-d2">
           <div class="svc-icon">🛠️</div>
           <h3>Proyectos a Medida</h3>
-          <p>¿Tienes un proceso específico? Lo automatizamos. Desarrollo de agentes IA y flujos personalizados para tu industria.</p>
-          <span class="svc-link">Ver servicio →</span>
+          <p>Agentes IA y flujos personalizados para tu industria.</p>
+          <span class="svc-link" data-i18n="svc.link">Ver servicio →</span>
         </a>
-
       </div>
     </div>
   </section>
@@ -1655,7 +1663,7 @@
   </script>
   <script src="js/gh-visitors.js" defer></script>
 
-  <script src="js/gh-locale.js?v=3"></script>
+  <script src="js/gh-locale.js?v=4"></script>
   <script>
     // Scroll progress
     const spbar = document.getElementById('spbar');
