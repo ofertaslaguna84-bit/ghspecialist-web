@@ -15,6 +15,9 @@ const SITEMAP_URLS = [
   { path: 'index.html', loc: `${SITE}/`, priority: '1.0' },
   { path: 'blog/index.html', loc: `${SITE}/blog/`, priority: '0.9' },
   { path: 'torreon/index.html', loc: `${SITE}/torreon/`, priority: '0.85' },
+  { path: 'chatbot-whatsapp-torreon.html', loc: `${SITE}/chatbot-whatsapp-torreon.html`, priority: '0.85' },
+  { path: 'agencia-ia-la-laguna.html', loc: `${SITE}/agencia-ia-la-laguna.html`, priority: '0.85' },
+  { path: 'automatizacion-gomez-palacio.html', loc: `${SITE}/automatizacion-gomez-palacio.html`, priority: '0.85' },
   { path: 'sobre-pedro.html', loc: `${SITE}/sobre-pedro.html`, priority: '0.7' },
 ];
 
