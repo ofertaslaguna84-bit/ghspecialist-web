@@ -33,8 +33,8 @@
  *   Si lo dejas vacío, el panel usa https://formspree.io/forms/TU_ID (mismo ID que /f/...).
  *
  * === E) Blog con IA (panel) ===
- * Generar/borrar artículos dispara GitHub Actions en el repo ghspecialist-web.
- * Pega un token GitHub (scopes repo + workflow) en el panel; se guarda solo en el navegador.
+ * blogApiBase → servidor que dispara GitHub Actions (no necesitas token GitHub en el panel).
+ * Si el servidor no responde, el panel acepta token GitHub como respaldo (solo en el navegador).
  *
  * Tras editar: git add js/gh-site-config.js && git commit -m "chore: config" && git push origin main
  */
@@ -48,6 +48,7 @@ window.GH_SITE_CONFIG = {
   leadsSheetEmbedUrl: '',
   githubOwner: 'ofertaslaguna84-bit',
   githubRepo: 'ghspecialist-web',
+  blogApiBase: 'https://adestajo.com.mx',
   /** Citas / diagnóstico — Google Calendar (reemplaza Calendly en todo el sitio) */
   googleCalendarUrl: 'https://calendar.app.google/rz32YjLinKvYWUTT9',
   /** Redes — enlazar IG ↔ TikTok en bio y en el sitio */

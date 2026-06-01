@@ -13,7 +13,7 @@
   <meta name="theme-color" content="#7C4DFF">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="../js/gh-site-config.js?v=panel10"></script>
+  <script src="../js/gh-site-config.js?v=panel11"></script>
   <script>
     (function () {
       var p = (window.GH_SITE_CONFIG && window.GH_SITE_CONFIG.panelPassword || '').trim();
@@ -338,8 +338,8 @@
           <button type="button" class="btn-p" id="btn-blog-generate">Generar artículo</button>
         </div>
         <div id="blog-topic-preview" class="blog-topic-preview" aria-live="polite"></div>
-        <div id="blog-token-wrap" class="blog-token-box">
-          <strong>Token GitHub</strong> — para generar, editar o borrar artículos el panel dispara GitHub Actions en <span class="mono">ghspecialist-web</span>. Pega un token con permisos <span class="mono">repo</span> + <span class="mono">workflow</span>. Se guarda solo en este navegador.
+        <div id="blog-token-wrap" class="blog-token-box" hidden>
+          <strong>Respaldo manual</strong> — solo si el servidor no responde: token GitHub con <span class="mono">repo</span> + <span class="mono">workflow</span> en <span class="mono">ghspecialist-web</span>.
           <div class="blog-token-row">
             <input type="password" id="blog-github-token" placeholder="ghp_… o github_pat_…" autocomplete="off">
             <button type="button" id="btn-save-github-token">Guardar token</button>
