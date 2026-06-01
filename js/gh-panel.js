@@ -263,12 +263,35 @@
   function checkAdestajoHealth() {
     return fetch(apiBase() + '/api/ghspecialist/blog-list?secret=' + encodeURIComponent(PASS))
       .then(function (r) {
-        if (r.ok) return true;
+        if (r.ok) {
+          showGithubTokenBox(false);
+          return true;
+        }
         showGithubTokenBox(true);
+        if (r.status === 401) {
+          setBlogStatus(
+            'warn',
+            '<strong>Clave del panel desincronizada con Adestajo.</strong> La API responde pero rechaza la clave. ' +
+              'Actualiza <span class="mono">GHSPECIALIST_BLOG_SECRET</span> en Vercel a la misma que ' +
+              '<span class="mono">panelPassword</span> en <span class="mono">js/gh-site-config.js</span>, ' +
+              'o pega un token GitHub abajo como respaldo.'
+          );
+        } else if (r.status >= 500) {
+          setBlogStatus(
+            'warn',
+            '<strong>Adestajo respondió con error ' +
+              r.status +
+              '.</strong> Pega un token GitHub abajo para generar o borrar mientras se corrige el servidor.'
+          );
+        }
         return false;
       })
       .catch(function () {
         showGithubTokenBox(true);
+        setBlogStatus(
+          'warn',
+          '<strong>No se pudo contactar Adestajo</strong> (red o Vercel caído). Pega un token GitHub abajo para usar el respaldo directo.'
+        );
         return false;
       });
   }
