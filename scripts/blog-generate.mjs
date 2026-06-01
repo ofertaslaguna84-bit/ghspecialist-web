@@ -50,16 +50,37 @@ function encodeWebPath(relPath) {
   return relPath.split('/').map((p) => encodeURIComponent(p)).join('/');
 }
 
-function toHeroAsset(relPath, city, tags) {
+function blogHeroPaths(relPath) {
   const enc = encodeWebPath(relPath);
+  const isBlogImg = relPath.startsWith('blog/img/');
   return {
-    img: `../${enc}`,
+    articleImg: isBlogImg ? relPath.replace(/^blog\/img\//, 'img/') : `../${enc}`,
+    cardImg: `/${enc}`,
     og: `${SITE}/${enc}`,
+  };
+}
+
+function toHeroAsset(relPath, city, tags) {
+  return {
+    ...blogHeroPaths(relPath),
     city,
     tags,
     relPath,
     generated: false,
   };
+}
+
+function normalizeBlogSlug(slug) {
+  if (!slug || slug.includes('://') || slug.startsWith('../') || slug.startsWith('/')) return slug;
+  const s = String(slug).replace(/^\.\//, '');
+  return s.endsWith('.html') ? s : `${s}.html`;
+}
+
+function fixInternalBlogLinks(html) {
+  return String(html || '').replace(/href="([a-z0-9][a-z0-9-]*)"/gi, (match, slug) => {
+    if (slug.includes('.') || slug === 'index') return match;
+    return `href="${slug}.html"`;
+  });
 }
 
 async function discoverImagePool() {
@@ -144,8 +165,7 @@ High-end commercial photo, futuristic but believable, Mexican enterprise context
         const enc = encodeWebPath(finalRel);
         console.log(`✓ Hero IA generado: ${finalRel}`);
         return {
-          img: `../${enc}`,
-          og: `${SITE}/${enc}`,
+          ...blogHeroPaths(finalRel),
           city: 'GH Specialist',
           tags: ['generado'],
           relPath: finalRel,
@@ -466,7 +486,7 @@ function buildArticleHtml(article, dateIso, hero) {
     .slice(0, 3)
     .map(
       (r) =>
-        `      <a href="${escapeHtml(r.slug)}" class="related-item"><strong>${escapeHtml(r.title)}</strong><span>${escapeHtml(r.desc)}</span></a>`
+        `      <a href="${escapeHtml(normalizeBlogSlug(r.slug))}" class="related-item"><strong>${escapeHtml(r.title)}</strong><span>${escapeHtml(r.desc)}</span></a>`
     )
     .join('\n');
 
@@ -568,7 +588,7 @@ function buildArticleHtml(article, dateIso, hero) {
   <h1>${escapeHtml(article.title)}</h1>
   <div class="art-meta">Por <strong>Pedro Luis Díaz Velázquez</strong> · GH Specialist · ${dateDisplay} · ${article.read_time || 5} min lectura</div>
   <figure class="art-hero">
-    <img src="${hero.img}" alt="${escapeHtml(article.title)}" width="1200" height="630" loading="eager">
+    <img src="${hero.articleImg}" alt="${escapeHtml(article.title)}" width="1200" height="630" loading="eager">
     <figcaption>${hero.generated ? 'Imagen hero IA · GH Specialist · ' + BLOG_YEAR : escapeHtml(article.card_city_label || hero.city || 'México')}</figcaption>
   </figure>
   ${article.content_html}
@@ -600,7 +620,7 @@ function buildCard(article, dateIso, hero) {
   });
   return `
     <a href="${slug}.html" class="card">
-      <div class="card-img" style="background-image:url('${hero.img}')"><span class="card-city">${escapeHtml(article.card_city_label || hero.city)}</span></div>
+      <div class="card-img" style="background-image:url('${hero.cardImg}')"><span class="card-city">${escapeHtml(article.card_city_label || hero.city)}</span></div>
       <div class="card-body">
         <span class="card-tag">${escapeHtml(article.category_tag)}</span>
         <h2>${escapeHtml(article.title)}</h2>
@@ -694,8 +714,10 @@ async function main() {
   const wordCount = countWordsInHtml(parsed.content_html || '');
   console.log(`→ Longitud: ${wordCount} palabras (máx ${BLOG_MAX_WORDS})`);
   parsed.slug = slugify(parsed.slug.replace(/\.html$/, '')) + '.html';
+  if (parsed.content_html) parsed.content_html = fixInternalBlogLinks(parsed.content_html);
   if (parsed.related?.length) {
     for (const r of parsed.related) {
+      if (r.slug) r.slug = normalizeBlogSlug(r.slug);
       if (r.title) r.title = sanitizeBannedWords(sanitizeStaleYears(r.title, freshness));
       if (r.desc) r.desc = sanitizeBannedWords(sanitizeStaleYears(r.desc, freshness));
     }
