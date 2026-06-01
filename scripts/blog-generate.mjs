@@ -649,10 +649,9 @@ async function main() {
   const clientSecret = process.env.CLIENT_SECRET || '';
   const expectedSecret = process.env.BLOG_GENERATE_SECRET || '';
   if (expectedSecret && clientSecret !== expectedSecret) {
-    console.error(
+    throw new Error(
       'Secret inválido: la clave del panel (panelPassword) debe coincidir con BLOG_GENERATE_SECRET en GitHub Actions.'
     );
-    process.exit(1);
   }
 
   const hasKey =
@@ -662,10 +661,9 @@ async function main() {
     process.env.GEMINI_API_KEY?.trim() ||
     process.env.OPENAI_API_KEY?.trim();
   if (!hasKey) {
-    console.error(
+    throw new Error(
       'Falta una API key de IA en GitHub Secrets (Settings → Secrets → Actions): GEMINI_API_KEY, OPENAI_API_KEY, DEEPSEEK_API_KEY o QWEN_API_KEY.'
     );
-    process.exit(1);
   }
 
   const userTopic = (process.env.BLOG_TOPIC || '').trim();

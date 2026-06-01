@@ -29,7 +29,7 @@ jobs:
       - name: Guardar artículo
         env:
           BLOG_GENERATE_SECRET: ${{ secrets.BLOG_GENERATE_SECRET }}
-          CLIENT_SECRET: ${{ github.event.client_payload.secret }}
+          CLIENT_SECRET: ${{ secrets.BLOG_GENERATE_SECRET }}
           BLOG_SAVE_PAYLOAD: ${{ toJson(github.event.client_payload) }}
         run: node scripts/blog-save.mjs
 

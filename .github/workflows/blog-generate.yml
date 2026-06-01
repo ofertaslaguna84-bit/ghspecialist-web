@@ -36,7 +36,7 @@ jobs:
           BLOG_GEMINI_IMAGES: '1'
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           BLOG_GENERATE_SECRET: ${{ secrets.BLOG_GENERATE_SECRET }}
-          CLIENT_SECRET: ${{ github.event.client_payload.secret }}
+          CLIENT_SECRET: ${{ secrets.BLOG_GENERATE_SECRET }}
           BLOG_TOPIC: ${{ github.event.client_payload.topic }}
           BLOG_KEYWORDS: ${{ github.event.client_payload.keywords }}
           GITHUB_RUN_ID: ${{ github.run_id }}
