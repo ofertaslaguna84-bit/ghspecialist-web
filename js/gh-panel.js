@@ -206,10 +206,6 @@
     return (C.githubRepo || 'ghspecialist-web').trim();
   }
 
-  function apiBase() {
-    return ((C.blogApiBase || 'https://adestajo.com.mx') + '').replace(/\/$/, '');
-  }
-
   function getGithubToken() {
     try {
       var t = sessionStorage.getItem(GH_TOKEN_KEY) || '';
@@ -246,7 +242,15 @@
   function initGithubTokenUi() {
     var saveBtn = $('btn-save-github-token');
     var input = $('blog-github-token');
-    if (getGithubToken()) markGithubTokenSaved();
+    if (getGithubToken()) {
+      markGithubTokenSaved();
+    } else {
+      showGithubTokenBox(true);
+      setBlogStatus(
+        'info',
+        '<strong>Token GitHub requerido.</strong> Pégalo abajo para generar o borrar artículos en el blog de GH Specialist.'
+      );
+    }
     if (saveBtn && input) {
       saveBtn.addEventListener('click', function () {
         var t = (input.value || '').trim();
@@ -257,43 +261,6 @@
         setBlogStatus('ok', '<strong>Token GitHub guardado.</strong> Ya puedes generar o borrar artículos.');
       });
     }
-    checkAdestajoHealth();
-  }
-
-  function checkAdestajoHealth() {
-    return fetch(apiBase() + '/api/ghspecialist/blog-list?secret=' + encodeURIComponent(PASS))
-      .then(function (r) {
-        if (r.ok) {
-          showGithubTokenBox(false);
-          return true;
-        }
-        showGithubTokenBox(true);
-        if (r.status === 401) {
-          setBlogStatus(
-            'warn',
-            '<strong>Clave del panel desincronizada con Adestajo.</strong> La API responde pero rechaza la clave. ' +
-              'Actualiza <span class="mono">GHSPECIALIST_BLOG_SECRET</span> en Vercel a la misma que ' +
-              '<span class="mono">panelPassword</span> en <span class="mono">js/gh-site-config.js</span>, ' +
-              'o pega un token GitHub abajo como respaldo.'
-          );
-        } else if (r.status >= 500) {
-          setBlogStatus(
-            'warn',
-            '<strong>Adestajo respondió con error ' +
-              r.status +
-              '.</strong> Pega un token GitHub abajo para generar o borrar mientras se corrige el servidor.'
-          );
-        }
-        return false;
-      })
-      .catch(function () {
-        showGithubTokenBox(true);
-        setBlogStatus(
-          'warn',
-          '<strong>No se pudo contactar Adestajo</strong> (red o Vercel caído). Pega un token GitHub abajo para usar el respaldo directo.'
-        );
-        return false;
-      });
   }
 
   function parseBlogIndexHtml(html) {
@@ -352,7 +319,7 @@
     var token = getGithubToken();
     if (!token) {
       showGithubTokenBox(true);
-      return Promise.reject(new Error('Falta token GitHub. Pégalo arriba (Adestajo no responde).'));
+      return Promise.reject(new Error('Falta token GitHub. Pégalo arriba para generar o borrar artículos.'));
     }
     return fetch(
       'https://api.github.com/repos/' + ghOwner() + '/' + ghRepo() + '/dispatches',
@@ -483,88 +450,22 @@
 
   function triggerBlogGenerate(topic, keywords) {
     var payload = { secret: PASS, topic: topic, keywords: keywords };
-    return fetch(apiBase() + '/api/ghspecialist/blog-trigger', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    })
-      .then(function (r) {
-        return r.json().then(function (data) {
-          if (!r.ok || !data.ok) throw new Error((data && data.error) || 'Adestajo no respondió');
-          return { startedAt: data.startedAt || Date.now(), via: 'adestajo' };
-        });
-      })
-      .catch(function () {
-        return dispatchGithub('blog_generate', payload).then(function (startedAt) {
-          return { startedAt: startedAt, via: 'github' };
-        });
-      });
+    return dispatchGithub('blog_generate', payload).then(function (startedAt) {
+      return { startedAt: startedAt, via: 'github' };
+    });
   }
 
   function triggerBlogDelete(slug) {
     var payload = { secret: PASS, slug: slug };
-    return fetch(apiBase() + '/api/ghspecialist/blog-delete', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    })
-      .then(function (r) {
-        return r.json().then(function (data) {
-          if (!r.ok || !data.ok) throw new Error((data && data.error) || 'Adestajo no respondió');
-          return { startedAt: data.startedAt || Date.now(), via: 'adestajo' };
-        });
-      })
-      .catch(function () {
-        return dispatchGithub('blog_delete', payload).then(function (startedAt) {
-          return { startedAt: startedAt, via: 'github' };
-        });
-      });
+    return dispatchGithub('blog_delete', payload).then(function (startedAt) {
+      return { startedAt: startedAt, via: 'github' };
+    });
   }
 
-  function waitBlogJob(startedAt, mode, slug, via) {
-    if (via === 'github') {
-      var wf =
-        mode === 'delete' ? 'blog-delete.yml' : mode === 'save' ? 'blog-save.yml' : 'blog-generate.yml';
-      return pollGithubWorkflow(wf, startedAt, mode, slug);
-    }
-    return pollBlogStatusAdestajo(startedAt, mode, slug);
-  }
-
-  function pollBlogStatusAdestajo(startedAt, mode, slug) {
-    var deadline = Date.now() + 8 * 60 * 1000;
-    var base = apiBase();
-    var url =
-      base +
-      '/api/ghspecialist/blog-status?secret=' +
-      encodeURIComponent(PASS) +
-      '&startedAt=' +
-      encodeURIComponent(String(startedAt)) +
-      '&mode=' +
-      encodeURIComponent(mode);
-    if (slug) url += '&slug=' + encodeURIComponent(slug);
-
-    function tick() {
-      if (Date.now() > deadline) return Promise.reject(new Error('timeout'));
-      return fetch(url)
-        .then(function (r) {
-          return r.json().then(function (data) {
-            if (!r.ok) throw new Error((data && data.error) || 'Error de servidor');
-            return data;
-          });
-        })
-        .then(function (data) {
-          if (data.status === 'done' && data.article) return { type: 'article', data: data.article };
-          if (data.status === 'done' && data.deleted) return { type: 'deleted', data: data.deleted };
-          if (data.status === 'error') throw new Error(data.error || 'Error en el workflow');
-          var msg =
-            mode === 'delete'
-              ? '<strong>Eliminando artículo…</strong> Borrando archivo y actualizando blog (1–2 min).'
-              : '<strong>Generando artículo…</strong> DeepSeek/Qwen escribiendo y publicando (2–4 min).';
-          setBlogStatus('info', msg);
-          return sleep(12000).then(tick);
-        });
-    }
-    return tick();
+  function waitBlogJob(startedAt, mode, slug) {
+    var wf =
+      mode === 'delete' ? 'blog-delete.yml' : mode === 'save' ? 'blog-save.yml' : 'blog-generate.yml';
+    return pollGithubWorkflow(wf, startedAt, mode, slug);
   }
 
   function renderBlogList(articles) {
@@ -698,7 +599,7 @@
       cardExcerpt: cardExcerpt.trim(),
     })
       .then(function (job) {
-        return waitBlogJob(job.startedAt, 'save', slug, job.via);
+        return waitBlogJob(job.startedAt, 'save', slug);
       })
       .then(function (result) {
         setBlogStatus(
@@ -779,7 +680,7 @@
 
     triggerBlogDelete(slug)
       .then(function (job) {
-        return waitBlogJob(job.startedAt, 'delete', slug, job.via);
+        return waitBlogJob(job.startedAt, 'delete', slug);
       })
       .then(function (result) {
         setBlogStatus(
@@ -912,7 +813,7 @@
 
       triggerBlogGenerate(topic, '')
         .then(function (job) {
-          return waitBlogJob(job.startedAt, 'generate', '', job.via);
+          return waitBlogJob(job.startedAt, 'generate', '');
         })
         .then(function (result) {
           var article = result.data;

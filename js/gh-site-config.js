@@ -32,8 +32,9 @@
  * formspreeSubmissionsUrl → (opcional) URL exacta de la pestaña Submissions de tu formulario en Formspree.
  *   Si lo dejas vacío, el panel usa https://formspree.io/forms/TU_ID (mismo ID que /f/...).
  *
- * === E) Blog one-click (como Adestajo) ===
- * blogApiBase → Adestajo dispara Claude + GitHub Actions en servidor (no necesitas token GitHub en el panel).
+ * === E) Blog con IA (panel) ===
+ * Generar/borrar artículos dispara GitHub Actions en el repo ghspecialist-web.
+ * Pega un token GitHub (scopes repo + workflow) en el panel; se guarda solo en el navegador.
  *
  * Tras editar: git add js/gh-site-config.js && git commit -m "chore: config" && git push origin main
  */
@@ -47,8 +48,6 @@ window.GH_SITE_CONFIG = {
   leadsSheetEmbedUrl: '',
   githubOwner: 'ofertaslaguna84-bit',
   githubRepo: 'ghspecialist-web',
-  /** API en Adestajo (servidor) — el panel no necesita token GitHub en el navegador */
-  blogApiBase: 'https://adestajo.com.mx',
   /** Citas / diagnóstico — Google Calendar (reemplaza Calendly en todo el sitio) */
   googleCalendarUrl: 'https://calendar.app.google/rz32YjLinKvYWUTT9',
   /** Redes — enlazar IG ↔ TikTok en bio y en el sitio */
