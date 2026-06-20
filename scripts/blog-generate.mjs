@@ -124,7 +124,7 @@ function pickImageForTopic(pool, topic, keywords) {
 }
 
 async function generateHeroWithGemini(topic, slug, apiKey) {
-  const models = ['gemini-2.5-flash-image', 'gemini-2.0-flash-exp-image-generation'];
+  const models = ['gemini-2.5-flash-image'];
   const prompts = [
     `Ultra-premium editorial hero photograph for a B2B technology blog in Mexico (${BLOG_YEAR}). Topic: ${topic}.
 Cinematic 16:9 wide shot, magazine cover quality, photorealistic, sharp focus, professional studio lighting, subtle purple accent glow (#7C4DFF).
@@ -297,7 +297,7 @@ async function callQwen(prompt, apiKey) {
   throw lastErr || new Error('Qwen falló');
 }
 
-async function callGemini(prompt, apiKey, model = 'gemini-2.0-flash') {
+async function callGemini(prompt, apiKey, model = 'gemini-2.5-flash') {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
   const res = await fetch(url, {
     method: 'POST',
@@ -344,7 +344,25 @@ async function generateArticleContent(prompt) {
   const gemini = process.env.GEMINI_API_KEY?.trim();
   const openai = process.env.OPENAI_API_KEY?.trim();
 
-  const geminiModels = ['gemini-2.0-flash', 'gemini-2.0-flash-lite', 'gemini-1.5-flash'];
+  if (deepseek) {
+    try {
+      console.log('→ DeepSeek…');
+      return await callDeepSeek(prompt, deepseek);
+    } catch (e) {
+      errors.push(e.message || String(e));
+    }
+  }
+
+  if (qwen) {
+    try {
+      console.log('→ Qwen…');
+      return await callQwen(prompt, qwen);
+    } catch (e) {
+      errors.push(e.message || String(e));
+    }
+  }
+
+  const geminiModels = ['gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-3.5-flash'];
   if (gemini) {
     for (const model of geminiModels) {
       try {
@@ -360,24 +378,6 @@ async function generateArticleContent(prompt) {
     try {
       console.log('→ OpenAI…');
       return await callOpenAI(prompt, openai);
-    } catch (e) {
-      errors.push(e.message || String(e));
-    }
-  }
-
-  if (deepseek) {
-    try {
-      console.log('→ DeepSeek…');
-      return await callDeepSeek(prompt, deepseek);
-    } catch (e) {
-      errors.push(e.message || String(e));
-    }
-  }
-
-  if (qwen) {
-    try {
-      console.log('→ Qwen…');
-      return await callQwen(prompt, qwen);
     } catch (e) {
       errors.push(e.message || String(e));
     }
