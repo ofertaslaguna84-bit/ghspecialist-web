@@ -467,87 +467,113 @@
 
   function triggerBlogGenerate(topic, keywords) {
     var payload = { secret: PASS, topic: topic, keywords: keywords };
-    return fetch(apiBase() + '/api/ghspecialist/blog-trigger', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    })
-      .then(function (r) {
+    var viaGithub = function () {
+      return dispatchGithub('blog_generate', payload).then(function (startedAt) {
+        return { startedAt: startedAt, via: 'github' };
+      });
+    };
+    var viaApi = function () {
+      return fetch(apiBase() + '/api/ghspecialist/blog-trigger', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }).then(function (r) {
         return r.json().then(function (data) {
           if (!r.ok || !data.ok) throw new Error((data && data.error) || 'Servidor no respondió');
           return { startedAt: data.startedAt || Date.now(), via: 'api' };
         });
-      })
-      .catch(function () {
-        return dispatchGithub('blog_generate', payload).then(function (startedAt) {
-          return { startedAt: startedAt, via: 'github' };
-        });
       });
+    };
+    if (getGithubToken()) return viaGithub().catch(viaApi);
+    return viaApi().catch(viaGithub);
   }
 
   function triggerBlogDelete(slug) {
     var payload = { secret: PASS, slug: slug };
-    return fetch(apiBase() + '/api/ghspecialist/blog-delete', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    })
-      .then(function (r) {
+    var viaGithub = function () {
+      return dispatchGithub('blog_delete', payload).then(function (startedAt) {
+        return { startedAt: startedAt, via: 'github' };
+      });
+    };
+    var viaApi = function () {
+      return fetch(apiBase() + '/api/ghspecialist/blog-delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }).then(function (r) {
         return r.json().then(function (data) {
           if (!r.ok || !data.ok) throw new Error((data && data.error) || 'Servidor no respondió');
           return { startedAt: data.startedAt || Date.now(), via: 'api' };
         });
-      })
-      .catch(function () {
-        return dispatchGithub('blog_delete', payload).then(function (startedAt) {
-          return { startedAt: startedAt, via: 'github' };
-        });
       });
+    };
+    if (getGithubToken()) return viaGithub().catch(viaApi);
+    return viaApi().catch(viaGithub);
   }
 
-  function waitBlogJob(startedAt, mode, slug, via) {
-    if (via === 'github') {
-      var wf =
-        mode === 'delete' ? 'blog-delete.yml' : mode === 'save' ? 'blog-save.yml' : 'blog-generate.yml';
-      return pollGithubWorkflow(wf, startedAt, mode, slug);
-    }
-    return pollBlogStatusApi(startedAt, mode, slug);
+  function blogResultFile(mode) {
+    return mode === 'delete'
+      ? 'blog-delete-result.json'
+      : mode === 'save'
+        ? 'blog-save-result.json'
+        : 'blog-generate-result.json';
   }
 
-  function pollBlogStatusApi(startedAt, mode, slug) {
+  function fetchResultRunId(mode) {
+    return fetchRawJson(blogResultFile(mode)).then(function (result) {
+      return result && result.runId ? String(result.runId) : '';
+    });
+  }
+
+  function pollBlogResultFile(startedAt, mode, slug, beforeRunId) {
     var deadline = Date.now() + 8 * 60 * 1000;
-    var url =
-      apiBase() +
-      '/api/ghspecialist/blog-status?secret=' +
-      encodeURIComponent(PASS) +
-      '&startedAt=' +
-      encodeURIComponent(String(startedAt)) +
-      '&mode=' +
-      encodeURIComponent(mode);
-    if (slug) url += '&slug=' + encodeURIComponent(slug);
+    var resultFile = blogResultFile(mode);
 
     function tick() {
       if (Date.now() > deadline) return Promise.reject(new Error('timeout'));
-      return fetch(url)
-        .then(function (r) {
-          return r.json().then(function (data) {
-            if (!r.ok) throw new Error((data && data.error) || 'Error de servidor');
-            return data;
-          });
-        })
-        .then(function (data) {
-          if (data.status === 'done' && data.article) return { type: 'article', data: data.article };
-          if (data.status === 'done' && data.deleted) return { type: 'deleted', data: data.deleted };
-          if (data.status === 'error') throw new Error(data.error || 'Error en el workflow');
+      return fetchRawJson(resultFile).then(function (result) {
+        var runId = result && result.runId ? String(result.runId) : '';
+        var isNew = runId && runId !== beforeRunId;
+
+        if (!isNew) {
           var msg =
             mode === 'delete'
               ? '<strong>Eliminando artículo…</strong> (1–2 min)'
-              : '<strong>Generando artículo…</strong> (2–4 min)';
+              : mode === 'save'
+                ? '<strong>Guardando cambios…</strong> (1–2 min)'
+                : '<strong>Generando artículo…</strong> (2–4 min)';
           setBlogStatus('info', msg);
           return sleep(12000).then(tick);
-        });
+        }
+
+        if (mode === 'delete') {
+          if (result.ok && result.deleted && result.slug) {
+            if (slug && result.slug !== slug) return sleep(8000).then(tick);
+            return { type: 'deleted', data: result };
+          }
+        } else if (mode === 'save') {
+          if (result.ok && result.saved && result.slug) {
+            if (slug && result.slug !== slug) return sleep(8000).then(tick);
+            return { type: 'saved', data: result };
+          }
+        } else if (result.ok && result.url) {
+          return { type: 'article', data: result };
+        }
+
+        if (result && result.error) {
+          var errMsg = result.error;
+          if (result.runUrl) errMsg += ' — ' + result.runUrl;
+          throw new Error(errMsg);
+        }
+
+        return sleep(8000).then(tick);
+      });
     }
     return tick();
+  }
+
+  function waitBlogJob(startedAt, mode, slug, via, beforeRunId) {
+    return pollBlogResultFile(startedAt, mode, slug, beforeRunId);
   }
 
   function renderBlogList(articles) {
@@ -673,15 +699,17 @@
     closeBlogEdit();
     setBlogStatus('info', '<strong>Guardando cambios…</strong> ' + slug);
 
-    triggerBlogSave({
-      slug: slug,
-      title: title.trim(),
-      description: description.trim(),
-      bodyHtml: bodyHtml.trim(),
-      cardExcerpt: cardExcerpt.trim(),
-    })
-      .then(function (job) {
-        return waitBlogJob(job.startedAt, 'save', slug, job.via);
+    fetchResultRunId('save')
+      .then(function (beforeRunId) {
+        return triggerBlogSave({
+          slug: slug,
+          title: title.trim(),
+          description: description.trim(),
+          bodyHtml: bodyHtml.trim(),
+          cardExcerpt: cardExcerpt.trim(),
+        }).then(function (job) {
+          return waitBlogJob(job.startedAt, 'save', slug, job.via, beforeRunId);
+        });
       })
       .then(function (result) {
         setBlogStatus(
@@ -760,9 +788,11 @@
     hideBlogStatus();
     setBlogStatus('info', '<strong>Eliminando…</strong> ' + slug);
 
-    triggerBlogDelete(slug)
-      .then(function (job) {
-        return waitBlogJob(job.startedAt, 'delete', slug, job.via);
+    fetchResultRunId('delete')
+      .then(function (beforeRunId) {
+        return triggerBlogDelete(slug).then(function (job) {
+          return waitBlogJob(job.startedAt, 'delete', slug, job.via, beforeRunId);
+        });
       })
       .then(function (result) {
         setBlogStatus(
@@ -893,9 +923,11 @@
         '<strong>Iniciando…</strong> IA + publicación automática en ghspecialist.com'
       );
 
-      triggerBlogGenerate(topic, '')
-        .then(function (job) {
-          return waitBlogJob(job.startedAt, 'generate', '', job.via);
+      fetchResultRunId('generate')
+        .then(function (beforeRunId) {
+          return triggerBlogGenerate(topic, '').then(function (job) {
+            return waitBlogJob(job.startedAt, 'generate', '', job.via, beforeRunId);
+          });
         })
         .then(function (result) {
           var article = result.data;

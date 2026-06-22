@@ -33,8 +33,9 @@
  *   Si lo dejas vacío, el panel usa https://formspree.io/forms/TU_ID (mismo ID que /f/...).
  *
  * === E) Blog con IA (panel) ===
- * blogApiBase → servidor que dispara GitHub Actions (no necesitas token GitHub en el panel).
- * Si el servidor no responde, el panel acepta token GitHub como respaldo (solo en el navegador).
+ * blogApiBase → (opcional) proxy para disparar GitHub Actions si no tienes token en el panel.
+ * El estado del workflow se lee directo de ghspecialist-web (blog-generate-result.json).
+ * Respaldo: token GitHub con repo + workflow en ghspecialist-web.
  *
  * Tras editar: git add js/gh-site-config.js && git commit -m "chore: config" && git push origin main
  */
