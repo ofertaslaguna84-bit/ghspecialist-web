@@ -201,6 +201,13 @@ function slugify(s) {
     .slice(0, 80);
 }
 
+function repairJsonText(text) {
+  return text
+    .replace(/[\u201c\u201d]/g, '"')
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/,\s*([}\]])/g, '$1');
+}
+
 function extractJsonObject(text) {
   const start = text.indexOf('{');
   if (start === -1) throw new Error('No JSON en respuesta IA');
@@ -218,11 +225,26 @@ function extractJsonObject(text) {
       else if (c === '{') depth++;
       else if (c === '}') {
         depth--;
-        if (depth === 0) return JSON.parse(text.slice(start, i + 1));
+        if (depth === 0) {
+          const slice = text.slice(start, i + 1);
+          try {
+            return JSON.parse(slice);
+          } catch (e) {
+            return JSON.parse(repairJsonText(slice));
+          }
+        }
       }
     }
   }
   throw new Error('JSON incompleto en respuesta IA');
+}
+
+function parseArticleResponse(raw) {
+  const cleaned = String(raw || '')
+    .replace(/```json\s*/gi, '')
+    .replace(/```/g, '')
+    .trim();
+  return extractJsonObject(cleaned);
 }
 
 async function listExistingArticles() {
@@ -248,25 +270,37 @@ async function fetchExistingHaystack(files) {
 
 async function callChatCompletions(baseUrl, apiKey, model, prompt, label) {
   const url = baseUrl.replace(/\/$/, '') + '/chat/completions';
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model,
-      messages: [{ role: 'user', content: prompt }],
-      max_tokens: 8192,
-      temperature: 0.7,
-    }),
-  });
-  const raw = await res.text();
-  if (!res.ok) throw new Error(`${label} ${res.status}: ${raw.slice(0, 300)}`);
-  const data = JSON.parse(raw);
-  const text = data.choices?.[0]?.message?.content;
-  if (!text) throw new Error(`${label} sin contenido`);
-  return text;
+  const baseBody = {
+    model,
+    messages: [{ role: 'user', content: prompt }],
+    max_tokens: 8192,
+    temperature: 0.7,
+  };
+  let lastErr;
+  for (const jsonMode of [true, false]) {
+    const body = jsonMode ? { ...baseBody, response_format: { type: 'json_object' } } : baseBody;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+    const raw = await res.text();
+    if (!res.ok) {
+      if (jsonMode && (raw.includes('response_format') || res.status === 400)) {
+        lastErr = new Error(`${label} ${res.status}: ${raw.slice(0, 300)}`);
+        continue;
+      }
+      throw new Error(`${label} ${res.status}: ${raw.slice(0, 300)}`);
+    }
+    const data = JSON.parse(raw);
+    const text = data.choices?.[0]?.message?.content;
+    if (!text) throw new Error(`${label} sin contenido`);
+    return text;
+  }
+  throw lastErr || new Error(`${label} falló`);
 }
 
 async function callDeepSeek(prompt, apiKey) {
@@ -304,7 +338,11 @@ async function callGemini(prompt, apiKey, model = 'gemini-2.5-flash') {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: { maxOutputTokens: 8192, temperature: 0.7 },
+      generationConfig: {
+        maxOutputTokens: 8192,
+        temperature: 0.7,
+        responseMimeType: 'application/json',
+      },
     }),
   });
   const raw = await res.text();
@@ -327,6 +365,7 @@ async function callOpenAI(prompt, apiKey) {
       messages: [{ role: 'user', content: prompt }],
       max_tokens: 8192,
       temperature: 0.7,
+      response_format: { type: 'json_object' },
     }),
   });
   const raw = await res.text();
@@ -450,9 +489,10 @@ REGLAS SEO:
 - Primer párrafo: mencionar actualización ${freshness.label}
 - PROHIBIDO la palabra "leads" (usa contactos, interesados, prospectos)
 - PROHIBIDO jerga inventada (B2B leads, funnel anglicismos) salvo WhatsApp/CRM reales
+- JSON válido RFC8259: en content_html usa comillas SIMPLES en atributos HTML (class='x'); escapa " como \\"
 ${comparativeNote}
 
-Responde SOLO JSON:
+Responde SOLO JSON (sin markdown, sin texto fuera del objeto):
 {
   "title": "...",
   "slug": "palabras-clave-frase-${freshness.slugSuffix}",
@@ -700,8 +740,24 @@ async function main() {
     message: plan.message,
   };
 
-  const raw = await generateArticleContent(buildPrompt(plan, freshness, existing));
-  const parsed = extractJsonObject(raw.replace(/```json\s*/gi, '').replace(/```/g, ''));
+  const basePrompt = buildPrompt(plan, freshness, existing);
+  let parsed;
+  let lastParseErr;
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    const retryNote =
+      attempt > 1
+        ? '\n\nREINTENTO: el JSON anterior fue inválido. Devuelve un único objeto JSON parseable; content_html con comillas simples en HTML.'
+        : '';
+    const raw = await generateArticleContent(basePrompt + retryNote);
+    try {
+      parsed = parseArticleResponse(raw);
+      break;
+    } catch (e) {
+      lastParseErr = e;
+      console.warn(`JSON inválido (intento ${attempt}):`, e.message || e);
+    }
+  }
+  if (!parsed) throw lastParseErr || new Error('JSON inválido en respuesta IA');
 
   if (!parsed.slug) parsed.slug = slugify(plan.userTopic);
   parsed.slug = slugify(parsed.slug.replace(/\.html$/, ''));
