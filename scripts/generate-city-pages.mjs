@@ -4,12 +4,18 @@
  * Ejecutar: node scripts/generate-city-pages.mjs
  */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const SITE = 'https://ghspecialist.com';
 const CALENDAR = 'https://calendar.app.google/rz32YjLinKvYWUTT9';
+
+/** @type {{ groups: Array<{ label: string, phrases: string[] }> }} */
+const SEARCH_INTENTS = JSON.parse(
+  readFileSync(join(ROOT, 'data/ai-search-intents.json'), 'utf8')
+);
 
 const SERVICES = [
   { slug: 'chatbot-ia-whatsapp.html', title: 'Chatbot IA WhatsApp', desc: 'Atención y ventas 24/7 por WhatsApp.' },
@@ -29,6 +35,45 @@ function esc(s) {
 
 function waText(city) {
   return encodeURIComponent(`Hola Pedro, quiero automatizar mi negocio con IA en ${city.name}`);
+}
+
+function metaKeywordsForCity(city) {
+  const base = [
+    `automatizacion ia ${city.name}`,
+    `chatbot whatsapp ${city.name}`,
+    `agente inteligencia artificial ${city.name}`,
+    `ia para empresas ${city.state}`,
+    'automatizar whatsapp con ia',
+    'chatbot whatsapp con ia',
+    'mejor ia para empresas',
+    'chatgpt para negocios',
+  ];
+  for (const g of SEARCH_INTENTS.groups) {
+    for (const p of g.phrases.slice(0, 2)) base.push(`${p} ${city.name.toLowerCase()}`);
+  }
+  return [...new Set(base)].slice(0, 24).join(', ');
+}
+
+function buildSearchIntentsHtml(city) {
+  const cityLow = city.name.toLowerCase();
+  return SEARCH_INTENTS.groups
+    .map((g) => {
+      const items = g.phrases
+        .slice(0, 4)
+        .map((p) => `<li>${esc(p)} en ${esc(city.name)}</li>`)
+        .join('\n          ');
+      return `<div class="search-block"><h3>${esc(g.label)}</h3><ul>${items}</ul></div>`;
+    })
+    .join('\n        ');
+}
+
+function hubSearchIntentsHtml() {
+  return SEARCH_INTENTS.groups
+    .map((g) => {
+      const items = g.phrases.map((p) => `<li>${esc(p)}</li>`).join('\n          ');
+      return `<div class="search-block"><h3>${esc(g.label)}</h3><ul>${items}</ul></div>`;
+    })
+    .join('\n      ');
 }
 
 function buildCityPage(city, allCities) {
@@ -152,7 +197,7 @@ function buildCityPage(city, allCities) {
   <link rel="icon" href="../../favicon.png" type="image/png">
   <title>${esc(title)}</title>
   <meta name="description" content="${esc(description)}">
-  <meta name="keywords" content="automatización IA ${esc(city.name)}, chatbot WhatsApp ${esc(city.name)}, inteligencia artificial ${esc(city.state)}, CRM Kommo ${esc(city.name)}, agentes IA México">
+  <meta name="keywords" content="${esc(metaKeywordsForCity(city))}">
   <link rel="canonical" href="${url}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${url}">
@@ -205,6 +250,10 @@ function buildCityPage(city, allCities) {
     .local-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
     .local-links a{display:inline-block;padding:8px 16px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--p);background:#fff}
     .local-links a:hover{background:var(--bg2)}
+    .search-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:24px}
+    .search-block ul{margin:10px 0 0 18px}
+    .search-block li{font-size:13px;color:var(--ink3);margin-bottom:6px;line-height:1.5}
+    .search-block h3{font-size:15px;font-weight:700;margin-bottom:4px}
     .cta{text-align:center;padding:64px 28px;background:linear-gradient(135deg,#7C4DFF,#5C35CC);color:#fff;border-radius:16px;margin:0 28px 80px;max-width:1024px;margin-left:auto;margin-right:auto}
     .cta h2{font-size:clamp(22px,3vw,32px);margin-bottom:12px}
     .cta p{opacity:.9;margin-bottom:24px}
@@ -259,6 +308,17 @@ function buildCityPage(city, allCities) {
       <h2 class="title">Qué implementamos en tu empresa</h2>
       <div class="grid">
         ${serviceCards}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-gray">
+    <div class="w">
+      <span class="label">Google México</span>
+      <h2 class="title">Lo que buscan sobre IA en ${esc(city.name)}</h2>
+      <p style="font-size:14px;color:var(--ink3);max-width:720px;margin-bottom:8px">Búsquedas reales en Google Suggest México — GH Specialist implementa chatbots, agentes IA y automatización para estas necesidades.</p>
+      <div class="search-grid">
+        ${buildSearchIntentsHtml(city)}
       </div>
     </div>
   </section>
@@ -341,7 +401,7 @@ function buildHubPage(cities) {
   <link rel="icon" href="../favicon.png" type="image/png">
   <title>Automatización con IA en México — Ciudades | GH Specialist</title>
   <meta name="description" content="Chatbots WhatsApp, CRM Kommo y agentes IA para empresas en Monterrey, CDMX, Guadalajara, Querétaro, Torreón y todo México. Cobertura nacional GH Specialist.">
-  <meta name="keywords" content="automatización IA México, chatbot WhatsApp Monterrey, IA CDMX, agentes IA Guadalajara, inteligencia artificial empresas México">
+  <meta name="keywords" content="automatizar whatsapp con ia, chatbot whatsapp con ia, agente de inteligencia artificial, mejor ia para empresas, chatgpt para negocios, claude vs chatgpt vs gemini, ia para pymes mexico, automatizacion con ia para empresas">
   <link rel="canonical" href="${url}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${url}">
@@ -375,6 +435,13 @@ function buildHubPage(cities) {
     .city-body{position:absolute;bottom:0;left:0;right:0;padding:16px;color:#fff}
     .city-body h2{font-size:18px;font-weight:800}
     .city-body p{font-size:12px;opacity:.85}
+    .search-wrap{max-width:1080px;margin:0 auto;padding:0 28px 48px}
+    .search-wrap h2{font-size:22px;font-weight:800;margin-bottom:8px;text-align:center}
+    .search-wrap>p{text-align:center;font-size:14px;color:var(--ink3);margin-bottom:24px}
+    .search-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+    .search-block ul{margin:8px 0 0 18px}
+    .search-block li{font-size:13px;color:var(--ink3);margin-bottom:5px}
+    .search-block h3{font-size:14px;font-weight:700}
     .footer{text-align:center;padding:32px;font-size:12px;color:#999;border-top:1px solid var(--border)}
     .footer a{color:var(--p);font-weight:600}
   </style>
@@ -396,6 +463,13 @@ function buildHubPage(cities) {
   <div class="grid">
       ${cards}
   </div>
+  <section class="search-wrap">
+    <h2>Lo que buscan en Google sobre IA (México)</h2>
+    <p>Búsquedas reales en Google Suggest — GH Specialist las resuelve con implementación, no solo tips.</p>
+    <div class="search-grid">
+      ${hubSearchIntentsHtml()}
+    </div>
+  </section>
   <footer class="footer">
     <p>© 2026 GH Specialist · <a href="../">Inicio</a> · <a href="../servicios/">Servicios</a> · <a href="../blog/">Blog</a></p>
   </footer>

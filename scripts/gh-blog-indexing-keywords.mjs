@@ -6,8 +6,11 @@ import { pickSeoKeywordsForArticle } from './gh-blog-keywords-pick.mjs';
 
 export const INDEXING_REGIONS = [
   { id: 'mexico', label: 'México (general)', suffix: 'mexico' },
-  { id: 'torreon', label: 'Torreón y La Laguna', suffix: 'torreon' },
+  { id: 'cdmx', label: 'CDMX', suffix: 'cdmx' },
   { id: 'monterrey', label: 'Monterrey', suffix: 'monterrey' },
+  { id: 'guadalajara', label: 'Guadalajara', suffix: 'guadalajara' },
+  { id: 'queretaro', label: 'Querétaro', suffix: 'queretaro' },
+  { id: 'torreon', label: 'Torreón y La Laguna', suffix: 'torreon' },
 ];
 
 function normalize(s) {

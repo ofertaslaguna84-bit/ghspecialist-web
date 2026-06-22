@@ -1,0 +1,72 @@
+{
+  "updated": "2026-06-22",
+  "source": "Google Suggest México (hl=es, gl=mx)",
+  "groups": [
+    {
+      "id": "agentes",
+      "label": "Agentes de IA",
+      "phrases": [
+        "agente de inteligencia artificial",
+        "agente de inteligencia artificial whatsapp",
+        "qué es un agente de ia",
+        "qué es un agente de ia y cómo funciona",
+        "mejor ia para empresas",
+        "mejores herramientas ia para empresas",
+        "cuánto cuesta inteligencia artificial",
+        "empresa de inteligencia artificial en méxico"
+      ]
+    },
+    {
+      "id": "whatsapp",
+      "label": "WhatsApp + IA",
+      "phrases": [
+        "automatizar whatsapp con ia",
+        "automatizar whatsapp business con ia",
+        "chatbot whatsapp con ia",
+        "bot whatsapp ia",
+        "crear chatbot para whatsapp",
+        "chatgpt whatsapp bot",
+        "ia para atención al cliente whatsapp",
+        "herramientas de ia para atención al cliente"
+      ]
+    },
+    {
+      "id": "comparativas",
+      "label": "Comparativas de IAs",
+      "phrases": [
+        "claude vs chatgpt vs gemini",
+        "claude vs chatgpt vs gemini vs copilot",
+        "claude vs chatgpt vs gemini vs grok",
+        "claude vs chatgpt cuál es mejor",
+        "chatgpt para negocios",
+        "gemini para empresas",
+        "copilot para empresas"
+      ]
+    },
+    {
+      "id": "automatizacion",
+      "label": "Automatización y ventas",
+      "phrases": [
+        "automatización con ia para empresas",
+        "automatización con ia para pymes",
+        "cómo implementar ia en mi empresa",
+        "cómo usar ia en mi negocio",
+        "automatizar ventas con ia",
+        "ventas con ia",
+        "aumentar ventas con ia",
+        "marketing con inteligencia artificial",
+        "marketing inmobiliario con inteligencia artificial"
+      ]
+    },
+    {
+      "id": "crm",
+      "label": "CRM + IA",
+      "phrases": [
+        "crm con ia para whatsapp",
+        "crm inmobiliario con ia",
+        "kommo crm opiniones",
+        "kommo crm planes"
+      ]
+    }
+  ]
+}
