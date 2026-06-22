@@ -1,4 +1,4 @@
-name: Blog diario automático (9:00 CDMX)
+name: Blog diario automático — 2 posts (MX + USA)
 
 on:
   schedule:
@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Generar artículo (tema validado automático)
+      - name: Generar 2 artículos (México + EE.UU.)
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
@@ -37,14 +37,14 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           BLOG_GENERATE_SECRET: ${{ secrets.BLOG_GENERATE_SECRET }}
           CLIENT_SECRET: ${{ secrets.BLOG_GENERATE_SECRET }}
-        run: node scripts/blog-generate.mjs
+        run: node scripts/blog-generate-daily.mjs
 
       - name: Commit y push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add blog/ sitemap.xml blog/feed.xml blog-generate-result.json torreon/ llms.txt f7e2a9b1c4d6e8f1029384756acdef0123.txt robots.txt servicios/ index.html 2>/dev/null || true
-          git diff --staged --quiet && echo "Sin cambios en git" || (git commit -m "blog: artículo diario automático ($(date -u +%Y-%m-%d))" && git push)
+          git diff --staged --quiet && echo "Sin cambios en git" || (git commit -m "blog: 2 artículos diarios MX + USA ($(date -u +%Y-%m-%d))" && git push)
 
       - uses: actions/configure-pages@v5
 

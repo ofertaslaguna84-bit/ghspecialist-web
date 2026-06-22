@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
 import { pingSearchEngines } from './indexnow.mjs';
 import { isComparativeBrief } from './gh-blog-topic-resolve.mjs';
-import { prepareBlogGeneration, prepareBlogAuto } from './gh-blog-prepare.mjs';
+import { prepareBlogGeneration, prepareBlogAuto, parseBlogMarket } from './gh-blog-prepare.mjs';
 import {
   getBlogFreshness,
   applyFreshnessToArticle,
@@ -123,15 +123,19 @@ function pickImageForTopic(pool, topic, keywords) {
   return best;
 }
 
-async function generateHeroWithGemini(topic, slug, apiKey) {
+async function generateHeroWithGemini(topic, slug, apiKey, market = 'mx') {
   const models = ['gemini-2.5-flash-image'];
+  const geoContext =
+    market === 'usa'
+      ? 'Hispanic/Latino small business in the United States, bilingual professional setting, diverse Latin American entrepreneurs'
+      : 'Modern Latin American office in Mexico';
   const prompts = [
-    `Ultra-premium editorial hero photograph for a B2B technology blog in Mexico (${BLOG_YEAR}). Topic: ${topic}.
+    `Ultra-premium editorial hero photograph for a B2B technology blog (${BLOG_YEAR}). Topic: ${topic}.
 Cinematic 16:9 wide shot, magazine cover quality, photorealistic, sharp focus, professional studio lighting, subtle purple accent glow (#7C4DFF).
-Modern Latin American office, WhatsApp/AI/automation theme when relevant, depth of field, aspirational business mood.
+${geoContext}, WhatsApp/AI/automation theme when relevant, depth of field, aspirational business mood.
 NO text, NO logos, NO watermarks, NO readable UI. Looks like a top Getty Images stock photo.`,
     `Award-winning business photography for blog hero (${BLOG_YEAR}). ${topic}.
-High-end commercial photo, futuristic but believable, Mexican enterprise context, purple (#7C4DFF) highlights, clean composition, 16:9, photorealistic, no text or logos.`,
+High-end commercial photo, futuristic but believable, ${geoContext}, purple (#7C4DFF) highlights, clean composition, 16:9, photorealistic, no text or logos.`,
   ];
   const imgDir = join(ROOT, 'blog', 'img');
   await mkdir(imgDir, { recursive: true });
@@ -179,12 +183,12 @@ High-end commercial photo, futuristic but believable, Mexican enterprise context
   return null;
 }
 
-async function resolveHeroImage(topic, keywords, slug) {
+async function resolveHeroImage(topic, keywords, slug, market = 'mx') {
   const pool = await discoverImagePool();
   const geminiKey = process.env.GEMINI_API_KEY?.trim();
   const tryGemini = process.env.BLOG_GEMINI_IMAGES !== '0' && geminiKey;
   if (tryGemini) {
-    const generated = await generateHeroWithGemini(topic, slug, geminiKey);
+    const generated = await generateHeroWithGemini(topic, slug, geminiKey, market);
     if (generated) return generated;
     console.warn('⚠ Gemini no generó imagen; usando foto del sitio como fallback');
   }
@@ -431,7 +435,8 @@ async function generateArticleContent(prompt) {
 }
 
 function buildPrompt(plan, freshness, existingSlugs) {
-  const { topic, userTopic, seoKeywords, contentBrief } = plan;
+  const { topic, userTopic, seoKeywords, contentBrief, market = 'mx' } = plan;
+  const isUsa = market === 'usa';
   const articleTopic = userTopic || topic.phrase;
   const slugList = existingSlugs.map((s) => s.replace('.html', '')).join(', ');
   const expansionBlock = contentBrief
@@ -443,26 +448,48 @@ ${contentBrief}`
   const comparativeNote = isComparativeBrief(contentBrief)
     ? '\n- TABLA HTML comparativa breve (table, thead, tbody) con 3–4 filas; celdas cortas'
     : '';
+  const suggestLabel = isUsa ? 'Google Suggest USA (comunidad hispana, gl=us)' : 'Google Suggest México';
   const keywordBlock =
     seoKeywords?.length > 0
       ? `
 
-PALABRAS CLAVE DE BÚSQUEDA (Google Suggest México — integra entre 2 y 5 de forma natural en el artículo: en algún <h2>, párrafos y meta description; NO cambies el tema del artículo):
+PALABRAS CLAVE DE BÚSQUEDA (${suggestLabel} — integra entre 2 y 5 de forma natural en el artículo: en algún <h2>, párrafos y meta description; NO cambies el tema del artículo):
 ${seoKeywords.map((k) => `- ${k}`).join('\n')}`
       : '';
 
-  return `Eres redactor SEO senior para GH Specialist (automatización con IA, chatbots WhatsApp, CRM Kommo, México).
+  const geoBlock = isUsa
+    ? `Eres redactor SEO senior para GH Specialist (automatización con IA, chatbots WhatsApp, CRM Kommo).
+AUDIENCIA: empresarios y PYMES de la comunidad hispana/latina en ESTADOS UNIDOS (Texas, California, Florida, etc.).
+GH Specialist opera desde México e implementa 100% remoto en español para negocios latinos en USA.
+Menciona que atendemos EE.UU. de forma remota; si encaja, cita Houston, Los Ángeles, Miami o Dallas sin inventar datos locales.
+Tono: directo para dueño de negocio latino ocupado en USA (español claro, sin spanglish forzado).
+card_city_label en JSON: "EE.UU. · Comunidad hispana" (o ciudad USA concreta si el tema la incluye).`
+    : `Eres redactor SEO senior para GH Specialist (automatización con IA, chatbots WhatsApp, CRM Kommo, México).
+Tono directo para dueño de PYME ocupado en México.
+card_city_label en JSON: "México" (o ciudad mexicana si el tema la incluye).`;
+
+  const indexingBlock = plan.indexingKeywords?.regions?.length
+    ? isUsa
+      ? `
+
+INDEXACIÓN LOCAL USA (menciona al menos una vez que GH Specialist atiende negocios hispanos en EE.UU. de forma remota; enlaza ../ciudades/houston/ o ../ciudades/los-angeles/ si encaja):
+${plan.indexingKeywords.regions.map((r) => `- ${r.region}: ${r.keywords.join(', ')}`).join('\n')}`
+      : `
+
+INDEXACIÓN LOCAL (menciona al menos una vez en el artículo que GH Specialist atiende México; si encaja, una línea sobre Torreón/La Laguna o Monterrey sin inventar datos locales):
+${plan.indexingKeywords.regions.map((r) => `- ${r.region}: ${r.keywords.join(', ')}`).join('\n')}`
+    : '';
+
+  return `${geoBlock}
 
 Actualidad obligatoria: ${freshness.label} (zona horaria México). Prohibido años anteriores a ${freshness.year}.
 
 TEMA DEL ARTÍCULO (obligatorio — lo que pidió el usuario): "${articleTopic}"
+Mercado SEO: ${isUsa ? 'Estados Unidos · comunidad hispana' : 'México'}
 Categoría: ${topic.category}
 El título, slug, h1 y enfoque del contenido deben ser sobre ESE tema, no sobre otro del catálogo.
 ${keywordBlock}
-${plan.indexingKeywords?.regions?.length ? `
-
-INDEXACIÓN LOCAL (menciona al menos una vez en el artículo que GH Specialist atiende México; si encaja, una línea sobre Torreón/La Laguna o Monterrey sin inventar datos locales):
-${plan.indexingKeywords.regions.map((r) => `- ${r.region}: ${r.keywords.join(', ')}`).join('\n')}` : ''}
+${indexingBlock}
 
 Artículos ya publicados (enlaza 2-3 si encajan): ${slugList}
 
@@ -472,13 +499,13 @@ Servicios (enlaces relativos ../servicios/...):
 - automatizacion-total.html
 - web-seo-blog-ia.html
 - agentes-omnicanal.html
+${isUsa ? '- Enlaza ../ciudades/ (hub) o ../ciudades/houston/ ../ciudades/miami/ si encaja' : ''}
 
 REGLAS DE LONGITUD (CRÍTICO — el lector no lee paredes de texto):
 - Entre 700 y 1.000 palabras en content_html (NUNCA más de 1.000). Si te pasas, el sistema RECORTA el artículo y borra secciones del final.
 - Máximo 4 secciones <h2>; evita <h3> salvo que sea indispensable.
 - Párrafos cortos (2–3 líneas). Listas con máximo 5 viñetas.
 - Ve al grano: una idea por sección, sin relleno ni repetir lo mismo con otras palabras.
-- Tono directo para dueño de PYME ocupado en México.
 - read_time en JSON: entero 4, 5 o 6 (minutos de lectura), acorde a la longitud real.
 
 REGLAS SEO:
@@ -504,7 +531,7 @@ Responde SOLO JSON (sin markdown, sin texto fuera del objeto):
   "breadcrumb_title": "título corto",
   "read_time": 5,
   "card_excerpt": "...",
-  "card_city_label": "México",
+  "card_city_label": "${isUsa ? 'EE.UU. · Comunidad hispana' : 'México'}",
   "content_html": "<p>...</p>",
   "related": [{"slug": "otro.html", "title": "...", "desc": "..."}]
 }
@@ -520,7 +547,7 @@ function escapeHtml(s) {
     .replace(/"/g, '&quot;');
 }
 
-function buildArticleHtml(article, dateIso, hero) {
+function buildArticleHtml(article, dateIso, hero, market = 'mx') {
   const slug = article.slug.replace(/\.html$/, '');
   const relatedHtml = (article.related || [])
     .slice(0, 3)
@@ -535,6 +562,8 @@ function buildArticleHtml(article, dateIso, hero) {
     month: 'long',
     year: 'numeric',
   });
+
+  const defaultCity = market === 'usa' ? 'EE.UU. · Comunidad hispana' : 'México';
 
   return `<!DOCTYPE html>
 <html lang="es">
@@ -583,6 +612,7 @@ function buildArticleHtml(article, dateIso, hero) {
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="../js/gh-site-config.js"></script>
   <script src="../js/gh-analytics.js" async></script>
+  <script src="../js/gh-blog-locale.js" defer></script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     :root{--p:#7C4DFF;--ink:#111;--ink2:#444;--ink3:#888;--bg:#fff;--bg2:#F7F7F5;--border:#E8E8E8}
@@ -623,15 +653,17 @@ function buildArticleHtml(article, dateIso, hero) {
   <a href="index.html" class="back">← Volver al blog</a>
 </div>
 <nav class="bc" aria-label="Breadcrumb"><a href="../index.html">Inicio</a><span>›</span><a href="index.html">Blog</a><span>›</span>${escapeHtml(article.breadcrumb_title)}</nav>
-<article class="art">
+<article class="art" data-market="${market}">
   <div class="art-label">${escapeHtml(article.category_label)}</div>
   <h1>${escapeHtml(article.title)}</h1>
   <div class="art-meta">Por <strong>Pedro Luis Díaz Velázquez</strong> · GH Specialist · ${dateDisplay} · ${article.read_time || 5} min lectura</div>
   <figure class="art-hero">
     <img src="${hero.articleImg}" alt="${escapeHtml(article.title)}" width="1200" height="630" loading="eager">
-    <figcaption>${hero.generated ? 'Imagen hero IA · GH Specialist · ' + BLOG_YEAR : escapeHtml(article.card_city_label || hero.city || 'México')}</figcaption>
+    <figcaption>${hero.generated ? 'Imagen hero IA · GH Specialist · ' + BLOG_YEAR : escapeHtml(article.card_city_label || hero.city || defaultCity)}</figcaption>
   </figure>
+  <div class="gh-article-body">
   ${article.content_html}
+  </div>
   <div class="cta-art">
     <h3>¿Quieres automatizar tu negocio con IA?</h3>
     <p>Diagnóstico gratuito de 30 minutos. Te decimos qué implementar primero.</p>
@@ -709,16 +741,19 @@ async function main() {
   const userTopic = (process.env.BLOG_TOPIC || '').trim();
   const userKeywords = (process.env.BLOG_KEYWORDS || '').trim();
   const userInput = [userTopic, userKeywords].filter(Boolean).join(' ').trim();
+  const market = parseBlogMarket(process.env.BLOG_MARKET);
 
   const existing = await listExistingArticles();
   const haystack = await fetchExistingHaystack(existing);
   const freshness = getBlogFreshness();
 
+  console.log(`→ Mercado blog: ${market === 'usa' ? 'EE.UU. (comunidad hispana)' : 'México'}`);
+
   /** @type {import('./gh-blog-prepare.mjs').prepareBlogGeneration extends (...args: any) => Promise<infer R> ? R : never} */
   let plan;
 
   if (userInput) {
-    plan = await prepareBlogGeneration(userInput);
+    plan = await prepareBlogGeneration(userInput, market);
     console.log(`→ Tema usuario: «${plan.userTopic}»`);
     console.log(`→ Keywords SEO: ${plan.seoKeywords.join(' | ')}`);
     if (plan.indexingKeywords?.regions) {
@@ -727,7 +762,7 @@ async function main() {
       }
     }
   } else {
-    plan = prepareBlogAuto(haystack);
+    plan = prepareBlogAuto(haystack, market);
     console.log(`→ Tema automático: «${plan.userTopic}»`);
   }
 
@@ -809,10 +844,10 @@ async function main() {
     parsed.slug = candidate;
   }
 
-  const hero = await resolveHeroImage(plan.userTopic, '', parsed.slug);
+  const hero = await resolveHeroImage(plan.userTopic, '', parsed.slug, market);
   const dateIso = new Date().toISOString().slice(0, 10);
 
-  const html = buildArticleHtml(parsed, dateIso, hero);
+  const html = buildArticleHtml(parsed, dateIso, hero, market);
   await writeFile(join(ROOT, 'blog', parsed.slug), html, 'utf8');
   await insertCardInIndex(buildCard(parsed, dateIso, hero));
 
@@ -827,6 +862,7 @@ async function main() {
       ok: true,
       title: parsed.title,
       slug: parsed.slug,
+      market,
       url: `${SITE}/blog/${parsed.slug}`,
       resolved: resolveMeta,
       seoKeywords: plan.seoKeywords,

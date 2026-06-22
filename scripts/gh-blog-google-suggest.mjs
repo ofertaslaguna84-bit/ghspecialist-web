@@ -18,17 +18,28 @@ export function isGhBlogUserIntent(input) {
   return NICHE.test(n);
 }
 
-/** @param {string} q */
-export async function fetchGoogleSuggestMx(q) {
+/** @param {string} q @param {'mx'|'usa'} [market] */
+export async function fetchGoogleSuggest(q, market = 'mx') {
   const query = String(q || '').trim();
   if (!query) return [];
+  const gl = market === 'usa' ? 'us' : 'mx';
   const url =
     'https://suggestqueries.google.com/complete/search?' +
-    new URLSearchParams({ client: 'firefox', q: query, hl: 'es', gl: 'mx' });
+    new URLSearchParams({ client: 'firefox', q: query, hl: 'es', gl });
   const res = await fetch(url);
   const text = Buffer.from(await res.arrayBuffer()).toString('latin1');
   const data = JSON.parse(text);
   return (data[1] || []).map((s) => String(s).toLowerCase().trim()).filter(Boolean);
+}
+
+/** @param {string} q */
+export async function fetchGoogleSuggestMx(q) {
+  return fetchGoogleSuggest(q, 'mx');
+}
+
+/** @param {string} q */
+export async function fetchGoogleSuggestUs(q) {
+  return fetchGoogleSuggest(q, 'usa');
 }
 
 /** @param {string} phrase */
@@ -89,6 +100,9 @@ export function pickBestSuggestPhrase(userInput, suggestions) {
     if (/\bmexico\b|\btorreon\b|\bmonterrey\b|\bcdmx\b|\bnegocio\b|\bempresa\b|\bpyme/.test(phrase)) {
       score += 2;
     }
+    if (/\busa\b|\bestados unidos\b|\bhouston\b|\bmiami\b|\btexas\b|\bcalifornia\b|\blatino\b|\bhispan/.test(phrase)) {
+      score += 2;
+    }
     if (score > bestScore) {
       bestScore = score;
       best = phrase;
@@ -103,15 +117,15 @@ export function pickBestSuggestPhrase(userInput, suggestions) {
   return '';
 }
 
-/** @param {string} userInput */
-export async function suggestPhrasesForUserInput(userInput) {
+/** @param {string} userInput @param {'mx'|'usa'} [market] */
+export async function suggestPhrasesForUserInput(userInput, market = 'mx') {
   const trimmed = userInput.trim();
   if (!trimmed) return [];
-  const primary = await fetchGoogleSuggestMx(trimmed);
+  const primary = await fetchGoogleSuggest(trimmed, market);
   const merged = new Set(primary.filter(isGhBlogNichePhrase));
   const firstWords = trimmed.split(/\s+/).slice(0, 4).join(' ');
   if (firstWords.length >= 8 && firstWords !== trimmed) {
-    const extra = await fetchGoogleSuggestMx(firstWords);
+    const extra = await fetchGoogleSuggest(firstWords, market);
     for (const s of extra) {
       if (isGhBlogNichePhrase(s)) merged.add(s.toLowerCase());
     }

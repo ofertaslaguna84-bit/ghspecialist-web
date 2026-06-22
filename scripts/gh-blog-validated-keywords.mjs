@@ -1,14 +1,23 @@
 /**
- * Temas de blog con frases alineadas a Google Suggest México.
- * Lista: data/gh-blog-topics.json — ampliar: node scripts/fetch-google-suggest-keywords.mjs
+ * Temas de blog con frases alineadas a Google Suggest (MX o USA hispano).
+ * MX: data/gh-blog-topics.json · USA: data/gh-blog-topics-usa.json
  */
-import topicsJson from '../data/gh-blog-topics.json' with { type: 'json' };
+import topicsMx from '../data/gh-blog-topics.json' with { type: 'json' };
+import topicsUsa from '../data/gh-blog-topics-usa.json' with { type: 'json' };
 import { inferBlogCategory } from './gh-blog-google-suggest.mjs';
 
 /** @typedef {{ phrase: string, category: 'Chatbots'|'WhatsApp'|'Automatización'|'CRM'|'SEO'|'IA'|'Consejos' }} ValidatedKeywordTopic */
 
 /** @type {ValidatedKeywordTopic[]} */
-export const VALIDATED_BLOG_TOPICS = topicsJson;
+export const VALIDATED_BLOG_TOPICS = topicsMx;
+
+/** @type {ValidatedKeywordTopic[]} */
+export const VALIDATED_BLOG_TOPICS_USA = topicsUsa;
+
+/** @param {'mx'|'usa'} [market] */
+export function getTopicsForMarket(market = 'mx') {
+  return market === 'usa' ? VALIDATED_BLOG_TOPICS_USA : VALIDATED_BLOG_TOPICS;
+}
 
 function normalizePhrase(s) {
   return s
@@ -28,13 +37,14 @@ function topicKeys(phrase) {
 
 /**
  * @param {string[]} existingSlugsAndTitles
- * @param {{ category?: ValidatedKeywordTopic['category'] }} [options]
+ * @param {{ category?: ValidatedKeywordTopic['category'], market?: 'mx'|'usa' }} [options]
  */
 export function pickNextValidatedTopic(existingSlugsAndTitles, options) {
   const haystack = existingSlugsAndTitles.map(normalizePhrase).join(' ');
+  const catalog = getTopicsForMarket(options?.market || 'mx');
   const pool = options?.category
-    ? VALIDATED_BLOG_TOPICS.filter((t) => t.category === options.category)
-    : VALIDATED_BLOG_TOPICS;
+    ? catalog.filter((t) => t.category === options.category)
+    : catalog;
 
   for (const topic of pool) {
     const keys = topicKeys(topic.phrase);
@@ -59,11 +69,17 @@ export function isValidatedPhrase(phrase) {
 
 /**
  * @param {string} phrase
+ * @param {'mx'|'usa'} [market]
  * @returns {ValidatedKeywordTopic|undefined}
  */
-export function findValidatedTopic(phrase) {
+export function findValidatedTopic(phrase, market) {
   const n = normalizePhrase(phrase);
-  return VALIDATED_BLOG_TOPICS.find((t) => normalizePhrase(t.phrase) === n);
+  const catalogs = market ? [getTopicsForMarket(market)] : [VALIDATED_BLOG_TOPICS, VALIDATED_BLOG_TOPICS_USA];
+  for (const catalog of catalogs) {
+    const hit = catalog.find((t) => normalizePhrase(t.phrase) === n);
+    if (hit) return hit;
+  }
+  return undefined;
 }
 
 /**

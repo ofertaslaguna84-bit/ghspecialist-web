@@ -7,7 +7,14 @@ import { pickSeoKeywordsForArticle } from './gh-blog-keywords-pick.mjs';
 import {
   gatherIndexingKeywords,
   INDEXING_REGIONS,
+  INDEXING_REGIONS_USA,
 } from './gh-blog-indexing-keywords.mjs';
+
+/** @returns {'mx'|'usa'} */
+export function parseBlogMarket(value) {
+  const m = String(value || 'mx').trim().toLowerCase();
+  return m === 'usa' || m === 'us' ? 'usa' : 'mx';
+}
 
 function normalize(s) {
   return s
@@ -20,35 +27,42 @@ function normalize(s) {
 
 /**
  * @param {string} userInput
+ * @param {'mx'|'usa'} [market]
  */
-export async function prepareBlogGeneration(userInput) {
+export async function prepareBlogGeneration(userInput, market = 'mx') {
   const trimmed = userInput.trim();
-  const suggestions = await suggestPhrasesForUserInput(trimmed);
+  const suggestions = await suggestPhrasesForUserInput(trimmed, market);
   const seoKeywords = pickSeoKeywordsForArticle(trimmed, suggestions, 5);
-  const indexingKeywords = await gatherIndexingKeywords(trimmed, seoKeywords);
+  const indexingKeywords = await gatherIndexingKeywords(trimmed, seoKeywords, market);
   const phrase = normalize(trimmed);
 
   return {
+    market,
     topic: topicFromPhrase(phrase),
     userTopic: trimmed,
     seoKeywords,
     indexingKeywords,
     contentBrief: undefined,
     autoCorrected: false,
-    message: `Tema del artículo: «${trimmed}». Keywords en el texto: ${seoKeywords.join(' · ')}`,
+    message: `Tema del artículo (${market.toUpperCase()}): «${trimmed}». Keywords: ${seoKeywords.join(' · ')}`,
   };
 }
 
 /**
- * Tema automático (campo vacío) — sigue usando catálogo rotativo.
+ * Tema automático (campo vacío) — catálogo rotativo por mercado.
  * @param {string[]} haystack
+ * @param {'mx'|'usa'} [market]
  */
-export function prepareBlogAuto(haystack) {
-  const topic = pickNextValidatedTopic(haystack);
+export function prepareBlogAuto(haystack, market = 'mx') {
+  const topic = pickNextValidatedTopic(haystack, { market });
+  const regionsList = market === 'usa' ? INDEXING_REGIONS_USA : INDEXING_REGIONS;
   const indexingKeywords = {
-    intro: 'Indexación alineada al tema del catálogo:',
+    intro:
+      market === 'usa'
+        ? 'Indexación alineada al tema USA (comunidad hispana):'
+        : 'Indexación alineada al tema del catálogo:',
     enArticulo: [topic.phrase],
-    regions: INDEXING_REGIONS.map(({ id, label, suffix }) => ({
+    regions: regionsList.map(({ id, label, suffix }) => ({
       id,
       region: label,
       query: `${topic.phrase} ${suffix}`,
@@ -56,12 +70,13 @@ export function prepareBlogAuto(haystack) {
     })),
   };
   return {
+    market,
     topic,
     userTopic: topic.phrase,
     seoKeywords: [topic.phrase],
     indexingKeywords,
     contentBrief: undefined,
     autoCorrected: false,
-    message: `Tema automático del catálogo: «${topic.phrase}».`,
+    message: `Tema automático (${market.toUpperCase()}): «${topic.phrase}».`,
   };
 }
