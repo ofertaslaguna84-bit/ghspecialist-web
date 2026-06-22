@@ -35,8 +35,17 @@ function esc(s) {
     .replace(/"/g, '&quot;');
 }
 
+function cityCountry(city) {
+  return city.country || 'MX';
+}
+
+function isUS(city) {
+  return cityCountry(city) === 'US';
+}
+
 function waText(city) {
-  return encodeURIComponent(`Hola Pedro, quiero automatizar mi negocio con IA en ${city.name}`);
+  const where = isUS(city) ? `${city.name}, ${city.state}, USA` : city.name;
+  return encodeURIComponent(`Hola Pedro, quiero automatizar mi negocio con IA en ${where}`);
 }
 
 function metaKeywordsForCity(city) {
@@ -50,6 +59,15 @@ function metaKeywordsForCity(city) {
     'mejor ia para empresas',
     'chatgpt para negocios',
   ];
+  if (isUS(city)) {
+    base.push(
+      `automatizacion whatsapp empresas hispanas ${city.name}`,
+      `chatbot whatsapp español ${city.state}`,
+      `marketing digital latinos ${city.name}`,
+      `crm whatsapp ${city.name}`,
+      `inteligencia artificial empresas latinas usa`
+    );
+  }
   for (const g of SEARCH_INTENTS.groups) {
     for (const p of g.phrases.slice(0, 2)) base.push(`${p} ${city.name.toLowerCase()}`);
   }
@@ -80,16 +98,24 @@ function hubSearchIntentsHtml() {
 
 function buildCityPage(city, allCities) {
   if (city.legacyUrl) return null;
+  const us = isUS(city);
+  const cc = cityCountry(city);
   const url = `${SITE}/ciudades/${city.slug}/`;
   const heroPath = `../../${city.hero}`;
-  const title = `Automatización con IA en ${city.name} | Chatbots WhatsApp | GH Specialist`;
-  const description = `Chatbots WhatsApp, CRM Kommo y agentes de IA para empresas en ${city.name}, ${city.state}. Implementación en México desde $12,000 MXN. Diagnóstico gratuito.`;
+  const title = us
+    ? `Automatización con IA en ${city.name} | Empresas hispanas | GH Specialist`
+    : `Automatización con IA en ${city.name} | Chatbots WhatsApp | GH Specialist`;
+  const description = us
+    ? `Chatbots WhatsApp, CRM y agentes IA para empresas hispanas en ${city.name}, ${city.state}, EE.UU. Implementación remota en español desde México. Diagnóstico gratuito.`
+    : `Chatbots WhatsApp, CRM Kommo y agentes de IA para empresas en ${city.name}, ${city.state}. Implementación en México desde $12,000 MXN. Diagnóstico gratuito.`;
 
   const localBusiness = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: `GH Specialist — ${city.name}`,
-    description: `Automatización con inteligencia artificial para empresas en ${city.name}, ${city.state}. Chatbots WhatsApp, CRM Kommo y agentes IA.`,
+    description: us
+      ? `Automatización con IA para empresas hispanas en ${city.name}, ${city.state}, EE.UU. Chatbots WhatsApp, CRM y agentes IA en español.`
+      : `Automatización con inteligencia artificial para empresas en ${city.name}, ${city.state}. Chatbots WhatsApp, CRM Kommo y agentes IA.`,
     url,
     telephone: '+528712638082',
     priceRange: '$$',
@@ -98,10 +124,12 @@ function buildCityPage(city, allCities) {
       '@type': 'PostalAddress',
       addressLocality: city.name,
       addressRegion: city.state,
-      addressCountry: 'MX',
+      addressCountry: cc,
     },
     geo: { '@type': 'GeoCoordinates', latitude: city.lat, longitude: city.lng },
-    areaServed: [{ '@type': 'City', name: city.name }, { '@type': 'Country', name: 'México' }],
+    areaServed: us
+      ? [{ '@type': 'City', name: city.name }, { '@type': 'Country', name: 'United States' }]
+      : [{ '@type': 'City', name: city.name }, { '@type': 'Country', name: 'México' }],
     founder: {
       '@type': 'Person',
       name: 'Pedro Luis Díaz Velázquez',
@@ -149,10 +177,14 @@ function buildCityPage(city, allCities) {
     mainEntity: [
       {
         '@type': 'Question',
-        name: `¿GH Specialist atiende empresas en ${city.name}?`,
+        name: us
+          ? `¿GH Specialist atiende empresas hispanas en ${city.name}, EE.UU.?`
+          : `¿GH Specialist atiende empresas en ${city.name}?`,
         acceptedAnswer: {
           '@type': 'Answer',
-          text: `Sí. Implementamos chatbots WhatsApp, CRM Kommo y automatización con IA para empresas en ${city.name}, ${city.state} y todo México. Diagnóstico gratuito por videollamada o presencial cuando aplica.`,
+          text: us
+            ? `Sí. Implementamos chatbots WhatsApp, CRM Kommo y automatización con IA para empresas hispanas en ${city.name}, ${city.state}, EE.UU. Diagnóstico gratuito por videollamada en español — operación remota desde México.`
+            : `Sí. Implementamos chatbots WhatsApp, CRM Kommo y automatización con IA para empresas en ${city.name}, ${city.state} y todo México. Diagnóstico gratuito por videollamada o presencial cuando aplica.`,
         },
       },
       {
@@ -160,15 +192,21 @@ function buildCityPage(city, allCities) {
         name: `¿Cuánto cuesta un chatbot IA en ${city.name}?`,
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Desde $12,000 MXN + IVA, pago único. Incluye configuración, integración WhatsApp Business y capacitación.',
+          text: us
+            ? 'Desde $12,000 MXN + IVA (equivalente en USD disponible). Pago único. Incluye configuración, integración WhatsApp Business y capacitación en español.'
+            : 'Desde $12,000 MXN + IVA, pago único. Incluye configuración, integración WhatsApp Business y capacitación.',
         },
       },
       {
         '@type': 'Question',
-        name: `¿Trabajan solo en ${city.name} o en todo México?`,
+        name: us
+          ? `¿Trabajan remoto con empresas en ${city.state}?`
+          : `¿Trabajan solo en ${city.name} o en todo México?`,
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Atendemos empresas en todo México y LATAM de forma remota. GH Specialist tiene base en Torreón, Coahuila, y operación 100% digital a nivel nacional.',
+          text: us
+            ? 'Sí. Atendemos empresas hispanas en todo EE.UU. y México de forma remota. GH Specialist tiene base en Torreón, México, con clientes en California, Texas, Florida, New York y más.'
+            : 'Atendemos empresas en todo México, EE.UU. hispano y LATAM de forma remota. GH Specialist tiene base en Torreón, Coahuila, y operación 100% digital.',
         },
       },
     ],
@@ -288,7 +326,7 @@ function buildCityPage(city, allCities) {
     <div class="w">
       <span class="kicker">${esc(city.kicker)}</span>
       <h1>Automatización con IA en <em>${esc(city.name)}</em></h1>
-      <p>Chatbots WhatsApp, CRM Kommo y agentes de inteligencia artificial para empresas en ${esc(city.name)} y ${esc(city.state)}. Operación nacional desde GH Specialist — diagnóstico gratuito.</p>
+      <p>${us ? `Chatbots WhatsApp, CRM y agentes IA para <strong>empresas hispanas</strong> en ${esc(city.name)}, ${esc(city.state)}, EE.UU. Implementación remota en español desde México — diagnóstico gratuito.` : `Chatbots WhatsApp, CRM Kommo y agentes de inteligencia artificial para empresas en ${esc(city.name)} y ${esc(city.state)}. Operación nacional desde GH Specialist — diagnóstico gratuito.`}</p>
       <div class="hero-btns">
         <a href="${CALENDAR}" class="btn">🗓️ Diagnóstico gratuito</a>
         <a href="https://wa.me/528712638082?text=${waText(city)}" class="btn btn-wa">WhatsApp directo</a>
@@ -302,8 +340,8 @@ function buildCityPage(city, allCities) {
       <h2 class="title">IA y WhatsApp para negocios en ${esc(city.name)}</h2>
       <div class="prose">
         <p>${esc(city.intro)}</p>
-        <p>Sectores que atendemos en ${esc(city.name)}: ${esc(city.industries)}. Implementamos chatbots que califican prospectos, integran Kommo CRM y publican contenido SEO — todo desde México, sin contratar más personal de ventas.</p>
-        <p>GH Specialist es agencia de automatización con IA a nivel nacional. Fundada por Pedro Luis Díaz Velázquez (Gold Partner Kommo), con base en Torreón y clientes en Monterrey, CDMX, Guadalajara, Querétaro y todo el país.</p>
+        <p>Sectores que atendemos en ${esc(city.name)}: ${esc(city.industries)}. Implementamos chatbots que califican prospectos, integran Kommo CRM y publican contenido SEO — ${us ? 'operación 100% remota en español desde México' : 'todo desde México, sin contratar más personal de ventas'}.</p>
+        <p>GH Specialist es agencia de automatización con IA. Fundada por Pedro Luis Díaz Velázquez (Gold Partner Kommo), con base en Torreón, México, y clientes en ${us ? 'EE.UU. hispano, México y LATAM' : 'Monterrey, CDMX, Guadalajara, Querétaro y todo el país'}.</p>
       </div>
     </div>
   </section>
@@ -320,9 +358,9 @@ function buildCityPage(city, allCities) {
 
   <section class="sec sec-gray">
     <div class="w">
-      <span class="label">Google México</span>
+      <span class="label">${us ? 'Búsquedas en español · EE.UU.' : 'Google México'}</span>
       <h2 class="title">Lo que buscan sobre IA en ${esc(city.name)}</h2>
-      <p style="font-size:14px;color:var(--ink3);max-width:720px;margin-bottom:8px">Búsquedas reales en Google Suggest México — GH Specialist implementa chatbots, agentes IA y automatización para estas necesidades.</p>
+      <p style="font-size:14px;color:var(--ink3);max-width:720px;margin-bottom:8px">${us ? 'Consultas frecuentes de empresas hispanas en Google — GH Specialist implementa chatbots, agentes IA y automatización en español.' : 'Búsquedas reales en Google Suggest México — GH Specialist implementa chatbots, agentes IA y automatización para estas necesidades.'}</p>
       <div class="search-grid">
         ${buildSearchIntentsHtml(city)}
       </div>
@@ -331,8 +369,8 @@ function buildCityPage(city, allCities) {
 
   <section class="sec">
     <div class="w">
-      <span class="label">Cobertura nacional</span>
-      <h2 class="title">También operamos en otras ciudades de México</h2>
+      <span class="label">Cobertura</span>
+      <h2 class="title">${us ? 'También en México, EE.UU. y LATAM' : 'También operamos en otras ciudades de México'}</h2>
       <div class="local-links">
         ${otherCities}
         <a href="../">Ver todas las ciudades →</a>
@@ -355,7 +393,7 @@ function buildCityPage(city, allCities) {
       <a href="../../servicios/chatbot-ia-whatsapp.html">Chatbot WhatsApp</a>
       <a href="../../blog/">Blog</a>
       <a href="../../torreon/">Torreón</a>
-      <a href="../">Ciudades México</a>
+      <a href="../">Todas las ciudades</a>
     </div>
   </footer>
 </body>
@@ -365,19 +403,26 @@ function buildCityPage(city, allCities) {
 
 function buildHubPage(cities) {
   const url = `${SITE}/ciudades/`;
-  const cards = cities
-    .map((c) => {
-      const href = c.legacyUrl ? `..${c.legacyUrl}` : `./${c.slug}/`;
-      return `<a href="${href}" class="city-card">
+
+  function cityCards(list) {
+    return list
+      .map((c) => {
+        const href = c.legacyUrl ? `..${c.legacyUrl}` : `./${c.slug}/`;
+        const flag = isUS(c) ? ' 🇺🇸' : '';
+        return `<a href="${href}" class="city-card">
         <div class="city-bg" style="background-image:url('../${c.hero}')"></div>
         <div class="city-overlay"></div>
         <div class="city-body">
           <h2>${esc(c.name)}</h2>
-          <p>${esc(c.state)}</p>
+          <p>${esc(c.state)}${flag}</p>
         </div>
       </a>`;
-    })
-    .join('\n      ');
+      })
+      .join('\n      ');
+  }
+
+  const mxCities = cities.filter((c) => !isUS(c));
+  const usCities = cities.filter((c) => isUS(c));
 
   const itemList = cities.map((c, i) => ({
     '@type': 'ListItem',
@@ -389,8 +434,9 @@ function buildHubPage(cities) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'Automatización con IA en México — Ciudades',
-    description: 'GH Specialist atiende empresas en Monterrey, CDMX, Guadalajara, Querétaro, Torreón y todo México con chatbots WhatsApp e IA.',
+    name: 'Automatización con IA — México y EE.UU. hispano',
+    description:
+      'GH Specialist atiende empresas en México y comunidad hispana en EE.UU. con chatbots WhatsApp e IA. Monterrey, CDMX, Los Ángeles, Houston, Miami y más.',
     url,
     inLanguage: 'es-MX',
     mainEntity: {
@@ -405,14 +451,14 @@ function buildHubPage(cities) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="../favicon.png" type="image/png">
-  <title>Automatización con IA en México — Ciudades | GH Specialist</title>
-  <meta name="description" content="Chatbots WhatsApp, CRM Kommo y agentes IA para empresas en Monterrey, CDMX, Guadalajara, Querétaro, Torreón y todo México. Cobertura nacional GH Specialist.">
-  <meta name="keywords" content="automatizar whatsapp con ia, chatbot whatsapp con ia, agente de inteligencia artificial, mejor ia para empresas, chatgpt para negocios, claude vs chatgpt vs gemini, ia para pymes mexico, automatizacion con ia para empresas">
+  <title>Automatización con IA — México y EE.UU. hispano | GH Specialist</title>
+  <meta name="description" content="Chatbots WhatsApp, CRM Kommo y agentes IA para empresas en México y comunidad hispana en EE.UU.: Los Ángeles, Houston, Miami, Dallas, CDMX, Monterrey y más.">
+  <meta name="keywords" content="automatizar whatsapp con ia, chatbot whatsapp empresas hispanas, agente inteligencia artificial, chatbot whatsapp los angeles, automatizacion ia houston, ia para empresas latinas usa">
   <link rel="canonical" href="${url}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${url}">
-  <meta property="og:title" content="Automatización IA en México — Ciudades | GH Specialist">
-  <meta property="og:description" content="Cobertura nacional: chatbots WhatsApp e IA para PYMES en las principales ciudades de México.">
+  <meta property="og:title" content="Automatización IA — México y EE.UU. | GH Specialist">
+  <meta property="og:description" content="Cobertura en México y ciudades hispanas de EE.UU. Chatbots WhatsApp e IA en español.">
   <meta property="og:image" content="${SITE}/hero-cdmx.png">
   <meta property="og:locale" content="es_MX">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -433,7 +479,9 @@ function buildHubPage(cities) {
     .hero h1{font-size:clamp(28px,4vw,44px);font-weight:900;letter-spacing:-.03em;margin-bottom:12px}
     .hero p{font-size:17px;color:var(--ink3);max-width:640px;margin:0 auto 24px}
     .btn{display:inline-flex;padding:12px 24px;border-radius:8px;font-weight:600;font-size:14px;background:var(--p);color:#fff}
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;padding:0 28px 64px;max-width:1080px;margin:0 auto}
+    .region{max-width:1080px;margin:0 auto;padding:0 28px 16px}
+    .region h2{font-size:20px;font-weight:800;margin-bottom:16px;color:var(--ink)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;padding:0 28px 48px;max-width:1080px;margin:0 auto}
     .city-card{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/3;border:1px solid var(--border)}
     .city-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .3s}
     .city-card:hover .city-bg{transform:scale(1.05)}
@@ -461,17 +509,22 @@ function buildHubPage(cities) {
   </header>
   <section class="hero">
     <div class="w">
-      <h1>Automatización con IA en <span style="color:var(--p)">todo México</span></h1>
-      <p>Chatbots WhatsApp, CRM Kommo y agentes de inteligencia artificial para empresas en las principales ciudades. Operación 100% digital — implementación remota o presencial.</p>
+      <h1>Automatización con IA en <span style="color:var(--p)">México y EE.UU. hispano</span></h1>
+      <p>Chatbots WhatsApp, CRM Kommo y agentes de IA para empresas en México y la comunidad latina en Estados Unidos. Implementación remota en español.</p>
       <a href="${CALENDAR}" class="btn">Diagnóstico gratuito →</a>
     </div>
   </section>
+  <div class="region"><h2>México</h2></div>
   <div class="grid">
-      ${cards}
+      ${cityCards(mxCities)}
+  </div>
+  <div class="region"><h2>Estados Unidos — comunidad hispana</h2></div>
+  <div class="grid">
+      ${cityCards(usCities)}
   </div>
   <section class="search-wrap">
-    <h2>Lo que buscan en Google sobre IA (México)</h2>
-    <p>Búsquedas reales en Google Suggest — GH Specialist las resuelve con implementación, no solo tips.</p>
+    <h2>Lo que buscan en Google sobre IA</h2>
+    <p>Búsquedas reales — GH Specialist las resuelve con implementación, no solo tips.</p>
     <div class="search-grid">
       ${hubSearchIntentsHtml()}
     </div>

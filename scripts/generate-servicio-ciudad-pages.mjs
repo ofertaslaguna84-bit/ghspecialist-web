@@ -17,6 +17,10 @@ const cities = JSON.parse(readFileSync(join(ROOT, 'data/seo-cities.json'), 'utf8
 );
 const services = JSON.parse(readFileSync(join(ROOT, 'data/seo-services.json'), 'utf8'));
 
+function isUS(city) {
+  return (city.country || 'MX') === 'US';
+}
+
 function esc(s) {
   return String(s || '')
     .replace(/&/g, '&amp;')
@@ -30,10 +34,13 @@ function waText(svc, city) {
 }
 
 function buildPage(svc, city, allCities, allServices) {
+  const us = isUS(city);
   const url = `${SITE}/servicios/${svc.slug}/${city.slug}/`;
   const depth = '../../../';
   const title = `${svc.short} en ${city.name}, ${city.state} | GH Specialist`;
-  const description = `${svc.desc} Para empresas en ${city.name}, ${city.state}. Desde $${Number(svc.price).toLocaleString('es-MX')} MXN + IVA. Diagnóstico gratuito GH Specialist.`;
+  const description = us
+    ? `${svc.desc} Para empresas hispanas en ${city.name}, ${city.state}, EE.UU. Implementación remota en español desde $${Number(svc.price).toLocaleString('es-MX')} MXN + IVA. Diagnóstico gratuito GH Specialist.`
+    : `${svc.desc} Para empresas en ${city.name}, ${city.state}. Desde $${Number(svc.price).toLocaleString('es-MX')} MXN + IVA. Diagnóstico gratuito GH Specialist.`;
 
   const otherCities = allCities
     .filter((c) => c.slug !== city.slug)
@@ -88,10 +95,14 @@ function buildPage(svc, city, allCities, allServices) {
       },
       {
         '@type': 'Question',
-        name: `¿Atienden empresas en ${city.name}?`,
+        name: us
+          ? `¿Atienden empresas hispanas en ${city.name}, EE.UU.?`
+          : `¿Atienden empresas en ${city.name}?`,
         acceptedAnswer: {
           '@type': 'Answer',
-          text: `Sí. Implementamos ${svc.name.toLowerCase()} para empresas en ${city.name}, ${city.state} y todo México. Operación remota o presencial.`,
+          text: us
+            ? `Sí. Implementamos ${svc.name.toLowerCase()} para empresas hispanas en ${city.name}, ${city.state}, EE.UU. Operación remota en español desde México.`
+            : `Sí. Implementamos ${svc.name.toLowerCase()} para empresas en ${city.name}, ${city.state} y todo México. Operación remota o presencial.`,
         },
       },
     ],
