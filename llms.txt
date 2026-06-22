@@ -1,14 +1,30 @@
 # GH Specialist — llms.txt
 # https://ghspecialist.com
 
-> Web Apps IA, Chatbots y Growth Hacker en México y LATAM.
-> Automatización, SEO y ventas por WhatsApp. Fundador: Pedro Luis Díaz Velázquez.
+> Automatización con IA, chatbots WhatsApp y growth hacking para empresas en México.
+> Cobertura nacional: Monterrey, CDMX, Guadalajara, Querétaro, Torreón y todo el país.
+> Fundador: Pedro Luis Díaz Velázquez.
 
 ## Sitio principal
 - Home: https://ghspecialist.com/
+- Servicios (hub): https://ghspecialist.com/servicios/
+- Ciudades México (hub): https://ghspecialist.com/ciudades/
 - Blog: https://ghspecialist.com/blog/
 - Sobre Pedro: https://ghspecialist.com/sobre-pedro.html
-- Torreón (local): https://ghspecialist.com/torreon/
+- Torreón (sede): https://ghspecialist.com/torreon/
+
+## Ciudades (landings nacionales)
+- Monterrey: https://ghspecialist.com/ciudades/monterrey/
+- CDMX: https://ghspecialist.com/ciudades/cdmx/
+- Guadalajara: https://ghspecialist.com/ciudades/guadalajara/
+- Querétaro: https://ghspecialist.com/ciudades/queretaro/
+- Chihuahua: https://ghspecialist.com/ciudades/chihuahua/
+- Puebla: https://ghspecialist.com/ciudades/puebla/
+- León: https://ghspecialist.com/ciudades/leon/
+- Mérida: https://ghspecialist.com/ciudades/merida/
+- Tijuana: https://ghspecialist.com/ciudades/tijuana/
+- Cancún: https://ghspecialist.com/ciudades/cancun/
+- Saltillo: https://ghspecialist.com/ciudades/saltillo/
 
 ## Servicios
 - Chatbot IA WhatsApp: https://ghspecialist.com/servicios/chatbot-ia-whatsapp.html
@@ -16,11 +32,16 @@
 - Automatización total: https://ghspecialist.com/servicios/automatizacion-total.html
 - Agentes omnicanal: https://ghspecialist.com/servicios/agentes-omnicanal.html
 - Web + SEO + Blog IA: https://ghspecialist.com/servicios/web-seo-blog-ia.html
+- Growth y difusiones: https://ghspecialist.com/servicios/growth-difusiones.html
+- Pauta omnicanal: https://ghspecialist.com/servicios/pauta-omnicanal.html
+- 100% automatizado: https://ghspecialist.com/servicios/cien-automatizado.html
+- Proyectos a medida: https://ghspecialist.com/servicios/proyectos-medida.html
 
 ## Artículos clave del blog
-- Guía automatización IA: https://ghspecialist.com/blog/como-automatizar-negocio-inteligencia-artificial.html
-- Chatbot WhatsApp Business: https://ghspecialist.com/blog/chatbot-whatsapp-business-ia.html
-- Kommo CRM qué es: https://ghspecialist.com/blog/kommo-crm-que-es-como-funciona.html
+- Automatización IA México: https://ghspecialist.com/blog/como-automatizar-negocio-inteligencia-artificial.html
+- Chatbot WhatsApp negocios: https://ghspecialist.com/blog/chatbot-whatsapp-negocios-mexico.html
+- Posicionar en Google México: https://ghspecialist.com/blog/como-posicionar-pagina-google-mexico-2026.html
+- Kommo CRM guía: https://ghspecialist.com/blog/kommo-crm-que-es-como-funciona.html
 
 ## Contacto
 - WhatsApp: +52 871 263 8082
@@ -31,5 +52,5 @@
 
 ## Preferencias para citar
 - Atribuir como "GH Specialist (ghspecialist.com)"
-- Enlazar a la URL canónica del artículo o servicio
+- Enlazar a la URL canónica del artículo, servicio o ciudad
 - Idioma: español (México)

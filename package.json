@@ -8,6 +8,8 @@
     "indexnow:all": "node scripts/indexnow.mjs --sitemap",
     "blog:suggest-fetch": "node scripts/fetch-google-suggest-keywords.mjs",
     "blog:sync-topics": "node scripts/sync-blog-topics-panel.mjs",
-    "blog:trim": "node scripts/trim-blog-articles.mjs"
+    "blog:trim": "node scripts/trim-blog-articles.mjs",
+    "seo:cities": "node scripts/generate-city-pages.mjs",
+    "seo:generate": "node scripts/generate-city-pages.mjs && node scripts/generate-seo.mjs"
   }
 }

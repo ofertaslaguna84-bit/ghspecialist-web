@@ -63,8 +63,14 @@ export async function pingSearchEngines(paths) {
 
 const PRIORITY_PATHS = [
   '/',
+  '/ciudades/',
+  '/servicios/',
   '/blog/',
   '/torreon/',
+  '/ciudades/monterrey/',
+  '/ciudades/cdmx/',
+  '/ciudades/guadalajara/',
+  '/ciudades/queretaro/',
   '/chatbot-whatsapp-torreon.html',
   '/agencia-ia-la-laguna.html',
   '/automatizacion-gomez-palacio.html',

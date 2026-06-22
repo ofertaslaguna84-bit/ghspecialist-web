@@ -14,6 +14,8 @@ const BLOG_EXCLUDE = new Set(['_template.html', 'index.html']);
 const SITEMAP_URLS = [
   { path: 'index.html', loc: `${SITE}/`, priority: '1.0' },
   { path: 'blog/index.html', loc: `${SITE}/blog/`, priority: '0.9' },
+  { path: 'ciudades/index.html', loc: `${SITE}/ciudades/`, priority: '0.9' },
+  { path: 'servicios/index.html', loc: `${SITE}/servicios/`, priority: '0.9' },
   { path: 'torreon/index.html', loc: `${SITE}/torreon/`, priority: '0.85' },
   { path: 'chatbot-whatsapp-torreon.html', loc: `${SITE}/chatbot-whatsapp-torreon.html`, priority: '0.85' },
   { path: 'agencia-ia-la-laguna.html', loc: `${SITE}/agencia-ia-la-laguna.html`, priority: '0.85' },
@@ -115,12 +117,38 @@ async function collectBlogArticles() {
   return articles;
 }
 
+async function collectCiudades() {
+  const dir = join(ROOT, 'ciudades');
+  const entries = [];
+  let subdirs;
+  try {
+    subdirs = await readdir(dir, { withFileTypes: true });
+  } catch {
+    return entries;
+  }
+  for (const d of subdirs.filter((x) => x.isDirectory())) {
+    const rel = `ciudades/${d.name}/index.html`;
+    const full = join(ROOT, rel);
+    try {
+      entries.push({
+        path: rel,
+        loc: `${SITE}/ciudades/${d.name}/`,
+        priority: '0.85',
+        lastmod: await fileLastMod(full),
+      });
+    } catch {
+      /* noop */
+    }
+  }
+  return entries.sort((a, b) => a.loc.localeCompare(b.loc));
+}
+
 async function collectServicios() {
   const dir = join(ROOT, 'servicios');
   const files = await readdir(dir);
   const entries = [];
 
-  for (const f of files.filter((x) => x.endsWith('.html'))) {
+  for (const f of files.filter((x) => x.endsWith('.html') && x !== 'index.html')) {
     const full = join(dir, f);
     entries.push({
       path: `servicios/${f}`,
@@ -133,7 +161,7 @@ async function collectServicios() {
   return entries.sort((a, b) => a.loc.localeCompare(b.loc));
 }
 
-async function generateSitemap(blogArticles, servicios) {
+async function generateSitemap(blogArticles, servicios, ciudades) {
   const urls = [];
 
   for (const entry of SITEMAP_URLS) {
@@ -142,6 +170,14 @@ async function generateSitemap(blogArticles, servicios) {
       loc: entry.loc,
       lastmod: await fileLastMod(full),
       priority: entry.priority,
+    });
+  }
+
+  for (const city of ciudades) {
+    urls.push({
+      loc: city.loc,
+      lastmod: city.lastmod,
+      priority: city.priority,
     });
   }
 
@@ -248,8 +284,9 @@ async function updateBlogIndexSchema(articles) {
 async function main() {
   const blogArticles = await collectBlogArticles();
   const servicios = await collectServicios();
+  const ciudades = await collectCiudades();
 
-  await generateSitemap(blogArticles, servicios);
+  await generateSitemap(blogArticles, servicios, ciudades);
   await generateRss(blogArticles);
   await updateBlogIndexSchema(blogArticles);
 

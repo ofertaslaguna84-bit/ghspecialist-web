@@ -275,7 +275,15 @@ function pickValidatedTopicForCity(city, input, services) {
 /** @param {string} city @param {string} userInput */
 function buildLocalBrief(city, userInput) {
   const label = CITY_LABELS[city] ?? city;
-  const path = city === 'torreon' ? '/torreon/' : 'https://ghspecialist.com/';
+  const cityPaths = {
+    torreon: '/torreon/',
+    monterrey: '/ciudades/monterrey/',
+    cdmx: '/ciudades/cdmx/',
+    guadalajara: '/ciudades/guadalajara/',
+    queretaro: '/ciudades/queretaro/',
+    chihuahua: '/ciudades/chihuahua/',
+  };
+  const path = cityPaths[city] ? `https://ghspecialist.com${cityPaths[city]}` : 'https://ghspecialist.com/ciudades/';
   return [
     `Artículo LOCAL para empresas en ${label}. El usuario escribió: «${userInput}».`,
     'Enfócate en agencia o servicios de IA para negocios (chatbots WhatsApp, CRM Kommo, automatización de ventas y atención), NO en automatización industrial de maquinaria salvo que el usuario lo pida explícitamente.',
