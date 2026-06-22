@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "chatbot-ia-whatsapp",
+    "file": "chatbot-ia-whatsapp.html",
+    "name": "Chatbot IA WhatsApp",
+    "short": "Chatbot WhatsApp con IA",
+    "desc": "Chatbots con inteligencia artificial para WhatsApp Business: atención 24/7, calificación de prospectos y cierre de ventas.",
+    "price": "12000"
+  },
+  {
+    "slug": "crm-kommo",
+    "file": "crm-kommo.html",
+    "name": "CRM Kommo",
+    "short": "CRM Kommo con WhatsApp",
+    "desc": "Implementación de Kommo CRM integrado con WhatsApp e IA para pipeline de ventas y seguimiento automático.",
+    "price": "15000"
+  },
+  {
+    "slug": "automatizacion-total",
+    "file": "automatizacion-total.html",
+    "name": "Automatización total",
+    "short": "Automatización con IA",
+    "desc": "Automatización comercial completa: WhatsApp, CRM, seguimiento y procesos sin trabajo manual repetitivo.",
+    "price": "25000"
+  },
+  {
+    "slug": "agentes-omnicanal",
+    "file": "agentes-omnicanal.html",
+    "name": "Agentes omnicanal",
+    "short": "Agentes IA omnicanal",
+    "desc": "Agentes de inteligencia artificial en WhatsApp, web e Instagram con un solo cerebro comercial.",
+    "price": "20000"
+  },
+  {
+    "slug": "web-seo-blog-ia",
+    "file": "web-seo-blog-ia.html",
+    "name": "Web + SEO + Blog IA",
+    "short": "SEO con IA",
+    "desc": "Sitio web optimizado para Google con blog automatizado por IA y posicionamiento en México.",
+    "price": "18000"
+  },
+  {
+    "slug": "growth-difusiones",
+    "file": "growth-difusiones.html",
+    "name": "Growth y difusiones",
+    "short": "Growth hacking con IA",
+    "desc": "Estrategias de growth hacking y difusiones masivas con inteligencia artificial para PYMES.",
+    "price": "12000"
+  },
+  {
+    "slug": "pauta-omnicanal",
+    "file": "pauta-omnicanal.html",
+    "name": "Pauta omnicanal",
+    "short": "Pauta digital + CRM",
+    "desc": "Publicidad en Meta y Google conectada a WhatsApp y CRM para convertir clics en ventas.",
+    "price": "15000"
+  },
+  {
+    "slug": "cien-automatizado",
+    "file": "cien-automatizado.html",
+    "name": "100% automatizado",
+    "short": "Negocio automatizado con IA",
+    "desc": "Operación comercial casi sin intervención humana: IA en ventas, atención y seguimiento.",
+    "price": "35000"
+  },
+  {
+    "slug": "proyectos-medida",
+    "file": "proyectos-medida.html",
+    "name": "Proyectos a medida",
+    "short": "Desarrollo IA a medida",
+    "desc": "Apps web, integraciones y automatizaciones personalizadas con inteligencia artificial.",
+    "price": "50000"
+  }
+]

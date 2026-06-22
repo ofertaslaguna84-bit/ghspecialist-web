@@ -13,6 +13,12 @@
 - Sobre Pedro: https://ghspecialist.com/sobre-pedro.html
 - Torreón (sede): https://ghspecialist.com/torreon/
 
+## Cobertura servicio×ciudad (SEO local)
+- Patrón: https://ghspecialist.com/servicios/{servicio}/{ciudad}/
+- Ejemplo chatbot Monterrey: https://ghspecialist.com/servicios/chatbot-ia-whatsapp/monterrey/
+- Ejemplo CRM CDMX: https://ghspecialist.com/servicios/crm-kommo/cdmx/
+- 99 combinaciones servicio×ciudad + 11 hubs ciudad
+
 ## Ciudades (landings nacionales)
 - Monterrey: https://ghspecialist.com/ciudades/monterrey/
 - CDMX: https://ghspecialist.com/ciudades/cdmx/

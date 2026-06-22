@@ -143,6 +143,37 @@ async function collectCiudades() {
   return entries.sort((a, b) => a.loc.localeCompare(b.loc));
 }
 
+async function collectServicioCiudad() {
+  const entries = [];
+  let services;
+  let cities;
+  try {
+    services = JSON.parse(await readFile(join(ROOT, 'data/seo-services.json'), 'utf8'));
+    cities = JSON.parse(await readFile(join(ROOT, 'data/seo-cities.json'), 'utf8')).filter(
+      (c) => !c.legacyUrl
+    );
+  } catch {
+    return entries;
+  }
+  for (const svc of services) {
+    for (const city of cities) {
+      const rel = `servicios/${svc.slug}/${city.slug}/index.html`;
+      const full = join(ROOT, rel);
+      try {
+        entries.push({
+          path: rel,
+          loc: `${SITE}/servicios/${svc.slug}/${city.slug}/`,
+          priority: '0.88',
+          lastmod: await fileLastMod(full),
+        });
+      } catch {
+        /* noop */
+      }
+    }
+  }
+  return entries.sort((a, b) => a.loc.localeCompare(b.loc));
+}
+
 async function collectServicios() {
   const dir = join(ROOT, 'servicios');
   const files = await readdir(dir);
@@ -161,7 +192,7 @@ async function collectServicios() {
   return entries.sort((a, b) => a.loc.localeCompare(b.loc));
 }
 
-async function generateSitemap(blogArticles, servicios, ciudades) {
+async function generateSitemap(blogArticles, servicios, ciudades, servicioCiudad) {
   const urls = [];
 
   for (const entry of SITEMAP_URLS) {
@@ -178,6 +209,14 @@ async function generateSitemap(blogArticles, servicios, ciudades) {
       loc: city.loc,
       lastmod: city.lastmod,
       priority: city.priority,
+    });
+  }
+
+  for (const sc of servicioCiudad) {
+    urls.push({
+      loc: sc.loc,
+      lastmod: sc.lastmod,
+      priority: sc.priority,
     });
   }
 
@@ -285,8 +324,9 @@ async function main() {
   const blogArticles = await collectBlogArticles();
   const servicios = await collectServicios();
   const ciudades = await collectCiudades();
+  const servicioCiudad = await collectServicioCiudad();
 
-  await generateSitemap(blogArticles, servicios, ciudades);
+  await generateSitemap(blogArticles, servicios, ciudades, servicioCiudad);
   await generateRss(blogArticles);
   await updateBlogIndexSchema(blogArticles);
 

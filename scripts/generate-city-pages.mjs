@@ -23,6 +23,8 @@ const SERVICES = [
   { slug: 'automatizacion-total.html', title: 'Automatización total', desc: 'Procesos comerciales sin trabajo manual.' },
   { slug: 'web-seo-blog-ia.html', title: 'Web + SEO + Blog IA', desc: 'Posicionamiento en Google con contenido automático.' },
   { slug: 'agentes-omnicanal.html', title: 'Agentes omnicanal', desc: 'IA en WhatsApp, web y redes.' },
+  { slug: 'growth-difusiones.html', title: 'Growth y difusiones', desc: 'Crecimiento con IA y difusiones.' },
+  { slug: 'pauta-omnicanal.html', title: 'Pauta omnicanal', desc: 'Meta/Google conectado a tu CRM.' },
 ];
 
 function esc(s) {
@@ -182,11 +184,15 @@ function buildCityPage(city, allCities) {
     .join('\n        ');
 
   const serviceCards = SERVICES.map(
-    (s) => `<div class="card">
+    (s) => {
+      const svcSlug = s.slug.replace('.html', '');
+      return `<div class="card">
           <h3>${esc(s.title)}</h3>
           <p>${esc(s.desc)}</p>
-          <a href="../../servicios/${s.slug}">Ver servicio →</a>
-        </div>`
+          <a href="../../servicios/${svcSlug}/${city.slug}/">${esc(s.title)} en ${esc(city.name)} →</a>
+          <a href="../../servicios/${s.slug}" style="display:block;margin-top:6px;font-size:12px">Servicio nacional →</a>
+        </div>`;
+    }
   ).join('\n        ');
 
   return `<!DOCTYPE html>
