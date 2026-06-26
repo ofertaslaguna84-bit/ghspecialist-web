@@ -44,7 +44,7 @@ jobs:
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: offline
+          path: '.'
 
       - name: Publicar en GitHub Pages
         id: deployment
