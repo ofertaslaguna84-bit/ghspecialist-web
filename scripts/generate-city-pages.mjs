@@ -206,7 +206,7 @@ function buildCityPage(city, allCities) {
           '@type': 'Answer',
           text: us
             ? 'Sí. Atendemos empresas hispanas en todo EE.UU. y México de forma remota. GH Specialist tiene base en Torreón, México, con clientes en California, Texas, Florida, New York y más.'
-            : 'Atendemos empresas en todo México, EE.UU. hispano y LATAM de forma remota. GH Specialist tiene base en Torreón, Coahuila, y operación 100% digital.',
+            : 'Atendemos empresas en todo México de forma remota o presencial. GH Specialist tiene base en Torreón, Coahuila, y operación 100% digital.',
         },
       },
     ],
@@ -341,7 +341,7 @@ function buildCityPage(city, allCities) {
       <div class="prose">
         <p>${esc(city.intro)}</p>
         <p>Sectores que atendemos en ${esc(city.name)}: ${esc(city.industries)}. Implementamos chatbots que califican prospectos, integran Kommo CRM y publican contenido SEO — ${us ? 'operación 100% remota en español desde México' : 'todo desde México, sin contratar más personal de ventas'}.</p>
-        <p>GH Specialist es agencia de automatización con IA. Fundada por Pedro Luis Díaz Velázquez (Gold Partner Kommo), con base en Torreón, México, y clientes en ${us ? 'EE.UU. hispano, México y LATAM' : 'Monterrey, CDMX, Guadalajara, Querétaro y todo el país'}.</p>
+        <p>GH Specialist es agencia de automatización con IA en México. Fundada por Pedro Luis Díaz Velázquez (Gold Partner Kommo), con base en Torreón y clientes en Monterrey, CDMX, Guadalajara, Querétaro y todo el país.</p>
       </div>
     </div>
   </section>
@@ -370,7 +370,7 @@ function buildCityPage(city, allCities) {
   <section class="sec">
     <div class="w">
       <span class="label">Cobertura</span>
-      <h2 class="title">${us ? 'También en México, EE.UU. y LATAM' : 'También operamos en otras ciudades de México'}</h2>
+      <h2 class="title">También operamos en otras ciudades de México</h2>
       <div class="local-links">
         ${otherCities}
         <a href="../">Ver todas las ciudades →</a>
@@ -434,9 +434,9 @@ function buildHubPage(cities) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'Automatización con IA — México y EE.UU. hispano',
+    name: 'Automatización con IA en México',
     description:
-      'GH Specialist atiende empresas en México y comunidad hispana en EE.UU. con chatbots WhatsApp e IA. Monterrey, CDMX, Los Ángeles, Houston, Miami y más.',
+      'GH Specialist atiende empresas en México con chatbots WhatsApp e IA. Monterrey, CDMX, Guadalajara, Torreón, La Laguna y cobertura nacional.',
     url,
     inLanguage: 'es-MX',
     mainEntity: {
@@ -451,14 +451,14 @@ function buildHubPage(cities) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="../favicon.png" type="image/png">
-  <title>Automatización con IA — México y EE.UU. hispano | GH Specialist</title>
-  <meta name="description" content="Chatbots WhatsApp, CRM Kommo y agentes IA para empresas en México y comunidad hispana en EE.UU.: Los Ángeles, Houston, Miami, Dallas, CDMX, Monterrey y más.">
-  <meta name="keywords" content="automatizar whatsapp con ia, chatbot whatsapp empresas hispanas, agente inteligencia artificial, chatbot whatsapp los angeles, automatizacion ia houston, ia para empresas latinas usa">
+  <title>Automatización con IA en México | GH Specialist</title>
+  <meta name="description" content="Chatbots WhatsApp, CRM Kommo y agentes IA para empresas en México: Monterrey, CDMX, Guadalajara, Torreón, La Laguna, Bajío, norte y sureste.">
+  <meta name="keywords" content="automatizar whatsapp con ia mexico, chatbot whatsapp empresas mexico, agente inteligencia artificial, automatizacion ia monterrey, chatbot whatsapp cdmx, ia para pymes mexico">
   <link rel="canonical" href="${url}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${url}">
-  <meta property="og:title" content="Automatización IA — México y EE.UU. | GH Specialist">
-  <meta property="og:description" content="Cobertura en México y ciudades hispanas de EE.UU. Chatbots WhatsApp e IA en español.">
+  <meta property="og:title" content="Automatización IA en México | GH Specialist">
+  <meta property="og:description" content="Cobertura nacional en México. Chatbots WhatsApp, CRM Kommo e IA para PYMES.">
   <meta property="og:image" content="${SITE}/hero-cdmx.png">
   <meta property="og:locale" content="es_MX">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -509,18 +509,14 @@ function buildHubPage(cities) {
   </header>
   <section class="hero">
     <div class="w">
-      <h1>Automatización con IA en <span style="color:var(--p)">México y EE.UU. hispano</span></h1>
-      <p>Chatbots WhatsApp, CRM Kommo y agentes de IA para empresas en México y la comunidad latina en Estados Unidos. Implementación remota en español.</p>
+      <h1>Automatización con IA en <span style="color:var(--p)">México</span></h1>
+      <p>Chatbots WhatsApp, CRM Kommo y agentes de IA para PYMES en las principales ciudades del país. Sede en Torreón · implementación remota o presencial.</p>
       <a href="${CALENDAR}" class="btn">Diagnóstico gratuito →</a>
     </div>
   </section>
-  <div class="region"><h2>México</h2></div>
+  <div class="region"><h2>Ciudades</h2></div>
   <div class="grid">
       ${cityCards(mxCities)}
-  </div>
-  <div class="region"><h2>Estados Unidos — comunidad hispana</h2></div>
-  <div class="grid">
-      ${cityCards(usCities)}
   </div>
   <section class="search-wrap">
     <h2>Lo que buscan en Google sobre IA</h2>

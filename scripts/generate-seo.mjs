@@ -99,6 +99,7 @@ async function collectBlogArticles() {
     const html = await readFile(full, 'utf8');
     const fileUrl = `${SITE}/blog/${f}`;
     if (isRedirectPage(html, fileUrl)) continue;
+    if (/data-market=["']usa["']/i.test(html)) continue;
     const slug = f.replace(/\.html$/, '');
     articles.push({
       file: f,

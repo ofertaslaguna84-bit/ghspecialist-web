@@ -42,7 +42,7 @@
       ctaWa: '📱 WhatsApp →',
       figCap: 'AI-generated image · GH Specialist',
       indexLabel: 'GH Specialist Blog · SEO + AI',
-      indexH1: 'AI Automation for<br>Businesses in Mexico & USA',
+      indexH1: 'AI Automation for<br>Businesses in Mexico',
       indexSub:
         'SEO-optimized guides and articles. Want a blog like this on your site? <a href="../servicios/web-seo-blog-ia.html" style="color:var(--p);font-weight:700">Web + SEO + AI Blog →</a>',
       ctaBlogH2: 'Want a blog that ranks on Google?',

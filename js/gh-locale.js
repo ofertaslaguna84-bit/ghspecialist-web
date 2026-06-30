@@ -105,7 +105,7 @@
       'blogseo.desc': 'Guías y artículos para automatizar tu negocio. Publicamos contenido pensado para SEO; si quieres el mismo sistema en tu web, lo implementamos.',
       'blogseo.btn': 'Ver blog',
       'blogseo.btn2': 'Web + SEO + Blog IA',
-      'footer.tagline': 'Web Apps IA, Chatbots y Growth Hacker en México y LATAM. GH Specialist — Pedro Luis Díaz Velázquez.',
+      'footer.tagline': 'Agencia de IA en México: Web Apps, Chatbots WhatsApp y Growth Hacker. GH Specialist — Pedro Luis Díaz Velázquez.',
       'reject.p1': 'Por ahora no abrimos agenda para este rango por aquí. <strong>Si tu inversión total del proyecto es menor a USD $1,500</strong> (todo incluido), escríbenos por WhatsApp y vemos si hay otra opción.',
       'reject.wa': 'WhatsApp →',
       'cal.title': 'Elige fecha y hora',
@@ -238,7 +238,7 @@
       'blogseo.desc': 'Guides and articles to automate your business. We publish SEO-focused content; if you want the same system on your site, we implement it.',
       'blogseo.btn': 'Read the blog',
       'blogseo.btn2': 'Web + SEO + AI blog',
-      'footer.tagline': 'AI Web Apps, Chatbots and Growth Hacker in Mexico and LATAM. GH Specialist — Pedro Luis Díaz Velázquez.',
+      'footer.tagline': 'AI agency in Mexico: Web Apps, WhatsApp Chatbots and Growth Hacker. GH Specialist — Pedro Luis Díaz Velázquez.',
       'reject.p1': 'We don’t open the calendar here for this range yet. <strong>If your all-in project is under USD $1,500</strong> (all-in), message us on WhatsApp and we’ll see if there’s another option.',
       'reject.wa': 'WhatsApp →',
       'cal.title': 'Pick date and time',
@@ -376,9 +376,9 @@
       chatbotEn = 'Chatbots from <strong>$' + fmtUsdNum(mxnToUsd(mxn)) + ' USD</strong> (one-time; Kommo not included unless quoted separately).';
     }
     if (state.lang === 'es') {
-      el.innerHTML = 'Trabajamos con empresas en <strong>México y Estados Unidos</strong>. Los proyectos de implementación arrancan desde <strong>' + usd1500 + ' en adelante (todo incluido: licencias y entregables acordados)</strong>. ' + chatbotEs;
+      el.innerHTML = 'Trabajamos con empresas en <strong>México</strong>. ' + chatbotEs + ' Proyectos mayores se cotizan según alcance e integraciones.';
     } else {
-      el.innerHTML = 'We work with companies in <strong>Mexico and the United States</strong>. Implementation projects start at <strong>' + usd1500 + ' and up (all-in: licenses and agreed deliverables)</strong>. ' + chatbotEn;
+      el.innerHTML = 'We work with companies in <strong>Mexico</strong>. ' + chatbotEn + ' Larger projects are quoted based on scope and integrations.';
     }
   }
 
