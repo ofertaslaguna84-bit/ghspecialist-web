@@ -19,7 +19,9 @@ jobs:
         with:
           node-version: '20'
       - name: Generate sitemap and RSS feed
-        run: node scripts/generate-seo.mjs
+        run: |
+          node scripts/generate-us-retired-pages.mjs
+          node scripts/generate-seo.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
