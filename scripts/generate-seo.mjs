@@ -11,6 +11,41 @@ const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const SITE = 'https://ghspecialist.com';
 const BLOG_EXCLUDE = new Set(['_template.html', 'index.html']);
 
+/** Ciudades USA retiradas del SEO — nunca deben entrar al sitemap aunque exista la carpeta. */
+const BLOCKED_CITY_SLUGS = new Set([
+  'los-angeles', 'houston', 'miami', 'san-antonio', 'chicago', 'phoenix', 'dallas',
+  'el-paso', 'san-diego', 'austin', 'las-vegas', 'orlando', 'nueva-york', 'fresno',
+  'albuquerque', 'mcallen', 'sacramento', 'denver', 'san-jose', 'tampa',
+]);
+
+const USA_BLOG_SLUG_RE =
+  /(?:^|\/)(?:.*-usa(?:-|\.|$)|.*-estados-unidos|.*-dallas-texas|.*-hispana(?:-|\.|$)|.*-latinas-usa)/i;
+
+async function loadMexicoCitySlugs() {
+  const cities = JSON.parse(await readFile(join(ROOT, 'data/seo-cities.json'), 'utf8'));
+  return new Set(
+    cities
+      .filter((c) => !c.legacyUrl && (c.country || 'MX') === 'MX' && !BLOCKED_CITY_SLUGS.has(c.slug))
+      .map((c) => c.slug)
+  );
+}
+
+function isBlockedCitySlug(slug) {
+  return BLOCKED_CITY_SLUGS.has(slug);
+}
+
+function isNonMexicoBlog(file, html) {
+  if (/data-market=["']usa["']/i.test(html)) return true;
+  if (/content=["'][^"']*noindex/i.test(html)) return true;
+  if (USA_BLOG_SLUG_RE.test(file)) return true;
+  const title = extractTitle(html).toLowerCase();
+  const desc = extractMeta(html, 'description').toLowerCase();
+  if (/\bee\.?\s*uu\.?\b|estados unidos|comunidad hispana en ee\.uu|empresas latinas en usa|small business usa|dallas, texas/i.test(`${title} ${desc}`)) {
+    return true;
+  }
+  return false;
+}
+
 const SITEMAP_URLS = [
   { path: 'index.html', loc: `${SITE}/`, priority: '1.0' },
   { path: 'blog/index.html', loc: `${SITE}/blog/`, priority: '0.9' },
@@ -99,7 +134,7 @@ async function collectBlogArticles() {
     const html = await readFile(full, 'utf8');
     const fileUrl = `${SITE}/blog/${f}`;
     if (isRedirectPage(html, fileUrl)) continue;
-    if (/data-market=["']usa["']/i.test(html)) continue;
+    if (isNonMexicoBlog(f, html)) continue;
     const slug = f.replace(/\.html$/, '');
     articles.push({
       file: f,
@@ -118,7 +153,7 @@ async function collectBlogArticles() {
   return articles;
 }
 
-async function collectCiudades() {
+async function collectCiudades(mexicoSlugs) {
   const dir = join(ROOT, 'ciudades');
   const entries = [];
   let subdirs;
@@ -128,6 +163,7 @@ async function collectCiudades() {
     return entries;
   }
   for (const d of subdirs.filter((x) => x.isDirectory())) {
+    if (!mexicoSlugs.has(d.name) || isBlockedCitySlug(d.name)) continue;
     const rel = `ciudades/${d.name}/index.html`;
     const full = join(ROOT, rel);
     try {
@@ -144,14 +180,14 @@ async function collectCiudades() {
   return entries.sort((a, b) => a.loc.localeCompare(b.loc));
 }
 
-async function collectServicioCiudad() {
+async function collectServicioCiudad(mexicoSlugs) {
   const entries = [];
   let services;
   let cities;
   try {
     services = JSON.parse(await readFile(join(ROOT, 'data/seo-services.json'), 'utf8'));
     cities = JSON.parse(await readFile(join(ROOT, 'data/seo-cities.json'), 'utf8')).filter(
-      (c) => !c.legacyUrl
+      (c) => !c.legacyUrl && (c.country || 'MX') === 'MX' && mexicoSlugs.has(c.slug)
     );
   } catch {
     return entries;
@@ -247,7 +283,24 @@ async function generateSitemap(blogArticles, servicios, ciudades, servicioCiudad
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
 
   await writeFile(join(ROOT, 'sitemap.xml'), xml, 'utf8');
-  console.log(`✓ sitemap.xml — ${urls.length} URLs`);
+  console.log(`✓ sitemap.xml — ${urls.length} URLs (solo México)`);
+  return urls;
+}
+
+function assertMexicoOnlySitemap(urls) {
+  const bad = urls.filter((u) => {
+    const loc = u.loc.toLowerCase();
+    if (BLOCKED_CITY_SLUGS.has(loc.match(/\/ciudades\/([^/]+)\//)?.[1] || '')) return true;
+    if (BLOCKED_CITY_SLUGS.has(loc.match(/\/servicios\/[^/]+\/([^/]+)\//)?.[1] || '')) return true;
+    if (USA_BLOG_SLUG_RE.test(loc)) return true;
+    if (/\/blog\/[^/]*(estados-unidos|hispanas-usa|latinas-usa|dallas-texas|small-business-usa)/i.test(loc)) return true;
+    return false;
+  });
+  if (bad.length) {
+    console.error('✗ sitemap contiene URLs fuera de México:');
+    bad.forEach((u) => console.error('  -', u.loc));
+    process.exit(1);
+  }
 }
 
 async function generateRss(articles) {
@@ -322,12 +375,14 @@ async function updateBlogIndexSchema(articles) {
 }
 
 async function main() {
+  const mexicoSlugs = await loadMexicoCitySlugs();
   const blogArticles = await collectBlogArticles();
   const servicios = await collectServicios();
-  const ciudades = await collectCiudades();
-  const servicioCiudad = await collectServicioCiudad();
+  const ciudades = await collectCiudades(mexicoSlugs);
+  const servicioCiudad = await collectServicioCiudad(mexicoSlugs);
 
-  await generateSitemap(blogArticles, servicios, ciudades, servicioCiudad);
+  const sitemapUrls = await generateSitemap(blogArticles, servicios, ciudades, servicioCiudad);
+  assertMexicoOnlySitemap(sitemapUrls);
   await generateRss(blogArticles);
   await updateBlogIndexSchema(blogArticles);
 
