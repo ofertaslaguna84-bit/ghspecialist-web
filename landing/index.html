@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- gh-security-meta -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://calendar.app.google https://calendar.google.com https://lookerstudio.google.com https://docs.google.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://formspree.io https://ipapi.co https://ntfy.sh; base-uri 'self'; form-action 'self' https://formspree.io">
   <link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="../favicon.png" type="image/png" sizes="48x48">
   <link rel="icon" type="image/png" sizes="192x192" href="https://ghspecialist.com/icon-192.png">
@@ -94,7 +97,7 @@
     .hero-video-col{text-align:center}
     .hero-video-col .label{color:#e9d5ff;font-size:clamp(12px,1.2vw,14px);margin-bottom:10px;display:block}
     .hero-vertical-frame{border-radius:16px;overflow:hidden;aspect-ratio:9/16;max-width:280px;margin:0 auto;box-shadow:0 24px 56px rgba(0,0,0,.45);border:3px solid rgba(255,255,255,.25);background:#000}
-    .hero-vertical-frame iframe{width:100%;height:100%;border:none}
+    .hero-vertical-frame iframe,.hero-vertical-frame.yt-facade{width:100%;height:100%;border:none}
     .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.14);color:#fff;padding:5px 16px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:.06em;margin-bottom:20px;border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(8px);text-transform:uppercase}
     .hero h1{font-size:clamp(36px,6vw,72px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:#fff;max-width:900px;margin:0 auto 20px}
     .hero h1 .hl{color:#a78bfa}
@@ -196,7 +199,11 @@
 
     /* VIDEO SECTION */
     .vid-hero{max-width:800px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.12);aspect-ratio:16/9;position:relative}
-    .vid-hero iframe{width:100%;height:100%;border:none}
+    .vid-hero iframe,.vid-hero.yt-facade{width:100%;height:100%;border:none}
+    .yt-facade{position:relative;cursor:pointer;background:#000;display:block;padding:0;border:none;font:inherit;color:inherit;text-align:inherit}
+    .yt-facade img{width:100%;height:100%;object-fit:cover;display:block}
+    .yt-facade-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;border:none;background:rgba(124,77,255,.92);color:#fff;font-size:26px;line-height:1;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.35)}
+    .yt-facade-play:hover{background:var(--p2)}
     .short-wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:64px}
     .short-frame{border-radius:24px;overflow:hidden;aspect-ratio:9/16;max-width:280px;margin:0 auto;box-shadow:0 20px 48px rgba(0,0,0,.15);border:4px solid #fff;position:relative}
     .short-frame::before{content:'';position:absolute;inset:0;border-radius:20px;border:1px solid rgba(124,77,255,.3);z-index:1;pointer-events:none}
@@ -353,9 +360,10 @@
       </div>
       <div class="hero-video-col" id="video">
         <span class="label" style="color:#e9d5ff">Mi historia</span>
-        <div class="hero-vertical-frame">
-          <iframe src="https://www.youtube.com/embed/pgJCM3FPHL8" title="Mi historia — Pedro Díaz" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-        </div>
+        <button type="button" class="yt-facade hero-vertical-frame" data-yt-id="pgJCM3FPHL8" data-yt-title="Mi historia — Pedro Díaz" aria-label="Reproducir video: Mi historia — Pedro Díaz">
+          <img src="https://i.ytimg.com/vi/pgJCM3FPHL8/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+          <span class="yt-facade-play" aria-hidden="true">▶</span>
+        </button>
       </div>
     </div>
   </div>
@@ -369,9 +377,10 @@
     <div class="vid-agent-copy">
       <h2 class="title">Así atiende y agenda un agente quitándote más de 20 hrs por semana de tu tiempo.</h2>
     </div>
-    <div class="vid-hero">
-      <iframe src="https://www.youtube.com/embed/HmfqtNRf9f0" title="Agente IA — Pedro Díaz" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-    </div>
+    <button type="button" class="yt-facade vid-hero" data-yt-id="HmfqtNRf9f0" data-yt-title="Agente IA — Pedro Díaz" aria-label="Reproducir video: Agente IA — Pedro Díaz">
+      <img src="https://i.ytimg.com/vi/HmfqtNRf9f0/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+      <span class="yt-facade-play" aria-hidden="true">▶</span>
+    </button>
   </div>
 </section>
 
@@ -789,6 +798,29 @@
     });
     showChat('inmobiliaria');
   }
+
+  document.querySelectorAll('.yt-facade[data-yt-id]').forEach(function (btn) {
+    function loadPlayer() {
+      if (btn.dataset.ytLoaded === '1') return;
+      btn.dataset.ytLoaded = '1';
+      var id = btn.getAttribute('data-yt-id');
+      var title = btn.getAttribute('data-yt-title') || 'Video de YouTube';
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1';
+      iframe.title = title;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.loading = 'lazy';
+      btn.replaceChildren(iframe);
+    }
+    btn.addEventListener('click', loadPlayer);
+    btn.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        loadPlayer();
+      }
+    });
+  });
 </script>
 </body>
 </html>

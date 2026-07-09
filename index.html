@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- gh-security-meta -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://calendar.app.google https://calendar.google.com https://lookerstudio.google.com https://docs.google.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://formspree.io https://ipapi.co https://ntfy.sh; base-uri 'self'; form-action 'self' https://formspree.io">
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="favicon.png" type="image/png" sizes="48x48">
   <link rel="icon" type="image/png" sizes="192x192" href="https://ghspecialist.com/icon-192.png">
@@ -24,8 +27,8 @@
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ghspecialist.com/">
-  <meta property="og:title" content="GH Specialist — Web Apps IA, Chatbots y Growth Hacker">
-  <meta property="og:description" content="Web apps IA, chatbots WhatsApp y growth hacking en México. Automatiza ventas y haz que te encuentren en Google.">
+  <meta property="og:title" content="GH Specialist — Automatización con IA y Chatbots WhatsApp en México">
+  <meta property="og:description" content="Chatbots WhatsApp, CRM Kommo y automatización con IA para empresas en México. Automatiza ventas y posiciona tu negocio en Google.">
   <meta property="og:image" content="https://ghspecialist.com/fotos/slide2_img2.png">
   <meta property="og:locale" content="es_MX">
   <meta property="og:site_name" content="GH Specialist">
@@ -34,8 +37,8 @@
   <link rel="alternate" hreflang="es-mx" href="https://ghspecialist.com/">
   <link rel="alternate" hreflang="x-default" href="https://ghspecialist.com/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="GH Specialist — Web Apps IA, Chatbots y Growth Hacker">
-  <meta name="twitter:description" content="Web apps con IA, chatbots WhatsApp y growth hacker para empresas en México.">
+  <meta name="twitter:title" content="GH Specialist — Automatización con IA y Chatbots WhatsApp en México">
+  <meta name="twitter:description" content="Chatbots WhatsApp, CRM Kommo y automatización con IA para empresas en México. Automatiza ventas y posiciona tu negocio en Google.">
   <meta name="twitter:image" content="https://ghspecialist.com/fotos/slide2_img2.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -568,7 +571,7 @@
   <!-- HEADER -->
   <header class="hdr" id="hdr">
     <div class="hdr-inner">
-      <a href="index.html" class="hdr-logo-link"><img src="2.png" alt="GH Specialist" class="hdr-logo"></a>
+      <a href="index.html" class="hdr-logo-link"><img src="2.png" alt="GH Specialist" class="hdr-logo" width="39" height="28" fetchpriority="high" loading="eager"></a>
       <button type="button" class="hdr-menu-btn" id="hdrMenuBtn" aria-controls="hdrDrawer" aria-expanded="false" aria-label="Abrir menú">
         <span class="hdr-menu-label" id="hdrMenuLabel">Menú</span>
       </button>
@@ -624,10 +627,6 @@
         <a href="blog/" data-i18n="nav.blog">Blog</a>
       </nav>
       <div class="hdr-right">
-        <div class="hdr-lang" id="hdr-lang" role="group" aria-label="Idioma">
-          <button type="button" class="hdr-lang-btn active" data-gh-lang="es" aria-pressed="true">ES</button>
-          <button type="button" class="hdr-lang-btn" data-gh-lang="en" aria-pressed="false">EN</button>
-        </div>
         <span class="hdr-currency-badge" id="currency-badge" title=""></span>
         <a href="https://wa.me/528712638082?text=Hola%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20gratuito" target="_blank" class="hdr-wa" id="hdr-wa-link">
           <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.123 1.522 5.858L0 24l6.338-1.498A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.897 0-3.668-.508-5.194-1.396l-.371-.221-3.764.89.946-3.658-.243-.393A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
@@ -1065,7 +1064,7 @@
     <div class="w">
       <div class="about-grid">
         <div class="about-img fi">
-          <img src="fotos/slide2_img2.png" alt="Pedro Luis Díaz Velázquez — Fundador GH Specialist">
+          <img src="fotos/slide2_img2.png" alt="Pedro Luis Díaz Velázquez — Fundador GH Specialist" width="675" height="1200" loading="lazy">
         </div>
         <div>
           <div class="fi">
@@ -1527,7 +1526,7 @@
     <div class="w">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="2.png" alt="GH Specialist" style="height:28px;filter:brightness(0) invert(1)">
+          <img src="2.png" alt="GH Specialist" width="39" height="28" loading="lazy" style="height:28px;filter:brightness(0) invert(1)">
           <p data-i18n="footer.tagline">Agencia de IA en México: Web Apps, Chatbots WhatsApp y Growth Hacker. GH Specialist — Pedro Luis Díaz Velázquez.</p>
           <div style="margin-top:16px;display:flex;gap:8px">
             <a href="https://wa.me/528712638082" target="_blank" class="fsoc" title="WhatsApp">💬</a>
@@ -1601,9 +1600,10 @@
       title: 'GH Specialist · nueva visita'
     };
   </script>
+  <script src="js/gh-fetch-timeout.js" defer></script>
   <script src="js/gh-visitors.js" defer></script>
 
-  <script src="js/gh-locale.js?v=4"></script>
+  <script src="js/gh-locale.js?v=5" defer></script>
   <script>
     // Scroll progress
     const spbar = document.getElementById('spbar');
@@ -1650,11 +1650,6 @@
       if (overlay) overlay.addEventListener('click', close);
       drawer.querySelectorAll('a').forEach(function (a) {
         a.addEventListener('click', function () {
-          if (window.matchMedia('(max-width:1024px)').matches) close();
-        });
-      });
-      drawer.querySelectorAll('.hdr-lang-btn').forEach(function (b) {
-        b.addEventListener('click', function () {
           if (window.matchMedia('(max-width:1024px)').matches) close();
         });
       });
@@ -1706,11 +1701,12 @@
       if (formId) {
         if (btn) { btn.disabled = true; }
         var fd = new FormData(f);
-        fetch('https://formspree.io/f/' + formId, {
+        var fetchFn = window.ghFetchWithTimeout || fetch;
+        fetchFn('https://formspree.io/f/' + formId, {
           method: 'POST',
           body: fd,
           headers: { Accept: 'application/json' }
-        })
+        }, 10000)
           .then(function (res) {
             if (res.ok) {
               f.reset();
@@ -1768,7 +1764,7 @@
         iframe.title = ght('cal.title', 'Citas de GH Specialist');
         iframe.setAttribute('allow', 'fullscreen');
         iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
-        iframe.loading = 'eager';
+        iframe.loading = 'lazy';
         iframe.className = 'gh-book-cal-iframe';
         wrap.appendChild(iframe);
         container.appendChild(wrap);
@@ -1860,11 +1856,12 @@
           try { cal.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (x) {}
         }
         if (FORM_ID) {
-          fetch('https://formspree.io/f/' + FORM_ID, {
+          var fetchFn = window.ghFetchWithTimeout || fetch;
+          fetchFn('https://formspree.io/f/' + FORM_ID, {
             method: 'POST',
             body: fd,
             headers: { Accept: 'application/json' }
-          }).then(function (r) { afterNotify(); }).catch(function () { afterNotify(); });
+          }, 10000).then(function (r) { afterNotify(); }).catch(function () { afterNotify(); });
         } else {
           afterNotify();
         }

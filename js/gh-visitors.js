@@ -55,13 +55,14 @@
   }
 
   if (typeof fetch !== 'undefined') {
-    fetch(url, {
+    var fetchFn = typeof window !== 'undefined' && window.ghFetchWithTimeout ? window.ghFetchWithTimeout : fetch;
+    fetchFn(url, {
       method: 'POST',
       body: body,
       headers: headers,
       mode: 'cors',
       keepalive: true
-    })
+    }, 10000)
       .then(function (res) {
         if (res && res.ok) {
           markSent();
