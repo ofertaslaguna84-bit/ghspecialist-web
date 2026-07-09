@@ -39,7 +39,7 @@ const BASE_IMAGES = [
   { path: 'hero-queretaro.jpg', city: 'Querétaro', tags: ['queretaro', 'mexico'] },
   { path: 'hero-chihuahua.jpg', city: 'Chihuahua', tags: ['chihuahua', 'mexico'] },
   { path: 'hero-monterrey.png', city: 'Monterrey', tags: ['monterrey', 'nuevo leon', 'mexico'] },
-  { path: 'hero-cdmx.png', city: 'CDMX', tags: ['cdmx', 'ciudad de mexico', 'mexico'] },
+  { path: 'hero-cdmx.webp', city: 'CDMX', tags: ['cdmx', 'ciudad de mexico', 'mexico'] },
   { path: 'hero-puebla.png', city: 'Puebla', tags: ['puebla', 'mexico'] },
   { path: 'hero-leon.png', city: 'León', tags: ['leon', 'guanajuato', 'mexico'] },
   { path: 'hero-merida.png', city: 'Mérida', tags: ['merida', 'yucatan', 'mexico'] },

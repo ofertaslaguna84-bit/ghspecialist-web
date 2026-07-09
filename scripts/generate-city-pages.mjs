@@ -459,7 +459,7 @@ function buildHubPage(cities) {
   <meta property="og:url" content="${url}">
   <meta property="og:title" content="Automatización IA en México | GH Specialist">
   <meta property="og:description" content="Cobertura nacional en México. Chatbots WhatsApp, CRM Kommo e IA para PYMES.">
-  <meta property="og:image" content="${SITE}/hero-cdmx.png">
+  <meta property="og:image" content="${SITE}/hero-cdmx.webp">
   <meta property="og:locale" content="es_MX">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
