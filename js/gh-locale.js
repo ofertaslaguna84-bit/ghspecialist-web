@@ -1,8 +1,7 @@
 /**
- * GH Specialist — idioma manual (ES/EN) + moneda por IP (solo MX → MXN; resto → USD).
+ * GH Specialist — moneda por IP (MX → MXN; resto → USD) y textos en español (SEO).
  */
 (function () {
-  var STORAGE_KEY = 'gh_lang';
   var RATE = 17.2;
   var PRICES = { starter: 12000, business: 35000, enterprise: 120000 };
 
@@ -25,8 +24,10 @@
 
   var T = {
     es: {
-      'meta.title': 'GH Specialist — Web Apps IA, Chatbots y Growth Hacker | México',
-      'meta.desc': 'Web apps con IA, chatbots WhatsApp y growth hacking para PYMES en México. Desarrollo, automatización y posicionamiento en Google. Pedro Luis Díaz Velázquez.',
+      'meta.title': 'GH Specialist — Automatización con IA y Chatbots WhatsApp en México',
+      'meta.desc': 'Chatbots WhatsApp, CRM Kommo y automatización con IA para empresas en México. Monterrey, CDMX, Guadalajara, Torreón y cobertura nacional. Pedro Luis Díaz Velázquez.',
+      'meta.ogTitle': 'GH Specialist — Automatización con IA y Chatbots WhatsApp en México',
+      'meta.ogDesc': 'Chatbots WhatsApp, CRM Kommo y automatización con IA para empresas en México. Automatiza ventas y posiciona tu negocio en Google.',
       'nav.servicios': 'Servicios',
       'nav.como': 'Cómo funciona',
       'nav.pedro': 'Pedro',
@@ -40,8 +41,8 @@
       'pillars.webapps': 'Web Apps IA',
       'pillars.chatbots': 'Chatbots',
       'pillars.growth': 'Growth Hacker',
-      'embudo.title': 'Web Apps IA, Chatbots y Growth Hacker para que te encuentren y vendas en automático',
-      'embudo.sub': 'Desarrollo web con IA · WhatsApp 24/7 · Estrategia de crecimiento en Google y redes',
+      'embudo.title': 'Chatbots WhatsApp y automatización con IA en México',
+      'embudo.sub': 'Web Apps IA · ventas 24/7 por WhatsApp · posicionamiento en Google en Monterrey, CDMX, Guadalajara y todo el país',
       'svc.label': '¿Qué hacemos?',
       'svc.title': 'Web Apps IA · Chatbots · Growth Hacker',
       'svc.sub': 'Tres pilares para PYMES en México: tu web con IA, ventas por WhatsApp y crecimiento medible en Google.',
@@ -445,11 +446,19 @@
   }
 
   function applyMeta() {
+    document.documentElement.lang = 'es';
     var title = t('meta.title');
     document.title = title;
     var mt = document.querySelector('meta[name="description"]');
     if (mt) mt.setAttribute('content', t('meta.desc'));
-    document.documentElement.lang = state.lang;
+    var ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', t('meta.ogTitle') || title);
+    var ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', t('meta.ogDesc') || t('meta.desc'));
+    var twTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twTitle) twTitle.setAttribute('content', t('meta.ogTitle') || title);
+    var twDesc = document.querySelector('meta[name="twitter:description"]');
+    if (twDesc) twDesc.setAttribute('content', t('meta.ogDesc') || t('meta.desc'));
   }
 
   function applyHeaderLinks() {
@@ -628,13 +637,7 @@
     renderBookChecks();
     refreshCalendarCopy();
 
-    document.querySelectorAll('.hdr-lang-btn').forEach(function (btn) {
-      var isActive = btn.getAttribute('data-gh-lang') === state.lang;
-      btn.classList.toggle('active', isActive);
-      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-    });
-
-    window.dispatchEvent(new CustomEvent('gh-localechange', { detail: { lang: state.lang, currency: state.currency } }));
+    window.dispatchEvent(new CustomEvent('gh-localechange', { detail: { lang: 'es', currency: state.currency } }));
 
     window.__ghLocaleState = state;
     window.__ghT = t;
@@ -642,15 +645,6 @@
       var pack = ERR[state.lang] || ERR.es;
       return pack[key] || ERR.es[key] || '';
     };
-  }
-
-  function setLang(lang) {
-    if (lang !== 'es' && lang !== 'en') return;
-    state.lang = lang;
-    try {
-      localStorage.setItem(STORAGE_KEY, lang);
-    } catch (e) {}
-    renderAll();
   }
 
   async function detectCurrency() {
@@ -671,17 +665,7 @@
   }
 
   function init() {
-    try {
-      var saved = localStorage.getItem(STORAGE_KEY);
-      if (saved === 'es' || saved === 'en') state.lang = saved;
-    } catch (e) {}
-
-    document.addEventListener('click', function (e) {
-      var btn = e.target.closest('.hdr-lang-btn');
-      if (!btn) return;
-      var lang = btn.getAttribute('data-gh-lang');
-      if (lang) setLang(lang);
-    });
+    state.lang = 'es';
 
     detectCurrency().then(function (cur) {
       state.currency = cur;
