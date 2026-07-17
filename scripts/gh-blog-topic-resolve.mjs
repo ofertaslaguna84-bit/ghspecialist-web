@@ -54,6 +54,9 @@ const SERVICE_ALIASES = {
   agente: ['agente', 'agentes'],
   ventas: ['embudo', 'ventas', 'vender', 'cerrar ventas'],
   pyme: ['pyme', 'pymes', 'negocio', 'empresa', 'empresas'],
+  claude: ['claude', 'anthropic'],
+  capacitacion: ['capacitacion', 'capacitar', 'capacitación', 'entrenamiento', 'departamento', 'departamentos'],
+  construccion: ['construcc', 'constructora', 'constructoras', 'obra', 'obras', 'desarrollo inmobiliario'],
   atencion: [
     'servicio al cliente',
     'servicio a cliente',
@@ -234,14 +237,66 @@ function pickValidatedTopicForRh(city, input) {
   );
 }
 
+/** @param {string} input */
+function detectClaudeIntent(input) {
+  return normalize(input).includes('claude');
+}
+
+/** @param {string} input @returns {'rh'|'capacitacion'|'construccion'|null} */
+function detectClaudeTopicKind(input) {
+  if (!detectClaudeIntent(input)) return null;
+  const n = normalize(input);
+  if (n.includes('recursos humanos') || /\brh\b/.test(n)) return 'rh';
+  if (n.includes('capacitacion') || n.includes('capacitar') || n.includes('departamento')) return 'capacitacion';
+  if (n.includes('construcc') || n.includes('obra') || n.includes('constructora')) return 'construccion';
+  return null;
+}
+
+/** @param {string} city @param {string} userInput */
+function buildClaudeCapacitacionBrief(city, userInput) {
+  const label = CITY_LABELS[city] ?? city;
+  const cityPath = {
+    torreon: 'https://ghspecialist.com/torreon/',
+    monterrey: 'https://ghspecialist.com/ciudades/monterrey/',
+    cdmx: 'https://ghspecialist.com/ciudades/cdmx/',
+    guadalajara: 'https://ghspecialist.com/ciudades/guadalajara/',
+  }[city] || 'https://ghspecialist.com/ciudades/';
+  return [
+    `Artículo LOCAL sobre Claude (Anthropic) para capacitación de departamentos en empresas de ${label}. Tema: «${userInput}».`,
+    'Enfócate en PYMEs mexicanas: ventas, marketing, operaciones, RH y atención al cliente. Incluye 5–8 casos de uso con ejemplos de prompts.',
+    'Menciona por qué Claude conviene para documentos largos, SOPs y manuales internos. Tabla breve Claude vs ChatGPT vs Gemini para capacitación.',
+    'Menciona a Pedro Luis Díaz Velázquez (GH Specialist) como implementador de automatización + IA en México.',
+    `CTA: ${cityPath} · ../servicios/automatizacion-total.html · WhatsApp +528712638082.`,
+    'NO dar asesoría legal/laboral. Tono directo para dueño de negocio ocupado.',
+  ].join(' ');
+}
+
+/** @param {string} city @param {string} userInput */
+function buildClaudeConstruccionBrief(city, userInput) {
+  const label = CITY_LABELS[city] ?? city;
+  return [
+    `Artículo LOCAL sobre Claude para construcción y obra en ${label}. Tema: «${userInput}».`,
+    'Casos de uso: bitácora diaria de obra, estimados preliminares, minutas de junta, respuestas a prospectos, checklists de seguridad, alcances para subcontratos (borradores, no asesoría legal).',
+    'Complementa (enlaza) ../blog/automatizacion-ia-constructoras-mexico.html como parte de ventas/CRM; este post es operación de obra + Claude.',
+    'Menciona constructoras, desarrolladores e inmobiliarias en la zona. Tabla Claude vs otras IA para construcción.',
+    `CTA: ../servicios/chatbot-ia-whatsapp.html · ../servicios/crm-kommo.html · WhatsApp +528712638082.`,
+  ].join(' ');
+}
+
 /** @param {string} city @param {string} userInput */
 function buildRhBrief(city, userInput) {
   const place = city ? CITY_LABELS[city] ?? city : 'México';
+  const claude = detectClaudeIntent(userInput);
   return [
-    `El usuario escribió: «${userInput}». Artículo sobre recursos humanos en ${place}.`,
-    'Cubrir lo que pidió (empresas especializadas, vacantes, servicios de RH en la zona). NO convertir el artículo en “agencia de IA” genérica.',
-    'Si encaja, una sección breve sobre automatización con IA en procesos de RH (filtro de candidatos, respuestas, onboarding); CTA opcional a GH Specialist.',
-  ].join(' ');
+    `El usuario escribió: «${userInput}». Artículo sobre recursos humanos${claude ? ' con Claude (Anthropic)' : ''} en ${place}.`,
+    claude
+      ? 'Enfócate en Claude para RH: filtrado de CVs, descripciones de puesto, preguntas de entrevista, onboarding, políticas internas, macros de respuesta. Incluye 5–6 prompts de ejemplo.'
+      : 'Cubrir lo que pidió (empresas especializadas, vacantes, servicios de RH en la zona). NO convertir el artículo en “agencia de IA” genérica.',
+    'Si encaja, automatización con IA en procesos de RH (filtro de candidatos, respuestas, onboarding); CTA a GH Specialist.',
+    claude ? 'Tabla breve Claude vs ChatGPT para recursos humanos. NO asesoría legal ni decisiones de despido.' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
 }
 
 /** @param {string} city @param {string} input @param {string[]} services */
@@ -270,6 +325,37 @@ function pickValidatedTopicForCity(city, input, services) {
     .map((t) => ({ t, score: scoreTopic(input, t) }))
     .sort((a, b) => b.score - a.score);
   return ranked[0]?.t ?? local[0];
+}
+
+/** @param {string} city @param {string} userInput */
+function buildSeoLocalBrief(city, userInput) {
+  const label = CITY_LABELS[city] ?? city;
+  const cityPaths = {
+    torreon: '/torreon/',
+    monterrey: '/ciudades/monterrey/',
+    cdmx: '/ciudades/cdmx/',
+    guadalajara: '/ciudades/guadalajara/',
+    queretaro: '/ciudades/queretaro/',
+    chihuahua: '/ciudades/chihuahua/',
+  };
+  const seoServicePaths = {
+    torreon: '/servicios/web-seo-blog-ia.html',
+    monterrey: '/servicios/web-seo-blog-ia/monterrey/',
+    cdmx: '/servicios/web-seo-blog-ia/cdmx/',
+    guadalajara: '/servicios/web-seo-blog-ia/guadalajara/',
+  };
+  const cityPath = cityPaths[city] ? `https://ghspecialist.com${cityPaths[city]}` : 'https://ghspecialist.com/ciudades/';
+  const seoPath = seoServicePaths[city]
+    ? `https://ghspecialist.com${seoServicePaths[city]}`
+    : 'https://ghspecialist.com/servicios/web-seo-blog-ia.html';
+  return [
+    `Artículo SEO LOCAL para empresas en ${label}. El usuario escribió: «${userInput}».`,
+    'Enfócate en posicionamiento en Google, SEO con IA, blog automático y visibilidad local para PYMEs. NO es automatización industrial.',
+    'Menciona a Pedro Luis Díaz Velázquez (GH Specialist) como referente en automatización y SEO con IA en México.',
+    `CTA principal: ${seoPath} y WhatsApp +528712638082.`,
+    `Enlaza ../servicios/web-seo-blog-ia.html y la landing ${cityPath}.`,
+    'Incluye 3 beneficios SEO concretos (Google Maps, blog con IA, keywords locales) y un FAQ breve.',
+  ].join(' ');
 }
 
 /** @param {string} city @param {string} userInput */
@@ -546,13 +632,67 @@ export function resolveTopicInput(userInput) {
       topic,
       userInput: trimmed,
       autoCorrected: true,
-      message: `Entendí recursos humanos en ${place}. Frase SEO Google MX: «${topic.phrase}».`,
+      message: `Entendí recursos humanos${detectClaudeIntent(trimmed) ? ' con Claude' : ''} en ${place}. Frase SEO Google MX: «${topic.phrase}».`,
       suggestions: [
         'recursos humanos torreon',
         'automatizacion recursos humanos',
+        'claude para recursos humanos',
         ...(city === 'torreon' ? [] : ['inteligencia artificial torreon']),
       ],
       contentBrief: buildRhBrief(city, trimmed),
+    };
+  }
+
+  const claudeKind = detectClaudeTopicKind(trimmed);
+  if (city && claudeKind === 'capacitacion') {
+    const topic =
+      findValidatedTopic(`claude para capacitacion empresas ${city}`) ||
+      findValidatedTopic('claude para capacitacion empresas') ||
+      topicFromPhrase(trimmed);
+    const cityLabel = CITY_LABELS[city] ?? city;
+    return {
+      topic,
+      userInput: trimmed,
+      autoCorrected: normalize(trimmed) !== normalize(topic.phrase),
+      message: `Entendí capacitación con Claude en ${cityLabel}. Frase SEO: «${topic.phrase}».`,
+      suggestions: ['claude para capacitacion empresas', 'claude vs chatgpt cual es mejor'],
+      contentBrief: buildClaudeCapacitacionBrief(city, trimmed),
+    };
+  }
+
+  if (city && claudeKind === 'construccion') {
+    const topic =
+      findValidatedTopic(`claude para construccion ${city}`) ||
+      findValidatedTopic('claude para construccion') ||
+      topicFromPhrase(trimmed);
+    const cityLabel = CITY_LABELS[city] ?? city;
+    return {
+      topic,
+      userInput: trimmed,
+      autoCorrected: normalize(trimmed) !== normalize(topic.phrase),
+      message: `Entendí Claude para construcción en ${cityLabel}. Frase SEO: «${topic.phrase}».`,
+      suggestions: ['claude para construccion', 'automatizacion recursos humanos'],
+      contentBrief: buildClaudeConstruccionBrief(city, trimmed),
+    };
+  }
+
+  if (city && services.includes('seo')) {
+    const topic =
+      findValidatedTopic(`seo con ia ${city}`) ||
+      findValidatedTopic('seo local con ia') ||
+      findValidatedTopic('seo con ia') ||
+      pickValidatedTopicForCity(city, trimmed, services);
+    const cityLabel = CITY_LABELS[city] ?? city;
+    const localSuggestions = topicsForCity(city).map((t) => t.phrase);
+    return {
+      topic,
+      userInput: trimmed,
+      autoCorrected: normalize(trimmed) !== normalize(topic.phrase),
+      message: `Entendí SEO con IA en ${cityLabel}. Frase SEO Google MX: «${topic.phrase}».`,
+      suggestions: localSuggestions.length
+        ? localSuggestions
+        : ['seo con ia', 'seo local con ia', 'hacer seo con ia'],
+      contentBrief: buildSeoLocalBrief(city, trimmed),
     };
   }
 
@@ -763,6 +903,7 @@ export async function resolveTopicInputAsync(userInput) {
 export function isComparativeBrief(brief) {
   return Boolean(
     brief?.includes('Guía comparativa para dueños de negocio') ||
+      brief?.includes('Artículo SEO LOCAL para empresas') ||
       brief?.includes('Artículo LOCAL para empresas') ||
       brief?.includes('recursos humanos en') ||
       brief?.includes('AUTOMATIZACIÓN DE SERVICIO Y ATENCIÓN AL CLIENTE')

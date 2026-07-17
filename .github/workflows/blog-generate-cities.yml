@@ -1,0 +1,71 @@
+name: Blog SEO local — 4 ciudades (Torreón, MTY, CDMX, GDL)
+
+on:
+  workflow_dispatch:
+    inputs:
+      city:
+        description: 'Ciudad (vacío = las 4)'
+        required: false
+        type: choice
+        options:
+          - ''
+          - torreon
+          - monterrey
+          - cdmx
+          - guadalajara
+  schedule:
+    # Primer lunes de cada mes, 10:00 UTC (4:00 CDMX)
+    - cron: '0 10 1-7 * 1'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generar artículos SEO por ciudad
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          BLOG_GEMINI_IMAGES: '1'
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          BLOG_GENERATE_SECRET: ${{ secrets.BLOG_GENERATE_SECRET }}
+          CLIENT_SECRET: ${{ secrets.BLOG_GENERATE_SECRET }}
+          BLOG_CITY: ${{ github.event.inputs.city }}
+          BLOG_BATCH_DELAY_MS: '12000'
+        run: node scripts/blog-generate-cities-batch.mjs
+
+      - name: Commit y push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add blog/ sitemap.xml blog/feed.xml blog-generate-result.json torreon/ llms.txt f7e2a9b1c4d6e8f1029384756acdef0123.txt robots.txt servicios/ index.html js/gh-blog-topic.js 2>/dev/null || true
+          git diff --staged --quiet && echo "Sin cambios en git" || (git commit -m "blog: lote SEO local ciudades ($(date -u +%Y-%m-%d))" && git push)
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Publicar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

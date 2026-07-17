@@ -1,9 +1,10 @@
 /**
  * Prepara generación: TU tema manda; Google Suggest solo aporta 2–5 keywords para el texto.
  */
-import { pickNextValidatedTopic, topicFromPhrase } from './gh-blog-validated-keywords.mjs';
+import { pickNextValidatedTopic } from './gh-blog-validated-keywords.mjs';
 import { suggestPhrasesForUserInput } from './gh-blog-google-suggest.mjs';
 import { pickSeoKeywordsForArticle } from './gh-blog-keywords-pick.mjs';
+import { resolveTopicInputAsync } from './gh-blog-topic-resolve.mjs';
 import {
   gatherIndexingKeywords,
   INDEXING_REGIONS,
@@ -31,20 +32,20 @@ function normalize(s) {
  */
 export async function prepareBlogGeneration(userInput, market = 'mx') {
   const trimmed = userInput.trim();
+  const resolved = await resolveTopicInputAsync(trimmed);
   const suggestions = await suggestPhrasesForUserInput(trimmed, market);
   const seoKeywords = pickSeoKeywordsForArticle(trimmed, suggestions, 5);
   const indexingKeywords = await gatherIndexingKeywords(trimmed, seoKeywords, market);
-  const phrase = normalize(trimmed);
 
   return {
     market,
-    topic: topicFromPhrase(phrase),
-    userTopic: trimmed,
-    seoKeywords,
+    topic: resolved.topic,
+    userTopic: resolved.userInput,
+    seoKeywords: seoKeywords.length ? seoKeywords : [resolved.topic.phrase],
     indexingKeywords,
-    contentBrief: undefined,
-    autoCorrected: false,
-    message: `Tema del artículo (${market.toUpperCase()}): «${trimmed}». Keywords: ${seoKeywords.join(' · ')}`,
+    contentBrief: resolved.contentBrief,
+    autoCorrected: resolved.autoCorrected,
+    message: resolved.message,
   };
 }
 
