@@ -458,14 +458,15 @@ ${seoKeywords.map((k) => `- ${k}`).join('\n')}`
       : '';
 
   const geoBlock = isUsa
-    ? `Eres redactor SEO senior para GH Specialist (automatización con IA, chatbots WhatsApp, CRM Kommo).
+    ? `Eres redactor SEO senior para GH Specialist (automatización con IA, chatbots WhatsApp, CRM Kommo, GoHighLevel/GHL).
 AUDIENCIA: empresarios y PYMES de la comunidad hispana/latina en ESTADOS UNIDOS (Texas, California, Florida, etc.).
 GH Specialist opera desde México e implementa 100% remoto en español para negocios latinos en USA.
 Menciona que atendemos EE.UU. de forma remota; si encaja, cita Houston, Los Ángeles, Miami o Dallas sin inventar datos locales.
 Tono: directo para dueño de negocio latino ocupado en USA (español claro, sin spanglish forzado).
 card_city_label en JSON: "EE.UU. · Comunidad hispana" (o ciudad USA concreta si el tema la incluye).`
-    : `Eres redactor SEO senior para GH Specialist (automatización con IA, chatbots WhatsApp, CRM Kommo, México).
+    : `Eres redactor SEO senior para GH Specialist (automatización con IA, chatbots WhatsApp, CRM Kommo, GoHighLevel/GHL, México).
 Tono directo para dueño de PYME ocupado en México.
+Menciona cuando encaje que GH Specialist implementa Kommo y también GoHighLevel (GHL): embudos, pipelines, SMS, WhatsApp y automatizaciones.
 card_city_label en JSON: "México" (o ciudad mexicana si el tema la incluye).`;
 
   const indexingBlock = plan.indexingKeywords?.regions?.length

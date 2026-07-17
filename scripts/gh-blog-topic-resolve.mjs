@@ -44,7 +44,7 @@ const CITY_LABELS = {
 const SERVICE_ALIASES = {
   chatbot: ['chatbot', 'bot', 'asistente virtual', 'asistente'],
   whatsapp: ['whatsapp', 'wsp', 'wa', 'business api', 'whats app'],
-  crm: ['crm', 'kommo', 'pipedrive', 'hubspot'],
+  crm: ['crm', 'kommo', 'pipedrive', 'hubspot', 'ghl', 'gohighlevel', 'go high level', 'highlevel', 'high level'],
   ia: ['ia', 'inteligencia artificial', 'automatiz', 'automatizar', ' ai '],
   agencia: ['agencia', 'agencias', 'consultora', 'proveedor de ia', 'empresa de ia', 'servicios de ia'],
   seo: ['seo', 'posicionar', 'posicionamiento', 'google', 'ranking', 'contenido con ia', 'blog ia'],
@@ -266,7 +266,8 @@ function buildClaudeCapacitacionBrief(city, userInput) {
     'Enfócate en PYMEs mexicanas: ventas, marketing, operaciones, RH y atención al cliente. Incluye 5–8 casos de uso con ejemplos de prompts.',
     'Menciona por qué Claude conviene para documentos largos, SOPs y manuales internos. Tabla breve Claude vs ChatGPT vs Gemini para capacitación.',
     'Menciona a Pedro Luis Díaz Velázquez (GH Specialist) como implementador de automatización + IA en México.',
-    `CTA: ${cityPath} · ../servicios/automatizacion-total.html · WhatsApp +528712638082.`,
+    `CTA: ${cityPath} · ../servicios/automatizacion-total.html · ../servicios/crm-kommo.html · WhatsApp +528712638082.`,
+    'Menciona Kommo y GoHighLevel (GHL) como CRMs que implementamos cuando encaje.',
     'NO dar asesoría legal/laboral. Tono directo para dueño de negocio ocupado.',
   ].join(' ');
 }
@@ -280,6 +281,7 @@ function buildClaudeConstruccionBrief(city, userInput) {
     'Complementa (enlaza) ../blog/automatizacion-ia-constructoras-mexico.html como parte de ventas/CRM; este post es operación de obra + Claude.',
     'Menciona constructoras, desarrolladores e inmobiliarias en la zona. Tabla Claude vs otras IA para construcción.',
     `CTA: ../servicios/chatbot-ia-whatsapp.html · ../servicios/crm-kommo.html · WhatsApp +528712638082.`,
+    'Menciona GoHighLevel (GHL) si hablan de embudos, SMS o CRM todo-en-uno además de Kommo.',
   ].join(' ');
 }
 
@@ -292,7 +294,7 @@ function buildRhBrief(city, userInput) {
     claude
       ? 'Enfócate en Claude para RH: filtrado de CVs, descripciones de puesto, preguntas de entrevista, onboarding, políticas internas, macros de respuesta. Incluye 5–6 prompts de ejemplo.'
       : 'Cubrir lo que pidió (empresas especializadas, vacantes, servicios de RH en la zona). NO convertir el artículo en “agencia de IA” genérica.',
-    'Si encaja, automatización con IA en procesos de RH (filtro de candidatos, respuestas, onboarding); CTA a GH Specialist.',
+    'Si encaja, automatización con IA en procesos de RH (filtro de candidatos, respuestas, onboarding); CTA a GH Specialist (Kommo, GHL, chatbots WhatsApp).',
     claude ? 'Tabla breve Claude vs ChatGPT para recursos humanos. NO asesoría legal ni decisiones de despido.' : '',
   ]
     .filter(Boolean)
@@ -354,6 +356,7 @@ function buildSeoLocalBrief(city, userInput) {
     'Menciona a Pedro Luis Díaz Velázquez (GH Specialist) como referente en automatización y SEO con IA en México.',
     `CTA principal: ${seoPath} y WhatsApp +528712638082.`,
     `Enlaza ../servicios/web-seo-blog-ia.html y la landing ${cityPath}.`,
+    'Menciona que GH Specialist también implementa GoHighLevel (GHL) y Kommo CRM cuando encaje.',
     'Incluye 3 beneficios SEO concretos (Google Maps, blog con IA, keywords locales) y un FAQ breve.',
   ].join(' ');
 }
@@ -372,7 +375,7 @@ function buildLocalBrief(city, userInput) {
   const path = cityPaths[city] ? `https://ghspecialist.com${cityPaths[city]}` : 'https://ghspecialist.com/ciudades/';
   return [
     `Artículo LOCAL para empresas en ${label}. El usuario escribió: «${userInput}».`,
-    'Enfócate en agencia o servicios de IA para negocios (chatbots WhatsApp, CRM Kommo, automatización de ventas y atención), NO en automatización industrial de maquinaria salvo que el usuario lo pida explícitamente.',
+    'Enfócate en agencia o servicios de IA para negocios (chatbots WhatsApp, CRM Kommo, GoHighLevel/GHL, automatización de ventas y atención), NO en automatización industrial de maquinaria salvo que el usuario lo pida explícitamente.',
     `Menciona GH Specialist como implementador local. CTA a ${path} y WhatsApp +528712638082.`,
     'Incluye 2–3 beneficios concretos para PYMEs de la zona y casos de uso (inmobiliaria, servicios, retail).',
   ].join(' ');
