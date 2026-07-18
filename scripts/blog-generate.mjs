@@ -8,6 +8,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
 import { pingSearchEngines } from './indexnow.mjs';
+import { assertBlogClientSecret } from './gh-blog-secret.mjs';
 import { isComparativeBrief } from './gh-blog-topic-resolve.mjs';
 import { prepareBlogGeneration, prepareBlogAuto, parseBlogMarket } from './gh-blog-prepare.mjs';
 import {
@@ -719,14 +720,7 @@ async function insertCardInIndex(cardHtml) {
 }
 
 async function main() {
-  const clientSecret = process.env.CLIENT_SECRET || '';
-  const expectedSecret = process.env.BLOG_GENERATE_SECRET || '';
-  if (expectedSecret && clientSecret !== expectedSecret) {
-    throw new Error(
-      'Secret inválido: la clave del panel (panelPassword) debe coincidir con BLOG_GENERATE_SECRET en GitHub Actions.'
-    );
-  }
-
+  await assertBlogClientSecret(process.env.CLIENT_SECRET || '');
   const hasKey =
     process.env.DEEPSEEK_API_KEY?.trim() ||
     process.env.QWEN_API_KEY?.trim() ||

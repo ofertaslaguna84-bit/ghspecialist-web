@@ -6,6 +6,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
+import { assertBlogClientSecret } from './gh-blog-secret.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const SITE = 'https://ghspecialist.com';
@@ -92,13 +93,7 @@ function patchCardInIndex(html, slug, title, cardExcerpt) {
 }
 
 async function main() {
-  const clientSecret = process.env.CLIENT_SECRET || '';
-  const expectedSecret = process.env.BLOG_GENERATE_SECRET || '';
-  if (expectedSecret && clientSecret !== expectedSecret) {
-    console.error('Secret inválido');
-    process.exit(1);
-  }
-
+  await assertBlogClientSecret(process.env.CLIENT_SECRET || '');
   let payload = {};
   try {
     payload = JSON.parse(process.env.BLOG_SAVE_PAYLOAD || '{}');
