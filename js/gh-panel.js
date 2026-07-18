@@ -268,6 +268,12 @@
           return true;
         }
         showGithubTokenBox(true);
+        if (r.status === 401) {
+          setBlogStatus(
+            'warn',
+            '<strong>El proxy del blog aún no tiene la clave nueva.</strong> Pega un token GitHub abajo para generar/borrar, o espera a que se sincronice Vercel.'
+          );
+        }
         return false;
       })
       .catch(function () {
