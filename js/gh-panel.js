@@ -497,7 +497,7 @@
           throw new Error('No se pudo contactar el servidor del blog. Revisa tu conexión.');
         });
     };
-    if (getGithubToken()) return viaGithub().catch(viaApi);
+    if (getGithubToken()) return viaApi().catch(viaGithub);
     return viaApi().catch(viaGithub);
   }
 
@@ -521,7 +521,7 @@
         });
       });
     };
-    if (getGithubToken()) return viaGithub().catch(viaApi);
+    if (getGithubToken()) return viaApi().catch(viaGithub);
     return viaApi().catch(viaGithub);
   }
 
