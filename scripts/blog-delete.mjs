@@ -7,6 +7,7 @@ import { readFile, writeFile, unlink, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
+import { assertBlogClientSecret } from './gh-blog-secret.mjs';
 import { pingSearchEngines } from './indexnow.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
@@ -40,10 +41,10 @@ async function removeHeroImages(slug) {
 }
 
 async function main() {
-  const clientSecret = process.env.CLIENT_SECRET || '';
-  const expectedSecret = process.env.BLOG_GENERATE_SECRET || '';
-  if (expectedSecret && clientSecret !== expectedSecret) {
-    console.error('Secret inválido');
+  try {
+    await assertBlogClientSecret(process.env.CLIENT_SECRET || '');
+  } catch (err) {
+    console.error(err.message || 'Secret inválido');
     process.exit(1);
   }
 
