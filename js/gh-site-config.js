@@ -36,7 +36,7 @@
  * blogApiBase → (opcional) proxy para disparar GitHub Actions si no tienes token en el panel.
  * El estado del workflow se lee directo de ghspecialist-web (blog-generate-result.json).
  * Respaldo: token GitHub con repo + workflow en ghspecialist-web.
- * Tras cambiar panelPassword, el workflow sync-panel-secret.yml actualiza GitHub + Vercel.
+ * Tras cambiar panelPassword, el workflow sync-panel-secret.yml actualiza GitHub + Vercel (Actions).
  *
  * Tras editar: git add js/gh-site-config.js && git commit -m "chore: config" && git push origin main
  */
