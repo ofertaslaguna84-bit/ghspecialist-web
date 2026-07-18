@@ -4,6 +4,7 @@
 (function () {
   var C = window.GH_SITE_CONFIG || {};
   var PASS = (C.panelPassword || '').trim();
+  var API_SECRET = (C.blogApiSecret || PASS).trim();
   var SESSION_KEY = 'gh_panel_auth';
 
   function $(id) {
@@ -261,17 +262,17 @@
   }
 
   function checkBlogApiHealth() {
-    return fetch(apiBase() + '/api/ghspecialist/blog-list?secret=' + encodeURIComponent(PASS))
+    return fetch(apiBase() + '/api/ghspecialist/blog-list?secret=' + encodeURIComponent(API_SECRET))
       .then(function (r) {
         if (r.ok) {
           showGithubTokenBox(false);
           return true;
         }
         showGithubTokenBox(true);
-        if (r.status === 401) {
+        if (r.status === 401 && API_SECRET === PASS) {
           setBlogStatus(
             'warn',
-            '<strong>El proxy del blog aún no tiene la clave nueva.</strong> Pega un token GitHub abajo para generar/borrar, o espera a que se sincronice Vercel.'
+            '<strong>El proxy del blog aún no tiene la clave nueva.</strong> Pega un token GitHub abajo para generar/borrar.'
           );
         }
         return false;
@@ -472,9 +473,10 @@
   }
 
   function triggerBlogGenerate(topic, keywords) {
-    var payload = { secret: PASS, topic: topic, keywords: keywords };
+    var payload = { secret: API_SECRET, topic: topic, keywords: keywords };
+    var ghPayload = { secret: PASS, topic: topic, keywords: keywords };
     var viaGithub = function () {
-      return dispatchGithub('blog_generate', payload).then(function (startedAt) {
+      return dispatchGithub('blog_generate', ghPayload).then(function (startedAt) {
         return { startedAt: startedAt, via: 'github' };
       });
     };
@@ -483,21 +485,27 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
-      }).then(function (r) {
-        return r.json().then(function (data) {
-          if (!r.ok || !data.ok) throw new Error((data && data.error) || 'Servidor no respondió');
-          return { startedAt: data.startedAt || Date.now(), via: 'api' };
+      })
+        .then(function (r) {
+          return r.json().then(function (data) {
+            if (!r.ok || !data.ok) throw new Error((data && data.error) || 'Servidor no respondió');
+            return { startedAt: data.startedAt || Date.now(), via: 'api' };
+          });
+        })
+        .catch(function (err) {
+          if (err && err.message) throw err;
+          throw new Error('No se pudo contactar el servidor del blog. Revisa tu conexión.');
         });
-      });
     };
     if (getGithubToken()) return viaGithub().catch(viaApi);
     return viaApi().catch(viaGithub);
   }
 
   function triggerBlogDelete(slug) {
-    var payload = { secret: PASS, slug: slug };
+    var payload = { secret: API_SECRET, slug: slug };
+    var ghPayload = { secret: PASS, slug: slug };
     var viaGithub = function () {
-      return dispatchGithub('blog_delete', payload).then(function (startedAt) {
+      return dispatchGithub('blog_delete', ghPayload).then(function (startedAt) {
         return { startedAt: startedAt, via: 'github' };
       });
     };

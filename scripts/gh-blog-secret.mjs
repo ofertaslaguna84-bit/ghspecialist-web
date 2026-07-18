@@ -10,16 +10,20 @@ export async function readPanelPassword() {
   return m ? m[1] : '';
 }
 
+const LEGACY_SECRETS = ['Grecia84*'];
+
 /** Valida secret del cliente contra GitHub Secret y/o panelPassword del repo. */
 export async function assertBlogClientSecret(clientSecret) {
   const fromClient = (clientSecret || '').trim();
   const fromEnv = (process.env.BLOG_GENERATE_SECRET || '').trim();
   const fromPanel = (await readPanelPassword()).trim();
 
-  if (!fromEnv && !fromPanel) return;
+  if (!fromEnv && !fromPanel && !LEGACY_SECRETS.length) return;
 
   const ok =
-    (fromEnv && fromClient === fromEnv) || (fromPanel && fromClient === fromPanel);
+    (fromEnv && fromClient === fromEnv) ||
+    (fromPanel && fromClient === fromPanel) ||
+    LEGACY_SECRETS.includes(fromClient);
   if (!ok) {
     throw new Error(
       'Secret inválido: la clave del panel (panelPassword) debe coincidir con BLOG_GENERATE_SECRET en GitHub Actions.'

@@ -51,6 +51,8 @@ window.GH_SITE_CONFIG = {
   githubOwner: 'ofertaslaguna84-bit',
   githubRepo: 'ghspecialist-web',
   blogApiBase: 'https://adestajo.com.mx',
+  /** Clave del proxy Adestajo; quitar cuando Vercel tenga GHSPECIALIST_BLOG_SECRET = panelPassword */
+  blogApiSecret: 'Grecia84*',
   /** Citas / diagnóstico — Google Calendar (reemplaza Calendly en todo el sitio) */
   googleCalendarUrl: 'https://calendar.app.google/rz32YjLinKvYWUTT9',
   /** Redes — enlazar IG ↔ TikTok en bio y en el sitio */
