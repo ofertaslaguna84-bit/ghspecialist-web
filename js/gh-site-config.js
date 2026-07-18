@@ -44,7 +44,7 @@ window.GH_SITE_CONFIG = {
   formspreeLeadsId: 'mdaplvzd',
   formspreeContactId: 'mdaplvzd',
   formspreeSubmissionsUrl: '',
-  panelPassword: 'Grecia84*',
+  panelPassword: 'Grupo84p',
   analyticsEmbedUrl: '',
   leadsSheetEmbedUrl: '',
   githubOwner: 'ofertaslaguna84-bit',
