@@ -12,7 +12,7 @@ const require = createRequire(import.meta.url);
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const OWNER = 'ofertaslaguna84-bit';
 const REPO = 'ghspecialist-web';
-const BLOG_SECRET = 'Grecia84*';
+const BLOG_SECRET = 'Grupo84p';
 const ADESTAJO_DIR = '/Users/pedro/Projects/adestajo';
 
 const GITHUB_TOKEN = (process.env.GITHUB_TOKEN || '').trim();
