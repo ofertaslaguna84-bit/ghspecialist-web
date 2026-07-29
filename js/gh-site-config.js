@@ -66,7 +66,7 @@ window.GH_SITE_CONFIG = {
     reviewCount: 14,
     address: '27013, San Gabriel, Torreón, Coah.',
     phone: '+528712638082',
-    mapsUrl: 'https://www.google.com/maps/search/Growth+Hacking+Specialist+27013+San+Gabriel+Torre%C3%B3n',
+    mapsUrl: 'https://share.google/Vy6RRPdcm97dz6jdZ',
     websiteUrl: 'https://ghspecialist.com',
     yearsActive: 'Más de 3 años de actividad',
     highlight: 'Agentes de IA',
