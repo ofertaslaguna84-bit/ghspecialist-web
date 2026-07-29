@@ -71,6 +71,14 @@ window.GH_SITE_CONFIG = {
     yearsActive: 'Más de 3 años de actividad',
     highlight: 'Agentes de IA',
     /** Lun–Vie 9:00–18:00 (hora Torreón, America/Monterrey) */
-    hours: { open: 9, close: 18, days: [1, 2, 3, 4, 5] }
+    hours: { open: 9, close: 18, days: [1, 2, 3, 4, 5] },
+    reviews: [
+      { author: 'Alejandra M.', text: 'Pedro implementó el chatbot de WhatsApp en 2 semanas y ya en el primer mes triplicamos los prospectos calificados. Nunca imaginé que la IA funcionaría tan bien para inmobiliaria.', time: 'hace 3 semanas' },
+      { author: 'Roberto G.', text: 'Implementamos Kommo CRM con GH Specialist y ahora cada prospecto se mueve solo en el pipeline. Bajamos de 72h a 4 minutos en tiempo de respuesta promedio.', time: 'hace 1 mes' },
+      { author: 'Carolina L.', text: 'El blog con IA publica solo cada semana. Ya estamos en primera página de Google para 8 palabras clave. Fue la mejor inversión en marketing de toda nuestra historia.', time: 'hace 2 meses' },
+      { author: 'Miguel R.', text: 'En 2 semanas Pedro nos configuró el chatbot. Ahora atendemos 300+ mensajes diarios sin un solo empleado de soporte. Literalmente dormimos tranquilos.', time: 'hace 2 meses' },
+      { author: 'Laura S.', text: 'El salón tenía 80 mensajes diarios que yo contestaba a mano. Ahora el agente cotiza, agenda y confirma solo. Recuperé mis fines de semana.', time: 'hace 3 meses' },
+      { author: 'Jorge V.', text: 'Excelente servicio de automatización. Muy profesional, entregó a tiempo y el soporte post-implementación es de primera.', time: 'hace 4 meses' }
+    ]
   }
 };
