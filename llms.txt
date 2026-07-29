@@ -1,8 +1,9 @@
 # GH Specialist — llms.txt
 # https://ghspecialist.com
 
-> Automatización con IA, chatbots WhatsApp y growth hacking para empresas en México.
-> Cobertura nacional: Monterrey, CDMX, Guadalajara, Querétaro, Torreón y todo el país.
+> Especialistas en SEO para negocios B2B, blog con IA y automatización para empresas en México.
+> Posicionamiento nacional: prospectos interesados desde la semana 1.
+> Cobertura: Monterrey, CDMX, Guadalajara, Querétaro, Torreón y todo el país.
 > Fundador: Pedro Luis Díaz Velázquez.
 
 ## Sitio principal
@@ -12,6 +13,11 @@
 - Blog: https://ghspecialist.com/blog/
 - Sobre Pedro: https://ghspecialist.com/sobre-pedro.html
 - Torreón (sede): https://ghspecialist.com/torreon/
+
+## Pilar SEO B2B + Blog IA
+- Servicio: https://ghspecialist.com/servicios/web-seo-blog-ia.html
+- Guía pilar: https://ghspecialist.com/blog/seo-b2b-mexico-blog-ia.html
+- Posicionar en Google México: https://ghspecialist.com/blog/como-posicionar-pagina-google-mexico-2026.html
 
 ## Cobertura servicio×ciudad (SEO local)
 - Patrón: https://ghspecialist.com/servicios/{servicio}/{ciudad}/
@@ -33,30 +39,30 @@
 - Saltillo: https://ghspecialist.com/ciudades/saltillo/
 
 ## Servicios
+- SEO B2B + Blog IA: https://ghspecialist.com/servicios/web-seo-blog-ia.html
 - Chatbot IA WhatsApp: https://ghspecialist.com/servicios/chatbot-ia-whatsapp.html
 - CRM Kommo: https://ghspecialist.com/servicios/crm-kommo.html
 - Automatización total: https://ghspecialist.com/servicios/automatizacion-total.html
 - Agentes omnicanal: https://ghspecialist.com/servicios/agentes-omnicanal.html
-- Web + SEO + Blog IA: https://ghspecialist.com/servicios/web-seo-blog-ia.html
 - Growth y difusiones: https://ghspecialist.com/servicios/growth-difusiones.html
 - Pauta omnicanal: https://ghspecialist.com/servicios/pauta-omnicanal.html
 - 100% automatizado: https://ghspecialist.com/servicios/cien-automatizado.html
 - Proyectos a medida: https://ghspecialist.com/servicios/proyectos-medida.html
 
 ## Artículos clave del blog
+- SEO B2B México + Blog IA: https://ghspecialist.com/blog/seo-b2b-mexico-blog-ia.html
+- Posicionar en Google México: https://ghspecialist.com/blog/como-posicionar-pagina-google-mexico-2026.html
 - Automatización IA México: https://ghspecialist.com/blog/como-automatizar-negocio-inteligencia-artificial.html
 - Chatbot WhatsApp negocios: https://ghspecialist.com/blog/chatbot-whatsapp-negocios-mexico.html
-- Posicionar en Google México: https://ghspecialist.com/blog/como-posicionar-pagina-google-mexico-2026.html
 - Kommo CRM guía: https://ghspecialist.com/blog/kommo-crm-que-es-como-funciona.html
 
 ## Búsquedas frecuentes (Google México)
+- SEO B2B México / SEO para negocios B2B
+- Blog con IA para empresas / generación de demanda B2B
+- Posicionar página en Google México
 - Agente de inteligencia artificial / agente IA WhatsApp
 - Automatizar WhatsApp con IA / chatbot WhatsApp con IA
-- ChatGPT para negocios / Claude vs ChatGPT vs Gemini
-- Mejor IA para empresas / IA para PYMES
-- Cuánto cuesta inteligencia artificial
-- Cómo implementar IA en mi empresa
-- Ventas con IA / marketing con inteligencia artificial
+- ChatGPT para negocios / mejor IA para empresas
 - CRM con IA para WhatsApp / Kommo CRM
 
 ## Contacto
