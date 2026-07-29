@@ -354,6 +354,24 @@
     .gbp-action:hover{background:#f8f9fa;text-decoration:none;color:#1557b0}
     .gbp-action svg{width:18px;height:18px;flex-shrink:0}
 
+    /* ─── GOOGLE REVIEWS GRID ─── */
+    .grev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .grev-card{border:1px solid var(--border);border-radius:var(--r);padding:24px;background:#fff;transition:all .2s}
+    .grev-card:hover{border-color:var(--p-border);box-shadow:0 4px 20px rgba(124,77,255,.08)}
+    .grev-card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+    .grev-card-g{width:22px;height:22px;border-radius:50%;background:#fff;border:1px solid #e0e0e0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0}
+    .grev-card-g span{background:linear-gradient(135deg,#4285F4 0%,#EA4335 40%,#FBBC05 65%,#34A853 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .grev-card-label{font-size:11px;font-weight:700;color:var(--ink4);text-transform:uppercase;letter-spacing:.06em}
+    .grev-card-stars{color:#FBBC05;font-size:13px;letter-spacing:1px;margin-bottom:10px}
+    .grev-card-text{font-size:14px;color:var(--ink2);line-height:1.65;margin-bottom:14px}
+    .grev-card-foot{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .grev-card-author{font-size:13px;font-weight:700;color:var(--ink)}
+    .grev-card-time{font-size:11px;color:var(--ink4);white-space:nowrap}
+    .grev-more-wrap{text-align:center;margin-top:28px}
+    .grev-more{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#1a73e8;text-decoration:none;padding:10px 20px;border:1px solid var(--border);border-radius:100px;background:#fff;transition:all .15s}
+    .grev-more:hover{background:#f8f9fa;border-color:#1a73e8;text-decoration:none}
+    @media(max-width:900px){.grev-grid{grid-template-columns:1fr}}
+
     /* ─── CITIES SECTION ─── */
     .cities-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     a.city-card{display:block}
@@ -1230,47 +1248,58 @@
   <section class="sec sec-gray" id="testimonios">
     <div class="w">
       <div class="sec-header center fi">
-        <span class="label">Testimonios</span>
-        <h2 class="title">Lo que dicen nuestros clientes</h2>
+        <span class="label">Google Reviews</span>
+        <h2 class="title">Lo que dicen en Google</h2>
+        <p class="sub-text" style="margin:12px auto 0;max-width:560px">Reseñas verificadas de clientes en nuestro perfil de Google Business.</p>
       </div>
 
       <!-- Google Business Profile -->
-      <div class="gbp-wrap fi" id="gbp-card" aria-label="Perfil de Google Business"></div>
+      <div class="gbp-wrap fi fi-d1" aria-label="Perfil de Google Business">
+        <article class="gbp-card" id="gbp-card">
+          <div class="gbp-head">
+            <h3 class="gbp-title">Growth Hacking Specialist</h3>
+            <div class="gbp-rating">
+              <span class="gbp-score">5.0</span>
+              <span class="gbp-stars" aria-hidden="true">★★★★★</span>
+              <span class="gbp-count">(14)</span>
+            </div>
+            <p class="gbp-cat">Agencia de marketing</p>
+            <p class="gbp-status" id="gbp-status"><span class="gbp-closed">Cerrado</span></p>
+          </div>
+          <div class="gbp-meta">
+            <div class="gbp-meta-row">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <span>27013, San Gabriel, Torreón, Coah.</span>
+            </div>
+            <div class="gbp-meta-row">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              <span>Más de 3 años de actividad</span>
+            </div>
+            <div class="gbp-highlight">
+              <span class="gbp-highlight-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
+              <span>Ofrece: <strong>Agentes de IA</strong></span>
+            </div>
+          </div>
+          <div class="gbp-actions">
+            <a class="gbp-action" href="tel:+528712638082">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              Llamar
+            </a>
+            <a class="gbp-action" href="https://www.google.com/maps/search/Growth+Hacking+Specialist+27013+San+Gabriel+Torre%C3%B3n" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              Cómo llegar
+            </a>
+            <a class="gbp-action" href="https://ghspecialist.com">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.91-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
+              Sitio web
+            </a>
+          </div>
+        </article>
+      </div>
 
-      <div class="testi-grid">
-        <div class="testi-card fi fi-d1">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">Pedro implementó el chatbot de WhatsApp en 2 semanas y ya en el primer mes triplicamos los prospectos calificados. Nunca imaginé que la IA funcionaría tan bien para inmobiliaria.</p>
-          <div class="testi-author">
-            <div class="testi-avatar">A</div>
-            <div>
-              <div class="testi-name">Alejandra Morales</div>
-              <div class="testi-role">Directora Comercial · Inmobiliaria Norteña</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card fi fi-d2">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">Implementamos Kommo CRM con GH Specialist y ahora cada prospecto se mueve solo en el pipeline. Bajamos de 72h a 4 minutos en tiempo de respuesta promedio.</p>
-          <div class="testi-author">
-            <div class="testi-avatar">R</div>
-            <div>
-              <div class="testi-name">Roberto García</div>
-              <div class="testi-role">CEO · Constructora Pacífico GDL</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card fi fi-d3">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">El blog con IA publica solo cada semana. Ya estamos en primera página de Google para 8 palabras clave. Fue la mejor inversión en marketing de toda nuestra historia.</p>
-          <div class="testi-author">
-            <div class="testi-avatar">C</div>
-            <div>
-              <div class="testi-name">Carolina López</div>
-              <div class="testi-role">Fundadora · Boutique Querétaro</div>
-            </div>
-          </div>
-        </div>
+      <div class="grev-grid" id="grev-grid"></div>
+      <div class="grev-more-wrap fi fi-d2">
+        <a class="grev-more" id="grev-more-link" href="https://www.google.com/maps/search/Growth+Hacking+Specialist+27013+San+Gabriel+Torre%C3%B3n" target="_blank" rel="noopener">Ver las 14 reseñas en Google →</a>
       </div>
     </div>
   </section>
@@ -2130,81 +2159,60 @@
 
     showChat('inmobiliaria');
 
-    // Google Business Profile card
+    // Google Business: horario dinámico + reseñas desde config
     (function () {
       var cfg = (window.GH_SITE_CONFIG && window.GH_SITE_CONFIG.googleBusiness) || {};
-      var el = document.getElementById('gbp-card');
-      if (!el || !cfg.name) return;
+      var statusEl = document.getElementById('gbp-status');
+      var gridEl = document.getElementById('grev-grid');
+      var moreEl = document.getElementById('grev-more-link');
 
-      var DAYS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
-      var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Monterrey' }));
-      var day = now.getDay();
-      var hour = now.getHours() + now.getMinutes() / 60;
-      var openDays = cfg.hours && cfg.hours.days ? cfg.hours.days : [1, 2, 3, 4, 5];
-      var openH = (cfg.hours && cfg.hours.open) || 9;
-      var closeH = (cfg.hours && cfg.hours.close) || 18;
-      var isOpen = openDays.indexOf(day) !== -1 && hour >= openH && hour < closeH;
+      if (statusEl && cfg.hours) {
+        var DAYS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+        var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Monterrey' }));
+        var day = now.getDay();
+        var hour = now.getHours() + now.getMinutes() / 60;
+        var openDays = cfg.hours.days || [1, 2, 3, 4, 5];
+        var openH = cfg.hours.open || 9;
+        var closeH = cfg.hours.close || 18;
+        var isOpen = openDays.indexOf(day) !== -1 && hour >= openH && hour < closeH;
 
-      function nextOpenLabel() {
-        for (var i = 0; i < 7; i++) {
-          var d = (day + i) % 7;
-          if (openDays.indexOf(d) === -1) continue;
-          if (i === 0 && hour < openH) return 'Abre a las ' + openH + ' a.m.';
-          if (i > 0) return 'Abre a las ' + openH + ' a.m. del ' + DAYS[d];
+        function nextOpenLabel() {
+          for (var i = 0; i < 7; i++) {
+            var d = (day + i) % 7;
+            if (openDays.indexOf(d) === -1) continue;
+            if (i === 0 && hour < openH) return 'Abre a las ' + openH + ' a.m.';
+            if (i > 0) return 'Abre a las ' + openH + ' a.m. del ' + DAYS[d];
+          }
+          return '';
         }
-        return '';
+
+        statusEl.innerHTML = isOpen
+          ? '<span class="gbp-open">Abierto</span> <span class="gbp-next">· Cierra a las ' + closeH + ':00</span>'
+          : '<span class="gbp-closed">Cerrado</span> <span class="gbp-next">· ' + nextOpenLabel() + '</span>';
       }
 
-      var statusHtml = isOpen
-        ? '<span class="gbp-open">Abierto</span> <span class="gbp-next">· Cierra a las ' + closeH + ':00</span>'
-        : '<span class="gbp-closed">Cerrado</span> <span class="gbp-next">· ' + nextOpenLabel() + '</span>';
+      if (gridEl && cfg.reviews && cfg.reviews.length) {
+        gridEl.innerHTML = cfg.reviews.map(function (r, i) {
+          return '<article class="grev-card fi fi-d' + ((i % 3) + 1) + '">' +
+            '<div class="grev-card-head">' +
+              '<div style="display:flex;align-items:center;gap:8px">' +
+                '<div class="grev-card-g"><span>G</span></div>' +
+                '<span class="grev-card-label">Google</span>' +
+              '</div>' +
+            '</div>' +
+            '<div class="grev-card-stars" aria-label="5 estrellas">★★★★★</div>' +
+            '<p class="grev-card-text">' + r.text + '</p>' +
+            '<div class="grev-card-foot">' +
+              '<span class="grev-card-author">' + r.author + '</span>' +
+              '<span class="grev-card-time">' + (r.time || '') + '</span>' +
+            '</div>' +
+          '</article>';
+        }).join('');
+        gridEl.querySelectorAll('.fi').forEach(function (el) { io.observe(el); });
+      }
 
-      var stars = '★★★★★';
-      var phone = cfg.phone || '+528712638082';
-      var maps = cfg.mapsUrl || '#';
-      var web = cfg.websiteUrl || 'https://ghspecialist.com';
-
-      el.innerHTML =
-        '<article class="gbp-card">' +
-          '<div class="gbp-head">' +
-            '<h3 class="gbp-title">' + cfg.name + '</h3>' +
-            '<div class="gbp-rating">' +
-              '<span class="gbp-score">' + cfg.rating + '</span>' +
-              '<span class="gbp-stars" aria-hidden="true">' + stars + '</span>' +
-              '<span class="gbp-count">(' + cfg.reviewCount + ')</span>' +
-            '</div>' +
-            '<p class="gbp-cat">' + cfg.category + '</p>' +
-            '<p class="gbp-status">' + statusHtml + '</p>' +
-          '</div>' +
-          '<div class="gbp-meta">' +
-            '<div class="gbp-meta-row">' +
-              '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>' +
-              '<span>' + cfg.address + '</span>' +
-            '</div>' +
-            '<div class="gbp-meta-row">' +
-              '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>' +
-              '<span>' + cfg.yearsActive + '</span>' +
-            '</div>' +
-            '<div class="gbp-highlight">' +
-              '<span class="gbp-highlight-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>' +
-              '<span>Ofrece: <strong>' + cfg.highlight + '</strong></span>' +
-            '</div>' +
-          '</div>' +
-          '<div class="gbp-actions">' +
-            '<a class="gbp-action" href="tel:' + phone + '">' +
-              '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>' +
-              'Llamar' +
-            '</a>' +
-            '<a class="gbp-action" href="' + maps + '" target="_blank" rel="noopener">' +
-              '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>' +
-              'Cómo llegar' +
-            '</a>' +
-            '<a class="gbp-action" href="' + web + '">' +
-              '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.91-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>' +
-              'Sitio web' +
-            '</a>' +
-          '</div>' +
-        '</article>';
+      if (moreEl && cfg.mapsUrl) moreEl.href = cfg.mapsUrl;
+      if (moreEl && cfg.reviewCount) moreEl.textContent = 'Ver las ' + cfg.reviewCount + ' reseñas en Google →';
     })();
   </script>
 </body>
