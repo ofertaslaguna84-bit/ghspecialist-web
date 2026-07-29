@@ -57,5 +57,20 @@ window.GH_SITE_CONFIG = {
   googleCalendarUrl: 'https://calendar.app.google/rz32YjLinKvYWUTT9',
   /** Redes — enlazar IG ↔ TikTok en bio y en el sitio */
   instagramUrl: 'https://www.instagram.com/ghspecialist26/',
-  tiktokUrl: 'https://www.tiktok.com/@ghspecialist'
+  tiktokUrl: 'https://www.tiktok.com/@ghspecialist',
+  /** Perfil de Google Business (ficha en Maps / Search) */
+  googleBusiness: {
+    name: 'Growth Hacking Specialist',
+    category: 'Agencia de marketing',
+    rating: 5.0,
+    reviewCount: 14,
+    address: '27013, San Gabriel, Torreón, Coah.',
+    phone: '+528712638082',
+    mapsUrl: 'https://www.google.com/maps/search/Growth+Hacking+Specialist+27013+San+Gabriel+Torre%C3%B3n',
+    websiteUrl: 'https://ghspecialist.com',
+    yearsActive: 'Más de 3 años de actividad',
+    highlight: 'Agentes de IA',
+    /** Lun–Vie 9:00–18:00 (hora Torreón, America/Monterrey) */
+    hours: { open: 9, close: 18, days: [1, 2, 3, 4, 5] }
+  }
 };
