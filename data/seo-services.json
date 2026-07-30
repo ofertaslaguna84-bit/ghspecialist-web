@@ -34,9 +34,9 @@
   {
     "slug": "web-seo-blog-ia",
     "file": "web-seo-blog-ia.html",
-    "name": "SEO B2B + Blog IA",
-    "short": "SEO para negocios B2B",
-    "desc": "Especialistas en SEO para negocios B2B en México. Blog con IA a nivel nacional y prospectos interesados desde la semana 1.",
+    "name": "Página IA + SEO Industrial",
+    "short": "Página de IA con SEO",
+    "desc": "Página de IA con SEO: la forma más eficiente de conseguir empresas industriales en México. Blog IA + posicionamiento en Google.",
     "price": "18000"
   },
   {
@@ -70,5 +70,13 @@
     "short": "Desarrollo IA a medida",
     "desc": "Apps web, integraciones y automatizaciones personalizadas con inteligencia artificial.",
     "price": "50000"
+  },
+  {
+    "slug": "capacitaciones-ia-empresas",
+    "file": "capacitaciones-ia-empresas.html",
+    "name": "Capacitaciones IA al por mayor",
+    "short": "Capacitación IA corporativa",
+    "desc": "Capacitaciones de IA al por mayor para minería, construcción, manufactura e industria. Packs 10 / 25 / 50+ colaboradores.",
+    "price": "18000"
   }
 ]
