@@ -1,8 +1,8 @@
 # GH Specialist — llms.txt
 # https://ghspecialist.com
 
-> Especialistas en SEO para negocios B2B, blog con IA y automatización para empresas en México.
-> Posicionamiento nacional: prospectos interesados desde la semana 1.
+> Página de IA con SEO: la forma más eficiente de conseguir empresas industriales en México.
+> Blog IA + posicionamiento en Google para manufactura, maquilas y parques industriales.
 > Cobertura: Monterrey, CDMX, Guadalajara, Querétaro, Torreón y todo el país.
 > Fundador: Pedro Luis Díaz Velázquez.
 
@@ -14,9 +14,10 @@
 - Sobre Pedro: https://ghspecialist.com/sobre-pedro.html
 - Torreón (sede): https://ghspecialist.com/torreon/
 
-## Pilar SEO B2B + Blog IA
+## Pilar Página IA + SEO Industrial
 - Servicio: https://ghspecialist.com/servicios/web-seo-blog-ia.html
-- Guía pilar: https://ghspecialist.com/blog/seo-b2b-mexico-blog-ia.html
+- Guía industria: https://ghspecialist.com/blog/seo-ia-empresas-industriales-mexico.html
+- Guía SEO B2B: https://ghspecialist.com/blog/seo-b2b-mexico-blog-ia.html
 - Posicionar en Google México: https://ghspecialist.com/blog/como-posicionar-pagina-google-mexico-2026.html
 
 ## Cobertura servicio×ciudad (SEO local)
@@ -39,7 +40,7 @@
 - Saltillo: https://ghspecialist.com/ciudades/saltillo/
 
 ## Servicios
-- SEO B2B + Blog IA: https://ghspecialist.com/servicios/web-seo-blog-ia.html
+- Página IA + SEO Industrial: https://ghspecialist.com/servicios/web-seo-blog-ia.html
 - Chatbot IA WhatsApp: https://ghspecialist.com/servicios/chatbot-ia-whatsapp.html
 - CRM Kommo: https://ghspecialist.com/servicios/crm-kommo.html
 - Automatización total: https://ghspecialist.com/servicios/automatizacion-total.html
@@ -50,6 +51,7 @@
 - Proyectos a medida: https://ghspecialist.com/servicios/proyectos-medida.html
 
 ## Artículos clave del blog
+- SEO + IA empresas industriales: https://ghspecialist.com/blog/seo-ia-empresas-industriales-mexico.html
 - SEO B2B México + Blog IA: https://ghspecialist.com/blog/seo-b2b-mexico-blog-ia.html
 - Posicionar en Google México: https://ghspecialist.com/blog/como-posicionar-pagina-google-mexico-2026.html
 - Automatización IA México: https://ghspecialist.com/blog/como-automatizar-negocio-inteligencia-artificial.html
@@ -57,8 +59,9 @@
 - Kommo CRM guía: https://ghspecialist.com/blog/kommo-crm-que-es-como-funciona.html
 
 ## Búsquedas frecuentes (Google México)
-- SEO B2B México / SEO para negocios B2B
-- Blog con IA para empresas / generación de demanda B2B
+- Página de IA con SEO / SEO empresas industriales México
+- SEO manufactura / SEO parque industrial / conseguir empresas industriales
+- SEO B2B México / blog con IA para empresas
 - Posicionar página en Google México
 - Agente de inteligencia artificial / agente IA WhatsApp
 - Automatizar WhatsApp con IA / chatbot WhatsApp con IA
