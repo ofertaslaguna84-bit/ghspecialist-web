@@ -238,4 +238,16 @@
   <url><loc>https://ghspecialist.com/servicios/pauta-omnicanal.html</loc><lastmod>2026-07-28</lastmod><priority>0.8</priority></url>
   <url><loc>https://ghspecialist.com/servicios/proyectos-medida.html</loc><lastmod>2026-07-28</lastmod><priority>0.8</priority></url>
   <url><loc>https://ghspecialist.com/servicios/web-seo-blog-ia.html</loc><lastmod>2026-07-28</lastmod><priority>0.8</priority></url>
+  <url>
+    <loc>https://ghspecialist.com/servicios/capacitaciones-ia-empresas.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ghspecialist.com/blog/capacitaciones-ia-al-por-mayor-mineria-construccion-industria.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
 </urlset>
