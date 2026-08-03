@@ -78,5 +78,13 @@
     "short": "Capacitación IA corporativa",
     "desc": "Capacitaciones de IA al por mayor para minería, construcción, manufactura e industria. Packs 10 / 25 / 50+ colaboradores.",
     "price": "18000"
+  },
+  {
+    "slug": "ia-para-departamentos",
+    "file": "ia-para-departamentos.html",
+    "name": "IA para Departamentos",
+    "short": "IA Compras · Legal · Contabilidad",
+    "desc": "Inteligencia artificial para departamentos de Compras, Legal, Contabilidad, RRHH, operaciones y más. Capacitación y flujos por área.",
+    "price": "18000"
   }
 ]
