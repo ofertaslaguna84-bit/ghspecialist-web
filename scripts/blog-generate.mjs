@@ -11,6 +11,7 @@ import { pingSearchEngines } from './indexnow.mjs';
 import { assertBlogClientSecret } from './gh-blog-secret.mjs';
 import { isComparativeBrief } from './gh-blog-topic-resolve.mjs';
 import { prepareBlogGeneration, prepareBlogAuto, parseBlogMarket } from './gh-blog-prepare.mjs';
+import { armarTitle, armarH1, armarDescription, normalizarTexto } from './gh-tipografia.mjs';
 import {
   getBlogFreshness,
   applyFreshnessToArticle,
@@ -629,7 +630,10 @@ function buildArticleHtml(article, dateIso, hero, market = 'mx', publishedIso = 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="../favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="../favicon.png">
-  <title>${escapeHtml(article.title)} | GH Specialist</title>
+  <!-- El title ya viene armado y medido por armarTitle(). No pegarle
+       " | GH Specialist" aqui: son 16 de los ~60 caracteres que Google
+       muestra, y volveria a pasarse del limite. -->
+  <title>${escapeHtml(article.title)}</title>
   <meta name="description" content="${escapeHtml(article.description)}">
   <link rel="canonical" href="${SITE}/blog/${slug}.html">
   <meta property="og:type" content="article">
@@ -648,7 +652,7 @@ function buildArticleHtml(article, dateIso, hero, market = 'mx', publishedIso = 
   <script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: article.title,
+    headline: article.h1 || article.title,
     description: article.description,
     image: hero.og,
     author: { '@type': 'Person', name: 'Pedro Luis Díaz Velázquez', url: `${SITE}/sobre-pedro.html` },
@@ -712,10 +716,10 @@ function buildArticleHtml(article, dateIso, hero, market = 'mx', publishedIso = 
 <nav class="bc" aria-label="Breadcrumb"><a href="../index.html">Inicio</a><span>›</span><a href="index.html">Blog</a><span>›</span>${escapeHtml(article.breadcrumb_title)}</nav>
 <article class="art" data-market="${market}">
   <div class="art-label">${escapeHtml(article.category_label)}</div>
-  <h1>${escapeHtml(article.title)}</h1>
+  <h1>${escapeHtml(article.h1 || article.title)}</h1>
   <div class="art-meta">Por <strong>Pedro Luis Díaz Velázquez</strong> · GH Specialist · ${dateDisplay} · ${article.read_time || 5} min lectura</div>
   <figure class="art-hero">
-    <img src="${hero.articleImg}" alt="${escapeHtml(article.title)}" width="1200" height="630" loading="eager">
+    <img src="${hero.articleImg}" alt="${escapeHtml(article.h1 || article.title)}" width="1200" height="630" loading="eager">
     <figcaption>${hero.generated ? 'Imagen hero IA · GH Specialist · ' + BLOG_YEAR : escapeHtml(article.card_city_label || hero.city || defaultCity)}</figcaption>
   </figure>
   <div class="gh-article-body">
@@ -752,7 +756,7 @@ function buildCard(article, dateIso, hero) {
       <div class="card-img" style="background-image:url('${hero.cardImg}')"><span class="card-city">${escapeHtml(article.card_city_label || hero.city)}</span></div>
       <div class="card-body">
         <span class="card-tag">${escapeHtml(article.category_tag)}</span>
-        <h2>${escapeHtml(article.title)}</h2>
+        <h2>${escapeHtml(article.h1 || article.title)}</h2>
         <p>${escapeHtml(article.card_excerpt)}</p>
         <div class="card-meta">
           <span>${dateShort} · ${article.read_time || 5} min</span>
@@ -850,6 +854,17 @@ async function main() {
 
   applyFreshnessToArticle(parsed, freshness, plan.userTopic);
   enforceArticleLength(parsed);
+
+  // Tipografia de titulares. La IA escribe "Seo con IA cdmx", "Whats app" y
+  // titles de 87 caracteres que Google corta a media palabra. Se normaliza
+  // aqui, con las mismas reglas que se le aplicaron a los articulos ya
+  // publicados (scripts/gh-tipografia.mjs), para que no vuelvan a divergir.
+  parsed.h1 = armarH1(parsed.title || '');
+  parsed.title = armarTitle(parsed.title || '');
+  parsed.description = armarDescription(parsed.description || '');
+  if (parsed.og_title) parsed.og_title = normalizarTexto(parsed.og_title);
+  if (parsed.og_description) parsed.og_description = normalizarTexto(parsed.og_description);
+
   const wordCount = countWordsInHtml(parsed.content_html || '');
   console.log(`→ Longitud: ${wordCount} palabras (máx ${BLOG_MAX_WORDS})`);
   parsed.slug = slugify(parsed.slug.replace(/\.html$/, '')) + '.html';
