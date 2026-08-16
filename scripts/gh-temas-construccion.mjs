@@ -50,6 +50,23 @@ export const TEMAS_CONSTRUCCION = [
   { phrase: 'postventa de vivienda automatizada', category: 'Automatización' },
   { phrase: 'leads de vivienda infonavit', category: 'Consejos' },
 
+  // --- Credito: saber quien puede comprar antes de la visita ---
+  { phrase: 'precalificacion de credito para vivienda', category: 'Automatización' },
+  { phrase: 'como saber si un cliente califica para credito', category: 'Consejos' },
+  { phrase: 'credito para construccion de casa', category: 'Consejos' },
+  { phrase: 'credito puente para desarrolladoras', category: 'Consejos' },
+  { phrase: 'casas sin enganche como funciona', category: 'Consejos' },
+  { phrase: 'filtrar compradores que no califican', category: 'IA' },
+  { phrase: 'cuanto gana para que le presten infonavit', category: 'Consejos' },
+
+  // --- Venta del desarrollo ---
+  { phrase: 'como vender un desarrollo de vivienda rapido', category: 'Consejos' },
+  { phrase: 'renders 3d para vender sobre plano', category: 'Consejos' },
+  { phrase: 'visita virtual para desarrollos de vivienda', category: 'Automatización' },
+  { phrase: 'campañas de facebook para vender casas', category: 'SEO' },
+  { phrase: 'agendar visitas a casa muestra por whatsapp', category: 'WhatsApp' },
+  { phrase: 'panel de avance de ventas inmobiliarias', category: 'CRM' },
+
   // --- SEO / captacion para el gremio ---
   { phrase: 'seo para constructoras', category: 'SEO' },
   { phrase: 'seo para inmobiliarias mexico', category: 'SEO' },

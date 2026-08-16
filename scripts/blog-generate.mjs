@@ -518,6 +518,10 @@ ${indexingBlock}
 Artículos ya publicados (enlaza 2-3 si encajan): ${slugList}
 
 Servicios (enlaces relativos ../servicios/...):
+- constructoras-desarrolladoras.html ← la principal: reclutamiento de obra,
+  calificación de prospectos de vivienda, precalificación de crédito, campañas
+  por fraccionamiento, renders 3D y panel de avance. Enlázala siempre que el
+  artículo hable de obra, vivienda, compradores o crédito.
 - chatbot-ia-whatsapp.html
 - crm-kommo.html
 - automatizacion-total.html
