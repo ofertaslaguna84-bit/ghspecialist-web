@@ -11,6 +11,7 @@ import { pingSearchEngines } from './indexnow.mjs';
 import { assertBlogClientSecret } from './gh-blog-secret.mjs';
 import { isComparativeBrief } from './gh-blog-topic-resolve.mjs';
 import { prepareBlogGeneration, prepareBlogAuto, parseBlogMarket } from './gh-blog-prepare.mjs';
+import { armarTitle, armarH1, armarDescription, normalizarTexto } from './gh-tipografia.mjs';
 import {
   getBlogFreshness,
   applyFreshnessToArticle,
@@ -549,7 +550,62 @@ function escapeHtml(s) {
     .replace(/"/g, '&quot;');
 }
 
-function buildArticleHtml(article, dateIso, hero, market = 'mx') {
+const MESES_ES = 'enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|setiembre|octubre|noviembre|diciembre';
+
+/**
+ * Reduce un titulo a la llave del TEMA, quitando todo lo que cambia solo:
+ * mes, año, la marca, y las muletillas de titular ("guia", "domine google").
+ *
+ * Ojo con esto: la version anterior quitaba el año pero NO el mes, asi que
+ * "seo con ia cdmx | guia agosto 2026" y el mismo articulo de septiembre
+ * daban llaves distintas y jamas se reconocian como el mismo tema. Por eso el
+ * detector de duplicados no servia ni cuando llegaba a correr.
+ */
+function temaKey(titulo) {
+  let k = slugify(titulo || '');
+  k = k.replace(/-gh-specialist.*$/, '');
+  k = k.replace(new RegExp(`-(${MESES_ES})(-\\d{4})?`, 'g'), '');
+  k = k.replace(/-\d{4}/g, '');
+  k = k.replace(/-v\d+$/, '');
+  k = k.replace(/-(guia|guias|domine-google|domina-google|esencial|completa|completo|actualizada|actualizado|paso-a-paso)/g, '');
+  k = k.replace(/-mexico.*$/, '');
+  return k.replace(/-+/g, '-').replace(/^-|-$/g, '');
+}
+
+/**
+ * Devuelve el nombre del articulo ya publicado que trata el mismo tema, o
+ * null. Compara por tema normalizado, no por slug: el slug lleva el mes
+ * ("-agosto-2026") y cambia solo, el tema no.
+ */
+async function buscarArticuloDelMismoTema(existing, titleKey) {
+  if (!titleKey) return null;
+  const encontrados = [];
+  for (const ex of existing) {
+    const exHtml = await readFile(join(ROOT, 'blog', ex), 'utf8');
+    const exTitle = exHtml.match(/<title>([^<]*)<\/title>/i)?.[1] || '';
+    if (temaKey(exTitle) !== titleKey) continue;
+    // Una copia consolidada tiene el canonical apuntando a OTRA pagina; la
+    // buena se apunta a si misma. Hay que quedarse con la buena: actualizar
+    // una copia consolidada seria escribir en la pagina que Google ya ignora.
+    const canonical = exHtml.match(/<link rel="canonical" href="([^"]*)"/i)?.[1] || '';
+    encontrados.push({ archivo: ex, esCanonica: canonical.endsWith(`/blog/${ex}`) });
+  }
+  if (!encontrados.length) return null;
+  return (encontrados.find((e) => e.esCanonica) || encontrados[0]).archivo;
+}
+
+/** datePublished que ya traia el articulo, para no reiniciar su antiguedad. */
+async function leerDatePublished(slug, fallbackIso) {
+  try {
+    const html = await readFile(join(ROOT, 'blog', slug), 'utf8');
+    const m = html.match(/"datePublished"\s*:\s*"([0-9]{4}-[0-9]{2}-[0-9]{2})"/);
+    return m?.[1] || fallbackIso;
+  } catch {
+    return fallbackIso;
+  }
+}
+
+function buildArticleHtml(article, dateIso, hero, market = 'mx', publishedIso = dateIso) {
   const slug = article.slug.replace(/\.html$/, '');
   const relatedHtml = (article.related || [])
     .slice(0, 3)
@@ -574,7 +630,10 @@ function buildArticleHtml(article, dateIso, hero, market = 'mx') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="../favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="../favicon.png">
-  <title>${escapeHtml(article.title)} | GH Specialist</title>
+  <!-- El title ya viene armado y medido por armarTitle(). No pegarle
+       " | GH Specialist" aqui: son 16 de los ~60 caracteres que Google
+       muestra, y volveria a pasarse del limite. -->
+  <title>${escapeHtml(article.title)}</title>
   <meta name="description" content="${escapeHtml(article.description)}">
   <link rel="canonical" href="${SITE}/blog/${slug}.html">
   <meta property="og:type" content="article">
@@ -593,12 +652,12 @@ function buildArticleHtml(article, dateIso, hero, market = 'mx') {
   <script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: article.title,
+    headline: article.h1 || article.title,
     description: article.description,
     image: hero.og,
     author: { '@type': 'Person', name: 'Pedro Luis Díaz Velázquez', url: `${SITE}/sobre-pedro.html` },
     publisher: { '@type': 'Organization', name: 'GH Specialist', logo: { '@type': 'ImageObject', url: `${SITE}/2.png` } },
-    datePublished: dateIso,
+    datePublished: publishedIso,
     dateModified: dateIso,
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}/blog/${slug}.html` },
   })}</script>
@@ -657,10 +716,10 @@ function buildArticleHtml(article, dateIso, hero, market = 'mx') {
 <nav class="bc" aria-label="Breadcrumb"><a href="../index.html">Inicio</a><span>›</span><a href="index.html">Blog</a><span>›</span>${escapeHtml(article.breadcrumb_title)}</nav>
 <article class="art" data-market="${market}">
   <div class="art-label">${escapeHtml(article.category_label)}</div>
-  <h1>${escapeHtml(article.title)}</h1>
+  <h1>${escapeHtml(article.h1 || article.title)}</h1>
   <div class="art-meta">Por <strong>Pedro Luis Díaz Velázquez</strong> · GH Specialist · ${dateDisplay} · ${article.read_time || 5} min lectura</div>
   <figure class="art-hero">
-    <img src="${hero.articleImg}" alt="${escapeHtml(article.title)}" width="1200" height="630" loading="eager">
+    <img src="${hero.articleImg}" alt="${escapeHtml(article.h1 || article.title)}" width="1200" height="630" loading="eager">
     <figcaption>${hero.generated ? 'Imagen hero IA · GH Specialist · ' + BLOG_YEAR : escapeHtml(article.card_city_label || hero.city || defaultCity)}</figcaption>
   </figure>
   <div class="gh-article-body">
@@ -697,7 +756,7 @@ function buildCard(article, dateIso, hero) {
       <div class="card-img" style="background-image:url('${hero.cardImg}')"><span class="card-city">${escapeHtml(article.card_city_label || hero.city)}</span></div>
       <div class="card-body">
         <span class="card-tag">${escapeHtml(article.category_tag)}</span>
-        <h2>${escapeHtml(article.title)}</h2>
+        <h2>${escapeHtml(article.h1 || article.title)}</h2>
         <p>${escapeHtml(article.card_excerpt)}</p>
         <div class="card-meta">
           <span>${dateShort} · ${article.read_time || 5} min</span>
@@ -795,6 +854,17 @@ async function main() {
 
   applyFreshnessToArticle(parsed, freshness, plan.userTopic);
   enforceArticleLength(parsed);
+
+  // Tipografia de titulares. La IA escribe "Seo con IA cdmx", "Whats app" y
+  // titles de 87 caracteres que Google corta a media palabra. Se normaliza
+  // aqui, con las mismas reglas que se le aplicaron a los articulos ya
+  // publicados (scripts/gh-tipografia.mjs), para que no vuelvan a divergir.
+  parsed.h1 = armarH1(parsed.title || '');
+  parsed.title = armarTitle(parsed.title || '');
+  parsed.description = armarDescription(parsed.description || '');
+  if (parsed.og_title) parsed.og_title = normalizarTexto(parsed.og_title);
+  if (parsed.og_description) parsed.og_description = normalizarTexto(parsed.og_description);
+
   const wordCount = countWordsInHtml(parsed.content_html || '');
   console.log(`→ Longitud: ${wordCount} palabras (máx ${BLOG_MAX_WORDS})`);
   parsed.slug = slugify(parsed.slug.replace(/\.html$/, '')) + '.html';
@@ -807,21 +877,34 @@ async function main() {
     }
   }
 
-  const titleKey = slugify(parsed.title || plan.userTopic)
-    .replace(/-mexico.*$/, '')
-    .replace(/-mayo-\d{4}$/, '')
-    .replace(/-\d{4}$/, '');
-  if (!userInput) {
-    for (const ex of existing) {
-      const exHtml = await readFile(join(ROOT, 'blog', ex), 'utf8');
-      const exTitle = exHtml.match(/<title>([^<]*)<\/title>/i)?.[1] || '';
-      const exKey = slugify(exTitle).replace(/-mexico.*$/, '').replace(/-2026.*$/, '');
-      if (exKey && titleKey && exKey === titleKey) {
-        console.error(`Artículo similar ya existe: ${ex}`);
-        process.exit(0);
-      }
-    }
-  } else {
+  const titleKey = temaKey(parsed.title || plan.userTopic);
+
+  // Buscar si ya hay un articulo del mismo tema.
+  //
+  // Antes esta busqueda vivia dentro de `if (!userInput)`, o sea que solo
+  // corria para el blog diario. El lote de ciudades SI manda tema
+  // (BLOG_TOPIC='seo con ia cdmx'), asi que se saltaba el chequeo por
+  // completo y cada corrida creaba un -v2, -v3, -v4... con el mismo titulo,
+  // el mismo h1 y canonical propio: cinco paginas peleandose la misma
+  // keyword. Ahora la busqueda corre siempre.
+  const yaExiste = await buscarArticuloDelMismoTema(existing, titleKey);
+
+  if (yaExiste && !userInput) {
+    // Blog diario: el tema salio del catalogo. Si ya esta escrito, se sale
+    // sin hacer nada y manana toca otro tema.
+    console.error(`Artículo similar ya existe: ${yaExiste}`);
+    process.exit(0);
+  }
+
+  // Si el tema es fijo (lote de ciudades) y ya hay articulo, se ACTUALIZA ese
+  // mismo archivo: misma URL, mismo canonical, se conserva datePublished y se
+  // mueve dateModified. Refrescar un articulo posicionado vale mas que soltar
+  // una copia nueva que compite contra el.
+  const actualizando = Boolean(yaExiste && userInput);
+  if (actualizando) {
+    parsed.slug = yaExiste;
+    console.log(`→ Ya existe articulo de este tema: ${yaExiste}. Se ACTUALIZA en vez de duplicar.`);
+  } else if (userInput) {
     const userSlugBase = slugify(userInput).replace(/-mayo-\d{4}$/, '').slice(0, 48);
     if (userSlugBase) {
       const candidate = `${userSlugBase}-${freshness.slugSuffix}.html`;
@@ -829,22 +912,31 @@ async function main() {
     }
   }
 
-  if (existing.includes(parsed.slug)) {
+  // Ultimo recurso: mismo slug pero tema distinto (el titulo no empato). Se
+  // conserva el sufijo -vN para no pisar un articulo ajeno.
+  if (!actualizando && existing.includes(parsed.slug)) {
     let n = 2;
     let candidate = `${parsed.slug.replace('.html', '')}-v${n}.html`;
     while (existing.includes(candidate)) {
       n += 1;
       candidate = `${parsed.slug.replace('.html', '')}-v${n}.html`;
     }
+    console.warn(`⚠ Colision de slug con tema distinto, se crea ${candidate}`);
     parsed.slug = candidate;
   }
 
   const hero = await resolveHeroImage(plan.userTopic, '', parsed.slug, market);
   const dateIso = new Date().toISOString().slice(0, 10);
+  // Al actualizar se respeta la fecha original de publicacion.
+  const publishedIso = actualizando
+    ? await leerDatePublished(parsed.slug, dateIso)
+    : dateIso;
 
-  const html = buildArticleHtml(parsed, dateIso, hero, market);
+  const html = buildArticleHtml(parsed, dateIso, hero, market, publishedIso);
   await writeFile(join(ROOT, 'blog', parsed.slug), html, 'utf8');
-  await insertCardInIndex(buildCard(parsed, dateIso, hero));
+  // La tarjeta del indice solo se inserta si el articulo es nuevo; si no,
+  // saldria repetida en /blog/.
+  if (!actualizando) await insertCardInIndex(buildCard(parsed, dateIso, hero));
 
   execSync('node scripts/generate-seo.mjs', { cwd: ROOT, stdio: 'inherit' });
 
