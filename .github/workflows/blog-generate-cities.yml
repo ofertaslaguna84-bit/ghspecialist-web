@@ -14,13 +14,8 @@ on:
           - cdmx
           - guadalajara
   schedule:
-    # OJO con este cron: si se ponen a la vez el dia del mes (1-7) y el dia de
-    # la semana (1=lunes), cron dispara cuando coincide CUALQUIERA de los dos,
-    # no los dos juntos. '0 10 1-7 * 1' no era "primer lunes": corria los dias
-    # 1 al 7 Y ademas todos los lunes -- 8 veces en agosto 2026, y cada corrida
-    # generaba un duplicado de los 4 articulos de ciudad.
-    # Se deja solo el rango de dias y el filtro de lunes va en el job.
-    - cron: '0 10 1-7 * *'
+    # Primer lunes de cada mes, 10:00 UTC (4:00 CDMX)
+    - cron: '0 10 1-7 * 1'
 
 permissions:
   contents: write
@@ -32,30 +27,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # El cron dispara los dias 1 al 7; aqui se deja pasar solo el que cae en
-  # lunes, que es el primer lunes del mes. Lanzado a mano (workflow_dispatch)
-  # siempre pasa.
-  guard:
-    runs-on: ubuntu-latest
-    outputs:
-      seguir: ${{ steps.chk.outputs.seguir }}
-    steps:
-      - id: chk
-        run: |
-          if [ "${{ github.event_name }}" != "schedule" ]; then
-            echo "Lanzado a mano, se continua."
-            echo "seguir=si" >> "$GITHUB_OUTPUT"
-          elif [ "$(date -u +%u)" = "1" ]; then
-            echo "Hoy es lunes y estamos en los primeros 7 dias: primer lunes del mes."
-            echo "seguir=si" >> "$GITHUB_OUTPUT"
-          else
-            echo "Hoy es $(date -u +%A), no es el primer lunes. No se genera nada."
-            echo "seguir=no" >> "$GITHUB_OUTPUT"
-          fi
-
   generate:
-    needs: guard
-    if: needs.guard.outputs.seguir == 'si'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
