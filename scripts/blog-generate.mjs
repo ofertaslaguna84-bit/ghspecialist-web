@@ -4,6 +4,7 @@
  * CI: secrets DEEPSEEK_API_KEY y/o QWEN_API_KEY + BLOG_GENERATE_SECRET.
  */
 import { readFile, writeFile, readdir, mkdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
@@ -78,11 +79,63 @@ function normalizeBlogSlug(slug) {
   return s.endsWith('.html') ? s : `${s}.html`;
 }
 
+/**
+ * Arregla los enlaces que la IA se inventa dentro del articulo.
+ *
+ * La version anterior solo cubria href="slug" a secas, sin barras ni
+ * extension. Todo lo demas pasaba derecho, y asi se acumularon 55 destinos
+ * rotos en el sitio: "/blog/algo" sin .html, "../crm-kommo.html" (los
+ * servicios viven en ../servicios/), "../articulos/..." (esa carpeta nunca
+ * existio) y articulos citados que sencillamente no existen.
+ *
+ * Ahora, ademas de normalizar, COMPRUEBA CONTRA EL DISCO. Lo que no lleva a
+ * ningun lado se queda como texto sin enlace: un enlace roto le dice a Google
+ * que el sitio esta abandonado, una frase sin enlace no le dice nada.
+ */
 function fixInternalBlogLinks(html) {
-  return String(html || '').replace(/href="([a-z0-9][a-z0-9-]*)"/gi, (match, slug) => {
-    if (slug.includes('.') || slug === 'index') return match;
-    return `href="${slug}.html"`;
-  });
+  const existeEnBlog = (nombre) => existsSync(join(ROOT, 'blog', nombre));
+  const esServicio = (nombre) => existsSync(join(ROOT, 'servicios', nombre));
+
+  return String(html || '').replace(
+    /<a\b([^>]*?)href="([^"]+)"([^>]*)>([\s\S]*?)<\/a>/gi,
+    (todo, antes, url, despues, texto) => {
+      if (/^(https?:|mailto:|tel:|#)/.test(url)) return todo;
+
+      const base = url.split('#')[0].split('?')[0];
+
+      // Enlace a carpeta (../ciudades/monterrey/, ../blog/): se deja si
+      // existe. Sin esto, split('/').pop() daba cadena vacia, existsSync
+      // sobre "servicios/" daba true y el enlace acababa apuntando al
+      // indice de servicios.
+      if (base.endsWith('/')) {
+        const carpeta = base.startsWith('/') ? join(ROOT, base) : join(ROOT, 'blog', base);
+        if (existsSync(carpeta)) return todo;
+        console.warn(`[enlaces] se quita enlace a carpeta inexistente: ${url}`);
+        return texto;
+      }
+
+      let nombre = base.split('/').pop();
+      if (!nombre) return todo;
+      if (!/\.[a-z0-9]{2,4}$/i.test(nombre)) nombre += '.html';
+
+      // Un servicio: vive en ../servicios/, no en la raiz ni en el blog.
+      if (esServicio(nombre)) {
+        return `<a${antes}href="../servicios/${nombre}"${despues}>${texto}</a>`;
+      }
+      // Un articulo del blog: siempre relativo, ya estamos dentro de /blog/.
+      if (existeEnBlog(nombre)) {
+        return `<a${antes}href="${nombre}"${despues}>${texto}</a>`;
+      }
+      // Rutas del sitio que si existen tal cual (../ciudades/, ../torreon/…).
+      const abs = base.startsWith('/')
+        ? join(ROOT, base)
+        : join(ROOT, 'blog', base);
+      if (existsSync(abs)) return todo;
+
+      console.warn(`[enlaces] se quita enlace inventado: ${url}`);
+      return texto;
+    },
+  );
 }
 
 async function discoverImagePool() {
