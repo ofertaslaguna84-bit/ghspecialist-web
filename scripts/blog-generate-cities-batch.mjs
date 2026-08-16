@@ -10,12 +10,23 @@ import { loadAiEnv } from './gh-load-ai-env.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 
-/** @type {{ id: string, label: string, topic: string }[]} */
+/**
+ * Un tema por ciudad, apuntado a constructoras y desarrolladoras.
+ *
+ * Antes las cuatro pedian "seo con ia {ciudad}": el mismo articulo generico
+ * repetido, peleando contra cualquier agencia del pais. Ahora cada plaza pide
+ * lo que ahi se busca de verdad, y se alterna el perfil: unas ciudades atacan
+ * el dolor de la constructora (mano de obra) y otras el de la desarrolladora
+ * (vender la vivienda).
+ *
+ * @type {{ id: string, label: string, topic: string }[]}
+ */
 const CITY_SEO_TOPICS = [
-  { id: 'torreon', label: 'Torreón y La Laguna', topic: 'seo con ia torreon' },
-  { id: 'monterrey', label: 'Monterrey', topic: 'seo con ia monterrey' },
-  { id: 'cdmx', label: 'CDMX', topic: 'seo con ia cdmx' },
-  { id: 'guadalajara', label: 'Guadalajara', topic: 'seo con ia guadalajara' },
+  // La Laguna es donde hay obra propia y caso real: va por mano de obra.
+  { id: 'torreon', label: 'Torreón y La Laguna', topic: 'reclutar personal de obra en torreon' },
+  { id: 'monterrey', label: 'Monterrey', topic: 'crm para constructoras en monterrey' },
+  { id: 'cdmx', label: 'CDMX', topic: 'crm inmobiliario para desarrolladoras en cdmx' },
+  { id: 'guadalajara', label: 'Guadalajara', topic: 'automatizar ventas de vivienda en guadalajara' },
 ];
 
 const DELAY_MS = Number(process.env.BLOG_BATCH_DELAY_MS || 8000);

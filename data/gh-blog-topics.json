@@ -1,190 +1,902 @@
 [
-  { "phrase": "chatbot whatsapp negocios mexico", "category": "Chatbots" },
-  { "phrase": "chatbot whatsapp para empresas", "category": "Chatbots" },
-  { "phrase": "chatbot con inteligencia artificial", "category": "Chatbots" },
-  { "phrase": "chatbot whatsapp precio", "category": "Chatbots" },
-  { "phrase": "precio chatbot whatsapp", "category": "Chatbots" },
-  { "phrase": "precio chatbot con ia", "category": "Chatbots" },
-  { "phrase": "chatbot whatsapp business precio", "category": "Chatbots" },
-  { "phrase": "atencion cliente chatbot", "category": "Chatbots" },
-  { "phrase": "atencion al cliente chatbot", "category": "Chatbots" },
-  { "phrase": "chatbot atencion al cliente whatsapp", "category": "Chatbots" },
-  { "phrase": "bot whatsapp para empresas", "category": "Chatbots" },
-  { "phrase": "como crear chatbot whatsapp", "category": "Chatbots" },
-  { "phrase": "asistente virtual whatsapp empresas", "category": "Chatbots" },
-  { "phrase": "chatbot inmobiliaria whatsapp", "category": "Chatbots" },
-  { "phrase": "chatbot torreon", "category": "Chatbots" },
-  { "phrase": "chatbot monterrey", "category": "Chatbots" },
-  { "phrase": "chatbot cdmx", "category": "Chatbots" },
-  { "phrase": "chatbot guadalajara", "category": "Chatbots" },
-  { "phrase": "automatizacion de servicio al cliente", "category": "Automatización" },
-  { "phrase": "automatizacion atencion al cliente", "category": "Automatización" },
-  { "phrase": "automatizar ventas por whatsapp", "category": "Automatización" },
-  { "phrase": "automatizacion de ventas whatsapp", "category": "Automatización" },
-  { "phrase": "automatizacion whatsapp pymes", "category": "Automatización" },
-  { "phrase": "respuestas automaticas whatsapp", "category": "Automatización" },
-  { "phrase": "respuestas automaticas whatsapp ia", "category": "Automatización" },
-  { "phrase": "respuestas automaticas whatsapp business", "category": "Automatización" },
-  { "phrase": "como automatizar mi negocio con ia", "category": "Automatización" },
-  { "phrase": "automatizar negocio con inteligencia artificial", "category": "Automatización" },
-  { "phrase": "automatizacion recursos humanos", "category": "Automatización" },
-  { "phrase": "automatizacion torreon", "category": "Automatización" },
-  { "phrase": "automatizacion monterrey", "category": "Automatización" },
-  { "phrase": "automatizacion cdmx", "category": "Automatización" },
-  { "phrase": "automatizacion guadalajara", "category": "Automatización" },
-  { "phrase": "agencia automatizacion whatsapp mexico", "category": "Automatización" },
-  { "phrase": "inteligencia artificial empresas mexico", "category": "IA" },
-  { "phrase": "inteligencia artificial para pymes mexico", "category": "IA" },
-  { "phrase": "inteligencia artificial pymes", "category": "IA" },
-  { "phrase": "inteligencia artificial torreon", "category": "IA" },
-  { "phrase": "inteligencia artificial monterrey", "category": "IA" },
-  { "phrase": "inteligencia artificial cdmx", "category": "IA" },
-  { "phrase": "inteligencia artificial guadalajara", "category": "IA" },
-  { "phrase": "agencia inteligencia artificial mexico", "category": "IA" },
-  { "phrase": "consultoria inteligencia artificial mexico", "category": "IA" },
-  { "phrase": "transformacion digital pymes", "category": "IA" },
-  { "phrase": "ia para ventas whatsapp", "category": "IA" },
-  { "phrase": "agente de ia para whatsapp", "category": "IA" },
-  { "phrase": "agente ia whatsapp", "category": "IA" },
-  { "phrase": "agente de ia por whatsapp", "category": "IA" },
-  { "phrase": "agente de ventas ia whatsapp", "category": "IA" },
-  { "phrase": "agente ia whatsapp business", "category": "IA" },
-  { "phrase": "crear agente ia en whatsapp", "category": "IA" },
-  { "phrase": "crm kommo que es", "category": "CRM" },
-  { "phrase": "crm kommo whatsapp", "category": "CRM" },
-  { "phrase": "kommo crm whatsapp", "category": "CRM" },
-  { "phrase": "kommo crm para whatsapp", "category": "CRM" },
-  { "phrase": "kommo crm whatsapp api", "category": "CRM" },
-  { "phrase": "kommo crm whatsapp business", "category": "CRM" },
-  { "phrase": "kommo crm como funciona", "category": "CRM" },
-  { "phrase": "kommo crm precios", "category": "CRM" },
-  { "phrase": "integracion crm whatsapp", "category": "CRM" },
-  { "phrase": "software crm whatsapp mexico", "category": "CRM" },
-  { "phrase": "embudo ventas whatsapp", "category": "WhatsApp" },
-  { "phrase": "embudo de ventas whatsapp", "category": "WhatsApp" },
-  { "phrase": "whatsapp business api mexico", "category": "WhatsApp" },
-  { "phrase": "whatsapp business api como funciona", "category": "WhatsApp" },
-  { "phrase": "whatsapp business api costo", "category": "WhatsApp" },
-  { "phrase": "whatsapp business api precios", "category": "WhatsApp" },
-  { "phrase": "servicio al cliente whatsapp", "category": "WhatsApp" },
-  { "phrase": "servicio al cliente whatsapp business", "category": "WhatsApp" },
-  { "phrase": "marketing whatsapp pymes", "category": "WhatsApp" },
-  { "phrase": "como posicionar mi pagina en google mexico", "category": "SEO" },
-  { "phrase": "como posicionar pagina google mexico", "category": "SEO" },
-  { "phrase": "posicionar pagina en google", "category": "SEO" },
-  { "phrase": "posicionar negocio en google maps", "category": "SEO" },
-  { "phrase": "posicionar en google maps", "category": "SEO" },
-  { "phrase": "seo para pymes mexico", "category": "SEO" },
-  { "phrase": "seo b2b mexico", "category": "SEO" },
-  { "phrase": "seo para negocios b2b", "category": "SEO" },
-  { "phrase": "seo para empresas b2b mexico", "category": "SEO" },
-  { "phrase": "agencia seo b2b mexico", "category": "SEO" },
-  { "phrase": "posicionamiento seo b2b", "category": "SEO" },
-  { "phrase": "generacion de demanda b2b mexico", "category": "SEO" },
-  { "phrase": "blog con ia para empresas", "category": "SEO" },
-  { "phrase": "blog seo con ia mexico", "category": "SEO" },
-  { "phrase": "marketing de contenidos b2b mexico", "category": "SEO" },
-  { "phrase": "seo empresas industriales mexico", "category": "SEO" },
-  { "phrase": "seo para manufactura mexico", "category": "SEO" },
-  { "phrase": "seo parque industrial", "category": "SEO" },
-  { "phrase": "seo para maquiladoras", "category": "SEO" },
-  { "phrase": "conseguir empresas industriales", "category": "SEO" },
-  { "phrase": "pagina de ia con seo", "category": "SEO" },
-  { "phrase": "marketing industrial digital mexico", "category": "SEO" },
-  { "phrase": "proveedor industrial seo mexico", "category": "SEO" },
-  { "phrase": "capacitacion ia empresas mexico", "category": "IA" },
-  { "phrase": "capacitaciones ia al por mayor", "category": "IA" },
-  { "phrase": "capacitacion chatgpt mineria", "category": "IA" },
-  { "phrase": "capacitacion ia construccion mexico", "category": "IA" },
-  { "phrase": "curso ia para empresas industriales", "category": "IA" },
-  { "phrase": "entrenamiento ia corporativo mexico", "category": "IA" },
-  { "phrase": "taller chatgpt para compras industriales", "category": "IA" },
-  { "phrase": "capacitacion ia manufactura", "category": "IA" },
-  { "phrase": "cuanto cuesta posicionar pagina google mexico", "category": "SEO" },
-  { "phrase": "seo con ia", "category": "SEO" },
-  { "phrase": "seo inteligencia artificial", "category": "SEO" },
-  { "phrase": "hacer seo con ia", "category": "SEO" },
-  { "phrase": "agencia seo con ia", "category": "SEO" },
-  { "phrase": "posicionamiento seo con ia", "category": "SEO" },
-  { "phrase": "seo local con ia", "category": "SEO" },
-  { "phrase": "seo con ia torreon", "category": "SEO" },
-  { "phrase": "seo con ia monterrey", "category": "SEO" },
-  { "phrase": "seo con ia cdmx", "category": "SEO" },
-  { "phrase": "seo con ia guadalajara", "category": "SEO" },
-  { "phrase": "crear contenido con ia", "category": "SEO" },
-  { "phrase": "crear contenido con ia para youtube", "category": "SEO" },
-  { "phrase": "marketing digital con ia", "category": "IA" },
-  { "phrase": "crear videos con ia", "category": "IA" },
-  { "phrase": "videos con inteligencia artificial", "category": "IA" },
-  { "phrase": "video marketing con ia", "category": "IA" },
-  { "phrase": "generar videos ia", "category": "IA" },
-  { "phrase": "crear videos con ia a partir de texto", "category": "IA" },
-  { "phrase": "growth hacking que es", "category": "Consejos" },
-  { "phrase": "growth hacking mexico", "category": "Consejos" },
-  { "phrase": "growth hacking empresa", "category": "Consejos" },
-  { "phrase": "growth hacking estrategias", "category": "Consejos" },
-  { "phrase": "growth hacking marketing que es", "category": "Consejos" },
-  { "phrase": "growth hacking y marketing digital", "category": "Consejos" },
-  { "phrase": "recursos humanos torreon", "category": "Consejos" },
-  { "phrase": "agente de inteligencia artificial", "category": "IA" },
-  { "phrase": "agente de inteligencia artificial whatsapp", "category": "IA" },
-  { "phrase": "que es un agente de ia", "category": "IA" },
-  { "phrase": "que es un agente de ia y como funciona", "category": "IA" },
-  { "phrase": "mejor ia para empresas", "category": "IA" },
-  { "phrase": "mejores herramientas ia para empresas", "category": "IA" },
-  { "phrase": "cuanto cuesta inteligencia artificial", "category": "IA" },
-  { "phrase": "empresa de inteligencia artificial en mexico", "category": "IA" },
-  { "phrase": "como implementar ia en mi empresa", "category": "IA" },
-  { "phrase": "como implementar ia en mi negocio", "category": "IA" },
-  { "phrase": "como usar ia en mi negocio", "category": "IA" },
-  { "phrase": "ia para empresas", "category": "IA" },
-  { "phrase": "herramientas ia empresas", "category": "IA" },
-  { "phrase": "inteligencia artificial generativa", "category": "IA" },
-  { "phrase": "prompt chatgpt para negocios", "category": "IA" },
-  { "phrase": "chatgpt para negocios", "category": "IA" },
-  { "phrase": "gemini para empresas", "category": "IA" },
-  { "phrase": "copilot para empresas", "category": "IA" },
-  { "phrase": "claude vs chatgpt vs gemini", "category": "IA" },
-  { "phrase": "claude vs chatgpt vs gemini vs copilot", "category": "IA" },
-  { "phrase": "claude vs chatgpt vs gemini vs grok", "category": "IA" },
-  { "phrase": "claude vs chatgpt cual es mejor", "category": "IA" },
-  { "phrase": "claude para recursos humanos", "category": "IA" },
-  { "phrase": "claude para capacitacion empresas", "category": "IA" },
-  { "phrase": "claude para construccion", "category": "IA" },
-  { "phrase": "claude para recursos humanos torreon", "category": "IA" },
-  { "phrase": "claude para recursos humanos monterrey", "category": "IA" },
-  { "phrase": "claude para recursos humanos cdmx", "category": "IA" },
-  { "phrase": "claude para recursos humanos guadalajara", "category": "IA" },
-  { "phrase": "claude para capacitacion empresas torreon", "category": "IA" },
-  { "phrase": "claude para capacitacion empresas monterrey", "category": "IA" },
-  { "phrase": "claude para capacitacion empresas cdmx", "category": "IA" },
-  { "phrase": "claude para capacitacion empresas guadalajara", "category": "IA" },
-  { "phrase": "claude para construccion torreon", "category": "IA" },
-  { "phrase": "claude para construccion monterrey", "category": "IA" },
-  { "phrase": "claude para construccion cdmx", "category": "IA" },
-  { "phrase": "claude para construccion guadalajara", "category": "IA" },
-  { "phrase": "automatizar whatsapp con ia", "category": "WhatsApp" },
-  { "phrase": "automatizar whatsapp business con ia", "category": "WhatsApp" },
-  { "phrase": "chatbot whatsapp con ia", "category": "Chatbots" },
-  { "phrase": "chatbot whatsapp ia", "category": "Chatbots" },
-  { "phrase": "bot whatsapp ia", "category": "Chatbots" },
-  { "phrase": "crear chatbot para whatsapp", "category": "Chatbots" },
-  { "phrase": "crear bot whatsapp con ia", "category": "Chatbots" },
-  { "phrase": "chatgpt whatsapp bot", "category": "WhatsApp" },
-  { "phrase": "ia para atencion al cliente", "category": "IA" },
-  { "phrase": "ia para atencion al cliente whatsapp", "category": "WhatsApp" },
-  { "phrase": "herramientas de ia para atencion al cliente", "category": "IA" },
-  { "phrase": "automatizacion con ia para empresas", "category": "Automatización" },
-  { "phrase": "automatizacion con ia para pymes", "category": "Automatización" },
-  { "phrase": "automatizacion con ia para negocios", "category": "Automatización" },
-  { "phrase": "automatizar ventas con ia", "category": "Automatización" },
-  { "phrase": "ventas con ia", "category": "IA" },
-  { "phrase": "aumentar ventas con ia", "category": "IA" },
-  { "phrase": "marketing con inteligencia artificial", "category": "IA" },
-  { "phrase": "marketing digital con inteligencia artificial", "category": "IA" },
-  { "phrase": "marketing inmobiliario con inteligencia artificial", "category": "IA" },
-  { "phrase": "crm con ia para whatsapp", "category": "CRM" },
-  { "phrase": "crm inmobiliario con ia", "category": "CRM" },
-  { "phrase": "kommo crm opiniones", "category": "CRM" },
-  { "phrase": "kommo crm planes", "category": "CRM" }
+  {
+    "phrase": "como reclutar personal de obra rapido",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "software para reclutar personal de obra",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "como contratar albañiles y destajistas",
+    "category": "Consejos"
+  },
+  {
+    "phrase": "contratar cuadrillas para obra",
+    "category": "Consejos"
+  },
+  {
+    "phrase": "automatizar reclutamiento de personal de obra",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "falta de mano de obra en construccion",
+    "category": "Consejos"
+  },
+  {
+    "phrase": "como filtrar candidatos de obra con ia",
+    "category": "IA"
+  },
+  {
+    "phrase": "reclutamiento por whatsapp para constructoras",
+    "category": "WhatsApp"
+  },
+  {
+    "phrase": "crm para constructoras mexico",
+    "category": "CRM"
+  },
+  {
+    "phrase": "automatizacion para empresas constructoras",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "inteligencia artificial para constructoras",
+    "category": "IA"
+  },
+  {
+    "phrase": "control de avance de obra digital",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "reportes de obra automaticos",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "seguimiento de subcontratistas por whatsapp",
+    "category": "WhatsApp"
+  },
+  {
+    "phrase": "chatbot para constructoras",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "digitalizacion de empresas constructoras",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "como controlar destajos en obra",
+    "category": "Consejos"
+  },
+  {
+    "phrase": "crm inmobiliario mexico",
+    "category": "CRM"
+  },
+  {
+    "phrase": "crm para desarrolladoras de vivienda",
+    "category": "CRM"
+  },
+  {
+    "phrase": "como dar seguimiento a leads inmobiliarios",
+    "category": "CRM"
+  },
+  {
+    "phrase": "whatsapp para inmobiliarias",
+    "category": "WhatsApp"
+  },
+  {
+    "phrase": "chatbot para inmobiliarias mexico",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "como vender casas por whatsapp",
+    "category": "WhatsApp"
+  },
+  {
+    "phrase": "automatizar ventas de vivienda",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "calificar leads inmobiliarios con ia",
+    "category": "IA"
+  },
+  {
+    "phrase": "agendar citas en casa muestra automatico",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "como no perder leads inmobiliarios",
+    "category": "Consejos"
+  },
+  {
+    "phrase": "embudo de ventas inmobiliario",
+    "category": "CRM"
+  },
+  {
+    "phrase": "seguimiento de prospectos de vivienda",
+    "category": "CRM"
+  },
+  {
+    "phrase": "ia para desarrolladoras inmobiliarias",
+    "category": "IA"
+  },
+  {
+    "phrase": "postventa de vivienda automatizada",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "leads de vivienda infonavit",
+    "category": "Consejos"
+  },
+  {
+    "phrase": "seo para constructoras",
+    "category": "SEO"
+  },
+  {
+    "phrase": "seo para inmobiliarias mexico",
+    "category": "SEO"
+  },
+  {
+    "phrase": "marketing digital para constructoras",
+    "category": "SEO"
+  },
+  {
+    "phrase": "marketing para desarrolladoras inmobiliarias",
+    "category": "SEO"
+  },
+  {
+    "phrase": "como conseguir clientes para constructora",
+    "category": "Consejos"
+  },
+  {
+    "phrase": "chatbot whatsapp negocios mexico",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "chatbot whatsapp para empresas",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "chatbot con inteligencia artificial",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "chatbot whatsapp precio",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "precio chatbot whatsapp",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "precio chatbot con ia",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "chatbot whatsapp business precio",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "atencion cliente chatbot",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "atencion al cliente chatbot",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "chatbot atencion al cliente whatsapp",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "bot whatsapp para empresas",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "como crear chatbot whatsapp",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "asistente virtual whatsapp empresas",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "chatbot inmobiliaria whatsapp",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "chatbot torreon",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "chatbot monterrey",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "chatbot cdmx",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "chatbot guadalajara",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "automatizacion de servicio al cliente",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "automatizacion atencion al cliente",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "automatizar ventas por whatsapp",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "automatizacion de ventas whatsapp",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "automatizacion whatsapp pymes",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "respuestas automaticas whatsapp",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "respuestas automaticas whatsapp ia",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "respuestas automaticas whatsapp business",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "como automatizar mi negocio con ia",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "automatizar negocio con inteligencia artificial",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "automatizacion recursos humanos",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "automatizacion torreon",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "automatizacion monterrey",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "automatizacion cdmx",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "automatizacion guadalajara",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "agencia automatizacion whatsapp mexico",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "inteligencia artificial empresas mexico",
+    "category": "IA"
+  },
+  {
+    "phrase": "inteligencia artificial para pymes mexico",
+    "category": "IA"
+  },
+  {
+    "phrase": "inteligencia artificial pymes",
+    "category": "IA"
+  },
+  {
+    "phrase": "inteligencia artificial torreon",
+    "category": "IA"
+  },
+  {
+    "phrase": "inteligencia artificial monterrey",
+    "category": "IA"
+  },
+  {
+    "phrase": "inteligencia artificial cdmx",
+    "category": "IA"
+  },
+  {
+    "phrase": "inteligencia artificial guadalajara",
+    "category": "IA"
+  },
+  {
+    "phrase": "agencia inteligencia artificial mexico",
+    "category": "IA"
+  },
+  {
+    "phrase": "consultoria inteligencia artificial mexico",
+    "category": "IA"
+  },
+  {
+    "phrase": "transformacion digital pymes",
+    "category": "IA"
+  },
+  {
+    "phrase": "ia para ventas whatsapp",
+    "category": "IA"
+  },
+  {
+    "phrase": "agente de ia para whatsapp",
+    "category": "IA"
+  },
+  {
+    "phrase": "agente ia whatsapp",
+    "category": "IA"
+  },
+  {
+    "phrase": "agente de ia por whatsapp",
+    "category": "IA"
+  },
+  {
+    "phrase": "agente de ventas ia whatsapp",
+    "category": "IA"
+  },
+  {
+    "phrase": "agente ia whatsapp business",
+    "category": "IA"
+  },
+  {
+    "phrase": "crear agente ia en whatsapp",
+    "category": "IA"
+  },
+  {
+    "phrase": "crm kommo que es",
+    "category": "CRM"
+  },
+  {
+    "phrase": "crm kommo whatsapp",
+    "category": "CRM"
+  },
+  {
+    "phrase": "kommo crm whatsapp",
+    "category": "CRM"
+  },
+  {
+    "phrase": "kommo crm para whatsapp",
+    "category": "CRM"
+  },
+  {
+    "phrase": "kommo crm whatsapp api",
+    "category": "CRM"
+  },
+  {
+    "phrase": "kommo crm whatsapp business",
+    "category": "CRM"
+  },
+  {
+    "phrase": "kommo crm como funciona",
+    "category": "CRM"
+  },
+  {
+    "phrase": "kommo crm precios",
+    "category": "CRM"
+  },
+  {
+    "phrase": "integracion crm whatsapp",
+    "category": "CRM"
+  },
+  {
+    "phrase": "software crm whatsapp mexico",
+    "category": "CRM"
+  },
+  {
+    "phrase": "embudo ventas whatsapp",
+    "category": "WhatsApp"
+  },
+  {
+    "phrase": "embudo de ventas whatsapp",
+    "category": "WhatsApp"
+  },
+  {
+    "phrase": "whatsapp business api mexico",
+    "category": "WhatsApp"
+  },
+  {
+    "phrase": "whatsapp business api como funciona",
+    "category": "WhatsApp"
+  },
+  {
+    "phrase": "whatsapp business api costo",
+    "category": "WhatsApp"
+  },
+  {
+    "phrase": "whatsapp business api precios",
+    "category": "WhatsApp"
+  },
+  {
+    "phrase": "servicio al cliente whatsapp",
+    "category": "WhatsApp"
+  },
+  {
+    "phrase": "servicio al cliente whatsapp business",
+    "category": "WhatsApp"
+  },
+  {
+    "phrase": "marketing whatsapp pymes",
+    "category": "WhatsApp"
+  },
+  {
+    "phrase": "como posicionar mi pagina en google mexico",
+    "category": "SEO"
+  },
+  {
+    "phrase": "como posicionar pagina google mexico",
+    "category": "SEO"
+  },
+  {
+    "phrase": "posicionar pagina en google",
+    "category": "SEO"
+  },
+  {
+    "phrase": "posicionar negocio en google maps",
+    "category": "SEO"
+  },
+  {
+    "phrase": "posicionar en google maps",
+    "category": "SEO"
+  },
+  {
+    "phrase": "seo para pymes mexico",
+    "category": "SEO"
+  },
+  {
+    "phrase": "seo b2b mexico",
+    "category": "SEO"
+  },
+  {
+    "phrase": "seo para negocios b2b",
+    "category": "SEO"
+  },
+  {
+    "phrase": "seo para empresas b2b mexico",
+    "category": "SEO"
+  },
+  {
+    "phrase": "agencia seo b2b mexico",
+    "category": "SEO"
+  },
+  {
+    "phrase": "posicionamiento seo b2b",
+    "category": "SEO"
+  },
+  {
+    "phrase": "generacion de demanda b2b mexico",
+    "category": "SEO"
+  },
+  {
+    "phrase": "blog con ia para empresas",
+    "category": "SEO"
+  },
+  {
+    "phrase": "blog seo con ia mexico",
+    "category": "SEO"
+  },
+  {
+    "phrase": "marketing de contenidos b2b mexico",
+    "category": "SEO"
+  },
+  {
+    "phrase": "seo empresas industriales mexico",
+    "category": "SEO"
+  },
+  {
+    "phrase": "seo para manufactura mexico",
+    "category": "SEO"
+  },
+  {
+    "phrase": "seo parque industrial",
+    "category": "SEO"
+  },
+  {
+    "phrase": "seo para maquiladoras",
+    "category": "SEO"
+  },
+  {
+    "phrase": "conseguir empresas industriales",
+    "category": "SEO"
+  },
+  {
+    "phrase": "pagina de ia con seo",
+    "category": "SEO"
+  },
+  {
+    "phrase": "marketing industrial digital mexico",
+    "category": "SEO"
+  },
+  {
+    "phrase": "proveedor industrial seo mexico",
+    "category": "SEO"
+  },
+  {
+    "phrase": "capacitacion ia empresas mexico",
+    "category": "IA"
+  },
+  {
+    "phrase": "capacitaciones ia al por mayor",
+    "category": "IA"
+  },
+  {
+    "phrase": "capacitacion chatgpt mineria",
+    "category": "IA"
+  },
+  {
+    "phrase": "capacitacion ia construccion mexico",
+    "category": "IA"
+  },
+  {
+    "phrase": "curso ia para empresas industriales",
+    "category": "IA"
+  },
+  {
+    "phrase": "entrenamiento ia corporativo mexico",
+    "category": "IA"
+  },
+  {
+    "phrase": "taller chatgpt para compras industriales",
+    "category": "IA"
+  },
+  {
+    "phrase": "capacitacion ia manufactura",
+    "category": "IA"
+  },
+  {
+    "phrase": "cuanto cuesta posicionar pagina google mexico",
+    "category": "SEO"
+  },
+  {
+    "phrase": "seo con ia",
+    "category": "SEO"
+  },
+  {
+    "phrase": "seo inteligencia artificial",
+    "category": "SEO"
+  },
+  {
+    "phrase": "hacer seo con ia",
+    "category": "SEO"
+  },
+  {
+    "phrase": "agencia seo con ia",
+    "category": "SEO"
+  },
+  {
+    "phrase": "posicionamiento seo con ia",
+    "category": "SEO"
+  },
+  {
+    "phrase": "seo local con ia",
+    "category": "SEO"
+  },
+  {
+    "phrase": "seo con ia torreon",
+    "category": "SEO"
+  },
+  {
+    "phrase": "seo con ia monterrey",
+    "category": "SEO"
+  },
+  {
+    "phrase": "seo con ia cdmx",
+    "category": "SEO"
+  },
+  {
+    "phrase": "seo con ia guadalajara",
+    "category": "SEO"
+  },
+  {
+    "phrase": "crear contenido con ia",
+    "category": "SEO"
+  },
+  {
+    "phrase": "crear contenido con ia para youtube",
+    "category": "SEO"
+  },
+  {
+    "phrase": "marketing digital con ia",
+    "category": "IA"
+  },
+  {
+    "phrase": "crear videos con ia",
+    "category": "IA"
+  },
+  {
+    "phrase": "videos con inteligencia artificial",
+    "category": "IA"
+  },
+  {
+    "phrase": "video marketing con ia",
+    "category": "IA"
+  },
+  {
+    "phrase": "generar videos ia",
+    "category": "IA"
+  },
+  {
+    "phrase": "crear videos con ia a partir de texto",
+    "category": "IA"
+  },
+  {
+    "phrase": "growth hacking que es",
+    "category": "Consejos"
+  },
+  {
+    "phrase": "growth hacking mexico",
+    "category": "Consejos"
+  },
+  {
+    "phrase": "growth hacking empresa",
+    "category": "Consejos"
+  },
+  {
+    "phrase": "growth hacking estrategias",
+    "category": "Consejos"
+  },
+  {
+    "phrase": "growth hacking marketing que es",
+    "category": "Consejos"
+  },
+  {
+    "phrase": "growth hacking y marketing digital",
+    "category": "Consejos"
+  },
+  {
+    "phrase": "recursos humanos torreon",
+    "category": "Consejos"
+  },
+  {
+    "phrase": "agente de inteligencia artificial",
+    "category": "IA"
+  },
+  {
+    "phrase": "agente de inteligencia artificial whatsapp",
+    "category": "IA"
+  },
+  {
+    "phrase": "que es un agente de ia",
+    "category": "IA"
+  },
+  {
+    "phrase": "que es un agente de ia y como funciona",
+    "category": "IA"
+  },
+  {
+    "phrase": "mejor ia para empresas",
+    "category": "IA"
+  },
+  {
+    "phrase": "mejores herramientas ia para empresas",
+    "category": "IA"
+  },
+  {
+    "phrase": "cuanto cuesta inteligencia artificial",
+    "category": "IA"
+  },
+  {
+    "phrase": "empresa de inteligencia artificial en mexico",
+    "category": "IA"
+  },
+  {
+    "phrase": "como implementar ia en mi empresa",
+    "category": "IA"
+  },
+  {
+    "phrase": "como implementar ia en mi negocio",
+    "category": "IA"
+  },
+  {
+    "phrase": "como usar ia en mi negocio",
+    "category": "IA"
+  },
+  {
+    "phrase": "ia para empresas",
+    "category": "IA"
+  },
+  {
+    "phrase": "herramientas ia empresas",
+    "category": "IA"
+  },
+  {
+    "phrase": "inteligencia artificial generativa",
+    "category": "IA"
+  },
+  {
+    "phrase": "prompt chatgpt para negocios",
+    "category": "IA"
+  },
+  {
+    "phrase": "chatgpt para negocios",
+    "category": "IA"
+  },
+  {
+    "phrase": "gemini para empresas",
+    "category": "IA"
+  },
+  {
+    "phrase": "copilot para empresas",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude vs chatgpt vs gemini",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude vs chatgpt vs gemini vs copilot",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude vs chatgpt vs gemini vs grok",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude vs chatgpt cual es mejor",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude para recursos humanos",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude para capacitacion empresas",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude para construccion",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude para recursos humanos torreon",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude para recursos humanos monterrey",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude para recursos humanos cdmx",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude para recursos humanos guadalajara",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude para capacitacion empresas torreon",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude para capacitacion empresas monterrey",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude para capacitacion empresas cdmx",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude para capacitacion empresas guadalajara",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude para construccion torreon",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude para construccion monterrey",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude para construccion cdmx",
+    "category": "IA"
+  },
+  {
+    "phrase": "claude para construccion guadalajara",
+    "category": "IA"
+  },
+  {
+    "phrase": "automatizar whatsapp con ia",
+    "category": "WhatsApp"
+  },
+  {
+    "phrase": "automatizar whatsapp business con ia",
+    "category": "WhatsApp"
+  },
+  {
+    "phrase": "chatbot whatsapp con ia",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "chatbot whatsapp ia",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "bot whatsapp ia",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "crear chatbot para whatsapp",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "crear bot whatsapp con ia",
+    "category": "Chatbots"
+  },
+  {
+    "phrase": "chatgpt whatsapp bot",
+    "category": "WhatsApp"
+  },
+  {
+    "phrase": "ia para atencion al cliente",
+    "category": "IA"
+  },
+  {
+    "phrase": "ia para atencion al cliente whatsapp",
+    "category": "WhatsApp"
+  },
+  {
+    "phrase": "herramientas de ia para atencion al cliente",
+    "category": "IA"
+  },
+  {
+    "phrase": "automatizacion con ia para empresas",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "automatizacion con ia para pymes",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "automatizacion con ia para negocios",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "automatizar ventas con ia",
+    "category": "Automatización"
+  },
+  {
+    "phrase": "ventas con ia",
+    "category": "IA"
+  },
+  {
+    "phrase": "aumentar ventas con ia",
+    "category": "IA"
+  },
+  {
+    "phrase": "marketing con inteligencia artificial",
+    "category": "IA"
+  },
+  {
+    "phrase": "marketing digital con inteligencia artificial",
+    "category": "IA"
+  },
+  {
+    "phrase": "marketing inmobiliario con inteligencia artificial",
+    "category": "IA"
+  },
+  {
+    "phrase": "crm con ia para whatsapp",
+    "category": "CRM"
+  },
+  {
+    "phrase": "crm inmobiliario con ia",
+    "category": "CRM"
+  },
+  {
+    "phrase": "kommo crm opiniones",
+    "category": "CRM"
+  },
+  {
+    "phrase": "kommo crm planes",
+    "category": "CRM"
+  }
 ]

@@ -467,8 +467,29 @@ Menciona que atendemos EE.UU. de forma remota; si encaja, cita Houston, Los Áng
 Tono: directo para dueño de negocio latino ocupado en USA (español claro, sin spanglish forzado).
 card_city_label en JSON: "EE.UU. · Comunidad hispana" (o ciudad USA concreta si el tema la incluye).`
     : `Eres redactor SEO senior para GH Specialist (automatización con IA, chatbots WhatsApp, CRM Kommo, GoHighLevel/GHL, México).
-Tono directo para dueño de PYME ocupado en México.
-Menciona cuando encaje que GH Specialist implementa Kommo y también GoHighLevel (GHL): embudos, pipelines, SMS, WhatsApp y automatizaciones.
+
+AUDIENCIA PRINCIPAL: CONSTRUCTORAS y DESARROLLADORAS de vivienda en México.
+Le escribes a dos perfiles, y sus dolores no son el mismo:
+- CONSTRUCTORA (ejecuta obra): no consigue mano de obra — fierreros, cimbreros,
+  albañiles, yeseros —, no sabe cómo va el avance real, persigue subcontratistas
+  por teléfono y paga destajos sin control fino.
+- DESARROLLADORA (vende vivienda): recibe muchos interesados y pierde la mitad
+  entre la primera pregunta y la firma; nadie devuelve llamadas a tiempo; el
+  seguimiento vive en libretas y WhatsApp sueltos.
+
+Escribe como quien ha estado en obra: usa las palabras del gremio (destajista,
+cuadrilla, residente, avance, subcontratista, cimbra, tabique, m2). Nada de
+"transforma tu negocio" ni promesas de folleto. Ejemplos concretos con números
+redondos y realistas; si no tienes el dato, no lo inventes.
+
+GH Specialist trabaja hoy con desarrolladores de vivienda: automatiza el
+reclutamiento de personal de obra y el seguimiento de prospectos. Puede decirse
+sin nombrar clientes ni inventar cifras.
+
+Si el tema no es de construcción, escríbelo igual bien para empresa mexicana,
+pero el ejemplo que aterrice el punto que sea del gremio cuando se pueda.
+Menciona cuando encaje que GH Specialist implementa Kommo y también GoHighLevel
+(GHL): embudos, pipelines, SMS, WhatsApp y automatizaciones.
 card_city_label en JSON: "México" (o ciudad mexicana si el tema la incluye).`;
 
   const indexingBlock = plan.indexingKeywords?.regions?.length
@@ -502,7 +523,13 @@ Servicios (enlaces relativos ../servicios/...):
 - automatizacion-total.html
 - web-seo-blog-ia.html
 - agentes-omnicanal.html
-${isUsa ? '- Enlaza ../ciudades/ (hub) o ../ciudades/houston/ ../ciudades/miami/ si encaja' : ''}
+- capacitaciones-ia-empresas.html (minería, construcción e industria)
+${isUsa ? '- Enlaza ../ciudades/ (hub) o ../ciudades/houston/ ../ciudades/miami/ si encaja' : `OBLIGATORIO — enlaza UNA página de ciudad si el artículo menciona una plaza:
+../torreon/ (Torreón y La Laguna) · ../ciudades/monterrey/ · ../ciudades/cdmx/
+../ciudades/guadalajara/ · ../ciudades/saltillo/ · ../ciudades/queretaro/
+../ciudades/chihuahua/ · ../ciudades/puebla/ · ../ciudades/leon/
+../ciudades/merida/ · ../ciudades/cancun/ · ../ciudades/tijuana/
+Si no se menciona ninguna ciudad, enlaza ../ciudades/ (el hub).`}
 
 REGLAS DE LONGITUD (CRÍTICO — el lector no lee paredes de texto):
 - Entre 700 y 1.000 palabras en content_html (NUNCA más de 1.000). Si te pasas, el sistema RECORTA el artículo y borra secciones del final.
