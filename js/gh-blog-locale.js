@@ -18,10 +18,10 @@
       ctaCal: '📅 Agendar diagnóstico gratuito →',
       ctaWa: '📱 WhatsApp →',
       figCap: 'Imagen generada con IA · GH Specialist',
-      indexLabel: 'Blog GH Specialist · SEO + IA',
-      indexH1: 'Automatización IA para<br>Empresas en México',
+      indexLabel: 'Blog GH Specialist · Construcción y vivienda',
+      indexH1: 'IA para constructoras<br>y desarrolladoras',
       indexSub:
-        'Guías y artículos optimizados para buscadores. ¿Quieres un blog así en tu sitio? <a href="../servicios/web-seo-blog-ia.html" style="color:var(--p);font-weight:700">Web + SEO + Blog IA →</a>',
+        'Reclutamiento de personal de obra, seguimiento de compradores y automatización, explicados con casos reales. ¿Quieres un blog así en tu sitio? <a href="../servicios/web-seo-blog-ia.html" style="color:var(--p);font-weight:700">Web + SEO + Blog IA →</a>',
       ctaBlogH2: '¿Quieres un blog que posicione en Google?',
       ctaBlogP: 'Implementamos Web + SEO + Blog IA para tu empresa. Publicación automática y optimización incluida.',
       ctaBlogBtn: 'Ver servicio Web + SEO →',

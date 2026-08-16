@@ -21,7 +21,24 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://ghspecialist.com';
 const APLICAR = process.argv.includes('--aplicar');
 const HOY = new Date().toISOString().slice(0, 10);
-const HERO = 'hero-torreon.webp';
+
+/**
+ * Una imagen distinta por articulo, para que no salgan los cinco con la misma
+ * foto en el indice del blog.
+ *
+ * PENDIENTE: ninguna de estas es de obra de verdad -- son las de "IA generica"
+ * (oficina futurista, hologramas) que ya estaban en el repo. Para articulos de
+ * reclutamiento en obra desentonan. Lo correcto es foto real de obra, o
+ * generarlas con GEMINI_API_KEY (que vive en los secrets del repo, no aqui).
+ */
+const HERO_POR_SLUG = {
+  'cuello-de-botella-reclutamiento-obra': 'blog/img/claude-para-construccion-torreon-julio-2026.png',
+  'repartir-candidatos-obra-sin-duplicar': 'blog/img/claude-para-construccion-monterrey-julio-2026.png',
+  'que-datos-pedirle-a-un-destajista': 'blog/img/claude-para-construccion-cdmx-julio-2026.png',
+  'cuanto-cuesta-no-llamar-a-un-candidato-de-obra': 'blog/img/capacitacion-chatgpt-para-empresas-de-construcci-julio-2026.png',
+  'automatizar-reclutamiento-obra-que-si-y-que-no': 'blog/img/claude-para-construccion-guadalajara-julio-2026.png',
+};
+const HERO_POR_DEFECTO = 'hero-torreon.webp';
 
 function esc(s) {
   return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -62,7 +79,7 @@ for (const art of ARTICULOS_OBRA) {
     .replaceAll('{{DESCRIPTION}}', esc(description))
     .replaceAll('{{OG_TITLE}}', esc(art.ogTitle || h1))
     .replaceAll('{{OG_DESCRIPTION}}', esc(art.ogDescription || description))
-    .replaceAll('{{OG_IMAGE}}', `${SITE}/${HERO}`)
+    .replaceAll('{{OG_IMAGE}}', `${SITE}/${HERO_POR_SLUG[art.slug] || HERO_POR_DEFECTO}`)
     .replaceAll('{{DATE_PUBLISHED}}', HOY)
     .replaceAll('{{DATE_MODIFIED}}', HOY)
     .replaceAll('{{DATE_DISPLAY}}', fechaLarga(HOY))
@@ -127,7 +144,7 @@ for (const g of generados) {
   if (indice.includes(`href="${g.art.slug}.html"`)) continue;
   const tarjeta = `
     <a href="${g.art.slug}.html" class="card">
-      <div class="card-img" style="background-image:url('/${HERO}')"><span class="card-city">México</span></div>
+      <div class="card-img" style="background-image:url('/${HERO_POR_SLUG[g.art.slug] || HERO_POR_DEFECTO}')"><span class="card-city">México</span></div>
       <div class="card-body">
         <span class="card-tag">${esc(g.art.categoria)}</span>
         <h2>${esc(g.h1)}</h2>

@@ -700,43 +700,43 @@
       </div>
       <div class="sec-header center">
         <div class="gh-pillars" aria-label="Servicios principales">
-          <span class="gh-pillar" data-i18n="pillars.webapps">Página IA + SEO</span>
-          <span class="gh-pillar" data-i18n="pillars.chatbots">Chatbots</span>
-          <span class="gh-pillar" data-i18n="pillars.growth">Growth Hacker</span>
+          <span class="gh-pillar" data-i18n="pillars.webapps">Personal de obra</span>
+          <span class="gh-pillar" data-i18n="pillars.chatbots">Venta de vivienda</span>
+          <span class="gh-pillar" data-i18n="pillars.growth">Control de obra</span>
         </div>
         <h1 class="title" data-i18n="embudo.title">Automatización con IA para constructoras y desarrolladoras</h1>
-        <p class="sub-text" data-i18n="embudo.sub">Posicionamiento en Google + blog IA · prospectos industriales que ya te buscan · cobertura nacional México</p>
+        <p class="sub-text" data-i18n="embudo.sub">Reclutamiento de personal de obra · seguimiento de compradores 24/7 por WhatsApp · Torreón, Monterrey, CDMX, Guadalajara y todo el país</p>
       </div>
 
       <div class="pipeline">
         <div class="pipe-col">
           <div class="pipe-col-title">Nuevo prospecto</div>
           <div class="pipe-cards">
-            <div class="pipe-card moving"><span class="pc-dot hot"></span>Ing. Ramírez — Manufactura</div>
-            <div class="pipe-card moving3"><span class="pc-dot warm"></span>Compras — Parque Industrial</div>
-            <div class="pipe-card"><span class="pc-dot cool"></span>Planta MTY — Proveedor</div>
+            <div class="pipe-card moving"><span class="pc-dot hot"></span>Ing. Ramírez — Constructora</div>
+            <div class="pipe-card moving3"><span class="pc-dot warm"></span>RH — Desarrolladora</div>
+            <div class="pipe-card"><span class="pc-dot cool"></span>Residente — Obra MTY</div>
           </div>
         </div>
         <div class="pipe-col">
           <div class="pipe-col-title">Calificado</div>
           <div class="pipe-cards">
-            <div class="pipe-card moving2"><span class="pc-dot warm"></span>Director Ops — Maquila</div>
-            <div class="pipe-card"><span class="pc-dot hot"></span>RFQ — Metalmecánica</div>
+            <div class="pipe-card moving2"><span class="pc-dot warm"></span>Director de Obra — Vivienda</div>
+            <div class="pipe-card"><span class="pc-dot hot"></span>Cuadrilla — 6 albañiles</div>
           </div>
         </div>
         <div class="pipe-col">
           <div class="pipe-col-title">Propuesta</div>
           <div class="pipe-cards">
-            <div class="pipe-card moving"><span class="pc-dot hot"></span>Grupo Industrial QRO</div>
-            <div class="pipe-card moving2"><span class="pc-dot warm"></span>Planta CHI — Capacit.</div>
+            <div class="pipe-card moving"><span class="pc-dot hot"></span>Desarrolladora QRO</div>
+            <div class="pipe-card moving2"><span class="pc-dot warm"></span>Obra CHI — 200 casas</div>
           </div>
         </div>
         <div class="pipe-col pipe-done">
           <div class="pipe-col-title">Cerrado &#10003;</div>
           <div class="pipe-cards">
-            <div class="pipe-card"><span class="pc-dot done"></span>Industria Norte — $85K</div>
-            <div class="pipe-card"><span class="pc-dot done"></span>Maquila Bajío — $62K</div>
-            <div class="pipe-card"><span class="pc-dot done"></span>Proveedor GDL — $48K</div>
+            <div class="pipe-card"><span class="pc-dot done"></span>Constructora Norte — $85K</div>
+            <div class="pipe-card"><span class="pc-dot done"></span>Vivienda Bajío — $62K</div>
+            <div class="pipe-card"><span class="pc-dot done"></span>Desarrolladora GDL — $48K</div>
           </div>
         </div>
       </div>
@@ -787,7 +787,8 @@
           <h2 data-i18n-html="chat.h2">Tu bot atiende, califica y cierra.<br>Tú duermes.</h2>
           <p data-i18n="chat.p">Selecciona tu industria y ve cómo la IA conversa con tus clientes — califica, informa, agenda y cierra ventas sin intervención humana.</p>
           <div class="chat-tabs" id="chatTabs">
-            <div class="chat-tab active" data-chat="inmobiliaria">🏠 Inmobiliaria</div>
+            <div class="chat-tab active" data-chat="constructora">🏗️ Constructora</div>
+            <div class="chat-tab" data-chat="inmobiliaria">🏠 Inmobiliaria</div>
             <div class="chat-tab" data-chat="spa">💆 Spa</div>
             <div class="chat-tab" data-chat="restaurante">🍽️ Restaurante</div>
             <div class="chat-tab" data-chat="clinica">🏥 Clínica</div>
@@ -1949,14 +1950,14 @@
 
     // ── PIPELINE ANIMATION ──
     const pipeLeads = [
-      {name:'Ana L.', industry:'E-commerce', dot:'cool'},
-      {name:'Carlos R.', industry:'Restaurante', dot:'warm'},
-      {name:'María G.', industry:'Inmobiliaria', dot:'hot'},
-      {name:'Jorge M.', industry:'Clínica', dot:'warm'},
-      {name:'Laura S.', industry:'Spa', dot:'hot'},
-      {name:'Pedro V.', industry:'Educación', dot:'cool'},
-      {name:'Diana F.', industry:'RRHH', dot:'warm'},
-      {name:'Luis T.', industry:'Eventos', dot:'hot'},
+      {name:'Ing. Ramírez', industry:'Constructora', dot:'hot'},
+      {name:'Arq. Salas', industry:'Desarrolladora', dot:'warm'},
+      {name:'RH Obra', industry:'Vivienda', dot:'cool'},
+      {name:'Residente', industry:'Obra en curso', dot:'warm'},
+      {name:'Grupo Vivienda', industry:'Fraccionamiento', dot:'hot'},
+      {name:'Constructora MTY', industry:'Obra civil', dot:'cool'},
+      {name:'Desarrollo QRO', industry:'200 casas', dot:'warm'},
+      {name:'Ing. Prieto', industry:'Urbanización', dot:'hot'},
     ];
     const pipePrices = ['$28,000','$45,000','$62,000','$38,000','$51,000','$33,000'];
     let pipeIdx = 0, priceIdx = 0;
@@ -2041,6 +2042,21 @@
 
     // ── CHATBOT DEMO ──
     const chatData = {
+      constructora: [
+        {type:'bot', text:'¡Qué tal! 👷 Soy el asistente de reclutamiento. ¿Anda buscando trabajo en obra?'},
+        {type:'user', text:'Si, ando buscando chamba'},
+        {type:'bot', text:'Perfecto. ¿A qué se dedica? Fierrero, cimbrero, albañil, yesero, pisero…'},
+        {type:'user', text:'Soy cimbrero'},
+        {type:'bot', text:'Muy bien. ¿Trae cuadrilla o trabaja solo?'},
+        {type:'user', text:'Traigo 4 muchachos'},
+        {type:'bot', text:'Excelente, cuadrilla de 5 con usted. ¿Cuentan con herramienta propia?'},
+        {type:'user', text:'Si, traemos la nuestra'},
+        {type:'bot', text:'¿Y de dónde es? Para ver si le queda cerca la obra.'},
+        {type:'user', text:'De Torreón, de la Nueva Merced'},
+        {type:'bot', text:'Le queda bien. ¿Cómo se llama, para agendarle la entrevista?'},
+        {type:'user', text:'Ramón Ibarra'},
+        {type:'bot', text:'✅ Listo don Ramón. Entrevista el jueves 9:00 AM. Un reclutador le marca hoy mismo para confirmarle la dirección.'}
+      ],
       inmobiliaria: [
         {type:'bot', text:'¡Hola! 👋 Soy el asistente de GH Specialist. ¿Buscas comprar, rentar o vender una propiedad?'},
         {type:'user', text:'Comprar, busco depto en Querétaro 2 recámaras'},
