@@ -5,7 +5,8 @@
     "name": "Chatbot IA WhatsApp",
     "short": "Chatbot WhatsApp con IA",
     "desc": "Chatbots con inteligencia artificial para WhatsApp Business: atención 24/7, calificación de prospectos y cierre de ventas.",
-    "price": "12000"
+    "price": "12000",
+    "metaShort": "Chatbots con IA en WhatsApp Business: atención 24/7 y cierre de ventas."
   },
   {
     "slug": "crm-kommo",
@@ -13,7 +14,8 @@
     "name": "CRM Kommo",
     "short": "CRM Kommo con WhatsApp",
     "desc": "Implementación de Kommo CRM integrado con WhatsApp e IA para pipeline de ventas y seguimiento automático.",
-    "price": "15000"
+    "price": "15000",
+    "metaShort": "Kommo CRM integrado con WhatsApp e IA: pipeline y seguimiento automático."
   },
   {
     "slug": "automatizacion-total",
@@ -21,7 +23,8 @@
     "name": "Automatización total",
     "short": "Automatización con IA",
     "desc": "Automatización comercial completa: WhatsApp, CRM, seguimiento y procesos sin trabajo manual repetitivo.",
-    "price": "25000"
+    "price": "25000",
+    "metaShort": "Automatización comercial completa: WhatsApp, CRM, seguimiento y procesos."
   },
   {
     "slug": "agentes-omnicanal",
@@ -29,7 +32,8 @@
     "name": "Agentes omnicanal",
     "short": "Agentes IA omnicanal",
     "desc": "Agentes de inteligencia artificial en WhatsApp, web e Instagram con un solo cerebro comercial.",
-    "price": "20000"
+    "price": "20000",
+    "metaShort": "Agentes de IA en WhatsApp, web e Instagram con un solo cerebro comercial."
   },
   {
     "slug": "web-seo-blog-ia",
@@ -37,7 +41,8 @@
     "name": "Página IA + SEO Industrial",
     "short": "Página de IA con SEO",
     "desc": "Página de IA con SEO: la forma más eficiente de conseguir empresas industriales en México. Blog IA + posicionamiento en Google.",
-    "price": "18000"
+    "price": "18000",
+    "metaShort": "Página con SEO y blog IA para posicionar tu empresa industrial en Google."
   },
   {
     "slug": "growth-difusiones",
@@ -45,7 +50,8 @@
     "name": "Growth y difusiones",
     "short": "Growth hacking con IA",
     "desc": "Estrategias de growth hacking y difusiones masivas con inteligencia artificial para PYMES.",
-    "price": "12000"
+    "price": "12000",
+    "metaShort": "Growth hacking y difusiones masivas con IA para PYMES."
   },
   {
     "slug": "pauta-omnicanal",
@@ -53,15 +59,17 @@
     "name": "Pauta omnicanal",
     "short": "Pauta digital + CRM",
     "desc": "Publicidad en Meta y Google conectada a WhatsApp y CRM para convertir clics en ventas.",
-    "price": "15000"
+    "price": "15000",
+    "metaShort": "Publicidad en Meta y Google conectada a WhatsApp y CRM."
   },
   {
     "slug": "cien-automatizado",
     "file": "cien-automatizado.html",
     "name": "100% automatizado",
-    "short": "Negocio automatizado con IA",
+    "short": "Negocio 100% automatizado",
     "desc": "Operación comercial casi sin intervención humana: IA en ventas, atención y seguimiento.",
-    "price": "35000"
+    "price": "35000",
+    "metaShort": "Operación comercial con IA: ventas, atención y seguimiento sin humanos."
   },
   {
     "slug": "proyectos-medida",
@@ -69,7 +77,8 @@
     "name": "Proyectos a medida",
     "short": "Desarrollo IA a medida",
     "desc": "Apps web, integraciones y automatizaciones personalizadas con inteligencia artificial.",
-    "price": "50000"
+    "price": "50000",
+    "metaShort": "Apps web, integraciones y automatizaciones personalizadas con IA."
   },
   {
     "slug": "capacitaciones-ia-empresas",
@@ -77,6 +86,7 @@
     "name": "Capacitaciones IA al por mayor",
     "short": "Capacitación IA corporativa",
     "desc": "Capacitaciones de IA al por mayor para minería, construcción, manufactura e industria. Packs 10 / 25 / 50+ colaboradores.",
-    "price": "18000"
+    "price": "18000",
+    "metaShort": "Capacitaciones de IA para minería, construcción, manufactura e industria."
   }
 ]

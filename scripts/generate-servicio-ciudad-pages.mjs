@@ -17,6 +17,21 @@ const cities = JSON.parse(readFileSync(join(ROOT, 'data/seo-cities.json'), 'utf8
 );
 const services = JSON.parse(readFileSync(join(ROOT, 'data/seo-services.json'), 'utf8'));
 
+const TITLE_MAX = 60; // Google corta el <title> alrededor de aqui
+const DESC_MAX = 160; // idem para el snippet
+
+// Añade la marca solo si el title sigue cabiendo con ella.
+function fitTitle(base) {
+  const withBrand = `${base} | GH Specialist`;
+  return withBrand.length <= TITLE_MAX ? withBrand : base;
+}
+
+// Monta base + estado + cola, y suelta el estado si el conjunto se pasa de largo.
+function fitDescription(base, state, tail) {
+  const full = `${base}${state}${tail}`;
+  return full.length <= DESC_MAX ? full : `${base}${tail}`;
+}
+
 function isUS(city) {
   return (city.country || 'MX') === 'US';
 }
@@ -37,10 +52,24 @@ function buildPage(svc, city, allCities, allServices) {
   const us = isUS(city);
   const url = `${SITE}/servicios/${svc.slug}/${city.slug}/`;
   const depth = '../../../';
-  const title = `${svc.short} en ${city.name}, ${city.state} | GH Specialist`;
+  const price = Number(svc.price).toLocaleString('es-MX');
+
+  // El estado va en el H1, la description y el areaServed del schema; en el <title>
+  // sobra y empuja el corte de Google (~60 chars). Si aun asi no cabe, cae la marca.
+  const title = fitTitle(`${svc.short} en ${city.name}`);
+
+  // svc.metaShort es la version de svc.desc pensada para el snippet (=85 chars).
   const description = us
-    ? `${svc.desc} Para empresas hispanas en ${city.name}, ${city.state}, EE.UU. Implementación remota en español desde $${Number(svc.price).toLocaleString('es-MX')} MXN + IVA. Diagnóstico gratuito GH Specialist.`
-    : `${svc.desc} Para empresas en ${city.name}, ${city.state}. Desde $${Number(svc.price).toLocaleString('es-MX')} MXN + IVA. Diagnóstico gratuito GH Specialist.`;
+    ? fitDescription(
+        `${svc.metaShort} Para empresas hispanas en ${city.name}`,
+        `, ${city.state}, EE.UU.`,
+        ` Implementación remota en español desde $${price} MXN + IVA.`
+      )
+    : fitDescription(
+        `${svc.metaShort} Para empresas en ${city.name}`,
+        `, ${city.state}`,
+        `. Desde $${price} MXN + IVA. Diagnóstico gratis.`
+      );
 
   const otherCities = allCities
     .filter((c) => c.slug !== city.slug)
@@ -124,6 +153,10 @@ function buildPage(svc, city, allCities, allServices) {
   <meta property="og:description" content="${esc(description)}">
   <meta property="og:image" content="${SITE}/${city.hero}">
   <meta property="og:locale" content="es_MX">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${esc(title)}">
+  <meta name="twitter:description" content="${esc(description)}">
+  <meta name="twitter:image" content="${SITE}/${city.hero}">
   <script src="${depth}js/gh-site-config.js"></script>
   <script src="${depth}js/gh-analytics.js" async></script>
   <script type="application/ld+json">${JSON.stringify(schema)}</script>
@@ -138,7 +171,7 @@ function buildPage(svc, city, allCities, allServices) {
     .w{max-width:960px;margin:0 auto;padding:0 24px}
     .hdr{padding:16px 0;border-bottom:1px solid var(--border)}
     .hdr-inner{display:flex;justify-content:space-between;align-items:center;max-width:960px;margin:0 auto;padding:0 24px}
-    .hdr-logo{height:26px}
+    .hdr-logo{height:26px;width:auto}
     .hero{padding:72px 0 48px;background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.5)),url('${depth}${city.hero}') center/cover;color:#fff}
     .hero h1{font-size:clamp(28px,4vw,44px);font-weight:900;line-height:1.08;margin-bottom:14px}
     .hero h1 em{font-style:normal;color:#c4b5fd}
@@ -161,7 +194,7 @@ function buildPage(svc, city, allCities, allServices) {
 <body>
   <header class="hdr">
     <div class="hdr-inner">
-      <a href="${depth}"><img src="${depth}2.png" alt="GH Specialist" class="hdr-logo"></a>
+      <a href="${depth}"><img src="${depth}logo-gh.webp" width="155" height="112" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
       <a href="${CALENDAR}" class="btn">Agendar</a>
     </div>
   </header>

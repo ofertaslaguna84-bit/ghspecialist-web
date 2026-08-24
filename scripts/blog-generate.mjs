@@ -31,7 +31,7 @@ const GOOGLE_CALENDAR_URL = 'https://calendar.app.google/rz32YjLinKvYWUTT9';
 const BLOG_YEAR = String(getBlogFreshness().year);
 
 const BASE_IMAGES = [
-  { path: 'fotos/slide2_img2.png', city: 'México', tags: ['whatsapp', 'chatbot', 'ia', 'automatizacion', 'negocio', 'mexico'] },
+  { path: 'fotos/pedro-retrato.webp', city: 'México', tags: ['whatsapp', 'chatbot', 'ia', 'automatizacion', 'negocio', 'mexico'] },
   { path: 'fotos/slide1_img0.png', city: 'México', tags: ['ia', 'tecnologia', 'negocio', 'mexico'] },
   { path: 'fotos/slide1_img1.jpg', city: 'México', tags: ['ia', 'tecnologia', 'negocio'] },
   { path: 'fotos/slide2_img3.jpg', city: 'México', tags: ['whatsapp', 'ventas', 'negocio'] },
@@ -150,7 +150,7 @@ async function discoverImagePool() {
   } catch {
     /* noop */
   }
-  return pool.length ? pool : [toHeroAsset('fotos/slide2_img2.png', 'México', ['mexico'])];
+  return pool.length ? pool : [toHeroAsset('fotos/pedro-retrato.webp', 'México', ['mexico'])];
 }
 
 function pickImageForTopic(pool, topic, keywords) {
@@ -740,7 +740,7 @@ function buildArticleHtml(article, dateIso, hero, market = 'mx', publishedIso = 
     description: article.description,
     image: hero.og,
     author: { '@type': 'Person', name: 'Pedro Luis Díaz Velázquez', url: `${SITE}/sobre-pedro.html` },
-    publisher: { '@type': 'Organization', name: 'GH Specialist', logo: { '@type': 'ImageObject', url: `${SITE}/2.png` } },
+    publisher: { '@type': 'Organization', name: 'GH Specialist', logo: { '@type': 'ImageObject', url: `${SITE}/logo-gh-1200.png` } },
     datePublished: publishedIso,
     dateModified: dateIso,
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE}/blog/${slug}.html` },
@@ -764,7 +764,7 @@ function buildArticleHtml(article, dateIso, hero, market = 'mx', publishedIso = 
     body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased}
     a{color:var(--p);text-decoration:none}a:hover{text-decoration:underline}
     .hdr{padding:16px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto}
-    .hdr img{height:28px}.hdr a.back{font-size:13px;color:var(--ink)}
+    .hdr img{height:28px;width:auto}.hdr a.back{font-size:13px;color:var(--ink)}
     .bc{max-width:720px;margin:0 auto;padding:20px 32px 0;font-size:13px;color:var(--ink3)}
     .bc a{color:var(--ink3)}.bc a:hover{color:var(--p);text-decoration:none}.bc span{margin:0 6px}
     .art{max-width:720px;margin:0 auto;padding:24px 32px 48px}
@@ -794,7 +794,7 @@ function buildArticleHtml(article, dateIso, hero, market = 'mx', publishedIso = 
 </head>
 <body>
 <div class="hdr">
-  <a href="../index.html"><img src="../2.png" alt="GH Specialist"></a>
+  <a href="../index.html"><img src="../logo-gh.webp" width="155" height="112" alt="GH Specialist" decoding="async"></a>
   <a href="index.html" class="back">← Volver al blog</a>
 </div>
 <nav class="bc" aria-label="Breadcrumb"><a href="../index.html">Inicio</a><span>›</span><a href="index.html">Blog</a><span>›</span>${escapeHtml(article.breadcrumb_title)}</nav>

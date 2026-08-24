@@ -102,9 +102,12 @@ function buildCityPage(city, allCities) {
   const cc = cityCountry(city);
   const url = `${SITE}/ciudades/${city.slug}/`;
   const heroPath = `../../${city.hero}`;
+  // Ojo: /servicios/automatizacion-total/{ciudad}/ ya apunta a "Automatización con IA
+  // en {ciudad}". El hub de ciudad compite con el si repite ese title, asi que se
+  // posiciona como la pagina de agencia y deja el termino de servicio a la otra.
   const title = us
-    ? `Automatización con IA en ${city.name} | Empresas hispanas | GH Specialist`
-    : `Automatización con IA en ${city.name} | Chatbots WhatsApp | GH Specialist`;
+    ? `Agencia de IA en ${city.name} | Empresas hispanas | GH Specialist`
+    : `Agencia de IA en ${city.name} | GH Specialist`;
   const description = us
     ? `Chatbots WhatsApp, CRM y agentes IA para empresas hispanas en ${city.name}, ${city.state}, EE.UU. Implementación remota en español desde México. Diagnóstico gratuito.`
     : `Chatbots WhatsApp, CRM Kommo y agentes de IA para empresas en ${city.name}, ${city.state}. Implementación en México desde $12,000 MXN. Diagnóstico gratuito.`;
@@ -250,6 +253,9 @@ function buildCityPage(city, allCities) {
   <meta property="og:image" content="${SITE}/${city.hero}">
   <meta property="og:locale" content="es_MX">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${esc(title)}">
+  <meta name="twitter:description" content="${esc(description)}">
+  <meta name="twitter:image" content="${SITE}/${city.hero}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <script src="../../js/gh-site-config.js"></script>
@@ -266,7 +272,7 @@ function buildCityPage(city, allCities) {
     .w{max-width:1080px;margin:0 auto;padding:0 28px}
     .hdr{position:fixed;top:0;width:100%;z-index:100;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
     .hdr-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1080px;margin:0 auto;padding:0 28px}
-    .hdr-logo{height:28px}
+    .hdr-logo{height:28px;width:auto}
     .hdr-nav{display:flex;gap:8px;align-items:center}
     .hdr-nav a{font-size:13px;font-weight:500;padding:6px 12px;border-radius:6px;color:var(--ink3)}
     .hdr-nav a:hover{color:var(--p);background:#F3EFFF}
@@ -311,7 +317,7 @@ function buildCityPage(city, allCities) {
 <body>
   <header class="hdr">
     <div class="hdr-inner">
-      <a href="../../"><img src="../../2.png" alt="GH Specialist" class="hdr-logo"></a>
+      <a href="../../"><img src="../../logo-gh.webp" width="155" height="112" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
       <nav class="hdr-nav">
         <a href="../../servicios/">Servicios</a>
         <a href="../../ciudades/">Ciudades</a>
@@ -325,7 +331,7 @@ function buildCityPage(city, allCities) {
   <section class="hero">
     <div class="w">
       <span class="kicker">${esc(city.kicker)}</span>
-      <h1>Automatización con IA en <em>${esc(city.name)}</em></h1>
+      <h1>Agencia de inteligencia artificial en <em>${esc(city.name)}</em></h1>
       <p>${us ? `Chatbots WhatsApp, CRM y agentes IA para <strong>empresas hispanas</strong> en ${esc(city.name)}, ${esc(city.state)}, EE.UU. Implementación remota en español desde México — diagnóstico gratuito.` : `Chatbots WhatsApp, CRM Kommo y agentes de inteligencia artificial para empresas en ${esc(city.name)} y ${esc(city.state)}. Operación nacional desde GH Specialist — diagnóstico gratuito.`}</p>
       <div class="hero-btns">
         <a href="${CALENDAR}" class="btn">🗓️ Diagnóstico gratuito</a>
@@ -461,6 +467,10 @@ function buildHubPage(cities) {
   <meta property="og:description" content="Cobertura nacional en México. Chatbots WhatsApp, CRM Kommo e IA para PYMES.">
   <meta property="og:image" content="${SITE}/hero-cdmx.webp">
   <meta property="og:locale" content="es_MX">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Automatización IA en México | GH Specialist">
+  <meta name="twitter:description" content="Cobertura nacional en México. Chatbots WhatsApp, CRM Kommo e IA para PYMES.">
+  <meta name="twitter:image" content="${SITE}/hero-cdmx.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <script src="../js/gh-site-config.js"></script>
@@ -474,7 +484,7 @@ function buildHubPage(cities) {
     .w{max-width:1080px;margin:0 auto;padding:0 28px}
     .hdr{padding:20px 0;border-bottom:1px solid var(--border)}
     .hdr-inner{display:flex;align-items:center;justify-content:space-between;max-width:1080px;margin:0 auto;padding:0 28px}
-    .hdr-logo{height:28px}
+    .hdr-logo{height:28px;width:auto}
     .hero{padding:64px 0 48px;text-align:center}
     .hero h1{font-size:clamp(28px,4vw,44px);font-weight:900;letter-spacing:-.03em;margin-bottom:12px}
     .hero p{font-size:17px;color:var(--ink3);max-width:640px;margin:0 auto 24px}
@@ -503,7 +513,7 @@ function buildHubPage(cities) {
 <body>
   <header class="hdr">
     <div class="hdr-inner">
-      <a href="../"><img src="../2.png" alt="GH Specialist" class="hdr-logo"></a>
+      <a href="../"><img src="../logo-gh.webp" width="155" height="112" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
       <a href="${CALENDAR}" class="btn">Agendar diagnóstico</a>
     </div>
   </header>

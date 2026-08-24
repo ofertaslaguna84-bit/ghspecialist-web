@@ -359,7 +359,7 @@ async function updateBlogIndexSchema(articles) {
     publisher: {
       '@type': 'Organization',
       name: 'GH Specialist',
-      logo: { '@type': 'ImageObject', url: `${SITE}/2.png` },
+      logo: { '@type': 'ImageObject', url: `${SITE}/logo-gh-1200.png` },
     },
     blogPost,
   };
