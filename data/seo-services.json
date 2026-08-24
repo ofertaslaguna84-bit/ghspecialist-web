@@ -5,7 +5,45 @@
     "name": "Chatbot IA WhatsApp",
     "short": "Chatbot WhatsApp con IA",
     "desc": "Chatbots con inteligencia artificial para WhatsApp Business: atención 24/7, calificación de prospectos y cierre de ventas.",
-    "price": "12000"
+    "price": "12000",
+    "entrega": "2 a 3 semanas",
+    "paraQuien": "empresas que reciben más mensajes por WhatsApp de los que su equipo alcanza a contestar, y que pierden prospectos por tardar horas o dejar el chat sin respuesta fuera de horario",
+    "problema": "El prospecto que escribe por WhatsApp y no recibe respuesta en los primeros minutos casi siempre ya le escribió también a la competencia. El problema rara vez es el vendedor: es que nadie puede estar en el teléfono a las 10 de la noche, en domingo o cuando entran treinta mensajes a la vez.",
+    "comoFunciona": "El bot contesta al instante con el contexto de tu negocio (precios, horarios, ubicaciones, catálogo), hace las preguntas que tu vendedor haría para saber si el prospecto sirve, y solo pasa a una persona los que ya vienen calificados. Todo queda registrado, así que nada se pierde en el celular de nadie.",
+    "incluye": [
+      "Línea de WhatsApp Business API dada de alta y verificada a nombre de tu empresa",
+      "Bot con IA entrenado con tu catálogo, precios, horarios y forma de responder",
+      "Preguntas de calificación para separar al que sí compra del que solo pregunta",
+      "Pase a humano automático cuando el prospecto lo pide o el bot no tiene la respuesta",
+      "Mensajes de seguimiento a quien dejó la conversación a medias",
+      "Capacitación a tu equipo y 30 días de ajustes incluidos"
+    ],
+    "noIncluye": [
+      "El costo de las conversaciones que cobra Meta (se paga directo a Meta, aparte)",
+      "Producción de fotos o video de catálogo",
+      "Pauta publicitaria (eso va en el servicio de Pauta omnicanal)"
+    ],
+    "integraciones": [
+      "WhatsApp Business API",
+      "Kommo CRM",
+      "Google Calendar",
+      "Google Sheets",
+      "Meta Ads"
+    ],
+    "faqs": [
+      {
+        "q": "¿El cliente se da cuenta de que le contesta un robot?",
+        "a": "Se nota si el bot está mal armado. El nuestro responde con el tono y la información de tu negocio, y en cuanto la conversación se pone específica la pasa a una persona. La regla que aplicamos es no fingir que es humano: es peor que te cachen mintiendo que decir que es un asistente."
+      },
+      {
+        "q": "¿Puedo seguir usando mi número de siempre?",
+        "a": "Sí, si ese número está en WhatsApp normal o Business (la app). Se migra a la API y se conserva el número, pero pierdes el acceso desde la app del celular: la conversación pasa a verse desde el CRM o el panel. Si no quieres perder la app, se da de alta un número nuevo."
+      },
+      {
+        "q": "¿Qué pasa si el bot se equivoca con un cliente?",
+        "a": "Se le ponen límites desde el arranque: no inventa precios que no estén cargados, no promete plazos y no cierra ventas por su cuenta. Cuando no sabe algo, lo dice y llama a una persona. En los primeros 30 días revisamos conversaciones reales y ajustamos lo que haga falta."
+      }
+    ]
   },
   {
     "slug": "crm-kommo",
@@ -13,7 +51,44 @@
     "name": "CRM Kommo",
     "short": "CRM Kommo con WhatsApp",
     "desc": "Implementación de Kommo CRM integrado con WhatsApp e IA para pipeline de ventas y seguimiento automático.",
-    "price": "15000"
+    "price": "15000",
+    "entrega": "2 a 4 semanas",
+    "paraQuien": "negocios donde los prospectos viven en el celular de cada vendedor, sin forma de saber cuántos hay, en qué van, ni qué pasó con los que no compraron",
+    "problema": "Cuando cada vendedor lleva su propia lista en el teléfono, el dueño no tiene números: no sabe cuántos prospectos entraron, cuáles se enfriaron ni por qué se cayó una venta. Y el día que un vendedor se va, se lleva la cartera completa.",
+    "comoFunciona": "Kommo concentra WhatsApp, llamadas, Facebook e Instagram en un solo tablero. Cada prospecto entra solo, avanza por etapas visibles, y el sistema recuerda dar seguimiento. Los prospectos quedan a nombre de la empresa, no del vendedor.",
+    "incluye": [
+      "Kommo configurado con tus etapas de venta reales, no una plantilla genérica",
+      "WhatsApp, Facebook e Instagram conectados al mismo embudo",
+      "Entrada automática de prospectos y reparto entre vendedores",
+      "Recordatorios y seguimientos automáticos para que nada se enfríe",
+      "Tableros de cierre, origen de prospectos y desempeño por vendedor",
+      "Capacitación al equipo de ventas y 30 días de acompañamiento"
+    ],
+    "noIncluye": [
+      "La licencia mensual de Kommo (se paga directo a Kommo, por usuario)",
+      "Migración de bases con más de 10,000 registros sucios (se cotiza aparte)"
+    ],
+    "integraciones": [
+      "Kommo CRM",
+      "WhatsApp Business API",
+      "Meta Ads",
+      "Google Calendar",
+      "Facebook e Instagram"
+    ],
+    "faqs": [
+      {
+        "q": "¿Cuánto cuesta Kommo aparte de la implementación?",
+        "a": "Kommo se cobra por usuario al mes y se paga directo a ellos; el precio depende del plan que necesites. La implementación que cotizamos es el trabajo de dejarlo armado y funcionando, no la licencia. En el diagnóstico te decimos qué plan te alcanza para que no pagues de más."
+      },
+      {
+        "q": "¿Mis vendedores lo van a usar o va a ser dinero tirado?",
+        "a": "Es el riesgo real de cualquier CRM. Por eso se arma sobre cómo ya venden y no al revés: si contestan por WhatsApp, siguen contestando por WhatsApp y el CRM lo registra solo. Lo que fracasa es el CRM que obliga a capturar a mano."
+      },
+      {
+        "q": "¿Puedo pasar la información que ya tengo en Excel?",
+        "a": "Sí. Se importa tu base de contactos y clientes al arrancar. Si viene con duplicados o mal capturada, se limpia antes de subirla — de nada sirve estrenar CRM con la basura de años."
+      }
+    ]
   },
   {
     "slug": "automatizacion-total",
@@ -21,7 +96,46 @@
     "name": "Automatización total",
     "short": "Automatización con IA",
     "desc": "Automatización comercial completa: WhatsApp, CRM, seguimiento y procesos sin trabajo manual repetitivo.",
-    "price": "25000"
+    "price": "25000",
+    "entrega": "4 a 6 semanas",
+    "paraQuien": "empresas que ya venden bien pero traen al equipo ahogado en trabajo repetitivo: capturar datos, mandar cotizaciones, recordar seguimientos y pasar información de un sistema a otro",
+    "problema": "Hay negocios que no necesitan más prospectos: necesitan dejar de perder los que ya tienen. Cuando el equipo se va la mitad del día copiando datos entre WhatsApp, Excel y el correo, el cuello de botella no son las ventas, es la operación.",
+    "comoFunciona": "Se mapea todo el recorrido, desde que entra el prospecto hasta que se cobra, y se automatiza cada paso que hoy hace una persona a mano: captura, cotización, recordatorios, avisos internos y reportes. Queda documentado, para que no dependa de que alguien se acuerde.",
+    "incluye": [
+      "Mapeo de tu proceso comercial actual y detección de dónde se pierde tiempo y dinero",
+      "Chatbot de WhatsApp con IA conectado al CRM",
+      "Cotizaciones y documentos que se arman y se mandan solos",
+      "Recordatorios y seguimientos automáticos por etapa",
+      "Avisos internos al equipo cuando un prospecto se calienta o se enfría",
+      "Reporte semanal automático de ventas al dueño o a la dirección",
+      "Manual de operación y capacitación a todo el equipo"
+    ],
+    "noIncluye": [
+      "Licencias de las plataformas que se usen (Kommo, Meta, etc.)",
+      "Desarrollo de software a la medida (ese es el servicio de Proyectos a medida)"
+    ],
+    "integraciones": [
+      "Kommo CRM",
+      "WhatsApp Business API",
+      "n8n",
+      "Google Workspace",
+      "Meta Ads",
+      "Google Sheets"
+    ],
+    "faqs": [
+      {
+        "q": "¿Voy a tener que correr gente?",
+        "a": "No es el objetivo y casi nunca pasa. Lo que se automatiza es el trabajo repetitivo, no el criterio: cerrar, negociar y resolver problemas lo siguen haciendo personas. Lo normal es que el mismo equipo atienda más volumen sin contratar."
+      },
+      {
+        "q": "¿Qué diferencia hay con solo poner el chatbot?",
+        "a": "El chatbot atiende la entrada. La automatización total agarra el proceso completo: lo que pasa después de que el prospecto contesta — cotizar, dar seguimiento, avisar, cobrar y reportar. Si tu problema es que no contestas a tiempo, con el chatbot basta. Si el problema es lo que sigue, no."
+      },
+      {
+        "q": "¿Se cae todo si cambia una plataforma?",
+        "a": "Se arma sobre herramientas estándar y queda documentado. Si mañana cambias de CRM se reconecta la pieza, no se rehace el proyecto. Esa es la razón de entregar el manual: que no quedes amarrado a nosotros."
+      }
+    ]
   },
   {
     "slug": "agentes-omnicanal",
@@ -29,7 +143,44 @@
     "name": "Agentes omnicanal",
     "short": "Agentes IA omnicanal",
     "desc": "Agentes de inteligencia artificial en WhatsApp, web e Instagram con un solo cerebro comercial.",
-    "price": "20000"
+    "price": "20000",
+    "entrega": "3 a 5 semanas",
+    "paraQuien": "negocios que reciben mensajes por WhatsApp, Instagram, Facebook y el chat de la web, y hoy los atienden por separado con respuestas distintas en cada lado",
+    "problema": "El mismo cliente pregunta por Instagram, luego por WhatsApp y acaba llamando. Como cada canal lo lleva alguien distinto, le dan tres precios diferentes o le vuelven a pedir los datos que ya dio. Se ve desorganizado y cuesta ventas.",
+    "comoFunciona": "Un solo agente de IA con la misma información atiende todos los canales, y reconoce al cliente aunque cambie de aplicación. La conversación es una sola: si empezó en Instagram y sigue en WhatsApp, el agente ya sabe de qué estaban hablando.",
+    "incluye": [
+      "Agente de IA en WhatsApp, Instagram, Facebook Messenger y chat del sitio web",
+      "Un solo cerebro: mismo precio y misma respuesta en todos los canales",
+      "Historial unificado por cliente aunque cambie de canal",
+      "Bandeja única para tu equipo, sin brincar entre aplicaciones",
+      "Pase a humano con todo el contexto de la conversación",
+      "Capacitación y 30 días de ajustes incluidos"
+    ],
+    "noIncluye": [
+      "Costos de conversación de Meta",
+      "Rediseño del sitio web (se cotiza aparte)"
+    ],
+    "integraciones": [
+      "WhatsApp Business API",
+      "Instagram Direct",
+      "Facebook Messenger",
+      "Chat web",
+      "Kommo CRM"
+    ],
+    "faqs": [
+      {
+        "q": "¿Qué gano contra tener un bot en cada canal?",
+        "a": "Que no se contradicen y que el cliente no repite su historia. Con bots separados mantienes tres veces la misma información y tarde o temprano una queda desactualizada — casi siempre la del precio."
+      },
+      {
+        "q": "¿Sirve si el 90% de mis mensajes llegan por WhatsApp?",
+        "a": "Si de verdad es 90%, probablemente te conviene más el chatbot de WhatsApp solo y ahorrarte la diferencia. Este servicio se justifica cuando tienes volumen real en dos o más canales. Te lo decimos en el diagnóstico, aunque nos convenga menos."
+      },
+      {
+        "q": "¿Puede atender en inglés?",
+        "a": "Sí, detecta el idioma y responde en él. Es útil en frontera y en zonas turísticas, donde la mitad de las consultas llegan en inglés."
+      }
+    ]
   },
   {
     "slug": "web-seo-blog-ia",
@@ -37,7 +188,45 @@
     "name": "Página IA + SEO Industrial",
     "short": "Página de IA con SEO",
     "desc": "Página de IA con SEO: la forma más eficiente de conseguir empresas industriales en México. Blog IA + posicionamiento en Google.",
-    "price": "18000"
+    "price": "18000",
+    "entrega": "4 a 6 semanas",
+    "paraQuien": "empresas industriales y proveedores B2B que dependen de recomendación y de la cartera de siempre, y que no aparecen ni en Google ni en ChatGPT cuando el área de Compras de una planta busca proveedor",
+    "problema": "En la venta industrial el que busca ya no es el dueño: es Compras, y busca escribiendo. Cada vez más arranca preguntándole a ChatGPT, Gemini o Perplexity en vez de Google. Si tu sitio no tiene contenido que esas herramientas puedan leer y citar, no existes en esa conversación — y ahí no se puede pagar por aparecer.",
+    "comoFunciona": "Se arma el sitio con estructura que Google y los buscadores de IA entienden (datos estructurados, páginas por servicio y ciudad, llms.txt), y encima un blog que publica contenido técnico de forma constante. La meta no es solo posicionar: es ser la fuente que la IA cita cuando le preguntan por tu giro.",
+    "incluye": [
+      "Sitio web rápido y optimizado para celular",
+      "Páginas por servicio y por ciudad para que Compras te encuentre a nivel nacional",
+      "Datos estructurados (schema) y llms.txt para que los buscadores de IA te entiendan",
+      "Blog con publicación asistida por IA y revisión antes de publicar",
+      "Alta en Google Search Console y Bing, con sitemap y envío automático de URLs nuevas",
+      "Reporte mensual de posiciones y visitas"
+    ],
+    "noIncluye": [
+      "Dominio y hosting (se pagan aparte, suelen ser bajos)",
+      "Fotografía y video profesional",
+      "Garantía de posición #1: nadie que la prometa la puede cumplir"
+    ],
+    "integraciones": [
+      "Google Search Console",
+      "Google Analytics",
+      "Bing Webmaster",
+      "IndexNow",
+      "WhatsApp Business API"
+    ],
+    "faqs": [
+      {
+        "q": "¿En cuánto tiempo veo resultados en Google?",
+        "a": "Las primeras páginas se indexan en días, pero posicionar en búsquedas competidas toma de 3 a 6 meses de publicación constante. Quien te prometa primer lugar en un mes te está vendiendo humo."
+      },
+      {
+        "q": "¿El contenido escrito por IA no lo castiga Google?",
+        "a": "Google castiga el contenido malo, sea de IA o de humano. Lo que penaliza es publicar cien páginas iguales sin nada útil. Por eso aquí la IA hace el borrador y una persona revisa antes de publicar."
+      },
+      {
+        "q": "¿Esto sirve para que ChatGPT me recomiende como proveedor?",
+        "a": "Es a lo que le apuntamos. Para que un buscador de IA te cite necesita poder leer tu sitio, encontrar respuestas concretas y saber quién eres. Eso se trabaja con contenido que responda preguntas de frente, datos estructurados y dejar pasar a los bots de IA — no bloquearlos, que es el error más común."
+      }
+    ]
   },
   {
     "slug": "growth-difusiones",
@@ -45,7 +234,43 @@
     "name": "Growth y difusiones",
     "short": "Growth hacking con IA",
     "desc": "Estrategias de growth hacking y difusiones masivas con inteligencia artificial para PYMES.",
-    "price": "12000"
+    "price": "12000",
+    "entrega": "2 a 3 semanas",
+    "paraQuien": "negocios con una base de clientes y prospectos ya juntada que está muerta en un Excel, sin que nadie le saque provecho",
+    "problema": "Casi todos los negocios tienen cientos o miles de contactos guardados que ya les compraron o casi les compran. Volverles a vender cuesta mucho menos que conseguir clientes nuevos, pero mandar mensajes masivos mal hechos te tumba el número de WhatsApp.",
+    "comoFunciona": "Se limpia y segmenta la base, se arman campañas con plantillas aprobadas por Meta (que es la forma legal de mandar difusiones) y se mide qué segmento responde. El objetivo es sacar ventas de lo que ya tienes sin quemar el número.",
+    "incluye": [
+      "Limpieza y segmentación de tu base de contactos",
+      "Plantillas de mensaje enviadas a aprobación de Meta",
+      "Campañas de difusión programadas por segmento",
+      "Respuesta automática a quien contesta la difusión",
+      "Medición de aperturas, respuestas y ventas por campaña",
+      "Manejo de bajas para no exponer tu número"
+    ],
+    "noIncluye": [
+      "Compra de bases de datos: no lo hacemos, es ilegal y te tumban el número",
+      "Costo por conversación de Meta"
+    ],
+    "integraciones": [
+      "WhatsApp Business API",
+      "Kommo CRM",
+      "Google Sheets",
+      "Meta Business Suite"
+    ],
+    "faqs": [
+      {
+        "q": "¿Me pueden bloquear el número de WhatsApp?",
+        "a": "Sí, y es el riesgo real de este servicio. Pasa cuando mandas a gente que no te dio su número o cuando muchos te reportan. Por eso solo se manda a contactos propios, con plantillas aprobadas, en volúmenes escalonados y con salida fácil para quien no quiere recibir."
+      },
+      {
+        "q": "¿Puedo mandarle a una lista que compré?",
+        "a": "No, y no lo vamos a hacer. Además de estar prohibido por la ley de datos personales, es la forma más rápida de que Meta te tumbe la línea. Solo se trabaja con contactos que te dieron su número."
+      },
+      {
+        "q": "¿Cada cuánto conviene mandar difusiones?",
+        "a": "Depende del giro, pero de más es peor. En la mayoría de los negocios, una o dos veces al mes con algo que de verdad le sirva al cliente rinde más que semanal con promociones. La medición del primer mes nos dice tu ritmo."
+      }
+    ]
   },
   {
     "slug": "pauta-omnicanal",
@@ -53,7 +278,44 @@
     "name": "Pauta omnicanal",
     "short": "Pauta digital + CRM",
     "desc": "Publicidad en Meta y Google conectada a WhatsApp y CRM para convertir clics en ventas.",
-    "price": "15000"
+    "price": "15000",
+    "entrega": "2 a 3 semanas para dejarla corriendo",
+    "paraQuien": "empresas que ya invierten en anuncios de Facebook, Instagram o Google y no logran saber cuánto vendieron por esa inversión",
+    "problema": "El tablero de Meta te dice que trajo 200 mensajes. Lo que no te dice es cuántos compraron. Sin esa conexión estás decidiendo tu presupuesto a ciegas: subes la pauta de la campaña que trae más mensajes baratos, que muchas veces es la que trae puro curioso.",
+    "comoFunciona": "Se conectan los anuncios con el CRM, para que cada prospecto llegue con la etiqueta de qué campaña lo trajo y esa etiqueta lo siga hasta la venta. Con eso ya se puede apagar lo que no vende y meterle a lo que sí.",
+    "incluye": [
+      "Campañas en Meta Ads y Google Ads armadas y configuradas",
+      "Medición conectada de anuncio → mensaje → prospecto → venta cerrada",
+      "Atención automática por WhatsApp a quien llega del anuncio",
+      "Públicos armados con tu base de clientes actual",
+      "Reporte de costo por prospecto y costo por venta, por campaña",
+      "Optimización mensual con base en ventas, no en clics"
+    ],
+    "noIncluye": [
+      "El presupuesto de pauta (ese se le paga directo a Meta y Google)",
+      "Producción de video y fotografía para los anuncios"
+    ],
+    "integraciones": [
+      "Meta Ads",
+      "Google Ads",
+      "Kommo CRM",
+      "WhatsApp Business API",
+      "Google Analytics"
+    ],
+    "faqs": [
+      {
+        "q": "¿Cuánto debo invertir en pauta?",
+        "a": "Depende del giro y de la ciudad, pero por debajo de cierto piso la campaña no junta datos suficientes para aprender y solo tiras el dinero. En el diagnóstico sacamos el mínimo que tiene sentido para tu caso antes de arrancar."
+      },
+      {
+        "q": "¿Este precio incluye lo que se le paga a Facebook?",
+        "a": "No. Lo que cotizamos es el trabajo de armar, conectar y optimizar. El presupuesto de anuncios lo pagas tú directo a la plataforma con tu propia tarjeta, y la cuenta publicitaria queda a tu nombre — nunca a nombre nuestro."
+      },
+      {
+        "q": "¿Puedo saber qué campaña me trajo cada venta?",
+        "a": "Esa es justo la razón de este servicio. Cada prospecto entra al CRM etiquetado con su campaña y esa etiqueta lo sigue hasta que cierra, así que al final del mes ves cuánto vendiste por cada peso invertido en cada campaña."
+      }
+    ]
   },
   {
     "slug": "cien-automatizado",
@@ -61,7 +323,46 @@
     "name": "100% automatizado",
     "short": "Negocio automatizado con IA",
     "desc": "Operación comercial casi sin intervención humana: IA en ventas, atención y seguimiento.",
-    "price": "35000"
+    "price": "35000",
+    "entrega": "6 a 10 semanas",
+    "paraQuien": "dueños que quieren que el negocio venda y atienda solo, sin depender de que ellos estén encima todos los días",
+    "problema": "Hay negocios rentables que no crecen porque todo pasa por el dueño: él cotiza, él da seguimiento, él resuelve. El día que se enferma o se va de viaje, las ventas se caen. Eso no es un negocio, es un empleo con más riesgo.",
+    "comoFunciona": "Es el paquete completo: entrada de prospectos, atención, calificación, cotización, seguimiento, cobranza y reportes, todos conectados y corriendo solos. Las personas quedan para lo que de verdad necesita criterio. Es el servicio más grande y también el que más tiempo de tu parte pide al arrancar.",
+    "incluye": [
+      "Todo lo de Automatización total",
+      "Agentes de IA en todos tus canales de venta",
+      "Cotización y facturación conectadas al proceso",
+      "Recordatorios de cobranza automáticos",
+      "Tablero de dirección con los números del negocio en tiempo real",
+      "Documentación completa de la operación",
+      "3 meses de acompañamiento y ajustes después de entregar"
+    ],
+    "noIncluye": [
+      "Licencias de las plataformas",
+      "Contabilidad y timbrado fiscal (se conecta con tu proveedor actual)"
+    ],
+    "integraciones": [
+      "Kommo CRM",
+      "WhatsApp Business API",
+      "n8n",
+      "Google Workspace",
+      "Meta Ads",
+      "Facturación electrónica"
+    ],
+    "faqs": [
+      {
+        "q": "¿De verdad queda 100% sin gente?",
+        "a": "No, y quien te lo prometa te está mintiendo. Lo que queda automatizado es el flujo completo de rutina; las excepciones, las negociaciones grandes y los clientes molestos los sigue viendo una persona. El nombre es la meta, no una promesa literal."
+      },
+      {
+        "q": "¿Cuánto tiempo mío se necesita?",
+        "a": "Es lo que más subestima la gente. Las primeras semanas se necesitan varias sesiones contigo o con quien conozca el proceso a fondo, porque hay que sacar de tu cabeza cómo se decide cada cosa. Si no hay ese tiempo, mejor empezar por un servicio más chico."
+      },
+      {
+        "q": "¿Conviene arrancar aquí o ir por partes?",
+        "a": "En la mayoría de los casos conviene ir por partes: chatbot, luego CRM, luego automatización. Este paquete tiene sentido cuando ya tienes volumen y el desorden te está costando ventas medibles. Si apenas vas empezando, es sobre-inversión y te lo vamos a decir."
+      }
+    ]
   },
   {
     "slug": "proyectos-medida",
@@ -69,7 +370,45 @@
     "name": "Proyectos a medida",
     "short": "Desarrollo IA a medida",
     "desc": "Apps web, integraciones y automatizaciones personalizadas con inteligencia artificial.",
-    "price": "50000"
+    "price": "50000",
+    "entrega": "8 a 16 semanas según el alcance",
+    "paraQuien": "empresas con un proceso propio que ninguna herramienta de las que se compran hechas resuelve, o que necesitan conectar sistemas que no se hablan entre sí",
+    "problema": "Llega un punto en que la herramienta comprada ya no da: tienes un sistema viejo que nadie más integra, un proceso que es tu ventaja competitiva, o un volumen que ninguna plataforma aguanta a precio razonable. Ahí toca construir.",
+    "comoFunciona": "Arranca con un levantamiento pagado por separado, donde se define exactamente qué se va a construir y cuánto cuesta, antes de comprometer el proyecto completo. Se entrega por partes funcionales, no todo al final, para que veas avances y puedas corregir el rumbo.",
+    "incluye": [
+      "Levantamiento y documento de alcance antes de comprometer el proyecto",
+      "Desarrollo por entregas funcionales, no todo al final",
+      "Integración con los sistemas que ya usas, incluidos los viejos",
+      "Modelos de IA aplicados a tu caso específico",
+      "Código y documentación entregados a tu nombre",
+      "Pruebas con usuarios reales antes de salir en vivo",
+      "Garantía de correcciones después de la entrega"
+    ],
+    "noIncluye": [
+      "Infraestructura y servidores (se cotizan según lo que pida el proyecto)",
+      "Soporte mensual permanente (se contrata aparte si lo quieres)"
+    ],
+    "integraciones": [
+      "APIs a medida",
+      "ERP y sistemas propios",
+      "Kommo CRM",
+      "WhatsApp Business API",
+      "Bases de datos"
+    ],
+    "faqs": [
+      {
+        "q": "¿Por qué el precio dice 'desde' y no un número cerrado?",
+        "a": "Porque cotizar de verdad un desarrollo sin saber qué se va a construir es adivinar, y así nacen los proyectos que se van al doble. El levantamiento inicial existe justo para eso: sale un alcance y un precio firme antes de que te comprometas al proyecto completo."
+      },
+      {
+        "q": "¿De quién queda el código?",
+        "a": "Tuyo. El código y la documentación se entregan a tu nombre y en tus repositorios. Puedes llevártelo con otro proveedor cuando quieras; no dejamos proyectos secuestrados."
+      },
+      {
+        "q": "¿Se conecta con mi sistema viejo?",
+        "a": "Casi siempre sí, aunque no tenga API moderna: hay formas de integrarse por base de datos, archivos o pantalla. Lo revisamos en el levantamiento antes de prometer nada, porque a veces sale más barato reemplazarlo que integrarlo."
+      }
+    ]
   },
   {
     "slug": "capacitaciones-ia-empresas",
@@ -77,6 +416,44 @@
     "name": "Capacitaciones IA al por mayor",
     "short": "Capacitación IA corporativa",
     "desc": "Capacitaciones de IA al por mayor para minería, construcción, manufactura e industria. Packs 10 / 25 / 50+ colaboradores.",
-    "price": "18000"
+    "price": "18000",
+    "entrega": "2 a 4 semanas para armar el programa; la impartición se calendariza contigo",
+    "paraQuien": "empresas de minería, construcción, manufactura e industria que ya vieron a su gente usando IA por su cuenta, sin criterio ni reglas, y quieren capacitarla en serio en vez de prohibirla",
+    "problema": "En la mayoría de las plantas la IA ya entró por la puerta de atrás: el personal usa ChatGPT desde su celular para redactar reportes o resolver dudas, sin capacitación y a veces pegando información que no debería salir de la empresa. Prohibirla no funciona — solo la vuelve invisible. Y los cursos genéricos de internet no sirven porque no hablan del trabajo que esa gente hace.",
+    "comoFunciona": "Se arma un programa sobre los casos reales de tu operación — no ejemplos de manual — y se imparte por packs de colaboradores. La gente sale con herramientas aplicadas a su puesto y con reglas claras de qué información sí y cuál no se le da a una IA.",
+    "incluye": [
+      "Programa armado sobre los procesos y el vocabulario de tu industria",
+      "Packs de 10, 25 o 50+ colaboradores",
+      "Sesiones en vivo, presenciales o remotas, en español",
+      "Casos prácticos del puesto de cada grupo, no ejemplos genéricos",
+      "Reglas de uso seguro: qué información no se le da nunca a una IA pública",
+      "Material de consulta y constancia de participación por asistente"
+    ],
+    "noIncluye": [
+      "Licencias de las herramientas de IA que se usen en el curso",
+      "Certificación oficial ante STPS (se puede gestionar aparte)",
+      "Implementación técnica de las herramientas en tus sistemas"
+    ],
+    "integraciones": [
+      "ChatGPT",
+      "Claude",
+      "Gemini",
+      "Microsoft Copilot",
+      "Google Workspace"
+    ],
+    "faqs": [
+      {
+        "q": "¿Cuánta gente entra por ese precio?",
+        "a": "El precio de arranque corresponde al pack chico. De ahí escala por número de colaboradores: entre más grande el grupo, menor el costo por persona. En el diagnóstico se define el pack según cuánta gente y cuántos turnos hay que cubrir."
+      },
+      {
+        "q": "Mi gente de planta no es de computadora. ¿Les va a servir?",
+        "a": "Es la duda más común y por eso el programa se arma por puesto. A supervisión y administrativos se les enseña sobre su trabajo real — reportes, bitácoras, correos, análisis. A quien no usa computadora a diario se le enseña desde el celular y con casos de su turno. No se da el mismo curso a todos."
+      },
+      {
+        "q": "¿Puede ser en planta y por turnos?",
+        "a": "Sí. Se imparte presencial en sitio o remoto, y se calendariza por turnos para no parar la operación. En minería y construcción es lo normal: grupos chicos, sesiones cortas y repetidas por turno."
+      }
+    ]
   }
 ]

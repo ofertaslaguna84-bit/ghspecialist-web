@@ -8,7 +8,21 @@
     "lat": 25.6866,
     "lng": -100.3161,
     "industries": "manufactura, logística, fintech, inmobiliarias en San Pedro y Valle Oriente",
-    "intro": "En Monterrey el WhatsApp es canal de ventas #1 para empresas industriales, desarrolladoras inmobiliarias y servicios B2B. Un chatbot con IA responde en segundos lo que tu equipo tarda horas — incluso fuera de horario en San Pedro, Santa Catarina o el centro."
+    "intro": "En Monterrey el WhatsApp es canal de ventas #1 para empresas industriales, desarrolladoras inmobiliarias y servicios B2B. Un chatbot con IA responde en segundos lo que tu equipo tarda horas — incluso fuera de horario en San Pedro, Santa Catarina o el centro.",
+    "zonas": "San Pedro Garza García, Valle Oriente, Cumbres, Apodaca, Santa Catarina, Guadalupe y el centro",
+    "sectores": [
+      "Manufactura y proveeduría industrial",
+      "Desarrolladoras e inmobiliarias",
+      "Servicios financieros y fintech",
+      "Logística y transporte",
+      "Salud privada y clínicas"
+    ],
+    "cobertura": "Monterrey y toda su área metropolitana: San Nicolás, Escobedo, García, Juárez y Santiago",
+    "reto": "Monterrey es de los mercados más competidos del país y también de los más exigentes con los tiempos de respuesta: el comprador industrial pide cotización a tres proveedores el mismo día y trabaja con el primero que le contesta con números. En desarrollo inmobiliario pasa igual — el prospecto que ve un anuncio de un departamento en Valle Oriente a las once de la noche escribe en ese momento, y para la mañana siguiente ya visitó otras dos casetas.",
+    "faqLocal": {
+      "q": "¿Trabajan presencial en Monterrey o todo es remoto?",
+      "a": "La implementación se hace remota, que es como sale más rápido y más barato. Para arranque de proyecto y capacitación del equipo se puede ir presencial a Monterrey; la base de GH Specialist está en Torreón, a unas horas por carretera."
+    }
   },
   {
     "slug": "cdmx",
@@ -19,7 +33,21 @@
     "lat": 19.4326,
     "lng": -99.1332,
     "industries": "servicios profesionales, clínicas, e-commerce, startups y franquicias en la ZMVM",
-    "intro": "En la CDMX compites contra cientos de negocios similares. La automatización con IA en WhatsApp te permite atender prospectos de Polanco, Coyoacán o Iztapalapa las 24 horas sin multiplicar tu nómina."
+    "intro": "En la CDMX compites contra cientos de negocios similares. La automatización con IA en WhatsApp te permite atender prospectos de Polanco, Coyoacán o Iztapalapa las 24 horas sin multiplicar tu nómina.",
+    "zonas": "Polanco, Santa Fe, Condesa, Roma, Del Valle, Coyoacán, Interlomas y el norte de la ZMVM",
+    "sectores": [
+      "Servicios profesionales y despachos",
+      "Clínicas y consultorios",
+      "E-commerce y retail",
+      "Startups y tecnología",
+      "Franquicias y cadenas"
+    ],
+    "cobertura": "Ciudad de México y zona metropolitana del Valle de México, incluidos Naucalpan, Tlalnepantla, Ecatepec y Nezahualcóyotl",
+    "reto": "En la CDMX el problema casi nunca es la falta de prospectos: es el volumen. Un consultorio en Polanco o una tienda en línea que factura bien puede recibir cien mensajes al día entre WhatsApp, Instagram y el chat de la página, y el equipo alcanza a contestar bien la mitad. El otro factor es el tráfico: la gente escribe desde el transporte, a horas en que no hay nadie en el mostrador, y espera respuesta inmediata.",
+    "faqLocal": {
+      "q": "¿Sirve si atiendo toda la zona metropolitana y no solo una alcaldía?",
+      "a": "Sí, y es lo normal en la CDMX. El bot puede preguntar la zona del cliente al inicio y con eso enrutar a la sucursal, al vendedor de esa zona o dar el tiempo de entrega correcto, que en el Valle de México cambia muchísimo de un lado a otro."
+    }
   },
   {
     "slug": "guadalajara",
@@ -30,7 +58,21 @@
     "lat": 20.6597,
     "lng": -103.3496,
     "industries": "tecnología, manufactura, turismo, retail en Zapopan y el corredor del Bajío-Occidente",
-    "intro": "Guadalajara es hub tecnológico y de negocios en el occidente. Implementamos chatbots WhatsApp, CRM Kommo y agentes IA para PYMES tapatías que quieren escalar ventas sin perder el trato personal."
+    "intro": "Guadalajara es hub tecnológico y de negocios en el occidente. Implementamos chatbots WhatsApp, CRM Kommo y agentes IA para PYMES tapatías que quieren escalar ventas sin perder el trato personal.",
+    "zonas": "Zapopan, Providencia, Chapalita, Tlaquepaque, Tonalá, Andares y el centro tapatío",
+    "sectores": [
+      "Tecnología y software",
+      "Manufactura y agroindustria",
+      "Turismo y hospitalidad",
+      "Retail y comercio",
+      "Bienes raíces"
+    ],
+    "cobertura": "Guadalajara y toda la Zona Metropolitana: Zapopan, San Pedro Tlaquepaque, Tonalá, Tlajomulco y El Salto",
+    "reto": "Guadalajara tiene una mezcla poco común: empresas de tecnología acostumbradas a herramientas modernas conviviendo con negocios familiares de décadas que siguen vendiendo por teléfono y libreta. Para los primeros el reto es integrar sistemas que ya tienen; para los segundos, automatizar sin perder el trato personal, que en Jalisco pesa mucho en la decisión de compra.",
+    "faqLocal": {
+      "q": "Mi negocio es familiar y el trato personal es lo que nos distingue. ¿No lo voy a perder?",
+      "a": "Es la duda más común en Guadalajara y es válida. Por eso el bot se usa para lo que no aporta trato — dar horarios, precios de lista, ubicación, disponibilidad — y para que ningún mensaje quede sin respuesta a deshoras. La plática que cierra la venta la sigue teniendo tu gente, pero con el prospecto ya tibio y con todo el contexto a la mano."
+    }
   },
   {
     "slug": "queretaro",
@@ -41,7 +83,21 @@
     "lat": 20.5888,
     "lng": -100.3899,
     "industries": "aeroespacial, automotriz, logística, inmobiliarias y servicios corporativos",
-    "intro": "Querétaro concentra plantas, parques industriales y empresas de servicios en crecimiento acelerado. Automatizamos atención por WhatsApp, calificación de prospectos y seguimiento comercial con IA."
+    "intro": "Querétaro concentra plantas, parques industriales y empresas de servicios en crecimiento acelerado. Automatizamos atención por WhatsApp, calificación de prospectos y seguimiento comercial con IA.",
+    "zonas": "Juriquilla, Milenio, Centro Sur, El Refugio, el corredor industrial y San Juan del Río",
+    "sectores": [
+      "Aeroespacial y automotriz",
+      "Logística y centros de distribución",
+      "Desarrolladoras e inmobiliarias",
+      "Servicios corporativos",
+      "Educación privada"
+    ],
+    "cobertura": "Querétaro capital, El Marqués, Corregidora, San Juan del Río y el corredor industrial del Bajío",
+    "reto": "Querétaro creció rápido y con población que llegó de fuera, sobre todo de la CDMX. Eso cambia cómo se vende: el cliente nuevo no tiene proveedor de confianza ni recomendación de años, así que busca en Google y en WhatsApp, compara y decide en días. Para las empresas locales significa que ya no basta con la cartera de siempre. Del lado industrial, la proveeduría de las plantas exige respuesta formal y rápida a las solicitudes de cotización.",
+    "faqLocal": {
+      "q": "Le vendo a plantas industriales, no a consumidor final. ¿También aplica?",
+      "a": "Aplica y suele rendir más. En venta industrial el ciclo es largo y con varios involucrados, que es justo donde se pierden los seguimientos. El CRM registra cada solicitud de cotización, avisa cuándo toca dar seguimiento y guarda el historial completo de la cuenta, para que no dependa de la memoria del vendedor que la atiende."
+    }
   },
   {
     "slug": "chihuahua",
@@ -52,7 +108,21 @@
     "lat": 28.6329,
     "lng": -106.0691,
     "industries": "maquiladoras, distribución, construcción y comercio en el norte del país",
-    "intro": "Empresas en Chihuahua capital y la región norte necesitan responder rápido a clientes en todo México. Chatbots en WhatsApp, CRM y automatización total desde GH Specialist, con implementación remota o presencial."
+    "intro": "Empresas en Chihuahua capital y la región norte necesitan responder rápido a clientes en todo México. Chatbots en WhatsApp, CRM y automatización total desde GH Specialist, con implementación remota o presencial.",
+    "zonas": "Chihuahua capital, Ciudad Juárez, Delicias, Cuauhtémoc y Parral",
+    "sectores": [
+      "Maquiladoras y proveeduría",
+      "Distribución y mayoreo",
+      "Construcción",
+      "Agroindustria",
+      "Comercio y servicios"
+    ],
+    "cobertura": "Chihuahua capital, Ciudad Juárez y las principales ciudades del estado",
+    "reto": "Chihuahua es un estado grande y disperso: una empresa en la capital le vende a clientes en Juárez, Delicias y Cuauhtémoc, a horas de distancia. Mandar a un vendedor a cada visita cuesta caro, así que la mayor parte de la relación pasa por teléfono y WhatsApp. Además, quien le vende a maquiladoras trabaja con la zona horaria y los estándares de respuesta del cliente estadounidense.",
+    "faqLocal": {
+      "q": "Atiendo clientes en Estados Unidos además de México. ¿Se puede?",
+      "a": "Sí. El agente detecta el idioma y responde en inglés o español, y se le puede configurar el horario para que sepa que un cliente de El Paso está en otro huso. Es de los casos donde más se nota, porque cubre las horas en que tu oficina en Chihuahua ya cerró."
+    }
   },
   {
     "slug": "puebla",
@@ -63,7 +133,21 @@
     "lat": 19.0414,
     "lng": -98.2063,
     "industries": "automotriz, textil, turismo, educación y retail en Angelópolis",
-    "intro": "En Puebla y Angelópolis, clínicas, inmobiliarias y comercios reciben decenas de mensajes diarios por WhatsApp. Un agente IA califica, agenda y da seguimiento mientras tu equipo cierra las ventas importantes."
+    "intro": "En Puebla y Angelópolis, clínicas, inmobiliarias y comercios reciben decenas de mensajes diarios por WhatsApp. Un agente IA califica, agenda y da seguimiento mientras tu equipo cierra las ventas importantes.",
+    "zonas": "Angelópolis, Lomas de Angelópolis, La Paz, Centro Histórico, Cholula y Atlixco",
+    "sectores": [
+      "Automotriz y proveeduría",
+      "Clínicas y salud privada",
+      "Educación y universidades",
+      "Turismo y restaurantes",
+      "Inmobiliario y construcción"
+    ],
+    "cobertura": "Puebla capital, San Andrés y San Pedro Cholula, Atlixco y la zona metropolitana",
+    "reto": "Puebla mezcla una base industrial fuerte con un mercado de consumo grande y con mucha población estudiantil. Para clínicas, escuelas y restaurantes eso significa picos de mensajes concentrados en pocas horas, cuando nadie alcanza a contestar. En el lado inmobiliario de Angelópolis, la competencia por el mismo prospecto es directa y quien contesta primero se queda con la cita.",
+    "faqLocal": {
+      "q": "Tengo un consultorio y lo que necesito es que agenden citas. ¿Eso lo hace?",
+      "a": "Sí, es de los usos más agradecidos. El agente da los horarios disponibles, agenda directo en el calendario, manda recordatorio antes de la cita y permite reagendar por el mismo WhatsApp. Ahí donde más se nota es en bajar las citas a las que el paciente no llega."
+    }
   },
   {
     "slug": "leon",
@@ -74,7 +158,21 @@
     "lat": 21.1253,
     "lng": -101.6869,
     "industries": "calzado, cuero, distribución y servicios en el corazón del Bajío",
-    "intro": "León es motor económico del Bajío. Ayudamos a empresas leonesas a automatizar ventas por WhatsApp, integrar Kommo CRM y generar contenido SEO con IA para aparecer en Google a nivel nacional."
+    "intro": "León es motor económico del Bajío. Ayudamos a empresas leonesas a automatizar ventas por WhatsApp, integrar Kommo CRM y generar contenido SEO con IA para aparecer en Google a nivel nacional.",
+    "zonas": "León centro, Campestre, Jardines del Moral, la zona industrial y el corredor a Silao e Irapuato",
+    "sectores": [
+      "Calzado y marroquinería",
+      "Cuero y proveeduría",
+      "Distribución y mayoreo",
+      "Automotriz en el corredor del Bajío",
+      "Comercio y servicios"
+    ],
+    "cobertura": "León, Silao, Irapuato, Guanajuato capital, Salamanca y Celaya",
+    "reto": "León vende a todo el país: el fabricante de calzado o de artículos de piel tiene clientes mayoristas en Monterrey, la CDMX y Mérida que nunca va a visitar en persona. Toda esa relación vive en WhatsApp, con pedidos, muestras y anticipos revueltos en la misma conversación. Cuando el volumen crece, la libreta y la memoria dejan de alcanzar y se empiezan a caer pedidos.",
+    "faqLocal": {
+      "q": "Vendo mayoreo a clientes de otros estados. ¿Me sirve más el bot o el CRM?",
+      "a": "En mayoreo con clientes que repiten, casi siempre el CRM primero. Tu problema no suele ser contestarle a desconocidos, sino no perder el hilo de pedidos, anticipos y recompras de clientes que ya tienes. El bot ayuda para los prospectos nuevos, pero el orden lo pone el CRM."
+    }
   },
   {
     "slug": "merida",
@@ -85,7 +183,21 @@
     "lat": 20.9674,
     "lng": -89.5926,
     "industries": "turismo, bienes raíces, salud y servicios en el sureste mexicano",
-    "intro": "Mérida crece como destino de negocios y residencia. Implementamos chatbots WhatsApp y automatización con IA para empresas yucatecas que quieren atender turistas y clientes locales sin fricción."
+    "intro": "Mérida crece como destino de negocios y residencia. Implementamos chatbots WhatsApp y automatización con IA para empresas yucatecas que quieren atender turistas y clientes locales sin fricción.",
+    "zonas": "Montebello, Altabrisa, Norte de Mérida, Centro, Progreso y la costa yucateca",
+    "sectores": [
+      "Bienes raíces y desarrollos",
+      "Turismo y hospitalidad",
+      "Salud privada",
+      "Servicios profesionales",
+      "Comercio y retail"
+    ],
+    "cobertura": "Mérida, Progreso, Valladolid y el resto del estado de Yucatán",
+    "reto": "Mérida vive un fenómeno particular: buena parte de sus compradores no vive ahí. Gente de la CDMX, de Monterrey y del extranjero compra terreno, casa o departamento a distancia, y toda la venta ocurre por WhatsApp, con diferencia de horario y sin que el cliente pise la ciudad hasta el final. Eso obliga a responder con información completa y a dar seguimiento durante meses, no días.",
+    "faqLocal": {
+      "q": "Vendo desarrollos a compradores que están fuera de Yucatán. ¿Cómo ayuda?",
+      "a": "Ahí es donde más rinde. El agente atiende la primera consulta a la hora que llegue, manda planos, precios y ubicación sin esperar a que abra la oficina, y deja el prospecto registrado. Como en desarrollos el ciclo es largo, el seguimiento automático mantiene viva la conversación esos meses en que normalmente se enfría."
+    }
   },
   {
     "slug": "tijuana",
@@ -96,7 +208,21 @@
     "lat": 32.5149,
     "lng": -117.0382,
     "industries": "manufactura, médico, logística cross-border y comercio fronterizo",
-    "intro": "En Tijuana la velocidad de respuesta define ventas. Chatbots con IA en WhatsApp atienden en español, califican prospectos y conectan con tu CRM sin importar la zona horaria."
+    "intro": "En Tijuana la velocidad de respuesta define ventas. Chatbots con IA en WhatsApp atienden en español, califican prospectos y conectan con tu CRM sin importar la zona horaria.",
+    "zonas": "Zona Río, Otay, Playas de Tijuana, La Mesa y el corredor a Rosarito y Tecate",
+    "sectores": [
+      "Manufactura y maquiladora",
+      "Dispositivos médicos",
+      "Logística y cruce fronterizo",
+      "Turismo médico y dental",
+      "Comercio y servicios"
+    ],
+    "cobertura": "Tijuana, Rosarito, Tecate, Ensenada y Mexicali",
+    "reto": "En Tijuana muchas empresas operan con dos relojes: el de México y el de California. El turismo médico y dental recibe consultas de San Diego y Los Ángeles en inglés, a horas en que la clínica ya cerró, y quien contesta primero se queda con el paciente. Del lado industrial, la proveeduría a maquiladoras se maneja con estándares de respuesta gringos, donde no contestar el mismo día ya es quedarse fuera.",
+    "faqLocal": {
+      "q": "Mis pacientes escriben en inglés desde California. ¿El agente los atiende?",
+      "a": "Sí, detecta el idioma y contesta en inglés sin que tengas que hacer nada. Puede dar precios en dólares, explicar tiempos y agendar considerando el cruce fronterizo. Para turismo médico es de los casos donde el cambio se nota más rápido, porque cubre las tardes y fines de semana que hoy se están perdiendo."
+    }
   },
   {
     "slug": "cancun",
@@ -107,7 +233,21 @@
     "lat": 21.1619,
     "lng": -86.8515,
     "industries": "turismo, hospitalidad, bienes raíces y servicios en la Riviera Maya",
-    "intro": "Hoteles, desarrolladoras y servicios en Cancún reciben consultas a toda hora desde México y el extranjero. Automatizamos WhatsApp con IA para responder, cotizar y agendar sin perder reservaciones."
+    "intro": "Hoteles, desarrolladoras y servicios en Cancún reciben consultas a toda hora desde México y el extranjero. Automatizamos WhatsApp con IA para responder, cotizar y agendar sin perder reservaciones.",
+    "zonas": "Zona Hotelera, Centro, Puerto Cancún, Playa del Carmen y Tulum",
+    "sectores": [
+      "Hotelería y hospitalidad",
+      "Bienes raíces y desarrollos",
+      "Tours y servicios turísticos",
+      "Restaurantes",
+      "Salud y bienestar"
+    ],
+    "cobertura": "Cancún, Playa del Carmen, Tulum, Puerto Morelos y toda la Riviera Maya",
+    "reto": "En la Riviera Maya las consultas llegan de todo el mundo y a todas horas: un turista en Europa pregunta a las tres de la mañana hora de Cancún y espera respuesta antes de reservar con otro. Se suma el idioma — inglés, español y a veces más — y la estacionalidad, con temporadas altas donde el volumen se multiplica y no da tiempo de contratar y capacitar gente.",
+    "faqLocal": {
+      "q": "En temporada alta se nos multiplican los mensajes. ¿Aguanta el pico?",
+      "a": "Ese es justo el caso que resuelve: al agente le da igual atender diez conversaciones que trescientas al mismo tiempo, y no necesita capacitación cada temporada. Tu equipo se queda con las reservaciones grandes y los casos especiales, que es donde sí hace falta una persona."
+    }
   },
   {
     "slug": "saltillo",
@@ -118,7 +258,21 @@
     "lat": 25.4383,
     "lng": -100.9737,
     "industries": "automotriz, textiles, distribución y servicios corporativos",
-    "intro": "Saltillo concentra industria automotriz y servicios en expansión. Desde GH Specialist (base en La Laguna) implementamos chatbots, CRM Kommo y automatización para empresas saltillenses."
+    "intro": "Saltillo concentra industria automotriz y servicios en expansión. Desde GH Specialist (base en La Laguna) implementamos chatbots, CRM Kommo y automatización para empresas saltillenses.",
+    "zonas": "Saltillo centro, Ramos Arizpe, Arteaga y el corredor industrial",
+    "sectores": [
+      "Automotriz y proveeduría",
+      "Metalmecánica",
+      "Distribución industrial",
+      "Construcción",
+      "Servicios corporativos"
+    ],
+    "cobertura": "Saltillo, Ramos Arizpe, Arteaga y la región sureste de Coahuila",
+    "reto": "Saltillo y Ramos Arizpe giran alrededor de la industria automotriz, y eso marca la forma de vender: solicitudes de cotización formales, varias personas decidiendo y plazos que no se mueven. La empresa proveedora que tarda en responder o que pierde el hilo de una cotización sencillamente no entra a la lista. Al mismo tiempo, el comercio local compite por un mercado más chico donde la recomendación pesa.",
+    "faqLocal": {
+      "q": "¿Están cerca? Prefiero un proveedor de la región.",
+      "a": "Sí. GH Specialist tiene su base en Torreón, a unas tres horas de Saltillo por carretera, y atiende Coahuila completo. Las juntas de arranque y la capacitación se pueden hacer presenciales, y el resto de la implementación es remota."
+    }
   },
   {
     "slug": "torreon",
@@ -130,6 +284,20 @@
     "lng": -103.4068,
     "legacyUrl": "/torreon/",
     "industries": "inmobiliarias, clínicas, constructoras y retail en La Comarca Lagunera",
-    "intro": "Sede de GH Specialist. Atendemos Torreón, Gómez Palacio, Lerdo y toda La Laguna con chatbots WhatsApp, CRM Kommo y agentes IA — presencial o remoto."
+    "intro": "Sede de GH Specialist. Atendemos Torreón, Gómez Palacio, Lerdo y toda La Laguna con chatbots WhatsApp, CRM Kommo y agentes IA — presencial o remoto.",
+    "zonas": "Torreón, Gómez Palacio, Lerdo, Matamoros y toda La Comarca Lagunera",
+    "sectores": [
+      "Constructoras y desarrolladoras",
+      "Clínicas y salud privada",
+      "Comercio y retail",
+      "Agroindustria y lechería",
+      "Servicios profesionales"
+    ],
+    "cobertura": "Torreón, Gómez Palacio, Lerdo, Matamoros, San Pedro y la región lagunera de Coahuila y Durango",
+    "reto": "La Laguna es un mercado donde casi todos se conocen y la recomendación todavía manda, pero la forma de contactar ya cambió por completo: el cliente que antes hablaba por teléfono ahora escribe por WhatsApp, y espera respuesta con la misma rapidez que le da una empresa nacional. Los negocios laguneros que no contestan a tiempo están perdiendo contra competidores de fuera que sí tienen quien atienda a toda hora.",
+    "faqLocal": {
+      "q": "¿Pueden venir presencial a Torreón?",
+      "a": "Sí, es la sede. Torreón, Gómez Palacio y Lerdo se atienden presencial sin costo de traslado: juntas de arranque, capacitación del equipo y revisiones. Es la ciudad donde más fácil es acompañar el proyecto de cerca."
+    }
   }
 ]
