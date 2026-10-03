@@ -430,10 +430,15 @@
   }
 
   function applyDataI18n() {
+    // Solo se escribe si el texto cambia. Reescribir el mismo texto (caso
+    // es-MX, que ya viene en el HTML) hace que el navegador registre un
+    // nuevo candidato de LCP cuando corre este script, y PageSpeed medía
+    // el LCP de la home en 10 s cuando el texto ya estaba pintado a los 2.7 s.
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
       var key = el.getAttribute('data-i18n');
       if (!key) return;
-      el.textContent = t(key);
+      var v = t(key);
+      if (el.textContent !== v) el.textContent = v;
     });
     document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
       var key = el.getAttribute('data-i18n-placeholder');
@@ -441,7 +446,7 @@
     });
     document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
       var key = el.getAttribute('data-i18n-html');
-      if (key) el.innerHTML = t(key);
+      if (key && el.innerHTML !== t(key)) el.innerHTML = t(key);
     });
   }
 
