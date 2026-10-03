@@ -23,6 +23,8 @@
   <meta name="description" content="Automatización con IA para constructoras y desarrolladoras: reclutamiento de personal de obra y seguimiento de compradores. Torreón, MTY, CDMX y todo México.">
   <meta name="keywords" content="pagina de ia con seo, seo empresas industriales mexico, seo manufactura, seo parque industrial, blog con ia, posicionamiento google industria, chatbot whatsapp empresas, automatizacion ia mexico">
   <link rel="canonical" href="https://ghspecialist.com/">
+  <link rel="preload" as="image" href="hero-torreon-m.webp" media="(max-width:640px)" fetchpriority="high">
+  <link rel="preload" as="image" href="hero-torreon.webp" media="(min-width:641px)" fetchpriority="high">
   <meta name="author" content="Pedro Luis Díaz Velázquez">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta property="og:type" content="website">
@@ -132,6 +134,7 @@
 
     /* ─── SECTION 1: VIDEO EMBUDO ─── */
     .embudo-sec{padding:calc(100px + var(--safe-top)) 0 60px;background:linear-gradient(rgba(0,0,0,.30),rgba(0,0,0,.22)),url('hero-torreon.webp') center/cover no-repeat;color:#fff;overflow:hidden}
+    @media (max-width:640px){.embudo-sec{background-image:linear-gradient(rgba(0,0,0,.30),rgba(0,0,0,.22)),url('hero-torreon-m.webp')}}
     .embudo-sec .sec-header{margin-bottom:48px}
     .embudo-sec .title{color:#fff;max-width:700px;margin:0 auto 8px;text-shadow:0 2px 12px rgba(0,0,0,.5)}
     .embudo-sec .sub-text{color:rgba(255,255,255,.9);text-align:center;margin:0 auto;text-shadow:0 1px 8px rgba(0,0,0,.4)}
@@ -207,7 +210,7 @@
     .chat-demo-btn{margin-top:24px}
 
     /* ─── SECTION 3: TRUSTED BY ─── */
-    .trusted-sec{padding:80px 0;background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.55)),url('hero-guadalajara.webp') center/cover no-repeat;color:#fff}
+    .trusted-sec{padding:80px 0;background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.55)),var(--bg-img,none) center/cover no-repeat;color:#fff}
     .trusted-sec .sec-header{margin-bottom:44px}
     .trusted-sec .title{color:#fff}
     .trusted-sec .label{color:#a78bfa}
@@ -234,7 +237,7 @@
     .sec-gray{background:var(--bg2)}
     .sec-dark{background:#111;color:#fff}
     .sec-purple{background:var(--p);color:#fff}
-    .sec-photo{background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.5)),var(--bg-img) center/cover no-repeat;color:#fff}
+    .sec-photo{background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.5)),var(--bg-img,none) center/cover no-repeat;color:#fff}
     .sec-photo .title,.sec-photo h2,.sec-photo h3,.sec-photo strong{color:#fff}
     .sec-photo .sub,.sec-photo p,.sec-photo li,.sec-photo .hs-l{color:rgba(255,255,255,.8)}
     .sec-photo .label{color:#a78bfa}
@@ -894,7 +897,7 @@
   </section>
 
   <!-- SECTION 3: TRUSTED BY -->
-  <section class="trusted-sec">
+  <section class="trusted-sec" data-bg="hero-guadalajara.webp">
     <div class="w">
       <div class="sec-header center">
         <span class="label" data-i18n="trusted.label">Clientes activos</span>
@@ -1037,7 +1040,7 @@
   </section>
 
   <!-- SERVICES -->
-  <section class="sec sec-photo" id="servicios" style="--bg-img:url('hero-chihuahua.webp')">
+  <section class="sec sec-photo" id="servicios" data-bg="hero-chihuahua.webp">
     <div class="w">
       <div class="sec-header center fi">
         <span class="label" data-i18n="svc.label">¿Qué hacemos?</span>
@@ -1262,7 +1265,7 @@
   </div>
 
   <!-- RESULTS / CASES -->
-  <section class="sec sec-photo" id="resultados" style="--bg-img:url('hero-monterrey.webp')">
+  <section class="sec sec-photo" id="resultados" data-bg="hero-monterrey.webp">
     <div class="w">
       <div class="sec-header center fi">
         <span class="label">Casos de éxito</span>
@@ -1271,7 +1274,7 @@
       </div>
       <div class="cases-grid">
         <div class="case-card fi fi-d1">
-          <div class="case-bg" style="background-image:url('hero-monterrey.webp')"></div>
+          <div class="case-bg" data-bg="hero-monterrey.webp"></div>
           <div class="case-overlay"></div>
           <div class="case-content">
             <span class="case-sector">Industria · Página IA + SEO</span>
@@ -1281,7 +1284,7 @@
           </div>
         </div>
         <div class="case-card fi fi-d2">
-          <div class="case-bg" style="background-image:url('hero-cdmx.webp')"></div>
+          <div class="case-bg" data-bg="hero-cdmx.webp"></div>
           <div class="case-overlay"></div>
           <div class="case-content">
             <span class="case-sector">SEO B2B · Blog IA</span>
@@ -1291,7 +1294,7 @@
           </div>
         </div>
         <div class="case-card fi fi-d3">
-          <div class="case-bg" style="background-image:url('hero-guadalajara.webp')"></div>
+          <div class="case-bg" data-bg="hero-guadalajara.webp"></div>
           <div class="case-overlay"></div>
           <div class="case-content">
             <span class="case-sector">Desarrolladora de vivienda</span>
@@ -1336,7 +1339,7 @@
   </div>
 
   <!-- CITIES -->
-  <section class="sec sec-photo" style="--bg-img:url('hero-cdmx.webp')">
+  <section class="sec sec-photo" data-bg="hero-cdmx.webp">
     <div class="w">
       <div class="sec-header center fi">
         <span class="label">Presencia nacional</span>
@@ -1345,7 +1348,7 @@
       </div>
       <div class="cities-grid">
         <a href="torreon/" class="city-card fi fi-d1">
-          <div class="city-bg" style="background-image:url('hero-torreon.webp')"></div>
+          <div class="city-bg" data-bg="hero-torreon.webp"></div>
           <div class="city-overlay"></div>
           <div class="city-content">
             <div class="city-name">Torreón</div>
@@ -1353,7 +1356,7 @@
           </div>
         </a>
         <a href="ciudades/monterrey/" class="city-card fi fi-d2">
-          <div class="city-bg" style="background-image:url('hero-monterrey.webp')"></div>
+          <div class="city-bg" data-bg="hero-monterrey.webp"></div>
           <div class="city-overlay"></div>
           <div class="city-content">
             <div class="city-name">Monterrey</div>
@@ -1361,7 +1364,7 @@
           </div>
         </a>
         <a href="ciudades/cdmx/" class="city-card fi fi-d3">
-          <div class="city-bg" style="background-image:url('hero-cdmx.webp')"></div>
+          <div class="city-bg" data-bg="hero-cdmx.webp"></div>
           <div class="city-overlay"></div>
           <div class="city-content">
             <div class="city-name">CDMX</div>
@@ -1369,7 +1372,7 @@
           </div>
         </a>
         <a href="ciudades/guadalajara/" class="city-card fi fi-d4">
-          <div class="city-bg" style="background-image:url('hero-guadalajara.webp')"></div>
+          <div class="city-bg" data-bg="hero-guadalajara.webp"></div>
           <div class="city-overlay"></div>
           <div class="city-content">
             <div class="city-name">Guadalajara</div>
@@ -1377,7 +1380,7 @@
           </div>
         </a>
         <a href="ciudades/queretaro/" class="city-card fi fi-d5">
-          <div class="city-bg" style="background-image:url('hero-queretaro.webp')"></div>
+          <div class="city-bg" data-bg="hero-queretaro.webp"></div>
           <div class="city-overlay"></div>
           <div class="city-content">
             <div class="city-name">Querétaro</div>
@@ -1385,7 +1388,7 @@
           </div>
         </a>
         <a href="ciudades/chihuahua/" class="city-card fi fi-d6">
-          <div class="city-bg" style="background-image:url('hero-chihuahua.webp')"></div>
+          <div class="city-bg" data-bg="hero-chihuahua.webp"></div>
           <div class="city-overlay"></div>
           <div class="city-content">
             <div class="city-name">Chihuahua</div>
@@ -1393,7 +1396,7 @@
           </div>
         </a>
         <a href="ciudades/merida/" class="city-card fi fi-d7">
-          <div class="city-bg" style="background-image:url('hero-merida.webp')"></div>
+          <div class="city-bg" data-bg="hero-merida.webp"></div>
           <div class="city-overlay"></div>
           <div class="city-content">
             <div class="city-name">Mérida</div>
@@ -1401,7 +1404,7 @@
           </div>
         </a>
         <a href="ciudades/puebla/" class="city-card fi fi-d8">
-          <div class="city-bg" style="background-image:url('hero-puebla.webp')"></div>
+          <div class="city-bg" data-bg="hero-puebla.webp"></div>
           <div class="city-overlay"></div>
           <div class="city-content">
             <div class="city-name">Puebla</div>
@@ -1409,7 +1412,7 @@
           </div>
         </a>
         <a href="ciudades/leon/" class="city-card fi fi-d9">
-          <div class="city-bg" style="background-image:url('hero-leon.webp')"></div>
+          <div class="city-bg" data-bg="hero-leon.webp"></div>
           <div class="city-overlay"></div>
           <div class="city-content">
             <div class="city-name">León</div>
@@ -1417,7 +1420,7 @@
           </div>
         </a>
         <a href="ciudades/cancun/" class="city-card fi fi-d10">
-          <div class="city-bg" style="background-image:url('hero-bg.webp')"></div>
+          <div class="city-bg" data-bg="hero-bg.webp"></div>
           <div class="city-overlay"></div>
           <div class="city-content">
             <div class="city-name">Cancún</div>
@@ -1516,7 +1519,7 @@
   </section>
 
   <!-- CONTACT -->
-  <section class="sec sec-photo" id="contacto" style="--bg-img:url('hero-puebla.webp')">
+  <section class="sec sec-photo" id="contacto" data-bg="hero-puebla.webp">
     <div class="w">
       <div class="contact-grid">
         <div class="contact-info fi">
@@ -2260,6 +2263,21 @@
       if (moreEl && cfg.mapsUrl) moreEl.href = cfg.mapsUrl;
       if (moreEl && cfg.reviewCount) moreEl.textContent = 'Ver las ' + cfg.reviewCount + ' reseñas en Google →';
     })();
+  </script>
+  <script>
+  // Fondos diferidos: la home cargaba de golpe 10 fotos de ciudad (1.9 MB) que
+  // competian con la del hero y dejaban el LCP movil en 10 s. Cada fondo se
+  // pone cuando su seccion se acerca a la pantalla.
+  (function(){
+    var els=[].slice.call(document.querySelectorAll('[data-bg]'));
+    function show(el){var u=el.getAttribute('data-bg');if(!u)return;
+      if(el.classList.contains('sec-photo')||el.classList.contains('trusted-sec')){el.style.setProperty('--bg-img',"url('"+u+"')");}
+      else{el.style.backgroundImage="url('"+u+"')";}
+      el.removeAttribute('data-bg');}
+    if(!('IntersectionObserver' in window)){els.forEach(show);return;}
+    var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){show(e.target);io.unobserve(e.target);}});},{rootMargin:'600px 0px'});
+    els.forEach(function(el){io.observe(el);});
+  })();
   </script>
 </body>
 </html>
