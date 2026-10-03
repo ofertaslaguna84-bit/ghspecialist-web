@@ -212,9 +212,12 @@ async function collectServicioCiudad(mexicoSlugs) {
   let services;
   let cities;
   try {
-    services = JSON.parse(await readFile(join(ROOT, 'data/seo-services.json'), 'utf8'));
+    services = JSON.parse(await readFile(join(ROOT, 'data/seo-services.json'), 'utf8')).filter(
+      (s) => s.porCiudad
+    );
     cities = JSON.parse(await readFile(join(ROOT, 'data/seo-cities.json'), 'utf8')).filter(
-      (c) => !c.legacyUrl && (c.country || 'MX') === 'MX' && mexicoSlugs.has(c.slug)
+      // Torreón tiene legacyUrl (su hub es /torreon/), pero sus páginas servicio×ciudad sí van al sitemap.
+      (c) => (c.country || 'MX') === 'MX' && !isBlockedCitySlug(c.slug)
     );
   } catch {
     return entries;

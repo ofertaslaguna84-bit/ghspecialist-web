@@ -12,7 +12,7 @@
     "blog:sync-topics": "node scripts/sync-blog-topics-panel.mjs",
     "blog:trim": "node scripts/trim-blog-articles.mjs",
     "seo:cities": "node scripts/generate-city-pages.mjs",
-    "seo:generate": "node scripts/generate-city-pages.mjs && node scripts/generate-servicio-ciudad-pages.mjs && node scripts/generate-seo.mjs",
+    "seo:generate": "node scripts/generate-city-pages.mjs && node scripts/generate-servicio-ciudad-pages.mjs && node scripts/generate-retired-mx-pages.mjs && node scripts/generate-seo.mjs",
     "blog:patch-locale": "node scripts/patch-blog-locale.mjs",
     "blog:translate-en": "node scripts/translate-blog-en.mjs"
   }

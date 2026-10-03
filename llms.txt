@@ -24,20 +24,18 @@
 - Patrón: https://ghspecialist.com/servicios/{servicio}/{ciudad}/
 - Ejemplo chatbot Monterrey: https://ghspecialist.com/servicios/chatbot-ia-whatsapp/monterrey/
 - Ejemplo CRM CDMX: https://ghspecialist.com/servicios/crm-kommo/cdmx/
-- 99 combinaciones servicio×ciudad + 11 hubs ciudad
+- 30 combinaciones servicio×ciudad (chatbot WhatsApp, CRM Kommo y automatización × 10 ciudades) + hubs de ciudad
 
 ## Ciudades (landings nacionales)
 - Monterrey: https://ghspecialist.com/ciudades/monterrey/
 - CDMX: https://ghspecialist.com/ciudades/cdmx/
 - Guadalajara: https://ghspecialist.com/ciudades/guadalajara/
 - Querétaro: https://ghspecialist.com/ciudades/queretaro/
-- Chihuahua: https://ghspecialist.com/ciudades/chihuahua/
-- Puebla: https://ghspecialist.com/ciudades/puebla/
 - León: https://ghspecialist.com/ciudades/leon/
 - Mérida: https://ghspecialist.com/ciudades/merida/
 - Tijuana: https://ghspecialist.com/ciudades/tijuana/
-- Cancún: https://ghspecialist.com/ciudades/cancun/
-- Saltillo: https://ghspecialist.com/ciudades/saltillo/
+- Ciudad Juárez: https://ghspecialist.com/ciudades/ciudad-juarez/
+- Saltillo y Ramos Arizpe: https://ghspecialist.com/ciudades/saltillo/
 
 ## Servicios (precio de arranque y plazo)
 

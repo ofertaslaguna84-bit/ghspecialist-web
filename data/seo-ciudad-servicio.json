@@ -1,0 +1,143 @@
+{
+  "_nota": "Contenido propio de cada combinación servicio×ciudad. Lo usa scripts/generate-servicio-ciudad-pages.mjs. Sin cifras ni nombres de clientes inventados.",
+  "torreon": {
+    "chatbot-ia-whatsapp": {
+      "enfoque": "En La Laguna casi todo se cierra por WhatsApp: la inmobiliaria que enseña casas en Torreón, Gómez Palacio y Lerdo, la clínica que agenda consultas, la constructora que cotiza obra. El volumen no es el de Monterrey, pero el cliente lagunero compara rápido y le compra al que le contestó primero. Un chatbot con IA cubre justo los huecos que más cuestan aquí: la noche, el fin de semana y la hora de la comida.",
+      "casos": ["Inmobiliarias que reciben preguntas de precio y ubicación de desarrollos a cualquier hora", "Clínicas y consultorios que quieren dejar de perder citas por no contestar a tiempo", "Constructoras y proveedores de obra que reciben solicitudes de cotización por WhatsApp"]
+    },
+    "automatizacion-total": {
+      "enfoque": "Muchas empresas laguneras crecieron con procesos que viven en la cabeza del dueño y en libretas o Excel sueltos: quién llamó, a quién se le cotizó, qué falta cobrar. Automatizar aquí no es reemplazar gente, es que la información se mueva sola entre WhatsApp, el CRM y las hojas de cálculo para que el equipo deje de capturar lo mismo tres veces.",
+      "casos": ["Reparto automático de prospectos entre vendedores con seguimiento diario", "Reportes que llegan solos al dueño en lugar de pedirlos por WhatsApp", "Recordatorios de pago y de citas sin que nadie los mande a mano"]
+    },
+    "crm-kommo": {
+      "enfoque": "En la región es común que el negocio dependa del celular de dos o tres vendedores: si uno se va, se lleva sus conversaciones. Kommo junta todos los chats de WhatsApp de la empresa en un solo embudo, con quién atendió a quién y en qué etapa va cada prospecto. Al estar en Torreón, las juntas de arranque y la capacitación pueden ser presenciales.",
+      "casos": ["Equipos de venta que hoy atienden desde sus celulares personales", "Inmobiliarias y desarrolladoras que necesitan saber cuántos prospectos tiene cada asesor", "Empresas que quieren medir cuánto tarda su equipo en contestar"]
+    }
+  },
+  "monterrey": {
+    "chatbot-ia-whatsapp": {
+      "enfoque": "En Monterrey el comprador está acostumbrado a que le contesten rápido y con datos: precio, disponibilidad, tiempo de entrega. Con el nearshoring llegaron más empresas, más proveedores y más competencia por el mismo cliente, sobre todo en San Pedro, Apodaca y Escobedo. Un chatbot con IA permite responder en minutos a volúmenes que un equipo comercial no alcanza, sin bajar el nivel de la respuesta.",
+      "casos": ["Proveedores industriales que reciben solicitudes de cotización por WhatsApp", "Inmobiliarias de vivienda y naves industriales con mucho tráfico de anuncios", "Clínicas y servicios premium en San Pedro donde el cliente no espera"]
+    },
+    "automatizacion-total": {
+      "enfoque": "La empresa regiomontana suele tener procesos más maduros, pero también más sistemas que no se hablan entre sí: el ERP por un lado, el CRM por otro y el WhatsApp de ventas en medio. Automatizar en Monterrey normalmente significa conectar esas piezas para que una cotización, un pedido o un seguimiento no dependan de que alguien copie y pegue datos.",
+      "casos": ["Conectar el CRM con el ERP o con hojas de Google para no capturar doble", "Seguimiento automático a cotizaciones que se quedan sin respuesta", "Alertas internas cuando un cliente importante escribe o un pedido se atrasa"]
+    },
+    "crm-kommo": {
+      "enfoque": "En Monterrey los ciclos de venta B2B tienen varias personas decidiendo y varias semanas de seguimiento. Kommo ordena ese proceso alrededor de WhatsApp, que es donde de verdad ocurre la conversación, y deja a la dirección ver el embudo completo sin pedir reportes. Es el caso típico de empresas que ya tienen equipo comercial y necesitan que deje de trabajar a ciegas.",
+      "casos": ["Equipos comerciales B2B con ciclos de venta de semanas", "Empresas con varias sucursales o líneas de negocio que comparten clientes", "Direcciones que quieren ver conversión por vendedor y por fuente de prospectos"]
+    }
+  },
+  "saltillo": {
+    "chatbot-ia-whatsapp": {
+      "enfoque": "Saltillo y Ramos Arizpe viven de la industria automotriz y su proveeduría, y eso se nota en cómo se compra: solicitudes formales, plazos que no se mueven y poca paciencia con el proveedor que tarda en contestar. Un chatbot con IA en WhatsApp recibe la solicitud, pide los datos que faltan y la pasa al área correcta el mismo día. Para el comercio y los servicios locales, cubre las horas en que nadie está al teléfono.",
+      "casos": ["Proveeduría automotriz y metalmecánica que recibe solicitudes de cotización", "Inmobiliarias de vivienda para el personal que llega a trabajar a las plantas", "Comercios y servicios de Saltillo que pierden clientes fuera de horario"]
+    },
+    "automatizacion-total": {
+      "enfoque": "En el corredor Saltillo–Ramos Arizpe–Arteaga muchas empresas medianas atienden a clientes grandes con procesos todavía manuales: cotizaciones en Excel, seguimiento por correo y pedidos confirmados por WhatsApp. Automatizar esos pasos reduce errores justo donde un cliente industrial menos los perdona: tiempos de respuesta, datos de la cotización y seguimiento de entregas.",
+      "casos": ["Flujo de cotización que arma la solicitud y avisa al responsable", "Seguimiento automático a pedidos y entregas para clientes industriales", "Reportes diarios de ventas y cobranza para la dirección"]
+    },
+    "crm-kommo": {
+      "enfoque": "Para una empresa de Saltillo o Ramos Arizpe que le vende a la industria, perder el hilo de una cotización es perder al cliente. Kommo deja cada conversación de WhatsApp ligada a su oportunidad, con etapa, responsable y fecha de seguimiento. Torreón está a unas tres horas, así que el arranque y la capacitación se pueden hacer presenciales.",
+      "casos": ["Proveedores industriales con muchas cotizaciones abiertas al mismo tiempo", "Equipos de venta que atienden clientes en Saltillo, Ramos Arizpe y Monterrey", "Empresas que quieren dejar de depender del celular personal de cada vendedor"]
+    }
+  },
+  "queretaro": {
+    "chatbot-ia-whatsapp": {
+      "enfoque": "Querétaro creció rápido con industria aeroespacial, automotriz y logística, y con ella llegó gente de todo el país buscando casa, escuela y servicios. Eso significa mucho prospecto nuevo que no conoce la ciudad y pregunta todo por WhatsApp. Un chatbot con IA resuelve esas dudas al instante y deja al equipo solo las conversaciones que ya van en serio.",
+      "casos": ["Desarrolladoras e inmobiliarias con prospectos que se están mudando a la ciudad", "Escuelas, clínicas y servicios que reciben muchas preguntas repetidas", "Proveedores del corredor industrial que atienden solicitudes de cotización"]
+    },
+    "automatizacion-total": {
+      "enfoque": "Las empresas queretanas suelen estar a medio camino: ya usan herramientas digitales, pero cada área usa la suya. Automatizar aquí es conectar el formulario de la web, el WhatsApp, el CRM y las hojas de cálculo para que un prospecto o un pedido avance solo de un paso al siguiente, sin que alguien lo empuje a mano.",
+      "casos": ["Prospectos de anuncios que entran directo al CRM con su origen", "Avisos automáticos al equipo cuando un prospecto agenda o deja de contestar", "Reportes semanales de ventas armados sin intervención manual"]
+    },
+    "crm-kommo": {
+      "enfoque": "En Querétaro hay mucha competencia por el mismo cliente, tanto en vivienda como en servicios a empresas. Kommo permite medir de dónde llega cada prospecto, cuánto tarda el equipo en contestarle y en qué etapa se cae la venta. Es la base para dejar de invertir en anuncios que no cierran.",
+      "casos": ["Inmobiliarias que necesitan medir qué campaña trae ventas reales", "Equipos comerciales de servicios B2B en la zona industrial", "Negocios con varias personas atendiendo el mismo WhatsApp"]
+    }
+  },
+  "guadalajara": {
+    "chatbot-ia-whatsapp": {
+      "enfoque": "Guadalajara mezcla comercio tradicional muy fuerte con una escena de tecnología que exige más. El cliente tapatío compara precios, pregunta por WhatsApp y decide rápido. Un chatbot con IA bien entrenado contesta con el catálogo y las condiciones reales del negocio, y es especialmente útil para distribuidores y comercios con muchas preguntas de precio y existencia.",
+      "casos": ["Distribuidores y mayoristas con preguntas constantes de precio y existencia", "Comercios y franquicias en Zapopan y la zona metropolitana", "Clínicas y servicios profesionales que agendan por WhatsApp"]
+    },
+    "automatizacion-total": {
+      "enfoque": "En la zona metropolitana de Guadalajara hay muchas empresas familiares medianas que ya venden bien pero operan con procesos manuales: pedidos por WhatsApp que alguien pasa a Excel, cotizaciones hechas una por una, cobranza a base de recordatorios. Automatizar esos pasos libera horas del equipo y reduce errores de captura.",
+      "casos": ["Pedidos de WhatsApp que se registran solos en una hoja o sistema", "Cotizaciones generadas a partir de una plantilla con los datos del cliente", "Recordatorios automáticos de pago y de seguimiento"]
+    },
+    "crm-kommo": {
+      "enfoque": "Guadalajara es de las ciudades donde más empresas buscan un CRM, y la razón suele ser la misma: el equipo de ventas creció y ya nadie sabe en qué va cada cliente. Kommo pone todas las conversaciones de WhatsApp en un embudo visible para la dirección, con responsables y fechas de seguimiento.",
+      "casos": ["Equipos de venta que crecieron y perdieron control del seguimiento", "Distribuidores con cartera grande de clientes recurrentes", "Empresas que quieren saber qué vendedor convierte mejor"]
+    }
+  },
+  "cdmx": {
+    "chatbot-ia-whatsapp": {
+      "enfoque": "En la Ciudad de México el volumen manda: más prospectos, más competencia y clientes que escriben a cinco proveedores al mismo tiempo. Para una empresa de servicios, una clínica o un e-commerce, contestar en segundos y no en horas es la diferencia. Un chatbot con IA atiende ese volumen sin contratar más gente y filtra a quien de verdad va a comprar.",
+      "casos": ["Servicios profesionales y despachos con muchas consultas iniciales", "Clínicas y consultorios que agendan por WhatsApp", "E-commerce y marcas con preguntas de envío, existencia y precio"]
+    },
+    "automatizacion-total": {
+      "enfoque": "Las empresas de la ZMVM suelen tener el problema contrario al de una ciudad chica: demasiados prospectos y demasiadas herramientas. Automatizar aquí es poner orden en el flujo: que cada contacto entre al CRM con su origen, se asigne al responsable correcto y reciba seguimiento aunque el equipo esté saturado.",
+      "casos": ["Asignación automática de prospectos por zona, servicio o vendedor", "Seguimiento automático a quien pidió información y no volvió a escribir", "Tableros de ventas que se actualizan solos"]
+    },
+    "crm-kommo": {
+      "enfoque": "En CDMX es común tener varios equipos atendiendo el mismo número de WhatsApp, o varios números para distintas líneas de negocio. Kommo concentra todo en un solo lugar, separa por embudo y deja a la dirección ver qué pasa sin depender de reportes manuales. La implementación es remota, con sesiones en línea para el equipo.",
+      "casos": ["Empresas con varios números o varias líneas de negocio en WhatsApp", "Equipos grandes que comparten un mismo canal de atención", "Direcciones que necesitan métricas de conversión confiables"]
+    }
+  },
+  "leon": {
+    "chatbot-ia-whatsapp": {
+      "enfoque": "León es la capital del calzado y la proveeduría de cuero, con miles de negocios que le venden a mayoristas, a tiendas y al cliente final. Gran parte de esas ventas se negocia por WhatsApp: fotos de modelos, tallas, precios por docena, envíos. Un chatbot con IA contesta esas preguntas al instante con el catálogo real y deja al vendedor lo que ya está por cerrarse.",
+      "casos": ["Fabricantes y mayoristas de calzado con preguntas de modelo, talla y precio", "Proveedores de cuero, suela y componentes que cotizan por WhatsApp", "Comercios y servicios de León que quieren atender fuera de horario"]
+    },
+    "automatizacion-total": {
+      "enfoque": "En la industria del calzado y la marroquinería de León los pedidos se mueven rápido y por temporadas. Cuando todo pasa por WhatsApp y Excel, una temporada alta se convierte en errores de pedido y clientes sin respuesta. Automatizar el registro de pedidos, la confirmación y el seguimiento evita que el crecimiento se coma el margen.",
+      "casos": ["Pedidos de mayoristas registrados automáticamente desde WhatsApp", "Confirmaciones y avisos de envío sin intervención manual", "Seguimiento a clientes recurrentes antes de cada temporada"]
+    },
+    "crm-kommo": {
+      "enfoque": "Para un fabricante o distribuidor de León, la cartera de clientes recurrentes es el negocio. Kommo deja el historial de cada cliente —qué pidió, cuándo y con quién habló— en un solo lugar, ligado a WhatsApp, para que el seguimiento no dependa de la memoria del vendedor.",
+      "casos": ["Fabricantes con cartera de mayoristas en todo el país", "Distribuidores que quieren reactivar clientes que dejaron de comprar", "Equipos de venta que atienden por temporadas"]
+    }
+  },
+  "merida": {
+    "chatbot-ia-whatsapp": {
+      "enfoque": "Mérida vive de bienes raíces, turismo y salud, y en los tres el cliente muchas veces escribe desde otra ciudad o desde otro país. Eso significa preguntas a cualquier hora y, en ocasiones, en inglés. Un chatbot con IA contesta al momento, en el idioma del cliente, y agenda la visita, la consulta o la llamada sin que nadie tenga que estar despierto.",
+      "casos": ["Desarrolladoras e inmobiliarias con compradores de otros estados y del extranjero", "Clínicas y turismo médico que reciben consultas fuera de horario", "Hoteles, rentas vacacionales y servicios turísticos"]
+    },
+    "automatizacion-total": {
+      "enfoque": "En el mercado inmobiliario de Mérida un prospecto puede tardar meses en decidir. Automatizar el seguimiento —mensajes en el momento correcto, avisos al asesor cuando el prospecto vuelve a mostrar interés, recordatorios de visitas— mantiene viva la conversación sin que el equipo tenga que acordarse de cada caso.",
+      "casos": ["Seguimiento automático de prospectos inmobiliarios de largo plazo", "Recordatorios de citas y visitas a desarrollos", "Reportes de prospectos por origen y por asesor"]
+    },
+    "crm-kommo": {
+      "enfoque": "Yucatán es de los estados donde más se busca Kommo, y tiene sentido: las inmobiliarias y los servicios de la ciudad manejan muchos prospectos con ciclos largos. Kommo ordena esos prospectos por etapa, deja claro qué asesor atiende a quién y conserva todo el historial de WhatsApp aunque el asesor cambie.",
+      "casos": ["Inmobiliarias con muchos asesores y prospectos de ciclo largo", "Clínicas y servicios de salud que atienden pacientes foráneos", "Negocios turísticos que venden por WhatsApp e Instagram"]
+    }
+  },
+  "tijuana": {
+    "chatbot-ia-whatsapp": {
+      "enfoque": "En Tijuana muchas empresas atienden dos mercados a la vez: el local y el de California. El turismo médico y dental recibe consultas en inglés a horas en que la clínica ya cerró, y la proveeduría a maquiladoras se mide con estándares de respuesta de Estados Unidos. Un chatbot con IA contesta en el idioma del cliente, a cualquier hora, y agenda considerando el cruce.",
+      "casos": ["Clínicas dentales y de turismo médico con pacientes de San Diego y Los Ángeles", "Proveedores de la industria maquiladora y de dispositivos médicos", "Comercios y servicios con clientes de ambos lados de la frontera"]
+    },
+    "automatizacion-total": {
+      "enfoque": "La operación fronteriza agrega pasos: cotizaciones en dos monedas, clientes en dos zonas horarias, documentos que van y vienen. Automatizar en Tijuana suele significar que esos pasos ocurran solos —recordatorios, confirmaciones, avisos al responsable— para que el equipo no pierda tiempo coordinando lo que un sistema puede hacer.",
+      "casos": ["Confirmaciones y recordatorios de citas para pacientes que cruzan la frontera", "Seguimiento automático a cotizaciones de clientes industriales", "Reportes diarios de prospectos por idioma y por origen"]
+    },
+    "crm-kommo": {
+      "enfoque": "Con clientes en México y en Estados Unidos, el seguimiento se complica rápido. Kommo concentra WhatsApp, Instagram y formularios en un solo embudo, con etiquetas por idioma, origen y servicio, para que el equipo sepa a quién atender primero y la dirección vea qué está funcionando.",
+      "casos": ["Clínicas con pacientes nacionales y extranjeros en el mismo embudo", "Proveedores industriales con cuentas en ambos lados de la frontera", "Equipos que atienden en español e inglés"]
+    }
+  },
+  "ciudad-juarez": {
+    "chatbot-ia-whatsapp": {
+      "enfoque": "Ciudad Juárez es de los polos maquiladores más grandes del país y de las plazas donde más se ha movido el nearshoring. Alrededor de las plantas hay una cadena enorme de proveedores, servicios industriales, vivienda y comercio que compite por clientes que esperan respuesta el mismo día. Un chatbot con IA recibe solicitudes a cualquier hora, pide los datos necesarios y las pasa al responsable.",
+      "casos": ["Proveedores de la industria maquiladora que reciben solicitudes de cotización", "Inmobiliarias de vivienda y naves industriales", "Comercios y servicios con clientes de Juárez y El Paso"]
+    },
+    "automatizacion-total": {
+      "enfoque": "Las empresas que le venden a la maquila trabajan con clientes que miden todo: tiempos de respuesta, entregas, seguimiento. Automatizar en Juárez es quitar los pasos manuales que hoy frenan eso —capturar solicitudes, dar seguimiento a cotizaciones, avisar de entregas— para responder al ritmo que exige el cliente industrial.",
+      "casos": ["Flujo de solicitudes de cotización que llega completo al responsable", "Seguimiento automático a cotizaciones y pedidos", "Reportes diarios para la dirección sin armarlos a mano"]
+    },
+    "crm-kommo": {
+      "enfoque": "Para un proveedor o una empresa de servicios en Juárez, la venta suele ser a cuentas industriales con varias personas involucradas. Kommo deja cada conversación ligada a su cuenta y su oportunidad, con responsable y fecha de seguimiento, para que ninguna cotización se quede olvidada en el WhatsApp de alguien.",
+      "casos": ["Proveedores con varias cuentas industriales abiertas", "Equipos comerciales que atienden clientes en Juárez y El Paso", "Empresas que quieren medir cuánto tardan en responder"]
+    }
+  }
+}

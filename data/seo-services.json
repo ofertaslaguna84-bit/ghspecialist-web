@@ -44,7 +44,8 @@
         "a": "Se le ponen límites desde el arranque: no inventa precios que no estén cargados, no promete plazos y no cierra ventas por su cuenta. Cuando no sabe algo, lo dice y llama a una persona. En los primeros 30 días revisamos conversaciones reales y ajustamos lo que haga falta."
       }
     ],
-    "metaShort": "Chatbots con IA en WhatsApp Business: atención 24/7 y cierre de ventas."
+    "metaShort": "Chatbots con IA en WhatsApp Business: atención 24/7 y cierre de ventas.",
+    "porCiudad": true
   },
   {
     "slug": "crm-kommo",
@@ -90,7 +91,8 @@
         "a": "Sí. Se importa tu base de contactos y clientes al arrancar. Si viene con duplicados o mal capturada, se limpia antes de subirla — de nada sirve estrenar CRM con la basura de años."
       }
     ],
-    "metaShort": "Kommo CRM integrado con WhatsApp e IA: pipeline y seguimiento automático."
+    "metaShort": "Kommo CRM integrado con WhatsApp e IA: pipeline y seguimiento automático.",
+    "porCiudad": true
   },
   {
     "slug": "automatizacion-total",
@@ -138,7 +140,8 @@
         "a": "Se arma sobre herramientas estándar y queda documentado. Si mañana cambias de CRM se reconecta la pieza, no se rehace el proyecto. Esa es la razón de entregar el manual: que no quedes amarrado a nosotros."
       }
     ],
-    "metaShort": "Automatización comercial completa: WhatsApp, CRM, seguimiento y procesos."
+    "metaShort": "Automatización comercial completa: WhatsApp, CRM, seguimiento y procesos.",
+    "porCiudad": true
   },
   {
     "slug": "agentes-omnicanal",

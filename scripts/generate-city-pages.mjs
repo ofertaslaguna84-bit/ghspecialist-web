@@ -27,6 +27,12 @@ const SERVICES = [
   { slug: 'pauta-omnicanal.html', title: 'Pauta omnicanal', desc: 'Meta/Google conectado a tu CRM.' },
 ];
 
+const POR_CIUDAD = new Set(
+  JSON.parse(readFileSync(join(ROOT, 'data/seo-services.json'), 'utf8'))
+    .filter((s) => s.porCiudad)
+    .map((s) => s.slug)
+);
+
 function esc(s) {
   return String(s || '')
     .replace(/&/g, '&amp;')
@@ -224,14 +230,18 @@ function buildCityPage(city, allCities) {
     })
     .join('\n        ');
 
+  // Solo los servicios con porCiudad tienen página por ciudad; el resto enlaza a la nacional.
   const serviceCards = SERVICES.map(
     (s) => {
       const svcSlug = s.slug.replace('.html', '');
+      const local = POR_CIUDAD.has(svcSlug)
+        ? `<a href="../../servicios/${svcSlug}/${city.slug}/">${esc(s.title)} en ${esc(city.name)} →</a>
+          <a href="../../servicios/${s.slug}" style="display:block;margin-top:6px;font-size:12px">Servicio nacional →</a>`
+        : `<a href="../../servicios/${s.slug}">Ver servicio →</a>`;
       return `<div class="card">
           <h3>${esc(s.title)}</h3>
           <p>${esc(s.desc)}</p>
-          <a href="../../servicios/${svcSlug}/${city.slug}/">${esc(s.title)} en ${esc(city.name)} →</a>
-          <a href="../../servicios/${s.slug}" style="display:block;margin-top:6px;font-size:12px">Servicio nacional →</a>
+          ${local}
         </div>`;
     }
   ).join('\n        ');

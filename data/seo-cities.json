@@ -100,56 +100,6 @@
     }
   },
   {
-    "slug": "chihuahua",
-    "name": "Chihuahua",
-    "state": "Chihuahua",
-    "kicker": "Chihuahua · Norte de México",
-    "hero": "hero-chihuahua.webp",
-    "lat": 28.6329,
-    "lng": -106.0691,
-    "industries": "maquiladoras, distribución, construcción y comercio en el norte del país",
-    "intro": "Empresas en Chihuahua capital y la región norte necesitan responder rápido a clientes en todo México. Chatbots en WhatsApp, CRM y automatización total desde GH Specialist, con implementación remota o presencial.",
-    "zonas": "Chihuahua capital, Ciudad Juárez, Delicias, Cuauhtémoc y Parral",
-    "sectores": [
-      "Maquiladoras y proveeduría",
-      "Distribución y mayoreo",
-      "Construcción",
-      "Agroindustria",
-      "Comercio y servicios"
-    ],
-    "cobertura": "Chihuahua capital, Ciudad Juárez y las principales ciudades del estado",
-    "reto": "Chihuahua es un estado grande y disperso: una empresa en la capital le vende a clientes en Juárez, Delicias y Cuauhtémoc, a horas de distancia. Mandar a un vendedor a cada visita cuesta caro, así que la mayor parte de la relación pasa por teléfono y WhatsApp. Además, quien le vende a maquiladoras trabaja con la zona horaria y los estándares de respuesta del cliente estadounidense.",
-    "faqLocal": {
-      "q": "Atiendo clientes en Estados Unidos además de México. ¿Se puede?",
-      "a": "Sí. El agente detecta el idioma y responde en inglés o español, y se le puede configurar el horario para que sepa que un cliente de El Paso está en otro huso. Es de los casos donde más se nota, porque cubre las horas en que tu oficina en Chihuahua ya cerró."
-    }
-  },
-  {
-    "slug": "puebla",
-    "name": "Puebla",
-    "state": "Puebla",
-    "kicker": "Puebla · Angelópolis y zona metropolitana",
-    "hero": "hero-puebla.webp",
-    "lat": 19.0414,
-    "lng": -98.2063,
-    "industries": "automotriz, textil, turismo, educación y retail en Angelópolis",
-    "intro": "En Puebla y Angelópolis, clínicas, inmobiliarias y comercios reciben decenas de mensajes diarios por WhatsApp. Un agente IA califica, agenda y da seguimiento mientras tu equipo cierra las ventas importantes.",
-    "zonas": "Angelópolis, Lomas de Angelópolis, La Paz, Centro Histórico, Cholula y Atlixco",
-    "sectores": [
-      "Automotriz y proveeduría",
-      "Clínicas y salud privada",
-      "Educación y universidades",
-      "Turismo y restaurantes",
-      "Inmobiliario y construcción"
-    ],
-    "cobertura": "Puebla capital, San Andrés y San Pedro Cholula, Atlixco y la zona metropolitana",
-    "reto": "Puebla mezcla una base industrial fuerte con un mercado de consumo grande y con mucha población estudiantil. Para clínicas, escuelas y restaurantes eso significa picos de mensajes concentrados en pocas horas, cuando nadie alcanza a contestar. En el lado inmobiliario de Angelópolis, la competencia por el mismo prospecto es directa y quien contesta primero se queda con la cita.",
-    "faqLocal": {
-      "q": "Tengo un consultorio y lo que necesito es que agenden citas. ¿Eso lo hace?",
-      "a": "Sí, es de los usos más agradecidos. El agente da los horarios disponibles, agenda directo en el calendario, manda recordatorio antes de la cita y permite reagendar por el mismo WhatsApp. Ahí donde más se nota es en bajar las citas a las que el paciente no llega."
-    }
-  },
-  {
     "slug": "leon",
     "name": "León",
     "state": "Guanajuato",
@@ -225,35 +175,35 @@
     }
   },
   {
-    "slug": "cancun",
-    "name": "Cancún",
-    "state": "Quintana Roo",
-    "kicker": "Cancún · Riviera Maya · Caribe mexicano",
+    "slug": "ciudad-juarez",
+    "name": "Ciudad Juárez",
+    "state": "Chihuahua",
+    "kicker": "Ciudad Juárez · Chihuahua · Frontera",
     "hero": "hero-bg.webp",
-    "lat": 21.1619,
-    "lng": -86.8515,
-    "industries": "turismo, hospitalidad, bienes raíces y servicios en la Riviera Maya",
-    "intro": "Hoteles, desarrolladoras y servicios en Cancún reciben consultas a toda hora desde México y el extranjero. Automatizamos WhatsApp con IA para responder, cotizar y agendar sin perder reservaciones.",
-    "zonas": "Zona Hotelera, Centro, Puerto Cancún, Playa del Carmen y Tulum",
+    "lat": 31.6904,
+    "lng": -106.4245,
+    "industries": "maquiladora, proveeduría industrial, logística cross-border, vivienda y comercio fronterizo",
+    "intro": "Ciudad Juárez es uno de los polos maquiladores más grandes de México. Implementamos chatbots con IA en WhatsApp, CRM Kommo y automatización para proveedores, servicios industriales y comercio de la frontera.",
+    "zonas": "Zona industrial, Pronaf, Campestre, el suroriente y los parques industriales",
     "sectores": [
-      "Hotelería y hospitalidad",
-      "Bienes raíces y desarrollos",
-      "Tours y servicios turísticos",
-      "Restaurantes",
-      "Salud y bienestar"
+      "Maquiladora y manufactura",
+      "Proveeduría y servicios industriales",
+      "Logística y cruce fronterizo",
+      "Vivienda y bienes raíces",
+      "Comercio y servicios"
     ],
-    "cobertura": "Cancún, Playa del Carmen, Tulum, Puerto Morelos y toda la Riviera Maya",
-    "reto": "En la Riviera Maya las consultas llegan de todo el mundo y a todas horas: un turista en Europa pregunta a las tres de la mañana hora de Cancún y espera respuesta antes de reservar con otro. Se suma el idioma — inglés, español y a veces más — y la estacionalidad, con temporadas altas donde el volumen se multiplica y no da tiempo de contratar y capacitar gente.",
+    "cobertura": "Ciudad Juárez, su zona metropolitana y clientes en El Paso",
+    "reto": "En Juárez la economía gira alrededor de la maquila, y el cliente industrial compra con reglas claras: respuesta el mismo día, cotización completa y seguimiento puntual. Muchas empresas proveedoras tienen la capacidad para atenderlo, pero pierden oportunidades porque las solicitudes llegan por WhatsApp y correo a personas distintas y nadie las ordena. Del lado comercial, buena parte de los clientes vive o trabaja de los dos lados de la frontera.",
     "faqLocal": {
-      "q": "En temporada alta se nos multiplican los mensajes. ¿Aguanta el pico?",
-      "a": "Ese es justo el caso que resuelve: al agente le da igual atender diez conversaciones que trescientas al mismo tiempo, y no necesita capacitación cada temporada. Tu equipo se queda con las reservaciones grandes y los casos especiales, que es donde sí hace falta una persona."
+      "q": "¿Atienden en Ciudad Juárez si su base está en Torreón?",
+      "a": "Sí. La implementación es remota y se trabaja por videollamada con tu equipo; si el proyecto lo pide, las juntas de arranque pueden ser presenciales. El agente puede contestar en español o en inglés para clientes de El Paso."
     }
   },
   {
     "slug": "saltillo",
     "name": "Saltillo",
     "state": "Coahuila",
-    "kicker": "Saltillo · Coahuila · Norte",
+    "kicker": "Saltillo · Ramos Arizpe · Coahuila",
     "hero": "hero-bg.webp",
     "lat": 25.4383,
     "lng": -100.9737,

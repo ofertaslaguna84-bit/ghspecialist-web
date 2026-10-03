@@ -584,8 +584,8 @@ Servicios (enlaces relativos ../servicios/...):
 ${isUsa ? '- Enlaza ../ciudades/ (hub) o ../ciudades/houston/ ../ciudades/miami/ si encaja' : `OBLIGATORIO — enlaza UNA página de ciudad si el artículo menciona una plaza:
 ../torreon/ (Torreón y La Laguna) · ../ciudades/monterrey/ · ../ciudades/cdmx/
 ../ciudades/guadalajara/ · ../ciudades/saltillo/ · ../ciudades/queretaro/
-../ciudades/chihuahua/ · ../ciudades/puebla/ · ../ciudades/leon/
-../ciudades/merida/ · ../ciudades/cancun/ · ../ciudades/tijuana/
+../ciudades/leon/ · ../ciudades/merida/ · ../ciudades/tijuana/
+../ciudades/ciudad-juarez/
 Si no se menciona ninguna ciudad, enlaza ../ciudades/ (el hub).`}
 
 REGLAS DE LONGITUD (CRÍTICO — el lector no lee paredes de texto):

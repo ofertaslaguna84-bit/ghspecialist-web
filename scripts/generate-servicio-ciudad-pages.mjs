@@ -28,7 +28,13 @@ const HOY_LARGO = new Date().toLocaleDateString('es-MX', {
 const cities = JSON.parse(readFileSync(join(ROOT, 'data/seo-cities.json'), 'utf8')).filter(
   (c) => (c.country || 'MX') === 'MX'
 );
-const services = JSON.parse(readFileSync(join(ROOT, 'data/seo-services.json'), 'utf8'));
+// Solo los servicios que la gente busca con ciudad ("chatbot saltillo", "crm guadalajara").
+// El resto vive en su página nacional; sus rutas por ciudad las redirige generate-retired-mx-pages.mjs.
+const services = JSON.parse(readFileSync(join(ROOT, 'data/seo-services.json'), 'utf8')).filter(
+  (s) => s.porCiudad
+);
+// Contenido propio de cada servicio×ciudad, para que las páginas no sean la misma plantilla.
+const local = JSON.parse(readFileSync(join(ROOT, 'data/seo-ciudad-servicio.json'), 'utf8'));
 
 const TITLE_MAX = 60; // Google corta el <title> alrededor de aqui
 const DESC_MAX = 160; // idem para el snippet
@@ -77,7 +83,7 @@ function buildFaqs(svc, city) {
       q: `¿Atienden empresas en ${city.name}?`,
       a: `Sí. ${svc.name} para empresas de ${city.name}, ${city.state} y alrededores: ${city.cobertura}. La implementación es remota; las juntas de arranque y la capacitación pueden ser presenciales según la ciudad. GH Specialist tiene su base en Torreón y cobertura en todo México.`,
     },
-    ...(svc.faqs || []),
+    // Las FAQ generales del servicio viven en su página nacional; aquí solo las locales.
     ...(city.faqLocal ? [city.faqLocal] : []),
   ];
 }
@@ -110,6 +116,8 @@ function buildPage(svc, city, allCities, allServices) {
   );
 
   const faqs = buildFaqs(svc, city);
+  const propio = local[city.slug]?.[svc.slug];
+  if (!propio) throw new Error(`Falta contenido en data/seo-ciudad-servicio.json para ${city.slug}/${svc.slug}`);
 
   // Respuesta corta y citable: es el bloque que un buscador de IA extrae.
   const resumen = `${svc.name} en ${city.name} cuesta desde ${mxn(svc.price)} y se implementa en ${svc.entrega}. Es para ${svc.paraQuien}. Lo implementa GH Specialist, Gold Partner de Kommo con base en Torreón, con cobertura en ${city.cobertura}.`;
@@ -327,16 +335,17 @@ function buildPage(svc, city, allCities, allServices) {
 
       <span class="label">El problema</span>
       <h2 class="title">Por qué las empresas de ${esc(city.name)} contratan esto</h2>
-      <p>${esc(svc.problema)}</p>
+      <p>${esc(propio.enfoque)}</p>
       <p>${esc(city.reto)}</p>
+
+      <h3>Dónde más se usa en ${esc(city.name)}</h3>
+      <ul>
+          ${listHtml(propio.casos)}
+      </ul>
 
       <h3>Para quién es</h3>
       <p>Este servicio es para ${esc(svc.paraQuien)}.</p>
 
-      <h3>Sectores que más lo piden en ${esc(city.name)}</h3>
-      <ul>
-          ${listHtml(city.sectores)}
-      </ul>
     </div>
   </section>
 
@@ -358,12 +367,11 @@ function buildPage(svc, city, allCities, allServices) {
           </ul>
         </div>
         <div class="card">
-          <h3 style="margin-top:0">Qué no incluye</h3>
+          <h3 style="margin-top:0">Sectores que más lo piden en ${esc(city.name)}</h3>
           <ul>
-          ${listHtml(svc.noIncluye, 'cross')}
+          ${listHtml(city.sectores)}
           </ul>
-          <h3>Se conecta con</h3>
-          <p style="font-size:14px;color:var(--ink3);margin:0">${esc(svc.integraciones.join(' · '))}</p>
+          <p style="font-size:14px;margin:0"><a href="${depth}servicios/${svc.file}">Qué no incluye, integraciones y preguntas frecuentes →</a></p>
         </div>
       </div>
     </div>
