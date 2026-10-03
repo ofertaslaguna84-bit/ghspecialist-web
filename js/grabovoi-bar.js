@@ -1,4 +1,7 @@
 (function () {
+  // Los codigos se pintan via CSS (content:attr(data-t)) para que no formen
+  // parte del texto indexable de la pagina: Google leia esta barra como la
+  // primera linea de la home.
   var CODES = [
     ['71427321893', 'Abundancia eterna'],
     ['289 471 314917', 'Prosperidad en negocios'],
@@ -26,17 +29,17 @@
       if (i > 0) {
         var sep = document.createElement('div');
         sep.className = 'grab-sep';
-        sep.textContent = '\u00b7';
+        sep.setAttribute('data-t', '\u00b7');
         wrap.appendChild(sep);
       }
       var code = document.createElement('div');
       code.className = 'grab-code';
       var num = document.createElement('span');
       num.className = 'grab-num';
-      num.textContent = item[0];
+      num.setAttribute('data-t', item[0]);
       var desc = document.createElement('span');
       desc.className = 'grab-desc';
-      desc.textContent = item[1];
+      desc.setAttribute('data-t', item[1]);
       code.appendChild(num);
       code.appendChild(desc);
       wrap.appendChild(code);

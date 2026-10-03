@@ -30,6 +30,21 @@ const cities = JSON.parse(readFileSync(join(ROOT, 'data/seo-cities.json'), 'utf8
 );
 const services = JSON.parse(readFileSync(join(ROOT, 'data/seo-services.json'), 'utf8'));
 
+const TITLE_MAX = 60; // Google corta el <title> alrededor de aqui
+const DESC_MAX = 160; // idem para el snippet
+
+// Añade la marca solo si el title sigue cabiendo con ella.
+function fitTitle(base) {
+  const withBrand = `${base} | GH Specialist`;
+  return withBrand.length <= TITLE_MAX ? withBrand : base;
+}
+
+// Monta base + estado + cola, y suelta el estado si el conjunto se pasa de largo.
+function fitDescription(base, state, tail) {
+  const full = `${base}${state}${tail}`;
+  return full.length <= DESC_MAX ? full : `${base}${tail}`;
+}
+
 function esc(s) {
   return String(s || '')
     .replace(/&/g, '&amp;')
@@ -85,8 +100,14 @@ function listHtml(items, cls = 'check') {
 function buildPage(svc, city, allCities, allServices) {
   const url = `${SITE}/servicios/${svc.slug}/${city.slug}/`;
   const depth = '../../../';
-  const title = `${svc.short} en ${city.name}, ${city.state} | GH Specialist`;
-  const description = `${svc.desc} Para empresas en ${city.name}, ${city.state}. Desde ${mxn(svc.price)}, implementación en ${svc.entrega}. Diagnóstico gratuito GH Specialist.`;
+  // El estado va en el H1, la description y el schema; en el <title> empuja el corte de Google.
+  const title = fitTitle(`${svc.short} en ${city.name}`);
+  // svc.metaShort es la version corta de svc.desc para el snippet (<=85 chars).
+  const description = fitDescription(
+    `${svc.metaShort || svc.desc} Para empresas en ${city.name}`,
+    `, ${city.state}`,
+    `. Desde ${mxn(svc.price)}. Diagnóstico gratis.`
+  );
 
   const faqs = buildFaqs(svc, city);
 
@@ -211,6 +232,10 @@ function buildPage(svc, city, allCities, allServices) {
   <meta property="og:description" content="${esc(description)}">
   <meta property="og:image" content="${SITE}/${city.hero}">
   <meta property="og:locale" content="es_MX">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${esc(title)}">
+  <meta name="twitter:description" content="${esc(description)}">
+  <meta name="twitter:image" content="${SITE}/${city.hero}">
   <meta property="article:modified_time" content="${HOY}">
   <script src="${depth}js/gh-site-config.js"></script>
   <script src="${depth}js/gh-analytics.js" async></script>
@@ -218,7 +243,7 @@ function buildPage(svc, city, allCities, allServices) {
   <script type="application/ld+json">${JSON.stringify(webpage)}</script>
   <script type="application/ld+json">${JSON.stringify(breadcrumb)}</script>
   <script type="application/ld+json">${JSON.stringify(faqSchema)}</script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"></noscript>
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     :root{--p:#7C4DFF;--ink:#111;--ink3:#666;--border:#E8E8E8;--bg2:#FAFAFA}
@@ -227,7 +252,7 @@ function buildPage(svc, city, allCities, allServices) {
     .w{max-width:960px;margin:0 auto;padding:0 24px}
     .hdr{padding:16px 0;border-bottom:1px solid var(--border)}
     .hdr-inner{display:flex;justify-content:space-between;align-items:center;max-width:960px;margin:0 auto;padding:0 24px}
-    .hdr-logo{height:26px}
+    .hdr-logo{height:26px;width:auto}
     .crumbs{font-size:12px;color:var(--ink3);padding:12px 0}
     .crumbs a{color:var(--p);font-weight:600}
     .hero{padding:72px 0 48px;background:linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.52)),url('${depth}${city.hero}') center/cover;color:#fff}
@@ -277,7 +302,7 @@ function buildPage(svc, city, allCities, allServices) {
 <body>
   <header class="hdr">
     <div class="hdr-inner">
-      <a href="${depth}"><img src="${depth}2.png" alt="GH Specialist" class="hdr-logo"></a>
+      <a href="${depth}"><img src="${depth}logo-gh.webp" width="155" height="112" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
       <a href="${CALENDAR}" class="btn">Agendar</a>
     </div>
   </header>

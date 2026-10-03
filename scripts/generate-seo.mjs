@@ -4,6 +4,7 @@
  * Ejecutar: node scripts/generate-seo.mjs
  */
 import { readdir, readFile, stat, writeFile } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -77,7 +78,26 @@ function escapeXml(s) {
     .replace(/"/g, '&quot;');
 }
 
+function git(args) {
+  try {
+    return execFileSync('git', args, { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+  } catch {
+    return '';
+  }
+}
+
+// Fecha real del ultimo cambio. El mtime no sirve: en CI todos los archivos
+// nacen en el checkout y el sitemap entero decia "modificado hoy", asi que
+// Google ignoraba el lastmod. Se usa la fecha del ultimo commit que toco el
+// archivo; si tiene cambios sin commitear (el articulo que se acaba de
+// generar) o el repo no tiene historial, se cae al mtime.
 async function fileLastMod(filePath) {
+  const rel = relative(ROOT, filePath);
+  const committed = git(['log', '-1', '--format=%cI', '--', rel]);
+  if (committed) {
+    const dirty = git(['status', '--porcelain', '--', rel]);
+    if (!dirty) return committed.slice(0, 10);
+  }
   const s = await stat(filePath);
   return formatDate(s.mtime);
 }
@@ -99,6 +119,13 @@ function extractTitle(html) {
 function extractCanonical(html) {
   const m = html.match(/<link\s+rel=["']canonical["']\s+href=["']([^"']*)["']/i);
   return m ? m[1].trim() : '';
+}
+
+// Fecha de la ultima edicion real del articulo (JSON-LD). Un cambio de
+// plantilla (logo, fuentes) no cuenta como contenido nuevo para el sitemap.
+function extractDateModified(html) {
+  const m = html.match(/"dateModified"\s*:\s*"([^"]+)"/);
+  return m ? m[1].slice(0, 10) : null;
 }
 
 function extractDatePublished(html) {
@@ -145,7 +172,7 @@ async function collectBlogArticles() {
       description: extractMeta(html, 'description'),
       canonical: extractCanonical(html) || `${SITE}/blog/${f}`,
       datePublished: extractDatePublished(html),
-      lastmod: await fileLastMod(full),
+      lastmod: extractDateModified(html) || (extractDatePublished(html) || '').slice(0, 10) || (await fileLastMod(full)),
     });
   }
 
@@ -359,7 +386,7 @@ async function updateBlogIndexSchema(articles) {
     publisher: {
       '@type': 'Organization',
       name: 'GH Specialist',
-      logo: { '@type': 'ImageObject', url: `${SITE}/2.png` },
+      logo: { '@type': 'ImageObject', url: `${SITE}/logo-gh-1200.png` },
     },
     blogPost,
   };

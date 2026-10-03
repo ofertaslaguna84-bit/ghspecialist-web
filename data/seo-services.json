@@ -43,7 +43,8 @@
         "q": "¿Qué pasa si el bot se equivoca con un cliente?",
         "a": "Se le ponen límites desde el arranque: no inventa precios que no estén cargados, no promete plazos y no cierra ventas por su cuenta. Cuando no sabe algo, lo dice y llama a una persona. En los primeros 30 días revisamos conversaciones reales y ajustamos lo que haga falta."
       }
-    ]
+    ],
+    "metaShort": "Chatbots con IA en WhatsApp Business: atención 24/7 y cierre de ventas."
   },
   {
     "slug": "crm-kommo",
@@ -88,7 +89,8 @@
         "q": "¿Puedo pasar la información que ya tengo en Excel?",
         "a": "Sí. Se importa tu base de contactos y clientes al arrancar. Si viene con duplicados o mal capturada, se limpia antes de subirla — de nada sirve estrenar CRM con la basura de años."
       }
-    ]
+    ],
+    "metaShort": "Kommo CRM integrado con WhatsApp e IA: pipeline y seguimiento automático."
   },
   {
     "slug": "automatizacion-total",
@@ -135,7 +137,8 @@
         "q": "¿Se cae todo si cambia una plataforma?",
         "a": "Se arma sobre herramientas estándar y queda documentado. Si mañana cambias de CRM se reconecta la pieza, no se rehace el proyecto. Esa es la razón de entregar el manual: que no quedes amarrado a nosotros."
       }
-    ]
+    ],
+    "metaShort": "Automatización comercial completa: WhatsApp, CRM, seguimiento y procesos."
   },
   {
     "slug": "agentes-omnicanal",
@@ -180,7 +183,8 @@
         "q": "¿Puede atender en inglés?",
         "a": "Sí, detecta el idioma y responde en él. Es útil en frontera y en zonas turísticas, donde la mitad de las consultas llegan en inglés."
       }
-    ]
+    ],
+    "metaShort": "Agentes de IA en WhatsApp, web e Instagram con un solo cerebro comercial."
   },
   {
     "slug": "web-seo-blog-ia",
@@ -226,7 +230,8 @@
         "q": "¿Esto sirve para que ChatGPT me recomiende como proveedor?",
         "a": "Es a lo que le apuntamos. Para que un buscador de IA te cite necesita poder leer tu sitio, encontrar respuestas concretas y saber quién eres. Eso se trabaja con contenido que responda preguntas de frente, datos estructurados y dejar pasar a los bots de IA — no bloquearlos, que es el error más común."
       }
-    ]
+    ],
+    "metaShort": "Página con SEO y blog IA para posicionar tu empresa industrial en Google."
   },
   {
     "slug": "growth-difusiones",
@@ -270,7 +275,8 @@
         "q": "¿Cada cuánto conviene mandar difusiones?",
         "a": "Depende del giro, pero de más es peor. En la mayoría de los negocios, una o dos veces al mes con algo que de verdad le sirva al cliente rinde más que semanal con promociones. La medición del primer mes nos dice tu ritmo."
       }
-    ]
+    ],
+    "metaShort": "Growth hacking y difusiones masivas con IA para PYMES."
   },
   {
     "slug": "pauta-omnicanal",
@@ -315,13 +321,14 @@
         "q": "¿Puedo saber qué campaña me trajo cada venta?",
         "a": "Esa es justo la razón de este servicio. Cada prospecto entra al CRM etiquetado con su campaña y esa etiqueta lo sigue hasta que cierra, así que al final del mes ves cuánto vendiste por cada peso invertido en cada campaña."
       }
-    ]
+    ],
+    "metaShort": "Publicidad en Meta y Google conectada a WhatsApp y CRM."
   },
   {
     "slug": "cien-automatizado",
     "file": "cien-automatizado.html",
     "name": "100% automatizado",
-    "short": "Negocio automatizado con IA",
+    "short": "Negocio 100% automatizado",
     "desc": "Operación comercial casi sin intervención humana: IA en ventas, atención y seguimiento.",
     "price": "35000",
     "entrega": "6 a 10 semanas",
@@ -362,7 +369,8 @@
         "q": "¿Conviene arrancar aquí o ir por partes?",
         "a": "En la mayoría de los casos conviene ir por partes: chatbot, luego CRM, luego automatización. Este paquete tiene sentido cuando ya tienes volumen y el desorden te está costando ventas medibles. Si apenas vas empezando, es sobre-inversión y te lo vamos a decir."
       }
-    ]
+    ],
+    "metaShort": "Operación comercial con IA: ventas, atención y seguimiento sin humanos."
   },
   {
     "slug": "proyectos-medida",
@@ -408,7 +416,8 @@
         "q": "¿Se conecta con mi sistema viejo?",
         "a": "Casi siempre sí, aunque no tenga API moderna: hay formas de integrarse por base de datos, archivos o pantalla. Lo revisamos en el levantamiento antes de prometer nada, porque a veces sale más barato reemplazarlo que integrarlo."
       }
-    ]
+    ],
+    "metaShort": "Apps web, integraciones y automatizaciones personalizadas con IA."
   },
   {
     "slug": "capacitaciones-ia-empresas",
@@ -454,6 +463,7 @@
         "q": "¿Puede ser en planta y por turnos?",
         "a": "Sí. Se imparte presencial en sitio o remoto, y se calendariza por turnos para no parar la operación. En minería y construcción es lo normal: grupos chicos, sesiones cortas y repetidas por turno."
       }
-    ]
+    ],
+    "metaShort": "Capacitaciones de IA para minería, construcción, manufactura e industria."
   }
 ]
