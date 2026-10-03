@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Páginas noindex en rutas USA que Google aún tiene indexadas.
- * No van al sitemap; al re-rastrear, Google recibe señal explícita de salida del índice.
+ * No van al sitemap ni se bloquean en robots.txt; al re-rastrear, Google lee el noindex y las saca del índice.
  */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -57,24 +57,19 @@ async function main() {
     }
   }
 
-  const disallow = BLOCKED_CITY_SLUGS.flatMap((c) => [
-    `Disallow: /ciudades/${c}/`,
-    ...services.map((s) => `Disallow: /servicios/${s.slug}/${c}/`),
-  ]).join('\n');
-
+  // Las rutas USA NO llevan Disallow: si robots.txt las bloquea, Google no puede
+  // rastrearlas, nunca lee su noindex y se quedan en el índice.
   const robots = `User-agent: *
 Allow: /
-Sitemap: ${SITE}/sitemap.xml
-
-# Rutas USA retiradas (solo México en SEO)
-${disallow}
-
-# llms.txt — contexto para asistentes IA
-# ${SITE}/llms.txt
 Disallow: /drafts/
 Disallow: /panel/
 Disallow: /landing/
 Disallow: /docs-wix/
+
+# llms.txt — contexto para asistentes IA
+# ${SITE}/llms.txt
+
+Sitemap: ${SITE}/sitemap.xml
 `;
 
   await writeFile(join(ROOT, 'robots.txt'), robots, 'utf8');
