@@ -661,13 +661,28 @@ function temaKey(titulo) {
  * null. Compara por tema normalizado, no por slug: el slug lleva el mes
  * ("-agosto-2026") y cambia solo, el tema no.
  */
+// Palabras del tema sin conectores ni plurales: "chatbot inmobiliaria whatsapp" y
+// "chatbot whatsapp para inmobiliarias" dan el mismo conjunto.
+const CONECTORES = new Set(['de', 'del', 'la', 'el', 'los', 'las', 'para', 'por', 'con', 'en', 'y', 'a', 'tu', 'mi', 'un', 'una', 'que', 'como']);
+function palabrasTema(key) {
+  return new Set(key.split('-').filter((w) => w && !CONECTORES.has(w)).map((w) => w.replace(/(es|s)$/, '')));
+}
+function mismoTema(a, b) {
+  if (a === b) return true;
+  const A = palabrasTema(a);
+  const B = palabrasTema(b);
+  if (A.size < 2 || B.size < 2) return false;
+  const comunes = [...A].filter((w) => B.has(w)).length;
+  return comunes / (A.size + B.size - comunes) >= 0.75;
+}
+
 async function buscarArticuloDelMismoTema(existing, titleKey) {
   if (!titleKey) return null;
   const encontrados = [];
   for (const ex of existing) {
     const exHtml = await readFile(join(ROOT, 'blog', ex), 'utf8');
     const exTitle = exHtml.match(/<title>([^<]*)<\/title>/i)?.[1] || '';
-    if (temaKey(exTitle) !== titleKey) continue;
+    if (!mismoTema(temaKey(exTitle), titleKey)) continue;
     // Una copia consolidada tiene el canonical apuntando a OTRA pagina; la
     // buena se apunta a si misma. Hay que quedarse con la buena: actualizar
     // una copia consolidada seria escribir en la pagina que Google ya ignora.
@@ -675,7 +690,13 @@ async function buscarArticuloDelMismoTema(existing, titleKey) {
     encontrados.push({ archivo: ex, esCanonica: canonical.endsWith(`/blog/${ex}`) });
   }
   if (!encontrados.length) return null;
-  return (encontrados.find((e) => e.esCanonica) || encontrados[0]).archivo;
+  const buena = encontrados.find((e) => e.esCanonica);
+  if (buena) return buena.archivo;
+  // Solo quedan copias consolidadas (canonical/redirect a otro articulo): se
+  // regresa el articulo al que apuntan, nunca la copia.
+  const html = await readFile(join(ROOT, 'blog', encontrados[0].archivo), 'utf8');
+  const destino = html.match(/<link rel="canonical" href="[^"]*\/blog\/([^"]+\.html)"/i)?.[1];
+  return destino && existing.includes(destino) ? destino : encontrados[0].archivo;
 }
 
 /** datePublished que ya traia el articulo, para no reiniciar su antiguedad. */

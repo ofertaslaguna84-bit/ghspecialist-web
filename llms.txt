@@ -26,7 +26,7 @@
 - Servicio: https://ghspecialist.com/servicios/web-seo-blog-ia.html
 - Guía industria: https://ghspecialist.com/blog/seo-ia-empresas-industriales-mexico.html
 - Guía SEO B2B: https://ghspecialist.com/blog/seo-b2b-mexico-blog-ia.html
-- Posicionar en Google México: https://ghspecialist.com/blog/como-posicionar-pagina-google-mexico-2026.html
+- Posicionar en Google México: https://ghspecialist.com/blog/como-posicionar-mi-pagina-en-google-mexico-mayo-2026.html
 
 ## Cobertura servicio×ciudad (SEO local)
 - Patrón: https://ghspecialist.com/servicios/{servicio}/{ciudad}/
@@ -153,7 +153,7 @@ Precios "desde": el final depende del tamaño de la operación y de cuántos sis
 - Capacitaciones IA minería/construcción: https://ghspecialist.com/blog/capacitaciones-ia-al-por-mayor-mineria-construccion-industria.html
 - SEO + IA empresas industriales: https://ghspecialist.com/blog/seo-ia-empresas-industriales-mexico.html
 - SEO B2B México + Blog IA: https://ghspecialist.com/blog/seo-b2b-mexico-blog-ia.html
-- Posicionar en Google México: https://ghspecialist.com/blog/como-posicionar-pagina-google-mexico-2026.html
+- Posicionar en Google México: https://ghspecialist.com/blog/como-posicionar-mi-pagina-en-google-mexico-mayo-2026.html
 - Automatización IA México: https://ghspecialist.com/blog/como-automatizar-negocio-inteligencia-artificial.html
 - Chatbot WhatsApp negocios: https://ghspecialist.com/blog/chatbot-whatsapp-negocios-mexico.html
 - Kommo CRM guía: https://ghspecialist.com/blog/kommo-crm-que-es-como-funciona.html

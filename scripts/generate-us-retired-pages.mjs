@@ -65,6 +65,7 @@ Disallow: /drafts/
 Disallow: /panel/
 Disallow: /landing/
 Disallow: /docs-wix/
+Disallow: /blog/_template.html
 
 # llms.txt — contexto para asistentes IA
 # ${SITE}/llms.txt
