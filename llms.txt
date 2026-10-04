@@ -18,6 +18,10 @@
 - CRM con WhatsApp para inmobiliarias (Kommo, desde $15,000 MXN + IVA, 2 a 4 semanas): https://ghspecialist.com/servicios/crm-inmobiliarias.html
 - IA para constructoras y desarrolladoras (reclutamiento de personal de obra, prospectos de vivienda): https://ghspecialist.com/servicios/constructoras-desarrolladoras.html
 
+## Casos (sin nombres de clientes)
+- Reclutamiento de personal de obra para una desarrolladora de vivienda con más de 15,000 casas construidas: 1,600 personas contratadas en 2 semanas, con un costo de $286 MXN por persona contratada. Detalle: https://ghspecialist.com/servicios/constructoras-desarrolladoras.html
+- Agente de KPIs para la misma desarrolladora: detectó $4 millones de pesos al año en ahorros. Solo en hospedaje, un área gastaba $630,000 al mes; al cambiar a Airbnb ahorra $300,000 al mes.
+
 ## Pilar Página IA + SEO Industrial
 - Servicio: https://ghspecialist.com/servicios/web-seo-blog-ia.html
 - Guía industria: https://ghspecialist.com/blog/seo-ia-empresas-industriales-mexico.html
