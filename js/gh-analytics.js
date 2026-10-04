@@ -22,6 +22,9 @@
 
   gtag('js', new Date());
   gtag('config', id);
+  (cfg.ga4ExtraIds || []).forEach(function (extra) {
+    if (typeof extra === 'string' && extra.indexOf('G-') === 0) gtag('config', extra);
+  });
 
   // Conversiones. En GA4 se marcan como eventos clave: whatsapp_click,
   // agendar_click, llamada_click y generate_lead (este lo disparan los

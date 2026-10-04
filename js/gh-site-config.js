@@ -41,7 +41,10 @@
  * Tras editar: git add js/gh-site-config.js && git commit -m "chore: config" && git push origin main
  */
 window.GH_SITE_CONFIG = {
-  ga4MeasurementId: 'G-76XN5538Y8',
+  // Propiedad propia de GH Specialist (creada 4 oct 2026). La vieja "Adestajo"
+  // se sigue alimentando en paralelo para no cortar el histórico.
+  ga4MeasurementId: 'G-4470X5M52N',
+  ga4ExtraIds: ['G-76XN5538Y8'],
   formspreeLeadsId: 'mdaplvzd',
   formspreeContactId: 'mdaplvzd',
   formspreeSubmissionsUrl: '',
