@@ -1867,6 +1867,7 @@
         }, 10000)
           .then(function (res) {
             if (res.ok) {
+              if (window.ghTrack) window.ghTrack('generate_lead', { form: 'contacto' });
               f.reset();
               if (okEl) okEl.classList.add('show');
             } else {
@@ -2009,6 +2010,7 @@
           }
           form.classList.add('is-sent');
           rej.classList.remove('show');
+          if (window.ghTrack) window.ghTrack('generate_lead', { form: 'agendar_diagnostico' });
           loadGoogleBooking(cal);
           cal.classList.add('show');
           try { cal.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (x) {}
