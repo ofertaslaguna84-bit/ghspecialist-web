@@ -1,10 +1,10 @@
 # GH Specialist — llms.txt
 # https://ghspecialist.com
 
-> Capacitaciones de IA al por mayor para minería, construcción e industria en México.
-> Página de IA con SEO para que Compras te encuentre a nivel nacional.
-> Cobertura: Monterrey, CDMX, Guadalajara, Querétaro, Torreón y todo el país.
-> Fundador: Pedro Luis Díaz Velázquez.
+> GH Specialist es una agencia de automatización con IA en México: chatbots de WhatsApp con IA, CRM Kommo y automatización de ventas.
+> Especialidad: constructoras y desarrolladoras de vivienda (reclutamiento de personal de obra y seguimiento de compradores).
+> Base en Torreón, Coahuila (La Laguna). Cobertura: Monterrey, Saltillo y Ramos Arizpe, Querétaro, Guadalajara, CDMX, León, Mérida, Tijuana, Ciudad Juárez y todo México.
+> Fundador: Pedro Luis Díaz Velázquez. En Google Maps aparece como "Growth Hacking Specialist".
 
 ## Sitio principal
 - Home: https://ghspecialist.com/
