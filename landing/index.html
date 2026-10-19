@@ -12,8 +12,8 @@
   <link rel="icon" type="image/png" sizes="512x512" href="https://ghspecialist.com/icon-512.png">
   <link rel="apple-touch-icon" href="https://ghspecialist.com/apple-touch-icon.png" sizes="180x180">
   <link rel="manifest" href="https://ghspecialist.com/landing/manifest.webmanifest">
-  <meta name="theme-color" content="#7C4DFF">
-  <meta name="msapplication-TileColor" content="#7C4DFF">
+  <meta name="theme-color" content="#6D28D9">
+  <meta name="msapplication-TileColor" content="#6D28D9">
   <meta name="msapplication-TileImage" content="https://ghspecialist.com/icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -38,9 +38,9 @@
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     :root{
-      --p:#7C4DFF;--p2:#5C35CC;--p-light:#F3EFFF;--p-border:#DDD5FF;
-      --ink:#111;--ink2:#444;--ink3:#888;
-      --bg:#fff;--bg2:#F7F7F5;--border:#E8E8E8;
+      --p:#6D28D9;--p2:#4C1D95;--p-light:#F1EBFF;--p-border:#D9CCFF;
+      --ink:#1A1530;--ink2:#444;--ink3:#888;
+      --bg:#fff;--bg2:#F6F4FB;--border:#E5E0EF;
       --safe-top:env(safe-area-inset-top, 0px);
       --safe-bottom:env(safe-area-inset-bottom, 0px);
       --safe-left:env(safe-area-inset-left, 0px);
@@ -86,10 +86,10 @@
     .agenda-strip{background:var(--p);padding:10px 28px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
     .agenda-strip p{color:#fff;font-size:14px;font-weight:500}
     .agenda-strip .btn{background:#fff;color:var(--p);padding:7px 18px;font-size:13px}
-    .agenda-strip .btn:hover{background:#f0e8ff;transform:none}
+    .agenda-strip .btn:hover{background:#EDE4FF;transform:none}
 
     /* HERO */
-    .hero{padding:calc(100px + var(--safe-top)) 0 72px;background:#0a0a0a;position:relative;overflow:hidden;min-height:min(100vh,1100px);display:flex;align-items:center}
+    .hero{padding:calc(100px + var(--safe-top)) 0 72px;background:#0B0817;position:relative;overflow:hidden;min-height:min(100vh,1100px);display:flex;align-items:center}
     .hero-bg{position:absolute;inset:0;background:url('hero-bg.webp') center/cover no-repeat;opacity:.72}
     .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.18),rgba(0,0,0,.38))}
     .hero .w{position:relative;z-index:1}
@@ -130,11 +130,11 @@
     .chat-tab{padding:7px 15px;border-radius:100px;font-size:12.5px;font-weight:600;background:var(--bg2);color:var(--ink3);border:1.5px solid var(--border);cursor:pointer;transition:all .18s;white-space:nowrap}
     .chat-tab:hover{border-color:var(--p);color:var(--p)}
     .chat-tab.active{background:var(--p);color:#fff;border-color:var(--p)}
-    .phone-mockup{width:300px;flex-shrink:0;background:#1c1c1e;border-radius:50px;padding:10px;box-shadow:0 40px 80px rgba(0,0,0,.22),0 0 0 1px rgba(255,255,255,.08),inset 0 0 0 2px #2c2c2e;position:relative}
+    .phone-mockup{width:300px;flex-shrink:0;background:#0B0817;border-radius:50px;padding:10px;box-shadow:0 40px 80px rgba(0,0,0,.22),0 0 0 1px rgba(255,255,255,.08),inset 0 0 0 2px #1A1530;position:relative}
     .phone-screen{background:#e5ddd5;border-radius:42px;overflow:hidden;position:relative}
-    .phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:110px;height:30px;background:#1c1c1e;border-radius:0 0 22px 22px;z-index:10;display:flex;align-items:center;justify-content:center;gap:6px}
-    .phone-notch::before{content:'';width:10px;height:10px;border-radius:50%;background:#2c2c2e;border:1px solid #3c3c3e}
-    .phone-notch::after{content:'';width:50px;height:5px;background:#2c2c2e;border-radius:3px}
+    .phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:110px;height:30px;background:#0B0817;border-radius:0 0 22px 22px;z-index:10;display:flex;align-items:center;justify-content:center;gap:6px}
+    .phone-notch::before{content:'';width:10px;height:10px;border-radius:50%;background:#1A1530;border:1px solid #3c3c3e}
+    .phone-notch::after{content:'';width:50px;height:5px;background:#1A1530;border-radius:3px}
     .phone-status{background:#075e54;padding:36px 16px 6px;display:flex;align-items:center;justify-content:space-between}
     .phone-status-time{font-size:12px;font-weight:700;color:#fff}
     .phone-status-icons{font-size:10px;color:rgba(255,255,255,.8);display:flex;gap:4px}
@@ -314,7 +314,7 @@
   <div class="hdr-bar">
     <div class="hdr-inner">
       <div class="hdr-brand">
-        <a href="../index.html"><img src="../logo-gh.webp" width="155" height="112" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
+        <a href="../index.html"><img src="../logo-gh.webp" width="640" height="200" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
         <a href="../index.html" class="hdr-home">Sitio completo</a>
       </div>
       <button type="button" class="hdr-menu-btn" id="hdrMenuBtn" aria-controls="hdrNav" aria-expanded="false" aria-label="Abrir menú">
@@ -591,7 +591,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="ftr">
-    <img src="../logo-gh.webp" width="155" height="112" alt="GH Specialist" class="ftr-logo" decoding="async">
+    <img src="../logo-gh.webp" width="640" height="200" alt="GH Specialist" class="ftr-logo" decoding="async">
     <p>© 2026 GH Specialist · Pedro Luis Díaz Velázquez · Torreón, México</p>
     <div class="ftr-links">
       <a href="../blog/">Blog</a>

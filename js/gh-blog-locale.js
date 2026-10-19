@@ -149,7 +149,7 @@
     var n = document.createElement('p');
     n.id = 'gh-blog-i18n-notice';
     n.style.cssText =
-      'font-size:14px;color:#666;background:#F3EFFF;border:1px solid #ddd;padding:12px 16px;border-radius:8px;margin-bottom:20px';
+      'font-size:14px;color:#666;background:#F1EBFF;border:1px solid #ddd;padding:12px 16px;border-radius:8px;margin-bottom:20px';
     n.textContent = msg;
     art.insertBefore(n, art.firstChild);
   }
@@ -346,7 +346,7 @@
     var st = document.createElement('style');
     st.id = 'gh-blog-locale-css';
     st.textContent =
-      '.hdr{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.hdr-lang{display:flex;border:1px solid var(--border,#E8E8E8);border-radius:8px;overflow:hidden;flex-shrink:0}.hdr-lang-btn{background:#fff;padding:6px 11px;font-size:12px;font-weight:700;cursor:pointer;border:none;color:var(--ink3,#888);font-family:inherit;line-height:1}.hdr-lang-btn.active{background:#F3EFFF;color:#7C4DFF}';
+      '.hdr{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.hdr-lang{display:flex;border:1px solid var(--border,#E5E0EF);border-radius:8px;overflow:hidden;flex-shrink:0}.hdr-lang-btn{background:#fff;padding:6px 11px;font-size:12px;font-weight:700;cursor:pointer;border:none;color:var(--ink3,#888);font-family:inherit;line-height:1}.hdr-lang-btn.active{background:#F1EBFF;color:#6D28D9}';
     document.head.appendChild(st);
   }
 

@@ -276,16 +276,16 @@ function buildCityPage(city, allCities) {
   <script type="application/ld+json">${JSON.stringify(faq)}</script>
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-    :root{--p:#7C4DFF;--p2:#5C35CC;--ink:#111;--ink3:#666;--border:#E8E8E8;--bg2:#FAFAFA}
+    :root{--p:#6D28D9;--p2:#4C1D95;--ink:#1A1530;--ink3:#666;--border:#E5E0EF;--bg2:#FAFAFA}
     body{font-family:'Inter',sans-serif;color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
     a{text-decoration:none;color:inherit}
     .w{max-width:1080px;margin:0 auto;padding:0 28px}
     .hdr{position:fixed;top:0;width:100%;z-index:100;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
     .hdr-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1080px;margin:0 auto;padding:0 28px}
-    .hdr-logo{height:28px;width:auto}
+    .hdr-logo{height:40px;width:auto}
     .hdr-nav{display:flex;gap:8px;align-items:center}
     .hdr-nav a{font-size:13px;font-weight:500;padding:6px 12px;border-radius:6px;color:var(--ink3)}
-    .hdr-nav a:hover{color:var(--p);background:#F3EFFF}
+    .hdr-nav a:hover{color:var(--p);background:#F1EBFF}
     .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;font-weight:600;font-size:14px;background:var(--p);color:#fff}
     .btn:hover{background:var(--p2)}
     .btn-wa{background:#25D366}
@@ -314,7 +314,7 @@ function buildCityPage(city, allCities) {
     .search-block ul{margin:10px 0 0 18px}
     .search-block li{font-size:13px;color:var(--ink3);margin-bottom:6px;line-height:1.5}
     .search-block h3{font-size:15px;font-weight:700;margin-bottom:4px}
-    .cta{text-align:center;padding:64px 28px;background:linear-gradient(135deg,#7C4DFF,#5C35CC);color:#fff;border-radius:16px;margin:0 28px 80px;max-width:1024px;margin-left:auto;margin-right:auto}
+    .cta{text-align:center;padding:64px 28px;background:linear-gradient(135deg,#6D28D9,#4C1D95);color:#fff;border-radius:16px;margin:0 28px 80px;max-width:1024px;margin-left:auto;margin-right:auto}
     .cta h2{font-size:clamp(22px,3vw,32px);margin-bottom:12px}
     .cta p{opacity:.9;margin-bottom:24px}
     .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
@@ -327,7 +327,7 @@ function buildCityPage(city, allCities) {
 <body>
   <header class="hdr">
     <div class="hdr-inner">
-      <a href="../../"><img src="../../logo-gh.webp" width="155" height="112" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
+      <a href="../../"><img src="../../logo-gh.webp" width="640" height="200" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
       <nav class="hdr-nav">
         <a href="../../servicios/">Servicios</a>
         <a href="../../ciudades/">Ciudades</a>
@@ -488,13 +488,13 @@ function buildHubPage(cities) {
   <script type="application/ld+json">${JSON.stringify(schema)}</script>
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-    :root{--p:#7C4DFF;--p2:#5C35CC;--ink:#111;--ink3:#666;--border:#E8E8E8;--bg2:#FAFAFA}
+    :root{--p:#6D28D9;--p2:#4C1D95;--ink:#1A1530;--ink3:#666;--border:#E5E0EF;--bg2:#FAFAFA}
     body{font-family:'Inter',sans-serif;color:var(--ink);line-height:1.6}
     a{text-decoration:none;color:inherit}
     .w{max-width:1080px;margin:0 auto;padding:0 28px}
     .hdr{padding:20px 0;border-bottom:1px solid var(--border)}
     .hdr-inner{display:flex;align-items:center;justify-content:space-between;max-width:1080px;margin:0 auto;padding:0 28px}
-    .hdr-logo{height:28px;width:auto}
+    .hdr-logo{height:40px;width:auto}
     .hero{padding:64px 0 48px;text-align:center}
     .hero h1{font-size:clamp(28px,4vw,44px);font-weight:900;letter-spacing:-.03em;margin-bottom:12px}
     .hero p{font-size:17px;color:var(--ink3);max-width:640px;margin:0 auto 24px}
@@ -523,7 +523,7 @@ function buildHubPage(cities) {
 <body>
   <header class="hdr">
     <div class="hdr-inner">
-      <a href="../"><img src="../logo-gh.webp" width="155" height="112" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
+      <a href="../"><img src="../logo-gh.webp" width="640" height="200" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
       <a href="${CALENDAR}" class="btn">Agendar diagnóstico</a>
     </div>
   </header>

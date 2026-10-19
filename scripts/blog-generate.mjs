@@ -186,11 +186,11 @@ async function generateHeroWithGemini(topic, slug, apiKey, market = 'mx') {
       : 'Modern Latin American office in Mexico';
   const prompts = [
     `Ultra-premium editorial hero photograph for a B2B technology blog (${BLOG_YEAR}). Topic: ${topic}.
-Cinematic 16:9 wide shot, magazine cover quality, photorealistic, sharp focus, professional studio lighting, subtle purple accent glow (#7C4DFF).
+Cinematic 16:9 wide shot, magazine cover quality, photorealistic, sharp focus, professional studio lighting, subtle purple accent glow (#6D28D9).
 ${geoContext}, WhatsApp/AI/automation theme when relevant, depth of field, aspirational business mood.
 NO text, NO logos, NO watermarks, NO readable UI. Looks like a top Getty Images stock photo.`,
     `Award-winning business photography for blog hero (${BLOG_YEAR}). ${topic}.
-High-end commercial photo, futuristic but believable, ${geoContext}, purple (#7C4DFF) highlights, clean composition, 16:9, photorealistic, no text or logos.`,
+High-end commercial photo, futuristic but believable, ${geoContext}, purple (#6D28D9) highlights, clean composition, 16:9, photorealistic, no text or logos.`,
   ];
   const imgDir = join(ROOT, 'blog', 'img');
   await mkdir(imgDir, { recursive: true });
@@ -781,7 +781,7 @@ function buildArticleHtml(article, dateIso, hero, market = 'mx', publishedIso = 
   <script src="../js/gh-blog-locale.js" defer></script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    :root{--p:#7C4DFF;--ink:#111;--ink2:#444;--ink3:#888;--bg:#fff;--bg2:#F7F7F5;--border:#E8E8E8}
+    :root{--p:#6D28D9;--ink:#1A1530;--ink2:#444;--ink3:#888;--bg:#fff;--bg2:#F6F4FB;--border:#E5E0EF}
     body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased}
     a{color:var(--p);text-decoration:none}a:hover{text-decoration:underline}
     .hdr{padding:16px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto}
@@ -815,7 +815,7 @@ function buildArticleHtml(article, dateIso, hero, market = 'mx', publishedIso = 
 </head>
 <body>
 <div class="hdr">
-  <a href="../index.html"><img src="../logo-gh.webp" width="155" height="112" alt="GH Specialist" decoding="async"></a>
+  <a href="../index.html"><img src="../logo-gh.webp" width="640" height="200" alt="GH Specialist" decoding="async"></a>
   <a href="index.html" class="back">← Volver al blog</a>
 </div>
 <nav class="bc" aria-label="Breadcrumb"><a href="../index.html">Inicio</a><span>›</span><a href="index.html">Blog</a><span>›</span>${escapeHtml(article.breadcrumb_title)}</nav>
