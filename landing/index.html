@@ -61,7 +61,7 @@
     .hdr-bar{width:100%;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(0,0,0,.06);transition:box-shadow .3s}
     .hdr.scrolled .hdr-bar{box-shadow:0 4px 24px rgba(0,0,0,.08)}
     .hdr-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px max(28px, var(--safe-right)) 12px max(28px, var(--safe-left));max-width:1060px;margin:0 auto;flex-wrap:wrap;position:relative}
-    .hdr-logo{height:30px;width:auto}
+    .hdr-logo{height:44px;width:auto}
     .hdr-brand{display:flex;align-items:center;gap:14px;flex-shrink:1;min-width:0}
     .hdr-home{font-size:13px;font-weight:600;color:var(--p);padding:6px 12px;border-radius:8px;border:1.5px solid var(--p-border);background:var(--p-light);white-space:nowrap}
     .hdr-home:hover{background:#fff;border-color:var(--p)}
@@ -275,7 +275,7 @@
     @media(max-width:1024px){
       .hdr-inner{flex-wrap:nowrap;gap:10px}
       .hdr-brand{max-width:calc(100% - 54px)}
-      .hdr-logo{max-width:min(132px,42vw);height:auto;max-height:30px;object-fit:contain}
+      .hdr-logo{max-width:min(250px,64vw);height:auto;max-height:52px;object-fit:contain}
       .hdr-menu-btn{display:inline-flex;flex-direction:row;z-index:260}
       .hdr-nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;padding:8px max(16px, var(--safe-right)) calc(16px + var(--safe-bottom)) max(16px, var(--safe-left));background:#fff;border-bottom:1px solid var(--border);box-shadow:0 16px 40px rgba(0,0,0,.12);z-index:255}
       .hdr-nav.is-open{display:flex}
@@ -314,7 +314,7 @@
   <div class="hdr-bar">
     <div class="hdr-inner">
       <div class="hdr-brand">
-        <a href="../index.html"><img src="../logo-gh.webp" width="640" height="200" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
+        <a href="../index.html"><img src="../logo-gh.webp" width="770" height="200" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
         <a href="../index.html" class="hdr-home">Sitio completo</a>
       </div>
       <button type="button" class="hdr-menu-btn" id="hdrMenuBtn" aria-controls="hdrNav" aria-expanded="false" aria-label="Abrir menú">
@@ -591,7 +591,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="ftr">
-    <img src="../logo-gh.webp" width="640" height="200" alt="GH Specialist" class="ftr-logo" decoding="async">
+    <img src="../logo-gh.webp" width="770" height="200" alt="GH Specialist" class="ftr-logo" decoding="async">
     <p>© 2026 GH Specialist · Pedro Luis Díaz Velázquez · Torreón, México</p>
     <div class="ftr-links">
       <a href="../blog/">Blog</a>

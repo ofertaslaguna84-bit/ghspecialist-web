@@ -79,7 +79,7 @@
     /* ─── HEADER ─── */
     .hdr{position:fixed;top:calc(var(--grab-strip) + var(--safe-top));left:0;right:0;width:100%;max-width:100%;box-sizing:border-box;z-index:500;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(0,0,0,.06)}
     .hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px;max-width:1080px;width:100%;margin:0 auto;box-sizing:border-box;min-width:0}
-    .hdr-logo{height:40px;width:auto}
+    .hdr-logo{height:48px;width:auto}
     .hdr-nav{display:flex;align-items:center;gap:6px}
     .hdr-nav a,.hdr-nav .nav-drop-trigger{font-size:13.5px;font-weight:500;color:var(--ink);padding:6px 12px;border-radius:6px;transition:all .15s;cursor:pointer;display:flex;align-items:center;gap:4px}
     .hdr-nav a:hover,.hdr-nav .nav-drop-trigger:hover{color:var(--ink);background:var(--bg3)}
@@ -489,7 +489,7 @@
     @media(max-width:1024px){
       .hdr-inner{flex-wrap:nowrap;padding:0 max(16px, var(--safe-left)) 0 max(16px, var(--safe-right));position:relative}
       .hdr-logo-link{flex:1;min-width:0;max-width:calc(100% - 100px)}
-      .hdr-logo{max-width:min(200px,52vw);height:auto;max-height:40px;width:auto;object-fit:contain}
+      .hdr-logo{max-width:min(250px,64vw);height:auto;max-height:58px;width:auto;object-fit:contain}
       .hdr-menu-btn{display:inline-flex;flex-direction:row}
       .hdr-drawer{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;margin:0;padding:0 0 calc(12px + var(--safe-bottom));background:#fff;border-bottom:1px solid var(--border);box-shadow:0 16px 40px rgba(0,0,0,.12);z-index:560;max-height:min(85vh,700px);overflow-y:auto;-webkit-overflow-scrolling:touch}
       .hdr-drawer.is-open{display:flex}
@@ -619,7 +619,7 @@
   <!-- HEADER -->
   <header class="hdr" id="hdr">
     <div class="hdr-inner">
-      <a href="index.html" class="hdr-logo-link"><img src="logo-gh.webp" width="640" height="200" alt="GH Specialist" class="hdr-logo" fetchpriority="high" loading="eager" decoding="async"></a>
+      <a href="index.html" class="hdr-logo-link"><img src="logo-gh.webp" width="770" height="200" alt="GH Specialist" class="hdr-logo" fetchpriority="high" loading="eager" decoding="async"></a>
       <button type="button" class="hdr-menu-btn" id="hdrMenuBtn" aria-controls="hdrDrawer" aria-expanded="false" aria-label="Abrir menú">
         <span class="hdr-menu-label" id="hdrMenuLabel">Menú</span>
       </button>
@@ -1684,7 +1684,7 @@
     <div class="w">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="logo-gh.webp" width="640" height="200" alt="GH Specialist" loading="eager" style="height:40px;width:auto" decoding="async">
+          <img src="logo-gh.webp" width="770" height="200" alt="GH Specialist" loading="eager" style="height:40px;width:auto" decoding="async">
           <p data-i18n="footer.tagline">Agencia de IA en México: Web Apps, Chatbots WhatsApp y Growth Hacker. GH Specialist — Pedro Luis Díaz Velázquez.</p>
           <div style="margin-top:16px;display:flex;gap:8px">
             <a href="https://wa.me/528712638082" target="_blank" class="fsoc" title="WhatsApp">💬</a>

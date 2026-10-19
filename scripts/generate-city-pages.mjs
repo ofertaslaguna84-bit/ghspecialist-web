@@ -282,7 +282,7 @@ function buildCityPage(city, allCities) {
     .w{max-width:1080px;margin:0 auto;padding:0 28px}
     .hdr{position:fixed;top:0;width:100%;z-index:100;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
     .hdr-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1080px;margin:0 auto;padding:0 28px}
-    .hdr-logo{height:40px;width:auto}
+    .hdr-logo{height:48px;width:auto}
     .hdr-nav{display:flex;gap:8px;align-items:center}
     .hdr-nav a{font-size:13px;font-weight:500;padding:6px 12px;border-radius:6px;color:var(--ink3)}
     .hdr-nav a:hover{color:var(--p);background:#F1EBFF}
@@ -327,7 +327,7 @@ function buildCityPage(city, allCities) {
 <body>
   <header class="hdr">
     <div class="hdr-inner">
-      <a href="../../"><img src="../../logo-gh.webp" width="640" height="200" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
+      <a href="../../"><img src="../../logo-gh.webp" width="770" height="200" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
       <nav class="hdr-nav">
         <a href="../../servicios/">Servicios</a>
         <a href="../../ciudades/">Ciudades</a>
@@ -494,7 +494,7 @@ function buildHubPage(cities) {
     .w{max-width:1080px;margin:0 auto;padding:0 28px}
     .hdr{padding:20px 0;border-bottom:1px solid var(--border)}
     .hdr-inner{display:flex;align-items:center;justify-content:space-between;max-width:1080px;margin:0 auto;padding:0 28px}
-    .hdr-logo{height:40px;width:auto}
+    .hdr-logo{height:48px;width:auto}
     .hero{padding:64px 0 48px;text-align:center}
     .hero h1{font-size:clamp(28px,4vw,44px);font-weight:900;letter-spacing:-.03em;margin-bottom:12px}
     .hero p{font-size:17px;color:var(--ink3);max-width:640px;margin:0 auto 24px}
@@ -523,7 +523,7 @@ function buildHubPage(cities) {
 <body>
   <header class="hdr">
     <div class="hdr-inner">
-      <a href="../"><img src="../logo-gh.webp" width="640" height="200" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
+      <a href="../"><img src="../logo-gh.webp" width="770" height="200" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
       <a href="${CALENDAR}" class="btn">Agendar diagnóstico</a>
     </div>
   </header>

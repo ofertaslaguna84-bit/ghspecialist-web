@@ -260,7 +260,7 @@ function buildPage(svc, city, allCities, allServices) {
     .w{max-width:960px;margin:0 auto;padding:0 24px}
     .hdr{padding:16px 0;border-bottom:1px solid var(--border)}
     .hdr-inner{display:flex;justify-content:space-between;align-items:center;max-width:960px;margin:0 auto;padding:0 24px}
-    .hdr-logo{height:26px;width:auto}
+    .hdr-logo{height:44px;width:auto}
     .crumbs{font-size:12px;color:var(--ink3);padding:12px 0}
     .crumbs a{color:var(--p);font-weight:600}
     .hero{padding:72px 0 48px;background:linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.52)),url('${depth}${city.hero}') center/cover;color:#fff}
@@ -310,7 +310,7 @@ function buildPage(svc, city, allCities, allServices) {
 <body>
   <header class="hdr">
     <div class="hdr-inner">
-      <a href="${depth}"><img src="${depth}logo-gh.webp" width="640" height="200" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
+      <a href="${depth}"><img src="${depth}logo-gh.webp" width="770" height="200" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
       <a href="${CALENDAR}" class="btn">Agendar</a>
     </div>
   </header>
