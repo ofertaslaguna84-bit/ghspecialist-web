@@ -310,7 +310,7 @@ function buildPage(svc, city, allCities, allServices) {
 <body>
   <header class="hdr">
     <div class="hdr-inner">
-      <a href="${depth}"><img src="${depth}logo-gh.webp" width="770" height="200" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
+      <a href="${depth}"><img src="${depth}logo-gh.webp" width="900" height="200" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
       <a href="${CALENDAR}" class="btn">Agendar</a>
     </div>
   </header>

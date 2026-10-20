@@ -815,7 +815,7 @@ function buildArticleHtml(article, dateIso, hero, market = 'mx', publishedIso = 
 </head>
 <body>
 <div class="hdr">
-  <a href="../index.html"><img src="../logo-gh.webp" width="770" height="200" alt="GH Specialist" decoding="async"></a>
+  <a href="../index.html"><img src="../logo-gh.webp" width="900" height="200" alt="GH Specialist" decoding="async"></a>
   <a href="index.html" class="back">← Volver al blog</a>
 </div>
 <nav class="bc" aria-label="Breadcrumb"><a href="../index.html">Inicio</a><span>›</span><a href="index.html">Blog</a><span>›</span>${escapeHtml(article.breadcrumb_title)}</nav>

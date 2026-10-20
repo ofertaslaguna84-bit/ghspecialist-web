@@ -327,7 +327,7 @@ function buildCityPage(city, allCities) {
 <body>
   <header class="hdr">
     <div class="hdr-inner">
-      <a href="../../"><img src="../../logo-gh.webp" width="770" height="200" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
+      <a href="../../"><img src="../../logo-gh.webp" width="900" height="200" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
       <nav class="hdr-nav">
         <a href="../../servicios/">Servicios</a>
         <a href="../../ciudades/">Ciudades</a>
@@ -523,7 +523,7 @@ function buildHubPage(cities) {
 <body>
   <header class="hdr">
     <div class="hdr-inner">
-      <a href="../"><img src="../logo-gh.webp" width="770" height="200" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
+      <a href="../"><img src="../logo-gh.webp" width="900" height="200" alt="GH Specialist" class="hdr-logo" decoding="async"></a>
       <a href="${CALENDAR}" class="btn">Agendar diagnóstico</a>
     </div>
   </header>
