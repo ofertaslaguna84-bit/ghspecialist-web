@@ -17,6 +17,7 @@
 ## Especialidad: inmobiliarias, desarrolladoras y constructoras
 - CRM con WhatsApp para inmobiliarias (Kommo, desde $15,000 MXN + IVA, 2 a 4 semanas): https://ghspecialist.com/servicios/crm-inmobiliarias.html
 - IA para constructoras y desarrolladoras (reclutamiento de personal de obra, prospectos de vivienda): https://ghspecialist.com/servicios/constructoras-desarrolladoras.html
+- Asistente ciudadano 24/7 con IA para municipios y ayuntamientos (reportes de vecinos por WhatsApp con folio, canalización a dependencias, panel con estadísticas por colonia; implementación en ~10 semanas): https://ghspecialist.com/servicios/asistente-ciudadano-municipios.html
 
 ## Casos (sin nombres de clientes)
 - Reclutamiento de personal de obra para una desarrolladora de vivienda con más de 15,000 casas construidas: 1,600 personas contratadas en 2 semanas, con un costo de $286 MXN por persona contratada. Detalle: https://ghspecialist.com/servicios/constructoras-desarrolladoras.html

@@ -259,8 +259,35 @@ async function collectServicios() {
   return entries.sort((a, b) => a.loc.localeCompare(b.loc));
 }
 
+/** Videos de las páginas de servicio (data/videos.json) → entradas <video:video> del sitemap. */
+async function loadVideosByPage() {
+  try {
+    const list = JSON.parse(await readFile(join(ROOT, 'data/videos.json'), 'utf8'));
+    return new Map(list.filter((v) => v.transcript).map((v) => [`${SITE}/${v.page}`, v]));
+  } catch {
+    return new Map();
+  }
+}
+
+function videoXml(v) {
+  const dur = Math.round(v.duration);
+  return [
+    '    <video:video>',
+    `      <video:thumbnail_loc>${SITE}/videos/${v.slug}.jpg</video:thumbnail_loc>`,
+    `      <video:title>${escapeXml(v.title)}</video:title>`,
+    `      <video:description>${escapeXml(v.description)}</video:description>`,
+    `      <video:content_loc>${SITE}/videos/${v.slug}.mp4</video:content_loc>`,
+    `      <video:duration>${dur}</video:duration>`,
+    `      <video:publication_date>${v.uploadDate}</video:publication_date>`,
+    '      <video:family_friendly>yes</video:family_friendly>',
+    '      <video:live>no</video:live>',
+    '    </video:video>',
+  ].join('\n');
+}
+
 async function generateSitemap(blogArticles, servicios, ciudades, servicioCiudad) {
   const urls = [];
+  const videos = await loadVideosByPage();
 
   for (const entry of SITEMAP_URLS) {
     const full = join(ROOT, entry.path);
@@ -306,11 +333,13 @@ async function generateSitemap(blogArticles, servicios, ciudades, servicioCiudad
   const body = urls
     .map(
       (u) =>
-        `  <url><loc>${escapeXml(u.loc)}</loc><lastmod>${u.lastmod}</lastmod><priority>${u.priority}</priority></url>`
+        videos.has(u.loc)
+          ? `  <url><loc>${escapeXml(u.loc)}</loc><lastmod>${u.lastmod}</lastmod><priority>${u.priority}</priority>\n${videoXml(videos.get(u.loc))}\n  </url>`
+          : `  <url><loc>${escapeXml(u.loc)}</loc><lastmod>${u.lastmod}</lastmod><priority>${u.priority}</priority></url>`
     )
     .join('\n');
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n${body}\n</urlset>\n`;
 
   await writeFile(join(ROOT, 'sitemap.xml'), xml, 'utf8');
   console.log(`✓ sitemap.xml — ${urls.length} URLs (solo México)`);
