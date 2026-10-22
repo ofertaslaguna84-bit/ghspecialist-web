@@ -96,6 +96,26 @@
     .nav-mega-item:hover .nav-mega-icon{background:var(--p-light)}
     .nav-mega-text strong{display:block;font-size:13.5px;font-weight:600;color:var(--ink)}
     .nav-mega-text span{font-size:12px;color:var(--ink4);line-height:1.3}
+    .nav-mega-star{margin:-8px -12px 14px;padding:12px 12px 10px;background:var(--p-light);border-radius:12px}
+    .nav-mega-star-title{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--p);margin:0 0 6px 4px}
+    .nav-mega-star-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+    .nav-mega-item--star{background:#fff}
+    .nav-mega-item--star .nav-mega-icon{background:var(--p);color:#fff}
+    .estrella-sec{padding:72px 0;background:var(--bg2)}
+    .estrella-sec .sec-header{margin-bottom:36px}
+    .estrella-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .estrella-card{display:block;background:#fff;border:1.5px solid var(--border);border-radius:var(--r);overflow:hidden;transition:all .22s;color:inherit;text-decoration:none}
+    .estrella-card:hover{border-color:var(--p);transform:translateY(-3px);box-shadow:0 10px 36px rgba(124,77,255,.14)}
+    .estrella-thumb{position:relative;aspect-ratio:16/9;background:#111;overflow:hidden}
+    .estrella-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .estrella-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:rgba(109,40,217,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.35);transition:background .15s}
+    .estrella-play svg{width:22px;height:22px;margin-left:4px;fill:#fff}
+    .estrella-card:hover .estrella-play{background:var(--p2)}
+    .estrella-dur{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,.72);color:#fff;font-size:12px;font-weight:600;padding:3px 8px;border-radius:6px}
+    .estrella-body{padding:20px 22px 22px}
+    .estrella-body h3{font-size:18px;font-weight:700;color:var(--ink);margin:10px 0 8px;line-height:1.25}
+    .estrella-body p{font-size:14px;color:var(--ink2);line-height:1.5;margin:0 0 14px}
+    @media (max-width:860px){.estrella-grid{grid-template-columns:1fr}.estrella-sec{padding:56px 0}.nav-mega-star-row{grid-template-columns:1fr}}
     .hdr-right{display:flex;align-items:center;gap:10px}
     .hdr-lang{display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;flex-shrink:0}
     .hdr-lang-btn{background:#fff;padding:6px 11px;font-size:12px;font-weight:700;cursor:pointer;border:none;color:var(--ink3);font-family:inherit;line-height:1}
@@ -628,6 +648,23 @@
         <div class="nav-drop">
           <div class="nav-drop-trigger"><span data-i18n="nav.servicios">Servicios</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
           <div class="nav-mega">
+            <div class="nav-mega-star">
+              <div class="nav-mega-star-title">★ Servicios estrella · con video</div>
+              <div class="nav-mega-star-row">
+                <a href="servicios/web-seo-blog-ia.html" class="nav-mega-item nav-mega-item--star">
+                  <div class="nav-mega-icon">🌐</div>
+                  <div class="nav-mega-text"><strong>Página web con IA + SEO</strong><span>Ver video · 1:26</span></div>
+                </a>
+                <a href="servicios/agentes-omnicanal.html" class="nav-mega-item nav-mega-item--star">
+                  <div class="nav-mega-icon">🤖</div>
+                  <div class="nav-mega-text"><strong>Agentes IA omnicanal</strong><span>Ver video · 1:31</span></div>
+                </a>
+                <a href="servicios/asistente-ciudadano-municipios.html" class="nav-mega-item nav-mega-item--star">
+                  <div class="nav-mega-icon">🏛️</div>
+                  <div class="nav-mega-text"><strong>Asistente ciudadano 24/7</strong><span>Ver video · 1:14</span></div>
+                </a>
+              </div>
+            </div>
             <div class="nav-mega-grid">
               <a href="servicios/constructoras-desarrolladoras.html" class="nav-mega-item">
                 <div class="nav-mega-icon">🏗️</div>
@@ -782,6 +819,31 @@
           <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/supabase.svg" alt="Supabase" loading="lazy" width="90" height="22"/></span>
           <span class="logo-item"><img class="logo-svg" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/googlecloud.svg" alt="Google Cloud" loading="lazy" width="120" height="22"/></span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1B: SERVICIOS ESTRELLA (videos) -->
+  <section class="sec estrella-sec" id="servicios-estrella">
+    <div class="w">
+      <div class="sec-header center fi">
+        <span class="label">★ Servicios estrella</span>
+        <h2 class="title">Tres servicios, tres videos de un minuto</h2>
+        <p class="sub-text">Mira cómo funciona cada uno y escríbenos por WhatsApp si es lo que necesitas.</p>
+      </div>
+      <div class="estrella-grid">
+        <a class="estrella-card fi fi-d1" href="servicios/web-seo-blog-ia.html">
+          <div class="estrella-thumb"><img src="videos/seo-pagina-ia.jpg" alt="Página de IA con SEO: que te encuentren las empresas grandes" loading="lazy" width="640" height="360"><span class="estrella-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="estrella-dur">1:26</span></div>
+          <div class="estrella-body"><div class="svc-tag">Web + SEO</div><h3>Página de IA con SEO: que te encuentren las empresas grandes</h3><p>Cómo una página con SEO y posicionamiento en IA (ChatGPT, Gemini, Claude y Google) te consigue clientes industriales y corporativos con poder de compra. Explicado en un minuto por GH Specialist, agencia de automatización con IA en Torreón, México.</p><span class="svc-link">Ver video →</span></div>
+        </a>
+        <a class="estrella-card fi fi-d2" href="servicios/agentes-omnicanal.html">
+          <div class="estrella-thumb"><img src="videos/agentes-omnicanal.jpg" alt="Agentes inteligentes para tu empresa: administración, compras, cobranza e inventarios sin Excel a mano" loading="lazy" width="640" height="360"><span class="estrella-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="estrella-dur">1:31</span></div>
+          <div class="estrella-body"><div class="svc-tag">Agentes IA</div><h3>Agentes inteligentes para tu empresa: administración, compras, cobranza e inventarios sin Excel a mano</h3><p>Qué hace un agente inteligente en cada departamento de tu empresa: cuadra inventarios, compras y cobranza en segundos, trabaja con los sistemas que ya usas (Microsoft, HubSpot, WhatsApp, Enkontrol) y se paga una sola vez, con retorno de 1 a 2 meses. GH Specialist, agencia de automatización con IA en México.</p><span class="svc-link">Ver video →</span></div>
+        </a>
+        <a class="estrella-card fi fi-d3" href="servicios/asistente-ciudadano-municipios.html">
+          <div class="estrella-thumb"><img src="videos/madero-24-7.jpg" alt="Asistente ciudadano 24/7 con IA para municipios: reportes con folio por WhatsApp" loading="lazy" width="640" height="360"><span class="estrella-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="estrella-dur">1:14</span></div>
+          <div class="estrella-body"><div class="svc-tag">Gobiernos</div><h3>Asistente ciudadano 24/7 con IA para municipios: reportes con folio por WhatsApp</h3><p>Cómo un asistente con inteligencia artificial recibe por WhatsApp los reportes de los vecinos (fugas, baches, robos), les pone folio, los manda a la dependencia correcta y le da al alcalde un panel con estadísticas por colonia. GH Specialist, México.</p><span class="svc-link">Ver video →</span></div>
+        </a>
       </div>
     </div>
   </section>
