@@ -136,9 +136,7 @@ const LANDING_CSS = `<!-- gh-video:landing-css:start -->
     .land-sticky{display:none}
     @media(max-width:860px){
       .land-cta-box{padding:26px 22px;margin-bottom:40px}
-      .land-sticky{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;background:#120B2E;padding:10px 14px calc(10px + env(safe-area-inset-bottom));box-shadow:0 -8px 30px rgba(0,0,0,.35)}
-      .land-sticky a{flex:1;justify-content:center}
-      body{padding-bottom:76px}
+      .hdr-inner{padding:0 14px;height:60px}.hdr-inner .btn{padding:7px 11px;font-size:12.5px;border-radius:8px}.hdr-logo{height:50px;max-width:62vw;object-fit:contain}
     }
   </style>
 <!-- gh-video:landing-css:end -->`;
@@ -164,13 +162,7 @@ function applyLanding(html, v) {
   // CTA después de cada segunda sección (sin contar hero ni la del video)
   const secRe = /<section class="sec(?: [^"]*)?"(?: id="([^"]*)")?>[\s\S]*?<\/section>/g;
   let i = 0;
-  html = html.replace(secRe, (m, id) => {
-    if (id === 'video') return m;
-    i += 1;
-    return i % 2 === 0 ? m + '\n' + ctaBlock(v, wa) : m;
-  });
-  if (i % 2 === 1) html = html.replace(/(<\/section>)(?![\s\S]*<\/section>)/, `$1\n${ctaBlock(v, wa)}`);
-  html = html.replace('</body>', `${stickyBlock(wa)}\n</body>`);
+  // 23 oct 2026 (Pedro): solo la burbuja flotante de WhatsApp; sin cajas CTA ni barra fija
   html = html.replace('</head>', `${LANDING_CSS}\n</head>`);
   return html;
 }
