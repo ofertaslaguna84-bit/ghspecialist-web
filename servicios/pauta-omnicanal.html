@@ -119,7 +119,10 @@
     .cert-badges{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
     .cert-badge{background:var(--p-light);border:1px solid var(--p-border);border-radius:8px;padding:6px 12px;font-size:10px;font-weight:700;color:var(--p)}
     @media(max-width:860px){.svc-hero .w{grid-template-columns:1fr}.svc-hero-visual{display:none}.features-grid{grid-template-columns:1fr}.use-cases{grid-template-columns:1fr 1fr}.results-row{grid-template-columns:1fr 1fr}.hdr-nav{display:none}}
-  </style>
+  
+    html{overflow-x:hidden}
+    @media(max-width:600px){.results-row{grid-template-columns:1fr;gap:14px}.result-item{min-width:0;padding:22px 18px}.result-n{font-size:34px;overflow-wrap:anywhere}.features-grid,.steps-grid,.steps,.faq-grid{grid-template-columns:1fr}.step,.step-content,.feature{min-width:0;overflow-wrap:anywhere}}
+    </style>
 </head>
 <body>
   <header class="hdr" id="hdr">

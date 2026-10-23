@@ -116,7 +116,10 @@
     .camp-msg-meta{font-size:10px;color:#999;margin-top:4px;text-align:right}
     .camp-tag{display:inline-flex;gap:4px;background:var(--p-light);color:var(--p);font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;border:1px solid var(--p-border);margin-top:8px}
     @media(max-width:860px){.svc-hero .w{grid-template-columns:1fr}.svc-hero-visual{display:none}.features-grid{grid-template-columns:1fr}.use-cases{grid-template-columns:1fr 1fr}.results-row{grid-template-columns:1fr 1fr}.hdr-nav{display:none}}
-  </style>
+  
+    html{overflow-x:hidden}
+    @media(max-width:600px){.results-row{grid-template-columns:1fr;gap:14px}.result-item{min-width:0;padding:22px 18px}.result-n{font-size:34px;overflow-wrap:anywhere}.features-grid,.steps-grid,.steps,.faq-grid{grid-template-columns:1fr}.step,.step-content,.feature{min-width:0;overflow-wrap:anywhere}}
+    </style>
 </head>
 <body>
   <header class="hdr" id="hdr">
