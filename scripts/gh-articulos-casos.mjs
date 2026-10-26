@@ -9,7 +9,7 @@ export const ARTICULOS_CASOS = [
     title: 'Casos reales de IA en empresas mexicanas: 7 resultados medidos',
     h1: 'Casos reales de IA en empresas mexicanas: 7 resultados medidos',
     description:
-      'Siete casos reales de inteligencia artificial en empresas de México y el extranjero: $4 millones de ahorro detectados, 8,000 contratistas en 2 semanas, cotizaciones de semanas a 5 minutos y ventas en línea de USD $6,000 a $25,000.',
+      'Siete casos reales de inteligencia artificial en empresas de México y el extranjero: $4 millones de ahorro detectados, 8,000 contratistas en 2 semanas, cotizaciones de días a 15 minutos y ventas en línea de USD $6,000 a $25,000.',
     ogTitle: 'Casos reales de IA en empresas mexicanas: 7 resultados medidos',
     ogDescription:
       'No lo que la IA podría hacer: lo que ya hizo en una desarrolladora, una distribuidora farmacéutica, una consultoría industrial, una marca de artesanía y una cementera. Con cifras.',
@@ -38,11 +38,11 @@ export const ARTICULOS_CASOS = [
 
 <p>Para arrancar obra hacen falta cuadrillas antes del primer día. Un agente de IA en WhatsApp atiende a cada candidato, le pregunta oficio, experiencia, cuadrilla y ciudad, agenda la entrevista y a las 8 de la mañana reparte los calificados entre los reclutadores en un Excel listo para marcar. En dos semanas juntó más de 8,000 contactos de contratistas con cuadrilla. El costo por persona contratada bajó de $2,469 a $286.</p>
 
-<h2>Caso 3 · Botica del Norte: un requerimiento de medicinas cotizado en 5 minutos, antes tardaba semanas</h2>
+<h2>Caso 3 · Botica del Norte: un requerimiento de medicinas cotizado en 15 minutos, antes tardaba días</h2>
 
-<p><strong>5 minutos por requerimiento</strong>, con 4 proveedores conectados por API y más de 12,000 productos.</p>
+<p><strong>15 minutos por requerimiento</strong>, con 4 proveedores conectados por API y más de 12,000 productos.</p>
 
-<p><a href="https://boticadelnorte.com" target="_blank" rel="noopener">Botica del Norte</a> surte medicamentos, botiquines y pruebas antidoping a empresas, minas, fábricas y hospitales desde Torreón. Cada requerimiento de un cliente se cotizaba a mano, proveedor por proveedor: semanas, a veces meses. Instalamos en su página un cotizador conectado a las APIs de cuatro de sus proveedores, con más de 12,000 productos. Hoy un requerimiento completo se cotiza en cinco minutos, y el equipo de compras dedica el tiempo a negociar, no a copiar precios.</p>
+<p><a href="https://boticadelnorte.com" target="_blank" rel="noopener">Botica del Norte</a> surte medicamentos, botiquines y pruebas antidoping a empresas, minas, fábricas y hospitales desde Torreón. Cada requerimiento de un cliente se cotizaba a mano, proveedor por proveedor: antes tardaba días. Instalamos en su página un cotizador conectado a las APIs de cuatro de sus proveedores, con más de 12,000 productos. Hoy un requerimiento completo se cotiza en 15 minutos, y el equipo de compras dedica el tiempo a negociar, no a copiar precios.</p>
 
 <h2>Caso 4 · Crea Consultoría: primeros lugares a nivel nacional, y la buscan desde Qatar, Atlanta, LEGO y Urrea</h2>
 
@@ -70,7 +70,7 @@ export const ARTICULOS_CASOS = [
 
 <h2>Qué tienen en común: primero aprende la gente, luego corre la operación, y mientras te encuentran</h2>
 
-<p>Ninguno de estos casos empezó por "comprar IA". Empezaron por un dolor concreto: no hay cuadrillas, el requerimiento tarda semanas, nadie lee los Excel, no nos encuentran los clientes grandes. Lo demás es trabajo: capacitar al equipo, instalar el sistema sobre lo que ya usan y medir cada semana.</p>
+<p>Ninguno de estos casos empezó por "comprar IA". Empezaron por un dolor concreto: no hay cuadrillas, el requerimiento tarda días, nadie lee los Excel, no nos encuentran los clientes grandes. Lo demás es trabajo: capacitar al equipo, instalar el sistema sobre lo que ya usan y medir cada semana.</p>
 
 <ul>
   <li><strong>Que tu gente sepa usar la IA:</strong> capacitación en Claude por áreas, con precio fijo.</li>
