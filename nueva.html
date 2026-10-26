@@ -50,6 +50,14 @@ header .logo{height:118px;width:auto}
 .arrow.l{left:0}.arrow.r{right:0}
 .side{position:absolute;left:34px;bottom:72px;z-index:2;writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:rgba(255,255,255,.45)}
 .count{position:absolute;right:38px;bottom:72px;z-index:2;font-size:12px;letter-spacing:.3em;color:rgba(255,255,255,.55)}
+.chips{position:absolute;right:48px;top:34%;z-index:2;display:grid;gap:12px;width:330px}
+.chip{background:rgba(255,255,255,.94);color:var(--ink);border-radius:14px;padding:12px 14px;box-shadow:0 14px 40px rgba(0,0,0,.25);transform:translateX(0);animation:chip 1s ease both}
+.chip:nth-child(2){animation-delay:.5s;margin-left:26px}.chip:nth-child(3){animation-delay:1s;margin-left:52px}
+@keyframes chip{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.chip .dep{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--morado);font-weight:500}
+.chip p{font-size:13px;line-height:1.35;margin:4px 0 3px;font-weight:400}
+.chip small{font-size:10px;color:#5f6675}
+@media (max-width:1100px){.chips{display:none}}
 /* stats */
 .stats{background:var(--carbon);color:#fff;text-align:center;padding:72px 28px 64px}
 .stats .eyebrow{color:var(--lila);margin-bottom:44px}
@@ -174,19 +182,24 @@ footer .legal{font-size:13px;line-height:1.9;border-top:1px solid var(--line);pa
 </div>
 
 <section class="hero" aria-roledescription="carrusel">
-  <div class="slide on" style="background-image:url(img/nueva/obras/nave-industrial-estructura-01.jpg)"></div>
-  <div class="slide" style="background-image:url(img/nueva/obras/casas-fraccionamiento-acabados-01.jpg)"></div>
-  <div class="slide" style="background-image:url(img/nueva/obras/plaza-dos-niveles-terminada-01.jpg)"></div>
+  <div class="slide on" style="background-image:url(hero-cdmx.webp)"></div>
+  <div class="slide" style="background-image:url(hero-chihuahua.webp)"></div>
+  <div class="slide" style="background-image:url(hero-monterrey.webp)"></div>
   <div class="arrow l">‹</div><div class="arrow r">›</div>
   <div class="side">Torreón · Monterrey · CDMX · Guadalajara</div>
   <div class="count" id="count">01 — 03</div>
+  <div class="chips" aria-hidden="true">
+    <div class="chip"><span class="dep">Compras</span><p>Requerimiento #4521 cotizado con 4 proveedores</p><small>hace 5 min · enviado ✓✓</small></div>
+    <div class="chip"><span class="dep">Recursos Humanos</span><p>Fierrero con cuadrilla de 4 · entrevista martes 10 am</p><small>agendado en el CRM ✓✓</small></div>
+    <div class="chip"><span class="dep">Dirección</span><p>Tablero de KPIs actualizado · desviación detectada en nómina</p><small>reporte enviado 7:00 am ✓✓</small></div>
+  </div>
   <div class="copy">
-    <div class="eyebrow">Capacitación en Claude · Sistemas con IA · Construcción e industria</div>
+    <div class="eyebrow">Capacitación en Claude · Automatización por departamento · México</div>
     <div class="rule"></div>
-    <h1>IA que encuentra <b>el dinero y la gente</b> en tu empresa.</h1>
-    <p class="sub">$4 millones al año de ahorro detectados en un departamento. 8,000 contratistas con cuadrilla en 2 semanas. Ventas en línea de USD $6,000 a $25,000 al mes. Casos reales, y lo enseñamos a tu equipo.</p>
+    <h1>Capacitación e implementación de <b>procesos automatizados</b> por departamento.</h1>
+    <p class="sub">Compras, recursos humanos, dirección y ventas: tu gente aprende a usar la IA y los procesos corren solos. $4 millones al año detectados en un departamento, 8,000 contratistas en 2 semanas, ventas en línea de USD $6,000 a $25,000 al mes.</p>
     <a class="btn-ghost" href="#diagnostico">Agendar diagnóstico</a>
-    <div class="cap" id="cap">Reclutamiento de obra con IA</div>
+    <div class="cap" id="cap">Ciudad de México · Compras</div>
     <div class="dots"><i class="on"></i><i></i><i></i></div>
   </div>
 </section>
@@ -216,9 +229,9 @@ footer .legal{font-size:13px;line-height:1.9;border-top:1px solid var(--line);pa
       <p>Primero tu gente aprende a usar la IA. Luego la operación corre sola. Y mientras, te encuentran los clientes grandes.</p>
     </div>
     <div class="cards cards3">
-      <a class="card" href="#capacitacion"><div class="bg" style="background-image:url(img/nueva/obras/hotel-5-pisos-terminada-01.jpg)"></div><span class="num">01</span><div class="eyebrow">Capacitación en Claude e IA</div><h3>Que tu gente sepa usar la IA en su chamba real</h3><p>Taller de arranque, programa por áreas o implementación completa. Precio fijo, material de casos reales, y salimos con el proceso que más te duele detectado.</p><span class="more">Ver programa</span></a>
+      <a class="card" href="#capacitacion"><div class="bg" style="background-image:url(hero-guadalajara.webp)"></div><span class="num">01</span><div class="eyebrow">Capacitación en Claude e IA</div><h3>Que tu gente sepa usar la IA en su chamba real</h3><p>Taller de arranque, programa por áreas o implementación completa. Precio fijo, material de casos reales, y salimos con el proceso que más te duele detectado.</p><span class="more">Ver programa</span></a>
       <a class="card" href="#sistemas"><div class="bg" style="background-image:url(img/nueva/obras/nave-industrial-estructura-02.jpg)"></div><span class="num">02</span><div class="eyebrow">Sistemas de operación con IA</div><h3>Que la operación corra sola</h3><p>Reclutador de obra, agente de KPIs de dirección, cotizador de compras con tus proveedores, visión para seguridad. Instalación más mensualidad; nosotros lo operamos.</p><span class="more">Ver sistemas</span></a>
-      <a class="card" href="#encuentren"><div class="bg" style="background-image:url(img/nueva/obras/plaza-dos-niveles-terminada-04.jpg)"></div><span class="num">03</span><div class="eyebrow">Página IA + SEO + GEO</div><h3>Que te encuentren los clientes grandes</h3><p>Google y las IA (ChatGPT, Gemini, Claude) con contenido que se publica solo, y catálogo en marketplaces. Prospectos que ya buscan proveedor, desde Qatar hasta Urrea.</p><span class="more">Ver casos</span></a>
+      <a class="card" href="#encuentren"><div class="bg" style="background-image:url(hero-puebla.webp)"></div><span class="num">03</span><div class="eyebrow">Página IA + SEO + GEO</div><h3>Que te encuentren los clientes grandes</h3><p>Google y las IA (ChatGPT, Gemini, Claude) con contenido que se publica solo, y catálogo en marketplaces. Prospectos que ya buscan proveedor, desde Qatar hasta Urrea.</p><span class="more">Ver casos</span></a>
     </div>
   </div>
 </section>
@@ -252,8 +265,8 @@ footer .legal{font-size:13px;line-height:1.9;border-top:1px solid var(--line);pa
     </div>
     <div class="cards">
       <a class="card" href="#"><div class="bg" style="background-image:url(img/nueva/obras/casas-fraccionamiento-acabados-01.jpg)"></div><span class="num">Construcción</span><div class="eyebrow">Reclutador de obra</div><h3>8,000 contratistas con cuadrilla en 2 semanas</h3><p>El agente califica oficio, cuadrilla y ciudad por WhatsApp, agenda la entrevista y reparte a tus reclutadores cada mañana.</p><span class="more">Ver sistema</span></a>
-      <a class="card" href="#"><div class="bg" style="background-image:url(img/nueva/obras/residencia-acabados-01.jpg)"></div><span class="num">Dirección</span><div class="eyebrow">Agente de KPIs</div><h3>$4 millones al año detectados en un departamento</h3><p>Lee los Excel que cada área ya sube, arma el tablero de dirección y señala dónde se va el dinero.</p><span class="more">Ver sistema</span></a>
-      <a class="card" href="#"><div class="bg" style="background-image:url(img/nueva/obras/bascula-camionera-terminada-01.jpg)"></div><span class="num">Compras</span><div class="eyebrow">Cotizador con tus proveedores</div><h3>De semanas a 5 minutos por requerimiento</h3><p>Conectado a las APIs de tus proveedores (12,000 productos en el caso de Botica del Norte), cotiza completo en tu página.</p><span class="more">Ver sistema</span></a>
+      <a class="card" href="#"><div class="bg" style="background-image:url(hero-merida.webp)"></div><span class="num">Dirección</span><div class="eyebrow">Agente de KPIs</div><h3>$4 millones al año detectados en un departamento</h3><p>Lee los Excel que cada área ya sube, arma el tablero de dirección y señala dónde se va el dinero.</p><span class="more">Ver sistema</span></a>
+      <a class="card" href="#"><div class="bg" style="background-image:url(hero-torreon.webp)"></div><span class="num">Compras</span><div class="eyebrow">Cotizador con tus proveedores</div><h3>De semanas a 5 minutos por requerimiento</h3><p>Conectado a las APIs de tus proveedores (12,000 productos en el caso de Botica del Norte), cotiza completo en tu página.</p><span class="more">Ver sistema</span></a>
       <a class="card" href="#"><div class="bg" style="background-image:url(img/nueva/obras/nave-industrial-estructura-01.jpg)"></div><span class="num">Seguridad</span><div class="eyebrow">IA con visión para HSE</div><h3>Foto o video → condiciones inseguras</h3><p>Nació como dinámica para una cementera global; el agente recibe la imagen por WhatsApp y señala los riesgos.</p><span class="more">Ver sistema</span></a>
     </div>
   </div>
@@ -335,7 +348,7 @@ footer .legal{font-size:13px;line-height:1.9;border-top:1px solid var(--line);pa
 <a class="wa" href="https://wa.me/528712638082" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.7a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3z"/></svg></a>
 
 <script>
-const slides=[...document.querySelectorAll('.slide')],dots=[...document.querySelectorAll('.dots i')],caps=['Reclutamiento de obra con IA','Agente de KPIs de dirección','Capacitación en Claude para tu equipo'];let i=0;
+const slides=[...document.querySelectorAll('.slide')],dots=[...document.querySelectorAll('.dots i')],caps=['Ciudad de México · Compras','Querétaro · Recursos Humanos','Monterrey · Dirección'];let i=0;
 function go(n){slides[i].classList.remove('on');dots[i].classList.remove('on');i=(n+slides.length)%slides.length;slides[i].classList.add('on');dots[i].classList.add('on');document.getElementById('cap').textContent=caps[i];document.getElementById('count').textContent='0'+(i+1)+' — 03'}
 document.querySelector('.arrow.l').onclick=()=>go(i-1);document.querySelector('.arrow.r').onclick=()=>go(i+1);setInterval(()=>go(i+1),7000);
 const menu=document.getElementById('menu');document.getElementById('burger').onclick=()=>menu.classList.add('open');document.getElementById('close').onclick=()=>menu.classList.remove('open');menu.querySelectorAll('a').forEach(a=>a.onclick=()=>menu.classList.remove('open'));
