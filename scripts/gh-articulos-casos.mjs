@@ -9,7 +9,7 @@ export const ARTICULOS_CASOS = [
     title: 'Casos reales de IA en empresas mexicanas: 7 resultados medidos',
     h1: 'Casos reales de IA en empresas mexicanas: 7 resultados medidos',
     description:
-      'Siete casos reales de inteligencia artificial en empresas de México y Estados Unidos: $4 millones de ahorro detectados, 8,000 contratistas en 2 semanas, cotizaciones de semanas a 5 minutos y ventas en línea de USD $6,000 a $25,000.',
+      'Siete casos reales de inteligencia artificial en empresas de México y el extranjero: $4 millones de ahorro detectados, 8,000 contratistas en 2 semanas, cotizaciones de semanas a 5 minutos y ventas en línea de USD $6,000 a $25,000.',
     ogTitle: 'Casos reales de IA en empresas mexicanas: 7 resultados medidos',
     ogDescription:
       'No lo que la IA podría hacer: lo que ya hizo en una desarrolladora, una distribuidora farmacéutica, una consultoría industrial, una marca de artesanía y una cementera. Con cifras.',
