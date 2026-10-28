@@ -249,5 +249,57 @@
       "q": "¿Pueden venir presencial a Torreón?",
       "a": "Sí, es la sede. Torreón, Gómez Palacio y Lerdo se atienden presencial sin costo de traslado: juntas de arranque, capacitación del equipo y revisiones. Es la ciudad donde más fácil es acompañar el proyecto de cerca."
     }
+  },
+  {
+    "slug": "zapopan",
+    "name": "Zapopan",
+    "state": "Jalisco",
+    "kicker": "Zapopan · Guadalajara · Tlaquepaque · Tonalá",
+    "hero": "hero-guadalajara.webp",
+    "lat": 20.7214,
+    "lng": -103.3913,
+    "industries": "industria y logística, distribución de gas y energéticos, constructoras y desarrolladoras, corporativos y comercio",
+    "intro": "Zapopan concentra corporativos, parques industriales y la mayor parte de la vivienda nueva de la zona metropolitana de Guadalajara. Ahí capacitamos equipos en Claude y dejamos agentes de IA corriendo por departamento: compras, recursos humanos, dirección y ventas.",
+    "zonas": "Zapopan centro, Andares y Puerta de Hierro, Tesistán, La Venta del Astillero, El Bajío y el corredor a Tala y Ameca",
+    "sectores": [
+      "Distribución de gas y energéticos",
+      "Constructoras y desarrolladoras",
+      "Logística y manufactura",
+      "Corporativos",
+      "Comercio y servicios"
+    ],
+    "cobertura": "Zapopan, Guadalajara, Tlaquepaque, Tonalá, Tlajomulco, El Salto y toda la zona metropolitana",
+    "reto": "La zona metropolitana de Guadalajara es un mercado grande y competido: el cliente compara rápido y el proveedor que tarda en contestar o que cotiza con errores pierde la venta. Al mismo tiempo, las empresas medianas de Zapopan tienen equipos chicos cargando procesos manuales en compras, recursos humanos y administración.",
+    "faqLocal": {
+      "q": "¿Dan capacitación presencial en Zapopan?",
+      "a": "Sí. Los talleres de Claude por departamento los damos en tus instalaciones en Zapopan o Guadalajara (6 horas por área, con los archivos reales de cada persona) y la implementación de los agentes es remota con seguimiento semanal."
+    },
+    "published": "2026-10-28"
+  },
+  {
+    "slug": "ramos-arizpe",
+    "name": "Ramos Arizpe",
+    "state": "Coahuila",
+    "kicker": "Ramos Arizpe · Saltillo · Arteaga",
+    "hero": "hero-bg.webp",
+    "lat": 25.5406,
+    "lng": -100.948,
+    "industries": "automotriz y proveeduría, metalmecánica, logística, construcción industrial y servicios para plantas",
+    "intro": "Ramos Arizpe es el corazón industrial del sureste de Coahuila: plantas automotrices, proveedores Tier 1 y 2, naves y parques en crecimiento. Ahí la IA sirve para lo que más duele: cotizaciones formales a tiempo, reclutamiento de personal operativo y reportes para dirección sin captura manual.",
+    "zonas": "Ramos Arizpe, Parque Industrial Santa María, Finsa, Saltillo y Arteaga",
+    "sectores": [
+      "Automotriz y proveeduría Tier 1 y 2",
+      "Metalmecánica",
+      "Logística y transporte",
+      "Construcción industrial",
+      "Servicios para plantas"
+    ],
+    "cobertura": "Ramos Arizpe, Saltillo, Arteaga y el corredor industrial del sureste de Coahuila",
+    "reto": "Las empresas que le venden a las plantas de Ramos Arizpe compiten con solicitudes de cotización formales, varias personas decidiendo y plazos que no se mueven. El proveedor que tarda o se equivoca en una cotización sale de la lista. Y contratar personal operativo a tiempo es una pelea constante entre todas las plantas.",
+    "faqLocal": {
+      "q": "¿Atienden presencial en Ramos Arizpe?",
+      "a": "Sí. GH Specialist está en Torreón, a unas tres horas por carretera, y atiende Coahuila completo: diagnóstico y capacitación presenciales en tu planta, implementación remota con seguimiento semanal."
+    },
+    "published": "2026-10-28"
   }
 ]

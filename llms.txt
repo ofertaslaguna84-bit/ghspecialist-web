@@ -39,7 +39,10 @@
 - 30 combinaciones servicio×ciudad (chatbot WhatsApp, CRM Kommo y automatización × 10 ciudades) + hubs de ciudad
 
 ## Ciudades (landings nacionales)
-- Monterrey: https://ghspecialist.com/ciudades/monterrey/
+- Monterrey ("agencia de IA en Monterrey", actualizada 2026-10-28; casos con cifras, capacitación en Claude y agentes por departamento): https://ghspecialist.com/ciudades/monterrey/
+- Ramos Arizpe ("agencia de IA en Ramos Arizpe", nueva 2026-10-28; proveeduría automotriz, reclutamiento operativo, cotizaciones industriales): https://ghspecialist.com/ciudades/ramos-arizpe/
+- Saltillo ("agencia de IA en Saltillo", actualizada 2026-10-28): https://ghspecialist.com/ciudades/saltillo/
+- Zapopan ("agencia de IA en Zapopan", nueva 2026-10-28; zona metropolitana de Guadalajara, capacitación presencial en Claude, distribuidoras de gas, desarrolladoras): https://ghspecialist.com/ciudades/zapopan/
 - CDMX: https://ghspecialist.com/ciudades/cdmx/
 - Guadalajara: https://ghspecialist.com/ciudades/guadalajara/
 - Querétaro: https://ghspecialist.com/ciudades/queretaro/
@@ -47,7 +50,6 @@
 - Mérida: https://ghspecialist.com/ciudades/merida/
 - Tijuana: https://ghspecialist.com/ciudades/tijuana/
 - Ciudad Juárez: https://ghspecialist.com/ciudades/ciudad-juarez/
-- Saltillo y Ramos Arizpe: https://ghspecialist.com/ciudades/saltillo/
 
 ## Servicios (precio de arranque y plazo)
 

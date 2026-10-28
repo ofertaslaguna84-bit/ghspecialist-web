@@ -11,6 +11,8 @@ import { fileURLToPath } from 'node:url';
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const SITE = 'https://ghspecialist.com';
 const CALENDAR = 'https://calendar.app.google/rz32YjLinKvYWUTT9';
+const HOY = '2026-10-28';
+const HOY_TXT = '28 de octubre de 2026';
 
 /** @type {{ groups: Array<{ label: string, phrases: string[] }> }} */
 const SEARCH_INTENTS = JSON.parse(
@@ -122,6 +124,7 @@ function buildCityPage(city, allCities) {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: `GH Specialist — ${city.name}`,
+    alternateName: `Agencia de IA en ${city.name}`,
     description: us
       ? `Automatización con IA para empresas hispanas en ${city.name}, ${city.state}, EE.UU. Chatbots WhatsApp, CRM y agentes IA en español.`
       : `Automatización con inteligencia artificial para empresas en ${city.name}, ${city.state}. Chatbots WhatsApp, CRM Kommo y agentes IA.`,
@@ -231,6 +234,26 @@ function buildCityPage(city, allCities) {
     .join('\n        ');
 
   // Solo los servicios con porCiudad tienen página por ciudad; el resto enlaza a la nacional.
+  if (!us) {
+    faq.mainEntity.push(
+      { '@type': 'Question', name: `¿Qué hace una agencia de IA en ${city.name} como GH Specialist?`, acceptedAnswer: { '@type': 'Answer', text: `Diagnostica qué procesos de tu empresa en ${city.name} se pueden automatizar, implementa agentes de IA por departamento (compras, recursos humanos, dirección y ventas) y capacita a tu gente en Claude para que los use. Todo se mide: tiempo ahorrado, dinero detectado y prospectos atendidos.` } },
+      { '@type': 'Question', name: `¿Capacitan a mi equipo en IA en ${city.name}?`, acceptedAnswer: { '@type': 'Answer', text: `Sí. Talleres de 6 horas por departamento con Claude, en tus oficinas en ${city.name} o en línea, con los archivos reales de cada área. Cada persona sale con sus tareas diarias resueltas con IA y un plan de 30 días.` } },
+      { '@type': 'Question', name: `¿Qué resultados han tenido con otras empresas?`, acceptedAnswer: { '@type': 'Answer', text: `Un agente de KPIs detectó $4 millones al año de ahorro en un solo departamento de una desarrolladora de vivienda; un agente de reclutamiento juntó 8,000 contratistas con cuadrilla en 2 semanas; un cotizador de compras bajó de días a 15 minutos por requerimiento en Botica del Norte.` } }
+    );
+  }
+  const webPage = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title,
+    url,
+    inLanguage: us ? 'es' : 'es-MX',
+    datePublished: city.published || '2026-08-20',
+    dateModified: HOY,
+    about: { '@type': 'Thing', name: `Agencia de inteligencia artificial en ${city.name}` },
+    author: { '@type': 'Person', name: 'Pedro Luis Díaz Velázquez', url: `${SITE}/sobre-pedro.html` },
+    publisher: { '@type': 'Organization', name: 'GH Specialist', url: SITE },
+  };
+  const faqHtml = faq.mainEntity.map((q) => `        <details>\n          <summary>${esc(q.name)}</summary>\n          <p>${esc(q.acceptedAnswer.text)}</p>\n        </details>`).join('\n');
   const serviceCards = SERVICES.map(
     (s) => {
       const svcSlug = s.slug.replace('.html', '');
@@ -274,6 +297,7 @@ function buildCityPage(city, allCities) {
   <script type="application/ld+json">${JSON.stringify(serviceSchema)}</script>
   <script type="application/ld+json">${JSON.stringify(breadcrumb)}</script>
   <script type="application/ld+json">${JSON.stringify(faq)}</script>
+  <script type="application/ld+json">${JSON.stringify(webPage)}</script>
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     :root{--p:#6D28D9;--p2:#4C1D95;--ink:#1A1530;--ink3:#666;--border:#E5E0EF;--bg2:#FAFAFA}
@@ -307,6 +331,7 @@ function buildCityPage(city, allCities) {
     .card h3{font-size:16px;font-weight:700;margin-bottom:8px}
     .card p{font-size:14px;color:var(--ink3)}
     .card a{color:var(--p);font-weight:600;font-size:13px;margin-top:12px;display:inline-block}
+    .faq{max-width:720px;margin-top:32px}.faq details{border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:10px;background:#fff}.faq summary{font-weight:600;cursor:pointer}.faq p{margin-top:10px;font-size:14px;color:var(--ink3)}
     .local-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
     .local-links a{display:inline-block;padding:8px 16px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--p);background:#fff}
     .local-links a:hover{background:var(--bg2)}
@@ -341,8 +366,9 @@ function buildCityPage(city, allCities) {
   <section class="hero">
     <div class="w">
       <span class="kicker">${esc(city.kicker)}</span>
-      <h1>Agencia de inteligencia artificial en <em>${esc(city.name)}</em></h1>
+      <h1>${us ? `Agencia de inteligencia artificial en <em>${esc(city.name)}</em>` : `Agencia de IA en <em>${esc(city.name)}</em>: automatización y capacitación para empresas de ${esc(city.state)}`}</h1>
       <p>${us ? `Chatbots WhatsApp, CRM y agentes IA para <strong>empresas hispanas</strong> en ${esc(city.name)}, ${esc(city.state)}, EE.UU. Implementación remota en español desde México — diagnóstico gratuito.` : `Chatbots WhatsApp, CRM Kommo y agentes de inteligencia artificial para empresas en ${esc(city.name)} y ${esc(city.state)}. Operación nacional desde GH Specialist — diagnóstico gratuito.`}</p>
+      ${us ? '' : `<p style="font-size:13px;opacity:.75;margin-top:-16px;margin-bottom:24px">Actualizado el <time datetime="${HOY}">${HOY_TXT}</time></p>`}
       <div class="hero-btns">
         <a href="${CALENDAR}" class="btn">🗓️ Diagnóstico gratuito</a>
         <a href="https://wa.me/528712638082?text=${waText(city)}" class="btn btn-wa">WhatsApp directo</a>
@@ -361,6 +387,32 @@ function buildCityPage(city, allCities) {
       </div>
     </div>
   </section>
+
+  ${us ? '' : `<section class="sec sec-gray">
+    <div class="w">
+      <span class="label">Agencia de IA en ${esc(city.name)} · casos reales</span>
+      <h2 class="title">Lo que resolvemos, con cifras</h2>
+      <div class="prose"><p>No vendemos "transformación digital". Entramos a un departamento, medimos cuánto tiempo y dinero se va en tareas repetitivas, y dejamos un agente de IA corriendo. Resultados de empresas que ya operan con nuestros sistemas:</p></div>
+      <div class="grid">
+        <div class="card"><h3>🏗️ Reclutamiento de obra</h3><p>Una desarrolladora de vivienda que arranca 15,000 casas necesitaba cuadrillas. El agente por WhatsApp calificó y agendó solo: <strong>más de 8,000 contratistas con cuadrilla en 2 semanas</strong>.</p></div>
+        <div class="card"><h3>📊 Agente de KPIs para dirección</h3><p>Lee el Excel de cada departamento y arma el tablero de dirección cada semana. <strong>Detectó $4 millones al año de ahorro</strong> en un solo departamento.</p></div>
+        <div class="card"><h3>🛒 Cotizador de compras</h3><p>Para <a href="https://boticadelnorte.com" rel="noopener">Botica del Norte</a>: requerimientos cotizados con 4 proveedores por API y 12,000 productos. <strong>De días a 15 minutos</strong>.</p></div>
+        <div class="card"><h3>🎓 Capacitación en Claude por área</h3><p>Talleres de 6 horas para administración, inventarios y recursos humanos con los archivos reales de cada persona, en ${esc(city.name)} o en línea.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="w">
+      <span class="label">Cómo trabajamos en ${esc(city.name)}</span>
+      <h2 class="title">Tres pasos, sin humo</h2>
+      <div class="grid">
+        <div class="card"><h3>1 · Diagnosticamos</h3><p>30 minutos con el responsable del área. Salimos con la lista de tareas repetitivas y cuánto cuestan al mes. Sin costo.</p></div>
+        <div class="card"><h3>2 · Implementamos</h3><p>Agente de IA conectado a lo que ya usas: WhatsApp, Excel, Drive, Kommo, tu ERP. Entre 2 y 6 semanas según el proceso.</p></div>
+        <div class="card"><h3>3 · Reportamos</h3><p>Cada semana un reporte con lo que el agente hizo y lo que ahorró. Si no se mide, no se cobra.</p></div>
+      </div>
+    </div>
+  </section>`}
 
   <section class="sec sec-gray">
     <div class="w">
@@ -390,6 +442,16 @@ function buildCityPage(city, allCities) {
       <div class="local-links">
         ${otherCities}
         <a href="../">Ver todas las ciudades →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-gray">
+    <div class="w">
+      <span class="label">Preguntas frecuentes</span>
+      <h2 class="title">Preguntas sobre nuestra agencia de IA en ${esc(city.name)}</h2>
+      <div class="faq">
+${faqHtml}
       </div>
     </div>
   </section>
