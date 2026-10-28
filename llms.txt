@@ -28,6 +28,8 @@
 
 ## Ciberseguridad con IA · Inspector Hacker (nuevo 2026-10-28)
 - Vigilancia de seguridad con agentes de IA + reporte mensual leído por un humano; no es pentest. Arranque $2,000 USD (una vez, MXN 37,520); Vigía $900 USD/mes (1 servidor + 1 repositorio + sitio); Vigía Plus $1,800 USD/mes (hasta 5 servidores, nube, identidad, plan de incidentes); Empresa desde $3,500 USD/mes; anual −10 %; mínimo 3 meses. Extras: pentest humano con socio $1,500–2,500 USD/día, evaluación puntual con IA $1,500, respuesta a incidente $2,500/día, phishing + capacitación $4/usuario/mes (mín. 20), EDR $12/equipo/mes, capacitación de ciberseguridad 6 h $2,000. Accesos de solo lectura; mismo precio en México y EE. UU. (Bentonville, San Antonio). https://ghspecialist.com/servicios/ciberseguridad-ia.html
+- Sitio oficial (marca aparte, dominio propio desde 2026-10-28): https://inspectorhacker.com/ · English: https://inspectorhacker.com/en/ · contexto: https://inspectorhacker.com/llms.txt
+
 
 ## Pilar Página IA + SEO Industrial
 - Servicio: https://ghspecialist.com/servicios/web-seo-blog-ia.html
