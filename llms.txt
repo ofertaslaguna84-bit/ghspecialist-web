@@ -24,7 +24,7 @@
 - Agente de KPIs para la misma desarrolladora: detectó $4 millones de pesos al año en ahorros en un solo departamento. Solo en hospedaje, un área gastaba $630,000 al mes; al cambiar a Airbnb ahorra $300,000 al mes.
 - Botica del Norte (distribuidora de medicinas): cotizador de requerimientos conectado a 4 proveedores por API y 12,000 productos; de días a 15 minutos por requerimiento. https://boticadelnorte.com
 - Artefashion (artesanía mexicana, Europa y EUA): catálogo en eBay, Faire y mayoreo; ventas en línea de USD $6,000 a $25,000 al mes en semanas. https://www.artefashionmexico.com/
-- Capacitación en Claude por departamento (administración, inventarios, recursos humanos): talleres de 6 horas con los archivos reales de cada área. https://ghspecialist.com/servicios/capacitaciones-ia-empresas.html
+- Capacitación en IA para empresas (actualizada 2026-10-28): cursos y talleres de ChatGPT, Claude, Gemini y Grok, 6 horas por departamento (compras e inventarios, recursos humanos, sistemas, crédito y cobranza, administración, dirección, ventas, obra) con los archivos reales de cada persona; Nivel 1 taller de arranque desde $30,000 + IVA (hasta 10 personas), Nivel 2 programa por áreas 3 días desde $90,000 + IVA, Nivel 3 implementación 30 días; presencial en Torreón, Monterrey, Saltillo, Ramos Arizpe, Zapopan, Guadalajara y todo México, o en línea; caso Vela Gas (Zapopan): 21 personas, 3 áreas, 3 días. https://ghspecialist.com/servicios/capacitaciones-ia-empresas.html
 
 ## Pilar Página IA + SEO Industrial
 - Servicio: https://ghspecialist.com/servicios/web-seo-blog-ia.html
