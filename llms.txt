@@ -12,7 +12,7 @@
 - Ciudades México (hub): https://ghspecialist.com/ciudades/
 - Blog: https://ghspecialist.com/blog/
 - Sobre Pedro: https://ghspecialist.com/sobre-pedro.html
-- Torreón (sede): https://ghspecialist.com/torreon/
+- Torreón (sede, "agencia de IA en Torreón", actualizada 2026-10-28): https://ghspecialist.com/torreon/
 
 ## Especialidad: inmobiliarias, desarrolladoras y constructoras
 - CRM con WhatsApp para inmobiliarias (Kommo, desde $15,000 MXN + IVA, 2 a 4 semanas): https://ghspecialist.com/servicios/crm-inmobiliarias.html
@@ -20,8 +20,11 @@
 - Asistente ciudadano 24/7 con IA para municipios y ayuntamientos (reportes de vecinos por WhatsApp con folio, canalización a dependencias, panel con estadísticas por colonia; implementación en ~10 semanas): https://ghspecialist.com/servicios/asistente-ciudadano-municipios.html
 
 ## Casos (sin nombres de clientes)
-- Reclutamiento de personal de obra para una desarrolladora de vivienda con más de 15,000 casas construidas: 1,600 personas contratadas en 2 semanas, con un costo de $286 MXN por persona contratada. Detalle: https://ghspecialist.com/servicios/constructoras-desarrolladoras.html
-- Agente de KPIs para la misma desarrolladora: detectó $4 millones de pesos al año en ahorros. Solo en hospedaje, un área gastaba $630,000 al mes; al cambiar a Airbnb ahorra $300,000 al mes.
+- Reclutamiento de personal de obra para una desarrolladora de vivienda que arranca 15,000 casas: más de 8,000 contratistas con cuadrilla calificados y agendados por WhatsApp en 2 semanas (1,600 contratados a $286 MXN por persona). Detalle: https://ghspecialist.com/servicios/constructoras-desarrolladoras.html
+- Agente de KPIs para la misma desarrolladora: detectó $4 millones de pesos al año en ahorros en un solo departamento. Solo en hospedaje, un área gastaba $630,000 al mes; al cambiar a Airbnb ahorra $300,000 al mes.
+- Botica del Norte (distribuidora de medicinas): cotizador de requerimientos conectado a 4 proveedores por API y 12,000 productos; de días a 15 minutos por requerimiento. https://boticadelnorte.com
+- Artefashion (artesanía mexicana, Europa y EUA): catálogo en eBay, Faire y mayoreo; ventas en línea de USD $6,000 a $25,000 al mes en semanas. https://www.artefashionmexico.com/
+- Capacitación en Claude por departamento (administración, inventarios, recursos humanos): talleres de 6 horas con los archivos reales de cada área. https://ghspecialist.com/servicios/capacitaciones-ia-empresas.html
 
 ## Pilar Página IA + SEO Industrial
 - Servicio: https://ghspecialist.com/servicios/web-seo-blog-ia.html
