@@ -474,6 +474,7 @@ ${faqHtml}
       <a href="../">Todas las ciudades</a>
     </div>
   </footer>
+<script src="/js/grabovoi.js" defer></script>
 </body>
 </html>
 `;
@@ -610,6 +611,7 @@ function buildHubPage(cities) {
   <footer class="footer">
     <p>© 2026 GH Specialist · <a href="../">Inicio</a> · <a href="../servicios/">Servicios</a> · <a href="../blog/">Blog</a></p>
   </footer>
+<script src="/js/grabovoi.js" defer></script>
 </body>
 </html>
 `;

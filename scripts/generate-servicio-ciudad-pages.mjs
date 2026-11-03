@@ -432,6 +432,7 @@ ${faqHtml(faqs)}
   <footer class="footer">
     <p>© 2026 GH Specialist · <a href="${depth}">Inicio</a> · <a href="${depth}servicios/">Servicios</a> · <a href="${depth}blog/">Blog</a> · <a href="${depth}sobre-pedro.html">Sobre Pedro</a></p>
   </footer>
+<script src="/js/grabovoi.js" defer></script>
 </body>
 </html>
 `;

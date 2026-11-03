@@ -36,6 +36,7 @@ ${SECURITY}
 </head>
 <body>
   <p>Esta página se movió. <a href="${dest}">${texto} →</a></p>
+<script src="/js/grabovoi.js" defer></script>
 </body>
 </html>
 `;

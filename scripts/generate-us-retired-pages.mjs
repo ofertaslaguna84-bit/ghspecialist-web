@@ -30,6 +30,7 @@ function retiredHtml(title) {
 </head>
 <body>
   <p>GH Specialist opera en México. <a href="${HUB}">Ver ciudades →</a></p>
+<script src="/js/grabovoi.js" defer></script>
 </body>
 </html>
 `;
