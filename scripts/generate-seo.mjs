@@ -53,6 +53,7 @@ const SITEMAP_URLS = [
   { path: 'ciudades/index.html', loc: `${SITE}/ciudades/`, priority: '0.9' },
   { path: 'servicios/index.html', loc: `${SITE}/servicios/`, priority: '0.9' },
   { path: 'torreon/index.html', loc: `${SITE}/torreon/`, priority: '0.85' },
+  { path: 'bitacora/index.html', loc: `${SITE}/bitacora/`, priority: '0.8' },
   { path: 'chatbot-whatsapp-torreon.html', loc: `${SITE}/chatbot-whatsapp-torreon.html`, priority: '0.85' },
   { path: 'agencia-ia-la-laguna.html', loc: `${SITE}/agencia-ia-la-laguna.html`, priority: '0.85' },
   { path: 'automatizacion-gomez-palacio.html', loc: `${SITE}/automatizacion-gomez-palacio.html`, priority: '0.85' },
@@ -297,6 +298,16 @@ async function generateSitemap(blogArticles, servicios, ciudades, servicioCiudad
       priority: entry.priority,
     });
   }
+
+  // Bitácora de Jarvis: una carpeta por día en /bitacora/<slug>/
+  try {
+    const bdir = join(ROOT, 'bitacora');
+    const bsub = (await readdir(bdir, { withFileTypes: true })).filter((d) => d.isDirectory()).map((d) => d.name).sort().reverse();
+    for (const slug of bsub) {
+      const full = join(bdir, slug, 'index.html');
+      urls.push({ loc: `${SITE}/bitacora/${slug}/`, lastmod: await fileLastMod(full), priority: '0.7' });
+    }
+  } catch {}
 
   for (const city of ciudades) {
     urls.push({
