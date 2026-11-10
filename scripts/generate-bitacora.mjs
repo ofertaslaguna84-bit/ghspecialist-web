@@ -29,7 +29,7 @@ a{text-decoration:none;color:inherit}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;font-weight:600;font-size:14px;background:var(--p);color:#fff;border:none;cursor:pointer;font-family:inherit}
 .btn:hover{background:var(--p2)}
 .btn-wa{background:#25D366}.btn-wa:hover{background:#1da851}
-.hero{padding:120px 0 64px;background:var(--dark);color:#fff}
+.hero{padding:120px 0 64px;background:linear-gradient(rgba(22,14,64,.86),rgba(22,14,64,.72)),var(--hero,var(--dark)) center/cover;color:#fff}
 .kicker{display:inline-block;background:rgba(124,77,255,.35);border:1px solid rgba(167,139,250,.5);padding:5px 14px;border-radius:100px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px;color:#c4b5fd}
 .hero h1{font-size:clamp(30px,4vw,50px);font-weight:900;line-height:1.08;margin-bottom:18px;letter-spacing:-.03em}
 .hero p{font-size:17px;opacity:.9;max-width:640px;margin-bottom:24px}
@@ -171,7 +171,7 @@ function entryPage(e, prev, next, modified) {
   ];
   const items = e.items.map(([t, s]) => `<li class="it"><h3>${esc(t)}</h3><p>${esc(s)}</p></li>`).join('\n        ');
   return head({ title, description, url, image: e.image, ld, published: e.date, modified }) + `
-  <section class="hero">
+  <section class="hero" style="--hero:url('${e.image}')">
     <div class="w">
       <span class="kicker">Bitácora de Jarvis · ${esc(e.kicker)}</span>
       <time datetime="${e.date}">${esc(e.dayLabel)}</time>
@@ -257,7 +257,7 @@ function indexPage(entries, modified) {
           </div>
         </article>`).join('\n');
   return head({ title, description, url, image: entries[0].image, ld }) + `
-  <section class="hero">
+  <section class="hero" style="--hero:url('/hero-torreon.webp')">
     <div class="w">
       <span class="kicker">Bitácora de Jarvis</span>
       <h1>Lo que hace una IA operando una empresa, <em style="font-style:normal;color:#a78bfa">cada día</em></h1>
