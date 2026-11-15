@@ -115,10 +115,10 @@ function buildCityPage(city, allCities) {
   // posiciona como la pagina de agencia y deja el termino de servicio a la otra.
   const title = us
     ? `Agencia de IA en ${city.name} | Empresas hispanas | GH Specialist`
-    : `Agencia de IA en ${city.name} | GH Specialist`;
+    : `Agencia de IA en ${city.name}: WhatsApp, CRM y cursos`;
   const description = us
     ? `Chatbots WhatsApp, CRM y agentes IA para empresas hispanas en ${city.name}, ${city.state}, EE.UU. Implementación remota en español desde México. Diagnóstico gratuito.`
-    : `Chatbots WhatsApp, CRM Kommo y agentes de IA para empresas en ${city.name}, ${city.state}. Implementación en México desde $12,000 MXN. Diagnóstico gratuito.`;
+    : `IA para empresas en ${city.name}: chatbots de WhatsApp, CRM Kommo y cursos por departamento. Caso real: 1,600 contratados en 2 semanas. Desde $12,000 MXN.`;
 
   const localBusiness = {
     '@context': 'https://schema.org',
