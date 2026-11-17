@@ -24,6 +24,10 @@ jobs:
         run: |
           node scripts/generate-us-retired-pages.mjs
           node scripts/generate-seo.mjs
+      - name: Quitar archivos internos de lo publicado
+        run: |
+          rm -rf scripts docs-wix .claude node_modules
+          rm -f package.json package-lock.json .gitignore convert_to_pdf.py *.pptx
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
