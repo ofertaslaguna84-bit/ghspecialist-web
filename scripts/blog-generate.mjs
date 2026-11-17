@@ -12,6 +12,7 @@ import { pingSearchEngines } from './indexnow.mjs';
 import { assertBlogClientSecret } from './gh-blog-secret.mjs';
 import { isComparativeBrief } from './gh-blog-topic-resolve.mjs';
 import { prepareBlogGeneration, prepareBlogAuto, parseBlogMarket } from './gh-blog-prepare.mjs';
+import { getTopicsForMarket } from './gh-blog-validated-keywords.mjs';
 import { armarTitle, armarH1, armarDescription, normalizarTexto } from './gh-tipografia.mjs';
 import {
   getBlogFreshness,
@@ -676,6 +677,35 @@ function mismoTema(a, b) {
   return comunes / (A.size + B.size - comunes) >= 0.75;
 }
 
+/**
+ * Temas del catalogo que todavia NO tienen articulo, en el orden del catalogo.
+ *
+ * El blog diario elegia tema con pickNextValidatedTopic, que da un tema por
+ * "cubierto" si dos de sus palabras aparecen en CUALQUIER titulo del blog.
+ * Con 200+ articulos todas las palabras ya aparecen, ningun tema salia libre
+ * y caia al azar sobre el catalogo completo: casi siempre uno ya escrito. El
+ * detector de duplicados lo paraba DESPUES de redactar y la corrida salia en
+ * verde sin publicar nada (12, 14 y 15 de noviembre de 2026). Aqui se filtra
+ * con la misma regla que usa ese detector, antes de gastar la llamada a la IA.
+ */
+const MAX_INTENTOS_TEMA = 5;
+async function temasLibresDelCatalogo(existing, market) {
+  const llaves = [];
+  for (const ex of existing) {
+    try {
+      const exHtml = await readFile(join(ROOT, 'blog', ex), 'utf8');
+      const exTitle = exHtml.match(/<title>([^<]*)<\/title>/i)?.[1] || '';
+      if (exTitle) llaves.push(temaKey(exTitle));
+    } catch {
+      /* noop */
+    }
+  }
+  return getTopicsForMarket(market).filter((t) => {
+    const k = temaKey(t.phrase);
+    return k && !llaves.some((ll) => mismoTema(ll, k));
+  });
+}
+
 async function buscarArticuloDelMismoTema(existing, titleKey) {
   if (!titleKey) return null;
   const encontrados = [];
@@ -911,6 +941,9 @@ async function main() {
 
   /** @type {import('./gh-blog-prepare.mjs').prepareBlogGeneration extends (...args: any) => Promise<infer R> ? R : never} */
   let plan;
+  // Solo blog diario: temas del catalogo sin articulo, para reintentar con el
+  // siguiente si el que toca resulta repetido.
+  let temasLibres = [];
 
   if (userInput) {
     plan = await prepareBlogGeneration(userInput, market);
@@ -922,84 +955,106 @@ async function main() {
       }
     }
   } else {
-    plan = prepareBlogAuto(haystack, market);
-    console.log(`→ Tema automático: «${plan.userTopic}»`);
+    temasLibres = await temasLibresDelCatalogo(existing, market);
+    console.log(`→ Temas del catálogo sin artículo: ${temasLibres.length}`);
+    if (!temasLibres.length) {
+      throw new Error(
+        'Catálogo de temas agotado: todos los temas ya tienen artículo. Agrega temas nuevos a data/gh-blog-topics.json.'
+      );
+    }
   }
 
-  const resolveMeta = {
-    userInput: plan.userTopic,
-    phrase: plan.userTopic,
-    seoKeywords: plan.seoKeywords,
-    indexingKeywords: plan.indexingKeywords,
-    autoCorrected: false,
-    message: plan.message,
-  };
-
-  const basePrompt = buildPrompt(plan, freshness, existing);
+  let resolveMeta;
   let parsed;
-  let lastParseErr;
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    const retryNote =
-      attempt > 1
-        ? '\n\nREINTENTO: el JSON anterior fue inválido. Devuelve un único objeto JSON parseable; content_html con comillas simples en HTML.'
-        : '';
-    const raw = await generateArticleContent(basePrompt + retryNote);
-    try {
-      parsed = parseArticleResponse(raw);
-      break;
-    } catch (e) {
-      lastParseErr = e;
-      console.warn(`JSON inválido (intento ${attempt}):`, e.message || e);
+  let yaExiste;
+  for (let intentoTema = 1; ; intentoTema++) {
+    if (!userInput) {
+      plan = prepareBlogAuto(haystack, market, temasLibres.shift());
+      console.log(`→ Tema automático: «${plan.userTopic}»`);
     }
-  }
-  if (!parsed) throw lastParseErr || new Error('JSON inválido en respuesta IA');
 
-  if (!parsed.slug) parsed.slug = slugify(plan.userTopic);
-  parsed.slug = slugify(parsed.slug.replace(/\.html$/, ''));
-  if (!parsed.slug.endsWith('.html')) parsed.slug += '.html';
+    resolveMeta = {
+      userInput: plan.userTopic,
+      phrase: plan.userTopic,
+      seoKeywords: plan.seoKeywords,
+      indexingKeywords: plan.indexingKeywords,
+      autoCorrected: false,
+      message: plan.message,
+    };
 
-  applyFreshnessToArticle(parsed, freshness, plan.userTopic);
-  enforceArticleLength(parsed);
-
-  // Tipografia de titulares. La IA escribe "Seo con IA cdmx", "Whats app" y
-  // titles de 87 caracteres que Google corta a media palabra. Se normaliza
-  // aqui, con las mismas reglas que se le aplicaron a los articulos ya
-  // publicados (scripts/gh-tipografia.mjs), para que no vuelvan a divergir.
-  parsed.h1 = armarH1(parsed.title || '');
-  parsed.title = armarTitle(parsed.title || '');
-  parsed.description = armarDescription(parsed.description || '');
-  if (parsed.og_title) parsed.og_title = normalizarTexto(parsed.og_title);
-  if (parsed.og_description) parsed.og_description = normalizarTexto(parsed.og_description);
-
-  const wordCount = countWordsInHtml(parsed.content_html || '');
-  console.log(`→ Longitud: ${wordCount} palabras (máx ${BLOG_MAX_WORDS})`);
-  parsed.slug = slugify(parsed.slug.replace(/\.html$/, '')) + '.html';
-  if (parsed.content_html) parsed.content_html = fixInternalBlogLinks(parsed.content_html);
-  if (parsed.related?.length) {
-    for (const r of parsed.related) {
-      if (r.slug) r.slug = normalizeBlogSlug(r.slug);
-      if (r.title) r.title = sanitizeBannedWords(sanitizeStaleYears(r.title, freshness));
-      if (r.desc) r.desc = sanitizeBannedWords(sanitizeStaleYears(r.desc, freshness));
+    const basePrompt = buildPrompt(plan, freshness, existing);
+    parsed = undefined;
+    let lastParseErr;
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      const retryNote =
+        attempt > 1
+          ? '\n\nREINTENTO: el JSON anterior fue inválido. Devuelve un único objeto JSON parseable; content_html con comillas simples en HTML.'
+          : '';
+      const raw = await generateArticleContent(basePrompt + retryNote);
+      try {
+        parsed = parseArticleResponse(raw);
+        break;
+      } catch (e) {
+        lastParseErr = e;
+        console.warn(`JSON inválido (intento ${attempt}):`, e.message || e);
+      }
     }
-  }
+    if (!parsed) throw lastParseErr || new Error('JSON inválido en respuesta IA');
 
-  const titleKey = temaKey(parsed.title || plan.userTopic);
+    if (!parsed.slug) parsed.slug = slugify(plan.userTopic);
+    parsed.slug = slugify(parsed.slug.replace(/\.html$/, ''));
+    if (!parsed.slug.endsWith('.html')) parsed.slug += '.html';
 
-  // Buscar si ya hay un articulo del mismo tema.
-  //
-  // Antes esta busqueda vivia dentro de `if (!userInput)`, o sea que solo
-  // corria para el blog diario. El lote de ciudades SI manda tema
-  // (BLOG_TOPIC='seo con ia cdmx'), asi que se saltaba el chequeo por
-  // completo y cada corrida creaba un -v2, -v3, -v4... con el mismo titulo,
-  // el mismo h1 y canonical propio: cinco paginas peleandose la misma
-  // keyword. Ahora la busqueda corre siempre.
-  const yaExiste = await buscarArticuloDelMismoTema(existing, titleKey);
+    applyFreshnessToArticle(parsed, freshness, plan.userTopic);
+    enforceArticleLength(parsed);
 
-  if (yaExiste && !userInput) {
-    // Blog diario: el tema salio del catalogo. Si ya esta escrito, se sale
-    // sin hacer nada y manana toca otro tema.
-    console.error(`Artículo similar ya existe: ${yaExiste}`);
-    process.exit(0);
+    // Tipografia de titulares. La IA escribe "Seo con IA cdmx", "Whats app" y
+    // titles de 87 caracteres que Google corta a media palabra. Se normaliza
+    // aqui, con las mismas reglas que se le aplicaron a los articulos ya
+    // publicados (scripts/gh-tipografia.mjs), para que no vuelvan a divergir.
+    parsed.h1 = armarH1(parsed.title || '');
+    parsed.title = armarTitle(parsed.title || '');
+    parsed.description = armarDescription(parsed.description || '');
+    if (parsed.og_title) parsed.og_title = normalizarTexto(parsed.og_title);
+    if (parsed.og_description) parsed.og_description = normalizarTexto(parsed.og_description);
+
+    const wordCount = countWordsInHtml(parsed.content_html || '');
+    console.log(`→ Longitud: ${wordCount} palabras (máx ${BLOG_MAX_WORDS})`);
+    parsed.slug = slugify(parsed.slug.replace(/\.html$/, '')) + '.html';
+    if (parsed.content_html) parsed.content_html = fixInternalBlogLinks(parsed.content_html);
+    if (parsed.related?.length) {
+      for (const r of parsed.related) {
+        if (r.slug) r.slug = normalizeBlogSlug(r.slug);
+        if (r.title) r.title = sanitizeBannedWords(sanitizeStaleYears(r.title, freshness));
+        if (r.desc) r.desc = sanitizeBannedWords(sanitizeStaleYears(r.desc, freshness));
+      }
+    }
+
+    const titleKey = temaKey(parsed.title || plan.userTopic);
+
+    // Buscar si ya hay un articulo del mismo tema.
+    //
+    // Antes esta busqueda vivia dentro de `if (!userInput)`, o sea que solo
+    // corria para el blog diario. El lote de ciudades SI manda tema
+    // (BLOG_TOPIC='seo con ia cdmx'), asi que se saltaba el chequeo por
+    // completo y cada corrida creaba un -v2, -v3, -v4... con el mismo titulo,
+    // el mismo h1 y canonical propio: cinco paginas peleandose la misma
+    // keyword. Ahora la busqueda corre siempre.
+    yaExiste = await buscarArticuloDelMismoTema(existing, titleKey);
+
+    if (!yaExiste || userInput) break;
+
+    // Blog diario: el tema salio del catalogo pero el titulo que redacto la IA
+    // empata con un articulo ya publicado. Antes se salia con exito sin
+    // publicar ("manana toca otro tema") y el dia se quedaba sin articulo sin
+    // que nadie se enterara. Ahora se prueba con el siguiente tema libre y, si
+    // ninguno sirve, la corrida FALLA para que se vea en GitHub Actions.
+    console.warn(`⚠ Artículo similar ya existe: ${yaExiste}. Se prueba con otro tema.`);
+    if (intentoTema >= MAX_INTENTOS_TEMA || !temasLibres.length) {
+      throw new Error(
+        `Blog diario sin publicar: ${intentoTema} tema(s) probados y todos repetían un artículo existente (último: ${yaExiste}).`
+      );
+    }
   }
 
   // Si el tema es fijo (lote de ciudades) y ya hay articulo, se ACTUALIZA ese

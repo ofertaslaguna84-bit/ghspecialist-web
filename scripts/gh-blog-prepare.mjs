@@ -53,9 +53,10 @@ export async function prepareBlogGeneration(userInput, market = 'mx') {
  * Tema automático (campo vacío) — catálogo rotativo por mercado.
  * @param {string[]} haystack
  * @param {'mx'|'usa'} [market]
+ * @param {{ phrase: string, category: string }} [topicFijo] tema ya elegido por quien llama
  */
-export function prepareBlogAuto(haystack, market = 'mx') {
-  const topic = pickNextValidatedTopic(haystack, { market });
+export function prepareBlogAuto(haystack, market = 'mx', topicFijo) {
+  const topic = topicFijo || pickNextValidatedTopic(haystack, { market });
   const regionsList = market === 'usa' ? INDEXING_REGIONS_USA : INDEXING_REGIONS;
   const indexingKeywords = {
     intro:
