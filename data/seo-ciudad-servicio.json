@@ -24,6 +24,27 @@
         "Inmobiliarias y desarrolladoras que necesitan saber cuántos prospectos tiene cada asesor",
         "Empresas que quieren medir cuánto tarda su equipo en contestar"
       ]
+    },
+    "capacitaciones-ia-empresas": {
+      "enfoque": "En Torreón, Gómez Palacio y Lerdo la mayoría de las empresas medianas tiene oficinas chicas donde una misma persona hace compras, cuentas por pagar y a veces nómina. Ahí la IA no llega como proyecto de sistemas: llega cuando esa persona aprende a pasar el estado de cuenta a Excel en dos minutos o a comparar tres cotizaciones sin capturar nada a mano. El taller se da en tus oficinas de La Laguna, sin viáticos, y se arma con los archivos de tu gente.",
+      "reto": "La Laguna tiene de todo en poco espacio: agroindustria y lechería, metalmecánica, constructoras, distribuidoras y comercio. Lo que tienen en común es que la administración se lleva en Excel y WhatsApp, con procesos que dependen de la memoria de dos o tres personas. Cuando una de ellas falta, el reporte de dirección se atrasa. Capacitar por departamento sirve para que el conocimiento quede escrito en un prompt y en un proyecto, no en la cabeza de alguien.",
+      "casos": [
+        "Administración y compras de empresas agroindustriales y distribuidoras de La Laguna",
+        "Constructoras y desarrolladoras: reportes de avance, estimaciones y control de contratistas",
+        "Crédito y cobranza de comercios que dan crédito a clientes de la región",
+        "Despachos de arquitectura, contabilidad y consultoría con equipos de 5 a 10 personas"
+      ],
+      "viaticos": "En Torreón, Gómez Palacio y Lerdo el taller es presencial sin costo de traslado: es la sede de GH Specialist.",
+      "faqs": [
+        {
+          "q": "¿El taller en Torreón es presencial?",
+          "a": "Sí. En Torreón, Gómez Palacio y Lerdo vamos a tus oficinas o a tu planta sin costo de traslado, porque aquí está la sede de GH Specialist. Cada persona trabaja en su computadora, con sus propios archivos."
+        },
+        {
+          "q": "Somos una empresa chica, ¿podemos juntar varias áreas en un taller?",
+          "a": "Sí. El taller de arranque es para hasta 10 personas de una o varias áreas, así que en una empresa chica se puede sentar el mismo día a administración, compras y ventas, cada quien con sus archivos."
+        }
+      ]
     }
   },
   "monterrey": {
@@ -50,6 +71,27 @@
         "Empresas con varias sucursales o líneas de negocio que comparten clientes",
         "Direcciones que quieren ver conversión por vendedor y por fuente de prospectos"
       ]
+    },
+    "capacitaciones-ia-empresas": {
+      "enfoque": "En Monterrey hay empresas que ya pagan licencias de IA y las usan para poco más que redactar correos. El taller sirve para pasar de la licencia al trabajo: cada departamento llega con sus archivos y sale con sus tareas de la semana resueltas, una tabla de cuánto tardaba antes y cuánto tarda ahora, y la respuesta a cuál herramienta vale la pena seguir pagando. Se da en tus oficinas del área metropolitana o en línea.",
+      "reto": "El mercado regio tiene mucha oferta de cursos de IA: diplomados de universidad, plataformas en línea y conferencias. Casi todos enseñan la herramienta con ejemplos genéricos, a personas sueltas, y al volver a la oficina nadie cambia su forma de trabajar. Aquí la unidad no es la persona sino el departamento: compras completo, recursos humanos completo, con sus propios archivos y con el jefe del área en la sala.",
+      "casos": [
+        "Corporativos con varios departamentos que quieren el mismo criterio de uso y de seguridad",
+        "Manufactura y proveeduría industrial: compras, inventarios y reportes de planta",
+        "Desarrolladoras e inmobiliarias: seguimiento a prospectos y reportes de ventas",
+        "Logística y transporte: cotizaciones, facturas contra pagos y cobranza"
+      ],
+      "viaticos": "Para Monterrey y su área metropolitana los viáticos se cotizan aparte. El programa por áreas de tres días seguidos es el que mejor aprovecha el viaje.",
+      "faqs": [
+        {
+          "q": "¿Dan el curso presencial en Monterrey?",
+          "a": "Sí, en tus oficinas en Monterrey, San Pedro, Apodaca, Santa Catarina o cualquier punto del área metropolitana. GH Specialist viaja desde Torreón; los viáticos se cotizan aparte del precio del taller. También se puede dar en línea."
+        },
+        {
+          "q": "Ya tenemos Copilot o ChatGPT contratado, ¿el taller se adapta?",
+          "a": "Sí. Se practica en la herramienta que tu empresa ya paga. En el taller también se ve qué hace cada una (ChatGPT, Claude, Gemini y Grok) para que decidas con criterio si te quedas con la que tienes o si a algún puesto le conviene otra."
+        }
+      ]
     }
   },
   "saltillo": {
@@ -75,6 +117,27 @@
         "Proveedores industriales con muchas cotizaciones abiertas al mismo tiempo",
         "Equipos de venta que atienden clientes en Saltillo, Ramos Arizpe y Monterrey",
         "Empresas que quieren dejar de depender del celular personal de cada vendedor"
+      ]
+    },
+    "capacitaciones-ia-empresas": {
+      "enfoque": "Las empresas de Saltillo que le venden a la industria viven de contestar bien y a tiempo: cotizaciones con muchos renglones, reportes que pide el cliente en su formato y auditorías. Casi todo ese trabajo lo cargan compras, calidad y administración sobre Excel y correo. En el taller cada área trabaja esos mismos archivos: el comparativo de proveedores, la antigüedad de saldos, el reporte semanal. Se da presencial en Saltillo, a unas tres horas de Torreón.",
+      "reto": "En Saltillo el personal administrativo es difícil de reponer: las plantas grandes compiten por la misma gente y cada rotación se lleva conocimiento que no estaba escrito. Por eso el curso no se queda en enseñar a preguntarle cosas a un chat. Cada persona documenta su tarea como un prompt maestro dentro de un proyecto, de modo que quien llegue después pueda hacerla igual desde el primer día.",
+      "casos": [
+        "Compras e inventarios de proveedores de la industria automotriz y metalmecánica",
+        "Recursos humanos con vacantes operativas abiertas todo el año",
+        "Crédito y cobranza de distribuidoras industriales",
+        "Administración y finanzas que arman el reporte mensual para dirección"
+      ],
+      "viaticos": "Para Saltillo los viáticos se cotizan aparte; al ser un viaje por carretera de ida y vuelta desde Torreón, conviene juntar dos o tres áreas en días seguidos.",
+      "faqs": [
+        {
+          "q": "¿Van a Saltillo o es en línea?",
+          "a": "Las dos opciones. Saltillo está a unas tres horas de Torreón por carretera, así que el taller presencial en tus instalaciones es lo normal. Si el grupo está repartido en varias sedes, se da en línea con la misma dinámica de trabajos reales."
+        },
+        {
+          "q": "Nuestra información es de clientes industriales, ¿es seguro usarla en el curso?",
+          "a": "El taller empieza con las reglas de seguridad: cuentas de empresa y no personales, qué documentos no se suben y cómo quitar datos sensibles antes de trabajar un archivo. Los ejercicios se arman con datos anonimizados de tu empresa y lo que produce la IA se revisa antes de usarse."
+        }
       ]
     }
   },
@@ -127,6 +190,27 @@
         "Equipos de venta que crecieron y perdieron control del seguimiento",
         "Distribuidores con cartera grande de clientes recurrentes",
         "Empresas que quieren saber qué vendedor convierte mejor"
+      ]
+    },
+    "capacitaciones-ia-empresas": {
+      "enfoque": "Guadalajara tiene empresas de tecnología que ya usan IA para programar y, a unas cuadras, negocios familiares de décadas donde el dueño todavía firma cada compra. En los dos casos el hueco es el mismo: las áreas administrativas. Compras, recursos humanos, cobranza y contabilidad siguen capturando a mano. El taller es para esas áreas, con sus propios archivos, y respeta la forma de trabajar de la casa en lugar de imponer una nueva.",
+      "reto": "En las empresas familiares tapatías la resistencia a la IA no es técnica, es de confianza: quién ve la información, si se va a correr gente, si el trato con el cliente se vuelve frío. Por eso el curso arranca con qué es y qué no es la IA y con las reglas de qué se sube y qué no, y se trabaja sobre tareas internas, de escritorio, antes de tocar nada que vea el cliente.",
+      "casos": [
+        "Negocios familiares que quieren que la siguiente generación modernice la administración",
+        "Manufactura y agroindustria: compras, inventarios y costos",
+        "Comercio y retail con varias sucursales que consolidan reportes cada semana",
+        "Hoteles, restaurantes y servicios: recursos humanos con rotación alta"
+      ],
+      "viaticos": "Para Guadalajara los viáticos se cotizan aparte del precio del taller. En línea no hay viáticos y la dinámica es la misma.",
+      "faqs": [
+        {
+          "q": "¿Tienen experiencia capacitando empresas en Jalisco?",
+          "a": "Sí. En la zona metropolitana de Guadalajara se capacitó a una distribuidora de gas: 21 personas de 6 departamentos (administración, conciliación, recursos humanos, inventarios, créditos y dirección) en 3 días de taller, en su planta y con sus propios archivos."
+        },
+        {
+          "q": "¿La IA va a sustituir a mi gente de oficina?",
+          "a": "El taller no está armado para eso. Lo que cambia es en qué se va el día: menos captura y menos copiar de un archivo a otro, más revisión y más seguimiento. Cada persona hace una tabla de cuánto tardaba antes y cuánto tarda ahora en sus tareas; con eso la dirección decide qué hacer con el tiempo que se libera."
+        }
       ]
     }
   },
@@ -284,6 +368,27 @@
         "Distribuidoras con rutas de venta en toda la zona metropolitana",
         "Equipos comerciales que quieren medir seguimiento y tiempo de respuesta"
       ]
+    },
+    "capacitaciones-ia-empresas": {
+      "enfoque": "En Zapopan ya se dio este programa completo: una distribuidora de gas capacitó a 21 personas de seis departamentos en tres días de taller dentro de su planta. Se trabajó con sus Excel de ventas por ruta, facturas contra pagos, inventario de cilindros y solicitudes de empleo. Ese es el formato que mejor funciona en empresas medianas de la zona: tres días seguidos agrupando áreas afines, y lo que se repite cada semana se convierte después en un agente.",
+      "reto": "Las empresas medianas de Zapopan suelen tener la operación en un lado (planta, rutas, bodega en El Bajío o rumbo a Tesistán) y la administración en otro, y entre las dos viajan archivos de Excel por correo y WhatsApp. Buena parte del trabajo de oficina es juntar esos archivos y cuadrarlos. Ahí es donde un taller por departamento rinde más rápido: consolidar, conciliar y reportar son justo las tareas que la IA hace bien cuando alguien le enseña el formato.",
+      "casos": [
+        "Distribuidoras con rutas: ventas por ruta, inventario y facturas contra pagos",
+        "Constructoras y desarrolladoras del poniente de la zona metropolitana",
+        "Corporativos de Andares y Puerta de Hierro con áreas de finanzas y recursos humanos",
+        "Logística y manufactura de El Bajío y el corredor a Tala"
+      ],
+      "viaticos": "Para Zapopan los viáticos se cotizan aparte del precio del taller; con el programa de tres días seguidos se pagan una sola vez.",
+      "faqs": [
+        {
+          "q": "¿Cómo es el programa de tres días que ya dieron en Zapopan?",
+          "a": "Tres días de taller de 6 horas en las instalaciones de la empresa, agrupando áreas afines por día. Antes hay un diagnóstico de 30 minutos con cada responsable para armar el manual y los archivos de práctica. Al cierre cada persona tiene su tarea resuelta, su prompt maestro guardado y un plan de 30 días con soporte por WhatsApp."
+        },
+        {
+          "q": "¿Puedo empezar con un solo departamento?",
+          "a": "Sí. El taller de arranque es de un día para hasta 10 personas y sirve para probar con el área que más carga tiene. Si funciona, se sigue con las demás en el programa por áreas."
+        }
+      ]
     }
   },
   "ramos-arizpe": {
@@ -309,6 +414,27 @@
         "Proveedores industriales con muchas cotizaciones abiertas al mismo tiempo",
         "Empresas de reclutamiento y servicios que atienden varias plantas",
         "Equipos de venta que cubren Ramos Arizpe, Saltillo y Monterrey"
+      ]
+    },
+    "capacitaciones-ia-empresas": {
+      "enfoque": "En los parques industriales de Ramos Arizpe la capacitación tiene que caber en el turno. Por eso el taller se parte por departamento y se agenda para no parar la operación: un día recursos humanos, otro compras, otro sistemas. Los ejercicios salen del trabajo de planta: solicitudes de empleo, requisiciones, reportes de turno, tickets de soporte. Se da en tu planta o en una sala cercana.",
+      "reto": "En Ramos Arizpe la pelea diaria es por personal operativo y por tiempo: recursos humanos recibe decenas de solicitudes por vacante y compras persigue requisiciones urgentes. Son tareas repetidas, con formato, donde la IA quita horas de captura desde la primera semana si la gente sabe usarla. El riesgo es el contrario: que cada quien la use por su lado y suba información del cliente a una cuenta personal.",
+      "casos": [
+        "Recursos humanos de planta: de decenas de solicitudes a una lista corta de entrevistas con ranking",
+        "Compras y almacén de proveedores Tier 1 y Tier 2",
+        "Sistemas (TI): manuales, tickets de soporte y reportes",
+        "Supervisión y servicios para plantas que entregan reportes al cliente"
+      ],
+      "viaticos": "Para Ramos Arizpe los viáticos se cotizan aparte. Si tu empresa tiene oficinas en Saltillo, se puede dar en una sola visita para las dos sedes.",
+      "faqs": [
+        {
+          "q": "¿Pueden dar el curso en la planta, por turnos?",
+          "a": "Sí. Se da en tu planta y se agenda por departamento, viendo con el responsable de cada área qué día y en qué turno conviene para no parar la operación. El taller de un área dura 6 horas."
+        },
+        {
+          "q": "¿Sirve para personal de piso o solo para oficina?",
+          "a": "El taller está pensado para quien trabaja con archivos: recursos humanos, compras, sistemas, crédito y cobranza, administración, supervisión y dirección. Para el personal de piso lo que conviene es que su supervisor salga con los reportes y formatos ya resueltos."
+        }
       ]
     }
   }

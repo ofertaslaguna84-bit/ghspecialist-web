@@ -27,13 +27,17 @@ const SERVICES = [
   { slug: 'agentes-omnicanal.html', title: 'Agentes omnicanal', desc: 'IA en WhatsApp, web y redes.' },
   { slug: 'growth-difusiones.html', title: 'Growth y difusiones', desc: 'Crecimiento con IA y difusiones.' },
   { slug: 'pauta-omnicanal.html', title: 'Pauta omnicanal', desc: 'Meta/Google conectado a tu CRM.' },
+  { slug: 'capacitaciones-ia-empresas.html', title: 'Capacitación en IA', desc: 'Talleres de ChatGPT, Claude, Gemini y Grok por departamento.' },
 ];
 
-const POR_CIUDAD = new Set(
+// slug → lista de ciudades donde el servicio tiene página local (null = todas).
+const POR_CIUDAD = new Map(
   JSON.parse(readFileSync(join(ROOT, 'data/seo-services.json'), 'utf8'))
     .filter((s) => s.porCiudad)
-    .map((s) => s.slug)
+    .map((s) => [s.slug, s.ciudades || null])
 );
+const tienePaginaLocal = (svcSlug, citySlug) =>
+  POR_CIUDAD.has(svcSlug) && (!POR_CIUDAD.get(svcSlug) || POR_CIUDAD.get(svcSlug).includes(citySlug));
 
 function esc(s) {
   return String(s || '')
@@ -257,7 +261,7 @@ function buildCityPage(city, allCities) {
   const serviceCards = SERVICES.map(
     (s) => {
       const svcSlug = s.slug.replace('.html', '');
-      const local = POR_CIUDAD.has(svcSlug)
+      const local = tienePaginaLocal(svcSlug, city.slug)
         ? `<a href="../../servicios/${svcSlug}/${city.slug}/">${esc(s.title)} en ${esc(city.name)} →</a>
           <a href="../../servicios/${s.slug}" style="display:block;margin-top:6px;font-size:12px">Servicio nacional →</a>`
         : `<a href="../../servicios/${s.slug}">Ver servicio →</a>`;

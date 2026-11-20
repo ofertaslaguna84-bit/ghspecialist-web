@@ -57,6 +57,7 @@ const SITEMAP_URLS = [
   { path: 'chatbot-whatsapp-torreon.html', loc: `${SITE}/chatbot-whatsapp-torreon.html`, priority: '0.85' },
   { path: 'agencia-ia-la-laguna.html', loc: `${SITE}/agencia-ia-la-laguna.html`, priority: '0.85' },
   { path: 'automatizacion-gomez-palacio.html', loc: `${SITE}/automatizacion-gomez-palacio.html`, priority: '0.85' },
+  { path: 'preguntas-frecuentes.html', loc: `${SITE}/preguntas-frecuentes.html`, priority: '0.8' },
   { path: 'sobre-pedro.html', loc: `${SITE}/sobre-pedro.html`, priority: '0.7' },
 ];
 
@@ -225,6 +226,8 @@ async function collectServicioCiudad(mexicoSlugs) {
   }
   for (const svc of services) {
     for (const city of cities) {
+      // svc.ciudades limita las ciudades del servicio; el resto son redirecciones y no van al sitemap.
+      if (svc.ciudades && !svc.ciudades.includes(city.slug)) continue;
       const rel = `servicios/${svc.slug}/${city.slug}/index.html`;
       const full = join(ROOT, rel);
       try {

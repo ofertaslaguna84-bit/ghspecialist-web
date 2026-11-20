@@ -425,48 +425,84 @@
   {
     "slug": "capacitaciones-ia-empresas",
     "file": "capacitaciones-ia-empresas.html",
-    "name": "Capacitaciones IA al por mayor",
-    "short": "Capacitación IA corporativa",
-    "desc": "Capacitaciones de IA al por mayor para minería, construcción, manufactura e industria. Packs 10 / 25 / 50+ colaboradores.",
-    "price": "18000",
-    "entrega": "2 a 4 semanas para armar el programa; la impartición se calendariza contigo",
-    "paraQuien": "empresas de minería, construcción, manufactura e industria que ya vieron a su gente usando IA por su cuenta, sin criterio ni reglas, y quieren capacitarla en serio en vez de prohibirla",
-    "problema": "En la mayoría de las plantas la IA ya entró por la puerta de atrás: el personal usa ChatGPT desde su celular para redactar reportes o resolver dudas, sin capacitación y a veces pegando información que no debería salir de la empresa. Prohibirla no funciona — solo la vuelve invisible. Y los cursos genéricos de internet no sirven porque no hablan del trabajo que esa gente hace.",
-    "comoFunciona": "Se arma un programa sobre los casos reales de tu operación — no ejemplos de manual — y se imparte por packs de colaboradores. La gente sale con herramientas aplicadas a su puesto y con reglas claras de qué información sí y cuál no se le da a una IA.",
+    "name": "Capacitación en IA para empresas",
+    "short": "Capacitación en IA para empresas",
+    "desc": "Cursos y talleres de ChatGPT, Claude, Gemini y Grok para empresas, por departamento y con los archivos reales de cada persona: taller de arranque de 6 horas, programa por áreas de 3 días e implementación de 30 días.",
+    "price": "30000",
+    "entrega": "2 semanas del diagnóstico al taller",
+    "paraQuien": "empresas cuyo personal ya usa IA por su cuenta, sin criterio ni reglas, y que quieren que compras, recursos humanos, sistemas, crédito y cobranza, administración y dirección la usen en serio en su trabajo de todos los días",
+    "problema": "En casi todas las empresas la IA ya entró por la puerta de atrás: la gente usa ChatGPT desde su celular para redactar o resolver dudas, sin capacitación y a veces pegando información que no debería salir de la empresa. Prohibirla no funciona, solo la vuelve invisible. Y los cursos genéricos de internet no sirven porque no hablan del trabajo que esa gente hace.",
+    "comoFunciona": "Primero se platica 30 minutos con el responsable de cada área para saber qué tareas se repiten y qué archivos usan. Con eso se arma el manual y los ejercicios. El día del taller cada persona llega con sus propios Excel, PDF, Word y correos, resuelve sus tareas reales con IA y guarda su prompt maestro. Después hay 30 días de soporte por WhatsApp, y lo que se repite cada semana se puede convertir en un agente.",
     "incluye": [
-      "Programa armado sobre los procesos y el vocabulario de tu industria",
-      "Packs de 10, 25 o 50+ colaboradores",
-      "Sesiones en vivo, presenciales o remotas, en español",
-      "Casos prácticos del puesto de cada grupo, no ejemplos genéricos",
-      "Reglas de uso seguro: qué información no se le da nunca a una IA pública",
-      "Material de consulta y constancia de participación por asistente"
+      "Diagnóstico de 30 minutos con el responsable de cada área, sin costo",
+      "Taller de 6 horas por departamento, presencial o en línea",
+      "ChatGPT, Claude, Gemini y Grok: para qué sirve cada uno y cuál conviene por tarea",
+      "Ejercicios con los archivos reales de cada persona (Excel, PDF, Word, correos)",
+      "Reglas de seguridad: qué sí y qué no se le sube a una IA",
+      "Manual por área, banco de prompts y plan de 30 días",
+      "Soporte por WhatsApp durante un mes y constancias de participación"
     ],
     "noIncluye": [
-      "Licencias de las herramientas de IA que se usen en el curso",
-      "Certificación oficial ante STPS (se puede gestionar aparte)",
-      "Implementación técnica de las herramientas en tus sistemas"
+      "Licencias de las herramientas de IA (las contrata tu empresa)",
+      "Viáticos fuera de La Laguna (se cotizan aparte)",
+      "La instalación de agentes y conectores: eso es el Nivel 3, implementación de 30 días"
     ],
     "integraciones": [
       "ChatGPT",
       "Claude",
       "Gemini",
-      "Microsoft Copilot",
-      "Google Workspace"
+      "Grok",
+      "Google Workspace",
+      "Microsoft 365"
     ],
     "faqs": [
       {
         "q": "¿Cuánta gente entra por ese precio?",
-        "a": "El precio de arranque corresponde al pack chico. De ahí escala por número de colaboradores: entre más grande el grupo, menor el costo por persona. En el diagnóstico se define el pack según cuánta gente y cuántos turnos hay que cubrir."
+        "a": "El taller de arranque es de 6 horas para hasta 10 personas de una o varias áreas, desde $30,000 + IVA. El programa por áreas son tres días, un departamento por día, desde $90,000 + IVA."
       },
       {
-        "q": "Mi gente de planta no es de computadora. ¿Les va a servir?",
-        "a": "Es la duda más común y por eso el programa se arma por puesto. A supervisión y administrativos se les enseña sobre su trabajo real — reportes, bitácoras, correos, análisis. A quien no usa computadora a diario se le enseña desde el celular y con casos de su turno. No se da el mismo curso a todos."
+        "q": "Mi gente no es de computadora. ¿Les va a servir?",
+        "a": "Por eso el programa se arma por puesto. A cada área se le enseña sobre su trabajo real: reportes, conciliaciones, solicitudes, cotizaciones, correos. No se da el mismo curso a todos."
       },
       {
-        "q": "¿Puede ser en planta y por turnos?",
-        "a": "Sí. Se imparte presencial en sitio o remoto, y se calendariza por turnos para no parar la operación. En minería y construcción es lo normal: grupos chicos, sesiones cortas y repetidas por turno."
+        "q": "¿Puede ser en nuestras instalaciones?",
+        "a": "Sí. Se imparte presencial en tus instalaciones o en línea por videollamada con la misma dinámica de trabajos reales. Fuera de La Laguna los viáticos se cotizan aparte."
       }
     ],
-    "metaShort": "Capacitaciones de IA para minería, construcción, manufactura e industria."
+    "metaShort": "Cursos de ChatGPT, Claude, Gemini y Grok por departamento, con tus archivos.",
+    "porCiudad": true,
+    "ciudades": [
+      "torreon",
+      "saltillo",
+      "ramos-arizpe",
+      "monterrey",
+      "guadalajara",
+      "zapopan"
+    ],
+    "ciudad": {
+      "published": "2026-11-19",
+      "keywords": "capacitación en ia para empresas {ciudad}, curso de inteligencia artificial para empresas {ciudad}, curso de chatgpt para empresas {ciudad}, taller de claude {ciudad}, capacitación ia {estado}",
+      "hero": "Talleres de ChatGPT, Claude, Gemini y Grok por departamento, en tus instalaciones en {ciudad} o en línea. Cada persona llega con sus archivos y se va con sus tareas de todos los días resueltas con IA.",
+      "resumen": "La capacitación en IA para empresas en {ciudad} cuesta desde {precio} (taller de arranque de 6 horas para hasta 10 personas) o desde $90,000 MXN + IVA (programa de 3 días, un departamento por día). Se trabaja con los archivos reales de cada área y con ChatGPT, Claude, Gemini y Grok. La imparte GH Specialist, con base en Torreón, presencial o en línea.",
+      "tituloComo": "Cómo es el taller",
+      "casoTitulo": "Un caso real",
+      "caso": "Una distribuidora de gas de Jalisco capacitó en Claude a 21 personas de 6 departamentos (administración, conciliación, recursos humanos, inventarios, créditos y dirección) en 3 días de taller, en su planta y con sus propios archivos. Cada persona salió con su tarea real resuelta y un plan de 30 días.",
+      "precioNota": "Taller de arranque: 6 horas, hasta 10 personas. Programa por áreas (3 días, un departamento por día): desde $90,000 MXN + IVA. Implementación de 30 días: se cotiza según tamaño.",
+      "precioDetalle": "El precio es fijo y es el mismo en {ciudad} que en el resto del país. Las licencias de las herramientas las contrata tu empresa a su nombre, para que las cuentas y lo que se trabaje en ellas se queden contigo.",
+      "faqs": [
+        {
+          "q": "¿Cuánto cuesta un curso de IA para empresas en {ciudad}?",
+          "a": "El taller de arranque (6 horas, hasta 10 personas) cuesta desde {precio}. El programa por áreas, tres días con un departamento por día, desde $90,000 MXN + IVA. La implementación de 30 días se cotiza según el tamaño de la empresa. El precio en {ciudad} es el mismo que en el resto del país."
+        },
+        {
+          "q": "¿En cuánto tiempo se puede dar el taller?",
+          "a": "Unas dos semanas desde el diagnóstico: 30 minutos con el responsable de cada área, después se arman el manual y los archivos de práctica, y se da el taller. Lo que más mueve la fecha es juntar a la gente del área el mismo día."
+        },
+        {
+          "q": "¿Qué herramientas de IA se enseñan?",
+          "a": "ChatGPT, Claude, Gemini y Grok: para qué sirve cada una, cuál conviene por tarea y por precio. Se practica en la herramienta que tu empresa va a usar. Recomendamos Claude en plan Team porque lee archivos largos y permite proyectos con instrucciones por puesto."
+        }
+      ]
+    }
   }
 ]

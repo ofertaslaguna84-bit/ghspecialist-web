@@ -61,6 +61,22 @@ function esc(s) {
 
 const mxn = (n) => `$${Number(n).toLocaleString('es-MX')} MXN + IVA`;
 
+// Un servicio puede limitar sus páginas locales a ciertas ciudades (svc.ciudades = [slugs]).
+// Sin ese campo sale en todas. La misma regla la aplican generate-retired-mx-pages,
+// generate-city-pages y generate-seo (sitemap).
+const saleEn = (svc, city) => !svc.ciudades || svc.ciudades.includes(city.slug);
+
+// Textos de plantilla que un servicio puede reemplazar en svc.ciudad (p. ej. capacitación,
+// que no es una "implementación"). Marcadores: {ciudad} {estado} {cobertura} {precio}.
+function tpl(text, svc, city) {
+  return String(text)
+    .replaceAll('{ciudad}', city.name)
+    .replaceAll('{estado}', city.state)
+    .replaceAll('{cobertura}', city.cobertura)
+    .replaceAll('{precio}', mxn(svc.price));
+}
+const propioDe = (svc, city) => local[city.slug]?.[svc.slug];
+
 function waText(svc, city) {
   return encodeURIComponent(`Hola Pedro, quiero ${svc.short} en ${city.name}`);
 }
@@ -70,6 +86,12 @@ function waText(svc, city) {
  * Orden: precio → plazo → cobertura local → las propias del servicio → la de la ciudad.
  */
 function buildFaqs(svc, city) {
+  const o = svc.ciudad || {};
+  const propio = propioDe(svc, city) || {};
+  const locales = propio.faqs || (city.faqLocal ? [city.faqLocal] : []);
+  if (o.faqs) {
+    return [...o.faqs.map((f) => ({ q: tpl(f.q, svc, city), a: tpl(f.a, svc, city) })), ...locales];
+  }
   return [
     {
       q: `¿Cuánto cuesta ${svc.short.toLowerCase()} en ${city.name}?`,
@@ -84,7 +106,7 @@ function buildFaqs(svc, city) {
       a: `Sí. ${svc.name} para empresas de ${city.name}, ${city.state} y alrededores: ${city.cobertura}. La implementación es remota; las juntas de arranque y la capacitación pueden ser presenciales según la ciudad. GH Specialist tiene su base en Torreón y cobertura en todo México.`,
     },
     // Las FAQ generales del servicio viven en su página nacional; aquí solo las locales.
-    ...(city.faqLocal ? [city.faqLocal] : []),
+    ...locales,
   ];
 }
 
@@ -116,14 +138,15 @@ function buildPage(svc, city, allCities, allServices) {
   );
 
   const faqs = buildFaqs(svc, city);
-  const propio = local[city.slug]?.[svc.slug];
+  const o = svc.ciudad || {};
+  const propio = propioDe(svc, city);
   if (!propio) throw new Error(`Falta contenido en data/seo-ciudad-servicio.json para ${city.slug}/${svc.slug}`);
 
   // Respuesta corta y citable: es el bloque que un buscador de IA extrae.
-  const resumen = `${svc.name} en ${city.name} cuesta desde ${mxn(svc.price)} y se implementa en ${svc.entrega}. Es para ${svc.paraQuien}. Lo implementa GH Specialist, Gold Partner de Kommo con base en Torreón, con cobertura en ${city.cobertura}.`;
+  const resumen = o.resumen ? tpl(o.resumen, svc, city) : `${svc.name} en ${city.name} cuesta desde ${mxn(svc.price)} y se implementa en ${svc.entrega}. Es para ${svc.paraQuien}. Lo implementa GH Specialist, Gold Partner de Kommo con base en Torreón, con cobertura en ${city.cobertura}.`;
 
   const otherCities = allCities
-    .filter((c) => c.slug !== city.slug)
+    .filter((c) => c.slug !== city.slug && saleEn(svc, c))
     .map(
       (c) =>
         `<a href="${depth}servicios/${svc.slug}/${c.slug}/">${esc(svc.short)} ${esc(c.name)}</a>`
@@ -131,7 +154,7 @@ function buildPage(svc, city, allCities, allServices) {
     .join('\n        ');
 
   const otherServices = allServices
-    .filter((s) => s.slug !== svc.slug)
+    .filter((s) => s.slug !== svc.slug && saleEn(s, city))
     .map(
       (s) =>
         `<a href="${depth}servicios/${s.slug}/${city.slug}/">${esc(s.short)} ${esc(city.name)}</a>`
@@ -193,7 +216,8 @@ function buildPage(svc, city, allCities, allServices) {
     name: title,
     description,
     inLanguage: 'es-MX',
-    datePublished: '2026-03-01',
+    // Las combinaciones nuevas declaran su fecha en svc.ciudad.published; las originales son de marzo 2026.
+    datePublished: o.published || '2026-03-01',
     dateModified: HOY,
     isPartOf: { '@type': 'WebSite', name: 'GH Specialist', url: `${SITE}/` },
     about: { '@type': 'Thing', name: `${svc.name} en ${city.name}` },
@@ -231,7 +255,7 @@ function buildPage(svc, city, allCities, allServices) {
   <link rel="icon" href="${depth}favicon.png" type="image/png">
   <title>${esc(title)}</title>
   <meta name="description" content="${esc(description)}">
-  <meta name="keywords" content="${esc(svc.short.toLowerCase())} ${esc(city.name.toLowerCase())}, ${esc(svc.slug.replace(/-/g, ' '))} ${esc(city.state.toLowerCase())}, automatizar whatsapp ${esc(city.name.toLowerCase())}, ia empresas ${esc(city.name.toLowerCase())}">
+  <meta name="keywords" content="${o.keywords ? esc(tpl(o.keywords, svc, city).toLowerCase()) : `${esc(svc.short.toLowerCase())} ${esc(city.name.toLowerCase())}, ${esc(svc.slug.replace(/-/g, ' '))} ${esc(city.state.toLowerCase())}, automatizar whatsapp ${esc(city.name.toLowerCase())}, ia empresas ${esc(city.name.toLowerCase())}`}">
   <meta name="author" content="${esc(AUTOR)}">
   <link rel="canonical" href="${url}">
   <meta property="og:type" content="website">
@@ -319,7 +343,7 @@ function buildPage(svc, city, allCities, allServices) {
     <div class="w">
       <span class="label">${esc(city.kicker)}</span>
       <h1>${esc(svc.short)} en <em>${esc(city.name)}</em></h1>
-      <p>${esc(svc.desc)} Implementación para empresas en ${esc(city.name)} y ${esc(city.state)}, en ${esc(svc.entrega)}.</p>
+      <p>${o.hero ? esc(tpl(o.hero, svc, city)) : `${esc(svc.desc)} Implementación para empresas en ${esc(city.name)} y ${esc(city.state)}, en ${esc(svc.entrega)}.`}</p>
       <a href="${CALENDAR}" class="btn">Diagnóstico gratuito</a>
       <a href="https://wa.me/${WA}?text=${waText(svc, city)}" class="btn btn-wa">WhatsApp</a>
     </div>
@@ -336,7 +360,7 @@ function buildPage(svc, city, allCities, allServices) {
       <span class="label">El problema</span>
       <h2 class="title">Por qué las empresas de ${esc(city.name)} contratan esto</h2>
       <p>${esc(propio.enfoque)}</p>
-      <p>${esc(city.reto)}</p>
+      <p>${esc(propio.reto || city.reto)}</p>
 
       <h3>Dónde más se usa en ${esc(city.name)}</h3>
       <ul>
@@ -345,14 +369,17 @@ function buildPage(svc, city, allCities, allServices) {
 
       <h3>Para quién es</h3>
       <p>Este servicio es para ${esc(svc.paraQuien)}.</p>
-
+${o.caso ? `
+      <h3>${esc(o.casoTitulo || 'Un caso real')}</h3>
+      <p>${esc(tpl(o.caso, svc, city))}</p>
+` : ''}
     </div>
   </section>
 
   <section class="sec sec-gray">
     <div class="w prose">
       <span class="label">Cómo funciona</span>
-      <h2 class="title">Qué hacemos exactamente</h2>
+      <h2 class="title">${esc(o.tituloComo || 'Qué hacemos exactamente')}</h2>
       <p>${esc(svc.comoFunciona)}</p>
       <div class="meta">
         <span class="pill">Plazo: ${esc(svc.entrega)}</span>
@@ -381,9 +408,10 @@ function buildPage(svc, city, allCities, allServices) {
     <div class="w prose">
       <span class="label">Precio</span>
       <h2 class="title">Cuánto cuesta en ${esc(city.name)}</h2>
-      <div class="price">Desde ${esc(mxn(svc.price))}<small>Precio de arranque. El final se cierra tras el diagnóstico, según tamaño de la operación y sistemas a conectar.</small></div>
-      <p>No cobramos distinto por ciudad: el precio en ${esc(city.name)} es el mismo que en el resto del país. Lo que sí cambia el número es el volumen de mensajes, cuántos usuarios y sucursales entran, y con cuántos sistemas hay que conectarse.</p>
-      <p><a href="${depth}servicios/${svc.file}">Ver el servicio completo →</a> · <a href="${depth}ciudades/${city.slug}/">Más sobre ${esc(city.name)} →</a></p>
+      <div class="price">Desde ${esc(mxn(svc.price))}<small>${o.precioNota ? esc(tpl(o.precioNota, svc, city)) : 'Precio de arranque. El final se cierra tras el diagnóstico, según tamaño de la operación y sistemas a conectar.'}</small></div>
+      <p>${o.precioDetalle ? esc(tpl(o.precioDetalle, svc, city)) : `No cobramos distinto por ciudad: el precio en ${esc(city.name)} es el mismo que en el resto del país. Lo que sí cambia el número es el volumen de mensajes, cuántos usuarios y sucursales entran, y con cuántos sistemas hay que conectarse.`}</p>${propio.viaticos ? `
+      <p>${esc(propio.viaticos)}</p>` : ''}
+      <p><a href="${depth}servicios/${svc.file}">Ver el servicio completo →</a> · <a href="${depth}${city.legacyUrl ? city.legacyUrl.replace(/^\//, '') : `ciudades/${city.slug}/`}">Más sobre ${esc(city.name)} →</a></p>
     </div>
   </section>
 
@@ -442,6 +470,7 @@ async function main() {
   let count = 0;
   for (const svc of services) {
     for (const city of cities) {
+      if (!saleEn(svc, city)) continue;
       const dir = join(ROOT, 'servicios', svc.slug, city.slug);
       await mkdir(dir, { recursive: true });
       await writeFile(join(dir, 'index.html'), buildPage(svc, city, cities, services), 'utf8');
@@ -449,7 +478,7 @@ async function main() {
     }
   }
   console.log(
-    `✓ servicio×ciudad — ${count} páginas (${services.length} servicios × ${cities.length} ciudades) · actualizadas ${HOY}`
+    `✓ servicio×ciudad — ${count} páginas (${services.length} servicios, ${cities.length} ciudades) · actualizadas ${HOY}`
   );
 }
 

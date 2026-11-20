@@ -1,0 +1,275 @@
+{
+  "_nota": "Páginas de intención comercial (servicio por caso de uso, comparativas y preguntas frecuentes). Las genera scripts/generate-intent-pages.mjs. Reglas: sin nombres de clientes, solo cifras aprobadas (las mismas de la home y llms.txt), sin testimonios ni premios inventados. El hero siempre lleva foto con velo oscuro.",
+  "paginas": [
+    {
+      "out": "servicios/chatbot-reclutamiento.html",
+      "tipo": "servicio",
+      "published": "2026-11-19",
+      "hero": "img/nueva/obras/casas-fraccionamiento-acabados-01.jpg",
+      "kicker": "Reclutamiento con IA · WhatsApp · México",
+      "title": "Chatbot de reclutamiento por WhatsApp con IA | GH Specialist",
+      "description": "Chatbot de reclutamiento con IA: filtra candidatos por WhatsApp, agenda la entrevista y reparte la lista a tus reclutadores. 1,600 contratados en 2 semanas.",
+      "keywords": "chatbot de reclutamiento, chatbot reclutamiento whatsapp, reclutamiento con inteligencia artificial, reclutamiento masivo whatsapp, agente de ia para reclutamiento, reclutar personal de obra",
+      "h1": "Chatbot de reclutamiento por WhatsApp: del anuncio a la entrevista sin perder candidatos",
+      "sub": "Un agente de IA recibe a cada candidato por WhatsApp, le pregunta lo que tu reclutador preguntaría, agenda la entrevista y cada mañana reparte la lista entre tu equipo. Tus reclutadores marcan; ya no capturan.",
+      "waText": "Hola Pedro, quiero un chatbot de reclutamiento por WhatsApp",
+      "crumb": "Chatbot de reclutamiento",
+      "serviceName": "Chatbot de reclutamiento por WhatsApp con IA",
+      "serviceType": "Reclutamiento con inteligencia artificial",
+      "audience": "constructoras, desarrolladoras y empresas con vacantes operativas de mucho volumen",
+      "resumen": "Un chatbot de reclutamiento es un agente de IA que atiende por WhatsApp a quien responde tu anuncio de vacante: pregunta puesto u oficio, experiencia, ciudad y disponibilidad, agenda la entrevista y reparte los candidatos calificados entre tus reclutadores cada mañana. GH Specialist lo implementó para una desarrolladora de vivienda: más de 8,000 contratistas con cuadrilla calificados y 1,600 personas de obra contratadas en 2 semanas, a $286 MXN por persona contratada.",
+      "secciones": [
+        {
+          "label": "El problema",
+          "h2": "Los candidatos sí llegan. Se pierden después",
+          "p": [
+            "En reclutamiento de volumen el anuncio casi nunca es el problema: la gente escribe. El problema es lo que pasa después. Cientos de mensajes entran al mismo WhatsApp, cada reclutador contesta lo que alcanza, y nadie sabe a quién ya le llamaron y a quién no.",
+            "Lo vimos al auditar el embudo de una desarrolladora de vivienda antes de arrancar: había 466 candidatos ya calificados esperando una llamada, solo 8.6% de los candidatos había recibido una, y cero aprobados para contratar. El filtro funcionaba; el proceso se caía justo después, porque nadie tenía la instrucción de marcar ese día."
+          ]
+        },
+        {
+          "gris": true,
+          "label": "Cómo funciona",
+          "h2": "Qué hace el chatbot de reclutamiento, paso a paso",
+          "pasos": [
+            { "t": "Recibe al candidato", "d": "El anuncio de la vacante manda directo a WhatsApp. El agente contesta al instante, a cualquier hora, y explica la vacante con la información que tú autorizas: zona de trabajo, tipo de pago y requisitos." },
+            { "t": "Hace las preguntas del reclutador", "d": "Puesto u oficio, años de experiencia, si trae cuadrilla y de cuántos, si tiene herramienta, de qué ciudad es y cuándo puede presentarse. Entiende respuestas escritas con prisa, con faltas o a medias." },
+            { "t": "Califica y agenda", "d": "Quien cumple el perfil elige horario de entrevista o de llamada. Quien no, queda registrado con el motivo, por si después abre una vacante que sí le queda." },
+            { "t": "Reparte cada mañana", "d": "A primera hora los candidatos con cita se reparten en partes iguales entre tus reclutadores, cada uno con su lista: teléfono y un resumen de la conversación. Cada candidato tiene un solo dueño." },
+            { "t": "Deja el tablero al día", "d": "El candidato repartido cambia de etapa en el CRM. Dirección ve cuántos entraron, cuántos se entrevistaron y cuántos se contrataron, sin que nadie llene un Excel el viernes." }
+          ]
+        },
+        {
+          "label": "Resultados",
+          "h2": "Un caso real: reclutamiento de obra para una desarrolladora de vivienda",
+          "p": [
+            "Una desarrolladora que arranca un proyecto de 15,000 viviendas necesitaba cuadrillas de fierreros, cimbreros, albañiles, yeseros y acabados, y sus reclutadores no daban abasto para contestar. Se puso el agente a calificar por WhatsApp y el reparto diario a los reclutadores."
+          ],
+          "cifras": [
+            { "n": "+8,000", "t": "contratistas con cuadrilla calificados por WhatsApp en 2 semanas" },
+            { "n": "1,600", "t": "personas de obra contratadas en 2 semanas" },
+            { "n": "$286", "t": "MXN por persona contratada" }
+          ],
+          "despues": [
+            "El caso se cuenta sin el nombre del cliente. El detalle de cómo se armó está en <a href=\"constructoras-desarrolladoras.html\">IA para constructoras y desarrolladoras</a>."
+          ]
+        },
+        {
+          "gris": true,
+          "label": "Para quién",
+          "h2": "Para qué vacantes sirve y para cuáles no",
+          "p": [
+            "Funciona cuando hay volumen: muchas personas respondiendo a la misma vacante o a pocas vacantes parecidas, y un equipo de reclutamiento que no alcanza a contestar a todos el mismo día."
+          ],
+          "lista": [
+            "Personal de obra: oficios por cuadrilla o por persona, por frente y por ciudad",
+            "Vacantes operativas de planta, almacén y mantenimiento con rotación alta",
+            "Reclutamiento en varias ciudades a la vez, con reclutadores repartidos",
+            "Empresas que ya pagan anuncios de vacantes y sienten que los candidatos se les van"
+          ],
+          "despues": [
+            "No es para puestos gerenciales o de especialista, donde se reciben pocos currículos y la conversación la tiene que llevar una persona desde el primer mensaje. Tampoco contrata por ti: la llamada o la entrevista la sigue haciendo tu reclutador, porque a la gente se le contrata con confianza."
+          ]
+        },
+        {
+          "label": "Qué incluye",
+          "h2": "Qué se entrega",
+          "lista": [
+            "Agente de IA en WhatsApp con las preguntas de tu vacante y tus criterios de calificación",
+            "Embudo de reclutamiento en el CRM (Kommo), con una etapa por paso y por oficio o puesto",
+            "Agenda de entrevistas o llamadas con los horarios de tu equipo",
+            "Reparto diario automático a tus reclutadores, con la lista en el formato que ya usan",
+            "Seguimiento a quien dejó la conversación a medias",
+            "Tablero para dirección: candidatos, entrevistas y contrataciones por reclutador",
+            "Capacitación al equipo de reclutamiento y ajustes durante la operación"
+          ],
+          "despues": [
+            "Aparte van la licencia del CRM, que se paga directo a Kommo, el costo de las conversaciones que cobra Meta y la pauta de los anuncios de vacantes."
+          ]
+        },
+        {
+          "gris": true,
+          "label": "Precio",
+          "h2": "Cuánto cuesta un chatbot de reclutamiento",
+          "p": [
+            "Se cotiza después del diagnóstico, porque depende de cuántos candidatos entran al mes, cuántos reclutadores reciben lista y si ya tienes CRM o hay que montarlo. Como referencia, un <a href=\"chatbot-ia-whatsapp.html\">chatbot con IA para WhatsApp</a> arranca desde $12,000 MXN + IVA y la <a href=\"crm-kommo.html\">implementación de Kommo</a> desde $15,000 MXN + IVA; el sistema de reclutamiento completo, con reparto diario y tablero, se opera con mensualidad.",
+            "El diagnóstico no tiene costo: revisamos tu embudo actual y te decimos cuántos candidatos calificados llevan días sin que nadie les llame. Si el número sale bajo, te lo decimos y no hay nada que venderte."
+          ]
+        }
+      ],
+      "faqs": [
+        { "q": "¿Qué es un chatbot de reclutamiento?", "a": "Es un agente de IA que atiende por WhatsApp a las personas que responden a una vacante. Hace las preguntas de filtro (puesto u oficio, experiencia, ciudad, disponibilidad), agenda la entrevista con quien cumple el perfil y deja a cada candidato registrado en el CRM, con un resumen de la conversación para el reclutador." },
+        { "q": "¿El chatbot reemplaza a mis reclutadores?", "a": "No. La llamada y la entrevista las sigue haciendo una persona. Lo que se quita de encima es contestar las mismas preguntas cien veces, armar la lista, repartirla y perseguir quién ya le llamó a quién." },
+        { "q": "¿Cómo se evita que dos reclutadores llamen al mismo candidato?", "a": "Cada candidato se asigna a un solo reclutador y cambia de etapa en el CRM en el momento en que se reparte. Ese cambio de etapa es la marca de que ya tiene dueño, así que no puede salir en la lista de otro reclutador ni repetirse al día siguiente." },
+        { "q": "¿Sirve para reclutar fuera de la construcción?", "a": "Sí. Se armó para personal de obra, que es donde más volumen hay, pero el flujo es el mismo para cualquier vacante operativa con muchos candidatos: planta, almacén, mantenimiento. Cambian las preguntas de filtro y las etapas del embudo." },
+        { "q": "¿Necesito tener un CRM?", "a": "Si ya tienes uno, se trabaja sobre ese. Si no, se monta Kommo, que es donde vive el WhatsApp, el embudo y el reparto. La licencia de Kommo se paga directo a Kommo, por usuario." },
+        { "q": "¿Qué resultados ha dado?", "a": "Con una desarrolladora de vivienda que arranca un proyecto de 15,000 casas: más de 8,000 contratistas con cuadrilla calificados por WhatsApp y 1,600 personas de obra contratadas en 2 semanas, con un costo de $286 MXN por persona contratada." },
+        { "q": "¿En cuánto tiempo empieza a operar?", "a": "Si ya tienes candidatos registrados y un CRM, el reparto diario empieza a operar en días, porque los datos ya están ahí y nada más no se estaban usando. Armar el agente y el embudo desde cero toma de 2 a 3 semanas, contadas desde que tenemos los accesos." }
+      ],
+      "ctaTitulo": "¿Cuántos candidatos calificados llevan una semana sin que nadie les llame?",
+      "ctaTexto": "Te reviso el embudo y te doy el número. Diagnóstico sin costo.",
+      "relacionados": [
+        { "href": "servicios/constructoras-desarrolladoras.html", "t": "IA para constructoras y desarrolladoras" },
+        { "href": "servicios/chatbot-ia-whatsapp.html", "t": "Chatbot con IA para WhatsApp" },
+        { "href": "servicios/crm-kommo.html", "t": "Implementación de Kommo CRM" },
+        { "href": "servicios/chatbot-vs-agente-ia-whatsapp.html", "t": "Chatbot vs agente de IA: cuál conviene" },
+        { "href": "blog/reclutamiento-por-whatsapp-para-constructoras-noviembre-2026.html", "t": "Reclutamiento por WhatsApp para constructoras" },
+        { "href": "preguntas-frecuentes.html", "t": "Preguntas frecuentes" }
+      ]
+    },
+    {
+      "out": "servicios/chatbot-vs-agente-ia-whatsapp.html",
+      "tipo": "comparativa",
+      "published": "2026-11-19",
+      "hero": "hero-bg.webp",
+      "kicker": "Comparativa · WhatsApp para empresas",
+      "title": "Chatbot vs agente de IA para WhatsApp: cuál conviene",
+      "description": "Diferencias entre un chatbot de flujos y un agente de IA para WhatsApp: qué entiende cada uno, cuándo conviene y cuánto cuesta. Guía para decidir sin rodeos.",
+      "keywords": "agente de ia para whatsapp, chatbot vs agente de ia, diferencia entre chatbot y agente de ia, agente de inteligencia artificial whatsapp, chatbot con ia whatsapp empresas",
+      "h1": "Chatbot o agente de IA para WhatsApp: cuál conviene a tu empresa",
+      "sub": "Los dos contestan solos. La diferencia está en qué pasa cuando el cliente escribe algo que nadie previó. Esta es la forma en que lo decidimos con cada cliente.",
+      "waText": "Hola Pedro, quiero saber si me conviene un chatbot o un agente de IA en WhatsApp",
+      "crumb": "Chatbot vs agente de IA",
+      "resumen": "Un chatbot de flujos sigue un guion fijo de botones y respuestas: es exacto y barato de operar, pero se atora cuando el cliente escribe fuera del menú. Un agente de IA para WhatsApp entiende texto libre, contesta con la información de tu negocio y puede agendar, registrar o pasar la conversación a una persona. En la práctica casi siempre conviene combinarlos: flujo fijo para lo que debe salir idéntico, agente de IA para la conversación.",
+      "secciones": [
+        {
+          "label": "Las definiciones",
+          "h2": "Qué es cada uno, sin tecnicismos",
+          "p": [
+            "<strong>Chatbot de flujos.</strong> Es un árbol de decisiones: el cliente elige una opción, el bot manda la respuesta que le toca y pasa al siguiente paso. Todo lo que dice lo escribió alguien antes. Si el cliente contesta con un botón o con un número, funciona perfecto; si escribe una pregunta con sus palabras, el bot no la entiende y repite el menú.",
+            "<strong>Agente de IA.</strong> Usa un modelo de lenguaje al que se le carga la información de tu negocio (precios, horarios, catálogo, políticas) y unas instrucciones de cómo atender. Entiende lo que el cliente escribe aunque venga con faltas o a medias, contesta con sus propias palabras dentro de los límites que le pones, y puede hacer cosas: agendar una cita, llenar los datos del prospecto en el CRM o llamar a una persona."
+          ]
+        },
+        {
+          "gris": true,
+          "label": "Lado a lado",
+          "h2": "Diferencias que sí se notan en la operación",
+          "tabla": {
+            "cols": ["", "Chatbot de flujos", "Agente de IA"],
+            "filas": [
+              ["Cómo entiende al cliente", "Por botones, números o palabras clave", "Texto libre, con faltas o incompleto"],
+              ["Pregunta fuera del guion", "Repite el menú o manda a un humano", "La contesta si la información está cargada; si no, lo dice y llama a una persona"],
+              ["Lo que responde", "Siempre idéntico, palabra por palabra", "Varía la redacción; el contenido lo limitan sus instrucciones"],
+              ["Riesgo principal", "Que el cliente se desespere y abandone", "Que conteste de más si no se le ponen límites"],
+              ["Mantenimiento", "Cambiar cada paso a mano cuando cambia algo", "Actualizar la información y revisar conversaciones reales"],
+              ["Costo de operación", "No consume IA por mensaje", "Cada respuesta consume uso del modelo de IA"],
+              ["Dónde rinde más", "Avisos, confirmaciones, encuestas, menús cortos", "Ventas, calificación de prospectos, reclutamiento, dudas abiertas"]
+            ]
+          }
+        },
+        {
+          "label": "La decisión",
+          "h2": "Cuándo conviene cada uno",
+          "p": [
+            "<strong>Te alcanza con un chatbot de flujos</strong> si lo que el cliente necesita cabe en un menú de pocas opciones y la respuesta no cambia según quién pregunta: horarios, ubicación, estado de un pedido, confirmar una cita, mandar un folleto.",
+            "<strong>Necesitas un agente de IA</strong> si la conversación es de venta o de filtro: el cliente pregunta con sus palabras, hay que entender qué busca, hacerle preguntas y decidir si se pasa a un vendedor. Un menú ahí estorba: quien quiere cotizar no tiene paciencia para navegar opciones.",
+            "<strong>Lo más común es combinarlos.</strong> Lo que debe salir idéntico va como flujo fijo: el aviso de privacidad, la confirmación de una cita, un mensaje masivo. La conversación la lleva el agente. En el reclutamiento de obra que operamos, por ejemplo, el agente de IA es quien pregunta oficio, cuadrilla y ciudad, y los mensajes que deben ir idénticos para todos salen por flujo fijo."
+          ]
+        },
+        {
+          "gris": true,
+          "label": "Lo que casi nadie dice",
+          "h2": "Tres errores al poner un agente de IA en WhatsApp",
+          "lista": [
+            "Darle datos que cambian sin decirle de dónde tomarlos. Un agente no inventa precios si solo puede citar los que tiene cargados y la instrucción es decir \"eso lo confirma un asesor\" cuando no los tiene.",
+            "Pedirle todo en un solo mensaje. Si amontona cinco preguntas, el cliente contesta una. Se le instruye a preguntar de una en una, como lo haría una persona.",
+            "No definir cuándo se calla. Tiene que saber en qué momento pasa la conversación a tu equipo y dejar de contestar; si no, se encima con el vendedor."
+          ],
+          "despues": [
+            "Por eso los primeros 30 días se revisan conversaciones reales y se ajusta. Un agente no queda bien configurado en la primera versión, y quien te diga lo contrario no ha operado uno."
+          ]
+        },
+        {
+          "label": "Precio",
+          "h2": "Cuánto cuesta cada opción",
+          "p": [
+            "El <a href=\"chatbot-ia-whatsapp.html\">chatbot con IA para WhatsApp</a> arranca desde $12,000 MXN + IVA y se implementa en 2 a 3 semanas. El <a href=\"agentes-omnicanal.html\">agente de IA omnicanal</a>, que atiende WhatsApp, Instagram, Facebook y el chat de tu sitio con la misma información, desde $20,000 MXN + IVA, en 3 a 5 semanas. En los dos casos el precio final se cierra después del diagnóstico, que no tiene costo.",
+            "Aparte de la implementación hay dos costos que no dependen de nosotros: las conversaciones que cobra Meta por usar WhatsApp Business y, si se usa CRM, la licencia de Kommo, que se paga directo a Kommo."
+          ]
+        }
+      ],
+      "faqs": [
+        { "q": "¿Cuál es la diferencia entre un chatbot y un agente de IA?", "a": "El chatbot de flujos sigue un guion fijo de opciones y solo entiende lo que estaba previsto. El agente de IA entiende lo que el cliente escribe con sus palabras, contesta con la información de tu negocio y puede hacer acciones como agendar o registrar datos. El primero es exacto pero rígido; el segundo conversa, pero hay que ponerle límites." },
+        { "q": "¿Un agente de IA puede inventar precios o promesas?", "a": "Puede, si se configura mal. Se evita cargándole los precios vigentes como única fuente, prohibiéndole dar cifras que no estén ahí e instruyéndolo a pasar la conversación a una persona cuando no tiene el dato. Además no promete plazos ni cierra ventas por su cuenta." },
+        { "q": "¿Cuánto cuesta un agente de IA para WhatsApp?", "a": "El chatbot con IA para WhatsApp arranca desde $12,000 MXN + IVA y el agente omnicanal (WhatsApp, Instagram, Facebook y web) desde $20,000 MXN + IVA. El precio final depende del volumen de mensajes y de cuántos sistemas hay que conectar. Las conversaciones de Meta y la licencia del CRM se pagan aparte." },
+        { "q": "¿Puedo usar un agente de IA con mi número de WhatsApp actual?", "a": "Sí, si está en WhatsApp normal o en la app de WhatsApp Business. Se migra a la API y se conserva el número, pero deja de usarse desde la app del celular: las conversaciones se ven desde el CRM. Si no quieres perder la app, se da de alta un número nuevo." },
+        { "q": "¿El cliente sabe que le contesta una IA?", "a": "La regla que aplicamos es no fingir que es una persona. El agente contesta con el tono de tu negocio y pasa la conversación a tu equipo cuando el cliente lo pide o cuando la plática se pone específica." }
+      ],
+      "ctaTitulo": "¿Chatbot, agente o los dos?",
+      "ctaTexto": "Cuéntanos qué te escriben tus clientes y en 20 minutos te decimos cuál te conviene. Diagnóstico sin costo.",
+      "relacionados": [
+        { "href": "servicios/chatbot-ia-whatsapp.html", "t": "Chatbot con IA para WhatsApp" },
+        { "href": "servicios/agentes-omnicanal.html", "t": "Agente de IA omnicanal" },
+        { "href": "servicios/chatbot-reclutamiento.html", "t": "Chatbot de reclutamiento" },
+        { "href": "servicios/crm-kommo.html", "t": "Kommo CRM con WhatsApp" },
+        { "href": "blog/cuanto-cuesta-un-agente-de-inteligencia-artifici-junio-2026.html", "t": "¿Cuánto cuesta un agente de IA en México?" },
+        { "href": "preguntas-frecuentes.html", "t": "Preguntas frecuentes" }
+      ]
+    },
+    {
+      "out": "preguntas-frecuentes.html",
+      "tipo": "faq",
+      "published": "2026-11-19",
+      "hero": "hero-torreon.webp",
+      "kicker": "GH Specialist · Torreón, Coahuila · todo México",
+      "title": "Preguntas frecuentes sobre IA para empresas | GH Specialist",
+      "description": "Precios, plazos, capacitación, WhatsApp, CRM y resultados: las preguntas que nos hacen las empresas antes de automatizar con IA, contestadas con números.",
+      "keywords": "preguntas frecuentes automatización con ia, cuánto cuesta automatizar con ia, agencia de ia méxico precios, capacitación ia empresas precio, chatbot whatsapp precio méxico",
+      "h1": "Preguntas frecuentes sobre automatización y capacitación en IA para empresas",
+      "sub": "Lo que nos preguntan los dueños y directores antes de contratar: cuánto cuesta, cuánto tarda, qué resultados ha dado y por dónde se empieza.",
+      "waText": "Hola Pedro, tengo una duda sobre automatización con IA para mi empresa",
+      "crumb": "Preguntas frecuentes",
+      "resumen": "GH Specialist es una agencia de automatización con IA con base en Torreón, Coahuila, que atiende empresas en todo México. Hace dos cosas: capacita a tu gente en ChatGPT, Claude, Gemini y Grok por departamento (desde $30,000 MXN + IVA) e implementa sistemas con IA: chatbots y agentes para WhatsApp (desde $12,000 MXN + IVA), CRM Kommo (desde $15,000 MXN + IVA) y agentes por departamento. El diagnóstico no tiene costo.",
+      "grupos": [
+        {
+          "h2": "Precios y forma de trabajo",
+          "faqs": [
+            { "q": "¿Cuánto cuesta automatizar con IA en una empresa?", "a": "Depende de qué se automatice. Precios de arranque, más IVA: chatbot con IA para WhatsApp desde $12,000 MXN; implementación de Kommo CRM desde $15,000; agente de IA omnicanal desde $20,000; automatización total de procesos comerciales desde $25,000; capacitación en IA desde $30,000. El precio final se cierra después del diagnóstico.", "href": "servicios/", "link": "Ver todos los servicios" },
+            { "q": "¿El diagnóstico tiene costo?", "a": "No. Es una plática de 20 a 30 minutos para entender tu operación y validar que el proyecto encaje. Si lo que necesitas no es lo que hacemos, o ya lo tienes resuelto, te lo decimos." },
+            { "q": "¿Cuánto tarda una implementación?", "a": "Un chatbot con IA para WhatsApp, 2 a 3 semanas. Kommo CRM, 2 a 4 semanas. Un agente omnicanal, 3 a 5 semanas. La automatización total, 4 a 6 semanas. Los plazos cuentan desde que tenemos los accesos y la información del negocio; lo que más atrasa un proyecto es esperar accesos o que se defina quién decide del lado del cliente." },
+            { "q": "¿Qué costos hay además de la implementación?", "a": "Los que cobran terceros y se pagan directo a ellos: las conversaciones de WhatsApp Business que cobra Meta, la licencia del CRM (Kommo cobra por usuario) y las licencias de las herramientas de IA que use tu equipo. En capacitación presencial fuera de La Laguna, los viáticos se cotizan aparte." },
+            { "q": "¿En cuánto tiempo se recupera la inversión?", "a": "En un chatbot con IA para WhatsApp, el retorno promedio es de 3 a 4 meses. En sistemas más grandes depende de qué se mida: en una desarrolladora de vivienda un agente de KPIs detectó $4 millones de pesos al año de ahorro en un solo departamento." }
+          ]
+        },
+        {
+          "h2": "Capacitación en IA",
+          "faqs": [
+            { "q": "¿Cuánto cuesta la capacitación en IA para empresas?", "a": "Taller de arranque de 6 horas para hasta 10 personas, desde $30,000 MXN + IVA. Programa por áreas de 3 días, un departamento por día, desde $90,000 MXN + IVA. Implementación de 30 días, con la IA instalada y configurada por puesto, se cotiza según tamaño.", "href": "servicios/capacitaciones-ia-empresas.html", "link": "Ver el programa de capacitación" },
+            { "q": "¿Qué herramientas enseñan: ChatGPT, Claude, Gemini o Grok?", "a": "Las cuatro. Se ve para qué sirve cada una y cuál conviene por tarea y por precio, y se practica en la que tu empresa va a usar. Recomendamos Claude en plan Team para operar, porque lee archivos largos y permite proyectos con instrucciones por puesto." },
+            { "q": "¿En qué ciudades dan la capacitación presencial?", "a": "En Torreón, Gómez Palacio y Lerdo sin costo de traslado. En Saltillo, Ramos Arizpe, Monterrey, Guadalajara, Zapopan y el resto del país, presencial con viáticos aparte o en línea con la misma dinámica.", "href": "servicios/capacitaciones-ia-empresas/torreon/", "link": "Capacitación en IA en Torreón" },
+            { "q": "¿Para qué departamentos es?", "a": "Compras e inventarios, recursos humanos, sistemas, crédito y cobranza, administración y finanzas, dirección, ventas y obra u operación. Cada taller se arma con las tareas y los archivos de ese departamento." }
+          ]
+        },
+        {
+          "h2": "WhatsApp, agentes de IA y CRM",
+          "faqs": [
+            { "q": "¿Qué diferencia hay entre un chatbot y un agente de IA?", "a": "El chatbot de flujos sigue un guion fijo de opciones; el agente de IA entiende lo que el cliente escribe con sus palabras, contesta con la información de tu negocio y puede agendar o registrar datos. Casi siempre conviene combinarlos.", "href": "servicios/chatbot-vs-agente-ia-whatsapp.html", "link": "Comparativa completa: chatbot vs agente de IA" },
+            { "q": "¿Puedo conservar mi número de WhatsApp?", "a": "Sí, si está en WhatsApp normal o en la app de WhatsApp Business. Se migra a la API y se conserva el número, pero deja de usarse desde la app del celular: las conversaciones se ven desde el CRM. Si no quieres perder la app, se da de alta un número nuevo." },
+            { "q": "¿Trabajan con el CRM que ya tengo?", "a": "Sí. Somos Gold Partner de Kommo y es el que recomendamos cuando la venta ocurre por WhatsApp, pero si ya tienes otro CRM se trabaja sobre ese. La idea no es cambiarte de herramienta, es tapar por donde se están perdiendo los prospectos.", "href": "servicios/crm-kommo.html", "link": "Implementación de Kommo CRM" },
+            { "q": "¿El agente de IA puede equivocarse con un cliente?", "a": "Se le ponen límites desde el arranque: no da precios que no estén cargados, no promete plazos y no cierra ventas por su cuenta. Cuando no sabe algo, lo dice y llama a una persona. En los primeros 30 días se revisan conversaciones reales y se ajusta lo que haga falta." }
+          ]
+        },
+        {
+          "h2": "Reclutamiento, constructoras y resultados",
+          "faqs": [
+            { "q": "¿Sirve la IA para reclutar personal?", "a": "Sí, cuando hay volumen. Con una desarrolladora de vivienda que arranca un proyecto de 15,000 casas se calificaron por WhatsApp más de 8,000 contratistas con cuadrilla y se contrataron 1,600 personas de obra en 2 semanas, a $286 MXN por persona contratada.", "href": "servicios/chatbot-reclutamiento.html", "link": "Chatbot de reclutamiento por WhatsApp" },
+            { "q": "¿Qué resultados han tenido con otras empresas?", "a": "Un agente de KPIs detectó $4 millones de pesos al año de ahorro en un solo departamento de una desarrolladora de vivienda. Un agente de reclutamiento calificó más de 8,000 contratistas con cuadrilla en 2 semanas. Un cotizador conectado a 4 proveedores y 12,000 productos bajó un requerimiento de compras de días a 15 minutos en una distribuidora de medicinas." },
+            { "q": "¿Solo trabajan con constructoras?", "a": "No. La especialidad son constructoras, desarrolladoras e industria, pero la capacitación y los agentes por departamento (compras, recursos humanos, crédito y cobranza, dirección) aplican a cualquier empresa mediana.", "href": "servicios/constructoras-desarrolladoras.html", "link": "IA para constructoras y desarrolladoras" },
+            { "q": "¿Dónde están y qué ciudades atienden?", "a": "La base está en Torreón, Coahuila. La implementación es remota y se atiende todo México; las juntas de arranque y la capacitación pueden ser presenciales. Hay páginas con detalle para Torreón, Saltillo, Ramos Arizpe, Monterrey, Guadalajara, Zapopan, Ciudad de México, Querétaro, León, Mérida, Tijuana y Ciudad Juárez.", "href": "ciudades/", "link": "Ver ciudades" },
+            { "q": "¿Quién está detrás de GH Specialist?", "a": "Pedro Luis Díaz Velázquez, fundador. GH Specialist es Gold Partner de Kommo.", "href": "sobre-pedro.html", "link": "Sobre Pedro" }
+          ]
+        }
+      ],
+      "ctaTitulo": "¿Tu pregunta no está aquí?",
+      "ctaTexto": "Escríbenos por WhatsApp o agenda un diagnóstico sin costo.",
+      "relacionados": [
+        { "href": "servicios/capacitaciones-ia-empresas.html", "t": "Capacitación en IA para empresas" },
+        { "href": "servicios/chatbot-ia-whatsapp.html", "t": "Chatbot con IA para WhatsApp" },
+        { "href": "servicios/chatbot-reclutamiento.html", "t": "Chatbot de reclutamiento" },
+        { "href": "servicios/chatbot-vs-agente-ia-whatsapp.html", "t": "Chatbot vs agente de IA" },
+        { "href": "servicios/crm-kommo.html", "t": "Kommo CRM" },
+        { "href": "torreon/", "t": "Agencia de IA en Torreón" }
+      ]
+    }
+  ]
+}

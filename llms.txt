@@ -12,11 +12,14 @@
 - Ciudades México (hub): https://ghspecialist.com/ciudades/
 - Blog: https://ghspecialist.com/blog/
 - Sobre Pedro: https://ghspecialist.com/sobre-pedro.html
+- Preguntas frecuentes (precios, plazos, capacitación, WhatsApp, CRM y resultados): https://ghspecialist.com/preguntas-frecuentes.html
 - Torreón (sede, "agencia de IA en Torreón", actualizada 2026-10-28): https://ghspecialist.com/torreon/
 
 ## Especialidad: inmobiliarias, desarrolladoras y constructoras
 - CRM con WhatsApp para inmobiliarias (Kommo, desde $15,000 MXN + IVA, 2 a 4 semanas): https://ghspecialist.com/servicios/crm-inmobiliarias.html
 - IA para constructoras y desarrolladoras (reclutamiento de personal de obra, prospectos de vivienda): https://ghspecialist.com/servicios/constructoras-desarrolladoras.html
+- Chatbot de reclutamiento por WhatsApp con IA (filtra candidatos, agenda la entrevista y reparte la lista diaria a los reclutadores): https://ghspecialist.com/servicios/chatbot-reclutamiento.html
+- Comparativa chatbot de flujos vs agente de IA para WhatsApp (diferencias, cuándo conviene cada uno, precios): https://ghspecialist.com/servicios/chatbot-vs-agente-ia-whatsapp.html
 - Asistente ciudadano 24/7 con IA para municipios y ayuntamientos (reportes de vecinos por WhatsApp con folio, canalización a dependencias, panel con estadísticas por colonia; implementación en ~10 semanas): https://ghspecialist.com/servicios/asistente-ciudadano-municipios.html
 
 ## Casos (sin nombres de clientes)
@@ -41,7 +44,8 @@
 - Patrón: https://ghspecialist.com/servicios/{servicio}/{ciudad}/
 - Ejemplo chatbot Monterrey: https://ghspecialist.com/servicios/chatbot-ia-whatsapp/monterrey/
 - Ejemplo CRM CDMX: https://ghspecialist.com/servicios/crm-kommo/cdmx/
-- 30 combinaciones servicio×ciudad (chatbot WhatsApp, CRM Kommo y automatización × 10 ciudades) + hubs de ciudad
+- Capacitación en IA para empresas por ciudad (Torreón, Saltillo, Ramos Arizpe, Monterrey, Guadalajara y Zapopan), ejemplo: https://ghspecialist.com/servicios/capacitaciones-ia-empresas/monterrey/
+- 42 combinaciones servicio×ciudad (chatbot WhatsApp, CRM Kommo y automatización × 12 ciudades, capacitación en IA × 6 ciudades) + hubs de ciudad
 
 ## Ciudades (landings nacionales)
 - Monterrey ("agencia de IA en Monterrey", actualizada 2026-10-28; casos con cifras, capacitación en Claude y agentes por departamento): https://ghspecialist.com/ciudades/monterrey/
@@ -150,14 +154,14 @@ Precios "desde": el final depende del tamaño de la operación y de cuántos sis
 - Se conecta con: APIs a medida, ERP y sistemas propios, Kommo CRM, WhatsApp Business API, Bases de datos
 - Por ciudad: https://ghspecialist.com/servicios/proyectos-medida/{ciudad}/
 
-### Capacitaciones IA al por mayor
+### Capacitación en IA para empresas
 - Página: https://ghspecialist.com/servicios/capacitaciones-ia-empresas.html
-- Desde: $18,000 MXN + IVA
-- Plazo de implementación: 2 a 4 semanas para armar el programa; la impartición se calendariza contigo
-- Para quién: empresas de minería, construcción, manufactura e industria que ya vieron a su gente usando IA por su cuenta, sin criterio ni reglas, y quieren capacitarla en serio en vez de prohibirla
-- Incluye: Programa armado sobre los procesos y el vocabulario de tu industria; Packs de 10, 25 o 50+ colaboradores; Sesiones en vivo, presenciales o remotas, en español; Casos prácticos del puesto de cada grupo, no ejemplos genéricos; Reglas de uso seguro: qué información no se le da nunca a una IA pública; Material de consulta y constancia de participación por asistente
-- No incluye: Licencias de las herramientas de IA que se usen en el curso; Certificación oficial ante STPS (se puede gestionar aparte); Implementación técnica de las herramientas en tus sistemas
-- Se conecta con: ChatGPT, Claude, Gemini, Microsoft Copilot, Google Workspace
+- Desde: $30,000 MXN + IVA
+- Plazo de implementación: 2 semanas del diagnóstico al taller
+- Para quién: empresas cuyo personal ya usa IA por su cuenta, sin criterio ni reglas, y que quieren que compras, recursos humanos, sistemas, crédito y cobranza, administración y dirección la usen en serio en su trabajo de todos los días
+- Incluye: Diagnóstico de 30 minutos con el responsable de cada área, sin costo; Taller de 6 horas por departamento, presencial o en línea; ChatGPT, Claude, Gemini y Grok: para qué sirve cada uno y cuál conviene por tarea; Ejercicios con los archivos reales de cada persona (Excel, PDF, Word, correos); Reglas de seguridad: qué sí y qué no se le sube a una IA; Manual por área, banco de prompts y plan de 30 días; Soporte por WhatsApp durante un mes y constancias de participación
+- No incluye: Licencias de las herramientas de IA (las contrata tu empresa); Viáticos fuera de La Laguna (se cotizan aparte); La instalación de agentes y conectores: eso es el Nivel 3, implementación de 30 días
+- Se conecta con: ChatGPT, Claude, Gemini, Grok, Google Workspace, Microsoft 365
 - Por ciudad: https://ghspecialist.com/servicios/capacitaciones-ia-empresas/{ciudad}/
 
 ## Artículos clave del blog

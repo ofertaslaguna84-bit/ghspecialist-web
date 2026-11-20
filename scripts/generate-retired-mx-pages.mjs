@@ -57,7 +57,8 @@ async function main() {
     const dest = `${SITE}/servicios/${svc.file}`;
     const html = stub(dest, `${svc.name} | GH Specialist`, `Ir a ${svc.name}`);
     for (const city of [...activas, ...CIUDADES_RETIRADAS]) {
-      if (svc.porCiudad && activas.includes(city)) continue;
+      // svc.ciudades limita en qué ciudades sale el servicio; las demás siguen como redirección.
+      if (svc.porCiudad && activas.includes(city) && (!svc.ciudades || svc.ciudades.includes(city))) continue;
       const rel = `servicios/${svc.slug}/${city}`;
       // Solo se reemplaza lo que ya existió; no se crean rutas nuevas.
       if (!existsSync(join(ROOT, rel))) continue;
