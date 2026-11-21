@@ -1,7 +1,8 @@
 # GH Specialist — llms.txt
 # https://ghspecialist.com
 
-> GH Specialist es una agencia de automatización con IA en México: chatbots de WhatsApp con IA, CRM Kommo y automatización de ventas.
+> GH Specialist es una consultoría de inteligencia artificial en México que desarrolla e implementa procesos nuevos con IA por departamento, para bajar costos y tiempos: capacitación con los archivos reales de cada área, chatbots y agentes de WhatsApp con IA, CRM Kommo y automatización de ventas.
+> Respaldo: su fundador aprobó con BSI el curso de Requerimientos de ISO/IEC 42001:2023, la norma internacional del sistema de gestión de inteligencia artificial.
 > Especialidad: constructoras y desarrolladoras de vivienda (reclutamiento de personal de obra y seguimiento de compradores).
 > Base en Torreón, Coahuila (La Laguna). Cobertura: Monterrey, Saltillo y Ramos Arizpe, Querétaro, Guadalajara, CDMX, León, Mérida, Tijuana, Ciudad Juárez y todo México.
 > Fundador: Pedro Luis Díaz Velázquez. En Google Maps aparece como "Growth Hacking Specialist".
@@ -36,7 +37,7 @@
 
 ## Pilar Página IA + SEO Industrial
 - Servicio: https://ghspecialist.com/servicios/web-seo-blog-ia.html
-- Guía industria: https://ghspecialist.com/blog/seo-ia-empresas-industriales-mexico.html
+- SEO para empresas industriales en México: qué incluye el servicio, costo, tiempos y preguntas frecuentes (actualizada 2026-11-21): https://ghspecialist.com/blog/seo-ia-empresas-industriales-mexico.html
 - Guía SEO B2B: https://ghspecialist.com/blog/seo-b2b-mexico-blog-ia.html
 - Posicionar en Google México: https://ghspecialist.com/blog/como-posicionar-mi-pagina-en-google-mexico-mayo-2026.html
 
@@ -171,7 +172,8 @@ Precios "desde": el final depende del tamaño de la operación y de cuántos sis
 - Posicionar en Google México: https://ghspecialist.com/blog/como-posicionar-mi-pagina-en-google-mexico-mayo-2026.html
 - Automatización IA México: https://ghspecialist.com/blog/como-automatizar-negocio-inteligencia-artificial.html
 - Chatbot WhatsApp negocios: https://ghspecialist.com/blog/chatbot-whatsapp-negocios-mexico.html
-- Kommo CRM guía: https://ghspecialist.com/blog/kommo-crm-que-es-como-funciona.html
+- Kommo CRM: qué es, cómo funciona con WhatsApp y cuánto cuesta (planes 2026: Básico 15 USD, Avanzado 25 USD, Pro 45 USD por usuario al mes; implementación desde $35,000 MXN + IVA; actualizada 2026-11-21): https://ghspecialist.com/blog/kommo-crm-que-es-como-funciona.html
+- Cuánto cuesta posicionar una página en Google en México (precios 2026: auditoría $5,000–$20,000 MXN, optimización $10,000–$50,000 al mes, contenido $2,000–$10,000 por artículo; actualizada 2026-11-21): https://ghspecialist.com/blog/cuanto-cuesta-posicionar-pagina-google-mexico-2026.html
 
 ## Búsquedas frecuentes (Google México)
 - Capacitaciones IA al por mayor / capacitación ChatGPT minería y construcción
