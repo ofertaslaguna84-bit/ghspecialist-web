@@ -24,10 +24,10 @@
 
   var T = {
     es: {
-      'meta.title': 'IA para constructoras y desarrolladoras | GH Specialist',
-      'meta.desc': 'Automatización con IA para constructoras y desarrolladoras: reclutamiento de personal de obra y seguimiento de compradores. Torreón, MTY, CDMX y todo México.',
-      'meta.ogTitle': 'IA para constructoras y desarrolladoras — GH Specialist',
-      'meta.ogDesc': 'Reclutamiento de personal de obra, seguimiento de compradores y control de avance. Automatización con IA para constructoras y desarrolladoras.',
+      'meta.title': 'Implementación de IA para empresas | GH Specialist',
+      'meta.desc': 'Consultoría e implementación de IA en todos los departamentos de tu empresa: industria, distribución, servicios y construcción. Torreón, MTY, CDMX y México.',
+      'meta.ogTitle': 'Implementación de IA para empresas — GH Specialist',
+      'meta.ogDesc': 'Procesos nuevos con IA en cada departamento: administración, RH, compras, sistemas, obra y dirección. Para empresas de cualquier giro.',
       'nav.servicios': 'Servicios',
       'nav.como': 'Cómo funciona',
       'nav.pedro': 'Pedro',
@@ -106,7 +106,7 @@
       'blogseo.desc': 'Guías y artículos para automatizar tu negocio. Publicamos contenido pensado para SEO; si quieres el mismo sistema en tu web, lo implementamos.',
       'blogseo.btn': 'Ver blog',
       'blogseo.btn2': 'Web + SEO + Blog IA',
-      'footer.tagline': 'Automatización con IA para constructoras y desarrolladoras en México. GH Specialist — Pedro Luis Díaz Velázquez.',
+      'footer.tagline': 'Consultoría e implementación de IA para empresas en México. GH Specialist — Pedro Luis Díaz Velázquez.',
       'reject.p1': 'Por ahora no abrimos agenda para este rango por aquí. <strong>Si tu inversión total del proyecto es menor a USD $1,500</strong> (todo incluido), escríbenos por WhatsApp y vemos si hay otra opción.',
       'reject.wa': 'WhatsApp →',
       'cal.title': 'Elige fecha y hora',
