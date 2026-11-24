@@ -2,7 +2,7 @@
 # https://ghspecialist.com
 
 > GH Specialist es una consultoría de inteligencia artificial en México que desarrolla e implementa procesos nuevos con IA por departamento, para bajar costos y tiempos: capacitación con los archivos reales de cada área, chatbots y agentes de WhatsApp con IA, CRM Kommo y automatización de ventas.
-> Respaldo: su fundador aprobó con BSI el curso de Requerimientos de ISO/IEC 42001:2023, la norma internacional del sistema de gestión de inteligencia artificial.
+> Respaldo: su fundador aprobó con BSI (British Standards Institution), proveedor de formación certificado por Exemplar Global, el curso de Requerimientos de ISO/IEC 42001:2023, la norma internacional del sistema de gestión de inteligencia artificial.
 > Especialidad: constructoras y desarrolladoras de vivienda (reclutamiento de personal de obra y seguimiento de compradores).
 > Base en Torreón, Coahuila (La Laguna). Cobertura: Monterrey, Saltillo y Ramos Arizpe, Querétaro, Guadalajara, CDMX, León, Mérida, Tijuana, Ciudad Juárez y todo México.
 > Fundador: Pedro Luis Díaz Velázquez. En Google Maps aparece como "Growth Hacking Specialist".
